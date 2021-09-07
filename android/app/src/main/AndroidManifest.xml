@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.carboncd.grab_grip">
    <application
-        android:label="grab_grip"
+        android:label="Grab Grip"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
