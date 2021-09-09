@@ -18,4 +18,9 @@ class AppTextStyles {
     fontSize: 10.0,
     color: AppColors.purple,
   );
+
+  static const about_us_paragraph = TextStyle(
+    fontSize: 16.0,
+    color: AppColors.purple,
+  );
 }
