@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grab_grip/features/browsing/screens/home_screen.dart';
 
 void main() {
   runApp(GrabGripApp());
@@ -12,7 +13,7 @@ class GrabGripApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Container(),
+      home: HomeScreen(),
     );
   }
 }
