@@ -15,6 +15,7 @@ class GrabGripApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: AppColors.purple,
+        fontFamily: 'NeoTech'
       ),
       routerDelegate: _appRouter.delegate(),
       routeInformationParser: _appRouter.defaultRouteParser(),
