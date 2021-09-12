@@ -28,11 +28,21 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  # auto_route is used for managing the routes between the screens in the app.
+  auto_route: ^2.3.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: "^0.9.2"
+  # auto_route_generator is for generating code that is used for managing the routes between
+  # the screens in the app.
+  auto_route_generator: ^2.1.0
+  build_runner: ^2.1.2
+
+# override the analyzer dependency to solve an issue related to the usage of the auto_route package.
+dependency_overrides:
+  analyzer: ^1.7.0
 
 # the following is for customizing the app icon
 flutter_icons:
