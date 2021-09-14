@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:grab_grip/features/browsing/widgets/HorizontalListItem.dart';
+import 'package:grab_grip/features/browsing/home/widgets/horizontal_list_item.dart';
 import 'package:grab_grip/style/text.dart';
 import 'package:grab_grip/utils/device.dart';
 import 'package:grab_grip/utils/sized_box.dart';

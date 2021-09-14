@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grab_grip/features/browsing/widgets/application_bar.dart';
-import 'package:grab_grip/features/browsing/widgets/drawer.dart';
-import 'package:grab_grip/features/browsing/widgets/horizontal_list.dart';
+import 'package:grab_grip/features/browsing/home/widgets/application_bar.dart';
+import 'package:grab_grip/features/browsing/home/widgets/drawer.dart';
+import 'package:grab_grip/features/browsing/home/widgets/horizontal_list.dart';
 import 'package:grab_grip/style/colors.dart';
 
 class HomeScreen extends StatelessWidget {
