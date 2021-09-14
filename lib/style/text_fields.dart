@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grab_grip/style/colors.dart';
 
 class AppTextFields {
-  static const registration_input_decoration = InputDecoration(
+  static const registrationInputDecoration = InputDecoration(
     hintStyle: TextStyle(
       color: AppColors.purple,
     ),

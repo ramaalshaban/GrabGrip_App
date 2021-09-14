@@ -3,7 +3,7 @@ import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
 AppBar homeBar = AppBar(
-  iconTheme: IconThemeData(
+  iconTheme: const IconThemeData(
     color: AppColors.purple,
   ),
   backgroundColor: Colors.transparent,
@@ -11,23 +11,22 @@ AppBar homeBar = AppBar(
   flexibleSpace: SafeArea(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.search,
             color: AppColors.purple,
           ),
           onPressed: () {},
         ),
         IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.shopping_bag_outlined,
             color: AppColors.purple,
           ),
           onPressed: () {},
         ),
-        SizedBoxWidth.w12(),
+        width12(),
       ],
     ),
   ),

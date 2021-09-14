@@ -1,15 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:grab_grip/style/colors.dart';
-import 'package:auto_route/auto_route.dart';
 
 AppBar registrationBar(BuildContext context) => AppBar(
-      iconTheme: IconThemeData(
+      iconTheme: const IconThemeData(
         color: AppColors.purple,
       ),
       backgroundColor: Colors.transparent,
       elevation: 0.0,
       leading: IconButton(
-        icon: Icon(
+        icon: const Icon(
           Icons.close,
           color: AppColors.purple,
         ),

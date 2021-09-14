@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:grab_grip/style/colors.dart';
 
 class AppTextStyles {
-  static const horizontal_list_title = TextStyle(
+  static const horizontalListTitle = TextStyle(
     fontSize: 24.0,
     fontWeight: FontWeight.bold,
     color: AppColors.purple,
   );
 
-  static const horizontal_list_item_title = TextStyle(
+  static const horizontalListItemTitle = TextStyle(
     fontSize: 12.0,
     fontWeight: FontWeight.bold,
     color: AppColors.purple,
   );
 
-  static const horizontal_list_item_subtitle = TextStyle(
+  static const horizontalListItemSubtitle = TextStyle(
     fontSize: 10.0,
     color: AppColors.purple,
   );
 
-  static const about_us_paragraph = TextStyle(
+  static const aboutUsParagraph = TextStyle(
     fontSize: 16.0,
     color: AppColors.purple,
   );

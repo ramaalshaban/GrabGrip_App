@@ -15,13 +15,13 @@ class LoginScreen extends StatelessWidget {
       appBar: registrationBar(context),
       body: Container(
         color: AppColors.white,
-        height: Device.screenHeightWithoutExtras(context),
+        height: screenHeightWithoutExtras(context),
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(40.0, 40.0, 40.0, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
+              const Text(
                 'Login',
                 style: TextStyle(
                   color: AppColors.purple,
@@ -29,32 +29,32 @@ class LoginScreen extends StatelessWidget {
                   fontSize: 30.0,
                 ),
               ),
-              SizedBoxHeight.h48(),
-              SizedBoxHeight.h24(),
+              height48(),
+              height48(),
               Form(
                 child: Column(
                   children: <Widget>[
                     TextFormField(
-                      decoration: AppTextFields.registration_input_decoration
+                      decoration: AppTextFields.registrationInputDecoration
                           .copyWith(hintText: "Email"),
                       cursorColor: AppColors.purple,
                     ),
-                    SizedBoxHeight.h36(),
+                    height36(),
                     TextFormField(
                       cursorColor: AppColors.purple,
                       obscureText: true,
-                      decoration: AppTextFields.registration_input_decoration
+                      decoration: AppTextFields.registrationInputDecoration
                           .copyWith(hintText: "Password"),
                     ),
-                    SizedBoxHeight.h48(),
-                    SizedBoxHeight.h48(),
-                    SizedBoxHeight.h48(),
+                     height48(),
+                     height48(),
+                     height48(),
                     Container(
-                      width: Device.screenWidth(context),
+                      width: screenWidth(context),
                       color: AppColors.purple,
                       child: TextButton(
                         onPressed: () {},
-                        child: Text(
+                        child: const Text(
                           'LOGIN',
                           style: TextStyle(
                             color: AppColors.white,
@@ -63,19 +63,19 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBoxHeight.h24(),
+                    height24(),
                     TextButton(
                       onPressed: () {},
-                      child: Text(
+                      child: const Text(
                         'Forgot your password?',
                         style: TextStyle(
                           color: AppColors.purple,
                         ),
                       ),
                     ),
-                    SizedBoxHeight.h60(),
+                    height60(),
                     Container(
-                      width: Device.screenWidth(context),
+                      width: screenWidth(context),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.blue,
@@ -83,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       child: TextButton(
                         onPressed: () {},
-                        child: Text(
+                        child: const Text(
                           'LOGIN WITH FACEBOOK',
                           style: TextStyle(
                             color: Colors.blue,
@@ -92,11 +92,11 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBoxHeight.h24(),
+                    height24(),
                     TextButton(
                       onPressed: () {},
-                      child: Text(
-                        'Don\'t have an account? Sign Up',
+                      child: const Text(
+                        "Don't have an account? Sign Up",
                         style: TextStyle(
                           color: AppColors.purple,
                         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grab_grip/features/browsing/home/widgets/home_bar.dart';
 import 'package:grab_grip/features/browsing/home/widgets/drawer.dart';
+import 'package:grab_grip/features/browsing/home/widgets/home_bar.dart';
 import 'package:grab_grip/features/browsing/home/widgets/horizontal_list.dart';
 import 'package:grab_grip/style/colors.dart';
 
@@ -16,24 +16,18 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              child: HorizontalList(
-                title: "Explore",
-                data: ["", "", "", "", "", "", "", "", "", ""],
-              ),
+          children: const [
+            HorizontalList(
+              title: "Explore",
+              data: ["", "", "", "", "", "", "", "", "", ""],
             ),
-            Container(
-              child: HorizontalList(
-                title: "Best Sellers",
-                data: ["", "", "", "", "", ""],
-              ),
+            HorizontalList(
+              title: "Best Sellers",
+              data: ["", "", "", "", "", ""],
             ),
-            Container(
-              child: HorizontalList(
-                title: "Top Trends",
-                data: ["", "", "", "", "", "", "", "", "", ""],
-              ),
+            HorizontalList(
+              title: "Top Trends",
+              data: ["", "", "", "", "", "", "", "", "", ""],
             )
           ],
         ),

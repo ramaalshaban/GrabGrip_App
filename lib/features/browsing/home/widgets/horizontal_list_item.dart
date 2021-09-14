@@ -7,12 +7,12 @@ import 'package:grab_grip/utils/sized_box.dart';
 class HorizontalListItem extends StatelessWidget {
   final String item;
 
-  HorizontalListItem({required this.item}) : super();
+  const HorizontalListItem({required this.item}) : super();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: Device.screenWidth(context) / 3,
+    return SizedBox(
+      width: screenWidth(context) / 3,
       child: Card(
         elevation: 6.0,
         color: AppColors.white,
@@ -20,24 +20,23 @@ class HorizontalListItem extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(1.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Image.asset("assets/images/logo.png"),
-              SizedBoxHeight.h4(),
-              Padding(
-                padding: const EdgeInsets.only(left: 4.0),
+              height4(),
+              const Padding(
+                padding: EdgeInsets.only(left: 4.0),
                 child: Text(
                   "item title",
-                  style: AppTextStyles.horizontal_list_item_title,
+                  style: AppTextStyles.horizontalListItemTitle,
                 ),
               ),
-              SizedBoxHeight.h2(),
-              Padding(
-                padding: const EdgeInsets.only(left: 4.0),
+              height2(),
+              const Padding(
+                padding: EdgeInsets.only(left: 4.0),
                 child: Text(
                   "item subtitle",
-                  style: AppTextStyles.horizontal_list_item_subtitle,
+                  style: AppTextStyles.horizontalListItemSubtitle,
                 ),
               ),
             ],

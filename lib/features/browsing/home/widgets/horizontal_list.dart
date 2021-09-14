@@ -9,7 +9,7 @@ class HorizontalList extends StatelessWidget {
   final String title;
   final List<String> data;
 
-  HorizontalList({required this.title, required this.data}) : super();
+  const HorizontalList({required this.title, required this.data}) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +19,14 @@ class HorizontalList extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBoxHeight.h24(),
+          height24(),
           Text(
             title,
-            style: AppTextStyles.horizontal_list_title,
+            style: AppTextStyles.horizontalListTitle,
           ),
-          SizedBoxHeight.h12(),
+          height12(),
           SizedBox(
-            height: Device.screenHeightWithoutExtras(context) / 5.3,
+            height: screenHeightWithoutExtras(context) / 5.3,
             child: ListView.builder(
               itemCount: data.length,
               shrinkWrap: true,

@@ -18,24 +18,48 @@ Widget drawer(BuildContext context) {
               child: _drawerHeader,
             ),
           ),
-          _drawerButton(Icons.login, "Login", const LoginScreenRoute()),
-          _drawerButton(Icons.search, "Search", const AboutUsScreenRoute()),
           _drawerButton(
-              Icons.security, "Insurance", const AboutUsScreenRoute()),
+            Icons.login,
+            "Login",
+            const LoginScreenRoute(),
+          ),
           _drawerButton(
-              Icons.free_breakfast, "Blog", const AboutUsScreenRoute()),
-          _drawerButton(Icons.info, "About us", const AboutUsScreenRoute()),
+            Icons.search,
+            "Search",
+            const AboutUsScreenRoute(),
+          ),
           _drawerButton(
-              Icons.contact_page, "Contact us", const AboutUsScreenRoute()),
-          _drawerButton(Icons.home_repair_service,
-              "Terms of Service & Privacy Policy", const AboutUsScreenRoute()),
+            Icons.security,
+            "Insurance",
+            const AboutUsScreenRoute(),
+          ),
+          _drawerButton(
+            Icons.free_breakfast,
+            "Blog",
+            const AboutUsScreenRoute(),
+          ),
+          _drawerButton(
+            Icons.info,
+            "About us",
+            const AboutUsScreenRoute(),
+          ),
+          _drawerButton(
+            Icons.contact_page,
+            "Contact us",
+            const AboutUsScreenRoute(),
+          ),
+          _drawerButton(
+            Icons.home_repair_service,
+            "Terms of Service & Privacy Policy",
+            const AboutUsScreenRoute(),
+          ),
         ],
       ),
     ),
   );
 }
 
-ListTile _drawerHeader = ListTile(
+ListTile _drawerHeader = const ListTile(
   leading: CircleAvatar(
     radius: 30.0,
     backgroundImage: AssetImage("assets/images/logo.png"),
@@ -61,7 +85,7 @@ ListTile _drawerButton(
     ),
     title: Text(
       title,
-      style: TextStyle(
+      style: const TextStyle(
         color: AppColors.purple,
         fontWeight: FontWeight.bold,
       ),
