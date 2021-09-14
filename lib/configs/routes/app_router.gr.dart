@@ -7,8 +7,9 @@
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
-import '../../features/browsing/about_us/about_us_screen.dart' as _i4;
+import '../../features/browsing/about_us/about_us_screen.dart' as _i5;
 import '../../features/browsing/home/home_screen.dart' as _i3;
+import '../../features/registration/login_screen.dart' as _i4;
 
 class AppRouter extends _i1.RootStackRouter {
   AppRouter([_i2.GlobalKey<_i2.NavigatorState>? navigatorKey])
@@ -21,16 +22,22 @@ class AppRouter extends _i1.RootStackRouter {
         builder: (_) {
           return const _i3.HomeScreen();
         }),
+    LoginScreenRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return const _i4.LoginScreen();
+        }),
     AboutUsScreenRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i4.AboutUsScreen();
+          return _i5.AboutUsScreen();
         })
   };
 
   @override
   List<_i1.RouteConfig> get routes => [
         _i1.RouteConfig(HomeScreenRoute.name, path: '/'),
+        _i1.RouteConfig(LoginScreenRoute.name, path: '/login-screen'),
         _i1.RouteConfig(AboutUsScreenRoute.name, path: '/about-us-screen')
       ];
 }
@@ -39,6 +46,12 @@ class HomeScreenRoute extends _i1.PageRouteInfo {
   const HomeScreenRoute() : super(name, path: '/');
 
   static const String name = 'HomeScreenRoute';
+}
+
+class LoginScreenRoute extends _i1.PageRouteInfo {
+  const LoginScreenRoute() : super(name, path: '/login-screen');
+
+  static const String name = 'LoginScreenRoute';
 }
 
 class AboutUsScreenRoute extends _i1.PageRouteInfo {

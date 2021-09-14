@@ -18,6 +18,7 @@ Widget drawer(BuildContext context) {
               child: _drawerHeader,
             ),
           ),
+          _drawerButton(Icons.login, "Login", const LoginScreenRoute()),
           _drawerButton(Icons.search, "Search", const AboutUsScreenRoute()),
           _drawerButton(
               Icons.security, "Insurance", const AboutUsScreenRoute()),

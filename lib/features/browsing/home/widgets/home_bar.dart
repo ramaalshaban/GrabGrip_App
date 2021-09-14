@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
-AppBar applicationBar = AppBar(
+AppBar homeBar = AppBar(
   iconTheme: IconThemeData(
     color: AppColors.purple,
   ),

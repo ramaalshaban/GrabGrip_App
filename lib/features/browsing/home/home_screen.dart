@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grab_grip/features/browsing/home/widgets/application_bar.dart';
+import 'package:grab_grip/features/browsing/home/widgets/home_bar.dart';
 import 'package:grab_grip/features/browsing/home/widgets/drawer.dart';
 import 'package:grab_grip/features/browsing/home/widgets/horizontal_list.dart';
 import 'package:grab_grip/style/colors.dart';
@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: applicationBar,
+      appBar: homeBar,
       drawer: drawer(context),
       body: SingleChildScrollView(
         child: Column(
