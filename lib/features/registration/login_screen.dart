@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/registration/widgets/registration_bar.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text_fields.dart';
@@ -46,9 +48,9 @@ class LoginScreen extends StatelessWidget {
                       decoration: AppTextFields.registrationInputDecoration
                           .copyWith(hintText: "Password"),
                     ),
-                     height48(),
-                     height48(),
-                     height48(),
+                    height48(),
+                    height48(),
+                    height48(),
                     Container(
                       width: screenWidth(context),
                       color: AppColors.purple,
@@ -65,7 +67,8 @@ class LoginScreen extends StatelessWidget {
                     ),
                     height24(),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () => context.router
+                          .push(const ForgotPasswordScreenRoute()),
                       child: const Text(
                         'Forgot your password?',
                         style: TextStyle(
