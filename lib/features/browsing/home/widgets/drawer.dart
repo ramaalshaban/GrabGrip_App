@@ -19,6 +19,11 @@ Widget drawer(BuildContext context) {
             ),
           ),
           _drawerButton(
+            Icons.app_registration,
+            "Join Grab Grip",
+            const RegisterScreenRoute(),
+          ),
+          _drawerButton(
             Icons.login,
             "Login",
             const LoginScreenRoute(),
