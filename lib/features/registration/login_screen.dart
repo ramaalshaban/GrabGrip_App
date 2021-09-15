@@ -97,7 +97,8 @@ class LoginScreen extends StatelessWidget {
                     ),
                     height24(),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () =>
+                          context.router.replace(const RegisterScreenRoute()),
                       child: const Text(
                         "Don't have an account? Sign Up",
                         style: TextStyle(

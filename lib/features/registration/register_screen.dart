@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/registration/widgets/registration_bar.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text_fields.dart';
@@ -86,7 +88,8 @@ class RegisterScreen extends StatelessWidget {
                     ),
                     height24(),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () =>
+                          context.router.replace(const LoginScreenRoute()),
                       child: const Text(
                         "Already have an account? Sign in",
                         style: TextStyle(
