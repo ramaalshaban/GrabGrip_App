@@ -2,7 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:grab_grip/style/colors.dart';
 
-AppBar registrationBar(BuildContext context) => AppBar(
+class RegistrationAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
+  const RegistrationAppBar({Key? key}) : super(key: key);
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
       iconTheme: const IconThemeData(
         color: AppColors.purple,
       ),
@@ -16,3 +25,5 @@ AppBar registrationBar(BuildContext context) => AppBar(
         onPressed: () => context.router.pop(),
       ),
     );
+  }
+}

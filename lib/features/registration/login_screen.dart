@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
-import 'package:grab_grip/features/registration/widgets/registration_bar.dart';
+import 'package:grab_grip/features/registration/widgets/registration_app_bar.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text_fields.dart';
 import 'package:grab_grip/utils/device.dart';
@@ -14,7 +14,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: registrationBar(context),
+      appBar: RegistrationAppBar(),
       body: Container(
         color: AppColors.white,
         height: screenHeightWithoutExtras(context),
