@@ -28,6 +28,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_riverpod: ^0.14.0+3
+  intl: ^0.17.0
+
 
 dev_dependencies:
 
@@ -61,6 +66,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   assets:

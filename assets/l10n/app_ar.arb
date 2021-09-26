@@ -1,0 +1,54 @@
+{
+    "join": "انضم لـ Grab Grip",
+    "@join": {
+      "description": "drawer button text"
+    },
+    "login": "تسجيل دخول",
+    "@login": {
+      "description": "drawer button text"
+    },
+    "search": "بحث",
+    "@search": {
+      "description": "drawer button text"
+    },
+    "insurance": "تأمين",
+    "@insurance": {
+      "description": "drawer button text"
+    },
+    "blog": "مدوّنة",
+    "@blog": {
+      "description": "drawer button text"
+    },
+    "about_us": "عنّا",
+    "@about_us": {
+      "description": "drawer button text"
+    },
+    "contact_us": "تواصل معنا",
+    "@contact_us": {
+      "description": "drawer button text"
+    },
+    "terms_and_privacy": "شروط الخدمة و سياسة الخصوصيّة",
+    "@terms_and_privacy": {
+      "description": "drawer button text"
+    },
+    "language": "اللغة",
+    "@language": {
+      "description": "drawer button text"
+    },
+    "explore": "اكتشف",
+    "@explore": {
+      "description": "headline in home screen"
+    },
+    "best_sellers": "أفضل البائعين",
+    "@best_sellers": {
+      "description": "headline in home screen"
+    },
+    "top_trends": "الأكثر شيوعاً",
+    "@top_trends": {
+      "description": "headline in home screen"
+    },
+    "change_app_lang": "غيّر لغة التّطبيق",
+    "@change_app_lang": {
+      "description": "language picker title"
+    }
+}

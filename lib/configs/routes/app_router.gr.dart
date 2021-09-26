@@ -23,27 +23,27 @@ class AppRouter extends _i1.RootStackRouter {
         routeData: routeData,
         builder: (_) {
           return const _i3.HomeScreen();
-        }),
+        },),
     RegisterScreenRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
           return const _i4.RegisterScreen();
-        }),
+        },),
     LoginScreenRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
           return const _i5.LoginScreen();
-        }),
+        },),
     ForgotPasswordScreenRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
           return const _i6.ForgotPasswordScreen();
-        }),
+        },),
     AboutUsScreenRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
           return _i7.AboutUsScreen();
-        })
+        },)
   };
 
   @override
@@ -52,7 +52,7 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(RegisterScreenRoute.name, path: '/register-screen'),
         _i1.RouteConfig(LoginScreenRoute.name, path: '/login-screen'),
         _i1.RouteConfig(ForgotPasswordScreenRoute.name,
-            path: '/forgot-password-screen'),
+            path: '/forgot-password-screen',),
         _i1.RouteConfig(AboutUsScreenRoute.name, path: '/about-us-screen')
       ];
 }

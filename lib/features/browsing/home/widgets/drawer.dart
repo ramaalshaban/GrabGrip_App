@@ -1,5 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/style/colors.dart';
 
@@ -13,48 +16,49 @@ class AppDrawer extends StatelessWidget {
         color: AppColors.white,
         child: ListView(
           padding: EdgeInsets.zero,
-          children: const <Widget>[
-            AppDrawerHeader(),
+          children: <Widget>[
+            const AppDrawerHeader(),
             DrawerButton(
               Icons.app_registration,
-              "Join Grab Grip",
-              RegisterScreenRoute(),
+              AppLocalizations.of(context)!.join,
+              const RegisterScreenRoute(),
             ),
             DrawerButton(
               Icons.login,
-              "Login",
-              LoginScreenRoute(),
+              AppLocalizations.of(context)!.login,
+              const LoginScreenRoute(),
             ),
             DrawerButton(
               Icons.search,
-              "Search",
-              AboutUsScreenRoute(),
+              AppLocalizations.of(context)!.search,
+              const AboutUsScreenRoute(),
             ),
             DrawerButton(
               Icons.security,
-              "Insurance",
-              AboutUsScreenRoute(),
+              AppLocalizations.of(context)!.insurance,
+              const AboutUsScreenRoute(),
             ),
             DrawerButton(
               Icons.free_breakfast,
-              "Blog",
-              AboutUsScreenRoute(),
+              AppLocalizations.of(context)!.blog,
+              const AboutUsScreenRoute(),
             ),
             DrawerButton(
               Icons.info,
-              "About us",
-              AboutUsScreenRoute(),
+              AppLocalizations.of(context)!.about_us,
+              const AboutUsScreenRoute(),
             ),
             DrawerButton(
               Icons.contact_page,
-              "Contact us",
-              AboutUsScreenRoute(),
+              AppLocalizations.of(context)!.contact_us,
+              const AboutUsScreenRoute(),
             ),
             DrawerButton(
               Icons.home_repair_service,
-              "Terms of Service & Privacy Policy",
-              AboutUsScreenRoute(),
+              AppLocalizations.of(context)!.terms_and_privacy,
+              const AboutUsScreenRoute(),
             ),
+            const LanguagePicker(),
           ],
         ),
       ),
@@ -109,6 +113,54 @@ class DrawerButton extends StatelessWidget {
         ),
       ),
       onTap: () => context.router.push(toGoToScreenRoute),
+    );
+  }
+}
+
+class LanguagePicker extends StatelessWidget {
+  const LanguagePicker({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: const Icon(
+        Icons.language,
+        color: AppColors.purple,
+      ),
+      title: Text(
+        AppLocalizations.of(context)!.language,
+        style: const TextStyle(
+          color: AppColors.purple,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      onTap: () => showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(AppLocalizations.of(context)!.change_app_lang),
+            actionsAlignment: MainAxisAlignment.center,
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  const english = Locale('en');
+                  context.read(localeProvider.notifier).locale = english;
+                  Navigator.pop(context);
+                },
+                child: const Text("English"),
+              ),
+              TextButton(
+                onPressed: () {
+                  const arabic = Locale('ar');
+                  context.read(localeProvider.notifier).locale = arabic;
+                  Navigator.pop(context);
+                },
+                child: const Text("العربيّة"),
+              )
+            ],
+          );
+        },
+      ),
     );
   }
 }

@@ -14,7 +14,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: RegistrationAppBar(),
+      appBar: const RegistrationAppBar(),
       body: Container(
         color: AppColors.white,
         height: screenHeightWithoutExtras(context),

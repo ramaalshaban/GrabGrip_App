@@ -1,0 +1,54 @@
+{
+    "join": "Join Grab Grip",
+    "@join": {
+      "description": "drawer button text"
+    },
+    "login": "Login",
+    "@login": {
+      "description": "drawer button text"
+    },
+    "search": "Search",
+    "@search": {
+      "description": "drawer button text"
+    },
+    "insurance": "Insurance",
+    "@insurance": {
+      "description": "drawer button text"
+    },
+    "blog": "Blog",
+    "@blog": {
+      "description": "drawer button text"
+    },
+    "about_us": "About us",
+    "@about_us": {
+      "description": "drawer button text"
+    },
+    "contact_us": "Contact us",
+    "@contact_us": {
+      "description": "drawer button text"
+    },
+    "terms_and_privacy": "Terms of Service & Privacy Policy",
+    "@terms_and_privacy": {
+      "description": "drawer button text"
+    },
+    "language": "Language",
+    "@language": {
+      "description": "drawer button text"
+    },
+    "explore": "Explore",
+    "@explore": {
+      "description": "headline in home screen"
+    },
+    "best_sellers": "Best Sellers",
+    "@best_sellers": {
+      "description": "headline in home screen"
+    },
+    "top_trends": "Top Trends",
+    "@top_trends": {
+      "description": "headline in home screen"
+    },
+    "change_app_lang": "Change application language",
+    "@change_app_lang": {
+      "description": "language picker title"
+    }
+}
