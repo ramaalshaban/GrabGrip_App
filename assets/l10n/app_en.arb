@@ -1,7 +1,11 @@
 {
-    "join": "Join Grab Grip",
-    "@join": {
+    "join_grab_grip": "Join Grab Grip",
+    "@join_grab_grip": {
       "description": "drawer button text"
+    },
+    "join": "Join",
+     "@join": {
+      "description": "register button text"
     },
     "login": "Login",
     "@login": {
@@ -50,5 +54,53 @@
     "change_app_lang": "Change application language",
     "@change_app_lang": {
       "description": "language picker title"
+    },
+    "logout": "Logout",
+    "@logout": {
+      "description": "drawer button text"
+    },
+    "name": "Name",
+    "@name": {
+      "description": "text field hint"
+    },
+    "email": "Email",
+    "@email": {
+      "description": "text field hint"
+    },
+    "password": "Password",
+    "@password": {
+      "description": "text field hint"
+    },
+    "password_confirmation": "Password Confirmation",
+    "@password_confirmation": {
+      "description": "text field hint"
+    },
+    "forget_password": "Forgot your password?",
+    "@forget_password": {
+      "description": "button text"
+    },
+    "do_not_have_account": "Don't have an account? Sign Up",
+    "@do_not_have_account": {
+      "description": "button text"
+    },
+    "already_have_account": "Already have an account? Sign in",
+    "@already_have_account": {
+      "description": "button text"
+    },
+    "personal_details": "Personal details",
+    "@personal_details": {
+      "description": "register screen headline"
+    },
+    "you_registered_successfully": "You have registered successfully",
+    "@you_registered_successfully": {
+      "description": "successful registration message"
+    },
+    "you_logged_in_successfully": "You have logged in successfully",
+    "@you_logged_in_successfully": {
+      "description": "successful logging in message"
+    },
+    "you_logged_out_successfully": "You have logged out successfully",
+    "@you_logged_out_successfully": {
+      "description": "successful logging out message"
     }
 }

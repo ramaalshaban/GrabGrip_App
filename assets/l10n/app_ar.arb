@@ -1,7 +1,11 @@
 {
-    "join": "انضم لـ Grab Grip",
-    "@join": {
+    "join_grab_grip": "انضم لـ Grab Grip",
+    "@join_grab_grip": {
       "description": "drawer button text"
+    },
+    "join": "انضمام",
+     "@join": {
+      "description": "register button text"
     },
     "login": "تسجيل دخول",
     "@login": {
@@ -50,5 +54,53 @@
     "change_app_lang": "غيّر لغة التّطبيق",
     "@change_app_lang": {
       "description": "language picker title"
+    },
+    "logout": "تسجيل خروج",
+    "@logout": {
+      "description": "drawer button text"
+    },
+    "name": "الاسم",
+    "@name": {
+      "description": "text field hint"
+    },
+    "email": "البريد الالكتروني",
+    "@email": {
+      "description": "text field hint"
+    },
+    "password": "كلمة المرور",
+    "@password": {
+      "description": "text field hint"
+    },
+    "password_confirmation": "تأكيد كلمة المرور",
+    "@password_confirmation": {
+      "description": "text field hint"
+    },
+    "forget_password": "نسيت كلمة المرور؟",
+    "@forget_password": {
+      "description": "button text"
+    },
+    "do_not_have_account": "ليس لديك حساب؟ قم بالتّسجيل",
+    "@do_not_have_account": {
+      "description": "button text"
+    },
+    "already_have_account": "لديك حساب؟ قم بتسجيل الدّخول",
+    "@already_have_account": {
+      "description": "button text"
+    },
+    "personal_details": "المعلومات الشّخصيّة",
+    "@personal_details": {
+      "description": "register screen headline"
+    },
+    "you_registered_successfully": "لقد سجّلت بنجاح",
+    "@you_registered_successfully": {
+      "description": "successful registration message"
+    },
+    "you_logged_in_successfully": "لقد سجّلت دخولك بنجاح",
+    "@you_logged_in_successfully": {
+      "description": "successful logging in message"
+    },
+    "you_logged_out_successfully": "لقد سجّلت خروجك بنجاح",
+    "@you_logged_out_successfully": {
+      "description": "successful logging out message"
     }
 }

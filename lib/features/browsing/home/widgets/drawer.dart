@@ -18,15 +18,27 @@ class AppDrawer extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
             const AppDrawerHeader(),
-            DrawerButton(
-              Icons.app_registration,
-              AppLocalizations.of(context)!.join,
-              const RegisterScreenRoute(),
-            ),
-            DrawerButton(
-              Icons.login,
-              AppLocalizations.of(context)!.login,
-              const LoginScreenRoute(),
+            Consumer(
+              builder: (_, watch, __) => Visibility(
+                visible: watch(authProvider).when(
+                  authenticated: () => false,
+                  notAuthenticated: () => true,
+                ),
+                child: Column(
+                  children: [
+                    DrawerButton(
+                      Icons.app_registration,
+                      AppLocalizations.of(context)!.join_grab_grip,
+                      const RegisterScreenRoute(),
+                    ),
+                    DrawerButton(
+                      Icons.login,
+                      AppLocalizations.of(context)!.login,
+                      const LoginScreenRoute(),
+                    ),
+                  ],
+                ),
+              ),
             ),
             DrawerButton(
               Icons.search,
@@ -59,6 +71,33 @@ class AppDrawer extends StatelessWidget {
               const AboutUsScreenRoute(),
             ),
             const LanguagePicker(),
+            Consumer(
+              builder: (_, watch, __) {
+                return Visibility(
+                  visible: watch(authProvider).when(
+                    authenticated: () => true,
+                    notAuthenticated: () => false,
+                  ),
+                  child: ListTile(
+                    leading: const Icon(
+                      Icons.sensor_door_outlined,
+                      color: AppColors.purple,
+                    ),
+                    title: Text(
+                      AppLocalizations.of(context)!.logout,
+                      style: const TextStyle(
+                        color: AppColors.purple,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onTap: () {
+                      watch(authProvider.notifier).logout(context);
+                      Navigator.pop(context);
+                    },
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
@@ -112,7 +151,10 @@ class DrawerButton extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      onTap: () => context.router.push(toGoToScreenRoute),
+      onTap: () {
+        context.router.push(toGoToScreenRoute);
+        Navigator.pop(context);
+      },
     );
   }
 }

@@ -23,31 +23,42 @@ environment:
 dependencies:
   # auto_route is used for managing the routes between the about_us in the app.
   auto_route: ^2.3.2
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  email_validator: ^2.0.1
+  # flash is for showing SnackBars easily
+  flash: ^2.0.3
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  # flutter_riverpod is used for state management
   flutter_riverpod: ^0.14.0+3
   intl: ^0.17.0
+  json_annotation: ^4.1.0
+  # multiple_result makes it easy to return two valued from a function
+  multiple_result: ^1.0.4
+  # retrofit is used for making http requests
+  retrofit: ^2.0.1
+  shared_preferences: ^2.0.8
 
 
 dev_dependencies:
-
   # auto_route_generator is for generating code that is used for managing the routes between
-  # the about_us in the app.
+  # the screens in the app.
   auto_route_generator: ^2.1.0
   build_runner: ^2.1.2
   flutter_launcher_icons: "^0.9.2"
   flutter_test:
     sdk: flutter
+  # freezed is used for code generation for unions and more
+  freezed: ^0.14.5
+  json_serializable: ^5.0.2
   lint: ^1.7.2
+  retrofit_generator: ^2.0.1+1
 
 # override the analyzer dependency to solve an issue related to the usage of the auto_route package.
-dependency_overrides:
-  analyzer: ^1.7.0
+#dependency_overrides:
+#  analyzer: ^1.7.0
 
 # the following is for customizing the app icon
 flutter_icons:

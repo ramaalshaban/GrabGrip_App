@@ -3,3 +3,6 @@ include: package:lint/analysis_options.yaml
 analyzer:
   errors:
     parameter_assignments: error
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"

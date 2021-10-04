@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grab_grip/features/registration/widgets/registration_app_bar.dart';
+import 'package:grab_grip/features/authentication/widgets/registration_app_bar.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text_fields.dart';
 import 'package:grab_grip/utils/device.dart';
