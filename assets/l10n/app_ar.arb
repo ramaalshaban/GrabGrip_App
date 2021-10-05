@@ -102,5 +102,9 @@
     "you_logged_out_successfully": "لقد سجّلت خروجك بنجاح",
     "@you_logged_out_successfully": {
       "description": "successful logging out message"
+    },
+    "check_internet_connection": "تحقّق من اتّصالك بالإنترنت من فضلك",
+    "@check_internet_connection": {
+      "description": "no internet connection message"
     }
 }

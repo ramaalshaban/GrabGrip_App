@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/auth/auth_state.dart';
 import 'package:grab_grip/configs/providers/http_request/http_request_state_provider.dart';
@@ -32,7 +31,7 @@ class AuthProvider extends StateNotifier<AuthState> {
     AppSharedPreferences().saveTokenDuration(tokenDuration!);
   }
 
-  Future<void> register(AuthModel authModel, BuildContext context) async {
+  Future<void> register(AuthModel authModel) async {
     httpRequestStateProvider.setLoading();
     await NetworkService().register(authModel).then((result) {
       result.when((errorMessage) {
@@ -60,7 +59,7 @@ class AuthProvider extends StateNotifier<AuthState> {
     });
   }
 
-  Future<void> logout(BuildContext context) async {
+  Future<void> logout() async {
     httpRequestStateProvider.setLoading();
     final token = await AppSharedPreferences().getToken();
     await NetworkService().logout(token!).then((result) {

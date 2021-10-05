@@ -2,9 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:grab_grip/configs/providers/http_request/http_request_state.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/style/colors.dart';
+import 'package:grab_grip/utils/functions.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -71,32 +73,55 @@ class AppDrawer extends StatelessWidget {
               const AboutUsScreenRoute(),
             ),
             const LanguagePicker(),
-            Consumer(
-              builder: (_, watch, __) {
-                return Visibility(
-                  visible: watch(authProvider).when(
-                    authenticated: () => true,
-                    notAuthenticated: () => false,
-                  ),
-                  child: ListTile(
-                    leading: const Icon(
-                      Icons.sensor_door_outlined,
-                      color: AppColors.purple,
-                    ),
-                    title: Text(
-                      AppLocalizations.of(context)!.logout,
-                      style: const TextStyle(
-                        color: AppColors.purple,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    onTap: () {
-                      watch(authProvider.notifier).logout(context);
-                      Navigator.pop(context);
-                    },
+            ProviderListener(
+              provider: httpRequestStateProvider,
+              onChange: (context, HttpRequestState httpRequestState) {
+                httpRequestState.whenOrNull(
+                  success: () {
+                    showSnackBar(
+                      context,
+                      AppLocalizations.of(context)!.you_logged_out_successfully,
+                    );
+                    Navigator.pop(context);
+                  },
+                  error: (errorMessage) => showSnackBarForError(
+                    context,
+                    errorMessage,
                   ),
                 );
               },
+              child: Consumer(
+                builder: (_, watch, __) {
+                  final httpRequestState = watch(httpRequestStateProvider);
+                  return httpRequestState.maybeWhen(
+                    loading: () => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    orElse: () => Visibility(
+                      visible: watch(authProvider).when(
+                        authenticated: () => true,
+                        notAuthenticated: () => false,
+                      ),
+                      child: ListTile(
+                        leading: const Icon(
+                          Icons.sensor_door_outlined,
+                          color: AppColors.purple,
+                        ),
+                        title: Text(
+                          AppLocalizations.of(context)!.logout,
+                          style: const TextStyle(
+                            color: AppColors.purple,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onTap: () {
+                          watch(authProvider.notifier).logout();
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),

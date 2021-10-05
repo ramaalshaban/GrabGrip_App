@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
@@ -20,6 +22,7 @@ class NetworkService {
       "\$Content-Type": "application/json",
     };
     _dio.options.headers = globalHeaders;
+    _dio.options.connectTimeout = 20000;
     _grabGripApi = GrabGripApi(_dio);
   }
 
@@ -55,26 +58,36 @@ class NetworkService {
     }
   }
 
+  bool _isNoInternetError(DioError dioError) =>
+      dioError.error != null &&
+      ((dioError.type == DioErrorType.other &&
+              dioError.error is SocketException) ||
+          (dioError.type == DioErrorType.connectTimeout));
+
   String _errorHandler(DioError error) {
     String aggregatedErrorMessage = "";
+    if (_isNoInternetError(error)) {
+      // no internet connection, so return an empty string
+      return "";
+    }
     final errorData = json.decode(error.response.toString());
     // when an exception occurs while registration, "errors" is not null
     if (errorData["errors"] != null) {
       if (errorData["errors"]["email"] != null) {
         aggregatedErrorMessage +=
-            "\n${errorData["errors"]["email"][0] as String}";
+            "${errorData["errors"]["email"][0] as String}\n";
       }
       if (errorData["errors"]["password"] != null) {
         aggregatedErrorMessage +=
-            "\n${errorData["errors"]["password"][0] as String}";
+            "${errorData["errors"]["password"][0] as String}\n";
       }
     }
     // when an exception occurs while logging in, "error" is not null
     else if (errorData["error"] != null) {
-      aggregatedErrorMessage += "\nEntered email or password is incorrect";
+      aggregatedErrorMessage += "Entered email or password is incorrect";
     } else if (error.response!.statusCode == 401) {
       // user is unauthorized
-      aggregatedErrorMessage += "\nYou are not authorized to do so";
+      aggregatedErrorMessage += "You are not authorized to do so";
     }
     return aggregatedErrorMessage;
   }

@@ -102,5 +102,9 @@
     "you_logged_out_successfully": "You have logged out successfully",
     "@you_logged_out_successfully": {
       "description": "successful logging out message"
+    },
+    "check_internet_connection": "Check your internet connection please",
+    "@check_internet_connection": {
+      "description": "no internet connection message"
     }
 }

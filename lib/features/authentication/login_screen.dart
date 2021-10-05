@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:grab_grip/configs/providers/http_request/http_request_state.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
@@ -79,61 +80,64 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: screenWidth(context),
                       height: 48.0,
                       color: AppColors.purple,
-                      child: Consumer(
-                        builder: (_, watch, __) {
-                          final httpRequestState =
-                              watch(httpRequestStateProvider);
-                          return httpRequestState.when(
-                            noRequestInProgress: () {
-                              return LoginButton(
-                                formKey: _formKey,
-                                watch: watch,
-                                authModel: AuthModel(email, password),
-                              );
-                            },
-                            success: () {
-                              final authenticationState = watch(authProvider);
-                              return authenticationState.when(
-                                authenticated: () {
-                                  context.router.pop();
-                                  watch(httpRequestStateProvider.notifier)
-                                      .reset();
-                                  showSnackBar(
-                                    context,
-                                    AppLocalizations.of(context)!
-                                        .you_logged_in_successfully,
-                                  );
-                                  // this return statement is just to satisfy the Consumer widget's builder
-                                  // and the returned container will not show up anywhere
-                                  return Container();
-                                },
-                                notAuthenticated: () {
-                                  watch(httpRequestStateProvider.notifier)
-                                      .reset();
-                                  return LoginButton(
-                                    formKey: _formKey,
-                                    watch: watch,
-                                    authModel: AuthModel(email, password),
-                                  );
-                                },
-                              );
-                            },
-                            loading: () {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            },
-                            error: (errorMessage) {
-                              watch(httpRequestStateProvider.notifier).reset();
-                              showSnackBar(context, errorMessage);
-                              return LoginButton(
-                                formKey: _formKey,
-                                watch: watch,
-                                authModel: AuthModel(email, password),
-                              );
-                            },
+                      child: ProviderListener(
+                        provider: httpRequestStateProvider,
+                        onChange: (context, HttpRequestState httpRequestState) {
+                          httpRequestState.whenOrNull(
+                            success: () => showSnackBar(
+                              context,
+                              AppLocalizations.of(context)!
+                                  .you_logged_in_successfully,
+                            ),
+                            error: (errorMessage) =>
+                                showSnackBarForError(context, errorMessage),
                           );
                         },
+                        child: Consumer(
+                          builder: (_, watch, __) {
+                            final httpRequestState =
+                                watch(httpRequestStateProvider);
+                            return httpRequestState.when(
+                              noRequestInProgress: () {
+                                return LoginButton(
+                                  formKey: _formKey,
+                                  watch: watch,
+                                  authModel: AuthModel(email, password),
+                                );
+                              },
+                              success: () {
+                                final authenticationState = watch(authProvider);
+                                return authenticationState.when(
+                                  authenticated: () {
+                                    context.router.pop();
+                                    // this return statement is just to satisfy the Consumer widget's builder
+                                    // and the returned container will not show up anywhere
+                                    return Container();
+                                  },
+                                  notAuthenticated: () {
+                                    return LoginButton(
+                                      formKey: _formKey,
+                                      watch: watch,
+                                      authModel: AuthModel(email, password),
+                                    );
+                                  },
+                                );
+                              },
+                              loading: () {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              },
+                              error: (errorMessage) {
+                                return LoginButton(
+                                  formKey: _formKey,
+                                  watch: watch,
+                                  authModel: AuthModel(email, password),
+                                );
+                              },
+                            );
+                          },
+                        ),
                       ),
                     ),
                     height24(),

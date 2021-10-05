@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:grab_grip/configs/providers/http_request/http_request_state.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
@@ -110,74 +111,79 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       width: screenWidth(context),
                       height: 48.0,
                       color: AppColors.purple,
-                      child: Consumer(
-                        builder: (_, watch, __) {
-                          final httpRequestState =
-                              watch(httpRequestStateProvider);
-                          return httpRequestState.when(
-                            noRequestInProgress: () {
-                              return RegisterButton(
-                                formKey: _formKey,
-                                authModel: AuthModel(
-                                  email,
-                                  password,
-                                  name,
-                                  passwordConfirmation,
-                                ),
-                                watch: watch,
-                              );
-                            },
-                            success: () {
-                              final authenticationState = watch(authProvider);
-                              return authenticationState.when(
-                                authenticated: () {
-                                  context.router.pop();
-                                  watch(httpRequestStateProvider.notifier)
-                                      .reset();
-                                  showSnackBar(
-                                    context,
-                                    AppLocalizations.of(context)!
-                                        .you_registered_successfully,
-                                  );
-                                  // this return statement is just to satisfy the Consumer widget's builder
-                                  // and the returned container will not show up anywhere
-                                  return Container();
-                                },
-                                notAuthenticated: () {
-                                  return RegisterButton(
-                                    formKey: _formKey,
-                                    authModel: AuthModel(
-                                      email,
-                                      password,
-                                      name,
-                                      passwordConfirmation,
-                                    ),
-                                    watch: watch,
-                                  );
-                                },
-                              );
-                            },
-                            loading: () {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            },
-                            error: (errorMessage) {
-                              watch(httpRequestStateProvider.notifier).reset();
-                              showSnackBar(context, errorMessage);
-                              return RegisterButton(
-                                formKey: _formKey,
-                                authModel: AuthModel(
-                                  email,
-                                  password,
-                                  name,
-                                  passwordConfirmation,
-                                ),
-                                watch: watch,
-                              );
-                            },
+                      child: ProviderListener(
+                        provider: httpRequestStateProvider,
+                        onChange: (context, HttpRequestState httpRequestState) {
+                          httpRequestState.whenOrNull(
+                            success: () => showSnackBar(
+                              context,
+                              AppLocalizations.of(context)!
+                                  .you_registered_successfully,
+                            ),
+                            error: (errorMessage) =>
+                                showSnackBarForError(context, errorMessage),
                           );
                         },
+                        child: Consumer(
+                          builder: (_, watch, __) {
+                            final httpRequestState =
+                                watch(httpRequestStateProvider);
+                            return httpRequestState.when(
+                              noRequestInProgress: () {
+                                return RegisterButton(
+                                  formKey: _formKey,
+                                  authModel: AuthModel(
+                                    email,
+                                    password,
+                                    name,
+                                    passwordConfirmation,
+                                  ),
+                                  watch: watch,
+                                );
+                              },
+                              success: () {
+                                final authenticationState = watch(authProvider);
+                                return authenticationState.when(
+                                  authenticated: () {
+                                    context.router.pop();
+                                    // this return statement is just to satisfy the Consumer widget's builder
+                                    // and the returned container will not show up anywhere
+                                    return Container();
+                                  },
+                                  notAuthenticated: () {
+                                    return RegisterButton(
+                                      formKey: _formKey,
+                                      authModel: AuthModel(
+                                        email,
+                                        password,
+                                        name,
+                                        passwordConfirmation,
+                                      ),
+                                      watch: watch,
+                                    );
+                                  },
+                                );
+                              },
+                              loading: () {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              },
+                              error: (errorMessage) {
+                                return RegisterButton(
+                                  formKey: _formKey,
+                                  authModel: AuthModel(
+                                    email,
+                                    password,
+                                    name,
+                                    passwordConfirmation,
+                                  ),
+                                  watch: watch,
+                                );
+                              },
+                            );
+                          },
+                        ),
                       ),
                     ),
                     height24(),
@@ -218,7 +224,7 @@ class RegisterButton extends StatelessWidget {
     return TextButton(
       onPressed: () async {
         if (formKey.currentState!.validate()) {
-          watch(authProvider.notifier).register(authModel, context);
+          watch(authProvider.notifier).register(authModel);
         }
       },
       child: Text(
