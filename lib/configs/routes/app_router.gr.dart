@@ -10,7 +10,8 @@ import 'package:flutter/material.dart' as _i2;
 import '../../features/authentication/forgot_password_screen.dart' as _i6;
 import '../../features/authentication/login_screen.dart' as _i5;
 import '../../features/authentication/register_screen.dart' as _i4;
-import '../../features/browsing/about_us/about_us_screen.dart' as _i7;
+import '../../features/browsing/about_us/about_us_screen.dart' as _i8;
+import '../../features/browsing/browse/browse_screen.dart' as _i7;
 import '../../features/browsing/home/home_screen.dart' as _i3;
 
 class AppRouter extends _i1.RootStackRouter {
@@ -35,9 +36,13 @@ class AppRouter extends _i1.RootStackRouter {
       return _i1.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i6.ForgotPasswordScreen());
     },
+    BrowseScreenRoute.name: (routeData) {
+      return _i1.MaterialPageX<dynamic>(
+          routeData: routeData, child: _i7.BrowseScreen());
+    },
     AboutUsScreenRoute.name: (routeData) {
       return _i1.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i7.AboutUsScreen());
+          routeData: routeData, child: _i8.AboutUsScreen());
     }
   };
 
@@ -48,6 +53,7 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(LoginScreenRoute.name, path: '/login-screen'),
         _i1.RouteConfig(ForgotPasswordScreenRoute.name,
             path: '/forgot-password-screen'),
+        _i1.RouteConfig(BrowseScreenRoute.name, path: '/browse-screen'),
         _i1.RouteConfig(AboutUsScreenRoute.name, path: '/about-us-screen')
       ];
 }
@@ -75,6 +81,12 @@ class ForgotPasswordScreenRoute extends _i1.PageRouteInfo<void> {
       : super(name, path: '/forgot-password-screen');
 
   static const String name = 'ForgotPasswordScreenRoute';
+}
+
+class BrowseScreenRoute extends _i1.PageRouteInfo<void> {
+  const BrowseScreenRoute() : super(name, path: '/browse-screen');
+
+  static const String name = 'BrowseScreenRoute';
 }
 
 class AboutUsScreenRoute extends _i1.PageRouteInfo<void> {

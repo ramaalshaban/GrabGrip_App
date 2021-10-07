@@ -8,7 +8,7 @@ part of 'grab_grip_api.dart';
 
 class _GrabGripApi implements GrabGripApi {
   _GrabGripApi(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'http://grabgrips.com/api/v1';
+    baseUrl ??= 'http://grabgrips.com';
   }
 
   final Dio _dio;
@@ -24,7 +24,7 @@ class _GrabGripApi implements GrabGripApi {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<RegisterResponse>>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/auth/register',
+                .compose(_dio.options, '/api/v1/auth/register',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = RegisterResponse.fromJson(_result.data!);
@@ -41,7 +41,7 @@ class _GrabGripApi implements GrabGripApi {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<LoginResponse>>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/auth/login',
+                .compose(_dio.options, '/api/v1/auth/login',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = LoginResponse.fromJson(_result.data!);
@@ -59,10 +59,26 @@ class _GrabGripApi implements GrabGripApi {
                 method: 'POST',
                 headers: <String, dynamic>{r'Authorization': token},
                 extra: _extra)
-            .compose(_dio.options, '/auth/logout',
+            .compose(_dio.options, '/api/v1/auth/logout',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<BrowseModel>> browse() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<BrowseModel>>(
+            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/browse',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = BrowseModel.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

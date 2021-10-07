@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
+import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
 import 'package:grab_grip/services/network/api/grab_grip_api.dart';
 import 'package:multiple_result/multiple_result.dart';
 
@@ -26,6 +27,7 @@ class NetworkService {
     _grabGripApi = GrabGripApi(_dio);
   }
 
+  //region auth calls
   Future<Result<String, LoginResponse>> register(AuthModel authModel) async {
     try {
       await _grabGripApi.register(authModel);
@@ -58,6 +60,23 @@ class NetworkService {
     }
   }
 
+  //endregion
+
+  //region browse
+  Future<Result<String, BrowseModel>> browse() async {
+    try {
+      final browseCall = await _grabGripApi.browse();
+
+      return Success(browseCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  //endregion
+
+  //region error handling
   bool _isNoInternetError(DioError dioError) =>
       dioError.error != null &&
       ((dioError.type == DioErrorType.other &&
@@ -91,4 +110,5 @@ class NetworkService {
     }
     return aggregatedErrorMessage;
   }
+//endregion
 }

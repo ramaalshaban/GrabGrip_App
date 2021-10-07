@@ -1,5 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:grab_grip/configs/providers/providers.dart';
+import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/browsing/home/widgets/drawer.dart';
 import 'package:grab_grip/features/browsing/home/widgets/home_app_bar.dart';
 import 'package:grab_grip/features/browsing/home/widgets/horizontal_list.dart';
@@ -18,6 +22,19 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Consumer(
+              builder: (_, watch, __) {
+                return TextButton(
+                  onPressed: () {
+                    context.router.push(
+                      const BrowseScreenRoute(),
+                    );
+                    watch(browseDataProvider.notifier).browse();
+                  },
+                  child: const Text("Browse Gears"),
+                );
+              },
+            ),
             HorizontalList(
               title: AppLocalizations.of(context)!.explore,
               data: const ["", "", "", "", "", "", "", "", "", ""],

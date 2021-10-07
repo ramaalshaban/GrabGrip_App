@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:grab_grip/configs/providers/http_request/http_request_state.dart';
+import 'package:grab_grip/services/network/providers/http_request_state.dart';
 
 class HttpRequestStateProvider extends StateNotifier<HttpRequestState> {
   HttpRequestStateProvider()
