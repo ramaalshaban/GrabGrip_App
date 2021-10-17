@@ -22,7 +22,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'id': instance.id,
-      'display_name': instance.name,
+      'display_name': instance.displayName,
       'username': instance.userName,
       'bio': instance.bio,
       'phone': instance.phone,

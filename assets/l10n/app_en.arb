@@ -106,5 +106,125 @@
     "check_internet_connection": "Check your internet connection please",
     "@check_internet_connection": {
       "description": "no internet connection message"
+    },
+    "most_recent_first": "Most recent first",
+    "@most_recent_first": {
+      "description": "gears sorting option"
+    },
+    "ending_soonest": "Ending soonest",
+    "@ending_soonest": {
+      "description": "gears sorting option"
+    },
+    "price_low_to_high": "Price: low to high",
+    "@price_low_to_high": {
+      "description": "gears sorting option"
+    },
+    "price_high_to_low": "Price: high to low",
+    "@price_high_to_low": {
+      "description": "gears sorting option"
+    },
+    "nearest_first": "Nearest first",
+    "@nearest_first": {
+      "description": "gears sorting option"
+    },
+    "cancel": "Cancel",
+    "@cancel": {
+      "description": "filters dialog cancel button text"
+    },
+    "apply": "Apply",
+    "@apply": {
+      "description": "filters dialog apply button text"
+    },
+    "distance": "Distance",
+    "@distance": {
+      "description": "filtering option text"
+    },
+    "categories": "Categories",
+    "@categories": {
+      "description": "filtering option text"
+    },
+    "price": "Price",
+    "@price": {
+      "description": "filtering option text"
+    },
+    "to": "to",
+    "@to": {
+      "description": "text for price filtering option"
+    },
+    "listing_type": "Listing Type",
+    "@listing_type": {
+      "description": "filtering option text"
+    },
+    "anywhere": "Anywhere",
+    "@anywhere": {
+      "description": "text for distance filtering option"
+    },
+    "this_area_only": "This area only",
+    "@anywhere": {
+      "description": "text for distance filtering option"
+    },
+    "one_km": "+1 km",
+    "@one_km": {
+      "description": "text for distance filtering option"
+    },
+    "three_km": "+3 km",
+    "@three_km": {
+      "description": "text for distance filtering option"
+    },
+    "five_km": "+5 km",
+    "@five_km": {
+      "description": "text for distance filtering option"
+    },
+    "ten_km": "+10 km",
+    "@ten_km": {
+      "description": "text for distance filtering option"
+    },
+    "fifteen_km": "+15 km",
+    "@fifteen_km": {
+      "description": "text for distance filtering option"
+    },
+    "thirteen_km": "+30 km",
+    "@thirteen_km": {
+      "description": "text for distance filtering option"
+    },
+    "fifty_km": "+50 km",
+    "@fifty_km": {
+      "description": "text for distance filtering option"
+    },
+    "seventy_five_km": "+75 km",
+    "@seventy_five_km": {
+      "description": "text for distance filtering option"
+    },
+    "one_hundred_km": "+100 km",
+    "@one_km": {
+      "description": "text for distance filtering option"
+    },
+    "reset": "Reset",
+    "@reset": {
+      "description": "filtering option text"
+    },
+    "all": "All",
+    "@all": {
+      "description": "text for listing type filtering option"
+    },
+    "buy": "Buy",
+    "@buy": {
+      "description": "text for listing type filtering option"
+    },
+    "rent": "Rent",
+    "@rent": {
+      "description": "text for listing type filtering option"
+    },
+    "no_results_with_applied_filters": "No results with the applied filters",
+    "@no_results_with_applied_filters": {
+      "description": "text appears when there is no gears results to display in browse screen"
+    },
+    "refresh": "Refresh",
+    "@refresh": {
+      "description": "refresh button text"
+    },
+    "something_went_wrong": "Something went wrong !",
+    "@something_went_wrong": {
+      "description": "text appears when there is an error in browse screen and no results to display"
     }
 }

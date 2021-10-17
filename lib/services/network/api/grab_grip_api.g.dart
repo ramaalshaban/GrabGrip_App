@@ -68,9 +68,25 @@ class _GrabGripApi implements GrabGripApi {
   }
 
   @override
-  Future<HttpResponse<BrowseModel>> browse() async {
+  Future<HttpResponse<BrowseModel>> browse(
+      {searchText,
+      sortType,
+      distance,
+      category,
+      minPrice,
+      maxPrice,
+      listingType}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'q': searchText,
+      r'sort': sortType,
+      r'distance': distance,
+      r'category': category,
+      r'price_min': minPrice,
+      r'price_max': maxPrice,
+      r'listing-type': listingType
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<BrowseModel>>(
@@ -79,6 +95,22 @@ class _GrabGripApi implements GrabGripApi {
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = BrowseModel.fromJson(_result.data!);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<CategoriesResponse>> getCategories() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<CategoriesResponse>>(
+            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/categories',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CategoriesResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

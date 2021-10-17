@@ -26,7 +26,7 @@ class AboutUsScreen extends StatelessWidget {
                   height48(),
                   const Text(
                     "ABOUT CARBON",
-                    style: AppTextStyles.horizontalListTitle,
+                    style: AppTextStyles.bigTitle,
                   ),
                   height24(),
                   const Padding(
@@ -39,7 +39,7 @@ class AboutUsScreen extends StatelessWidget {
                   height48(),
                   const Text(
                     "WHY CARBON ?",
-                    style: AppTextStyles.horizontalListTitle,
+                    style: AppTextStyles.bigTitle,
                   ),
                   height24(),
                   const Padding(
@@ -52,7 +52,7 @@ class AboutUsScreen extends StatelessWidget {
                   height48(),
                   const Text(
                     "CARBON PHILOSOPHY",
-                    style: AppTextStyles.horizontalListTitle,
+                    style: AppTextStyles.bigTitle,
                   ),
                   height24(),
                   const Padding(
@@ -65,7 +65,7 @@ class AboutUsScreen extends StatelessWidget {
                   height48(),
                   const Text(
                     "CARBON TEAM",
-                    style: AppTextStyles.horizontalListTitle,
+                    style: AppTextStyles.bigTitle,
                   ),
                   height24(),
                   const Padding(

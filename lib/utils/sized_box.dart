@@ -11,6 +11,8 @@ SizedBox height24() => const SizedBox(height: 24.0);
 
 SizedBox height12() => const SizedBox(height: 12.0);
 
+SizedBox height8() => const SizedBox(height: 8.0);
+
 SizedBox height4() => const SizedBox(height: 4.0);
 
 SizedBox height2() => const SizedBox(height: 2.0);
@@ -18,5 +20,7 @@ SizedBox height2() => const SizedBox(height: 2.0);
 
 //region sized box with width
 SizedBox width12() => const SizedBox(width: 12.0);
+
+SizedBox width4() => const SizedBox(width: 4.0);
 
 //endregion

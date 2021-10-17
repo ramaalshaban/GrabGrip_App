@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:grab_grip/style/colors.dart';
 
+//region snack bars
 void showSnackBar(BuildContext context, String message) {
   WidgetsBinding.instance?.addPostFrameCallback((_) {
     // showFlash function was put inside this block
@@ -67,3 +68,4 @@ void showSnackBarForError(BuildContext context, String errorMessage) {
     );
   });
 }
+//endregion

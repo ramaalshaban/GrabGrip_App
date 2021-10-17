@@ -22,7 +22,7 @@ class _$CategoryTearOff {
   const _$CategoryTearOff();
 
   _Category call(int id, @JsonKey(name: 'parent_id') int parentId, int? order,
-      String name, @JsonKey(name: 'child') List<Category>? subCategories) {
+      String name, @JsonKey(name: 'child') List<Category> subCategories) {
     return _Category(
       id,
       parentId,
@@ -48,7 +48,7 @@ mixin _$Category {
   int? get order => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'child')
-  List<Category>? get subCategories => throw _privateConstructorUsedError;
+  List<Category> get subCategories => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -65,7 +65,7 @@ abstract class $CategoryCopyWith<$Res> {
       @JsonKey(name: 'parent_id') int parentId,
       int? order,
       String name,
-      @JsonKey(name: 'child') List<Category>? subCategories});
+      @JsonKey(name: 'child') List<Category> subCategories});
 }
 
 /// @nodoc
@@ -104,7 +104,7 @@ class _$CategoryCopyWithImpl<$Res> implements $CategoryCopyWith<$Res> {
       subCategories: subCategories == freezed
           ? _value.subCategories
           : subCategories // ignore: cast_nullable_to_non_nullable
-              as List<Category>?,
+              as List<Category>,
     ));
   }
 }
@@ -119,7 +119,7 @@ abstract class _$CategoryCopyWith<$Res> implements $CategoryCopyWith<$Res> {
       @JsonKey(name: 'parent_id') int parentId,
       int? order,
       String name,
-      @JsonKey(name: 'child') List<Category>? subCategories});
+      @JsonKey(name: 'child') List<Category> subCategories});
 }
 
 /// @nodoc
@@ -159,7 +159,7 @@ class __$CategoryCopyWithImpl<$Res> extends _$CategoryCopyWithImpl<$Res>
       subCategories == freezed
           ? _value.subCategories
           : subCategories // ignore: cast_nullable_to_non_nullable
-              as List<Category>?,
+              as List<Category>,
     ));
   }
 }
@@ -184,7 +184,7 @@ class _$_Category with DiagnosticableTreeMixin implements _Category {
   final String name;
   @override
   @JsonKey(name: 'child')
-  final List<Category>? subCategories;
+  final List<Category> subCategories;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -247,7 +247,7 @@ abstract class _Category implements Category {
       @JsonKey(name: 'parent_id') int parentId,
       int? order,
       String name,
-      @JsonKey(name: 'child') List<Category>? subCategories) = _$_Category;
+      @JsonKey(name: 'child') List<Category> subCategories) = _$_Category;
 
   factory _Category.fromJson(Map<String, dynamic> json) = _$_Category.fromJson;
 
@@ -262,7 +262,7 @@ abstract class _Category implements Category {
   String get name => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'child')
-  List<Category>? get subCategories => throw _privateConstructorUsedError;
+  List<Category> get subCategories => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CategoryCopyWith<_Category> get copyWith =>

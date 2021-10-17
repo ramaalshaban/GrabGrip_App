@@ -11,8 +11,8 @@ _$_Category _$$_CategoryFromJson(Map<String, dynamic> json) => _$_Category(
       json['parent_id'] as int,
       json['order'] as int?,
       json['name'] as String,
-      (json['child'] as List<dynamic>?)
-          ?.map((e) => Category.fromJson(e as Map<String, dynamic>))
+      (json['child'] as List<dynamic>)
+          .map((e) => Category.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

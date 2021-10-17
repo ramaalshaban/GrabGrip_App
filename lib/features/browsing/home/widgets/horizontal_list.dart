@@ -22,7 +22,7 @@ class HorizontalList extends StatelessWidget {
           height24(),
           Text(
             title,
-            style: AppTextStyles.horizontalListTitle,
+            style: AppTextStyles.bigTitle,
           ),
           height12(),
           SizedBox(

@@ -11,17 +11,28 @@ void main() {
 
 class GrabGripApp extends ConsumerWidget {
   final _appRouter = AppRouter();
-  final _themeData = ThemeData(
-    primaryColor: AppColors.purple,
-    fontFamily: 'NeoTech',
-  );
+
+  ThemeData _initTheme() {
+    final ThemeData themeData = ThemeData(
+      fontFamily: 'NeoTech',
+    );
+    return themeData.copyWith(
+      primaryColor: AppColors.purple,
+      textSelectionTheme: themeData.textSelectionTheme.copyWith(
+        cursorColor: AppColors.purple,
+        selectionHandleColor: AppColors.purple,
+      ),
+      splashColor: AppColors.purple,
+      hintColor: AppColors.purple,
+    );
+  }
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return MaterialApp.router(
       locale: watch(localeProvider),
       title: 'Grab Grip',
-      theme: _themeData,
+      theme: _initTheme(),
       routerDelegate: _appRouter.delegate(),
       routeInformationParser: _appRouter.defaultRouteParser(),
       localizationsDelegates: AppLocalizations.localizationsDelegates,

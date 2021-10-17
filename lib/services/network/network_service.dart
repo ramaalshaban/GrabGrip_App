@@ -5,6 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
 import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
+import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
+import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
 import 'package:grab_grip/services/network/api/grab_grip_api.dart';
 import 'package:multiple_result/multiple_result.dart';
 
@@ -63,11 +65,50 @@ class NetworkService {
   //endregion
 
   //region browse
-  Future<Result<String, BrowseModel>> browse() async {
+  Future<Result<String, BrowseModel>> browse(
+    FilterSortModel? filterAndSortParams,
+  ) async {
     try {
-      final browseCall = await _grabGripApi.browse();
-
+      print(
+          "====================before the browse call, the filters values are : ========================");
+      print(" ${filterAndSortParams?.searchText?.toString()} search text");
+      print(" ${filterAndSortParams?.category?.name.toString()} category");
+      print(
+          " ${filterAndSortParams?.subcategory?.name.toString()} subcategory");
+      print(" ${filterAndSortParams?.distance?.title.toString()} distance");
+      print(
+          " ${filterAndSortParams?.listingType?.title.toString()} listing type");
+      print(" ${filterAndSortParams?.minPrice.toString()}  minPrice");
+      print(" ${filterAndSortParams?.maxPrice.toString()} maxPrice");
+      print(
+          " ${filterAndSortParams?.sortOption?.title.toString()}    sortOption");
+      print(
+          "===========================================================================================");
+      print("\n");
+      print("\n");
+      print("\n");
+      print("\n");
+      final browseCall = await _grabGripApi.browse(
+        category: filterAndSortParams?.subcategory != null
+            ? filterAndSortParams?.subcategory?.id.toString()
+            : filterAndSortParams?.category?.id.toString(),
+        distance: filterAndSortParams?.distance?.key,
+        listingType: filterAndSortParams?.listingType?.key,
+        minPrice: filterAndSortParams?.minPrice,
+        maxPrice: filterAndSortParams?.maxPrice,
+        sortType: filterAndSortParams?.sortOption?.key,
+      );
       return Success(browseCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  Future<Result<String, CategoriesResponse>> getCategories() async {
+    try {
+      final getCategoriesCall = await _grabGripApi.getCategories();
+      return Success(getCategoriesCall.data);
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);
       return Error(errorMessage);

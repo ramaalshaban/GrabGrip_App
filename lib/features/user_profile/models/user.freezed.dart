@@ -23,7 +23,7 @@ class _$UserTearOff {
 
   _User call(
       int id,
-      @JsonKey(name: 'display_name') String name,
+      @JsonKey(name: 'display_name') String displayName,
       @JsonKey(name: 'username') String userName,
       String? bio,
       String? phone,
@@ -35,7 +35,7 @@ class _$UserTearOff {
       {required bool verified}) {
     return _User(
       id,
-      name,
+      displayName,
       userName,
       bio,
       phone,
@@ -60,7 +60,7 @@ const $User = _$UserTearOff();
 mixin _$User {
   int get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'display_name')
-  String get name => throw _privateConstructorUsedError;
+  String get displayName => throw _privateConstructorUsedError;
   @JsonKey(name: 'username')
   String get userName => throw _privateConstructorUsedError;
   String? get bio => throw _privateConstructorUsedError;
@@ -85,7 +85,7 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res>;
   $Res call(
       {int id,
-      @JsonKey(name: 'display_name') String name,
+      @JsonKey(name: 'display_name') String displayName,
       @JsonKey(name: 'username') String userName,
       String? bio,
       String? phone,
@@ -108,7 +108,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = freezed,
+    Object? displayName = freezed,
     Object? userName = freezed,
     Object? bio = freezed,
     Object? phone = freezed,
@@ -124,9 +124,9 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      displayName: displayName == freezed
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
               as String,
       userName: userName == freezed
           ? _value.userName
@@ -175,7 +175,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   $Res call(
       {int id,
-      @JsonKey(name: 'display_name') String name,
+      @JsonKey(name: 'display_name') String displayName,
       @JsonKey(name: 'username') String userName,
       String? bio,
       String? phone,
@@ -199,7 +199,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = freezed,
+    Object? displayName = freezed,
     Object? userName = freezed,
     Object? bio = freezed,
     Object? phone = freezed,
@@ -215,9 +215,9 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      displayName == freezed
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
               as String,
       userName == freezed
           ? _value.userName
@@ -264,7 +264,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 class _$_User with DiagnosticableTreeMixin implements _User {
   const _$_User(
       this.id,
-      @JsonKey(name: 'display_name') this.name,
+      @JsonKey(name: 'display_name') this.displayName,
       @JsonKey(name: 'username') this.userName,
       this.bio,
       this.phone,
@@ -281,7 +281,7 @@ class _$_User with DiagnosticableTreeMixin implements _User {
   final int id;
   @override
   @JsonKey(name: 'display_name')
-  final String name;
+  final String displayName;
   @override
   @JsonKey(name: 'username')
   final String userName;
@@ -306,7 +306,7 @@ class _$_User with DiagnosticableTreeMixin implements _User {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, name: $name, userName: $userName, bio: $bio, phone: $phone, avatar: $avatar, city: $city, country: $country, unreadMessagesCount: $unreadMessagesCount, canAcceptPayments: $canAcceptPayments, verified: $verified)';
+    return 'User(id: $id, displayName: $displayName, userName: $userName, bio: $bio, phone: $phone, avatar: $avatar, city: $city, country: $country, unreadMessagesCount: $unreadMessagesCount, canAcceptPayments: $canAcceptPayments, verified: $verified)';
   }
 
   @override
@@ -315,7 +315,7 @@ class _$_User with DiagnosticableTreeMixin implements _User {
     properties
       ..add(DiagnosticsProperty('type', 'User'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('displayName', displayName))
       ..add(DiagnosticsProperty('userName', userName))
       ..add(DiagnosticsProperty('bio', bio))
       ..add(DiagnosticsProperty('phone', phone))
@@ -333,8 +333,9 @@ class _$_User with DiagnosticableTreeMixin implements _User {
         (other is _User &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.displayName, displayName) ||
+                const DeepCollectionEquality()
+                    .equals(other.displayName, displayName)) &&
             (identical(other.userName, userName) ||
                 const DeepCollectionEquality()
                     .equals(other.userName, userName)) &&
@@ -364,7 +365,7 @@ class _$_User with DiagnosticableTreeMixin implements _User {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(displayName) ^
       const DeepCollectionEquality().hash(userName) ^
       const DeepCollectionEquality().hash(bio) ^
       const DeepCollectionEquality().hash(phone) ^
@@ -389,7 +390,7 @@ class _$_User with DiagnosticableTreeMixin implements _User {
 abstract class _User implements User {
   const factory _User(
       int id,
-      @JsonKey(name: 'display_name') String name,
+      @JsonKey(name: 'display_name') String displayName,
       @JsonKey(name: 'username') String userName,
       String? bio,
       String? phone,
@@ -406,7 +407,7 @@ abstract class _User implements User {
   int get id => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'display_name')
-  String get name => throw _privateConstructorUsedError;
+  String get displayName => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'username')
   String get userName => throw _privateConstructorUsedError;

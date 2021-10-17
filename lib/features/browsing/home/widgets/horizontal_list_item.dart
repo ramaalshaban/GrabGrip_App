@@ -28,7 +28,7 @@ class HorizontalListItem extends StatelessWidget {
                 padding: EdgeInsets.only(left: 4.0),
                 child: Text(
                   "item title",
-                  style: AppTextStyles.horizontalListItemTitle,
+                  style: AppTextStyles.title,
                 ),
               ),
               height2(),
@@ -36,7 +36,7 @@ class HorizontalListItem extends StatelessWidget {
                 padding: EdgeInsets.only(left: 4.0),
                 child: Text(
                   "item subtitle",
-                  style: AppTextStyles.horizontalListItemSubtitle,
+                  style: AppTextStyles.subtitle,
                 ),
               ),
             ],

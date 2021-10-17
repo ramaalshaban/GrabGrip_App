@@ -23,6 +23,8 @@ environment:
 dependencies:
   # auto_route is used for managing the routes between the about_us in the app.
   auto_route: ^2.3.2
+  # cached_network_image is for showing images from the internet and caching them
+  cached_network_image: ^3.1.0
   cupertino_icons: ^1.0.2
   email_validator: ^2.0.1
   # flash is for showing SnackBars easily
@@ -33,6 +35,7 @@ dependencies:
     sdk: flutter
   # flutter_riverpod is used for state management
   flutter_riverpod: ^0.14.0+3
+  google_maps_flutter: ^2.0.11
   intl: ^0.17.0
   json_annotation: ^4.1.0
   # multiple_result makes it easy to return two valued from a function
@@ -40,6 +43,8 @@ dependencies:
   # retrofit is used for making http requests
   retrofit: ^2.0.1
   shared_preferences: ^2.0.8
+  # skeleton_loader is for making loading skeleton
+  skeleton_loader: ^2.0.0+4
 
 
 dev_dependencies:

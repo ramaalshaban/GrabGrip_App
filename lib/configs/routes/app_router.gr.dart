@@ -10,8 +10,12 @@ import 'package:flutter/material.dart' as _i2;
 import '../../features/authentication/forgot_password_screen.dart' as _i6;
 import '../../features/authentication/login_screen.dart' as _i5;
 import '../../features/authentication/register_screen.dart' as _i4;
-import '../../features/browsing/about_us/about_us_screen.dart' as _i8;
-import '../../features/browsing/browse/browse_screen.dart' as _i7;
+import '../../features/browsing/about_us/about_us_screen.dart' as _i9;
+import '../../features/browsing/browse/models/gear/gear.dart' as _i10;
+import '../../features/browsing/browse/widgets/screens/browse_details_screen.dart'
+    as _i8;
+import '../../features/browsing/browse/widgets/screens/browse_screen/browse_screen.dart'
+    as _i7;
 import '../../features/browsing/home/home_screen.dart' as _i3;
 
 class AppRouter extends _i1.RootStackRouter {
@@ -40,9 +44,16 @@ class AppRouter extends _i1.RootStackRouter {
       return _i1.MaterialPageX<dynamic>(
           routeData: routeData, child: _i7.BrowseScreen());
     },
+    BrowseDetailsScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<BrowseDetailsScreenRouteArgs>();
+      return _i1.MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: _i8.BrowseDetailsScreen(
+              key: args.key, clickedGear: args.clickedGear));
+    },
     AboutUsScreenRoute.name: (routeData) {
       return _i1.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i8.AboutUsScreen());
+          routeData: routeData, child: _i9.AboutUsScreen());
     }
   };
 
@@ -54,6 +65,8 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(ForgotPasswordScreenRoute.name,
             path: '/forgot-password-screen'),
         _i1.RouteConfig(BrowseScreenRoute.name, path: '/browse-screen'),
+        _i1.RouteConfig(BrowseDetailsScreenRoute.name,
+            path: '/browse-details-screen'),
         _i1.RouteConfig(AboutUsScreenRoute.name, path: '/about-us-screen')
       ];
 }
@@ -87,6 +100,25 @@ class BrowseScreenRoute extends _i1.PageRouteInfo<void> {
   const BrowseScreenRoute() : super(name, path: '/browse-screen');
 
   static const String name = 'BrowseScreenRoute';
+}
+
+class BrowseDetailsScreenRoute
+    extends _i1.PageRouteInfo<BrowseDetailsScreenRouteArgs> {
+  BrowseDetailsScreenRoute({_i2.Key? key, required _i10.Gear clickedGear})
+      : super(name,
+            path: '/browse-details-screen',
+            args: BrowseDetailsScreenRouteArgs(
+                key: key, clickedGear: clickedGear));
+
+  static const String name = 'BrowseDetailsScreenRoute';
+}
+
+class BrowseDetailsScreenRouteArgs {
+  const BrowseDetailsScreenRouteArgs({this.key, required this.clickedGear});
+
+  final _i2.Key? key;
+
+  final _i10.Gear clickedGear;
 }
 
 class AboutUsScreenRoute extends _i1.PageRouteInfo<void> {

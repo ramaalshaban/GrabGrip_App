@@ -5,7 +5,7 @@ part 'view_mode.freezed.dart';
 
 @freezed
 class ViewMode with _$ViewMode {
-  const factory ViewMode.list() = _ListViewMode;
   const factory ViewMode.grid() = _GridViewMode;
+  const factory ViewMode.list() = _ListViewMode;
   const factory ViewMode.map() = _MapViewMode;
 }

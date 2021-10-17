@@ -10,7 +10,7 @@ part 'user.g.dart';
 class User with _$User {
   const factory User(
       int id,
-      @JsonKey(name: 'display_name') String name,
+      @JsonKey(name: 'display_name') String displayName,
       @JsonKey(name: 'username') String userName,
       String? bio,
       String? phone,

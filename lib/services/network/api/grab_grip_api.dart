@@ -3,6 +3,7 @@ import 'package:grab_grip/features/authentication/models/auth_request/auth_reque
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
 import 'package:grab_grip/features/authentication/models/register_response/register_response.dart';
 import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
+import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -27,6 +28,17 @@ abstract class GrabGripApi {
 
   //region browse requests
   @GET("/browse")
-  Future<HttpResponse<BrowseModel>> browse();
-  //endregion
+  Future<HttpResponse<BrowseModel>> browse({
+    @Query("q") String? searchText,
+    @Query("sort") String? sortType,
+    @Query("distance") String? distance,
+    @Query("category") String? category,
+    @Query("price_min") String? minPrice,
+    @Query("price_max") String? maxPrice,
+    @Query("listing-type") String? listingType,
+  });
+
+  @GET("/categories")
+  Future<HttpResponse<CategoriesResponse>> getCategories();
+//endregion
 }
