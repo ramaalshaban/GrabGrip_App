@@ -20,7 +20,7 @@ class ListGearItem extends StatelessWidget {
         moveToDetailsScreen(context, gear);
       },
       child: SizedBox(
-        height: screenHeightWithoutExtras(context) / 6.5,
+        height: screenHeightWithoutExtras(context) / 5,
         child: Card(
           elevation: 4.0,
           shadowColor: AppColors.purple,
@@ -28,6 +28,7 @@ class ListGearItem extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
+                flex: 2,
                 child: CachedNetworkImage(
                   imageUrl: gear.thumbnail,
                   placeholder: (context, url) => const Center(
@@ -56,10 +57,11 @@ class ListGearItem extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 3,
+                flex: 4,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(10, 8, 6, 8),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(

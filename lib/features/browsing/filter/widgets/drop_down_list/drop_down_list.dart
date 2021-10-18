@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
+import 'package:grab_grip/features/browsing/browse/providers/browse_provider.dart';
 import 'package:grab_grip/features/browsing/filter/models/drop_down_item.dart';
 import 'package:grab_grip/features/browsing/filter/models/drop_down_type/drop_down_type.dart';
 import 'package:grab_grip/style/colors.dart';
@@ -50,7 +51,7 @@ class _DropDownListState extends State<DropDownList> {
               widget.dataType.when(
                 sortOptions: () {
                   watch(filterAndSortProvider.notifier).sortOption = newValue;
-                  watch(browseDataProvider.notifier).browse();
+                  BrowseProvider.pagingController.refresh();
                 },
                 distanceOptions: () {
                   watch(filterAndSortProvider.notifier).distance = newValue;

@@ -8,6 +8,7 @@ import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_mo
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
 import 'package:grab_grip/services/network/api/grab_grip_api.dart';
+import 'package:grab_grip/utils/constants.dart';
 import 'package:multiple_result/multiple_result.dart';
 
 class NetworkService {
@@ -66,29 +67,11 @@ class NetworkService {
 
   //region browse
   Future<Result<String, BrowseModel>> browse(
-    FilterSortModel? filterAndSortParams,
-  ) async {
+      FilterSortModel? filterAndSortParams,
+      {required int pageNumber}) async {
     try {
-      print(
-          "====================before the browse call, the filters values are : ========================");
-      print(" ${filterAndSortParams?.searchText?.toString()} search text");
-      print(" ${filterAndSortParams?.category?.name.toString()} category");
-      print(
-          " ${filterAndSortParams?.subcategory?.name.toString()} subcategory");
-      print(" ${filterAndSortParams?.distance?.title.toString()} distance");
-      print(
-          " ${filterAndSortParams?.listingType?.title.toString()} listing type");
-      print(" ${filterAndSortParams?.minPrice.toString()}  minPrice");
-      print(" ${filterAndSortParams?.maxPrice.toString()} maxPrice");
-      print(
-          " ${filterAndSortParams?.sortOption?.title.toString()}    sortOption");
-      print(
-          "===========================================================================================");
-      print("\n");
-      print("\n");
-      print("\n");
-      print("\n");
       final browseCall = await _grabGripApi.browse(
+        pageNumber: pageNumber,
         category: filterAndSortParams?.subcategory != null
             ? filterAndSortParams?.subcategory?.id.toString()
             : filterAndSortParams?.category?.id.toString(),
@@ -127,8 +110,7 @@ class NetworkService {
   String _errorHandler(DioError error) {
     String aggregatedErrorMessage = "";
     if (_isNoInternetError(error)) {
-      // no internet connection, so return an empty string
-      return "";
+      return noInternetConnection;
     }
     final errorData = json.decode(error.response.toString());
     // when an exception occurs while registration, "errors" is not null

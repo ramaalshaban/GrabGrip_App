@@ -29,6 +29,7 @@ abstract class GrabGripApi {
   //region browse requests
   @GET("/browse")
   Future<HttpResponse<BrowseModel>> browse({
+    @Query("page") required int pageNumber,
     @Query("q") String? searchText,
     @Query("sort") String? sortType,
     @Query("distance") String? distance,

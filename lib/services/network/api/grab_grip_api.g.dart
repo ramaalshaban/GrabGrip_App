@@ -69,7 +69,8 @@ class _GrabGripApi implements GrabGripApi {
 
   @override
   Future<HttpResponse<BrowseModel>> browse(
-      {searchText,
+      {required pageNumber,
+      searchText,
       sortType,
       distance,
       category,
@@ -78,6 +79,7 @@ class _GrabGripApi implements GrabGripApi {
       listingType}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
+      r'page': pageNumber,
       r'q': searchText,
       r'sort': sortType,
       r'distance': distance,

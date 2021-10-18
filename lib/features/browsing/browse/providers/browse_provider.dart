@@ -1,27 +1,48 @@
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
+import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/browsing/filter/providers/filter_sort_provider.dart';
 import 'package:grab_grip/services/network/network_service.dart';
-import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class BrowseProvider extends StateNotifier<BrowseModel?> {
-  final HttpRequestStateProvider _httpRequestStateProvider;
+class BrowseProvider extends StateNotifier<BrowseModel> {
   final FilterSortProvider _filterSortProvider;
+  static PagingController<int, Gear> pagingController =
+      PagingController(firstPageKey: 1 );
 
-  BrowseProvider(this._httpRequestStateProvider, this._filterSortProvider)
-      : super(null);
+  BrowseProvider(this._filterSortProvider)
+      : super(BrowseModel.getEmptyModel());
 
-  Future<void> browse() async {
+  Future<void> browse(int pageKey) async {
     final filterAndSortParams = _filterSortProvider.state;
-    _httpRequestStateProvider.setLoading();
-    await NetworkService().browse(filterAndSortParams).then((result) {
-      result.when((errorMessage) {
-        state = null;
-        _httpRequestStateProvider.setError(errorMessage);
-      }, (response) {
-        state = response;
-        _httpRequestStateProvider.setSuccess();
-      });
-    });
+    await NetworkService()
+        .browse(filterAndSortParams, pageNumber: pageKey)
+        .then(
+      (result) {
+
+        result.when(
+          (errorMessage) {
+            BrowseProvider.pagingController.error = errorMessage;
+          },
+          (response) {
+            state = response;
+            final isLastPage = response.data.lastPageNumber == pageKey;
+            if (isLastPage) {
+              pagingController.appendLastPage(response.data.gears);
+            } else {
+              final nextPageKey = pageKey + 1;
+              pagingController.appendPage(response.data.gears, nextPageKey);
+            }
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    pagingController.dispose();
+    super.dispose();
   }
 }

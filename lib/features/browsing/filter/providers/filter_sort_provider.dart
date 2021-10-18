@@ -37,13 +37,10 @@ class FilterSortProvider extends StateNotifier<FilterSortModel> {
 
   Future<void> _getCategories() async {
     await NetworkService().getCategories().then((result) {
-      print(
-          " _getCategories====================>resutl is $result<=================");
       result.when((errorMessage) {
         filteringCategories = null;
       }, (response) {
         filteringCategories = response.categories;
-        print(" _getCategories done");
       });
     });
   }

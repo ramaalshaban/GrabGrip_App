@@ -9,9 +9,14 @@ part 'browse_model.g.dart';
 
 @freezed
 class BrowseModel with _$BrowseModel {
-  const factory BrowseModel(@JsonKey(name: 'listings') Listing data,
-      {@JsonKey(name: 'is_filtered') required bool isFiltered}) = _BrowseModel;
+  const factory BrowseModel(
+    @JsonKey(name: 'listings') Listing data,
+  ) = _BrowseModel;
 
   factory BrowseModel.fromJson(Map<String, dynamic> json) =>
       _$BrowseModelFromJson(json);
+
+  static BrowseModel getEmptyModel() {
+    return const BrowseModel(Listing(-1, -1, -1, []));
+  }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:grab_grip/configs/providers/providers.dart';
+import 'package:grab_grip/features/browsing/browse/providers/browse_provider.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
@@ -28,7 +28,9 @@ class BrowseScreenErrorBody extends ConsumerWidget {
               shadowColor: AppColors.purple,
               primary: AppColors.white,
             ),
-            onPressed: () => watch(browseDataProvider.notifier).browse(),
+            onPressed: () async {
+              BrowseProvider.pagingController.retryLastFailedRequest();
+            },
             child: Text(
               AppLocalizations.of(context)!.refresh,
               style: const TextStyle(color: AppColors.purple),

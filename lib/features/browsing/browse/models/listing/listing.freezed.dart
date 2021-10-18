@@ -21,9 +21,14 @@ Listing _$ListingFromJson(Map<String, dynamic> json) {
 class _$ListingTearOff {
   const _$ListingTearOff();
 
-  _Listing call(@JsonKey(name: 'total') int gearsCount,
+  _Listing call(
+      @JsonKey(name: 'current_page') int pageNumber,
+      @JsonKey(name: 'last_page') int lastPageNumber,
+      @JsonKey(name: 'total') int gearsCount,
       @JsonKey(name: 'data') List<Gear> gears) {
     return _Listing(
+      pageNumber,
+      lastPageNumber,
       gearsCount,
       gears,
     );
@@ -39,6 +44,10 @@ const $Listing = _$ListingTearOff();
 
 /// @nodoc
 mixin _$Listing {
+  @JsonKey(name: 'current_page')
+  int get pageNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_page')
+  int get lastPageNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'total')
   int get gearsCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'data')
@@ -54,7 +63,9 @@ abstract class $ListingCopyWith<$Res> {
   factory $ListingCopyWith(Listing value, $Res Function(Listing) then) =
       _$ListingCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'total') int gearsCount,
+      {@JsonKey(name: 'current_page') int pageNumber,
+      @JsonKey(name: 'last_page') int lastPageNumber,
+      @JsonKey(name: 'total') int gearsCount,
       @JsonKey(name: 'data') List<Gear> gears});
 }
 
@@ -68,10 +79,20 @@ class _$ListingCopyWithImpl<$Res> implements $ListingCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? pageNumber = freezed,
+    Object? lastPageNumber = freezed,
     Object? gearsCount = freezed,
     Object? gears = freezed,
   }) {
     return _then(_value.copyWith(
+      pageNumber: pageNumber == freezed
+          ? _value.pageNumber
+          : pageNumber // ignore: cast_nullable_to_non_nullable
+              as int,
+      lastPageNumber: lastPageNumber == freezed
+          ? _value.lastPageNumber
+          : lastPageNumber // ignore: cast_nullable_to_non_nullable
+              as int,
       gearsCount: gearsCount == freezed
           ? _value.gearsCount
           : gearsCount // ignore: cast_nullable_to_non_nullable
@@ -90,7 +111,9 @@ abstract class _$ListingCopyWith<$Res> implements $ListingCopyWith<$Res> {
       __$ListingCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'total') int gearsCount,
+      {@JsonKey(name: 'current_page') int pageNumber,
+      @JsonKey(name: 'last_page') int lastPageNumber,
+      @JsonKey(name: 'total') int gearsCount,
       @JsonKey(name: 'data') List<Gear> gears});
 }
 
@@ -105,10 +128,20 @@ class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? pageNumber = freezed,
+    Object? lastPageNumber = freezed,
     Object? gearsCount = freezed,
     Object? gears = freezed,
   }) {
     return _then(_Listing(
+      pageNumber == freezed
+          ? _value.pageNumber
+          : pageNumber // ignore: cast_nullable_to_non_nullable
+              as int,
+      lastPageNumber == freezed
+          ? _value.lastPageNumber
+          : lastPageNumber // ignore: cast_nullable_to_non_nullable
+              as int,
       gearsCount == freezed
           ? _value.gearsCount
           : gearsCount // ignore: cast_nullable_to_non_nullable
@@ -124,12 +157,21 @@ class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Listing with DiagnosticableTreeMixin implements _Listing {
-  const _$_Listing(@JsonKey(name: 'total') this.gearsCount,
+  const _$_Listing(
+      @JsonKey(name: 'current_page') this.pageNumber,
+      @JsonKey(name: 'last_page') this.lastPageNumber,
+      @JsonKey(name: 'total') this.gearsCount,
       @JsonKey(name: 'data') this.gears);
 
   factory _$_Listing.fromJson(Map<String, dynamic> json) =>
       _$$_ListingFromJson(json);
 
+  @override
+  @JsonKey(name: 'current_page')
+  final int pageNumber;
+  @override
+  @JsonKey(name: 'last_page')
+  final int lastPageNumber;
   @override
   @JsonKey(name: 'total')
   final int gearsCount;
@@ -139,7 +181,7 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Listing(gearsCount: $gearsCount, gears: $gears)';
+    return 'Listing(pageNumber: $pageNumber, lastPageNumber: $lastPageNumber, gearsCount: $gearsCount, gears: $gears)';
   }
 
   @override
@@ -147,6 +189,8 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Listing'))
+      ..add(DiagnosticsProperty('pageNumber', pageNumber))
+      ..add(DiagnosticsProperty('lastPageNumber', lastPageNumber))
       ..add(DiagnosticsProperty('gearsCount', gearsCount))
       ..add(DiagnosticsProperty('gears', gears));
   }
@@ -155,6 +199,12 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Listing &&
+            (identical(other.pageNumber, pageNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.pageNumber, pageNumber)) &&
+            (identical(other.lastPageNumber, lastPageNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastPageNumber, lastPageNumber)) &&
             (identical(other.gearsCount, gearsCount) ||
                 const DeepCollectionEquality()
                     .equals(other.gearsCount, gearsCount)) &&
@@ -165,6 +215,8 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(pageNumber) ^
+      const DeepCollectionEquality().hash(lastPageNumber) ^
       const DeepCollectionEquality().hash(gearsCount) ^
       const DeepCollectionEquality().hash(gears);
 
@@ -180,11 +232,20 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
 }
 
 abstract class _Listing implements Listing {
-  const factory _Listing(@JsonKey(name: 'total') int gearsCount,
+  const factory _Listing(
+      @JsonKey(name: 'current_page') int pageNumber,
+      @JsonKey(name: 'last_page') int lastPageNumber,
+      @JsonKey(name: 'total') int gearsCount,
       @JsonKey(name: 'data') List<Gear> gears) = _$_Listing;
 
   factory _Listing.fromJson(Map<String, dynamic> json) = _$_Listing.fromJson;
 
+  @override
+  @JsonKey(name: 'current_page')
+  int get pageNumber => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'last_page')
+  int get lastPageNumber => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'total')
   int get gearsCount => throw _privateConstructorUsedError;

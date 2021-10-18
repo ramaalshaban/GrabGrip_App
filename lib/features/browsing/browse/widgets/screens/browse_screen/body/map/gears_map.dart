@@ -1,51 +1,56 @@
 import 'dart:async';
-import 'package:auto_route/auto_route.dart';
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/browsing/browse/models/listing/listing.dart';
 
-class GearsMap extends StatefulWidget {
+class GearsMap extends StatelessWidget {
   GearsMap({Key? key, required this.browseData}) : super(key: key);
+
   final Completer<GoogleMapController> mapController = Completer();
   final BrowseModel browseData;
 
-  @override
-  _GearsMapState createState() => _GearsMapState();
-}
-
-class _GearsMapState extends State<GearsMap> {
-  late CameraPosition initialCameraPosition;
-
-  @override
-  void initState() {
-    final initLat = double.parse(widget.browseData.data.gears[0].lat);
-    final initLng = double.parse(widget.browseData.data.gears[0].lng);
+  CameraPosition _getInitialCameraPosition(Gear gear) {
+    final initLat = double.parse(gear.lat);
+    final initLng = double.parse(gear.lng);
     final initialLatLng = LatLng(initLat, initLng);
-    initialCameraPosition = CameraPosition(target: initialLatLng, zoom: 14);
-    super.initState();
+    return CameraPosition(target: initialLatLng, zoom: 14);
   }
 
   @override
   Widget build(BuildContext context) {
-    final Listing data = widget.browseData.data;
+    final Listing data = browseData.data;
     return Padding(
       padding: const EdgeInsets.all(4.0),
-      child: GoogleMap(
-        initialCameraPosition: initialCameraPosition,
-        onMapCreated: (controller) {
-          widget.mapController.complete(controller);
-        },
-        markers: Set.from(
-          _getMarkers(data.gearsCount, data.gears),
-        ),
-      ),
+      child: data.gears.isNotEmpty == true
+          ? GoogleMap(
+              initialCameraPosition: _getInitialCameraPosition(
+                data.gears[0],
+              ),
+              onMapCreated: (controller) {
+                mapController.complete(controller);
+              },
+              markers: Set.from(
+                _getMarkers(context, data.gears.length, data.gears),
+              ),
+            )
+          : Center(
+              child: Text(
+                AppLocalizations.of(context)!.no_results_with_applied_filters,
+              ),
+            ),
     );
   }
 
-  List<Marker> _getMarkers(int gearsCount, List<Gear> gears) {
+  List<Marker> _getMarkers(
+    BuildContext context,
+    int gearsCount,
+    List<Gear> gears,
+  ) {
     return List.generate(
       gearsCount,
       (index) {

@@ -2,6 +2,7 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:grab_grip/style/colors.dart';
+import 'package:grab_grip/utils/constants.dart';
 
 //region snack bars
 void showSnackBar(BuildContext context, String message) {
@@ -39,8 +40,7 @@ void showSnackBarForError(BuildContext context, String errorMessage) {
     String messageToShow = errorMessage;
     // showFlash function was put inside this block
     // to avoid this exception : setState() or markNeedsBuild() called during build.
-    if (errorMessage.isEmpty) {
-      // i.e. no internet connection because _errorHandler function in network_service returns an empty string for no internet connection error
+    if (errorMessage == noInternetConnection) {
       messageToShow = AppLocalizations.of(context)!.check_internet_connection;
     }
     showFlash(

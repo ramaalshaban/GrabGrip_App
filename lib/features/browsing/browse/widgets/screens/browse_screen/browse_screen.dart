@@ -3,8 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/browsing/browse/widgets/screens/browse_screen/body/browse_screen_body.dart';
-import 'package:grab_grip/features/browsing/browse/widgets/screens/browse_screen/body/browse_screen_error_body.dart';
-import 'package:grab_grip/features/browsing/browse/widgets/screens/browse_screen/body/browse_screen_loading_body.dart';
 import 'package:grab_grip/features/browsing/filter/filter_dialog.dart';
 import 'package:grab_grip/features/browsing/filter/models/drop_down_type/drop_down_type.dart';
 import 'package:grab_grip/features/browsing/filter/providers/filter_sort_provider.dart';
@@ -38,25 +36,25 @@ class BrowseScreen extends ConsumerWidget {
                     Expanded(
                       flex: 6,
                       child: TextField(
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(
-                          Icons.search,
-                          color: AppColors.purple,
-                        ),
-                        hintText: AppLocalizations.of(context)!.search,
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 2,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(
+                            Icons.search,
                             color: AppColors.purple,
                           ),
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.purple,
+                          hintText: AppLocalizations.of(context)!.search,
+                          focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: AppColors.purple,
+                            ),
+                          ),
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColors.purple,
+                            ),
                           ),
                         ),
                       ),
-                    ),
                     ),
                     Expanded(
                       child: IconButton(
@@ -127,28 +125,13 @@ class BrowseScreen extends ConsumerWidget {
                           dataType: const DropDownType.sortOptions(),
                         ),
                       ),
-                    //  const SortingDropDownList(),
+                      //  const SortingDropDownList(),
                     ],
                   ),
                 ),
                 height8(),
-                Consumer(
-                  builder: (_, watch, __) {
-                    final httpRequestState = watch(httpRequestStateProvider);
-                    return Expanded(
-                      child: RefreshIndicator(
-                        onRefresh: () async {
-                          watch(browseDataProvider.notifier).browse();
-                        },
-                        child: httpRequestState.when(
-                          noRequestInProgress: () => const BrowseScreenBody(),
-                          loading: () => const BrowseScreenLoadingBody(),
-                          success: () => const BrowseScreenBody(),
-                          error: (_) => const BrowseScreenErrorBody(),
-                        ),
-                      ),
-                    );
-                  },
+                Expanded(
+                  child: BrowseScreenBody(),
                 ),
               ],
             ),

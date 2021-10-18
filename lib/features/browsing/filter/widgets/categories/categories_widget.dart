@@ -16,7 +16,6 @@ class CategoriesWidget extends StatelessWidget {
             watch(filterAndSortProvider.notifier).filteringCategories;
         final selectedCategory = watch(filterAndSortProvider).category;
         final selectedSubcategory = watch(filterAndSortProvider).subcategory;
-        print(" CategoriesWidget's build method just ran!");
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

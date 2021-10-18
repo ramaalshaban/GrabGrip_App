@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
+import 'package:grab_grip/features/browsing/browse/providers/browse_provider.dart';
 import 'package:grab_grip/features/browsing/filter/models/drop_down_type/drop_down_type.dart';
 import 'package:grab_grip/features/browsing/filter/providers/filter_sort_provider.dart';
 import 'package:grab_grip/features/browsing/filter/widgets/categories/categories_widget.dart';
@@ -166,7 +167,7 @@ class FilterDialog extends ConsumerWidget {
             ),
             onPressed: () {
               Navigator.pop(context);
-              watch(browseDataProvider.notifier).browse();
+              BrowseProvider.pagingController.refresh();
             },
             child: Text(
               AppLocalizations.of(context)!.apply,

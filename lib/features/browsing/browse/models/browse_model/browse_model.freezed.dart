@@ -21,11 +21,9 @@ BrowseModel _$BrowseModelFromJson(Map<String, dynamic> json) {
 class _$BrowseModelTearOff {
   const _$BrowseModelTearOff();
 
-  _BrowseModel call(@JsonKey(name: 'listings') Listing data,
-      {@JsonKey(name: 'is_filtered') required bool isFiltered}) {
+  _BrowseModel call(@JsonKey(name: 'listings') Listing data) {
     return _BrowseModel(
       data,
-      isFiltered: isFiltered,
     );
   }
 
@@ -41,8 +39,6 @@ const $BrowseModel = _$BrowseModelTearOff();
 mixin _$BrowseModel {
   @JsonKey(name: 'listings')
   Listing get data => throw _privateConstructorUsedError;
-  @JsonKey(name: 'is_filtered')
-  bool get isFiltered => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,9 +51,7 @@ abstract class $BrowseModelCopyWith<$Res> {
   factory $BrowseModelCopyWith(
           BrowseModel value, $Res Function(BrowseModel) then) =
       _$BrowseModelCopyWithImpl<$Res>;
-  $Res call(
-      {@JsonKey(name: 'listings') Listing data,
-      @JsonKey(name: 'is_filtered') bool isFiltered});
+  $Res call({@JsonKey(name: 'listings') Listing data});
 
   $ListingCopyWith<$Res> get data;
 }
@@ -73,17 +67,12 @@ class _$BrowseModelCopyWithImpl<$Res> implements $BrowseModelCopyWith<$Res> {
   @override
   $Res call({
     Object? data = freezed,
-    Object? isFiltered = freezed,
   }) {
     return _then(_value.copyWith(
       data: data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as Listing,
-      isFiltered: isFiltered == freezed
-          ? _value.isFiltered
-          : isFiltered // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 
@@ -102,9 +91,7 @@ abstract class _$BrowseModelCopyWith<$Res>
           _BrowseModel value, $Res Function(_BrowseModel) then) =
       __$BrowseModelCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {@JsonKey(name: 'listings') Listing data,
-      @JsonKey(name: 'is_filtered') bool isFiltered});
+  $Res call({@JsonKey(name: 'listings') Listing data});
 
   @override
   $ListingCopyWith<$Res> get data;
@@ -123,17 +110,12 @@ class __$BrowseModelCopyWithImpl<$Res> extends _$BrowseModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? data = freezed,
-    Object? isFiltered = freezed,
   }) {
     return _then(_BrowseModel(
       data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as Listing,
-      isFiltered: isFiltered == freezed
-          ? _value.isFiltered
-          : isFiltered // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -141,8 +123,7 @@ class __$BrowseModelCopyWithImpl<$Res> extends _$BrowseModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_BrowseModel with DiagnosticableTreeMixin implements _BrowseModel {
-  const _$_BrowseModel(@JsonKey(name: 'listings') this.data,
-      {@JsonKey(name: 'is_filtered') required this.isFiltered});
+  const _$_BrowseModel(@JsonKey(name: 'listings') this.data);
 
   factory _$_BrowseModel.fromJson(Map<String, dynamic> json) =>
       _$$_BrowseModelFromJson(json);
@@ -150,13 +131,10 @@ class _$_BrowseModel with DiagnosticableTreeMixin implements _BrowseModel {
   @override
   @JsonKey(name: 'listings')
   final Listing data;
-  @override
-  @JsonKey(name: 'is_filtered')
-  final bool isFiltered;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BrowseModel(data: $data, isFiltered: $isFiltered)';
+    return 'BrowseModel(data: $data)';
   }
 
   @override
@@ -164,8 +142,7 @@ class _$_BrowseModel with DiagnosticableTreeMixin implements _BrowseModel {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'BrowseModel'))
-      ..add(DiagnosticsProperty('data', data))
-      ..add(DiagnosticsProperty('isFiltered', isFiltered));
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -173,17 +150,12 @@ class _$_BrowseModel with DiagnosticableTreeMixin implements _BrowseModel {
     return identical(this, other) ||
         (other is _BrowseModel &&
             (identical(other.data, data) ||
-                const DeepCollectionEquality().equals(other.data, data)) &&
-            (identical(other.isFiltered, isFiltered) ||
-                const DeepCollectionEquality()
-                    .equals(other.isFiltered, isFiltered)));
+                const DeepCollectionEquality().equals(other.data, data)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(data) ^
-      const DeepCollectionEquality().hash(isFiltered);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(data);
 
   @JsonKey(ignore: true)
   @override
@@ -197,8 +169,7 @@ class _$_BrowseModel with DiagnosticableTreeMixin implements _BrowseModel {
 }
 
 abstract class _BrowseModel implements BrowseModel {
-  const factory _BrowseModel(@JsonKey(name: 'listings') Listing data,
-          {@JsonKey(name: 'is_filtered') required bool isFiltered}) =
+  const factory _BrowseModel(@JsonKey(name: 'listings') Listing data) =
       _$_BrowseModel;
 
   factory _BrowseModel.fromJson(Map<String, dynamic> json) =
@@ -207,9 +178,6 @@ abstract class _BrowseModel implements BrowseModel {
   @override
   @JsonKey(name: 'listings')
   Listing get data => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(name: 'is_filtered')
-  bool get isFiltered => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$BrowseModelCopyWith<_BrowseModel> get copyWith =>

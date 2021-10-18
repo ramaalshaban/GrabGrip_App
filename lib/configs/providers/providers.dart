@@ -37,8 +37,7 @@ final gearsViewMode = StateNotifierProvider<ViewModeProvider, ViewMode>(
 );
 
 final browseDataProvider =
-    StateNotifierProvider<BrowseProvider, BrowseModel?>((reference) {
-  final httpStateProvider = reference.watch(httpRequestStateProvider.notifier);
+    StateNotifierProvider<BrowseProvider, BrowseModel>((reference) {
   final filterSortProvider = reference.watch(filterAndSortProvider.notifier);
-  return BrowseProvider(httpStateProvider, filterSortProvider);
+  return BrowseProvider(filterSortProvider);
 });

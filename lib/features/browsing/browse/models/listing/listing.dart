@@ -10,6 +10,8 @@ part 'listing.g.dart';
 @freezed
 class Listing with _$Listing {
   const factory Listing(
+    @JsonKey(name: 'current_page') int pageNumber,
+    @JsonKey(name: 'last_page') int lastPageNumber,
     @JsonKey(name: 'total') int gearsCount,
     @JsonKey(name: 'data') List<Gear> gears,
   ) = _Listing;
