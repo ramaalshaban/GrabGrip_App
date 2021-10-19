@@ -73,6 +73,10 @@ class FilterSortProvider extends StateNotifier<FilterSortModel> {
 
   String? get maxPrice => state.maxPrice;
 
+  set searchText(String? text) => state = state.copyWith(searchText: text);
+
+  String? get searchText => state.searchText;
+
   set listingType(DropDownItem? listingType) =>
       state = state.copyWith(listingType: listingType);
 

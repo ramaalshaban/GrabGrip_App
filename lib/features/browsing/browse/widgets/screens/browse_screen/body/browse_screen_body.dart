@@ -18,18 +18,20 @@ class _BrowseScreenBodyState extends State<BrowseScreenBody> {
   void initState() {
     BrowseProvider.pagingController.addPageRequestListener((pageKey) {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
+        if(mounted){
         context.read(browseDataProvider.notifier).browse(pageKey);
+        }
       });
     });
 
     BrowseProvider.pagingController.addStatusListener((status) {
-
-      if (
-          BrowseProvider.pagingController.error == noInternetConnection) {
-        showSnackBarForError(
-          context,
-          BrowseProvider.pagingController.error.toString(),
-        );
+      if (BrowseProvider.pagingController.error == noInternetConnection) {
+        if(mounted){
+          showSnackBarForError(
+            context,
+            BrowseProvider.pagingController.error.toString(),
+          );
+        }
       }
     });
     super.initState();
@@ -60,4 +62,5 @@ class _BrowseScreenBodyState extends State<BrowseScreenBody> {
       },
     );
   }
+
 }

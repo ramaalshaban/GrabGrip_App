@@ -80,6 +80,7 @@ class NetworkService {
         minPrice: filterAndSortParams?.minPrice,
         maxPrice: filterAndSortParams?.maxPrice,
         sortType: filterAndSortParams?.sortOption?.key,
+        searchText: filterAndSortParams?.searchText,
       );
       return Success(browseCall.data);
     } catch (error) {
