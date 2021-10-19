@@ -10,7 +10,6 @@ import 'package:grab_grip/services/network/network_service.dart';
 class FilterSortProvider extends StateNotifier<FilterSortModel> {
   FilterSortProvider() : super(const FilterSortModel()) {
     _initializeDropDownLists();
-    _getCategories();
   }
 
   void _initializeDropDownLists() {
@@ -35,10 +34,10 @@ class FilterSortProvider extends StateNotifier<FilterSortModel> {
     subcategory = null;
   }
 
-  Future<void> _getCategories() async {
+  Future<void> getCategories() async {
     await NetworkService().getCategories().then((result) {
       result.when((errorMessage) {
-        filteringCategories = null;
+        filteringCategories = [];
       }, (response) {
         filteringCategories = response.categories;
       });
@@ -79,9 +78,9 @@ class FilterSortProvider extends StateNotifier<FilterSortModel> {
 
   DropDownItem? get listingType => state.listingType;
 
-  List<Category>? get filteringCategories => state.filteringCategories;
+  List<Category> get filteringCategories => state.filteringCategories;
 
-  set filteringCategories(List<Category>? categories) =>
+  set filteringCategories(List<Category> categories) =>
       state = state.copyWith(filteringCategories: categories);
 
   //endregion

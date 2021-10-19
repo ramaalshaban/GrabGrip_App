@@ -10,32 +10,43 @@ class CategoriesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read(filterAndSortProvider.notifier).getCategories();
     return Consumer(
       builder: (_, watch, __) {
         final filteringCategories =
-            watch(filterAndSortProvider.notifier).filteringCategories;
+            watch(filterAndSortProvider).filteringCategories;
         final selectedCategory = watch(filterAndSortProvider).category;
         final selectedSubcategory = watch(filterAndSortProvider).subcategory;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Wrap(
-              spacing: 4,
-              children: [
-                ...List.generate(
-                  filteringCategories!.length,
-                  (index) {
-                    final category = filteringCategories[index];
-                    return CategoryFilteringItem(
-                      category: category,
-                      isSelected: selectedCategory == category,
-                    );
-                  },
-                ),
-              ],
+            AnimatedOpacity(
+              // filteringCategories can be empty when an error happens while fetching the categories
+              // (like when the user opens the filter dialog and there is no internet connection)
+              opacity: filteringCategories.isNotEmpty ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 400),
+              child: Wrap(
+                spacing: 4,
+                children: [
+                  ...List.generate(
+                    filteringCategories.length,
+                    (index) {
+                      final category = filteringCategories[index];
+                      return CategoryFilteringItem(
+                        category: category,
+                        isSelected: selectedCategory == category,
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
-            Visibility(
-              visible: _shouldSubcategoriesBeVisible(selectedCategory),
+            AnimatedOpacity(
+              opacity: _shouldSubcategoriesBeVisible(selectedCategory) &&
+                      filteringCategories.isNotEmpty
+                  ? 1.0
+                  : 0.0,
+              duration: const Duration(milliseconds: 400),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [

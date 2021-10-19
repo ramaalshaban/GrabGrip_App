@@ -17,6 +17,6 @@ class FilterSortModel with _$FilterSortModel {
     String? minPrice,
     String? maxPrice,
     DropDownItem? listingType,
-    List<Category>? filteringCategories,
+    @Default([]) List<Category> filteringCategories,
   ]) = _FilterSortModel;
 }

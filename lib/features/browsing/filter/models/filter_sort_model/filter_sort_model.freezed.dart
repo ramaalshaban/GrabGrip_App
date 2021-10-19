@@ -26,7 +26,7 @@ class _$FilterSortModelTearOff {
       String? minPrice,
       String? maxPrice,
       DropDownItem? listingType,
-      List<Category>? filteringCategories]) {
+      List<Category> filteringCategories = const []]) {
     return _FilterSortModel(
       searchText,
       sortOption,
@@ -54,7 +54,7 @@ mixin _$FilterSortModel {
   String? get minPrice => throw _privateConstructorUsedError;
   String? get maxPrice => throw _privateConstructorUsedError;
   DropDownItem? get listingType => throw _privateConstructorUsedError;
-  List<Category>? get filteringCategories => throw _privateConstructorUsedError;
+  List<Category> get filteringCategories => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FilterSortModelCopyWith<FilterSortModel> get copyWith =>
@@ -75,7 +75,7 @@ abstract class $FilterSortModelCopyWith<$Res> {
       String? minPrice,
       String? maxPrice,
       DropDownItem? listingType,
-      List<Category>? filteringCategories});
+      List<Category> filteringCategories});
 
   $CategoryCopyWith<$Res>? get category;
   $CategoryCopyWith<$Res>? get subcategory;
@@ -138,7 +138,7 @@ class _$FilterSortModelCopyWithImpl<$Res>
       filteringCategories: filteringCategories == freezed
           ? _value.filteringCategories
           : filteringCategories // ignore: cast_nullable_to_non_nullable
-              as List<Category>?,
+              as List<Category>,
     ));
   }
 
@@ -181,7 +181,7 @@ abstract class _$FilterSortModelCopyWith<$Res>
       String? minPrice,
       String? maxPrice,
       DropDownItem? listingType,
-      List<Category>? filteringCategories});
+      List<Category> filteringCategories});
 
   @override
   $CategoryCopyWith<$Res>? get category;
@@ -248,7 +248,7 @@ class __$FilterSortModelCopyWithImpl<$Res>
       filteringCategories == freezed
           ? _value.filteringCategories
           : filteringCategories // ignore: cast_nullable_to_non_nullable
-              as List<Category>?,
+              as List<Category>,
     ));
   }
 }
@@ -267,7 +267,7 @@ class _$_FilterSortModel
       this.minPrice,
       this.maxPrice,
       this.listingType,
-      this.filteringCategories]);
+      this.filteringCategories = const []]);
 
   @override
   final String? searchText;
@@ -285,8 +285,9 @@ class _$_FilterSortModel
   final String? maxPrice;
   @override
   final DropDownItem? listingType;
+  @JsonKey(defaultValue: const [])
   @override
-  final List<Category>? filteringCategories;
+  final List<Category> filteringCategories;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -371,7 +372,7 @@ abstract class _FilterSortModel implements FilterSortModel {
       String? minPrice,
       String? maxPrice,
       DropDownItem? listingType,
-      List<Category>? filteringCategories]) = _$_FilterSortModel;
+      List<Category> filteringCategories]) = _$_FilterSortModel;
 
   @override
   String? get searchText => throw _privateConstructorUsedError;
@@ -390,7 +391,7 @@ abstract class _FilterSortModel implements FilterSortModel {
   @override
   DropDownItem? get listingType => throw _privateConstructorUsedError;
   @override
-  List<Category>? get filteringCategories => throw _privateConstructorUsedError;
+  List<Category> get filteringCategories => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$FilterSortModelCopyWith<_FilterSortModel> get copyWith =>
