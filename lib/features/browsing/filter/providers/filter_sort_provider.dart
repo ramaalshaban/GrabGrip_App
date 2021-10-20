@@ -14,7 +14,6 @@ class FilterSortProvider extends StateNotifier<FilterSortModel> {
 
   void _initializeDropDownLists() {
     final currentLanguageCode = Platform.localeName.substring(0, 2);
-
     if (currentLanguageCode == 'ar') {
       sortOption = DropDownItem(key: 'date', title: 'الأحدث أولاً');
       distance = DropDownItem(key: '-1', title: 'في أي مكان');
@@ -24,6 +23,18 @@ class FilterSortProvider extends StateNotifier<FilterSortModel> {
       distance = DropDownItem(key: '-1', title: 'Anywhere');
       listingType = DropDownItem(key: 'all', title: 'All');
     }
+  }
+
+  void resetPlace() {
+    // when the place cleared, set it to null and give the distance its default value again (which is 'Anywhere' that has the key '-1')
+    state = state.copyWith(
+      place: null,
+      distance: DropDownItem(
+        key: '-1',
+      ),
+    );
+    // also, reset the bounds that are related to this place
+    bounds = null;
   }
 
   void reset() {
@@ -76,6 +87,22 @@ class FilterSortProvider extends StateNotifier<FilterSortModel> {
   set searchText(String? text) => state = state.copyWith(searchText: text);
 
   String? get searchText => state.searchText;
+
+  set place(String? place) {
+    // when user filter the gears by place, set the distance key to 1 (i.e. 1 km) in order for the server to be able to filter
+    state = state.copyWith(
+      place: place,
+      distance: DropDownItem(
+        key: '1',
+      ),
+    );
+  }
+
+  String? get place => state.place;
+
+  set bounds(String? bounds) => state = state.copyWith(bounds: bounds);
+
+  String? get bounds => state.bounds;
 
   set listingType(DropDownItem? listingType) =>
       state = state.copyWith(listingType: listingType);

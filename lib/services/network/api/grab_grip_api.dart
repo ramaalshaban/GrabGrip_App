@@ -3,15 +3,17 @@ import 'package:grab_grip/features/authentication/models/auth_request/auth_reque
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
 import 'package:grab_grip/features/authentication/models/register_response/register_response.dart';
 import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
+import 'package:grab_grip/features/browsing/browse/models/geocode_response/geocode_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
+import 'package:grab_grip/utils/constants.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'grab_grip_api.g.dart';
 
-@RestApi(baseUrl: "http://grabgrips.com")
+@RestApi(baseUrl: "https://grabgrips.com")
 abstract class GrabGripApi {
-  factory GrabGripApi(Dio dio) = _GrabGripApi;
+  factory GrabGripApi(Dio dio, {String baseUrl}) = _GrabGripApi;
 
   //region auth requests
   @POST("/api/v1/auth/register")
@@ -31,6 +33,8 @@ abstract class GrabGripApi {
   Future<HttpResponse<BrowseModel>> browse({
     @Query("page") required int pageNumber,
     @Query("q") String? searchText,
+    @Query("bounds") String? bounds,
+    @Query("location") String? location,
     @Query("sort") String? sortType,
     @Query("distance") String? distance,
     @Query("category") String? category,
@@ -41,5 +45,11 @@ abstract class GrabGripApi {
 
   @GET("/categories")
   Future<HttpResponse<CategoriesResponse>> getCategories();
+
+  @GET("/json")
+  Future<HttpResponse<GeocodeResponse>> getBoundsByPlaceId({
+    @Query("key") String googleApiKey = googleApiKey,
+    @Query("place_id") required String placeId,
+  });
 //endregion
 }

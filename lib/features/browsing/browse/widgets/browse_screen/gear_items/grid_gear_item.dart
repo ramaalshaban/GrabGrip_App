@@ -46,6 +46,7 @@ class GridGearItem extends StatelessWidget {
                   ),
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
                       image: DecorationImage(
                         image: imageProvider,
                         fit: BoxFit.cover,
@@ -102,7 +103,7 @@ class GridGearItem extends StatelessWidget {
 
 //region actions
   void moveToDetailsScreen(BuildContext context, Gear clickedGear) {
-    context.router.push(BrowseDetailsScreenRoute(clickedGear: clickedGear));
+    context.router.push(BrowseDetailsScreenRoute(gear: clickedGear));
   }
 //endregion
 }

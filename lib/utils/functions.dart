@@ -1,6 +1,7 @@
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:grab_grip/features/browsing/browse/models/geocode_response/geometry/geometry.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
 
@@ -67,5 +68,16 @@ void showSnackBarForError(BuildContext context, String errorMessage) {
       },
     );
   });
+}
+//endregion
+
+//region formatting
+
+String formatLocationBounds(Geometry geometry) {
+  final southWestLat = geometry.viewport.southWest.lat;
+  final southWestLng = geometry.viewport.southWest.lng;
+  final northEastLat = geometry.viewport.northEast.lat;
+  final northEastLng = geometry.viewport.northEast.lng;
+  return "$southWestLat,$southWestLng,$northEastLat,$northEastLng";
 }
 //endregion

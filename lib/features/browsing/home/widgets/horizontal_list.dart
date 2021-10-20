@@ -16,7 +16,7 @@ class HorizontalList extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(8.0, 4.0, 4.0, 4.0),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           height24(),
@@ -26,7 +26,7 @@ class HorizontalList extends StatelessWidget {
           ),
           height12(),
           SizedBox(
-            height: screenHeightWithoutExtras(context) / 5.3,
+            height: screenHeightWithoutExtras(context) *0.3,
             child: ListView.builder(
               itemCount: data.length,
               shrinkWrap: true,

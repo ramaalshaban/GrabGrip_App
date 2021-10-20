@@ -12,9 +12,9 @@ import '../../features/authentication/login_screen.dart' as _i5;
 import '../../features/authentication/register_screen.dart' as _i4;
 import '../../features/browsing/about_us/about_us_screen.dart' as _i9;
 import '../../features/browsing/browse/models/gear/gear.dart' as _i10;
-import '../../features/browsing/browse/widgets/screens/browse_details_screen.dart'
+import '../../features/browsing/browse/widgets/browse_details_screen.dart'
     as _i8;
-import '../../features/browsing/browse/widgets/screens/browse_screen/browse_screen.dart'
+import '../../features/browsing/browse/widgets/browse_screen/browse_screen.dart'
     as _i7;
 import '../../features/browsing/home/home_screen.dart' as _i3;
 
@@ -48,8 +48,7 @@ class AppRouter extends _i1.RootStackRouter {
       final args = routeData.argsAs<BrowseDetailsScreenRouteArgs>();
       return _i1.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i8.BrowseDetailsScreen(
-              key: args.key, clickedGear: args.clickedGear));
+          child: _i8.BrowseDetailsScreen(key: args.key, gear: args.gear));
     },
     AboutUsScreenRoute.name: (routeData) {
       return _i1.MaterialPageX<dynamic>(
@@ -104,21 +103,20 @@ class BrowseScreenRoute extends _i1.PageRouteInfo<void> {
 
 class BrowseDetailsScreenRoute
     extends _i1.PageRouteInfo<BrowseDetailsScreenRouteArgs> {
-  BrowseDetailsScreenRoute({_i2.Key? key, required _i10.Gear clickedGear})
+  BrowseDetailsScreenRoute({_i2.Key? key, required _i10.Gear gear})
       : super(name,
             path: '/browse-details-screen',
-            args: BrowseDetailsScreenRouteArgs(
-                key: key, clickedGear: clickedGear));
+            args: BrowseDetailsScreenRouteArgs(key: key, gear: gear));
 
   static const String name = 'BrowseDetailsScreenRoute';
 }
 
 class BrowseDetailsScreenRouteArgs {
-  const BrowseDetailsScreenRouteArgs({this.key, required this.clickedGear});
+  const BrowseDetailsScreenRouteArgs({this.key, required this.gear});
 
   final _i2.Key? key;
 
-  final _i10.Gear clickedGear;
+  final _i10.Gear gear;
 }
 
 class AboutUsScreenRoute extends _i1.PageRouteInfo<void> {

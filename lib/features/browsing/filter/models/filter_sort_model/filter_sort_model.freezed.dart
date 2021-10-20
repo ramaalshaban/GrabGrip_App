@@ -19,6 +19,8 @@ class _$FilterSortModelTearOff {
 
   _FilterSortModel call(
       [String? searchText,
+      String? place,
+      String? bounds,
       DropDownItem? sortOption,
       DropDownItem? distance,
       Category? category,
@@ -29,6 +31,8 @@ class _$FilterSortModelTearOff {
       List<Category> filteringCategories = const []]) {
     return _FilterSortModel(
       searchText,
+      place,
+      bounds,
       sortOption,
       distance,
       category,
@@ -47,6 +51,8 @@ const $FilterSortModel = _$FilterSortModelTearOff();
 /// @nodoc
 mixin _$FilterSortModel {
   String? get searchText => throw _privateConstructorUsedError;
+  String? get place => throw _privateConstructorUsedError;
+  String? get bounds => throw _privateConstructorUsedError;
   DropDownItem? get sortOption => throw _privateConstructorUsedError;
   DropDownItem? get distance => throw _privateConstructorUsedError;
   Category? get category => throw _privateConstructorUsedError;
@@ -68,6 +74,8 @@ abstract class $FilterSortModelCopyWith<$Res> {
       _$FilterSortModelCopyWithImpl<$Res>;
   $Res call(
       {String? searchText,
+      String? place,
+      String? bounds,
       DropDownItem? sortOption,
       DropDownItem? distance,
       Category? category,
@@ -93,6 +101,8 @@ class _$FilterSortModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? searchText = freezed,
+    Object? place = freezed,
+    Object? bounds = freezed,
     Object? sortOption = freezed,
     Object? distance = freezed,
     Object? category = freezed,
@@ -106,6 +116,14 @@ class _$FilterSortModelCopyWithImpl<$Res>
       searchText: searchText == freezed
           ? _value.searchText
           : searchText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      place: place == freezed
+          ? _value.place
+          : place // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bounds: bounds == freezed
+          ? _value.bounds
+          : bounds // ignore: cast_nullable_to_non_nullable
               as String?,
       sortOption: sortOption == freezed
           ? _value.sortOption
@@ -174,6 +192,8 @@ abstract class _$FilterSortModelCopyWith<$Res>
   @override
   $Res call(
       {String? searchText,
+      String? place,
+      String? bounds,
       DropDownItem? sortOption,
       DropDownItem? distance,
       Category? category,
@@ -203,6 +223,8 @@ class __$FilterSortModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? searchText = freezed,
+    Object? place = freezed,
+    Object? bounds = freezed,
     Object? sortOption = freezed,
     Object? distance = freezed,
     Object? category = freezed,
@@ -216,6 +238,14 @@ class __$FilterSortModelCopyWithImpl<$Res>
       searchText == freezed
           ? _value.searchText
           : searchText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      place == freezed
+          ? _value.place
+          : place // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bounds == freezed
+          ? _value.bounds
+          : bounds // ignore: cast_nullable_to_non_nullable
               as String?,
       sortOption == freezed
           ? _value.sortOption
@@ -260,6 +290,8 @@ class _$_FilterSortModel
     implements _FilterSortModel {
   const _$_FilterSortModel(
       [this.searchText,
+      this.place,
+      this.bounds,
       this.sortOption,
       this.distance,
       this.category,
@@ -271,6 +303,10 @@ class _$_FilterSortModel
 
   @override
   final String? searchText;
+  @override
+  final String? place;
+  @override
+  final String? bounds;
   @override
   final DropDownItem? sortOption;
   @override
@@ -291,7 +327,7 @@ class _$_FilterSortModel
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FilterSortModel(searchText: $searchText, sortOption: $sortOption, distance: $distance, category: $category, subcategory: $subcategory, minPrice: $minPrice, maxPrice: $maxPrice, listingType: $listingType, filteringCategories: $filteringCategories)';
+    return 'FilterSortModel(searchText: $searchText, place: $place, bounds: $bounds, sortOption: $sortOption, distance: $distance, category: $category, subcategory: $subcategory, minPrice: $minPrice, maxPrice: $maxPrice, listingType: $listingType, filteringCategories: $filteringCategories)';
   }
 
   @override
@@ -300,6 +336,8 @@ class _$_FilterSortModel
     properties
       ..add(DiagnosticsProperty('type', 'FilterSortModel'))
       ..add(DiagnosticsProperty('searchText', searchText))
+      ..add(DiagnosticsProperty('place', place))
+      ..add(DiagnosticsProperty('bounds', bounds))
       ..add(DiagnosticsProperty('sortOption', sortOption))
       ..add(DiagnosticsProperty('distance', distance))
       ..add(DiagnosticsProperty('category', category))
@@ -317,6 +355,10 @@ class _$_FilterSortModel
             (identical(other.searchText, searchText) ||
                 const DeepCollectionEquality()
                     .equals(other.searchText, searchText)) &&
+            (identical(other.place, place) ||
+                const DeepCollectionEquality().equals(other.place, place)) &&
+            (identical(other.bounds, bounds) ||
+                const DeepCollectionEquality().equals(other.bounds, bounds)) &&
             (identical(other.sortOption, sortOption) ||
                 const DeepCollectionEquality()
                     .equals(other.sortOption, sortOption)) &&
@@ -347,6 +389,8 @@ class _$_FilterSortModel
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(searchText) ^
+      const DeepCollectionEquality().hash(place) ^
+      const DeepCollectionEquality().hash(bounds) ^
       const DeepCollectionEquality().hash(sortOption) ^
       const DeepCollectionEquality().hash(distance) ^
       const DeepCollectionEquality().hash(category) ^
@@ -365,6 +409,8 @@ class _$_FilterSortModel
 abstract class _FilterSortModel implements FilterSortModel {
   const factory _FilterSortModel(
       [String? searchText,
+      String? place,
+      String? bounds,
       DropDownItem? sortOption,
       DropDownItem? distance,
       Category? category,
@@ -376,6 +422,10 @@ abstract class _FilterSortModel implements FilterSortModel {
 
   @override
   String? get searchText => throw _privateConstructorUsedError;
+  @override
+  String? get place => throw _privateConstructorUsedError;
+  @override
+  String? get bounds => throw _privateConstructorUsedError;
   @override
   DropDownItem? get sortOption => throw _privateConstructorUsedError;
   @override

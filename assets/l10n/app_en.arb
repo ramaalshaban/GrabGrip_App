@@ -226,5 +226,13 @@
     "something_went_wrong": "Something went wrong !",
     "@something_went_wrong": {
       "description": "text appears when there is an error in browse screen and no results to display"
+    },
+    "search_by_gear_name_placeholder": "Search by gear's name ...",
+    "@search_by_gear_name_placeholder": {
+      "description": "placeholder for search by gear name search box in browse screen"
+    },
+    "search_by_gear_location_placeholder": "Search by gear's location ...",
+    "@search_by_gear_location_placeholder": {
+      "description": "placeholder for search by gear location search box in browse screen"
     }
 }

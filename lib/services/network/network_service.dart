@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
 import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
+import 'package:grab_grip/features/browsing/browse/models/geocode_response/geocode_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
 import 'package:grab_grip/services/network/api/grab_grip_api.dart';
@@ -14,6 +15,7 @@ import 'package:multiple_result/multiple_result.dart';
 class NetworkService {
   static final NetworkService _retrofit = NetworkService._internal();
   late final GrabGripApi _grabGripApi;
+  late final GrabGripApi _googleGeocodeApi;
 
   factory NetworkService() {
     return _retrofit;
@@ -28,6 +30,8 @@ class NetworkService {
     _dio.options.headers = globalHeaders;
     _dio.options.connectTimeout = 20000;
     _grabGripApi = GrabGripApi(_dio);
+    _googleGeocodeApi = GrabGripApi(_dio,
+        baseUrl: "https://maps.googleapis.com/maps/api/geocode");
   }
 
   //region auth calls
@@ -67,8 +71,9 @@ class NetworkService {
 
   //region browse
   Future<Result<String, BrowseModel>> browse(
-      FilterSortModel? filterAndSortParams,
-      {required int pageNumber}) async {
+    FilterSortModel? filterAndSortParams, {
+    required int pageNumber,
+  }) async {
     try {
       final browseCall = await _grabGripApi.browse(
         pageNumber: pageNumber,
@@ -81,6 +86,8 @@ class NetworkService {
         maxPrice: filterAndSortParams?.maxPrice,
         sortType: filterAndSortParams?.sortOption?.key,
         searchText: filterAndSortParams?.searchText,
+        location: filterAndSortParams?.place,
+        bounds: filterAndSortParams?.bounds,
       );
       return Success(browseCall.data);
     } catch (error) {
@@ -93,6 +100,19 @@ class NetworkService {
     try {
       final getCategoriesCall = await _grabGripApi.getCategories();
       return Success(getCategoriesCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  Future<Result<String, GeocodeResponse>> getBoundsByPlaceId({
+    required String placeId,
+  }) async {
+    try {
+      final getBoundsCall =
+          await _googleGeocodeApi.getBoundsByPlaceId(placeId: placeId);
+      return Success(getBoundsCall.data);
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);
       return Error(errorMessage);

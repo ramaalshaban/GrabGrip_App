@@ -10,6 +10,8 @@ part 'filter_sort_model.freezed.dart';
 class FilterSortModel with _$FilterSortModel {
   const factory FilterSortModel([
     String? searchText,
+    String? place,
+    String? bounds,
     DropDownItem? sortOption,
     DropDownItem? distance,
     Category? category,

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/browsing/browse/providers/browse_provider.dart';
-import 'package:grab_grip/features/browsing/browse/widgets/screens/browse_screen/body/browse_screen_error_body.dart';
-import 'package:grab_grip/features/browsing/browse/widgets/screens/browse_screen/body/browse_screen_loading_body.dart';
-import 'package:grab_grip/features/browsing/browse/widgets/screens/browse_screen/gear_items/list_gear_item.dart';
+import 'package:grab_grip/features/browsing/browse/widgets/browse_screen/body/browse_screen_error_body.dart';
+import 'package:grab_grip/features/browsing/browse/widgets/browse_screen/body/browse_screen_loading_body.dart';
+import 'package:grab_grip/features/browsing/browse/widgets/browse_screen/gear_items/list_gear_item.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class PaginatedListView extends StatelessWidget {

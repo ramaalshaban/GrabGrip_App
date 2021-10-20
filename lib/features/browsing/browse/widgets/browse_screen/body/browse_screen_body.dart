@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/browsing/browse/providers/browse_provider.dart';
-import 'package:grab_grip/features/browsing/browse/widgets/screens/browse_screen/body/grid/paginated_grid_view.dart';
-import 'package:grab_grip/features/browsing/browse/widgets/screens/browse_screen/body/list/paginated_list_view.dart';
-import 'package:grab_grip/features/browsing/browse/widgets/screens/browse_screen/body/map/gears_map.dart';
+import 'package:grab_grip/features/browsing/browse/widgets/browse_screen/body/grid/paginated_grid_view.dart';
+import 'package:grab_grip/features/browsing/browse/widgets/browse_screen/body/list/paginated_list_view.dart';
+import 'package:grab_grip/features/browsing/browse/widgets/browse_screen/body/map/gears_map.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/functions.dart';
 

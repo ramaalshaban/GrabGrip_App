@@ -18,7 +18,7 @@ class GearsMap extends StatelessWidget {
     final initLat = double.parse(gear.lat);
     final initLng = double.parse(gear.lng);
     final initialLatLng = LatLng(initLat, initLng);
-    return CameraPosition(target: initialLatLng, zoom: 14);
+    return CameraPosition(target: initialLatLng, zoom: 11);
   }
 
   @override
@@ -79,7 +79,7 @@ class GearsMap extends StatelessWidget {
 
 //region actions
   void moveToDetailsScreen(BuildContext context, Gear clickedGear) {
-    context.router.push(BrowseDetailsScreenRoute(clickedGear: clickedGear));
+    context.router.push(BrowseDetailsScreenRoute(gear: clickedGear));
   }
 //endregion
 }

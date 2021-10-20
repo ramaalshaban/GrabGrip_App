@@ -62,6 +62,7 @@ class FilterDialog extends ConsumerWidget {
             Text(
               AppLocalizations.of(context)!.categories,
             ),
+            height8(),
             const CategoriesWidget(),
             height12(),
             const Divider(

@@ -8,7 +8,7 @@ part of 'grab_grip_api.dart';
 
 class _GrabGripApi implements GrabGripApi {
   _GrabGripApi(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'http://grabgrips.com';
+    baseUrl ??= 'https://grabgrips.com';
   }
 
   final Dio _dio;
@@ -71,6 +71,8 @@ class _GrabGripApi implements GrabGripApi {
   Future<HttpResponse<BrowseModel>> browse(
       {required pageNumber,
       searchText,
+      bounds,
+      location,
       sortType,
       distance,
       category,
@@ -81,6 +83,8 @@ class _GrabGripApi implements GrabGripApi {
     final queryParameters = <String, dynamic>{
       r'page': pageNumber,
       r'q': searchText,
+      r'bounds': bounds,
+      r'location': location,
       r'sort': sortType,
       r'distance': distance,
       r'category': category,
@@ -113,6 +117,26 @@ class _GrabGripApi implements GrabGripApi {
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = CategoriesResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<GeocodeResponse>> getBoundsByPlaceId(
+      {googleApiKey = googleApiKey, required placeId}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'key': googleApiKey,
+      r'place_id': placeId
+    };
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<GeocodeResponse>>(
+            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/json',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GeocodeResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
