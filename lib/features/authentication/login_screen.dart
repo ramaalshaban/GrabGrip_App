@@ -15,7 +15,12 @@ import 'package:grab_grip/utils/functions.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({
+    Key? key,
+    this.onSuccessLogin,
+  }) : super(key: key);
+
+  final VoidCallback? onSuccessLogin;
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -110,6 +115,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 return authenticationState.when(
                                   authenticated: () {
                                     context.router.pop();
+                                    if (widget.onSuccessLogin != null) {
+                                      widget.onSuccessLogin!.call();
+                                    }
                                     // this return statement is just to satisfy the Consumer widget's builder
                                     // and the returned container will not show up anywhere
                                     return Container();
@@ -172,8 +180,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     height24(),
                     TextButton(
-                      onPressed: () =>
-                          context.router.replace(const RegisterScreenRoute()),
+                      onPressed: () => context.router.replace(
+                        RegisterScreenRoute(
+                          onSuccessLogin: widget.onSuccessLogin,
+                        ),
+                      ),
                       child: Text(
                         AppLocalizations.of(context)!.do_not_have_account,
                         style: const TextStyle(

@@ -33,6 +33,18 @@ class HomeScreen extends StatelessWidget {
                 );
               },
             ),
+            Consumer(
+              builder: (_, watch, __) {
+                return TextButton(
+                  onPressed: () {
+                    context.router.push(
+                      const PostListingScreenRoute(),
+                    );
+                  },
+                  child: const Text("Post a Listing"),
+                );
+              },
+            ),
             HorizontalList(
               title: AppLocalizations.of(context)!.explore,
               data: const ["", "", "", "", "", "", "", "", "", ""],

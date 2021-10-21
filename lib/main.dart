@@ -3,14 +3,24 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
+import 'package:grab_grip/configs/routes/guards/auth_guard.dart';
 import 'package:grab_grip/style/colors.dart';
 
 void main() {
   runApp(ProviderScope(child: GrabGripApp()));
 }
 
-class GrabGripApp extends ConsumerWidget {
-  final _appRouter = AppRouter();
+class GrabGripApp extends StatefulWidget {
+  @override
+  State<GrabGripApp> createState() => _GrabGripAppState();
+}
+
+class _GrabGripAppState extends State<GrabGripApp> {
+  AppRouter? _appRouter;
+
+  void initAppRouterIfNot(BuildContext context) {
+    _appRouter ??= AppRouter(authGuard: AuthGuard(context: context));
+  }
 
   ThemeData _initTheme() {
     final ThemeData themeData = ThemeData(
@@ -28,15 +38,21 @@ class GrabGripApp extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    return MaterialApp.router(
-      locale: watch(localeProvider),
-      title: 'Grab Grip',
-      theme: _initTheme(),
-      routerDelegate: _appRouter.delegate(),
-      routeInformationParser: _appRouter.defaultRouteParser(),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+  Widget build(BuildContext context) {
+    initAppRouterIfNot(context);
+    return Consumer(
+      builder: (_, reference, __) {
+        return MaterialApp.router(
+
+          locale: reference(localeProvider),
+          title: 'Grab Grip',
+          theme: _initTheme(),
+          routerDelegate: _appRouter!.delegate(),
+          routeInformationParser: _appRouter!.defaultRouteParser(),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+        );
+      },
     );
   }
 }

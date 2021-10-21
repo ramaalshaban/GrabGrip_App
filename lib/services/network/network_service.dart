@@ -130,7 +130,6 @@ class NetworkService {
       final successMessage = (sendFormCall.data as Map<String, dynamic>)['message'];
       return Success(successMessage.toString());
     } catch (error) {
-      print("error message : ${error.toString()} , in sending the form");
       final errorMessage = _errorHandler(error as DioError);
       return Error(errorMessage);
     }

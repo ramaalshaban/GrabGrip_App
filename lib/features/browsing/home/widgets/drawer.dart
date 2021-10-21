@@ -31,12 +31,12 @@ class AppDrawer extends StatelessWidget {
                     DrawerButton(
                       Icons.app_registration,
                       AppLocalizations.of(context)!.join_grab_grip,
-                      const RegisterScreenRoute(),
+                      RegisterScreenRoute(),
                     ),
                     DrawerButton(
                       Icons.login,
                       AppLocalizations.of(context)!.login,
-                      const LoginScreenRoute(),
+                      LoginScreenRoute(),
                     ),
                   ],
                 ),
