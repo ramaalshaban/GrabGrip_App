@@ -31,6 +31,8 @@ dependencies:
   flash: ^2.0.3
   flutter:
     sdk: flutter
+  # flutter_html is used for rendering html coming from the server
+  flutter_html: ^2.1.5
   flutter_localizations:
     sdk: flutter
   # flutter_riverpod is used for state management
