@@ -13,4 +13,35 @@ class AppTextFields {
       ),
     ),
   );
+
+  static const contactUsInputDecoration = InputDecoration(
+    floatingLabelBehavior: FloatingLabelBehavior.always,
+    labelStyle: TextStyle(
+      color: AppColors.purple,
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 1.5,
+        color: AppColors.purple,
+      ),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 0.5,
+        color: AppColors.lightPurple,
+      ),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 0.5,
+        color: Colors.red,
+      ),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 0.5,
+        color: Colors.red,
+      ),
+    ),
+  );
 }

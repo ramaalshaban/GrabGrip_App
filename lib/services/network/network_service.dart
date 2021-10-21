@@ -8,6 +8,7 @@ import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_mo
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/geocode_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
+import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
 import 'package:grab_grip/services/network/api/grab_grip_api.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:multiple_result/multiple_result.dart';
@@ -121,6 +122,22 @@ class NetworkService {
 
   //endregion
 
+  //region feedback
+  Future<Result<String, String>> sendContactUsForm(
+      ContactUsForm contactUsForm) async {
+    try {
+      final sendFormCall = await _grabGripApi.sendContactUsForm(contactUsForm);
+      final successMessage = (sendFormCall.data as Map<String, dynamic>)['message'];
+      return Success(successMessage.toString());
+    } catch (error) {
+      print("error message : ${error.toString()} , in sending the form");
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  //endregion
+
   //region error handling
   bool _isNoInternetError(DioError dioError) =>
       dioError.error != null &&
@@ -143,6 +160,10 @@ class NetworkService {
       if (errorData["errors"]["password"] != null) {
         aggregatedErrorMessage +=
             "${errorData["errors"]["password"][0] as String}\n";
+      }
+      if (errorData["errors"]["email_address"] != null) {
+        aggregatedErrorMessage +=
+            "${errorData["errors"]["email_address"][0] as String}\n";
       }
     }
     // when an exception occurs while logging in, "error" is not null

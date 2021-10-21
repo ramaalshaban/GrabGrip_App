@@ -9,7 +9,8 @@ import 'package:grab_grip/features/browsing/browse/providers/browse_provider.dar
 import 'package:grab_grip/features/browsing/browse/providers/view_mode_provider.dart';
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
 import 'package:grab_grip/features/browsing/filter/providers/filter_sort_provider.dart';
-import 'package:grab_grip/services/network/providers/http_request_state.dart';
+import 'package:grab_grip/features/feedback/contact_us/providers/feedback_provider.dart';
+import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
 
 final localeProvider = StateNotifierProvider<LocaleProvider, Locale>((_) {
@@ -40,4 +41,9 @@ final browseDataProvider =
     StateNotifierProvider<BrowseProvider, BrowseModel>((reference) {
   final filterSortProvider = reference.watch(filterAndSortProvider.notifier);
   return BrowseProvider(filterSortProvider);
+});
+
+final feedbackProvider = Provider((reference) {
+  final provider = reference.watch(httpRequestStateProvider.notifier);
+  return FeedbackProvider(provider);
 });

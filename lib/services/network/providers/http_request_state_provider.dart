@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:grab_grip/services/network/providers/http_request_state.dart';
+import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 
 class HttpRequestStateProvider extends StateNotifier<HttpRequestState> {
   HttpRequestStateProvider()
@@ -9,8 +9,8 @@ class HttpRequestStateProvider extends StateNotifier<HttpRequestState> {
     state = const HttpRequestState.loading();
   }
 
-  void setSuccess() {
-    state = const HttpRequestState.success();
+  void setSuccess([String? successMessage]) {
+    state = HttpRequestState.success(successMessage);
   }
 
   void setError(String errorMessage) {

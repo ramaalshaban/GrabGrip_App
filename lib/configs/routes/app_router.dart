@@ -6,6 +6,7 @@ import 'package:grab_grip/features/browsing/about_us/about_us_screen.dart';
 import 'package:grab_grip/features/browsing/browse/widgets/browse_details_screen.dart';
 import 'package:grab_grip/features/browsing/browse/widgets/browse_screen/browse_screen.dart';
 import 'package:grab_grip/features/browsing/home/home_screen.dart';
+import 'package:grab_grip/features/feedback/contact_us/contact_us_screen.dart';
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[
@@ -15,6 +16,7 @@ import 'package:grab_grip/features/browsing/home/home_screen.dart';
     AutoRoute(page: ForgotPasswordScreen),
     AutoRoute(page: BrowseScreen),
     AutoRoute(page: BrowseDetailsScreen),
+    AutoRoute(page: ContactUsScreen),
     AutoRoute(page: AboutUsScreen),
   ],
 )

@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
-import 'package:grab_grip/services/network/providers/http_request_state.dart';
+import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/functions.dart';
 
@@ -65,7 +65,7 @@ class AppDrawer extends StatelessWidget {
             DrawerButton(
               Icons.contact_page,
               AppLocalizations.of(context)!.contact_us,
-              const AboutUsScreenRoute(),
+              const ContactUsScreenRoute(),
             ),
             DrawerButton(
               Icons.home_repair_service,
@@ -77,7 +77,7 @@ class AppDrawer extends StatelessWidget {
               provider: httpRequestStateProvider,
               onChange: (context, HttpRequestState httpRequestState) {
                 httpRequestState.whenOrNull(
-                  success: () {
+                  success: (_) {
                     showSnackBar(
                       context,
                       AppLocalizations.of(context)!.you_logged_out_successfully,

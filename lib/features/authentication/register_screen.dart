@@ -7,7 +7,7 @@ import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/utils/text_field_validators.dart';
 import 'package:grab_grip/features/authentication/widgets/registration_app_bar.dart';
-import 'package:grab_grip/services/network/providers/http_request_state.dart';
+import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text_fields.dart';
 import 'package:grab_grip/utils/device.dart';
@@ -115,7 +115,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         provider: httpRequestStateProvider,
                         onChange: (context, HttpRequestState httpRequestState) {
                           httpRequestState.whenOrNull(
-                            success: () => showSnackBar(
+                            success: (_) => showSnackBar(
                               context,
                               AppLocalizations.of(context)!
                                   .you_registered_successfully,
@@ -141,7 +141,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   watch: watch,
                                 );
                               },
-                              success: () {
+                              success: (_) {
                                 final authenticationState = watch(authProvider);
                                 return authenticationState.when(
                                   authenticated: () {

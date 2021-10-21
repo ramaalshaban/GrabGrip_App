@@ -10,13 +10,14 @@ import 'package:flutter/material.dart' as _i2;
 import '../../features/authentication/forgot_password_screen.dart' as _i6;
 import '../../features/authentication/login_screen.dart' as _i5;
 import '../../features/authentication/register_screen.dart' as _i4;
-import '../../features/browsing/about_us/about_us_screen.dart' as _i9;
-import '../../features/browsing/browse/models/gear/gear.dart' as _i10;
+import '../../features/browsing/about_us/about_us_screen.dart' as _i10;
+import '../../features/browsing/browse/models/gear/gear.dart' as _i11;
 import '../../features/browsing/browse/widgets/browse_details_screen.dart'
     as _i8;
 import '../../features/browsing/browse/widgets/browse_screen/browse_screen.dart'
     as _i7;
 import '../../features/browsing/home/home_screen.dart' as _i3;
+import '../../features/feedback/contact_us/contact_us_screen.dart' as _i9;
 
 class AppRouter extends _i1.RootStackRouter {
   AppRouter([_i2.GlobalKey<_i2.NavigatorState>? navigatorKey])
@@ -50,9 +51,13 @@ class AppRouter extends _i1.RootStackRouter {
           routeData: routeData,
           child: _i8.BrowseDetailsScreen(key: args.key, gear: args.gear));
     },
+    ContactUsScreenRoute.name: (routeData) {
+      return _i1.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i9.ContactUsScreen());
+    },
     AboutUsScreenRoute.name: (routeData) {
       return _i1.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i9.AboutUsScreen());
+          routeData: routeData, child: _i10.AboutUsScreen());
     }
   };
 
@@ -66,6 +71,7 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(BrowseScreenRoute.name, path: '/browse-screen'),
         _i1.RouteConfig(BrowseDetailsScreenRoute.name,
             path: '/browse-details-screen'),
+        _i1.RouteConfig(ContactUsScreenRoute.name, path: '/contact-us-screen'),
         _i1.RouteConfig(AboutUsScreenRoute.name, path: '/about-us-screen')
       ];
 }
@@ -103,7 +109,7 @@ class BrowseScreenRoute extends _i1.PageRouteInfo<void> {
 
 class BrowseDetailsScreenRoute
     extends _i1.PageRouteInfo<BrowseDetailsScreenRouteArgs> {
-  BrowseDetailsScreenRoute({_i2.Key? key, required _i10.Gear gear})
+  BrowseDetailsScreenRoute({_i2.Key? key, required _i11.Gear gear})
       : super(name,
             path: '/browse-details-screen',
             args: BrowseDetailsScreenRouteArgs(key: key, gear: gear));
@@ -116,7 +122,13 @@ class BrowseDetailsScreenRouteArgs {
 
   final _i2.Key? key;
 
-  final _i10.Gear gear;
+  final _i11.Gear gear;
+}
+
+class ContactUsScreenRoute extends _i1.PageRouteInfo<void> {
+  const ContactUsScreenRoute() : super(name, path: '/contact-us-screen');
+
+  static const String name = 'ContactUsScreenRoute';
 }
 
 class AboutUsScreenRoute extends _i1.PageRouteInfo<void> {
