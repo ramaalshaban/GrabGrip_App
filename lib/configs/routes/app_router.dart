@@ -8,7 +8,7 @@ import 'package:grab_grip/features/browsing/browse/widgets/browse_details_screen
 import 'package:grab_grip/features/browsing/browse/widgets/browse_screen/browse_screen.dart';
 import 'package:grab_grip/features/browsing/home/home_screen.dart';
 import 'package:grab_grip/features/feedback/contact_us/contact_us_screen.dart';
-import 'package:grab_grip/features/post_listing/widgets/post_listing_screen.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/post_listing_screen.dart';
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[

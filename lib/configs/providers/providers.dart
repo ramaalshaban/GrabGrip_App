@@ -10,6 +10,10 @@ import 'package:grab_grip/features/browsing/browse/providers/view_mode_provider.
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
 import 'package:grab_grip/features/browsing/filter/providers/filter_sort_provider.dart';
 import 'package:grab_grip/features/feedback/contact_us/providers/feedback_provider.dart';
+import 'package:grab_grip/features/post_listing/models/post_listing_model/post_listing_model.dart';
+import 'package:grab_grip/features/post_listing/models/post_listing_step_number_model/post_listing_step_number.dart';
+import 'package:grab_grip/features/post_listing/providers/post_listing_provider.dart';
+import 'package:grab_grip/features/post_listing/providers/post_listing_step_number_provider.dart';
 import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
 
@@ -29,8 +33,9 @@ final authProvider =
 });
 
 final filterAndSortProvider =
-    StateNotifierProvider<FilterSortProvider, FilterSortModel>((_) {
-  return FilterSortProvider();
+    StateNotifierProvider<FilterSortProvider, FilterSortModel>((reference) {
+  final provider = reference.watch(httpRequestStateProvider.notifier);
+  return FilterSortProvider(provider);
 });
 
 final gearsViewMode = StateNotifierProvider<ViewModeProvider, ViewMode>(
@@ -46,4 +51,15 @@ final browseDataProvider =
 final feedbackProvider = Provider((reference) {
   final provider = reference.watch(httpRequestStateProvider.notifier);
   return FeedbackProvider(provider);
+});
+
+final postListingProvider =
+    StateNotifierProvider<PostListingProvider, PostListingModel>((_) {
+  return PostListingProvider();
+});
+
+final postListingStepProvider =
+    StateNotifierProvider<PostListingStepNumberProvider, PostListingStepNumber>(
+        (_) {
+  return PostListingStepNumberProvider();
 });

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/browsing/browse/models/category/category.dart';
 import 'package:grab_grip/features/browsing/filter/widgets/categories/category_filtering_item.dart';
+import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
 class CategoriesWidget extends StatelessWidget {
@@ -24,7 +25,7 @@ class CategoriesWidget extends StatelessWidget {
               // filteringCategories can be empty when an error happens while fetching the categories
               // (like when the user opens the filter dialog and there is no internet connection)
               opacity: filteringCategories.isNotEmpty ? 1.0 : 0.0,
-              duration: const Duration(milliseconds: 400),
+              duration: duration300Milli,
               child: Wrap(
                 spacing: 4,
                 children: [
@@ -46,7 +47,7 @@ class CategoriesWidget extends StatelessWidget {
                       filteringCategories.isNotEmpty
                   ? 1.0
                   : 0.0,
-              duration: const Duration(milliseconds: 400),
+              duration: duration300Milli,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [

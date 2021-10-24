@@ -6,9 +6,13 @@ import 'package:grab_grip/features/browsing/browse/models/category/category.dart
 import 'package:grab_grip/features/browsing/filter/models/drop_down_item.dart';
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
 import 'package:grab_grip/services/network/network_service.dart';
+import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
 
 class FilterSortProvider extends StateNotifier<FilterSortModel> {
-  FilterSortProvider() : super(const FilterSortModel()) {
+  HttpRequestStateProvider httpRequestStateProvider;
+
+  FilterSortProvider(this.httpRequestStateProvider)
+      : super(const FilterSortModel()) {
     _initializeDropDownLists();
   }
 
@@ -46,10 +50,15 @@ class FilterSortProvider extends StateNotifier<FilterSortModel> {
   }
 
   Future<void> getCategories() async {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      httpRequestStateProvider.setLoading();
+    });
     await NetworkService().getCategories().then((result) {
       result.when((errorMessage) {
+        httpRequestStateProvider.setError(errorMessage);
         filteringCategories = [];
       }, (response) {
+        httpRequestStateProvider.setSuccess();
         filteringCategories = response.categories;
       });
     });

@@ -234,5 +234,9 @@
     "search_by_gear_location_placeholder": "ابحث عن طريق الموقع ...",
     "@search_by_gear_location_placeholder": {
       "description": "placeholder for search by gear location search box in browse screen"
+    },
+    "post_listing": "انشر قائمة",
+    "@post_listing": {
+      "description": "app bar title of post listing screen"
     }
 }

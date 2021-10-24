@@ -43,11 +43,11 @@ class _FloatingPlacesSearchBarState extends State<FloatingPlacesSearchBar> {
           hint: watch(filterAndSortProvider.notifier).place ??
               AppLocalizations.of(context)!.search_by_gear_location_placeholder,
           scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
-          transitionDuration: const Duration(milliseconds: 300),
+          transitionDuration: duration300Milli,
           transitionCurve: Curves.easeInOut,
           physics: const BouncingScrollPhysics(),
           openAxisAlignment: 0.0,
-          debounceDelay: const Duration(milliseconds: 500),
+          debounceDelay: duration500Milli,
           onQueryChanged: (enteredText) async {
             if (enteredText.isNotEmpty) {
               getPlacePredictions(enteredText);
@@ -75,7 +75,7 @@ class _FloatingPlacesSearchBarState extends State<FloatingPlacesSearchBar> {
               opacity: watch(filterAndSortProvider.notifier).place != null
                   ? 1.0
                   : 0.0,
-              duration: const Duration(milliseconds: 300),
+              duration: duration300Milli,
               child: FloatingSearchBarAction(
                 child: CircularButton(
                   icon: const Icon(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grab_grip/style/colors.dart';
+import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/device.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 
@@ -17,7 +18,7 @@ class GearsSkeletonMapLoader extends StatelessWidget {
       ),
     );
     return SkeletonLoader(
-      period: const Duration(seconds: 1),
+      period: duration1Second,
       builder: skeletonMapItem,
       highlightColor: AppColors.veryLightPurple,
     );

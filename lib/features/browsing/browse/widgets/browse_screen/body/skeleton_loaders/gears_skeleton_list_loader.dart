@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grab_grip/style/colors.dart';
+import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 
@@ -69,7 +70,7 @@ class GearsSkeletonListLoader extends StatelessWidget {
       children: [
         SkeletonLoader(
           items: 6,
-          period: const Duration(seconds: 1),
+          period: duration1Second,
           builder: skeletonListItem,
           highlightColor: AppColors.veryLightPurple,
         ),

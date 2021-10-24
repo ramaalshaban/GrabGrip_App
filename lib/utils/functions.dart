@@ -12,7 +12,7 @@ void showSnackBar(BuildContext context, String message) {
     // to avoid this exception : setState() or markNeedsBuild() called during build.
     showFlash(
       context: context,
-      duration: const Duration(seconds: 3),
+      duration: duration3Seconds,
       builder: (context, controller) {
         return Flash(
           backgroundColor: AppColors.purple,
@@ -46,7 +46,7 @@ void showSnackBarForError(BuildContext context, String errorMessage) {
     }
     showFlash(
       context: context,
-      duration: const Duration(seconds: 3),
+      duration: duration3Seconds,
       builder: (context, controller) {
         return Flash(
           backgroundColor: Colors.red[900],

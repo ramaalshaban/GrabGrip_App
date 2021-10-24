@@ -18,7 +18,8 @@ import '../../features/browsing/browse/widgets/browse_screen/browse_screen.dart'
     as _i8;
 import '../../features/browsing/home/home_screen.dart' as _i4;
 import '../../features/feedback/contact_us/contact_us_screen.dart' as _i11;
-import '../../features/post_listing/widgets/post_listing_screen.dart' as _i10;
+import '../../features/post_listing/widgets/screens/post_listing_screen.dart'
+    as _i10;
 import 'guards/auth_guard.dart' as _i3;
 
 class AppRouter extends _i1.RootStackRouter {
