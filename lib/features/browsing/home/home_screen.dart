@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/browsing/home/widgets/drawer.dart';
 import 'package:grab_grip/features/browsing/home/widgets/home_app_bar.dart';
@@ -13,6 +14,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // let the authProvider be initialized (i.e. let its _initialize() method run)
+    context.read(authProvider);
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: const HomeAppBar(),

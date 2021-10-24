@@ -43,7 +43,6 @@ class _GrabGripAppState extends State<GrabGripApp> {
     return Consumer(
       builder: (_, reference, __) {
         return MaterialApp.router(
-
           locale: reference(localeProvider),
           title: 'Grab Grip',
           theme: _initTheme(),
