@@ -17,10 +17,16 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$PostListingModelTearOff {
   const _$PostListingModelTearOff();
 
-  _PostListingModel call([Category? category, Category? subcategory]) {
+  _PostListingModel call(
+      [Category? category,
+      Category? subcategory,
+      int? listingTypeId,
+      List<PricingModel> pricingModels = const []]) {
     return _PostListingModel(
       category,
       subcategory,
+      listingTypeId,
+      pricingModels,
     );
   }
 }
@@ -32,6 +38,8 @@ const $PostListingModel = _$PostListingModelTearOff();
 mixin _$PostListingModel {
   Category? get category => throw _privateConstructorUsedError;
   Category? get subcategory => throw _privateConstructorUsedError;
+  int? get listingTypeId => throw _privateConstructorUsedError;
+  List<PricingModel> get pricingModels => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostListingModelCopyWith<PostListingModel> get copyWith =>
@@ -43,7 +51,11 @@ abstract class $PostListingModelCopyWith<$Res> {
   factory $PostListingModelCopyWith(
           PostListingModel value, $Res Function(PostListingModel) then) =
       _$PostListingModelCopyWithImpl<$Res>;
-  $Res call({Category? category, Category? subcategory});
+  $Res call(
+      {Category? category,
+      Category? subcategory,
+      int? listingTypeId,
+      List<PricingModel> pricingModels});
 
   $CategoryCopyWith<$Res>? get category;
   $CategoryCopyWith<$Res>? get subcategory;
@@ -62,6 +74,8 @@ class _$PostListingModelCopyWithImpl<$Res>
   $Res call({
     Object? category = freezed,
     Object? subcategory = freezed,
+    Object? listingTypeId = freezed,
+    Object? pricingModels = freezed,
   }) {
     return _then(_value.copyWith(
       category: category == freezed
@@ -72,6 +86,14 @@ class _$PostListingModelCopyWithImpl<$Res>
           ? _value.subcategory
           : subcategory // ignore: cast_nullable_to_non_nullable
               as Category?,
+      listingTypeId: listingTypeId == freezed
+          ? _value.listingTypeId
+          : listingTypeId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      pricingModels: pricingModels == freezed
+          ? _value.pricingModels
+          : pricingModels // ignore: cast_nullable_to_non_nullable
+              as List<PricingModel>,
     ));
   }
 
@@ -105,7 +127,11 @@ abstract class _$PostListingModelCopyWith<$Res>
           _PostListingModel value, $Res Function(_PostListingModel) then) =
       __$PostListingModelCopyWithImpl<$Res>;
   @override
-  $Res call({Category? category, Category? subcategory});
+  $Res call(
+      {Category? category,
+      Category? subcategory,
+      int? listingTypeId,
+      List<PricingModel> pricingModels});
 
   @override
   $CategoryCopyWith<$Res>? get category;
@@ -128,6 +154,8 @@ class __$PostListingModelCopyWithImpl<$Res>
   $Res call({
     Object? category = freezed,
     Object? subcategory = freezed,
+    Object? listingTypeId = freezed,
+    Object? pricingModels = freezed,
   }) {
     return _then(_PostListingModel(
       category == freezed
@@ -138,6 +166,14 @@ class __$PostListingModelCopyWithImpl<$Res>
           ? _value.subcategory
           : subcategory // ignore: cast_nullable_to_non_nullable
               as Category?,
+      listingTypeId == freezed
+          ? _value.listingTypeId
+          : listingTypeId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      pricingModels == freezed
+          ? _value.pricingModels
+          : pricingModels // ignore: cast_nullable_to_non_nullable
+              as List<PricingModel>,
     ));
   }
 }
@@ -147,16 +183,25 @@ class __$PostListingModelCopyWithImpl<$Res>
 class _$_PostListingModel
     with DiagnosticableTreeMixin
     implements _PostListingModel {
-  const _$_PostListingModel([this.category, this.subcategory]);
+  const _$_PostListingModel(
+      [this.category,
+      this.subcategory,
+      this.listingTypeId,
+      this.pricingModels = const []]);
 
   @override
   final Category? category;
   @override
   final Category? subcategory;
+  @override
+  final int? listingTypeId;
+  @JsonKey(defaultValue: const [])
+  @override
+  final List<PricingModel> pricingModels;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostListingModel(category: $category, subcategory: $subcategory)';
+    return 'PostListingModel(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, pricingModels: $pricingModels)';
   }
 
   @override
@@ -165,7 +210,9 @@ class _$_PostListingModel
     properties
       ..add(DiagnosticsProperty('type', 'PostListingModel'))
       ..add(DiagnosticsProperty('category', category))
-      ..add(DiagnosticsProperty('subcategory', subcategory));
+      ..add(DiagnosticsProperty('subcategory', subcategory))
+      ..add(DiagnosticsProperty('listingTypeId', listingTypeId))
+      ..add(DiagnosticsProperty('pricingModels', pricingModels));
   }
 
   @override
@@ -177,14 +224,22 @@ class _$_PostListingModel
                     .equals(other.category, category)) &&
             (identical(other.subcategory, subcategory) ||
                 const DeepCollectionEquality()
-                    .equals(other.subcategory, subcategory)));
+                    .equals(other.subcategory, subcategory)) &&
+            (identical(other.listingTypeId, listingTypeId) ||
+                const DeepCollectionEquality()
+                    .equals(other.listingTypeId, listingTypeId)) &&
+            (identical(other.pricingModels, pricingModels) ||
+                const DeepCollectionEquality()
+                    .equals(other.pricingModels, pricingModels)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(category) ^
-      const DeepCollectionEquality().hash(subcategory);
+      const DeepCollectionEquality().hash(subcategory) ^
+      const DeepCollectionEquality().hash(listingTypeId) ^
+      const DeepCollectionEquality().hash(pricingModels);
 
   @JsonKey(ignore: true)
   @override
@@ -193,13 +248,20 @@ class _$_PostListingModel
 }
 
 abstract class _PostListingModel implements PostListingModel {
-  const factory _PostListingModel([Category? category, Category? subcategory]) =
-      _$_PostListingModel;
+  const factory _PostListingModel(
+      [Category? category,
+      Category? subcategory,
+      int? listingTypeId,
+      List<PricingModel> pricingModels]) = _$_PostListingModel;
 
   @override
   Category? get category => throw _privateConstructorUsedError;
   @override
   Category? get subcategory => throw _privateConstructorUsedError;
+  @override
+  int? get listingTypeId => throw _privateConstructorUsedError;
+  @override
+  List<PricingModel> get pricingModels => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PostListingModelCopyWith<_PostListingModel> get copyWith =>

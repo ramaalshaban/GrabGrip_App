@@ -16,6 +16,7 @@ class PostListingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read(filterAndSortProvider.notifier).getCategories();
     return Consumer(
       builder: (_, ref, __) {
         final stepState = ref(postListingStepProvider);
@@ -34,50 +35,67 @@ class PostListingScreen extends StatelessWidget {
             appBar: CustomAppBar(
               appBarTitle: AppLocalizations.of(context)!.post_listing,
             ),
-            body: Stack(
-              children: [
-                IgnorePointer(
-                  ignoring: stepState != const PostListingStepNumber.step1(),
-                  child: AnimatedOpacity(
-                    opacity: stepState == const PostListingStepNumber.step1()
-                        ? 1.0
-                        : 0.0,
-                    duration: duration300Milli,
-                    child: const PostListingStepOneScreen(),
+            body: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: ref(httpRequestStateProvider).maybeWhen(
+                  success: (_) => Stack(
+                    children: [
+                      IgnorePointer(
+                        ignoring:
+                            stepState != const PostListingStepNumber.step1(),
+                        child: AnimatedOpacity(
+                          opacity:
+                              stepState == const PostListingStepNumber.step1()
+                                  ? 1.0
+                                  : 0.0,
+                          duration: duration300Milli,
+                          child: const PostListingStepOneScreen(),
+                        ),
+                      ),
+                      IgnorePointer(
+                        ignoring:
+                            stepState != const PostListingStepNumber.step2(),
+                        child: AnimatedOpacity(
+                          opacity:
+                              stepState == const PostListingStepNumber.step2()
+                                  ? 1.0
+                                  : 0.0,
+                          duration: duration300Milli,
+                          child:  stepState == const PostListingStepNumber.step2() ? const PostListingStepTwoScreen() : Container(),
+                        ),
+                      ),
+                      IgnorePointer(
+                        ignoring:
+                            stepState != const PostListingStepNumber.step3(),
+                        child: AnimatedOpacity(
+                          opacity:
+                              stepState == const PostListingStepNumber.step3()
+                                  ? 1.0
+                                  : 0.0,
+                          duration: duration300Milli,
+                          child: const PostListingStepThreeScreen(),
+                        ),
+                      ),
+                      IgnorePointer(
+                        ignoring:
+                            stepState != const PostListingStepNumber.step4(),
+                        child: AnimatedOpacity(
+                          opacity:
+                              stepState == const PostListingStepNumber.step4()
+                                  ? 1.0
+                                  : 0.0,
+                          duration: duration300Milli,
+                          child: const PostListingStepFourScreen(),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                IgnorePointer(
-                  ignoring: stepState != const PostListingStepNumber.step2(),
-                  child: AnimatedOpacity(
-                    opacity: stepState == const PostListingStepNumber.step2()
-                        ? 1.0
-                        : 0.0,
-                    duration: duration300Milli,
-                    child: const PostListingStepTwoScreen(),
+                  orElse: () => const Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.purple,
+                    ),
                   ),
-                ),
-                IgnorePointer(
-                  ignoring: stepState != const PostListingStepNumber.step3(),
-                  child: AnimatedOpacity(
-                    opacity: stepState == const PostListingStepNumber.step3()
-                        ? 1.0
-                        : 0.0,
-                    duration: duration300Milli,
-                    child: const PostListingStepThreeScreen(),
-                  ),
-                ),
-                IgnorePointer(
-                  ignoring: stepState != const PostListingStepNumber.step4(),
-                  child: AnimatedOpacity(
-                    opacity: stepState == const PostListingStepNumber.step4()
-                        ? 1.0
-                        : 0.0,
-                    duration: duration300Milli,
-                    child: const PostListingStepFourScreen(),
-                  ),
-                ),
-              ],
-            ),
+                )),
           ),
         );
       },

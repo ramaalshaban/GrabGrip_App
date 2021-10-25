@@ -238,5 +238,17 @@
     "post_listing": "انشر قائمة",
     "@post_listing": {
       "description": "app bar title of post listing screen"
+    },
+    "continue_label": "متابعة",
+    "@continue_label": {
+      "description": "button text"
+    },
+    "select_category": "اختر صنفاً",
+    "@select_category": {
+      "description": "categories drop down list title"
+    },
+    "select_subcategory": "اختر صنفاً فرعيّاً",
+    "@select_subcategory": {
+      "description": "subcategories drop down list title"
     }
 }

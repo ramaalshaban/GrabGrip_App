@@ -9,6 +9,7 @@ import 'package:grab_grip/features/browsing/browse/models/geocode_response/geoco
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
+import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
 import 'package:grab_grip/services/network/api/grab_grip_api.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:multiple_result/multiple_result.dart';
@@ -122,12 +123,28 @@ class NetworkService {
 
   //endregion
 
+  //region post a listing
+  Future<Result<String, PricingModelsResponse>> getPricingModels(
+  String token , int categoryId, ) async {
+    try {
+      final getPricingModelsCall =
+          await _grabGripApi.getPricingModels("Bearer $token" ,categoryId: categoryId);
+      return Success(getPricingModelsCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  //endregion
+
   //region feedback
   Future<Result<String, String>> sendContactUsForm(
       ContactUsForm contactUsForm) async {
     try {
       final sendFormCall = await _grabGripApi.sendContactUsForm(contactUsForm);
-      final successMessage = (sendFormCall.data as Map<String, dynamic>)['message'];
+      final successMessage =
+          (sendFormCall.data as Map<String, dynamic>)['message'];
       return Success(successMessage.toString());
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);

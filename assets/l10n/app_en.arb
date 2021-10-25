@@ -238,5 +238,17 @@
     "post_listing": "Post a listing",
     "@post_listing": {
       "description": "app bar title of post listing screen"
+    },
+    "continue_label": "Continue",
+    "@continue_label": {
+      "description": "button text"
+    },
+    "select_category": "Select a category",
+    "@select_category": {
+      "description": "categories drop down list title"
+    },
+    "select_subcategory": "Select a subcategory",
+    "@select_subcategory": {
+      "description": "subcategories drop down list title"
     }
 }

@@ -11,7 +11,7 @@ class ContinueButton extends StatelessWidget {
   }) : super(key: key);
 
   final GlobalKey<FormState>? formKey;
-  final VoidCallback onClickAction;
+  final Function onClickAction;
   final String buttonText;
 
   @override

@@ -30,8 +30,12 @@ class CategoriesDropDownList extends StatelessWidget {
               value: selectedCategory,
               elevation: 16,
               style: const TextStyle(color: AppColors.purple),
-              onChanged: (Category? newValue) {
-                ref(postListingProvider.notifier).category = newValue;
+              onChanged: (Category? newlySelectedCategory) {
+                ref(postListingProvider.notifier).category =
+                    newlySelectedCategory;
+                if (newlySelectedCategory?.subCategories.isEmpty ?? false) {
+                  ref(postListingProvider.notifier).subcategory = null;
+                }
               },
               items: ref(filterAndSortProvider.notifier)
                   .filteringCategories

@@ -6,6 +6,7 @@ import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_mo
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/geocode_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
+import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
@@ -52,11 +53,20 @@ abstract class GrabGripApi {
     @Query("key") String googleApiKey = googleApiKey,
     @Query("place_id") required String placeId,
   });
+
 //endregion
+
+  //region post a listing
+  @GET("/api/v1/create")
+  Future<HttpResponse<PricingModelsResponse>> getPricingModels(@Header("Authorization") String token, {
+    @Query("category") required int categoryId,
+  });
+
+  //endregion
 
   //region feedback
   @POST("/api/v1/contact")
   Future<HttpResponse> sendContactUsForm(@Body() ContactUsForm contactUsForm);
 
-  //endregion
+//endregion
 }

@@ -1,6 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_2/listing_type_widget.dart';
+import 'package:grab_grip/shared_widgets/continue_button.dart';
+import 'package:grab_grip/style/colors.dart';
+import 'package:grab_grip/utils/constants.dart';
+import 'package:grab_grip/utils/sized_box.dart';
 
 class PostListingStepTwoScreen extends StatelessWidget {
   const PostListingStepTwoScreen({Key? key}) : super(key: key);
@@ -8,17 +15,37 @@ class PostListingStepTwoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        const Center(
-          child: Text("I am step two!"),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            height60(),
+            Text(
+              AppLocalizations.of(context)!.listing_type,
+              style: const TextStyle(
+                color: AppColors.purple,
+              ),
+            ),
+            height24(),
+            const ListingTypeWidget(),
+            height48(),
+          ],
         ),
         Consumer(
           builder: (_, ref, __) {
-            return TextButton(
-              onPressed: () {
-                ref(postListingStepProvider.notifier).setStep3();
-              },
-              child: const Text("continue to step 3"),
+            return IgnorePointer(
+              ignoring: ref(postListingProvider).listingTypeId == null,
+              child: AnimatedOpacity(
+                opacity:
+                    ref(postListingProvider).listingTypeId == null ? 0.0 : 1.0,
+                duration: duration300Milli,
+                child: ContinueButton(
+                  formKey: null,
+                  buttonText:   AppLocalizations.of(context)!.continue_label,
+                  onClickAction: ref(postListingStepProvider.notifier).setStep3,
+                ),
+              ),
             );
           },
         ),
@@ -26,3 +53,4 @@ class PostListingStepTwoScreen extends StatelessWidget {
     );
   }
 }
+
