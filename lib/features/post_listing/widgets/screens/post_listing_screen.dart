@@ -55,7 +55,9 @@ class PostListingScreen extends StatelessWidget {
                 }
               },
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
+                padding: stepState != const PostListingStepNumber.step4()
+                    ? const EdgeInsets.symmetric(horizontal: 30)
+                    : const EdgeInsets.symmetric(horizontal: 15),
                 child: ref(httpRequestStateProvider).maybeWhen(
                   loading: () => const Center(
                     child: CircularProgressIndicator(

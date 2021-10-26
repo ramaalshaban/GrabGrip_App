@@ -8,11 +8,13 @@ class ContinueButton extends StatelessWidget {
     required this.formKey,
     required this.onClickAction,
     required this.buttonText,
+    this.isPurple = true,
   }) : super(key: key);
 
   final GlobalKey<FormState>? formKey;
   final Function onClickAction;
   final String buttonText;
+  final bool isPurple;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class ContinueButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12),
       constraints: BoxConstraints(minWidth: screenWidth(context)) / 3,
       decoration: BoxDecoration(
-        color: AppColors.purple,
+        color: isPurple ? AppColors.purple : AppColors.white,
         borderRadius: BorderRadius.circular(4),
         border: Border.all(
           width: 1.5,
@@ -40,8 +42,8 @@ class ContinueButton extends StatelessWidget {
         },
         child: Text(
           buttonText,
-          style: const TextStyle(
-            color: AppColors.white,
+          style: TextStyle(
+            color: isPurple ? AppColors.white : AppColors.purple,
           ),
         ),
       ),
