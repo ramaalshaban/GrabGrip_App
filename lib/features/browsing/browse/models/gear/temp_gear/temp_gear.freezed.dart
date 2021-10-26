@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'gear.dart';
+part of 'temp_gear.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,15 +13,15 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Gear _$GearFromJson(Map<String, dynamic> json) {
-  return _Gear.fromJson(json);
+TempGear _$TempGearFromJson(Map<String, dynamic> json) {
+  return _TempGear.fromJson(json);
 }
 
 /// @nodoc
-class _$GearTearOff {
-  const _$GearTearOff();
+class _$TempGearTearOff {
+  const _$TempGearTearOff();
 
-  _Gear call(
+  _TempGear call(
       String hash,
       int id,
       @JsonKey(name: 'category_id') int categoryId,
@@ -30,14 +30,14 @@ class _$GearTearOff {
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
-      String lat,
-      String lng,
+      double lat,
+      double lng,
       String? city,
       String? country,
       String thumbnail,
-      @JsonKey(name: 'price_formatted') String formattedPrice,
+      @JsonKey(name: 'price_formatted') String? formattedPrice,
       @JsonKey(name: 'user') User? owner) {
-    return _Gear(
+    return _TempGear(
       hash,
       id,
       categoryId,
@@ -56,16 +56,16 @@ class _$GearTearOff {
     );
   }
 
-  Gear fromJson(Map<String, Object> json) {
-    return Gear.fromJson(json);
+  TempGear fromJson(Map<String, Object> json) {
+    return TempGear.fromJson(json);
   }
 }
 
 /// @nodoc
-const $Gear = _$GearTearOff();
+const $TempGear = _$TempGearTearOff();
 
 /// @nodoc
-mixin _$Gear {
+mixin _$TempGear {
   String get hash => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'category_id')
@@ -77,25 +77,28 @@ mixin _$Gear {
   @JsonKey(name: 'short_description')
   String get shortDescription => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
-  String get lat => throw _privateConstructorUsedError;
-  String get lng => throw _privateConstructorUsedError;
+  double get lat =>
+      throw _privateConstructorUsedError; // double instead of String
+  double get lng =>
+      throw _privateConstructorUsedError; // double instead of String
   String? get city => throw _privateConstructorUsedError;
   String? get country => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
   @JsonKey(name: 'price_formatted')
-  String get formattedPrice => throw _privateConstructorUsedError;
+  String? get formattedPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'user')
   User? get owner => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GearCopyWith<Gear> get copyWith => throw _privateConstructorUsedError;
+  $TempGearCopyWith<TempGear> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GearCopyWith<$Res> {
-  factory $GearCopyWith(Gear value, $Res Function(Gear) then) =
-      _$GearCopyWithImpl<$Res>;
+abstract class $TempGearCopyWith<$Res> {
+  factory $TempGearCopyWith(TempGear value, $Res Function(TempGear) then) =
+      _$TempGearCopyWithImpl<$Res>;
   $Res call(
       {String hash,
       int id,
@@ -105,24 +108,24 @@ abstract class $GearCopyWith<$Res> {
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
-      String lat,
-      String lng,
+      double lat,
+      double lng,
       String? city,
       String? country,
       String thumbnail,
-      @JsonKey(name: 'price_formatted') String formattedPrice,
+      @JsonKey(name: 'price_formatted') String? formattedPrice,
       @JsonKey(name: 'user') User? owner});
 
   $UserCopyWith<$Res>? get owner;
 }
 
 /// @nodoc
-class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
-  _$GearCopyWithImpl(this._value, this._then);
+class _$TempGearCopyWithImpl<$Res> implements $TempGearCopyWith<$Res> {
+  _$TempGearCopyWithImpl(this._value, this._then);
 
-  final Gear _value;
+  final TempGear _value;
   // ignore: unused_field
-  final $Res Function(Gear) _then;
+  final $Res Function(TempGear) _then;
 
   @override
   $Res call({
@@ -178,11 +181,11 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
       lat: lat == freezed
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       lng: lng == freezed
           ? _value.lng
           : lng // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       city: city == freezed
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
@@ -198,7 +201,7 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
       formattedPrice: formattedPrice == freezed
           ? _value.formattedPrice
           : formattedPrice // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       owner: owner == freezed
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
@@ -219,9 +222,9 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$GearCopyWith<$Res> implements $GearCopyWith<$Res> {
-  factory _$GearCopyWith(_Gear value, $Res Function(_Gear) then) =
-      __$GearCopyWithImpl<$Res>;
+abstract class _$TempGearCopyWith<$Res> implements $TempGearCopyWith<$Res> {
+  factory _$TempGearCopyWith(_TempGear value, $Res Function(_TempGear) then) =
+      __$TempGearCopyWithImpl<$Res>;
   @override
   $Res call(
       {String hash,
@@ -232,12 +235,12 @@ abstract class _$GearCopyWith<$Res> implements $GearCopyWith<$Res> {
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
-      String lat,
-      String lng,
+      double lat,
+      double lng,
       String? city,
       String? country,
       String thumbnail,
-      @JsonKey(name: 'price_formatted') String formattedPrice,
+      @JsonKey(name: 'price_formatted') String? formattedPrice,
       @JsonKey(name: 'user') User? owner});
 
   @override
@@ -245,13 +248,13 @@ abstract class _$GearCopyWith<$Res> implements $GearCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
-    implements _$GearCopyWith<$Res> {
-  __$GearCopyWithImpl(_Gear _value, $Res Function(_Gear) _then)
-      : super(_value, (v) => _then(v as _Gear));
+class __$TempGearCopyWithImpl<$Res> extends _$TempGearCopyWithImpl<$Res>
+    implements _$TempGearCopyWith<$Res> {
+  __$TempGearCopyWithImpl(_TempGear _value, $Res Function(_TempGear) _then)
+      : super(_value, (v) => _then(v as _TempGear));
 
   @override
-  _Gear get _value => super._value as _Gear;
+  _TempGear get _value => super._value as _TempGear;
 
   @override
   $Res call({
@@ -271,7 +274,7 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
     Object? formattedPrice = freezed,
     Object? owner = freezed,
   }) {
-    return _then(_Gear(
+    return _then(_TempGear(
       hash == freezed
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
@@ -307,11 +310,11 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
       lat == freezed
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       lng == freezed
           ? _value.lng
           : lng // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       city == freezed
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
@@ -327,7 +330,7 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
       formattedPrice == freezed
           ? _value.formattedPrice
           : formattedPrice // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       owner == freezed
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
@@ -338,8 +341,8 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Gear with DiagnosticableTreeMixin implements _Gear {
-  const _$_Gear(
+class _$_TempGear with DiagnosticableTreeMixin implements _TempGear {
+  const _$_TempGear(
       this.hash,
       this.id,
       @JsonKey(name: 'category_id') this.categoryId,
@@ -356,7 +359,8 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       @JsonKey(name: 'price_formatted') this.formattedPrice,
       @JsonKey(name: 'user') this.owner);
 
-  factory _$_Gear.fromJson(Map<String, dynamic> json) => _$$_GearFromJson(json);
+  factory _$_TempGear.fromJson(Map<String, dynamic> json) =>
+      _$$_TempGearFromJson(json);
 
   @override
   final String hash;
@@ -378,10 +382,10 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
   @override
   final String currency;
   @override
-  final String lat;
-  @override
-  final String lng;
-  @override
+  final double lat;
+  @override // double instead of String
+  final double lng;
+  @override // double instead of String
   final String? city;
   @override
   final String? country;
@@ -389,21 +393,21 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
   final String thumbnail;
   @override
   @JsonKey(name: 'price_formatted')
-  final String formattedPrice;
+  final String? formattedPrice;
   @override
   @JsonKey(name: 'user')
   final User? owner;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Gear(hash: $hash, id: $id, categoryId: $categoryId, title: $title, stockQuantity: $stockQuantity, description: $description, shortDescription: $shortDescription, currency: $currency, lat: $lat, lng: $lng, city: $city, country: $country, thumbnail: $thumbnail, formattedPrice: $formattedPrice, owner: $owner)';
+    return 'TempGear(hash: $hash, id: $id, categoryId: $categoryId, title: $title, stockQuantity: $stockQuantity, description: $description, shortDescription: $shortDescription, currency: $currency, lat: $lat, lng: $lng, city: $city, country: $country, thumbnail: $thumbnail, formattedPrice: $formattedPrice, owner: $owner)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'Gear'))
+      ..add(DiagnosticsProperty('type', 'TempGear'))
       ..add(DiagnosticsProperty('hash', hash))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('categoryId', categoryId))
@@ -424,7 +428,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Gear &&
+        (other is _TempGear &&
             (identical(other.hash, hash) ||
                 const DeepCollectionEquality().equals(other.hash, hash)) &&
             (identical(other.id, id) ||
@@ -486,17 +490,17 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
 
   @JsonKey(ignore: true)
   @override
-  _$GearCopyWith<_Gear> get copyWith =>
-      __$GearCopyWithImpl<_Gear>(this, _$identity);
+  _$TempGearCopyWith<_TempGear> get copyWith =>
+      __$TempGearCopyWithImpl<_TempGear>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GearToJson(this);
+    return _$$_TempGearToJson(this);
   }
 }
 
-abstract class _Gear implements Gear {
-  const factory _Gear(
+abstract class _TempGear implements TempGear {
+  const factory _TempGear(
       String hash,
       int id,
       @JsonKey(name: 'category_id') int categoryId,
@@ -505,15 +509,15 @@ abstract class _Gear implements Gear {
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
-      String lat,
-      String lng,
+      double lat,
+      double lng,
       String? city,
       String? country,
       String thumbnail,
-      @JsonKey(name: 'price_formatted') String formattedPrice,
-      @JsonKey(name: 'user') User? owner) = _$_Gear;
+      @JsonKey(name: 'price_formatted') String? formattedPrice,
+      @JsonKey(name: 'user') User? owner) = _$_TempGear;
 
-  factory _Gear.fromJson(Map<String, dynamic> json) = _$_Gear.fromJson;
+  factory _TempGear.fromJson(Map<String, dynamic> json) = _$_TempGear.fromJson;
 
   @override
   String get hash => throw _privateConstructorUsedError;
@@ -535,10 +539,10 @@ abstract class _Gear implements Gear {
   @override
   String get currency => throw _privateConstructorUsedError;
   @override
-  String get lat => throw _privateConstructorUsedError;
-  @override
-  String get lng => throw _privateConstructorUsedError;
-  @override
+  double get lat => throw _privateConstructorUsedError;
+  @override // double instead of String
+  double get lng => throw _privateConstructorUsedError;
+  @override // double instead of String
   String? get city => throw _privateConstructorUsedError;
   @override
   String? get country => throw _privateConstructorUsedError;
@@ -546,11 +550,12 @@ abstract class _Gear implements Gear {
   String get thumbnail => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'price_formatted')
-  String get formattedPrice => throw _privateConstructorUsedError;
+  String? get formattedPrice => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'user')
   User? get owner => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$GearCopyWith<_Gear> get copyWith => throw _privateConstructorUsedError;
+  _$TempGearCopyWith<_TempGear> get copyWith =>
+      throw _privateConstructorUsedError;
 }

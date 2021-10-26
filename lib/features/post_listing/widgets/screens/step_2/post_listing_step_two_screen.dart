@@ -17,10 +17,10 @@ class PostListingStepTwoScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
+        height60(),
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            height60(),
             Text(
               AppLocalizations.of(context)!.listing_type,
               style: const TextStyle(
@@ -34,17 +34,14 @@ class PostListingStepTwoScreen extends StatelessWidget {
         ),
         Consumer(
           builder: (_, ref, __) {
-            return IgnorePointer(
-              ignoring: ref(postListingProvider).listingTypeId == null,
-              child: AnimatedOpacity(
-                opacity:
-                    ref(postListingProvider).listingTypeId == null ? 0.0 : 1.0,
-                duration: duration300Milli,
-                child: ContinueButton(
-                  formKey: null,
-                  buttonText:   AppLocalizations.of(context)!.continue_label,
-                  onClickAction: ref(postListingStepProvider.notifier).setStep3,
-                ),
+            return AnimatedOpacity(
+              opacity:
+                  ref(postListingProvider).listingTypeId == null ? 0.0 : 1.0,
+              duration: duration300Milli,
+              child: ContinueButton(
+                formKey: null,
+                buttonText: AppLocalizations.of(context)!.continue_label,
+                onClickAction: ref(postListingStepProvider.notifier).setStep3,
               ),
             );
           },
@@ -53,4 +50,3 @@ class PostListingStepTwoScreen extends StatelessWidget {
     );
   }
 }
-

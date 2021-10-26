@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'gear.dart';
+part of 'temp_gear.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Gear _$$_GearFromJson(Map<String, dynamic> json) => _$_Gear(
+_$_TempGear _$$_TempGearFromJson(Map<String, dynamic> json) => _$_TempGear(
       json['hash'] as String,
       json['id'] as int,
       json['category_id'] as int,
@@ -15,18 +15,19 @@ _$_Gear _$$_GearFromJson(Map<String, dynamic> json) => _$_Gear(
       json['description'] as String,
       json['short_description'] as String,
       json['currency'] as String,
-      json['lat'] as String,
-      json['lng'] as String,
+      (json['lat'] as num).toDouble(),
+      (json['lng'] as num).toDouble(),
       json['city'] as String?,
       json['country'] as String?,
       json['thumbnail'] as String,
-      json['price_formatted'] as String,
+      json['price_formatted'] as String?,
       json['user'] == null
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_GearToJson(_$_Gear instance) => <String, dynamic>{
+Map<String, dynamic> _$$_TempGearToJson(_$_TempGear instance) =>
+    <String, dynamic>{
       'hash': instance.hash,
       'id': instance.id,
       'category_id': instance.categoryId,

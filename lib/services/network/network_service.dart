@@ -9,6 +9,8 @@ import 'package:grab_grip/features/browsing/browse/models/geocode_response/geoco
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
+import 'package:grab_grip/features/post_listing/models/post_listing_request/post_listing_request.dart';
+import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
 import 'package:grab_grip/services/network/api/grab_grip_api.dart';
 import 'package:grab_grip/utils/constants.dart';
@@ -125,11 +127,29 @@ class NetworkService {
 
   //region post a listing
   Future<Result<String, PricingModelsResponse>> getPricingModels(
-  String token , int categoryId, ) async {
+    String token,
+    int categoryId,
+  ) async {
     try {
-      final getPricingModelsCall =
-          await _grabGripApi.getPricingModels("Bearer $token" ,categoryId: categoryId);
+      final getPricingModelsCall = await _grabGripApi
+          .getPricingModels("Bearer $token", categoryId: categoryId);
       return Success(getPricingModelsCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  Future<Result<String, PostListingResponse>> postListing(
+    String token,
+    PostListingRequest postListingRequest,
+  ) async {
+    try {
+      final postListingCall = await _grabGripApi.postListing(
+        "Bearer $token",
+        postListingRequest,
+      );
+      return Success(postListingCall.data);
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);
       return Error(errorMessage);
@@ -140,7 +160,7 @@ class NetworkService {
 
   //region feedback
   Future<Result<String, String>> sendContactUsForm(
-      ContactUsForm contactUsForm) async {
+      ContactUsForm contactUsForm,) async {
     try {
       final sendFormCall = await _grabGripApi.sendContactUsForm(contactUsForm);
       final successMessage =
@@ -180,6 +200,14 @@ class NetworkService {
       if (errorData["errors"]["email_address"] != null) {
         aggregatedErrorMessage +=
             "${errorData["errors"]["email_address"][0] as String}\n";
+      }
+      if (errorData["errors"]["title"] != null) {
+        aggregatedErrorMessage +=
+        "${errorData["errors"]["title"][0] as String}\n";
+      }
+      if (errorData["errors"]["description_new"] != null) {
+        aggregatedErrorMessage +=
+        "${errorData["errors"]["description_new"][0] as String}\n";
       }
     }
     // when an exception occurs while logging in, "error" is not null

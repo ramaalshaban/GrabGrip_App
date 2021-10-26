@@ -25,3 +25,17 @@ String? commentsFieldValidator(String? enteredText) => (enteredText == null ||
         enteredText.trim().length < 10)
     ? 'The comment must be at least 10 characters'
     : null;
+
+String? listingTitleFieldValidator(String? enteredTitle) =>
+    (enteredTitle == null ||
+            enteredTitle.trim().isEmpty ||
+            enteredTitle.trim().length < 5)
+        ? 'The title must be at least 5 characters'
+        : null;
+
+String? listingDescriptionFieldValidator(String? enteredTitle) =>
+    (enteredTitle == null ||
+            enteredTitle.trim().isEmpty ||
+            enteredTitle.trim().length < 5)
+        ? 'The description must be at least 5 characters'
+        : null;

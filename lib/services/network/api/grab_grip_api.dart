@@ -6,6 +6,8 @@ import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_mo
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/geocode_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
+import 'package:grab_grip/features/post_listing/models/post_listing_request/post_listing_request.dart';
+import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:retrofit/http.dart';
@@ -58,9 +60,16 @@ abstract class GrabGripApi {
 
   //region post a listing
   @GET("/api/v1/create")
-  Future<HttpResponse<PricingModelsResponse>> getPricingModels(@Header("Authorization") String token, {
+  Future<HttpResponse<PricingModelsResponse>> getPricingModels(
+    @Header("Authorization") String token, {
     @Query("category") required int categoryId,
   });
+
+  @POST("/api/v1/create")
+  Future<HttpResponse<PostListingResponse>> postListing(
+    @Header("Authorization") String token,
+    @Body() PostListingRequest postListingRequest,
+  );
 
   //endregion
 

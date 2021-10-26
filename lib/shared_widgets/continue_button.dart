@@ -17,6 +17,7 @@ class ContinueButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       constraints: BoxConstraints(minWidth: screenWidth(context)) / 3,
       decoration: BoxDecoration(
         color: AppColors.purple,

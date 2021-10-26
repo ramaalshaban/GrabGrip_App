@@ -50,9 +50,9 @@ class FilterSortProvider extends StateNotifier<FilterSortModel> {
   }
 
   Future<void> getCategories() async {
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+   WidgetsBinding.instance?.addPostFrameCallback((_) {
       httpRequestStateProvider.setLoading();
-    });
+   });
     await NetworkService().getCategories().then((result) {
       result.when((errorMessage) {
         httpRequestStateProvider.setError(errorMessage);

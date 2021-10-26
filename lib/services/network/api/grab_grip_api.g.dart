@@ -161,6 +161,26 @@ class _GrabGripApi implements GrabGripApi {
   }
 
   @override
+  Future<HttpResponse<PostListingResponse>> postListing(
+      token, postListingRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(postListingRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<PostListingResponse>>(Options(
+                method: 'POST',
+                headers: <String, dynamic>{r'Authorization': token},
+                extra: _extra)
+            .compose(_dio.options, '/api/v1/create',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PostListingResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
   Future<HttpResponse<dynamic>> sendContactUsForm(contactUsForm) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

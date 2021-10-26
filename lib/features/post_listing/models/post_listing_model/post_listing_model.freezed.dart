@@ -21,11 +21,19 @@ class _$PostListingModelTearOff {
       [Category? category,
       Category? subcategory,
       int? listingTypeId,
+      String? title,
+      String? description,
+      Gear? postedListing,
+      TempGear? tempPostedListing,
       List<PricingModel> pricingModels = const []]) {
     return _PostListingModel(
       category,
       subcategory,
       listingTypeId,
+      title,
+      description,
+      postedListing,
+      tempPostedListing,
       pricingModels,
     );
   }
@@ -39,6 +47,10 @@ mixin _$PostListingModel {
   Category? get category => throw _privateConstructorUsedError;
   Category? get subcategory => throw _privateConstructorUsedError;
   int? get listingTypeId => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  Gear? get postedListing => throw _privateConstructorUsedError;
+  TempGear? get tempPostedListing => throw _privateConstructorUsedError;
   List<PricingModel> get pricingModels => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -55,10 +67,16 @@ abstract class $PostListingModelCopyWith<$Res> {
       {Category? category,
       Category? subcategory,
       int? listingTypeId,
+      String? title,
+      String? description,
+      Gear? postedListing,
+      TempGear? tempPostedListing,
       List<PricingModel> pricingModels});
 
   $CategoryCopyWith<$Res>? get category;
   $CategoryCopyWith<$Res>? get subcategory;
+  $GearCopyWith<$Res>? get postedListing;
+  $TempGearCopyWith<$Res>? get tempPostedListing;
 }
 
 /// @nodoc
@@ -75,6 +93,10 @@ class _$PostListingModelCopyWithImpl<$Res>
     Object? category = freezed,
     Object? subcategory = freezed,
     Object? listingTypeId = freezed,
+    Object? title = freezed,
+    Object? description = freezed,
+    Object? postedListing = freezed,
+    Object? tempPostedListing = freezed,
     Object? pricingModels = freezed,
   }) {
     return _then(_value.copyWith(
@@ -90,6 +112,22 @@ class _$PostListingModelCopyWithImpl<$Res>
           ? _value.listingTypeId
           : listingTypeId // ignore: cast_nullable_to_non_nullable
               as int?,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      postedListing: postedListing == freezed
+          ? _value.postedListing
+          : postedListing // ignore: cast_nullable_to_non_nullable
+              as Gear?,
+      tempPostedListing: tempPostedListing == freezed
+          ? _value.tempPostedListing
+          : tempPostedListing // ignore: cast_nullable_to_non_nullable
+              as TempGear?,
       pricingModels: pricingModels == freezed
           ? _value.pricingModels
           : pricingModels // ignore: cast_nullable_to_non_nullable
@@ -118,6 +156,28 @@ class _$PostListingModelCopyWithImpl<$Res>
       return _then(_value.copyWith(subcategory: value));
     });
   }
+
+  @override
+  $GearCopyWith<$Res>? get postedListing {
+    if (_value.postedListing == null) {
+      return null;
+    }
+
+    return $GearCopyWith<$Res>(_value.postedListing!, (value) {
+      return _then(_value.copyWith(postedListing: value));
+    });
+  }
+
+  @override
+  $TempGearCopyWith<$Res>? get tempPostedListing {
+    if (_value.tempPostedListing == null) {
+      return null;
+    }
+
+    return $TempGearCopyWith<$Res>(_value.tempPostedListing!, (value) {
+      return _then(_value.copyWith(tempPostedListing: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -131,12 +191,20 @@ abstract class _$PostListingModelCopyWith<$Res>
       {Category? category,
       Category? subcategory,
       int? listingTypeId,
+      String? title,
+      String? description,
+      Gear? postedListing,
+      TempGear? tempPostedListing,
       List<PricingModel> pricingModels});
 
   @override
   $CategoryCopyWith<$Res>? get category;
   @override
   $CategoryCopyWith<$Res>? get subcategory;
+  @override
+  $GearCopyWith<$Res>? get postedListing;
+  @override
+  $TempGearCopyWith<$Res>? get tempPostedListing;
 }
 
 /// @nodoc
@@ -155,6 +223,10 @@ class __$PostListingModelCopyWithImpl<$Res>
     Object? category = freezed,
     Object? subcategory = freezed,
     Object? listingTypeId = freezed,
+    Object? title = freezed,
+    Object? description = freezed,
+    Object? postedListing = freezed,
+    Object? tempPostedListing = freezed,
     Object? pricingModels = freezed,
   }) {
     return _then(_PostListingModel(
@@ -170,6 +242,22 @@ class __$PostListingModelCopyWithImpl<$Res>
           ? _value.listingTypeId
           : listingTypeId // ignore: cast_nullable_to_non_nullable
               as int?,
+      title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      postedListing == freezed
+          ? _value.postedListing
+          : postedListing // ignore: cast_nullable_to_non_nullable
+              as Gear?,
+      tempPostedListing == freezed
+          ? _value.tempPostedListing
+          : tempPostedListing // ignore: cast_nullable_to_non_nullable
+              as TempGear?,
       pricingModels == freezed
           ? _value.pricingModels
           : pricingModels // ignore: cast_nullable_to_non_nullable
@@ -187,6 +275,10 @@ class _$_PostListingModel
       [this.category,
       this.subcategory,
       this.listingTypeId,
+      this.title,
+      this.description,
+      this.postedListing,
+      this.tempPostedListing,
       this.pricingModels = const []]);
 
   @override
@@ -195,13 +287,21 @@ class _$_PostListingModel
   final Category? subcategory;
   @override
   final int? listingTypeId;
+  @override
+  final String? title;
+  @override
+  final String? description;
+  @override
+  final Gear? postedListing;
+  @override
+  final TempGear? tempPostedListing;
   @JsonKey(defaultValue: const [])
   @override
   final List<PricingModel> pricingModels;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostListingModel(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, pricingModels: $pricingModels)';
+    return 'PostListingModel(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, title: $title, description: $description, postedListing: $postedListing, tempPostedListing: $tempPostedListing, pricingModels: $pricingModels)';
   }
 
   @override
@@ -212,6 +312,10 @@ class _$_PostListingModel
       ..add(DiagnosticsProperty('category', category))
       ..add(DiagnosticsProperty('subcategory', subcategory))
       ..add(DiagnosticsProperty('listingTypeId', listingTypeId))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('postedListing', postedListing))
+      ..add(DiagnosticsProperty('tempPostedListing', tempPostedListing))
       ..add(DiagnosticsProperty('pricingModels', pricingModels));
   }
 
@@ -228,6 +332,17 @@ class _$_PostListingModel
             (identical(other.listingTypeId, listingTypeId) ||
                 const DeepCollectionEquality()
                     .equals(other.listingTypeId, listingTypeId)) &&
+            (identical(other.title, title) ||
+                const DeepCollectionEquality().equals(other.title, title)) &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)) &&
+            (identical(other.postedListing, postedListing) ||
+                const DeepCollectionEquality()
+                    .equals(other.postedListing, postedListing)) &&
+            (identical(other.tempPostedListing, tempPostedListing) ||
+                const DeepCollectionEquality()
+                    .equals(other.tempPostedListing, tempPostedListing)) &&
             (identical(other.pricingModels, pricingModels) ||
                 const DeepCollectionEquality()
                     .equals(other.pricingModels, pricingModels)));
@@ -239,6 +354,10 @@ class _$_PostListingModel
       const DeepCollectionEquality().hash(category) ^
       const DeepCollectionEquality().hash(subcategory) ^
       const DeepCollectionEquality().hash(listingTypeId) ^
+      const DeepCollectionEquality().hash(title) ^
+      const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(postedListing) ^
+      const DeepCollectionEquality().hash(tempPostedListing) ^
       const DeepCollectionEquality().hash(pricingModels);
 
   @JsonKey(ignore: true)
@@ -252,6 +371,10 @@ abstract class _PostListingModel implements PostListingModel {
       [Category? category,
       Category? subcategory,
       int? listingTypeId,
+      String? title,
+      String? description,
+      Gear? postedListing,
+      TempGear? tempPostedListing,
       List<PricingModel> pricingModels]) = _$_PostListingModel;
 
   @override
@@ -260,6 +383,14 @@ abstract class _PostListingModel implements PostListingModel {
   Category? get subcategory => throw _privateConstructorUsedError;
   @override
   int? get listingTypeId => throw _privateConstructorUsedError;
+  @override
+  String? get title => throw _privateConstructorUsedError;
+  @override
+  String? get description => throw _privateConstructorUsedError;
+  @override
+  Gear? get postedListing => throw _privateConstructorUsedError;
+  @override
+  TempGear? get tempPostedListing => throw _privateConstructorUsedError;
   @override
   List<PricingModel> get pricingModels => throw _privateConstructorUsedError;
   @override

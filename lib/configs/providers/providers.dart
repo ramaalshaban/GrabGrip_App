@@ -55,7 +55,7 @@ final feedbackProvider = Provider((reference) {
 
 final postListingProvider =
     StateNotifierProvider<PostListingProvider, PostListingModel>((reference) {
-      final provider = reference.watch(httpRequestStateProvider.notifier);
+  final provider = reference.watch(httpRequestStateProvider.notifier);
   return PostListingProvider(provider);
 });
 

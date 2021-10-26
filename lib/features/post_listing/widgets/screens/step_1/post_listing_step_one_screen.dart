@@ -17,10 +17,10 @@ class PostListingStepOneScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
+        height60(),
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            height60(),
             Text(
               AppLocalizations.of(context)!.select_category,
               style: const TextStyle(
@@ -68,24 +68,16 @@ class PostListingStepOneScreen extends StatelessWidget {
                 (selectedCategory.subCategories.isEmpty ||
                     (selectedCategory.subCategories.isNotEmpty &&
                         selectedSubcategory != null));
-            return IgnorePointer(
-              ignoring: !visibilityConditions,
-              child: AnimatedOpacity(
-                opacity: visibilityConditions ? 1.0 : 0.0,
-                duration: duration300Milli,
-                child: ContinueButton(
-                  formKey: null,
-                  buttonText: AppLocalizations.of(context)!.continue_label,
-                  onClickAction: () {
-                    ref(postListingStepProvider.notifier).setStep2();
-                    final selectedCategory = context
-                        .read(postListingProvider.notifier)
-                        .selectedCategory();
-                    context
-                        .read(postListingProvider.notifier)
-                        .getPricingModels(selectedCategory.id);
-                  },
-                ),
+            return AnimatedOpacity(
+              opacity: visibilityConditions ? 1.0 : 0.0,
+              duration: duration300Milli,
+              child: ContinueButton(
+                formKey: null,
+                buttonText: AppLocalizations.of(context)!.continue_label,
+                onClickAction: () {
+                  ref(postListingStepProvider.notifier).setStep2();
+                  context.read(postListingProvider.notifier).getPricingModels();
+                },
               ),
             );
           },

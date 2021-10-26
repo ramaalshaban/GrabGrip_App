@@ -14,7 +14,7 @@ class Gear with _$Gear {
     int id,
     @JsonKey(name: 'category_id') int categoryId,
     String title,
-    @JsonKey(name: 'stock') int stockQuantity,
+    @JsonKey(name: 'stock') int? stockQuantity,
     String description,
     @JsonKey(name: 'short_description') String shortDescription,
     String currency,
@@ -24,7 +24,7 @@ class Gear with _$Gear {
     String? country,
     String thumbnail,
     @JsonKey(name: 'price_formatted') String formattedPrice,
-    @JsonKey(name: 'user') User owner,
+    @JsonKey(name: 'user') User? owner,
   ) = _Gear;
 
   factory Gear.fromJson(Map<String, dynamic> json) => _$GearFromJson(json);

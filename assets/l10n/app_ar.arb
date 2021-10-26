@@ -250,5 +250,21 @@
     "select_subcategory": "اختر صنفاً فرعيّاً",
     "@select_subcategory": {
       "description": "subcategories drop down list title"
+    },
+    "title": "العنوان",
+    "@title": {
+      "description": "the title label"
+    },
+    "description_label": "الوصف",
+    "@description_label": {
+      "description": "the description label"
+    },
+    "create_and_continue": "إنشاء و متابعة",
+    "@create_and_continue": {
+      "description": "create and continue button text"
+    },
+    "post_listing_hint": "يمكنك رفع الصّور و وضع التّسعير الخاصة بك في الخطوة التالية.",
+    "@post_listing_hint": {
+      "description": "text that appears in the step 3 in post a listing flow"
     }
 }

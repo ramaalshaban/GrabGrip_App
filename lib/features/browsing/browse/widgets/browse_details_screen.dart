@@ -107,7 +107,7 @@ class BrowseDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 OwnerWidget(
-                  owner: gear.owner,
+                  owner: gear.owner!,
                 )
               ],
             ),
