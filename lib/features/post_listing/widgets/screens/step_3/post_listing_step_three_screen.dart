@@ -53,7 +53,7 @@ class _PostListingStepThreeScreenState
                   controller: titleTextController,
                   validator: listingTitleFieldValidator,
                   keyboardType: TextInputType.name,
-                  decoration: AppTextFields.contactUsInputDecoration.copyWith(
+                  decoration: contactUsInputDecoration.copyWith(
                     labelText: AppLocalizations.of(context)!.title,
                     contentPadding: const EdgeInsets.fromLTRB(8, 14, 8, 8),
                   ),
@@ -71,7 +71,7 @@ class _PostListingStepThreeScreenState
                   controller: descriptionTextController,
                   validator: listingDescriptionFieldValidator,
                   keyboardType: TextInputType.multiline,
-                  decoration: AppTextFields.contactUsInputDecoration.copyWith(
+                  decoration: contactUsInputDecoration.copyWith(
                     labelText: AppLocalizations.of(context)!.description_label,
                     contentPadding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
                   ),

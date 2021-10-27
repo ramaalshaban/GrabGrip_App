@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       validator: emailFieldValidator,
                       keyboardType: TextInputType.emailAddress,
                       decoration:
-                          AppTextFields.registrationInputDecoration.copyWith(
+                          registrationInputDecoration.copyWith(
                         hintText: AppLocalizations.of(context)!.email,
                       ),
                       cursorColor: AppColors.purple,
@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       cursorColor: AppColors.purple,
                       obscureText: true,
                       decoration:
-                          AppTextFields.registrationInputDecoration.copyWith(
+                          registrationInputDecoration.copyWith(
                         hintText: AppLocalizations.of(context)!.password,
                       ),
                     ),

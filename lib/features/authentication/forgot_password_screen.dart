@@ -44,7 +44,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   children: <Widget>[
                     TextFormField(
                       keyboardType: TextInputType.emailAddress,
-                      decoration: AppTextFields.registrationInputDecoration
+                      decoration: registrationInputDecoration
                           .copyWith(hintText: "Email"),
                       cursorColor: AppColors.purple,
                     ),

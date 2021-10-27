@@ -68,7 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       validator: nameFieldValidator,
                       keyboardType: TextInputType.name,
                       decoration:
-                          AppTextFields.registrationInputDecoration.copyWith(
+                          registrationInputDecoration.copyWith(
                         hintText: AppLocalizations.of(context)!.name,
                       ),
                       cursorColor: AppColors.purple,
@@ -79,7 +79,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       validator: emailFieldValidator,
                       keyboardType: TextInputType.emailAddress,
                       decoration:
-                          AppTextFields.registrationInputDecoration.copyWith(
+                          registrationInputDecoration.copyWith(
                         hintText: AppLocalizations.of(context)!.email,
                       ),
                       cursorColor: AppColors.purple,
@@ -91,7 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       cursorColor: AppColors.purple,
                       obscureText: true,
                       decoration:
-                          AppTextFields.registrationInputDecoration.copyWith(
+                          registrationInputDecoration.copyWith(
                         hintText: AppLocalizations.of(context)!.password,
                       ),
                     ),
@@ -102,7 +102,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       cursorColor: AppColors.purple,
                       obscureText: true,
                       decoration:
-                          AppTextFields.registrationInputDecoration.copyWith(
+                          registrationInputDecoration.copyWith(
                         hintText:
                             AppLocalizations.of(context)!.password_confirmation,
                       ),
@@ -221,8 +221,8 @@ class RegisterButton extends StatelessWidget {
       {Key? key,
       required this.formKey,
       required this.watch,
-      required this.authModel})
-      : super(key: key);
+    required this.authModel,
+  }) : super(key: key);
   final GlobalKey<FormState> formKey;
   final AuthModel authModel;
   final ScopedReader watch;

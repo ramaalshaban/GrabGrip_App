@@ -59,7 +59,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     onChanged: (text) => name = text,
                     validator: nameFieldValidator,
                     keyboardType: TextInputType.name,
-                    decoration: AppTextFields.contactUsInputDecoration.copyWith(
+                    decoration: contactUsInputDecoration.copyWith(
                       labelText: AppLocalizations.of(context)!.name,
                       contentPadding: const EdgeInsets.fromLTRB(8, 14, 8, 8),
                     ),
@@ -70,7 +70,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     onChanged: (text) => email = text,
                     validator: emailFieldValidator,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: AppTextFields.contactUsInputDecoration.copyWith(
+                    decoration: contactUsInputDecoration.copyWith(
                       labelText: AppLocalizations.of(context)!.email,
                       contentPadding: const EdgeInsets.fromLTRB(8, 14, 8, 8),
                     ),
@@ -83,7 +83,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     onChanged: (text) => comments = text,
                     validator: commentsFieldValidator,
                     keyboardType: TextInputType.multiline,
-                    decoration: AppTextFields.contactUsInputDecoration.copyWith(
+                    decoration: contactUsInputDecoration.copyWith(
                       labelText: "Your comments",
                       contentPadding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
                     ),

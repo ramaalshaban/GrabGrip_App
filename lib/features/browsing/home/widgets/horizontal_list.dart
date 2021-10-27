@@ -26,7 +26,7 @@ class HorizontalList extends StatelessWidget {
           ),
           height12(),
           SizedBox(
-            height: screenHeightWithoutExtras(context) *0.3,
+            height: screenHeightWithoutExtras(context) * 0.3,
             child: ListView.builder(
               itemCount: data.length,
               shrinkWrap: true,

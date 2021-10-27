@@ -15,9 +15,7 @@ class GearsMap extends StatelessWidget {
   final BrowseModel browseData;
 
   CameraPosition _getInitialCameraPosition(Gear gear) {
-    final initLat = double.parse(gear.lat);
-    final initLng = double.parse(gear.lng);
-    final initialLatLng = LatLng(initLat, initLng);
+    final initialLatLng = LatLng(gear.lat, gear.lng);
     return CameraPosition(target: initialLatLng, zoom: 11);
   }
 
@@ -54,11 +52,9 @@ class GearsMap extends StatelessWidget {
     return List.generate(
       gearsCount,
       (index) {
-        final doubleLat = double.parse(gears[index].lat);
-        final doubleLng = double.parse(gears[index].lng);
         final latLng = LatLng(
-          doubleLat,
-          doubleLng,
+          gears[index].lat,
+          gears[index].lng,
         );
         return Marker(
           icon: BitmapDescriptor.defaultMarkerWithHue(256),

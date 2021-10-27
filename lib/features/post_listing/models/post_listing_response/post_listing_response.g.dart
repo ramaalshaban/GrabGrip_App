@@ -9,7 +9,7 @@ part of 'post_listing_response.dart';
 _$_PostListingResponse _$$_PostListingResponseFromJson(
         Map<String, dynamic> json) =>
     _$_PostListingResponse(
-      TempGear.fromJson(json['listing'] as Map<String, dynamic>),
+      Gear.fromJson(json['listing'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_PostListingResponseToJson(

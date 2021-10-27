@@ -30,8 +30,8 @@ class _$GearTearOff {
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
-      String lat,
-      String lng,
+      double lat,
+      double lng,
       String? city,
       String? country,
       String thumbnail,
@@ -77,8 +77,8 @@ mixin _$Gear {
   @JsonKey(name: 'short_description')
   String get shortDescription => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
-  String get lat => throw _privateConstructorUsedError;
-  String get lng => throw _privateConstructorUsedError;
+  double get lat => throw _privateConstructorUsedError;
+  double get lng => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
   String? get country => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
@@ -105,8 +105,8 @@ abstract class $GearCopyWith<$Res> {
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
-      String lat,
-      String lng,
+      double lat,
+      double lng,
       String? city,
       String? country,
       String thumbnail,
@@ -178,11 +178,11 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
       lat: lat == freezed
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       lng: lng == freezed
           ? _value.lng
           : lng // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       city: city == freezed
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
@@ -232,8 +232,8 @@ abstract class _$GearCopyWith<$Res> implements $GearCopyWith<$Res> {
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
-      String lat,
-      String lng,
+      double lat,
+      double lng,
       String? city,
       String? country,
       String thumbnail,
@@ -307,11 +307,11 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
       lat == freezed
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       lng == freezed
           ? _value.lng
           : lng // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       city == freezed
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
@@ -378,9 +378,9 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
   @override
   final String currency;
   @override
-  final String lat;
+  final double lat;
   @override
-  final String lng;
+  final double lng;
   @override
   final String? city;
   @override
@@ -505,8 +505,8 @@ abstract class _Gear implements Gear {
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
-      String lat,
-      String lng,
+      double lat,
+      double lng,
       String? city,
       String? country,
       String thumbnail,
@@ -535,9 +535,9 @@ abstract class _Gear implements Gear {
   @override
   String get currency => throw _privateConstructorUsedError;
   @override
-  String get lat => throw _privateConstructorUsedError;
+  double get lat => throw _privateConstructorUsedError;
   @override
-  String get lng => throw _privateConstructorUsedError;
+  double get lng => throw _privateConstructorUsedError;
   @override
   String? get city => throw _privateConstructorUsedError;
   @override

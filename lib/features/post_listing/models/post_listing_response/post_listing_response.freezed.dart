@@ -21,7 +21,7 @@ PostListingResponse _$PostListingResponseFromJson(Map<String, dynamic> json) {
 class _$PostListingResponseTearOff {
   const _$PostListingResponseTearOff();
 
-  _PostListingResponse call(@JsonKey(name: "listing") TempGear postedListing) {
+  _PostListingResponse call(@JsonKey(name: "listing") Gear postedListing) {
     return _PostListingResponse(
       postedListing,
     );
@@ -38,7 +38,7 @@ const $PostListingResponse = _$PostListingResponseTearOff();
 /// @nodoc
 mixin _$PostListingResponse {
   @JsonKey(name: "listing")
-  TempGear get postedListing => throw _privateConstructorUsedError;
+  Gear get postedListing => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,9 +51,9 @@ abstract class $PostListingResponseCopyWith<$Res> {
   factory $PostListingResponseCopyWith(
           PostListingResponse value, $Res Function(PostListingResponse) then) =
       _$PostListingResponseCopyWithImpl<$Res>;
-  $Res call({@JsonKey(name: "listing") TempGear postedListing});
+  $Res call({@JsonKey(name: "listing") Gear postedListing});
 
-  $TempGearCopyWith<$Res> get postedListing;
+  $GearCopyWith<$Res> get postedListing;
 }
 
 /// @nodoc
@@ -73,13 +73,13 @@ class _$PostListingResponseCopyWithImpl<$Res>
       postedListing: postedListing == freezed
           ? _value.postedListing
           : postedListing // ignore: cast_nullable_to_non_nullable
-              as TempGear,
+              as Gear,
     ));
   }
 
   @override
-  $TempGearCopyWith<$Res> get postedListing {
-    return $TempGearCopyWith<$Res>(_value.postedListing, (value) {
+  $GearCopyWith<$Res> get postedListing {
+    return $GearCopyWith<$Res>(_value.postedListing, (value) {
       return _then(_value.copyWith(postedListing: value));
     });
   }
@@ -92,10 +92,10 @@ abstract class _$PostListingResponseCopyWith<$Res>
           $Res Function(_PostListingResponse) then) =
       __$PostListingResponseCopyWithImpl<$Res>;
   @override
-  $Res call({@JsonKey(name: "listing") TempGear postedListing});
+  $Res call({@JsonKey(name: "listing") Gear postedListing});
 
   @override
-  $TempGearCopyWith<$Res> get postedListing;
+  $GearCopyWith<$Res> get postedListing;
 }
 
 /// @nodoc
@@ -117,7 +117,7 @@ class __$PostListingResponseCopyWithImpl<$Res>
       postedListing == freezed
           ? _value.postedListing
           : postedListing // ignore: cast_nullable_to_non_nullable
-              as TempGear,
+              as Gear,
     ));
   }
 }
@@ -134,7 +134,7 @@ class _$_PostListingResponse
 
   @override
   @JsonKey(name: "listing")
-  final TempGear postedListing;
+  final Gear postedListing;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -176,15 +176,14 @@ class _$_PostListingResponse
 
 abstract class _PostListingResponse implements PostListingResponse {
   const factory _PostListingResponse(
-          @JsonKey(name: "listing") TempGear postedListing) =
-      _$_PostListingResponse;
+      @JsonKey(name: "listing") Gear postedListing) = _$_PostListingResponse;
 
   factory _PostListingResponse.fromJson(Map<String, dynamic> json) =
       _$_PostListingResponse.fromJson;
 
   @override
   @JsonKey(name: "listing")
-  TempGear get postedListing => throw _privateConstructorUsedError;
+  Gear get postedListing => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PostListingResponseCopyWith<_PostListingResponse> get copyWith =>

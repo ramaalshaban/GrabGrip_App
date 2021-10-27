@@ -24,7 +24,8 @@ class _$PostListingModelTearOff {
       String? title,
       String? description,
       Gear? postedListing,
-      TempGear? tempPostedListing,
+      List<String> tags = const [],
+      String? listingEndDate,
       List<PricingModel> pricingModels = const []]) {
     return _PostListingModel(
       category,
@@ -33,7 +34,8 @@ class _$PostListingModelTearOff {
       title,
       description,
       postedListing,
-      tempPostedListing,
+      tags,
+      listingEndDate,
       pricingModels,
     );
   }
@@ -50,7 +52,8 @@ mixin _$PostListingModel {
   String? get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   Gear? get postedListing => throw _privateConstructorUsedError;
-  TempGear? get tempPostedListing => throw _privateConstructorUsedError;
+  List<String> get tags => throw _privateConstructorUsedError;
+  String? get listingEndDate => throw _privateConstructorUsedError;
   List<PricingModel> get pricingModels => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -70,13 +73,13 @@ abstract class $PostListingModelCopyWith<$Res> {
       String? title,
       String? description,
       Gear? postedListing,
-      TempGear? tempPostedListing,
+      List<String> tags,
+      String? listingEndDate,
       List<PricingModel> pricingModels});
 
   $CategoryCopyWith<$Res>? get category;
   $CategoryCopyWith<$Res>? get subcategory;
   $GearCopyWith<$Res>? get postedListing;
-  $TempGearCopyWith<$Res>? get tempPostedListing;
 }
 
 /// @nodoc
@@ -96,7 +99,8 @@ class _$PostListingModelCopyWithImpl<$Res>
     Object? title = freezed,
     Object? description = freezed,
     Object? postedListing = freezed,
-    Object? tempPostedListing = freezed,
+    Object? tags = freezed,
+    Object? listingEndDate = freezed,
     Object? pricingModels = freezed,
   }) {
     return _then(_value.copyWith(
@@ -124,10 +128,14 @@ class _$PostListingModelCopyWithImpl<$Res>
           ? _value.postedListing
           : postedListing // ignore: cast_nullable_to_non_nullable
               as Gear?,
-      tempPostedListing: tempPostedListing == freezed
-          ? _value.tempPostedListing
-          : tempPostedListing // ignore: cast_nullable_to_non_nullable
-              as TempGear?,
+      tags: tags == freezed
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      listingEndDate: listingEndDate == freezed
+          ? _value.listingEndDate
+          : listingEndDate // ignore: cast_nullable_to_non_nullable
+              as String?,
       pricingModels: pricingModels == freezed
           ? _value.pricingModels
           : pricingModels // ignore: cast_nullable_to_non_nullable
@@ -167,17 +175,6 @@ class _$PostListingModelCopyWithImpl<$Res>
       return _then(_value.copyWith(postedListing: value));
     });
   }
-
-  @override
-  $TempGearCopyWith<$Res>? get tempPostedListing {
-    if (_value.tempPostedListing == null) {
-      return null;
-    }
-
-    return $TempGearCopyWith<$Res>(_value.tempPostedListing!, (value) {
-      return _then(_value.copyWith(tempPostedListing: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -194,7 +191,8 @@ abstract class _$PostListingModelCopyWith<$Res>
       String? title,
       String? description,
       Gear? postedListing,
-      TempGear? tempPostedListing,
+      List<String> tags,
+      String? listingEndDate,
       List<PricingModel> pricingModels});
 
   @override
@@ -203,8 +201,6 @@ abstract class _$PostListingModelCopyWith<$Res>
   $CategoryCopyWith<$Res>? get subcategory;
   @override
   $GearCopyWith<$Res>? get postedListing;
-  @override
-  $TempGearCopyWith<$Res>? get tempPostedListing;
 }
 
 /// @nodoc
@@ -226,7 +222,8 @@ class __$PostListingModelCopyWithImpl<$Res>
     Object? title = freezed,
     Object? description = freezed,
     Object? postedListing = freezed,
-    Object? tempPostedListing = freezed,
+    Object? tags = freezed,
+    Object? listingEndDate = freezed,
     Object? pricingModels = freezed,
   }) {
     return _then(_PostListingModel(
@@ -254,10 +251,14 @@ class __$PostListingModelCopyWithImpl<$Res>
           ? _value.postedListing
           : postedListing // ignore: cast_nullable_to_non_nullable
               as Gear?,
-      tempPostedListing == freezed
-          ? _value.tempPostedListing
-          : tempPostedListing // ignore: cast_nullable_to_non_nullable
-              as TempGear?,
+      tags == freezed
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      listingEndDate == freezed
+          ? _value.listingEndDate
+          : listingEndDate // ignore: cast_nullable_to_non_nullable
+              as String?,
       pricingModels == freezed
           ? _value.pricingModels
           : pricingModels // ignore: cast_nullable_to_non_nullable
@@ -278,7 +279,8 @@ class _$_PostListingModel
       this.title,
       this.description,
       this.postedListing,
-      this.tempPostedListing,
+      this.tags = const [],
+      this.listingEndDate,
       this.pricingModels = const []]);
 
   @override
@@ -293,15 +295,18 @@ class _$_PostListingModel
   final String? description;
   @override
   final Gear? postedListing;
+  @JsonKey(defaultValue: const [])
   @override
-  final TempGear? tempPostedListing;
+  final List<String> tags;
+  @override
+  final String? listingEndDate;
   @JsonKey(defaultValue: const [])
   @override
   final List<PricingModel> pricingModels;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostListingModel(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, title: $title, description: $description, postedListing: $postedListing, tempPostedListing: $tempPostedListing, pricingModels: $pricingModels)';
+    return 'PostListingModel(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, title: $title, description: $description, postedListing: $postedListing, tags: $tags, listingEndDate: $listingEndDate, pricingModels: $pricingModels)';
   }
 
   @override
@@ -315,7 +320,8 @@ class _$_PostListingModel
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('postedListing', postedListing))
-      ..add(DiagnosticsProperty('tempPostedListing', tempPostedListing))
+      ..add(DiagnosticsProperty('tags', tags))
+      ..add(DiagnosticsProperty('listingEndDate', listingEndDate))
       ..add(DiagnosticsProperty('pricingModels', pricingModels));
   }
 
@@ -340,9 +346,11 @@ class _$_PostListingModel
             (identical(other.postedListing, postedListing) ||
                 const DeepCollectionEquality()
                     .equals(other.postedListing, postedListing)) &&
-            (identical(other.tempPostedListing, tempPostedListing) ||
+            (identical(other.tags, tags) ||
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.listingEndDate, listingEndDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.tempPostedListing, tempPostedListing)) &&
+                    .equals(other.listingEndDate, listingEndDate)) &&
             (identical(other.pricingModels, pricingModels) ||
                 const DeepCollectionEquality()
                     .equals(other.pricingModels, pricingModels)));
@@ -357,7 +365,8 @@ class _$_PostListingModel
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(postedListing) ^
-      const DeepCollectionEquality().hash(tempPostedListing) ^
+      const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(listingEndDate) ^
       const DeepCollectionEquality().hash(pricingModels);
 
   @JsonKey(ignore: true)
@@ -374,7 +383,8 @@ abstract class _PostListingModel implements PostListingModel {
       String? title,
       String? description,
       Gear? postedListing,
-      TempGear? tempPostedListing,
+      List<String> tags,
+      String? listingEndDate,
       List<PricingModel> pricingModels]) = _$_PostListingModel;
 
   @override
@@ -390,7 +400,9 @@ abstract class _PostListingModel implements PostListingModel {
   @override
   Gear? get postedListing => throw _privateConstructorUsedError;
   @override
-  TempGear? get tempPostedListing => throw _privateConstructorUsedError;
+  List<String> get tags => throw _privateConstructorUsedError;
+  @override
+  String? get listingEndDate => throw _privateConstructorUsedError;
   @override
   List<PricingModel> get pricingModels => throw _privateConstructorUsedError;
   @override

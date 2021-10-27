@@ -1,13 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/features/browsing/browse/models/category/category.dart';
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
-import 'package:grab_grip/features/browsing/browse/models/gear/temp_gear/temp_gear.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_model/post_listing_model.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_request/post_listing_request.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_model/pricing_model.dart';
 import 'package:grab_grip/services/network/network_service.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
 import 'package:grab_grip/services/storage/app_shared_pereferences.dart';
+import 'package:grab_grip/utils/functions.dart';
 
 class PostListingProvider extends StateNotifier<PostListingModel> {
   HttpRequestStateProvider httpRequestStateProvider;
@@ -54,10 +54,17 @@ class PostListingProvider extends StateNotifier<PostListingModel> {
 
   String? get description => state.description;
 
-  set tempPostedListing(TempGear? tempPostedListing) =>
-      state = state.copyWith(tempPostedListing: tempPostedListing);
+  List<String> get tags => state.tags;
 
-  TempGear? get tempPostedListing => state.tempPostedListing;
+  set tags(List<String> tags) => state = state.copyWith(tags: tags);
+
+  set listingEndDate(String? listingEndDate) {
+    final formattedEndDate = formatDate(listingEndDate);
+    print("the time before setting it to the state is $formattedEndDate");
+    state = state.copyWith(listingEndDate: formattedEndDate);
+  }
+
+  String? get listingEndDate => state.listingEndDate;
 
 //endregion
 
@@ -99,11 +106,11 @@ class PostListingProvider extends StateNotifier<PostListingModel> {
         .then((result) {
       result.when((errorMessage) {
         httpRequestStateProvider.setError(errorMessage);
-        tempPostedListing = null;
+        postedListing = null;
       }, (response) {
         httpRequestStateProvider
             .setSuccess("Your listing has been created as draft successfully");
-        tempPostedListing = response.postedListing;
+        postedListing = response.postedListing;
       });
     });
   }

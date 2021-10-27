@@ -99,8 +99,8 @@ class BrowseDetailsScreen extends StatelessWidget {
                         icon: BitmapDescriptor.defaultMarkerWithHue(256),
                         markerId: MarkerId("${gear.id}"),
                         position: LatLng(
-                          double.parse(gear.lat),
-                          double.parse(gear.lng),
+                          gear.lat,
+                          gear.lng,
                         ),
                       ),
                     },
@@ -118,9 +118,7 @@ class BrowseDetailsScreen extends StatelessWidget {
   }
 
   CameraPosition _getInitialCameraPosition(Gear gear) {
-    final initLat = double.parse(gear.lat);
-    final initLng = double.parse(gear.lng);
-    final initialLatLng = LatLng(initLat, initLng);
+    final initialLatLng = LatLng(gear.lat, gear.lng);
     return CameraPosition(target: initialLatLng, zoom: 14);
   }
 }
