@@ -3,7 +3,6 @@ import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_mo
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/browsing/filter/providers/filter_sort_provider.dart';
 import 'package:grab_grip/services/network/network_service.dart';
-import 'package:grab_grip/utils/functions.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class BrowseProvider extends StateNotifier<BrowseModel> {
@@ -38,27 +37,7 @@ class BrowseProvider extends StateNotifier<BrowseModel> {
     );
   }
 
-  Future<void> getLocationBounds(String placeId) async {
-    await NetworkService().getBoundsByPlaceId(placeId: placeId).then(
-      (result) {
-        result.when(
-          (errorMessage) {
-            BrowseProvider.pagingController.error = errorMessage;
-            _filterSortProvider.bounds = null;
-          },
-          (response) {
-            if (response.status == "OK") {
-              final bounds =
-                  formatLocationBounds(response.results.first.geometry);
-              _filterSortProvider.bounds = bounds;
-            } else {
-              _filterSortProvider.bounds = null;
-            }
-          },
-        );
-      },
-    );
-  }
+
 
   @override
   void dispose() {

@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/authentication/utils/text_field_validators.dart';
-import 'package:grab_grip/shared_widgets/continue_button.dart';
+import 'package:grab_grip/shared/continue_button.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text_fields.dart';
 import 'package:grab_grip/utils/sized_box.dart';
@@ -53,7 +53,7 @@ class _PostListingStepThreeScreenState
                   controller: titleTextController,
                   validator: listingTitleFieldValidator,
                   keyboardType: TextInputType.name,
-                  decoration: contactUsInputDecoration.copyWith(
+                  decoration: standardInputDecoration.copyWith(
                     labelText: AppLocalizations.of(context)!.title,
                     contentPadding: const EdgeInsets.fromLTRB(8, 14, 8, 8),
                   ),
@@ -71,7 +71,7 @@ class _PostListingStepThreeScreenState
                   controller: descriptionTextController,
                   validator: listingDescriptionFieldValidator,
                   keyboardType: TextInputType.multiline,
-                  decoration: contactUsInputDecoration.copyWith(
+                  decoration: standardInputDecoration.copyWith(
                     labelText: AppLocalizations.of(context)!.description_label,
                     contentPadding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
                   ),

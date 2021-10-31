@@ -1,5 +1,7 @@
+import 'package:country_code_picker/country_code.dart';
 import 'package:flutter/foundation.dart' hide Category;
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/features/browsing/browse/models/category/category.dart';
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_model/pricing_model.dart';
@@ -18,5 +20,10 @@ class PostListingModel with _$PostListingModel {
     @Default([]) List<String> tags,
     String? listingEndDate,
     @Default([]) List<PricingModel> pricingModels,
+    String? place,
+    LatLng? latLng,
+    CountryCode? country,
+    String? city,
+    String? region,
   ]) = _PostListingModel;
 }

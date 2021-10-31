@@ -20,7 +20,7 @@ _$_Gear _$$_GearFromJson(Map<String, dynamic> json) => _$_Gear(
       json['city'] as String?,
       json['country'] as String?,
       json['thumbnail'] as String,
-      json['price_formatted'] as String,
+      json['price_formatted'] as String?,
       json['user'] == null
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),

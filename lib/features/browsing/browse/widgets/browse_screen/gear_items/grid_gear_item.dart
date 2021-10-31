@@ -75,7 +75,7 @@ class GridGearItem extends StatelessWidget {
                         style: AppTextStyles.subtitle,
                       ),
                       Text(
-                        gear.formattedPrice,
+                        gear.formattedPrice??"",
                         maxLines: 2,
                         style: AppTextStyles.price,
                       ),

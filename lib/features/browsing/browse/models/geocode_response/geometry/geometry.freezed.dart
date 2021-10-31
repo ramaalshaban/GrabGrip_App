@@ -21,8 +21,9 @@ Geometry _$GeometryFromJson(Map<String, dynamic> json) {
 class _$GeometryTearOff {
   const _$GeometryTearOff();
 
-  _Geometry call(Viewport viewport) {
+  _Geometry call(@JsonKey(name: "location") LatLng latLng, Viewport viewport) {
     return _Geometry(
+      latLng,
       viewport,
     );
   }
@@ -37,6 +38,8 @@ const $Geometry = _$GeometryTearOff();
 
 /// @nodoc
 mixin _$Geometry {
+  @JsonKey(name: "location")
+  LatLng get latLng => throw _privateConstructorUsedError;
   Viewport get viewport => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,8 +52,9 @@ mixin _$Geometry {
 abstract class $GeometryCopyWith<$Res> {
   factory $GeometryCopyWith(Geometry value, $Res Function(Geometry) then) =
       _$GeometryCopyWithImpl<$Res>;
-  $Res call({Viewport viewport});
+  $Res call({@JsonKey(name: "location") LatLng latLng, Viewport viewport});
 
+  $LatLngCopyWith<$Res> get latLng;
   $ViewportCopyWith<$Res> get viewport;
 }
 
@@ -64,14 +68,26 @@ class _$GeometryCopyWithImpl<$Res> implements $GeometryCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? latLng = freezed,
     Object? viewport = freezed,
   }) {
     return _then(_value.copyWith(
+      latLng: latLng == freezed
+          ? _value.latLng
+          : latLng // ignore: cast_nullable_to_non_nullable
+              as LatLng,
       viewport: viewport == freezed
           ? _value.viewport
           : viewport // ignore: cast_nullable_to_non_nullable
               as Viewport,
     ));
+  }
+
+  @override
+  $LatLngCopyWith<$Res> get latLng {
+    return $LatLngCopyWith<$Res>(_value.latLng, (value) {
+      return _then(_value.copyWith(latLng: value));
+    });
   }
 
   @override
@@ -87,8 +103,10 @@ abstract class _$GeometryCopyWith<$Res> implements $GeometryCopyWith<$Res> {
   factory _$GeometryCopyWith(_Geometry value, $Res Function(_Geometry) then) =
       __$GeometryCopyWithImpl<$Res>;
   @override
-  $Res call({Viewport viewport});
+  $Res call({@JsonKey(name: "location") LatLng latLng, Viewport viewport});
 
+  @override
+  $LatLngCopyWith<$Res> get latLng;
   @override
   $ViewportCopyWith<$Res> get viewport;
 }
@@ -104,9 +122,14 @@ class __$GeometryCopyWithImpl<$Res> extends _$GeometryCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? latLng = freezed,
     Object? viewport = freezed,
   }) {
     return _then(_Geometry(
+      latLng == freezed
+          ? _value.latLng
+          : latLng // ignore: cast_nullable_to_non_nullable
+              as LatLng,
       viewport == freezed
           ? _value.viewport
           : viewport // ignore: cast_nullable_to_non_nullable
@@ -118,17 +141,20 @@ class __$GeometryCopyWithImpl<$Res> extends _$GeometryCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Geometry with DiagnosticableTreeMixin implements _Geometry {
-  const _$_Geometry(this.viewport);
+  const _$_Geometry(@JsonKey(name: "location") this.latLng, this.viewport);
 
   factory _$_Geometry.fromJson(Map<String, dynamic> json) =>
       _$$_GeometryFromJson(json);
 
   @override
+  @JsonKey(name: "location")
+  final LatLng latLng;
+  @override
   final Viewport viewport;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Geometry(viewport: $viewport)';
+    return 'Geometry(latLng: $latLng, viewport: $viewport)';
   }
 
   @override
@@ -136,6 +162,7 @@ class _$_Geometry with DiagnosticableTreeMixin implements _Geometry {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Geometry'))
+      ..add(DiagnosticsProperty('latLng', latLng))
       ..add(DiagnosticsProperty('viewport', viewport));
   }
 
@@ -143,6 +170,8 @@ class _$_Geometry with DiagnosticableTreeMixin implements _Geometry {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Geometry &&
+            (identical(other.latLng, latLng) ||
+                const DeepCollectionEquality().equals(other.latLng, latLng)) &&
             (identical(other.viewport, viewport) ||
                 const DeepCollectionEquality()
                     .equals(other.viewport, viewport)));
@@ -150,7 +179,9 @@ class _$_Geometry with DiagnosticableTreeMixin implements _Geometry {
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(viewport);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(latLng) ^
+      const DeepCollectionEquality().hash(viewport);
 
   @JsonKey(ignore: true)
   @override
@@ -164,10 +195,15 @@ class _$_Geometry with DiagnosticableTreeMixin implements _Geometry {
 }
 
 abstract class _Geometry implements Geometry {
-  const factory _Geometry(Viewport viewport) = _$_Geometry;
+  const factory _Geometry(
+          @JsonKey(name: "location") LatLng latLng, Viewport viewport) =
+      _$_Geometry;
 
   factory _Geometry.fromJson(Map<String, dynamic> json) = _$_Geometry.fromJson;
 
+  @override
+  @JsonKey(name: "location")
+  LatLng get latLng => throw _privateConstructorUsedError;
   @override
   Viewport get viewport => throw _privateConstructorUsedError;
   @override

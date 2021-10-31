@@ -1,4 +1,4 @@
-import 'package:auto_route/src/router/auto_router_x.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -59,7 +59,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     onChanged: (text) => name = text,
                     validator: nameFieldValidator,
                     keyboardType: TextInputType.name,
-                    decoration: contactUsInputDecoration.copyWith(
+                    decoration: standardInputDecoration.copyWith(
                       labelText: AppLocalizations.of(context)!.name,
                       contentPadding: const EdgeInsets.fromLTRB(8, 14, 8, 8),
                     ),
@@ -70,7 +70,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     onChanged: (text) => email = text,
                     validator: emailFieldValidator,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: contactUsInputDecoration.copyWith(
+                    decoration: standardInputDecoration.copyWith(
                       labelText: AppLocalizations.of(context)!.email,
                       contentPadding: const EdgeInsets.fromLTRB(8, 14, 8, 8),
                     ),
@@ -83,7 +83,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     onChanged: (text) => comments = text,
                     validator: commentsFieldValidator,
                     keyboardType: TextInputType.multiline,
-                    decoration: contactUsInputDecoration.copyWith(
+                    decoration: standardInputDecoration.copyWith(
                       labelText: "Your comments",
                       contentPadding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
                     ),
@@ -143,9 +143,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
 }
 
 class SubmitButton extends StatelessWidget {
-  const SubmitButton(
-      {Key? key, required this.formKey, required this.contactUsFormModel})
-      : super(key: key);
+  const SubmitButton({
+    Key? key,
+    required this.formKey,
+    required this.contactUsFormModel,
+  }) : super(key: key);
 
   final GlobalKey<FormState> formKey;
   final ContactUsForm contactUsFormModel;

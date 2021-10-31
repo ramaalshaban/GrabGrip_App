@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_geocoding/google_geocoding.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_place/google_place.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/browsing/browse/providers/browse_provider.dart';
@@ -10,7 +13,9 @@ import 'package:grab_grip/utils/constants.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 class FloatingPlacesSearchBar extends StatefulWidget {
-  const FloatingPlacesSearchBar({Key? key}) : super(key: key);
+  const FloatingPlacesSearchBar([this.mapController]);
+
+  final Completer<GoogleMapController>? mapController;
 
   @override
   State<FloatingPlacesSearchBar> createState() =>
@@ -40,8 +45,18 @@ class _FloatingPlacesSearchBarState extends State<FloatingPlacesSearchBar> {
           hintStyle: const TextStyle(
             color: AppColors.lightPurple,
           ),
-          hint: watch(filterAndSortProvider.notifier).place ??
-              AppLocalizations.of(context)!.search_by_gear_location_placeholder,
+          hint: watch(locationPickerStateProvider).when(
+            browsing: () {
+              watch(filterAndSortProvider.notifier).place ??
+                  AppLocalizations.of(context)!
+                      .search_by_gear_location_placeholder;
+            },
+            posting: () {
+              watch(postListingProvider.notifier).place ??
+                  "Search for places...";
+            },
+            editingProfile: () {},
+          ),
           scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
           transitionDuration: duration300Milli,
           transitionCurve: Curves.easeInOut,
@@ -61,34 +76,70 @@ class _FloatingPlacesSearchBarState extends State<FloatingPlacesSearchBar> {
           },
           transition: CircularFloatingSearchBarTransition(),
           title: Text(
-            watch(filterAndSortProvider.notifier).place ??
-                AppLocalizations.of(context)!
-                    .search_by_gear_location_placeholder,
+            watch(locationPickerStateProvider).when(
+              browsing: () {
+                return watch(filterAndSortProvider.notifier).place ??
+                    AppLocalizations.of(context)!
+                        .search_by_gear_location_placeholder;
+              },
+              posting: () {
+                return watch(postListingProvider.notifier).place ??
+                    "Search for places...";
+              },
+              editingProfile: () {
+                return "";
+              },
+            ),
             style: TextStyle(
-              color: watch(filterAndSortProvider.notifier).place == null
-                  ? AppColors.lightPurple
-                  : AppColors.purple,
+              color: watch(locationPickerStateProvider).when(
+                browsing: () {
+                  return watch(filterAndSortProvider.notifier).place == null
+                      ? AppColors.lightPurple
+                      : AppColors.purple;
+                },
+                posting: () {
+                  return watch(postListingProvider.notifier).place == null
+                      ? AppColors.lightPurple
+                      : AppColors.purple;
+                },
+                editingProfile: () {
+                  return AppColors.lightPurple;
+                },
+              ),
             ),
           ),
           actions: [
             AnimatedOpacity(
-              opacity: watch(filterAndSortProvider.notifier).place != null
-                  ? 1.0
-                  : 0.0,
+              opacity: watch(locationPickerStateProvider).when(
+                browsing: () =>
+                    watch(filterAndSortProvider.notifier).place != null
+                        ? 1.0
+                        : 0.0,
+                posting: () => watch(postListingProvider.notifier).place != null
+                    ? 1.0
+                    : 0.0,
+                editingProfile: () {
+                  return 1.0;
+                },
+              ),
               duration: duration300Milli,
-              child: FloatingSearchBarAction(
-                child: CircularButton(
-                  icon: const Icon(
-                    Icons.highlight_remove,
-                    color: AppColors.purple,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      watch(filterAndSortProvider.notifier).resetPlace();
-                      BrowseProvider.pagingController.refresh();
-                    });
-                  },
-                ),
+              child: watch(locationPickerStateProvider).whenOrNull(
+                browsing: () {
+                  return FloatingSearchBarAction(
+                    child: CircularButton(
+                      icon: const Icon(
+                        Icons.highlight_remove,
+                        color: AppColors.purple,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          watch(filterAndSortProvider.notifier).resetPlace();
+                          BrowseProvider.pagingController.refresh();
+                        });
+                      },
+                    ),
+                  );
+                },
               ),
             ),
             FloatingSearchBarAction.searchToClear(
@@ -104,11 +155,29 @@ class _FloatingPlacesSearchBarState extends State<FloatingPlacesSearchBar> {
                   ...List.generate(
                     placePredictions.length,
                     (index) => ListTile(
-                      title: Text(placePredictions[index].description ?? ""),
+                      title: Text(
+                        placePredictions[index].description ?? "",
+                      ),
                       onTap: () {
-                        watch(filterAndSortProvider.notifier).place =
-                            placePredictions[index].description;
-                        updateItemsByLocationBounds(placePredictions[index]);
+                        watch(locationPickerStateProvider).when(
+                          browsing: () {
+                            watch(filterAndSortProvider.notifier).place =
+                                placePredictions[index].description;
+                            updateItemsByLocationBounds(
+                              placePredictions[index],
+                            );
+                          },
+                          posting: () {
+                            watch(postListingProvider.notifier).place =
+                                placePredictions[index].description;
+                            updateItemsByLocationBounds(
+                              placePredictions[index],
+                            );
+                            // prevent the previously focused text field from receiving the focus again after clicking on the place prediction
+                            FocusScope.of(context).requestFocus(FocusNode());
+                          },
+                          editingProfile: () {},
+                        );
                       },
                     ),
                   ),
@@ -130,11 +199,32 @@ class _FloatingPlacesSearchBarState extends State<FloatingPlacesSearchBar> {
     }
   }
 
-  Future<void> updateItemsByLocationBounds(AutocompletePrediction prediction) async {
-    await context
-        .read(browseDataProvider.notifier)
-        .getLocationBounds(prediction.placeId ?? "");
-    BrowseProvider.pagingController.refresh();
-    placesSearchBoxController.close();
+  void updateItemsByLocationBounds(AutocompletePrediction prediction) {
+    context.read(locationPickerStateProvider).when(
+          browsing: () async {
+            await context
+                .read(locationPickerStateProvider.notifier)
+                .getLocationBounds(prediction.placeId ?? "");
+            BrowseProvider.pagingController.refresh();
+            placesSearchBoxController.close();
+          },
+          posting: () async {
+            await context
+                .read(locationPickerStateProvider.notifier)
+                .getLocationBounds(prediction.placeId ?? "");
+            placesSearchBoxController.close();
+            final GoogleMapController controller =
+                await widget.mapController!.future;
+            final searchedLocation =
+                context.read(postListingProvider.notifier).latLng;
+
+            final cameraPosition =
+                CameraPosition(target: searchedLocation!, zoom: 13);
+
+            controller
+                .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+          },
+          editingProfile: () {},
+        );
   }
 }

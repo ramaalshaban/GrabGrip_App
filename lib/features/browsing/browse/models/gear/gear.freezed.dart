@@ -35,7 +35,7 @@ class _$GearTearOff {
       String? city,
       String? country,
       String thumbnail,
-      @JsonKey(name: 'price_formatted') String formattedPrice,
+      @JsonKey(name: 'price_formatted') String? formattedPrice,
       @JsonKey(name: 'user') User? owner) {
     return _Gear(
       hash,
@@ -83,7 +83,7 @@ mixin _$Gear {
   String? get country => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
   @JsonKey(name: 'price_formatted')
-  String get formattedPrice => throw _privateConstructorUsedError;
+  String? get formattedPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'user')
   User? get owner => throw _privateConstructorUsedError;
 
@@ -110,7 +110,7 @@ abstract class $GearCopyWith<$Res> {
       String? city,
       String? country,
       String thumbnail,
-      @JsonKey(name: 'price_formatted') String formattedPrice,
+      @JsonKey(name: 'price_formatted') String? formattedPrice,
       @JsonKey(name: 'user') User? owner});
 
   $UserCopyWith<$Res>? get owner;
@@ -198,7 +198,7 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
       formattedPrice: formattedPrice == freezed
           ? _value.formattedPrice
           : formattedPrice // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       owner: owner == freezed
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
@@ -237,7 +237,7 @@ abstract class _$GearCopyWith<$Res> implements $GearCopyWith<$Res> {
       String? city,
       String? country,
       String thumbnail,
-      @JsonKey(name: 'price_formatted') String formattedPrice,
+      @JsonKey(name: 'price_formatted') String? formattedPrice,
       @JsonKey(name: 'user') User? owner});
 
   @override
@@ -327,7 +327,7 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
       formattedPrice == freezed
           ? _value.formattedPrice
           : formattedPrice // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       owner == freezed
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
@@ -389,7 +389,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
   final String thumbnail;
   @override
   @JsonKey(name: 'price_formatted')
-  final String formattedPrice;
+  final String? formattedPrice;
   @override
   @JsonKey(name: 'user')
   final User? owner;
@@ -510,7 +510,7 @@ abstract class _Gear implements Gear {
       String? city,
       String? country,
       String thumbnail,
-      @JsonKey(name: 'price_formatted') String formattedPrice,
+      @JsonKey(name: 'price_formatted') String? formattedPrice,
       @JsonKey(name: 'user') User? owner) = _$_Gear;
 
   factory _Gear.fromJson(Map<String, dynamic> json) = _$_Gear.fromJson;
@@ -546,7 +546,7 @@ abstract class _Gear implements Gear {
   String get thumbnail => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'price_formatted')
-  String get formattedPrice => throw _privateConstructorUsedError;
+  String? get formattedPrice => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'user')
   User? get owner => throw _privateConstructorUsedError;

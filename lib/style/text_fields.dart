@@ -13,7 +13,7 @@ const registrationInputDecoration = InputDecoration(
   ),
 );
 
-const contactUsInputDecoration = InputDecoration(
+const standardInputDecoration = InputDecoration(
   floatingLabelBehavior: FloatingLabelBehavior.always,
   labelStyle: TextStyle(
     color: AppColors.purple,

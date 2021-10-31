@@ -25,6 +25,7 @@ dependencies:
   auto_route: ^2.3.2
   # cached_network_image is for showing images from the internet and caching them
   cached_network_image: ^3.1.0
+  country_code_picker: ^2.0.2
   cupertino_icons: ^1.0.2
   email_validator: ^2.0.1
   # flash is for showing SnackBars easily
@@ -54,6 +55,8 @@ dependencies:
   shared_preferences: ^2.0.8
   # skeleton_loader is for making loading skeleton
   skeleton_loader: ^2.0.0+4
+  # syncfusion_flutter_datepicker is for showing Hijri and Gregorian date picker
+  syncfusion_flutter_datepicker: ^19.3.47
 
 
 dev_dependencies:

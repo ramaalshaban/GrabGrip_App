@@ -16,6 +16,8 @@ import 'package:grab_grip/features/post_listing/providers/post_listing_provider.
 import 'package:grab_grip/features/post_listing/providers/post_listing_step_number_provider.dart';
 import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
+import 'package:grab_grip/shared/location_picker/location_picker_state/location_picker_state.dart';
+import 'package:grab_grip/shared/location_picker/providers/location_picker_state_provider.dart';
 
 final localeProvider = StateNotifierProvider<LocaleProvider, Locale>((_) {
   return LocaleProvider();
@@ -63,4 +65,12 @@ final postListingStepProvider =
     StateNotifierProvider<PostListingStepNumberProvider, PostListingStepNumber>(
         (_) {
   return PostListingStepNumberProvider();
+});
+
+final locationPickerStateProvider =
+    StateNotifierProvider<LocationPickerStateProvider, LocationPickerState>(
+        (reference) {
+          final provider = reference.watch(filterAndSortProvider.notifier);
+          final postAListingProvider = reference.watch(postListingProvider.notifier);
+  return LocationPickerStateProvider(provider,postAListingProvider);
 });

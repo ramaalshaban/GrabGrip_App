@@ -1,4 +1,6 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/features/browsing/browse/models/category/category.dart';
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_model/post_listing_model.dart';
@@ -66,7 +68,42 @@ class PostListingProvider extends StateNotifier<PostListingModel> {
 
   String? get listingEndDate => state.listingEndDate;
 
+  set place(String? place) => state = state.copyWith(place: place);
+
+  String? get place => state.place;
+
+  set latLng(LatLng? latLng) {
+    postedListing = state.postedListing!.copyWith(
+      lat: latLng!.latitude,
+      lng: latLng.longitude,
+    );
+  }
+
+  LatLng? get latLng {
+    final lat = state.postedListing!.lat;
+    final lng = state.postedListing!.lng;
+    return LatLng(lat, lng);
+  }
+
+  set country(CountryCode? country) => state = state.copyWith(country: country);
+
+  CountryCode? get country => state.country;
+
+  set city(String? city) => state = state.copyWith(city: city);
+
+  String? get city => state.city;
+
+  set region(String? region) => state = state.copyWith(region: region);
+
+  String? get region => state.region;
+
 //endregion
+
+  void resetPlace() {
+    state = state.copyWith(place: null);
+    // also, reset the latLng that are related to this place
+    latLng = null;
+  }
 
   Category selectedCategory() {
     if (subcategory != null) {
@@ -74,6 +111,20 @@ class PostListingProvider extends StateNotifier<PostListingModel> {
     } else {
       return category!;
     }
+  }
+
+  void addTag(String newTag) {
+    final List<String> availableTags = [];
+    availableTags.addAll(tags);
+    availableTags.add(newTag);
+    tags = availableTags.toList();
+  }
+
+  void removeTag(String tagToRemove) {
+    final List<String> availableTags = [];
+    availableTags.addAll(tags);
+    availableTags.remove(tagToRemove);
+    tags = availableTags.toList();
   }
 
   Future<void> getPricingModels() async {
@@ -101,17 +152,30 @@ class PostListingProvider extends StateNotifier<PostListingModel> {
     );
     httpRequestStateProvider.setLoading();
     final token = await AppSharedPreferences().getToken();
-    await NetworkService()
-        .postListing(token!, postListingRequest)
-        .then((result) {
-      result.when((errorMessage) {
-        httpRequestStateProvider.setError(errorMessage);
-        postedListing = null;
-      }, (response) {
-        httpRequestStateProvider
-            .setSuccess("Your listing has been created as draft successfully");
-        postedListing = response.postedListing;
-      });
-    });
+    await NetworkService().postListing(token!, postListingRequest).then(
+      (result) {
+        result.when(
+          (errorMessage) {
+            httpRequestStateProvider.setError(errorMessage);
+            postedListing = null;
+          },
+          (response) {
+            httpRequestStateProvider.setSuccess(
+                "Your listing has been created as draft successfully");
+            postedListing = response.postedListing;
+          },
+        );
+      },
+    );
+  }
+
+  Future<void> publishListing() async {
+    // reset the state of the previous user actions the might be saved in the provider
+
+    // call this on a successful publishing call later
+    await Future.delayed(
+      const Duration(milliseconds: 500),
+    ) ;
+    reset();
   }
 }

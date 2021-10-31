@@ -23,7 +23,7 @@ class Gear with _$Gear {
     String? city,
     String? country,
     String thumbnail,
-    @JsonKey(name: 'price_formatted') String formattedPrice,
+    @JsonKey(name: 'price_formatted') String? formattedPrice,
     @JsonKey(name: 'user') User? owner,
   ) = _Gear;
 

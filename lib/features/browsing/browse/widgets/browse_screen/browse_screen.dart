@@ -15,10 +15,12 @@ import 'package:grab_grip/utils/sized_box.dart';
 class BrowseScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      context.read(locationPickerStateProvider.notifier).setBrowsing();
+    });
     final itemsSearchBoxController = TextEditingController(
       text: watch(filterAndSortProvider.notifier).searchText,
     );
-
     final sortOptions = FilterSortProvider.getSortOptions(context);
     return SafeArea(
       child: Scaffold(

@@ -26,7 +26,12 @@ class _$PostListingModelTearOff {
       Gear? postedListing,
       List<String> tags = const [],
       String? listingEndDate,
-      List<PricingModel> pricingModels = const []]) {
+      List<PricingModel> pricingModels = const [],
+      String? place,
+      LatLng? latLng,
+      CountryCode? country,
+      String? city,
+      String? region]) {
     return _PostListingModel(
       category,
       subcategory,
@@ -37,6 +42,11 @@ class _$PostListingModelTearOff {
       tags,
       listingEndDate,
       pricingModels,
+      place,
+      latLng,
+      country,
+      city,
+      region,
     );
   }
 }
@@ -55,6 +65,11 @@ mixin _$PostListingModel {
   List<String> get tags => throw _privateConstructorUsedError;
   String? get listingEndDate => throw _privateConstructorUsedError;
   List<PricingModel> get pricingModels => throw _privateConstructorUsedError;
+  String? get place => throw _privateConstructorUsedError;
+  LatLng? get latLng => throw _privateConstructorUsedError;
+  CountryCode? get country => throw _privateConstructorUsedError;
+  String? get city => throw _privateConstructorUsedError;
+  String? get region => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostListingModelCopyWith<PostListingModel> get copyWith =>
@@ -75,7 +90,12 @@ abstract class $PostListingModelCopyWith<$Res> {
       Gear? postedListing,
       List<String> tags,
       String? listingEndDate,
-      List<PricingModel> pricingModels});
+      List<PricingModel> pricingModels,
+      String? place,
+      LatLng? latLng,
+      CountryCode? country,
+      String? city,
+      String? region});
 
   $CategoryCopyWith<$Res>? get category;
   $CategoryCopyWith<$Res>? get subcategory;
@@ -102,6 +122,11 @@ class _$PostListingModelCopyWithImpl<$Res>
     Object? tags = freezed,
     Object? listingEndDate = freezed,
     Object? pricingModels = freezed,
+    Object? place = freezed,
+    Object? latLng = freezed,
+    Object? country = freezed,
+    Object? city = freezed,
+    Object? region = freezed,
   }) {
     return _then(_value.copyWith(
       category: category == freezed
@@ -140,6 +165,26 @@ class _$PostListingModelCopyWithImpl<$Res>
           ? _value.pricingModels
           : pricingModels // ignore: cast_nullable_to_non_nullable
               as List<PricingModel>,
+      place: place == freezed
+          ? _value.place
+          : place // ignore: cast_nullable_to_non_nullable
+              as String?,
+      latLng: latLng == freezed
+          ? _value.latLng
+          : latLng // ignore: cast_nullable_to_non_nullable
+              as LatLng?,
+      country: country == freezed
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as CountryCode?,
+      city: city == freezed
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      region: region == freezed
+          ? _value.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 
@@ -193,7 +238,12 @@ abstract class _$PostListingModelCopyWith<$Res>
       Gear? postedListing,
       List<String> tags,
       String? listingEndDate,
-      List<PricingModel> pricingModels});
+      List<PricingModel> pricingModels,
+      String? place,
+      LatLng? latLng,
+      CountryCode? country,
+      String? city,
+      String? region});
 
   @override
   $CategoryCopyWith<$Res>? get category;
@@ -225,6 +275,11 @@ class __$PostListingModelCopyWithImpl<$Res>
     Object? tags = freezed,
     Object? listingEndDate = freezed,
     Object? pricingModels = freezed,
+    Object? place = freezed,
+    Object? latLng = freezed,
+    Object? country = freezed,
+    Object? city = freezed,
+    Object? region = freezed,
   }) {
     return _then(_PostListingModel(
       category == freezed
@@ -263,6 +318,26 @@ class __$PostListingModelCopyWithImpl<$Res>
           ? _value.pricingModels
           : pricingModels // ignore: cast_nullable_to_non_nullable
               as List<PricingModel>,
+      place == freezed
+          ? _value.place
+          : place // ignore: cast_nullable_to_non_nullable
+              as String?,
+      latLng == freezed
+          ? _value.latLng
+          : latLng // ignore: cast_nullable_to_non_nullable
+              as LatLng?,
+      country == freezed
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as CountryCode?,
+      city == freezed
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      region == freezed
+          ? _value.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -281,7 +356,12 @@ class _$_PostListingModel
       this.postedListing,
       this.tags = const [],
       this.listingEndDate,
-      this.pricingModels = const []]);
+      this.pricingModels = const [],
+      this.place,
+      this.latLng,
+      this.country,
+      this.city,
+      this.region]);
 
   @override
   final Category? category;
@@ -303,10 +383,20 @@ class _$_PostListingModel
   @JsonKey(defaultValue: const [])
   @override
   final List<PricingModel> pricingModels;
+  @override
+  final String? place;
+  @override
+  final LatLng? latLng;
+  @override
+  final CountryCode? country;
+  @override
+  final String? city;
+  @override
+  final String? region;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostListingModel(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, title: $title, description: $description, postedListing: $postedListing, tags: $tags, listingEndDate: $listingEndDate, pricingModels: $pricingModels)';
+    return 'PostListingModel(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, title: $title, description: $description, postedListing: $postedListing, tags: $tags, listingEndDate: $listingEndDate, pricingModels: $pricingModels, place: $place, latLng: $latLng, country: $country, city: $city, region: $region)';
   }
 
   @override
@@ -322,7 +412,12 @@ class _$_PostListingModel
       ..add(DiagnosticsProperty('postedListing', postedListing))
       ..add(DiagnosticsProperty('tags', tags))
       ..add(DiagnosticsProperty('listingEndDate', listingEndDate))
-      ..add(DiagnosticsProperty('pricingModels', pricingModels));
+      ..add(DiagnosticsProperty('pricingModels', pricingModels))
+      ..add(DiagnosticsProperty('place', place))
+      ..add(DiagnosticsProperty('latLng', latLng))
+      ..add(DiagnosticsProperty('country', country))
+      ..add(DiagnosticsProperty('city', city))
+      ..add(DiagnosticsProperty('region', region));
   }
 
   @override
@@ -353,7 +448,18 @@ class _$_PostListingModel
                     .equals(other.listingEndDate, listingEndDate)) &&
             (identical(other.pricingModels, pricingModels) ||
                 const DeepCollectionEquality()
-                    .equals(other.pricingModels, pricingModels)));
+                    .equals(other.pricingModels, pricingModels)) &&
+            (identical(other.place, place) ||
+                const DeepCollectionEquality().equals(other.place, place)) &&
+            (identical(other.latLng, latLng) ||
+                const DeepCollectionEquality().equals(other.latLng, latLng)) &&
+            (identical(other.country, country) ||
+                const DeepCollectionEquality()
+                    .equals(other.country, country)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.region, region) ||
+                const DeepCollectionEquality().equals(other.region, region)));
   }
 
   @override
@@ -367,7 +473,12 @@ class _$_PostListingModel
       const DeepCollectionEquality().hash(postedListing) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(listingEndDate) ^
-      const DeepCollectionEquality().hash(pricingModels);
+      const DeepCollectionEquality().hash(pricingModels) ^
+      const DeepCollectionEquality().hash(place) ^
+      const DeepCollectionEquality().hash(latLng) ^
+      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(region);
 
   @JsonKey(ignore: true)
   @override
@@ -385,7 +496,12 @@ abstract class _PostListingModel implements PostListingModel {
       Gear? postedListing,
       List<String> tags,
       String? listingEndDate,
-      List<PricingModel> pricingModels]) = _$_PostListingModel;
+      List<PricingModel> pricingModels,
+      String? place,
+      LatLng? latLng,
+      CountryCode? country,
+      String? city,
+      String? region]) = _$_PostListingModel;
 
   @override
   Category? get category => throw _privateConstructorUsedError;
@@ -405,6 +521,16 @@ abstract class _PostListingModel implements PostListingModel {
   String? get listingEndDate => throw _privateConstructorUsedError;
   @override
   List<PricingModel> get pricingModels => throw _privateConstructorUsedError;
+  @override
+  String? get place => throw _privateConstructorUsedError;
+  @override
+  LatLng? get latLng => throw _privateConstructorUsedError;
+  @override
+  CountryCode? get country => throw _privateConstructorUsedError;
+  @override
+  String? get city => throw _privateConstructorUsedError;
+  @override
+  String? get region => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PostListingModelCopyWith<_PostListingModel> get copyWith =>

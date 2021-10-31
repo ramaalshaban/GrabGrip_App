@@ -9,6 +9,7 @@ import 'package:grab_grip/features/browsing/filter/providers/filter_sort_provide
 import 'package:grab_grip/features/browsing/filter/widgets/categories/categories_widget.dart';
 import 'package:grab_grip/features/browsing/filter/widgets/drop_down_list/drop_down_list.dart';
 import 'package:grab_grip/style/colors.dart';
+import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
 class FilterDialog extends ConsumerWidget {
@@ -46,10 +47,7 @@ class FilterDialog extends ConsumerWidget {
                 ),
               ),
             ),
-            const Divider(
-              thickness: 0.5,
-              color: AppColors.lightPurple,
-            ),
+            dividerThickness0_5,
             height8(),
             Text(
               AppLocalizations.of(context)!.distance,
@@ -65,10 +63,7 @@ class FilterDialog extends ConsumerWidget {
             height8(),
             const CategoriesWidget(),
             height12(),
-            const Divider(
-              thickness: 0.5,
-              color: AppColors.lightPurple,
-            ),
+            dividerThickness0_5,
             height12(),
             Text(
               AppLocalizations.of(context)!.price,
@@ -136,10 +131,7 @@ class FilterDialog extends ConsumerWidget {
               ),
             ),
             height12(),
-            const Divider(
-              thickness: 0.5,
-              color: AppColors.lightPurple,
-            ),
+            dividerThickness0_5,
             height8(),
             Text(
               AppLocalizations.of(context)!.listing_type,

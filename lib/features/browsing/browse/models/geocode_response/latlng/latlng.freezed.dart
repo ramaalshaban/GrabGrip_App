@@ -21,7 +21,8 @@ LatLng _$LatLngFromJson(Map<String, dynamic> json) {
 class _$LatLngTearOff {
   const _$LatLngTearOff();
 
-  _LatLng call(@JsonKey(name: 'lat') num lat, @JsonKey(name: 'lng') num lng) {
+  _LatLng call(
+      @JsonKey(name: 'lat') double lat, @JsonKey(name: 'lng') double lng) {
     return _LatLng(
       lat,
       lng,
@@ -39,9 +40,9 @@ const $LatLng = _$LatLngTearOff();
 /// @nodoc
 mixin _$LatLng {
   @JsonKey(name: 'lat')
-  num get lat => throw _privateConstructorUsedError;
+  double get lat => throw _privateConstructorUsedError;
   @JsonKey(name: 'lng')
-  num get lng => throw _privateConstructorUsedError;
+  double get lng => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,7 +53,8 @@ mixin _$LatLng {
 abstract class $LatLngCopyWith<$Res> {
   factory $LatLngCopyWith(LatLng value, $Res Function(LatLng) then) =
       _$LatLngCopyWithImpl<$Res>;
-  $Res call({@JsonKey(name: 'lat') num lat, @JsonKey(name: 'lng') num lng});
+  $Res call(
+      {@JsonKey(name: 'lat') double lat, @JsonKey(name: 'lng') double lng});
 }
 
 /// @nodoc
@@ -72,11 +74,11 @@ class _$LatLngCopyWithImpl<$Res> implements $LatLngCopyWith<$Res> {
       lat: lat == freezed
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
-              as num,
+              as double,
       lng: lng == freezed
           ? _value.lng
           : lng // ignore: cast_nullable_to_non_nullable
-              as num,
+              as double,
     ));
   }
 }
@@ -86,7 +88,8 @@ abstract class _$LatLngCopyWith<$Res> implements $LatLngCopyWith<$Res> {
   factory _$LatLngCopyWith(_LatLng value, $Res Function(_LatLng) then) =
       __$LatLngCopyWithImpl<$Res>;
   @override
-  $Res call({@JsonKey(name: 'lat') num lat, @JsonKey(name: 'lng') num lng});
+  $Res call(
+      {@JsonKey(name: 'lat') double lat, @JsonKey(name: 'lng') double lng});
 }
 
 /// @nodoc
@@ -107,11 +110,11 @@ class __$LatLngCopyWithImpl<$Res> extends _$LatLngCopyWithImpl<$Res>
       lat == freezed
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
-              as num,
+              as double,
       lng == freezed
           ? _value.lng
           : lng // ignore: cast_nullable_to_non_nullable
-              as num,
+              as double,
     ));
   }
 }
@@ -127,10 +130,10 @@ class _$_LatLng with DiagnosticableTreeMixin implements _LatLng {
 
   @override
   @JsonKey(name: 'lat')
-  final num lat;
+  final double lat;
   @override
   @JsonKey(name: 'lng')
-  final num lng;
+  final double lng;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -175,16 +178,17 @@ class _$_LatLng with DiagnosticableTreeMixin implements _LatLng {
 
 abstract class _LatLng implements LatLng {
   const factory _LatLng(
-      @JsonKey(name: 'lat') num lat, @JsonKey(name: 'lng') num lng) = _$_LatLng;
+          @JsonKey(name: 'lat') double lat, @JsonKey(name: 'lng') double lng) =
+      _$_LatLng;
 
   factory _LatLng.fromJson(Map<String, dynamic> json) = _$_LatLng.fromJson;
 
   @override
   @JsonKey(name: 'lat')
-  num get lat => throw _privateConstructorUsedError;
+  double get lat => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'lng')
-  num get lng => throw _privateConstructorUsedError;
+  double get lng => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$LatLngCopyWith<_LatLng> get copyWith => throw _privateConstructorUsedError;

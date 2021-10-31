@@ -12,9 +12,7 @@ class CategoriesDropDownList extends StatelessWidget {
     Category? selectedCategory;
     return Consumer(
       builder: (_, ref, __) {
-        //  WidgetsBinding.instance?.addPostFrameCallback((_) {
         selectedCategory = ref(postListingProvider).category;
-        //  });
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(

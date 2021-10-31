@@ -78,7 +78,7 @@ class BrowseDetailsScreen extends StatelessWidget {
                 height12(),
                 Text(gear.currency),
                 height12(),
-                Text(gear.formattedPrice),
+                Text(gear.formattedPrice??""),
                 height12(),
                 Text(
                   gear.stockQuantity.toString(),

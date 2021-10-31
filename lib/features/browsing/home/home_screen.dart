@@ -37,9 +37,10 @@ class HomeScreen extends StatelessWidget {
               },
             ),
             Consumer(
-              builder: (_, watch, __) {
+              builder: (_, ref, __) {
                 return TextButton(
                   onPressed: () {
+                    ref(postListingStepProvider.notifier).setStep1();
                     context.router.push(
                       const PostListingScreenRoute(),
                     );
