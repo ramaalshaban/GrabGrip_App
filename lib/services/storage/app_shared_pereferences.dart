@@ -32,7 +32,8 @@ class AppSharedPreferences {
   }
 
   Future<int?> getTokenDuration() async {
-    return (await _sharedPreferences).getInt(SharedPreferencesKeys.tokenDuration);
+    return (await _sharedPreferences)
+        .getInt(SharedPreferencesKeys.tokenDuration);
   }
 
   Future<void> saveValue(String key, String value) async {
@@ -42,9 +43,20 @@ class AppSharedPreferences {
   Future<String?> getValue(String key) async {
     return (await _sharedPreferences).getString(key);
   }
+
+  Future<void> setUserVerified({required bool verificationStatus}) async {
+    (await _sharedPreferences)
+        .setBool(SharedPreferencesKeys.isUserVerified, verificationStatus);
+  }
+
+  Future<bool?> isUserVerified() async {
+    return (await _sharedPreferences)
+        .getBool(SharedPreferencesKeys.isUserVerified);
+  }
 }
 
 class SharedPreferencesKeys {
   static const token = "token";
   static const tokenDuration = "tokenDuration";
+  static const isUserVerified = "isUserVerified";
 }

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
+import 'package:grab_grip/features/authentication/providers/auth_state.dart';
 import 'package:grab_grip/features/authentication/utils/text_field_validators.dart';
 import 'package:grab_grip/features/authentication/widgets/registration_app_bar.dart';
 import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
@@ -62,8 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onChanged: (text) => email = text,
                       validator: emailFieldValidator,
                       keyboardType: TextInputType.emailAddress,
-                      decoration:
-                          registrationInputDecoration.copyWith(
+                      decoration: registrationInputDecoration.copyWith(
                         hintText: AppLocalizations.of(context)!.email,
                       ),
                       cursorColor: AppColors.purple,
@@ -74,8 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       validator: passwordFieldValidator,
                       cursorColor: AppColors.purple,
                       obscureText: true,
-                      decoration:
-                          registrationInputDecoration.copyWith(
+                      decoration: registrationInputDecoration.copyWith(
                         hintText: AppLocalizations.of(context)!.password,
                       ),
                     ),
@@ -86,65 +85,52 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 48.0,
                       color: AppColors.purple,
                       child: ProviderListener(
-                        provider: httpRequestStateProvider,
-                        onChange: (context, HttpRequestState httpRequestState) {
-                          httpRequestState.whenOrNull(
-                            success: (_) => showSnackBar(
-                              context,
-                              AppLocalizations.of(context)!
-                                  .you_logged_in_successfully,
-                            ),
-                            error: (errorMessage) =>
-                                showSnackBarForError(context, errorMessage),
+                        provider: authProvider,
+                        onChange: (context, AuthState authState) {
+                          authState.whenOrNull(
+                            authenticated: (isUserVerified) {
+                              showSnackBar(
+                                context,
+                                AppLocalizations.of(context)!
+                                    .you_logged_in_successfully,
+                              );
+                              context.router.pop();
+                              if (widget.onSuccessLogin != null &&
+                                  isUserVerified == true) {
+                                widget.onSuccessLogin!.call();
+                              }
+                            },
                           );
                         },
-                        child: Consumer(
-                          builder: (_, watch, __) {
-                            final httpRequestState =
-                                watch(httpRequestStateProvider);
-                            return httpRequestState.when(
-                              noRequestInProgress: () {
-                                return LoginButton(
-                                  formKey: _formKey,
-                                  watch: watch,
-                                  authModel: AuthModel(email, password),
-                                );
-                              },
-                              success: (_) {
-                                final authenticationState = watch(authProvider);
-                                return authenticationState.when(
-                                  authenticated: () {
-                                    context.router.pop();
-                                    if (widget.onSuccessLogin != null) {
-                                      widget.onSuccessLogin!.call();
-                                    }
-                                    // this return statement is just to satisfy the Consumer widget's builder
-                                    // and the returned container will not show up anywhere
-                                    return Container();
-                                  },
-                                  notAuthenticated: () {
-                                    return LoginButton(
-                                      formKey: _formKey,
-                                      watch: watch,
-                                      authModel: AuthModel(email, password),
-                                    );
-                                  },
-                                );
-                              },
-                              loading: () {
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              },
-                              error: (errorMessage) {
-                                return LoginButton(
-                                  formKey: _formKey,
-                                  watch: watch,
-                                  authModel: AuthModel(email, password),
-                                );
-                              },
+                        child: ProviderListener(
+                          provider: httpRequestStateProvider,
+                          onChange:
+                              (context, HttpRequestState httpRequestState) {
+                            httpRequestState.whenOrNull(
+                              error: (errorMessage) =>
+                                  showSnackBarForError(context, errorMessage),
                             );
                           },
+                          child: Consumer(
+                            builder: (_, watch, __) {
+                              final httpRequestState =
+                                  watch(httpRequestStateProvider);
+                              return httpRequestState.maybeWhen(
+                                loading: () {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                },
+                                orElse: () {
+                                  return LoginButton(
+                                    formKey: _formKey,
+                                    watch: watch,
+                                    authModel: AuthModel(email, password),
+                                  );
+                                },
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ),
@@ -182,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextButton(
                       onPressed: () => context.router.replace(
                         RegisterScreenRoute(
-                          onSuccessLogin: widget.onSuccessLogin,
+                          onSuccessRegistration: widget.onSuccessLogin,
                         ),
                       ),
                       child: Text(

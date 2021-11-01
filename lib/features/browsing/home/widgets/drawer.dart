@@ -23,7 +23,7 @@ class AppDrawer extends StatelessWidget {
             Consumer(
               builder: (_, watch, __) => Visibility(
                 visible: watch(authProvider).when(
-                  authenticated: () => false,
+                  authenticated: (_) => false,
                   notAuthenticated: () => true,
                 ),
                 child: Column(
@@ -99,7 +99,7 @@ class AppDrawer extends StatelessWidget {
                     ),
                     orElse: () => Visibility(
                       visible: watch(authProvider).when(
-                        authenticated: () => true,
+                        authenticated: (_) => true,
                         notAuthenticated: () => false,
                       ),
                       child: ListTile(

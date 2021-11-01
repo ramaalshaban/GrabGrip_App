@@ -62,7 +62,6 @@ class PostListingProvider extends StateNotifier<PostListingModel> {
 
   set listingEndDate(String? listingEndDate) {
     final formattedEndDate = formatDate(listingEndDate);
-    print("the time before setting it to the state is $formattedEndDate");
     state = state.copyWith(listingEndDate: formattedEndDate);
   }
 

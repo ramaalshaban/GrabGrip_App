@@ -25,11 +25,15 @@ class _$UserTearOff {
       int id,
       @JsonKey(name: 'display_name') String displayName,
       @JsonKey(name: 'username') String userName,
+      String email,
       String? bio,
       String? phone,
       String avatar,
+      String lat,
+      String lng,
       String city,
-      String country,
+      @JsonKey(name: 'country') String countryCode,
+      @JsonKey(name: 'country_name') String countryName,
       @JsonKey(name: 'unread_messages') int unreadMessagesCount,
       @JsonKey(name: 'can_accept_payments') int canAcceptPayments,
       {required bool verified}) {
@@ -37,11 +41,15 @@ class _$UserTearOff {
       id,
       displayName,
       userName,
+      email,
       bio,
       phone,
       avatar,
+      lat,
+      lng,
       city,
-      country,
+      countryCode,
+      countryName,
       unreadMessagesCount,
       canAcceptPayments,
       verified: verified,
@@ -63,11 +71,17 @@ mixin _$User {
   String get displayName => throw _privateConstructorUsedError;
   @JsonKey(name: 'username')
   String get userName => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
   String? get bio => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   String get avatar => throw _privateConstructorUsedError;
+  String get lat => throw _privateConstructorUsedError;
+  String get lng => throw _privateConstructorUsedError;
   String get city => throw _privateConstructorUsedError;
-  String get country => throw _privateConstructorUsedError;
+  @JsonKey(name: 'country')
+  String get countryCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'country_name')
+  String get countryName => throw _privateConstructorUsedError;
   @JsonKey(name: 'unread_messages')
   int get unreadMessagesCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'can_accept_payments')
@@ -87,11 +101,15 @@ abstract class $UserCopyWith<$Res> {
       {int id,
       @JsonKey(name: 'display_name') String displayName,
       @JsonKey(name: 'username') String userName,
+      String email,
       String? bio,
       String? phone,
       String avatar,
+      String lat,
+      String lng,
       String city,
-      String country,
+      @JsonKey(name: 'country') String countryCode,
+      @JsonKey(name: 'country_name') String countryName,
       @JsonKey(name: 'unread_messages') int unreadMessagesCount,
       @JsonKey(name: 'can_accept_payments') int canAcceptPayments,
       bool verified});
@@ -110,11 +128,15 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? id = freezed,
     Object? displayName = freezed,
     Object? userName = freezed,
+    Object? email = freezed,
     Object? bio = freezed,
     Object? phone = freezed,
     Object? avatar = freezed,
+    Object? lat = freezed,
+    Object? lng = freezed,
     Object? city = freezed,
-    Object? country = freezed,
+    Object? countryCode = freezed,
+    Object? countryName = freezed,
     Object? unreadMessagesCount = freezed,
     Object? canAcceptPayments = freezed,
     Object? verified = freezed,
@@ -132,6 +154,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
       bio: bio == freezed
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
@@ -144,13 +170,25 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String,
+      lat: lat == freezed
+          ? _value.lat
+          : lat // ignore: cast_nullable_to_non_nullable
+              as String,
+      lng: lng == freezed
+          ? _value.lng
+          : lng // ignore: cast_nullable_to_non_nullable
+              as String,
       city: city == freezed
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String,
-      country: country == freezed
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
+      countryCode: countryCode == freezed
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryName: countryName == freezed
+          ? _value.countryName
+          : countryName // ignore: cast_nullable_to_non_nullable
               as String,
       unreadMessagesCount: unreadMessagesCount == freezed
           ? _value.unreadMessagesCount
@@ -177,11 +215,15 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       {int id,
       @JsonKey(name: 'display_name') String displayName,
       @JsonKey(name: 'username') String userName,
+      String email,
       String? bio,
       String? phone,
       String avatar,
+      String lat,
+      String lng,
       String city,
-      String country,
+      @JsonKey(name: 'country') String countryCode,
+      @JsonKey(name: 'country_name') String countryName,
       @JsonKey(name: 'unread_messages') int unreadMessagesCount,
       @JsonKey(name: 'can_accept_payments') int canAcceptPayments,
       bool verified});
@@ -201,11 +243,15 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? id = freezed,
     Object? displayName = freezed,
     Object? userName = freezed,
+    Object? email = freezed,
     Object? bio = freezed,
     Object? phone = freezed,
     Object? avatar = freezed,
+    Object? lat = freezed,
+    Object? lng = freezed,
     Object? city = freezed,
-    Object? country = freezed,
+    Object? countryCode = freezed,
+    Object? countryName = freezed,
     Object? unreadMessagesCount = freezed,
     Object? canAcceptPayments = freezed,
     Object? verified = freezed,
@@ -223,6 +269,10 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
+      email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
       bio == freezed
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
@@ -235,13 +285,25 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String,
+      lat == freezed
+          ? _value.lat
+          : lat // ignore: cast_nullable_to_non_nullable
+              as String,
+      lng == freezed
+          ? _value.lng
+          : lng // ignore: cast_nullable_to_non_nullable
+              as String,
       city == freezed
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String,
-      country == freezed
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
+      countryCode == freezed
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      countryName == freezed
+          ? _value.countryName
+          : countryName // ignore: cast_nullable_to_non_nullable
               as String,
       unreadMessagesCount == freezed
           ? _value.unreadMessagesCount
@@ -266,11 +328,15 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       this.id,
       @JsonKey(name: 'display_name') this.displayName,
       @JsonKey(name: 'username') this.userName,
+      this.email,
       this.bio,
       this.phone,
       this.avatar,
+      this.lat,
+      this.lng,
       this.city,
-      this.country,
+      @JsonKey(name: 'country') this.countryCode,
+      @JsonKey(name: 'country_name') this.countryName,
       @JsonKey(name: 'unread_messages') this.unreadMessagesCount,
       @JsonKey(name: 'can_accept_payments') this.canAcceptPayments,
       {required this.verified});
@@ -286,15 +352,25 @@ class _$_User with DiagnosticableTreeMixin implements _User {
   @JsonKey(name: 'username')
   final String userName;
   @override
+  final String email;
+  @override
   final String? bio;
   @override
   final String? phone;
   @override
   final String avatar;
   @override
+  final String lat;
+  @override
+  final String lng;
+  @override
   final String city;
   @override
-  final String country;
+  @JsonKey(name: 'country')
+  final String countryCode;
+  @override
+  @JsonKey(name: 'country_name')
+  final String countryName;
   @override
   @JsonKey(name: 'unread_messages')
   final int unreadMessagesCount;
@@ -306,7 +382,7 @@ class _$_User with DiagnosticableTreeMixin implements _User {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, displayName: $displayName, userName: $userName, bio: $bio, phone: $phone, avatar: $avatar, city: $city, country: $country, unreadMessagesCount: $unreadMessagesCount, canAcceptPayments: $canAcceptPayments, verified: $verified)';
+    return 'User(id: $id, displayName: $displayName, userName: $userName, email: $email, bio: $bio, phone: $phone, avatar: $avatar, lat: $lat, lng: $lng, city: $city, countryCode: $countryCode, countryName: $countryName, unreadMessagesCount: $unreadMessagesCount, canAcceptPayments: $canAcceptPayments, verified: $verified)';
   }
 
   @override
@@ -317,11 +393,15 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('displayName', displayName))
       ..add(DiagnosticsProperty('userName', userName))
+      ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('bio', bio))
       ..add(DiagnosticsProperty('phone', phone))
       ..add(DiagnosticsProperty('avatar', avatar))
+      ..add(DiagnosticsProperty('lat', lat))
+      ..add(DiagnosticsProperty('lng', lng))
       ..add(DiagnosticsProperty('city', city))
-      ..add(DiagnosticsProperty('country', country))
+      ..add(DiagnosticsProperty('countryCode', countryCode))
+      ..add(DiagnosticsProperty('countryName', countryName))
       ..add(DiagnosticsProperty('unreadMessagesCount', unreadMessagesCount))
       ..add(DiagnosticsProperty('canAcceptPayments', canAcceptPayments))
       ..add(DiagnosticsProperty('verified', verified));
@@ -339,17 +419,26 @@ class _$_User with DiagnosticableTreeMixin implements _User {
             (identical(other.userName, userName) ||
                 const DeepCollectionEquality()
                     .equals(other.userName, userName)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.bio, bio) ||
                 const DeepCollectionEquality().equals(other.bio, bio)) &&
             (identical(other.phone, phone) ||
                 const DeepCollectionEquality().equals(other.phone, phone)) &&
             (identical(other.avatar, avatar) ||
                 const DeepCollectionEquality().equals(other.avatar, avatar)) &&
+            (identical(other.lat, lat) ||
+                const DeepCollectionEquality().equals(other.lat, lat)) &&
+            (identical(other.lng, lng) ||
+                const DeepCollectionEquality().equals(other.lng, lng)) &&
             (identical(other.city, city) ||
                 const DeepCollectionEquality().equals(other.city, city)) &&
-            (identical(other.country, country) ||
+            (identical(other.countryCode, countryCode) ||
                 const DeepCollectionEquality()
-                    .equals(other.country, country)) &&
+                    .equals(other.countryCode, countryCode)) &&
+            (identical(other.countryName, countryName) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryName, countryName)) &&
             (identical(other.unreadMessagesCount, unreadMessagesCount) ||
                 const DeepCollectionEquality()
                     .equals(other.unreadMessagesCount, unreadMessagesCount)) &&
@@ -367,11 +456,15 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(displayName) ^
       const DeepCollectionEquality().hash(userName) ^
+      const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(bio) ^
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(avatar) ^
+      const DeepCollectionEquality().hash(lat) ^
+      const DeepCollectionEquality().hash(lng) ^
       const DeepCollectionEquality().hash(city) ^
-      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(countryCode) ^
+      const DeepCollectionEquality().hash(countryName) ^
       const DeepCollectionEquality().hash(unreadMessagesCount) ^
       const DeepCollectionEquality().hash(canAcceptPayments) ^
       const DeepCollectionEquality().hash(verified);
@@ -392,11 +485,15 @@ abstract class _User implements User {
       int id,
       @JsonKey(name: 'display_name') String displayName,
       @JsonKey(name: 'username') String userName,
+      String email,
       String? bio,
       String? phone,
       String avatar,
+      String lat,
+      String lng,
       String city,
-      String country,
+      @JsonKey(name: 'country') String countryCode,
+      @JsonKey(name: 'country_name') String countryName,
       @JsonKey(name: 'unread_messages') int unreadMessagesCount,
       @JsonKey(name: 'can_accept_payments') int canAcceptPayments,
       {required bool verified}) = _$_User;
@@ -412,15 +509,25 @@ abstract class _User implements User {
   @JsonKey(name: 'username')
   String get userName => throw _privateConstructorUsedError;
   @override
+  String get email => throw _privateConstructorUsedError;
+  @override
   String? get bio => throw _privateConstructorUsedError;
   @override
   String? get phone => throw _privateConstructorUsedError;
   @override
   String get avatar => throw _privateConstructorUsedError;
   @override
+  String get lat => throw _privateConstructorUsedError;
+  @override
+  String get lng => throw _privateConstructorUsedError;
+  @override
   String get city => throw _privateConstructorUsedError;
   @override
-  String get country => throw _privateConstructorUsedError;
+  @JsonKey(name: 'country')
+  String get countryCode => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'country_name')
+  String get countryName => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'unread_messages')
   int get unreadMessagesCount => throw _privateConstructorUsedError;

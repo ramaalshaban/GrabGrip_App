@@ -9,6 +9,7 @@ import 'package:grab_grip/features/browsing/browse/widgets/browse_screen/browse_
 import 'package:grab_grip/features/browsing/home/home_screen.dart';
 import 'package:grab_grip/features/feedback/contact_us/contact_us_screen.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/post_listing_screen.dart';
+import 'package:grab_grip/shared/verify_your_email_screen.dart';
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[
@@ -21,6 +22,7 @@ import 'package:grab_grip/features/post_listing/widgets/screens/post_listing_scr
     AutoRoute(page: PostListingScreen, guards: [AuthGuard]),
     AutoRoute(page: ContactUsScreen),
     AutoRoute(page: AboutUsScreen),
+    AutoRoute(page: VerifyYourEmailScreen),
   ],
 )
 class $AppRouter {}

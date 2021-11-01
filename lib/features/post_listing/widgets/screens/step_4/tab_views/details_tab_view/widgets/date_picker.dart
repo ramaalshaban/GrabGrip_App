@@ -99,7 +99,6 @@ class DatePicker extends StatelessWidget {
             child: Consumer(
               builder: (_, ref, __) {
                 final listingEndDate = ref(postListingProvider).listingEndDate;
-                debugPrint("before formatted display : $listingEndDate");
                 final formattedDate = formatDateForView(listingEndDate);
                 return Row(
                   children: [

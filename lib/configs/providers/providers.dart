@@ -14,6 +14,8 @@ import 'package:grab_grip/features/post_listing/models/post_listing_model/post_l
 import 'package:grab_grip/features/post_listing/models/post_listing_step_number_model/post_listing_step_number.dart';
 import 'package:grab_grip/features/post_listing/providers/post_listing_provider.dart';
 import 'package:grab_grip/features/post_listing/providers/post_listing_step_number_provider.dart';
+import 'package:grab_grip/features/user_profile/models/user.dart';
+import 'package:grab_grip/features/user_profile/providers/user_profile_provider.dart';
 import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
 import 'package:grab_grip/shared/location_picker/location_picker_state/location_picker_state.dart';
@@ -30,8 +32,9 @@ final httpRequestStateProvider =
 
 final authProvider =
     StateNotifierProvider<AuthProvider, AuthState>((reference) {
-  final provider = reference.watch(httpRequestStateProvider.notifier);
-  return AuthProvider(provider);
+  final httpProvider = reference.watch(httpRequestStateProvider.notifier);
+  final userProvider = reference.watch(userProfileProvider.notifier);
+  return AuthProvider(httpProvider,userProvider);
 });
 
 final filterAndSortProvider =
@@ -73,4 +76,10 @@ final locationPickerStateProvider =
           final provider = reference.watch(filterAndSortProvider.notifier);
           final postAListingProvider = reference.watch(postListingProvider.notifier);
   return LocationPickerStateProvider(provider,postAListingProvider);
+});
+
+final userProfileProvider =
+StateNotifierProvider<UserProfileProvider, User>((reference) {
+  final provider = reference.watch(httpRequestStateProvider.notifier);
+  return UserProfileProvider(provider);
 });

@@ -17,8 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$AuthStateTearOff {
   const _$AuthStateTearOff();
 
-  _AuthenticatedState authenticated() {
-    return const _AuthenticatedState();
+  _AuthenticatedState authenticated({bool? isVerified}) {
+    return _AuthenticatedState(
+      isVerified: isVerified,
+    );
   }
 
   _NotAuthenticatedState notAuthenticated() {
@@ -33,19 +35,19 @@ const $AuthState = _$AuthStateTearOff();
 mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() authenticated,
+    required TResult Function(bool? isVerified) authenticated,
     required TResult Function() notAuthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? authenticated,
+    TResult Function(bool? isVerified)? authenticated,
     TResult Function()? notAuthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? authenticated,
+    TResult Function(bool? isVerified)? authenticated,
     TResult Function()? notAuthenticated,
     required TResult orElse(),
   }) =>
@@ -91,6 +93,7 @@ abstract class _$AuthenticatedStateCopyWith<$Res> {
   factory _$AuthenticatedStateCopyWith(
           _AuthenticatedState value, $Res Function(_AuthenticatedState) then) =
       __$AuthenticatedStateCopyWithImpl<$Res>;
+  $Res call({bool? isVerified});
 }
 
 /// @nodoc
@@ -103,6 +106,18 @@ class __$AuthenticatedStateCopyWithImpl<$Res>
 
   @override
   _AuthenticatedState get _value => super._value as _AuthenticatedState;
+
+  @override
+  $Res call({
+    Object? isVerified = freezed,
+  }) {
+    return _then(_AuthenticatedState(
+      isVerified: isVerified == freezed
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
 }
 
 /// @nodoc
@@ -110,54 +125,69 @@ class __$AuthenticatedStateCopyWithImpl<$Res>
 class _$_AuthenticatedState
     with DiagnosticableTreeMixin
     implements _AuthenticatedState {
-  const _$_AuthenticatedState();
+  const _$_AuthenticatedState({this.isVerified});
+
+  @override
+  final bool? isVerified;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AuthState.authenticated()';
+    return 'AuthState.authenticated(isVerified: $isVerified)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'AuthState.authenticated'));
+    properties
+      ..add(DiagnosticsProperty('type', 'AuthState.authenticated'))
+      ..add(DiagnosticsProperty('isVerified', isVerified));
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _AuthenticatedState);
+    return identical(this, other) ||
+        (other is _AuthenticatedState &&
+            (identical(other.isVerified, isVerified) ||
+                const DeepCollectionEquality()
+                    .equals(other.isVerified, isVerified)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(isVerified);
+
+  @JsonKey(ignore: true)
+  @override
+  _$AuthenticatedStateCopyWith<_AuthenticatedState> get copyWith =>
+      __$AuthenticatedStateCopyWithImpl<_AuthenticatedState>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() authenticated,
+    required TResult Function(bool? isVerified) authenticated,
     required TResult Function() notAuthenticated,
   }) {
-    return authenticated();
+    return authenticated(isVerified);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? authenticated,
+    TResult Function(bool? isVerified)? authenticated,
     TResult Function()? notAuthenticated,
   }) {
-    return authenticated?.call();
+    return authenticated?.call(isVerified);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? authenticated,
+    TResult Function(bool? isVerified)? authenticated,
     TResult Function()? notAuthenticated,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
-      return authenticated();
+      return authenticated(isVerified);
     }
     return orElse();
   }
@@ -195,7 +225,12 @@ class _$_AuthenticatedState
 }
 
 abstract class _AuthenticatedState implements AuthState {
-  const factory _AuthenticatedState() = _$_AuthenticatedState;
+  const factory _AuthenticatedState({bool? isVerified}) = _$_AuthenticatedState;
+
+  bool? get isVerified => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$AuthenticatedStateCopyWith<_AuthenticatedState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -246,7 +281,7 @@ class _$_NotAuthenticatedState
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() authenticated,
+    required TResult Function(bool? isVerified) authenticated,
     required TResult Function() notAuthenticated,
   }) {
     return notAuthenticated();
@@ -255,7 +290,7 @@ class _$_NotAuthenticatedState
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? authenticated,
+    TResult Function(bool? isVerified)? authenticated,
     TResult Function()? notAuthenticated,
   }) {
     return notAuthenticated?.call();
@@ -264,7 +299,7 @@ class _$_NotAuthenticatedState
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? authenticated,
+    TResult Function(bool? isVerified)? authenticated,
     TResult Function()? notAuthenticated,
     required TResult orElse(),
   }) {

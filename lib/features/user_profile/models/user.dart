@@ -12,15 +12,39 @@ class User with _$User {
     int id,
     @JsonKey(name: 'display_name') String displayName,
     @JsonKey(name: 'username') String userName,
+    String email,
     String? bio,
     String? phone,
     String avatar,
+    String lat,
+    String lng,
     String city,
-    String country,
+    @JsonKey(name: 'country') String countryCode,
+    @JsonKey(name: 'country_name') String countryName,
     @JsonKey(name: 'unread_messages') int unreadMessagesCount,
     @JsonKey(name: 'can_accept_payments') int canAcceptPayments, {
     required bool verified,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  static User getEmptyModel() {
+    return const User(
+      -1,
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      -1,
+      -1,
+      verified: false,
+    );
+  }
 }

@@ -5,6 +5,7 @@ part 'auth_state.freezed.dart';
 
 @freezed
 class AuthState with _$AuthState {
-  const factory AuthState.authenticated() = _AuthenticatedState;
+  const factory AuthState.authenticated({bool? isVerified}) =
+      _AuthenticatedState;
   const factory AuthState.notAuthenticated() = _NotAuthenticatedState;
 }

@@ -15,9 +15,10 @@ import 'package:grab_grip/utils/functions.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({this.onSuccessLogin, Key? key}) : super(key: key);
+  const RegisterScreen({this.onSuccessRegistration, Key? key})
+      : super(key: key);
 
-  final VoidCallback? onSuccessLogin;
+  final VoidCallback? onSuccessRegistration;
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -67,8 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       onChanged: (text) => name = text,
                       validator: nameFieldValidator,
                       keyboardType: TextInputType.name,
-                      decoration:
-                          registrationInputDecoration.copyWith(
+                      decoration: registrationInputDecoration.copyWith(
                         hintText: AppLocalizations.of(context)!.name,
                       ),
                       cursorColor: AppColors.purple,
@@ -78,8 +78,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       onChanged: (text) => email = text,
                       validator: emailFieldValidator,
                       keyboardType: TextInputType.emailAddress,
-                      decoration:
-                          registrationInputDecoration.copyWith(
+                      decoration: registrationInputDecoration.copyWith(
                         hintText: AppLocalizations.of(context)!.email,
                       ),
                       cursorColor: AppColors.purple,
@@ -90,8 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       validator: passwordFieldValidator,
                       cursorColor: AppColors.purple,
                       obscureText: true,
-                      decoration:
-                          registrationInputDecoration.copyWith(
+                      decoration: registrationInputDecoration.copyWith(
                         hintText: AppLocalizations.of(context)!.password,
                       ),
                     ),
@@ -101,8 +99,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       validator: _passwordConfirmationFieldValidator,
                       cursorColor: AppColors.purple,
                       obscureText: true,
-                      decoration:
-                          registrationInputDecoration.copyWith(
+                      decoration: registrationInputDecoration.copyWith(
                         hintText:
                             AppLocalizations.of(context)!.password_confirmation,
                       ),
@@ -117,11 +114,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         provider: httpRequestStateProvider,
                         onChange: (context, HttpRequestState httpRequestState) {
                           httpRequestState.whenOrNull(
-                            success: (_) => showSnackBar(
-                              context,
-                              AppLocalizations.of(context)!
-                                  .you_registered_successfully,
-                            ),
+                            success: (_) {
+                              showSnackBar(
+                                context,
+                                AppLocalizations.of(context)!
+                                    .you_registered_successfully,
+                              );
+                              context.router.pop();
+                            },
                             error: (errorMessage) =>
                                 showSnackBarForError(context, errorMessage),
                           );
@@ -130,51 +130,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           builder: (_, watch, __) {
                             final httpRequestState =
                                 watch(httpRequestStateProvider);
-                            return httpRequestState.when(
-                              noRequestInProgress: () {
-                                return RegisterButton(
-                                  formKey: _formKey,
-                                  authModel: AuthModel(
-                                    email,
-                                    password,
-                                    name,
-                                    passwordConfirmation,
-                                  ),
-                                  watch: watch,
-                                );
-                              },
-                              success: (_) {
-                                final authenticationState = watch(authProvider);
-                                return authenticationState.when(
-                                  authenticated: () {
-                                    context.router.pop();
-                                    if (widget.onSuccessLogin != null) {
-                                      widget.onSuccessLogin!.call();
-                                    }
-                                    // this return statement is just to satisfy the Consumer widget's builder
-                                    // and the returned container will not show up anywhere
-                                    return Container();
-                                  },
-                                  notAuthenticated: () {
-                                    return RegisterButton(
-                                      formKey: _formKey,
-                                      authModel: AuthModel(
-                                        email,
-                                        password,
-                                        name,
-                                        passwordConfirmation,
-                                      ),
-                                      watch: watch,
-                                    );
-                                  },
-                                );
-                              },
+                            return httpRequestState.maybeWhen(
                               loading: () {
                                 return const Center(
                                   child: CircularProgressIndicator(),
                                 );
                               },
-                              error: (errorMessage) {
+                              orElse: () {
                                 return RegisterButton(
                                   formKey: _formKey,
                                   authModel: AuthModel(
@@ -195,7 +157,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     TextButton(
                       onPressed: () => context.router.replace(
                         LoginScreenRoute(
-                          onSuccessLogin: widget.onSuccessLogin,
+                          onSuccessLogin: widget.onSuccessRegistration,
                         ),
                       ),
                       child: Text(
@@ -217,10 +179,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 }
 
 class RegisterButton extends StatelessWidget {
-  const RegisterButton(
-      {Key? key,
-      required this.formKey,
-      required this.watch,
+  const RegisterButton({
+    Key? key,
+    required this.formKey,
+    required this.watch,
     required this.authModel,
   }) : super(key: key);
   final GlobalKey<FormState> formKey;

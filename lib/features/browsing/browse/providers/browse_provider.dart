@@ -37,8 +37,6 @@ class BrowseProvider extends StateNotifier<BrowseModel> {
     );
   }
 
-
-
   @override
   void dispose() {
     pagingController.dispose();

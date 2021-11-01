@@ -148,7 +148,7 @@ class OwnerWidget extends StatelessWidget {
         height12(),
         Text(owner.city),
         height12(),
-        Text(owner.country),
+        Text(owner.countryName),
         height12(),
       ],
     );

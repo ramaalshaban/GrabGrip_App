@@ -12,6 +12,7 @@ import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact
 import 'package:grab_grip/features/post_listing/models/post_listing_request/post_listing_request.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
+import 'package:grab_grip/features/user_profile/models/user.dart';
 import 'package:grab_grip/services/network/api/grab_grip_api.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:multiple_result/multiple_result.dart';
@@ -34,8 +35,10 @@ class NetworkService {
     _dio.options.headers = globalHeaders;
     _dio.options.connectTimeout = 20000;
     _grabGripApi = GrabGripApi(_dio);
-    _googleGeocodeApi = GrabGripApi(_dio,
-        baseUrl: "https://maps.googleapis.com/maps/api/geocode");
+    _googleGeocodeApi = GrabGripApi(
+      _dio,
+      baseUrl: "https://maps.googleapis.com/maps/api/geocode",
+    );
   }
 
   //region auth calls
@@ -160,12 +163,42 @@ class NetworkService {
 
   //region feedback
   Future<Result<String, String>> sendContactUsForm(
-      ContactUsForm contactUsForm,) async {
+    ContactUsForm contactUsForm,
+  ) async {
     try {
       final sendFormCall = await _grabGripApi.sendContactUsForm(contactUsForm);
       final successMessage =
           (sendFormCall.data as Map<String, dynamic>)['message'];
       return Success(successMessage.toString());
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  //endregion
+
+  //region user profile
+  Future<Result<String, User>> getUserProfile(
+    String token,
+  ) async {
+    try {
+      final getUserProfileCall =
+          await _grabGripApi.getUserProfile("Bearer $token");
+      return Success(getUserProfileCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  Future<Result<String, String>> resendVerificationEmail(
+    String token,
+  ) async {
+    try {
+      final resendCall =
+          await _grabGripApi.resendVerificationEmail("Bearer $token");
+      return Success(resendCall.data.toString());
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);
       return Error(errorMessage);
@@ -203,11 +236,11 @@ class NetworkService {
       }
       if (errorData["errors"]["title"] != null) {
         aggregatedErrorMessage +=
-        "${errorData["errors"]["title"][0] as String}\n";
+            "${errorData["errors"]["title"][0] as String}\n";
       }
       if (errorData["errors"]["description_new"] != null) {
         aggregatedErrorMessage +=
-        "${errorData["errors"]["description_new"][0] as String}\n";
+            "${errorData["errors"]["description_new"][0] as String}\n";
       }
     }
     // when an exception occurs while logging in, "error" is not null

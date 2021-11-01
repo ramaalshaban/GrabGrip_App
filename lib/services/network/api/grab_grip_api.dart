@@ -9,6 +9,7 @@ import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact
 import 'package:grab_grip/features/post_listing/models/post_listing_request/post_listing_request.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
+import 'package:grab_grip/features/user_profile/models/user.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
@@ -22,7 +23,8 @@ abstract class GrabGripApi {
   //region auth requests
   @POST("/api/v1/auth/register")
   Future<HttpResponse<RegisterResponse>> register(
-      @Body() AuthModel registerRequest);
+    @Body() AuthModel registerRequest,
+  );
 
   @POST("/api/v1/auth/login")
   Future<HttpResponse<LoginResponse>> login(@Body() AuthModel registerRequest);
@@ -76,6 +78,19 @@ abstract class GrabGripApi {
   //region feedback
   @POST("/api/v1/contact")
   Future<HttpResponse> sendContactUsForm(@Body() ContactUsForm contactUsForm);
+
+//endregion
+
+  //region user profile
+  @GET("/api/v1/auth/me")
+  Future<HttpResponse<User>> getUserProfile(
+    @Header("Authorization") String token,
+  );
+
+  @GET("/api/v1/auth/resend-verification")
+  Future<HttpResponse> resendVerificationEmail(
+    @Header("Authorization") String token,
+  );
 
 //endregion
 }
