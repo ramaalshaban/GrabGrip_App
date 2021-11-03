@@ -4,14 +4,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/details_tab_view.dart';
-import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/images_tab_view.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view.dart';
 import 'package:grab_grip/shared/continue_button.dart';
 import 'package:grab_grip/style/colors.dart';
+import 'package:grab_grip/utils/functions.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
 class PostListingStepFourScreen extends StatelessWidget {
   const PostListingStepFourScreen({Key? key}) : super(key: key);
+  static final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -69,43 +71,98 @@ class PostListingStepFourScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Consumer(
-                    builder: (_, ref, __) => ContinueButton(
+                    builder: (context, ref, __) => ContinueButton(
                       formKey: null,
                       buttonText: "Save listing",
                       isPurple: false,
                       onClickAction: () {
-                        if (DetailsTabView.formKey.currentState!.validate()) {
-                          // reset the state of the previous user actions the might be saved in the providers
-                          //   ref(postListingStepProvider.notifier).setStep1();
-                          //   ref(postListingProvider.notifier).reset();
-                          //    Navigator.pop(context);
+                        switch (DefaultTabController.of(context)!.index) {
+                          case 0:
+                            {
+                              if (formKey.currentState!.validate()) {
+                                // reset the state of the previous user actions the might be saved in the providers
+                                //   ref(postListingStepProvider.notifier).setStep1();
+                                //   ref(postListingProvider.notifier).reset();
+                                //    Navigator.pop(context);
+                              }
+                            }
+                            break;
+                          case 1:
+                            {
+                              if (!formKey.currentState!.validate()) {
+                                showSnackBar(
+                                  context,
+                                  "Check the information you entered please",
+                                  Colors.amber[800],
+                                );
+                              }
+                            }
+                            break;
+                          case 2:
+                            {}
+                            break;
                         }
-
-                        print(
-                            "-----------------listing saving button clicked-----------------------");
-                        print(
-                            "category id ${ref(postListingProvider.notifier).category!.id}");
-                        print(
-                            "pricing model id ${ref(postListingProvider.notifier).listingTypeId}");
-                        print(
-                            "title ${ref(postListingProvider.notifier).title}");
-                        print(
-                            "description ${ref(postListingProvider.notifier).description}");
-                        print(
-                            "tags ${ref(postListingProvider.notifier).tags.toString()}");
-                        print(
-                            "listing end date ${ref(postListingProvider.notifier).listingEndDate.toString()}");
-                        print(
-                            "lat ${ref(postListingProvider.notifier).postedListing!.lat.toString()}");
-                        print(
-                            "lng ${ref(postListingProvider.notifier).postedListing!.lng.toString()}");
-                        print(
-                            "country code ${ref(postListingProvider.notifier).country?.code}");
-                        print("city ${ref(postListingProvider.notifier).city}");
-                        print(
-                            "region ${ref(postListingProvider.notifier).region}");
-                        print(
-                            "---------------------------------------------------------------------");
+                        //region debugging print statements
+                        debugPrint(
+                          "-----------------listing saving button clicked-----------------------",
+                        );
+                        debugPrint(
+                          "category id ${ref(postListingProvider.notifier).category!.id}",
+                        );
+                        debugPrint(
+                          "pricing model id ${ref(postListingProvider.notifier).listingTypeId}",
+                        );
+                        debugPrint(
+                          "title ${ref(postListingProvider.notifier).title}",
+                        );
+                        debugPrint(
+                          "description ${ref(postListingProvider.notifier).description}",
+                        );
+                        debugPrint(
+                          "tags ${ref(postListingProvider.notifier).tags.toString()}",
+                        );
+                        debugPrint(
+                          "listing end date ${ref(postListingProvider.notifier).listingEndDate.toString()}",
+                        );
+                        debugPrint(
+                          "lat ${ref(postListingProvider.notifier).postedListing!.lat.toString()}",
+                        );
+                        debugPrint(
+                          "lng ${ref(postListingProvider.notifier).postedListing!.lng.toString()}",
+                        );
+                        debugPrint(
+                          "country code ${ref(postListingProvider.notifier).country?.code}",
+                        );
+                        debugPrint(
+                          "city ${ref(postListingProvider.notifier).city}",
+                        );
+                        debugPrint(
+                          "region ${ref(postListingProvider.notifier).region}",
+                        );
+                        debugPrint(
+                          "photos : ",
+                        );
+                        for (int i = 0;
+                            i <
+                                ref(postListingProvider.notifier)
+                                    .photosAsJson
+                                    .length;
+                            i++) {
+                          debugPrint(
+                            "       type: ${ref(postListingProvider.notifier).photosAsJson[i].type}",
+                          );
+                          debugPrint(
+                            "       path: ${ref(postListingProvider.notifier).photosAsJson[i].path}",
+                          );
+                          debugPrint(
+                            "       uploaded: ${ref(postListingProvider.notifier).photosAsJson[i].succeeded}",
+                          );
+                          debugPrint("-------------");
+                        }
+                        debugPrint(
+                          "---------------------------------------------------------------------",
+                        );
+                        //endregion
                       },
                     ),
                   ),
@@ -114,7 +171,7 @@ class PostListingStepFourScreen extends StatelessWidget {
                       formKey: null,
                       buttonText: "Publish",
                       onClickAction: () {
-                        if (DetailsTabView.formKey.currentState!.validate()) {
+                        if (formKey.currentState!.validate()) {
                           context.router.replace(const HomeScreenRoute());
                           ref(postListingProvider.notifier).publishListing();
                         }

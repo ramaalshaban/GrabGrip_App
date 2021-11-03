@@ -31,7 +31,10 @@ class _$PostListingModelTearOff {
       LatLng? latLng,
       CountryCode? country,
       String? city,
-      String? region]) {
+      String? region,
+      List<Photo> photos = const [],
+      List<UploadPhotoResponse> photosAsJson = const [],
+      Map<String, UploadPhotoResponse> photosToPost = const {}]) {
     return _PostListingModel(
       category,
       subcategory,
@@ -47,6 +50,9 @@ class _$PostListingModelTearOff {
       country,
       city,
       region,
+      photos,
+      photosAsJson,
+      photosToPost,
     );
   }
 }
@@ -70,6 +76,11 @@ mixin _$PostListingModel {
   CountryCode? get country => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
   String? get region => throw _privateConstructorUsedError;
+  List<Photo> get photos => throw _privateConstructorUsedError;
+  List<UploadPhotoResponse> get photosAsJson =>
+      throw _privateConstructorUsedError;
+  Map<String, UploadPhotoResponse> get photosToPost =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostListingModelCopyWith<PostListingModel> get copyWith =>
@@ -95,11 +106,15 @@ abstract class $PostListingModelCopyWith<$Res> {
       LatLng? latLng,
       CountryCode? country,
       String? city,
-      String? region});
+      String? region,
+      List<Photo> photos,
+      List<UploadPhotoResponse> photosAsJson,
+      Map<String, UploadPhotoResponse> photosToPost});
 
   $CategoryCopyWith<$Res>? get category;
   $CategoryCopyWith<$Res>? get subcategory;
   $GearCopyWith<$Res>? get postedListing;
+  $LatLngCopyWith<$Res>? get latLng;
 }
 
 /// @nodoc
@@ -127,6 +142,9 @@ class _$PostListingModelCopyWithImpl<$Res>
     Object? country = freezed,
     Object? city = freezed,
     Object? region = freezed,
+    Object? photos = freezed,
+    Object? photosAsJson = freezed,
+    Object? photosToPost = freezed,
   }) {
     return _then(_value.copyWith(
       category: category == freezed
@@ -185,6 +203,18 @@ class _$PostListingModelCopyWithImpl<$Res>
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as String?,
+      photos: photos == freezed
+          ? _value.photos
+          : photos // ignore: cast_nullable_to_non_nullable
+              as List<Photo>,
+      photosAsJson: photosAsJson == freezed
+          ? _value.photosAsJson
+          : photosAsJson // ignore: cast_nullable_to_non_nullable
+              as List<UploadPhotoResponse>,
+      photosToPost: photosToPost == freezed
+          ? _value.photosToPost
+          : photosToPost // ignore: cast_nullable_to_non_nullable
+              as Map<String, UploadPhotoResponse>,
     ));
   }
 
@@ -220,6 +250,17 @@ class _$PostListingModelCopyWithImpl<$Res>
       return _then(_value.copyWith(postedListing: value));
     });
   }
+
+  @override
+  $LatLngCopyWith<$Res>? get latLng {
+    if (_value.latLng == null) {
+      return null;
+    }
+
+    return $LatLngCopyWith<$Res>(_value.latLng!, (value) {
+      return _then(_value.copyWith(latLng: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -243,7 +284,10 @@ abstract class _$PostListingModelCopyWith<$Res>
       LatLng? latLng,
       CountryCode? country,
       String? city,
-      String? region});
+      String? region,
+      List<Photo> photos,
+      List<UploadPhotoResponse> photosAsJson,
+      Map<String, UploadPhotoResponse> photosToPost});
 
   @override
   $CategoryCopyWith<$Res>? get category;
@@ -251,6 +295,8 @@ abstract class _$PostListingModelCopyWith<$Res>
   $CategoryCopyWith<$Res>? get subcategory;
   @override
   $GearCopyWith<$Res>? get postedListing;
+  @override
+  $LatLngCopyWith<$Res>? get latLng;
 }
 
 /// @nodoc
@@ -280,6 +326,9 @@ class __$PostListingModelCopyWithImpl<$Res>
     Object? country = freezed,
     Object? city = freezed,
     Object? region = freezed,
+    Object? photos = freezed,
+    Object? photosAsJson = freezed,
+    Object? photosToPost = freezed,
   }) {
     return _then(_PostListingModel(
       category == freezed
@@ -338,6 +387,18 @@ class __$PostListingModelCopyWithImpl<$Res>
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as String?,
+      photos == freezed
+          ? _value.photos
+          : photos // ignore: cast_nullable_to_non_nullable
+              as List<Photo>,
+      photosAsJson == freezed
+          ? _value.photosAsJson
+          : photosAsJson // ignore: cast_nullable_to_non_nullable
+              as List<UploadPhotoResponse>,
+      photosToPost == freezed
+          ? _value.photosToPost
+          : photosToPost // ignore: cast_nullable_to_non_nullable
+              as Map<String, UploadPhotoResponse>,
     ));
   }
 }
@@ -361,7 +422,10 @@ class _$_PostListingModel
       this.latLng,
       this.country,
       this.city,
-      this.region]);
+      this.region,
+      this.photos = const [],
+      this.photosAsJson = const [],
+      this.photosToPost = const {}]);
 
   @override
   final Category? category;
@@ -393,10 +457,19 @@ class _$_PostListingModel
   final String? city;
   @override
   final String? region;
+  @JsonKey(defaultValue: const [])
+  @override
+  final List<Photo> photos;
+  @JsonKey(defaultValue: const [])
+  @override
+  final List<UploadPhotoResponse> photosAsJson;
+  @JsonKey(defaultValue: const {})
+  @override
+  final Map<String, UploadPhotoResponse> photosToPost;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostListingModel(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, title: $title, description: $description, postedListing: $postedListing, tags: $tags, listingEndDate: $listingEndDate, pricingModels: $pricingModels, place: $place, latLng: $latLng, country: $country, city: $city, region: $region)';
+    return 'PostListingModel(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, title: $title, description: $description, postedListing: $postedListing, tags: $tags, listingEndDate: $listingEndDate, pricingModels: $pricingModels, place: $place, latLng: $latLng, country: $country, city: $city, region: $region, photos: $photos, photosAsJson: $photosAsJson, photosToPost: $photosToPost)';
   }
 
   @override
@@ -417,7 +490,10 @@ class _$_PostListingModel
       ..add(DiagnosticsProperty('latLng', latLng))
       ..add(DiagnosticsProperty('country', country))
       ..add(DiagnosticsProperty('city', city))
-      ..add(DiagnosticsProperty('region', region));
+      ..add(DiagnosticsProperty('region', region))
+      ..add(DiagnosticsProperty('photos', photos))
+      ..add(DiagnosticsProperty('photosAsJson', photosAsJson))
+      ..add(DiagnosticsProperty('photosToPost', photosToPost));
   }
 
   @override
@@ -459,7 +535,15 @@ class _$_PostListingModel
             (identical(other.city, city) ||
                 const DeepCollectionEquality().equals(other.city, city)) &&
             (identical(other.region, region) ||
-                const DeepCollectionEquality().equals(other.region, region)));
+                const DeepCollectionEquality().equals(other.region, region)) &&
+            (identical(other.photos, photos) ||
+                const DeepCollectionEquality().equals(other.photos, photos)) &&
+            (identical(other.photosAsJson, photosAsJson) ||
+                const DeepCollectionEquality()
+                    .equals(other.photosAsJson, photosAsJson)) &&
+            (identical(other.photosToPost, photosToPost) ||
+                const DeepCollectionEquality()
+                    .equals(other.photosToPost, photosToPost)));
   }
 
   @override
@@ -478,7 +562,10 @@ class _$_PostListingModel
       const DeepCollectionEquality().hash(latLng) ^
       const DeepCollectionEquality().hash(country) ^
       const DeepCollectionEquality().hash(city) ^
-      const DeepCollectionEquality().hash(region);
+      const DeepCollectionEquality().hash(region) ^
+      const DeepCollectionEquality().hash(photos) ^
+      const DeepCollectionEquality().hash(photosAsJson) ^
+      const DeepCollectionEquality().hash(photosToPost);
 
   @JsonKey(ignore: true)
   @override
@@ -501,7 +588,10 @@ abstract class _PostListingModel implements PostListingModel {
       LatLng? latLng,
       CountryCode? country,
       String? city,
-      String? region]) = _$_PostListingModel;
+      String? region,
+      List<Photo> photos,
+      List<UploadPhotoResponse> photosAsJson,
+      Map<String, UploadPhotoResponse> photosToPost]) = _$_PostListingModel;
 
   @override
   Category? get category => throw _privateConstructorUsedError;
@@ -531,6 +621,14 @@ abstract class _PostListingModel implements PostListingModel {
   String? get city => throw _privateConstructorUsedError;
   @override
   String? get region => throw _privateConstructorUsedError;
+  @override
+  List<Photo> get photos => throw _privateConstructorUsedError;
+  @override
+  List<UploadPhotoResponse> get photosAsJson =>
+      throw _privateConstructorUsedError;
+  @override
+  Map<String, UploadPhotoResponse> get photosToPost =>
+      throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PostListingModelCopyWith<_PostListingModel> get copyWith =>

@@ -43,6 +43,8 @@ dependencies:
   google_maps_flutter: ^2.0.11
   # google_place is used to implement the autocomplete for the search box in browse screen
   google_place: ^0.4.3
+  # image_picker is for picking images from the gallery or taking them by the camera
+  image_picker: ^0.8.4+4
   infinite_scroll_pagination: ^3.1.0
   intl: ^0.17.0
   json_annotation: ^4.1.0

@@ -31,6 +31,10 @@ class _$HttpRequestStateTearOff {
     return const _Loading();
   }
 
+  _InnerLoading innerLoading() {
+    return const _InnerLoading();
+  }
+
   _ErrorDetails error(String message) {
     return _ErrorDetails(
       message,
@@ -48,6 +52,7 @@ mixin _$HttpRequestState {
     required TResult Function() noRequestInProgress,
     required TResult Function(String? message) success,
     required TResult Function() loading,
+    required TResult Function() innerLoading,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,6 +61,7 @@ mixin _$HttpRequestState {
     TResult Function()? noRequestInProgress,
     TResult Function(String? message)? success,
     TResult Function()? loading,
+    TResult Function()? innerLoading,
     TResult Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -64,6 +70,7 @@ mixin _$HttpRequestState {
     TResult Function()? noRequestInProgress,
     TResult Function(String? message)? success,
     TResult Function()? loading,
+    TResult Function()? innerLoading,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -73,6 +80,7 @@ mixin _$HttpRequestState {
     required TResult Function(_Nothing value) noRequestInProgress,
     required TResult Function(_Data value) success,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_InnerLoading value) innerLoading,
     required TResult Function(_ErrorDetails value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -81,6 +89,7 @@ mixin _$HttpRequestState {
     TResult Function(_Nothing value)? noRequestInProgress,
     TResult Function(_Data value)? success,
     TResult Function(_Loading value)? loading,
+    TResult Function(_InnerLoading value)? innerLoading,
     TResult Function(_ErrorDetails value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -89,6 +98,7 @@ mixin _$HttpRequestState {
     TResult Function(_Nothing value)? noRequestInProgress,
     TResult Function(_Data value)? success,
     TResult Function(_Loading value)? loading,
+    TResult Function(_InnerLoading value)? innerLoading,
     TResult Function(_ErrorDetails value)? error,
     required TResult orElse(),
   }) =>
@@ -160,6 +170,7 @@ class _$_Nothing with DiagnosticableTreeMixin implements _Nothing {
     required TResult Function() noRequestInProgress,
     required TResult Function(String? message) success,
     required TResult Function() loading,
+    required TResult Function() innerLoading,
     required TResult Function(String message) error,
   }) {
     return noRequestInProgress();
@@ -171,6 +182,7 @@ class _$_Nothing with DiagnosticableTreeMixin implements _Nothing {
     TResult Function()? noRequestInProgress,
     TResult Function(String? message)? success,
     TResult Function()? loading,
+    TResult Function()? innerLoading,
     TResult Function(String message)? error,
   }) {
     return noRequestInProgress?.call();
@@ -182,6 +194,7 @@ class _$_Nothing with DiagnosticableTreeMixin implements _Nothing {
     TResult Function()? noRequestInProgress,
     TResult Function(String? message)? success,
     TResult Function()? loading,
+    TResult Function()? innerLoading,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -197,6 +210,7 @@ class _$_Nothing with DiagnosticableTreeMixin implements _Nothing {
     required TResult Function(_Nothing value) noRequestInProgress,
     required TResult Function(_Data value) success,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_InnerLoading value) innerLoading,
     required TResult Function(_ErrorDetails value) error,
   }) {
     return noRequestInProgress(this);
@@ -208,6 +222,7 @@ class _$_Nothing with DiagnosticableTreeMixin implements _Nothing {
     TResult Function(_Nothing value)? noRequestInProgress,
     TResult Function(_Data value)? success,
     TResult Function(_Loading value)? loading,
+    TResult Function(_InnerLoading value)? innerLoading,
     TResult Function(_ErrorDetails value)? error,
   }) {
     return noRequestInProgress?.call(this);
@@ -219,6 +234,7 @@ class _$_Nothing with DiagnosticableTreeMixin implements _Nothing {
     TResult Function(_Nothing value)? noRequestInProgress,
     TResult Function(_Data value)? success,
     TResult Function(_Loading value)? loading,
+    TResult Function(_InnerLoading value)? innerLoading,
     TResult Function(_ErrorDetails value)? error,
     required TResult orElse(),
   }) {
@@ -306,6 +322,7 @@ class _$_Data with DiagnosticableTreeMixin implements _Data {
     required TResult Function() noRequestInProgress,
     required TResult Function(String? message) success,
     required TResult Function() loading,
+    required TResult Function() innerLoading,
     required TResult Function(String message) error,
   }) {
     return success(message);
@@ -317,6 +334,7 @@ class _$_Data with DiagnosticableTreeMixin implements _Data {
     TResult Function()? noRequestInProgress,
     TResult Function(String? message)? success,
     TResult Function()? loading,
+    TResult Function()? innerLoading,
     TResult Function(String message)? error,
   }) {
     return success?.call(message);
@@ -328,6 +346,7 @@ class _$_Data with DiagnosticableTreeMixin implements _Data {
     TResult Function()? noRequestInProgress,
     TResult Function(String? message)? success,
     TResult Function()? loading,
+    TResult Function()? innerLoading,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -343,6 +362,7 @@ class _$_Data with DiagnosticableTreeMixin implements _Data {
     required TResult Function(_Nothing value) noRequestInProgress,
     required TResult Function(_Data value) success,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_InnerLoading value) innerLoading,
     required TResult Function(_ErrorDetails value) error,
   }) {
     return success(this);
@@ -354,6 +374,7 @@ class _$_Data with DiagnosticableTreeMixin implements _Data {
     TResult Function(_Nothing value)? noRequestInProgress,
     TResult Function(_Data value)? success,
     TResult Function(_Loading value)? loading,
+    TResult Function(_InnerLoading value)? innerLoading,
     TResult Function(_ErrorDetails value)? error,
   }) {
     return success?.call(this);
@@ -365,6 +386,7 @@ class _$_Data with DiagnosticableTreeMixin implements _Data {
     TResult Function(_Nothing value)? noRequestInProgress,
     TResult Function(_Data value)? success,
     TResult Function(_Loading value)? loading,
+    TResult Function(_InnerLoading value)? innerLoading,
     TResult Function(_ErrorDetails value)? error,
     required TResult orElse(),
   }) {
@@ -429,6 +451,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
     required TResult Function() noRequestInProgress,
     required TResult Function(String? message) success,
     required TResult Function() loading,
+    required TResult Function() innerLoading,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -440,6 +463,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
     TResult Function()? noRequestInProgress,
     TResult Function(String? message)? success,
     TResult Function()? loading,
+    TResult Function()? innerLoading,
     TResult Function(String message)? error,
   }) {
     return loading?.call();
@@ -451,6 +475,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
     TResult Function()? noRequestInProgress,
     TResult Function(String? message)? success,
     TResult Function()? loading,
+    TResult Function()? innerLoading,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -466,6 +491,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
     required TResult Function(_Nothing value) noRequestInProgress,
     required TResult Function(_Data value) success,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_InnerLoading value) innerLoading,
     required TResult Function(_ErrorDetails value) error,
   }) {
     return loading(this);
@@ -477,6 +503,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
     TResult Function(_Nothing value)? noRequestInProgress,
     TResult Function(_Data value)? success,
     TResult Function(_Loading value)? loading,
+    TResult Function(_InnerLoading value)? innerLoading,
     TResult Function(_ErrorDetails value)? error,
   }) {
     return loading?.call(this);
@@ -488,6 +515,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
     TResult Function(_Nothing value)? noRequestInProgress,
     TResult Function(_Data value)? success,
     TResult Function(_Loading value)? loading,
+    TResult Function(_InnerLoading value)? innerLoading,
     TResult Function(_ErrorDetails value)? error,
     required TResult orElse(),
   }) {
@@ -500,6 +528,135 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
 
 abstract class _Loading implements HttpRequestState {
   const factory _Loading() = _$_Loading;
+}
+
+/// @nodoc
+abstract class _$InnerLoadingCopyWith<$Res> {
+  factory _$InnerLoadingCopyWith(
+          _InnerLoading value, $Res Function(_InnerLoading) then) =
+      __$InnerLoadingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$InnerLoadingCopyWithImpl<$Res>
+    extends _$HttpRequestStateCopyWithImpl<$Res>
+    implements _$InnerLoadingCopyWith<$Res> {
+  __$InnerLoadingCopyWithImpl(
+      _InnerLoading _value, $Res Function(_InnerLoading) _then)
+      : super(_value, (v) => _then(v as _InnerLoading));
+
+  @override
+  _InnerLoading get _value => super._value as _InnerLoading;
+}
+
+/// @nodoc
+
+class _$_InnerLoading with DiagnosticableTreeMixin implements _InnerLoading {
+  const _$_InnerLoading();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HttpRequestState.innerLoading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HttpRequestState.innerLoading'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _InnerLoading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() noRequestInProgress,
+    required TResult Function(String? message) success,
+    required TResult Function() loading,
+    required TResult Function() innerLoading,
+    required TResult Function(String message) error,
+  }) {
+    return innerLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? noRequestInProgress,
+    TResult Function(String? message)? success,
+    TResult Function()? loading,
+    TResult Function()? innerLoading,
+    TResult Function(String message)? error,
+  }) {
+    return innerLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? noRequestInProgress,
+    TResult Function(String? message)? success,
+    TResult Function()? loading,
+    TResult Function()? innerLoading,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (innerLoading != null) {
+      return innerLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Nothing value) noRequestInProgress,
+    required TResult Function(_Data value) success,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_InnerLoading value) innerLoading,
+    required TResult Function(_ErrorDetails value) error,
+  }) {
+    return innerLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Nothing value)? noRequestInProgress,
+    TResult Function(_Data value)? success,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_InnerLoading value)? innerLoading,
+    TResult Function(_ErrorDetails value)? error,
+  }) {
+    return innerLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Nothing value)? noRequestInProgress,
+    TResult Function(_Data value)? success,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_InnerLoading value)? innerLoading,
+    TResult Function(_ErrorDetails value)? error,
+    required TResult orElse(),
+  }) {
+    if (innerLoading != null) {
+      return innerLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InnerLoading implements HttpRequestState {
+  const factory _InnerLoading() = _$_InnerLoading;
 }
 
 /// @nodoc
@@ -578,6 +735,7 @@ class _$_ErrorDetails with DiagnosticableTreeMixin implements _ErrorDetails {
     required TResult Function() noRequestInProgress,
     required TResult Function(String? message) success,
     required TResult Function() loading,
+    required TResult Function() innerLoading,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -589,6 +747,7 @@ class _$_ErrorDetails with DiagnosticableTreeMixin implements _ErrorDetails {
     TResult Function()? noRequestInProgress,
     TResult Function(String? message)? success,
     TResult Function()? loading,
+    TResult Function()? innerLoading,
     TResult Function(String message)? error,
   }) {
     return error?.call(message);
@@ -600,6 +759,7 @@ class _$_ErrorDetails with DiagnosticableTreeMixin implements _ErrorDetails {
     TResult Function()? noRequestInProgress,
     TResult Function(String? message)? success,
     TResult Function()? loading,
+    TResult Function()? innerLoading,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -615,6 +775,7 @@ class _$_ErrorDetails with DiagnosticableTreeMixin implements _ErrorDetails {
     required TResult Function(_Nothing value) noRequestInProgress,
     required TResult Function(_Data value) success,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_InnerLoading value) innerLoading,
     required TResult Function(_ErrorDetails value) error,
   }) {
     return error(this);
@@ -626,6 +787,7 @@ class _$_ErrorDetails with DiagnosticableTreeMixin implements _ErrorDetails {
     TResult Function(_Nothing value)? noRequestInProgress,
     TResult Function(_Data value)? success,
     TResult Function(_Loading value)? loading,
+    TResult Function(_InnerLoading value)? innerLoading,
     TResult Function(_ErrorDetails value)? error,
   }) {
     return error?.call(this);
@@ -637,6 +799,7 @@ class _$_ErrorDetails with DiagnosticableTreeMixin implements _ErrorDetails {
     TResult Function(_Nothing value)? noRequestInProgress,
     TResult Function(_Data value)? success,
     TResult Function(_Loading value)? loading,
+    TResult Function(_InnerLoading value)? innerLoading,
     TResult Function(_ErrorDetails value)? error,
     required TResult orElse(),
   }) {

@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/authentication/utils/text_field_validators.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/post_listing_step_four_screen.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/widgets/country_picker.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/widgets/date_picker.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/widgets/tags_widget.dart';
@@ -14,13 +15,12 @@ import 'package:grab_grip/utils/sized_box.dart';
 
 class DetailsTabView extends StatefulWidget {
   const DetailsTabView({Key? key}) : super(key: key);
-  static final  formKey = GlobalKey<FormState>();
+
   @override
   State<DetailsTabView> createState() => _DetailsTabViewState();
 }
 
-class _DetailsTabViewState extends State<DetailsTabView> {
-
+class _DetailsTabViewState extends State<DetailsTabView> with AutomaticKeepAliveClientMixin {
   String title = "";
   String description = "";
   String city = "";
@@ -45,7 +45,7 @@ class _DetailsTabViewState extends State<DetailsTabView> {
         top: 10,
       ),
       child: Form(
-        key: DetailsTabView.formKey,
+        key: PostListingStepFourScreen.formKey,
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 10,
@@ -137,4 +137,7 @@ class _DetailsTabViewState extends State<DetailsTabView> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

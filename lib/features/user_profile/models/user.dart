@@ -23,7 +23,7 @@ class User with _$User {
     @JsonKey(name: 'country_name') String countryName,
     @JsonKey(name: 'unread_messages') int unreadMessagesCount,
     @JsonKey(name: 'can_accept_payments') int canAcceptPayments, {
-    required bool verified,
+    required  bool verified,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

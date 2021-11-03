@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:dio/dio.dart';
+import 'package:dio_http/dio_http.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
 import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
@@ -12,6 +12,7 @@ import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact
 import 'package:grab_grip/features/post_listing/models/post_listing_request/post_listing_request.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/models/upload_photo_response/upload_photo_response.dart';
 import 'package:grab_grip/features/user_profile/models/user.dart';
 import 'package:grab_grip/services/network/api/grab_grip_api.dart';
 import 'package:grab_grip/utils/constants.dart';
@@ -143,6 +144,36 @@ class NetworkService {
     }
   }
 
+  Future<Result<String, UploadPhotoResponse>> uploadPhoto(
+    String token,
+    String listingHash,
+    File file,
+  ) async {
+    try {
+      final uploadPhotoCall = await _grabGripApi.uploadPhoto("Bearer $token",
+          hash: listingHash, file: file);
+      return Success(uploadPhotoCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  Future<Result<String, String>> deletePhoto(
+    String token,
+    String listingHash,
+    String photoIndex,
+  ) async {
+    try {
+      final deletePhotoCall = await _grabGripApi.deletePhoto("Bearer $token",
+          hash: listingHash, photoIndex: photoIndex);
+      return Success(deletePhotoCall.data.toString());
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
   Future<Result<String, PostListingResponse>> postListing(
     String token,
     PostListingRequest postListingRequest,
@@ -246,6 +277,10 @@ class NetworkService {
     // when an exception occurs while logging in, "error" is not null
     else if (errorData["error"] != null) {
       aggregatedErrorMessage += "Entered email or password is incorrect";
+    }
+    // when an exception occurs while deleting an image while posting a listing, "success" is not null
+    else if (errorData["success"] != null) {
+      aggregatedErrorMessage += "The photo has not been deleted successfully";
     } else if (error.response!.statusCode == 401) {
       // user is unauthorized
       aggregatedErrorMessage += "You are not authorized to do so";

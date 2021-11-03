@@ -1,4 +1,5 @@
-import 'package:dio/dio.dart' hide Headers;
+import 'dart:io';
+import 'package:dio_http/dio_http.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
 import 'package:grab_grip/features/authentication/models/register_response/register_response.dart';
@@ -9,6 +10,7 @@ import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact
 import 'package:grab_grip/features/post_listing/models/post_listing_request/post_listing_request.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/models/upload_photo_response/upload_photo_response.dart';
 import 'package:grab_grip/features/user_profile/models/user.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:retrofit/http.dart';
@@ -65,6 +67,20 @@ abstract class GrabGripApi {
   Future<HttpResponse<PricingModelsResponse>> getPricingModels(
     @Header("Authorization") String token, {
     @Query("category") required int categoryId,
+  });
+
+  @POST("/api/v1/create/{hash}/uploads")
+  Future<HttpResponse<UploadPhotoResponse>> uploadPhoto(
+    @Header("Authorization") String token, {
+    @Path("hash") required String hash,
+    @Part(name: "qqfile") required File file,
+  });
+
+  @DELETE("/api/v1/create/{hash}/image/{index}")
+  Future<HttpResponse> deletePhoto(
+    @Header("Authorization") String token, {
+    @Path("hash") required String hash,
+    @Path("index") required String photoIndex,
   });
 
   @POST("/api/v1/create")

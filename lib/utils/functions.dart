@@ -1,14 +1,20 @@
+import 'dart:io';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/geometry/geometry.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/models/photo/photo.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:intl/intl.dart';
 
 //region snack bars
-void showSnackBar(BuildContext context, String message) {
+void showSnackBar(
+  BuildContext context,
+  String message, [
+  Color? backgroundColor,
+]) {
   WidgetsBinding.instance?.addPostFrameCallback((_) {
     // showFlash function was put inside this block
     // to avoid this exception : setState() or markNeedsBuild() called during build.
@@ -17,7 +23,7 @@ void showSnackBar(BuildContext context, String message) {
       duration: duration3Seconds,
       builder: (context, controller) {
         return Flash(
-          backgroundColor: AppColors.purple,
+          backgroundColor: backgroundColor ?? AppColors.purple,
           controller: controller,
           behavior: FlashBehavior.floating,
           position: FlashPosition.bottom,
@@ -107,5 +113,21 @@ String formatDateForView(String? dateTime) {
   final dateFormatter = DateFormat("MMMM dd, yyyy");
   final dateTimeObj = DateTime.parse(dateTime);
   return dateFormatter.format(dateTimeObj);
+}
+//endregion
+
+//region files
+Future<Photo> makePhotoFromFile(
+  File file,
+  String index,
+  String photoName,
+) async {
+  final fileSize = await file.length();
+  return Photo(
+    index: index,
+    name: photoName,
+    size: "${fileSize / 1000} KB",
+    path: file.path,
+  );
 }
 //endregion

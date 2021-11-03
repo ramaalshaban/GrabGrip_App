@@ -3,6 +3,7 @@ import 'package:grab_grip/style/colors.dart';
 
 const String noInternetConnection = "no internet connection";
 const String googleApiKey = "AIzaSyDgRW2kCiet1O-yY2YViStzDVe9ld_DSXo";
+const int postListingPhotosLimit = 20;
 //region durations
 const Duration duration300Milli = Duration(milliseconds: 300);
 const Duration duration500Milli = Duration(milliseconds: 500);
