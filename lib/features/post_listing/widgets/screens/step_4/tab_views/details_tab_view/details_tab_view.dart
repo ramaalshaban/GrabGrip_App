@@ -20,7 +20,8 @@ class DetailsTabView extends StatefulWidget {
   State<DetailsTabView> createState() => _DetailsTabViewState();
 }
 
-class _DetailsTabViewState extends State<DetailsTabView> with AutomaticKeepAliveClientMixin {
+class _DetailsTabViewState extends State<DetailsTabView>
+    with AutomaticKeepAliveClientMixin {
   String title = "";
   String description = "";
   String city = "";
@@ -40,12 +41,13 @@ class _DetailsTabViewState extends State<DetailsTabView> with AutomaticKeepAlive
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return SingleChildScrollView(
       padding: const EdgeInsets.only(
         top: 10,
       ),
       child: Form(
-        key: PostListingStepFourScreen.formKey,
+        key: PostListingStepFourScreen.detailsTabFormKey,
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 10,

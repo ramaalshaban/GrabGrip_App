@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:grab_grip/features/browsing/browse/models/geocode_response/latlng/latlng.dart';
+import 'package:grab_grip/features/browsing/browse/models/geocode_response/lat_lng/lat_lng.dart';
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/viewport/viewport.dart';
 
 part 'geometry.freezed.dart';

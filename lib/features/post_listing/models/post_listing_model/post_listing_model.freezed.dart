@@ -34,7 +34,12 @@ class _$PostListingModelTearOff {
       String? region,
       List<Photo> photos = const [],
       List<UploadPhotoResponse> photosAsJson = const [],
-      Map<String, UploadPhotoResponse> photosToPost = const {}]) {
+      Map<String, UploadPhotoResponse> photosToPost = const {},
+      int? price,
+      int? stock,
+      List<AdditionalOption> additionalOptions = const [AdditionalOption()],
+      List<ShippingFee> shippingFees = const [ShippingFee()],
+      List<Variation> variations = const [Variation()]]) {
     return _PostListingModel(
       category,
       subcategory,
@@ -53,6 +58,11 @@ class _$PostListingModelTearOff {
       photos,
       photosAsJson,
       photosToPost,
+      price,
+      stock,
+      additionalOptions,
+      shippingFees,
+      variations,
     );
   }
 }
@@ -81,6 +91,12 @@ mixin _$PostListingModel {
       throw _privateConstructorUsedError;
   Map<String, UploadPhotoResponse> get photosToPost =>
       throw _privateConstructorUsedError;
+  int? get price => throw _privateConstructorUsedError;
+  int? get stock => throw _privateConstructorUsedError;
+  List<AdditionalOption> get additionalOptions =>
+      throw _privateConstructorUsedError;
+  List<ShippingFee> get shippingFees => throw _privateConstructorUsedError;
+  List<Variation> get variations => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostListingModelCopyWith<PostListingModel> get copyWith =>
@@ -109,7 +125,12 @@ abstract class $PostListingModelCopyWith<$Res> {
       String? region,
       List<Photo> photos,
       List<UploadPhotoResponse> photosAsJson,
-      Map<String, UploadPhotoResponse> photosToPost});
+      Map<String, UploadPhotoResponse> photosToPost,
+      int? price,
+      int? stock,
+      List<AdditionalOption> additionalOptions,
+      List<ShippingFee> shippingFees,
+      List<Variation> variations});
 
   $CategoryCopyWith<$Res>? get category;
   $CategoryCopyWith<$Res>? get subcategory;
@@ -145,6 +166,11 @@ class _$PostListingModelCopyWithImpl<$Res>
     Object? photos = freezed,
     Object? photosAsJson = freezed,
     Object? photosToPost = freezed,
+    Object? price = freezed,
+    Object? stock = freezed,
+    Object? additionalOptions = freezed,
+    Object? shippingFees = freezed,
+    Object? variations = freezed,
   }) {
     return _then(_value.copyWith(
       category: category == freezed
@@ -215,6 +241,26 @@ class _$PostListingModelCopyWithImpl<$Res>
           ? _value.photosToPost
           : photosToPost // ignore: cast_nullable_to_non_nullable
               as Map<String, UploadPhotoResponse>,
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int?,
+      stock: stock == freezed
+          ? _value.stock
+          : stock // ignore: cast_nullable_to_non_nullable
+              as int?,
+      additionalOptions: additionalOptions == freezed
+          ? _value.additionalOptions
+          : additionalOptions // ignore: cast_nullable_to_non_nullable
+              as List<AdditionalOption>,
+      shippingFees: shippingFees == freezed
+          ? _value.shippingFees
+          : shippingFees // ignore: cast_nullable_to_non_nullable
+              as List<ShippingFee>,
+      variations: variations == freezed
+          ? _value.variations
+          : variations // ignore: cast_nullable_to_non_nullable
+              as List<Variation>,
     ));
   }
 
@@ -287,7 +333,12 @@ abstract class _$PostListingModelCopyWith<$Res>
       String? region,
       List<Photo> photos,
       List<UploadPhotoResponse> photosAsJson,
-      Map<String, UploadPhotoResponse> photosToPost});
+      Map<String, UploadPhotoResponse> photosToPost,
+      int? price,
+      int? stock,
+      List<AdditionalOption> additionalOptions,
+      List<ShippingFee> shippingFees,
+      List<Variation> variations});
 
   @override
   $CategoryCopyWith<$Res>? get category;
@@ -329,6 +380,11 @@ class __$PostListingModelCopyWithImpl<$Res>
     Object? photos = freezed,
     Object? photosAsJson = freezed,
     Object? photosToPost = freezed,
+    Object? price = freezed,
+    Object? stock = freezed,
+    Object? additionalOptions = freezed,
+    Object? shippingFees = freezed,
+    Object? variations = freezed,
   }) {
     return _then(_PostListingModel(
       category == freezed
@@ -399,6 +455,26 @@ class __$PostListingModelCopyWithImpl<$Res>
           ? _value.photosToPost
           : photosToPost // ignore: cast_nullable_to_non_nullable
               as Map<String, UploadPhotoResponse>,
+      price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int?,
+      stock == freezed
+          ? _value.stock
+          : stock // ignore: cast_nullable_to_non_nullable
+              as int?,
+      additionalOptions == freezed
+          ? _value.additionalOptions
+          : additionalOptions // ignore: cast_nullable_to_non_nullable
+              as List<AdditionalOption>,
+      shippingFees == freezed
+          ? _value.shippingFees
+          : shippingFees // ignore: cast_nullable_to_non_nullable
+              as List<ShippingFee>,
+      variations == freezed
+          ? _value.variations
+          : variations // ignore: cast_nullable_to_non_nullable
+              as List<Variation>,
     ));
   }
 }
@@ -425,7 +501,12 @@ class _$_PostListingModel
       this.region,
       this.photos = const [],
       this.photosAsJson = const [],
-      this.photosToPost = const {}]);
+      this.photosToPost = const {},
+      this.price,
+      this.stock,
+      this.additionalOptions = const [AdditionalOption()],
+      this.shippingFees = const [ShippingFee()],
+      this.variations = const [Variation()]]);
 
   @override
   final Category? category;
@@ -466,10 +547,23 @@ class _$_PostListingModel
   @JsonKey(defaultValue: const {})
   @override
   final Map<String, UploadPhotoResponse> photosToPost;
+  @override
+  final int? price;
+  @override
+  final int? stock;
+  @JsonKey(defaultValue: const [AdditionalOption()])
+  @override
+  final List<AdditionalOption> additionalOptions;
+  @JsonKey(defaultValue: const [ShippingFee()])
+  @override
+  final List<ShippingFee> shippingFees;
+  @JsonKey(defaultValue: const [Variation()])
+  @override
+  final List<Variation> variations;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostListingModel(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, title: $title, description: $description, postedListing: $postedListing, tags: $tags, listingEndDate: $listingEndDate, pricingModels: $pricingModels, place: $place, latLng: $latLng, country: $country, city: $city, region: $region, photos: $photos, photosAsJson: $photosAsJson, photosToPost: $photosToPost)';
+    return 'PostListingModel(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, title: $title, description: $description, postedListing: $postedListing, tags: $tags, listingEndDate: $listingEndDate, pricingModels: $pricingModels, place: $place, latLng: $latLng, country: $country, city: $city, region: $region, photos: $photos, photosAsJson: $photosAsJson, photosToPost: $photosToPost, price: $price, stock: $stock, additionalOptions: $additionalOptions, shippingFees: $shippingFees, variations: $variations)';
   }
 
   @override
@@ -493,7 +587,12 @@ class _$_PostListingModel
       ..add(DiagnosticsProperty('region', region))
       ..add(DiagnosticsProperty('photos', photos))
       ..add(DiagnosticsProperty('photosAsJson', photosAsJson))
-      ..add(DiagnosticsProperty('photosToPost', photosToPost));
+      ..add(DiagnosticsProperty('photosToPost', photosToPost))
+      ..add(DiagnosticsProperty('price', price))
+      ..add(DiagnosticsProperty('stock', stock))
+      ..add(DiagnosticsProperty('additionalOptions', additionalOptions))
+      ..add(DiagnosticsProperty('shippingFees', shippingFees))
+      ..add(DiagnosticsProperty('variations', variations));
   }
 
   @override
@@ -543,7 +642,20 @@ class _$_PostListingModel
                     .equals(other.photosAsJson, photosAsJson)) &&
             (identical(other.photosToPost, photosToPost) ||
                 const DeepCollectionEquality()
-                    .equals(other.photosToPost, photosToPost)));
+                    .equals(other.photosToPost, photosToPost)) &&
+            (identical(other.price, price) ||
+                const DeepCollectionEquality().equals(other.price, price)) &&
+            (identical(other.stock, stock) ||
+                const DeepCollectionEquality().equals(other.stock, stock)) &&
+            (identical(other.additionalOptions, additionalOptions) ||
+                const DeepCollectionEquality()
+                    .equals(other.additionalOptions, additionalOptions)) &&
+            (identical(other.shippingFees, shippingFees) ||
+                const DeepCollectionEquality()
+                    .equals(other.shippingFees, shippingFees)) &&
+            (identical(other.variations, variations) ||
+                const DeepCollectionEquality()
+                    .equals(other.variations, variations)));
   }
 
   @override
@@ -565,7 +677,12 @@ class _$_PostListingModel
       const DeepCollectionEquality().hash(region) ^
       const DeepCollectionEquality().hash(photos) ^
       const DeepCollectionEquality().hash(photosAsJson) ^
-      const DeepCollectionEquality().hash(photosToPost);
+      const DeepCollectionEquality().hash(photosToPost) ^
+      const DeepCollectionEquality().hash(price) ^
+      const DeepCollectionEquality().hash(stock) ^
+      const DeepCollectionEquality().hash(additionalOptions) ^
+      const DeepCollectionEquality().hash(shippingFees) ^
+      const DeepCollectionEquality().hash(variations);
 
   @JsonKey(ignore: true)
   @override
@@ -591,7 +708,12 @@ abstract class _PostListingModel implements PostListingModel {
       String? region,
       List<Photo> photos,
       List<UploadPhotoResponse> photosAsJson,
-      Map<String, UploadPhotoResponse> photosToPost]) = _$_PostListingModel;
+      Map<String, UploadPhotoResponse> photosToPost,
+      int? price,
+      int? stock,
+      List<AdditionalOption> additionalOptions,
+      List<ShippingFee> shippingFees,
+      List<Variation> variations]) = _$_PostListingModel;
 
   @override
   Category? get category => throw _privateConstructorUsedError;
@@ -629,6 +751,17 @@ abstract class _PostListingModel implements PostListingModel {
   @override
   Map<String, UploadPhotoResponse> get photosToPost =>
       throw _privateConstructorUsedError;
+  @override
+  int? get price => throw _privateConstructorUsedError;
+  @override
+  int? get stock => throw _privateConstructorUsedError;
+  @override
+  List<AdditionalOption> get additionalOptions =>
+      throw _privateConstructorUsedError;
+  @override
+  List<ShippingFee> get shippingFees => throw _privateConstructorUsedError;
+  @override
+  List<Variation> get variations => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PostListingModelCopyWith<_PostListingModel> get copyWith =>

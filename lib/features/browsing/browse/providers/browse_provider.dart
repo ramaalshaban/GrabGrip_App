@@ -10,7 +10,7 @@ class BrowseProvider extends StateNotifier<BrowseModel> {
   static PagingController<int, Gear> pagingController =
       PagingController(firstPageKey: 1);
 
-  BrowseProvider(this._filterSortProvider) : super(BrowseModel.getEmptyModel());
+  BrowseProvider(this._filterSortProvider) : super(BrowseModel.empty());
 
   Future<void> browse(int pageKey) async {
     final filterAndSortParams = _filterSortProvider.state;

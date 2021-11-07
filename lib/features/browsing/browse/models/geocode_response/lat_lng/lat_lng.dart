@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'latlng.freezed.dart';
+part 'lat_lng.freezed.dart';
 
-part 'latlng.g.dart';
+part 'lat_lng.g.dart';
 
 @freezed
 class LatLng with _$LatLng {

@@ -14,6 +14,8 @@ import 'package:grab_grip/features/post_listing/models/post_listing_model/post_l
 import 'package:grab_grip/features/post_listing/models/post_listing_step_number_model/post_listing_step_number.dart';
 import 'package:grab_grip/features/post_listing/providers/post_listing_provider.dart';
 import 'package:grab_grip/features/post_listing/providers/post_listing_step_number_provider.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/models/listing_pricing_model/listing_pricing_model.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/providers/listing_pricing_provider.dart';
 import 'package:grab_grip/features/user_profile/models/user.dart';
 import 'package:grab_grip/features/user_profile/providers/user_profile_provider.dart';
 import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
@@ -34,7 +36,7 @@ final authProvider =
     StateNotifierProvider<AuthProvider, AuthState>((reference) {
   final httpProvider = reference.watch(httpRequestStateProvider.notifier);
   final userProvider = reference.watch(userProfileProvider.notifier);
-  return AuthProvider(httpProvider,userProvider);
+  return AuthProvider(httpProvider, userProvider);
 });
 
 final filterAndSortProvider =
@@ -73,13 +75,20 @@ final postListingStepProvider =
 final locationPickerStateProvider =
     StateNotifierProvider<LocationPickerStateProvider, LocationPickerState>(
         (reference) {
-          final provider = reference.watch(filterAndSortProvider.notifier);
-          final postAListingProvider = reference.watch(postListingProvider.notifier);
-  return LocationPickerStateProvider(provider,postAListingProvider);
+  final provider = reference.watch(filterAndSortProvider.notifier);
+  final postAListingProvider = reference.watch(postListingProvider.notifier);
+  return LocationPickerStateProvider(provider, postAListingProvider);
 });
 
 final userProfileProvider =
-StateNotifierProvider<UserProfileProvider, User>((reference) {
+    StateNotifierProvider<UserProfileProvider, User>((reference) {
   final provider = reference.watch(httpRequestStateProvider.notifier);
   return UserProfileProvider(provider);
+});
+
+final listingPricingProvider =
+    StateNotifierProvider<ListingPricingProvider, ListingPricingModel>(
+        (reference) {
+  final provider = reference.watch(postListingProvider.notifier);
+  return ListingPricingProvider(provider);
 });

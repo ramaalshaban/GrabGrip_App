@@ -10,9 +10,12 @@ import 'package:grab_grip/features/post_listing/models/post_listing_request/post
 import 'package:grab_grip/features/post_listing/models/pricing_model/pricing_model.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/models/photo/photo.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/models/upload_photo_response/upload_photo_response.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/additional_options/models/additional_option/additional_option.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/shipping_fees/models/shipping_fee/shipping_fee.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/variations/models/variation/variation.dart';
 import 'package:grab_grip/services/network/network_service.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
-import 'package:grab_grip/services/storage/app_shared_pereferences.dart';
+import 'package:grab_grip/services/storage/app_shared_preferences.dart';
 import 'package:grab_grip/utils/functions.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -110,6 +113,29 @@ class PostListingProvider extends StateNotifier<PostListingModel> {
   set photosAsJson(List<UploadPhotoResponse> photosAsJson) =>
       state = state.copyWith(photosAsJson: photosAsJson);
 
+  set price(int? price) => state = state.copyWith(price: price);
+
+  int? get price => state.price;
+
+  set stock(int? stock) => state = state.copyWith(stock: stock);
+
+  int? get stock => state.stock;
+
+  List<AdditionalOption> get additionalOptions => state.additionalOptions;
+
+  set additionalOptions(List<AdditionalOption> additionalOptions) =>
+      state = state.copyWith(additionalOptions: additionalOptions);
+
+  List<ShippingFee> get shippingFees => state.shippingFees;
+
+  set shippingFees(List<ShippingFee> shippingFees) =>
+      state = state.copyWith(shippingFees: shippingFees);
+
+  List<Variation> get variations => state.variations;
+
+  set variations(List<Variation> variations) =>
+      state = state.copyWith(variations: variations);
+
 //endregion
 
   void resetPlace() {
@@ -126,6 +152,8 @@ class PostListingProvider extends StateNotifier<PostListingModel> {
     }
   }
 
+  //region add/remove methods
+  //region tags
   void addTag(String newTag) {
     final List<String> availableTags = [];
     availableTags.addAll(tags);
@@ -140,6 +168,9 @@ class PostListingProvider extends StateNotifier<PostListingModel> {
     tags = availableTags.toList();
   }
 
+  //endregion
+
+  //region photos
   Future<void> addPhoto(File file) async {
     final photoIndex = photos.length.toString();
     final newPhotoName = "$title - photo #${photos.length + 1}";
@@ -178,6 +209,134 @@ class PostListingProvider extends StateNotifier<PostListingModel> {
     availableResponses.remove(photoResponseToRemove);
     photosAsJson = availableResponses.toList();
   }
+
+  //endregion
+
+  //region additional options
+  void addEmptyAdditionalOption() {
+    final List<AdditionalOption> availableOptions = [];
+    availableOptions.addAll(additionalOptions);
+    availableOptions.add(AdditionalOption.empty());
+    additionalOptions = availableOptions.toList();
+  }
+
+  void editAdditionalOption(int index, AdditionalOption newOption) {
+    final List<AdditionalOption> availableOptions = [];
+    for (int i = 0; i < additionalOptions.length; i++) {
+      if (i == index) {
+        availableOptions.add(newOption);
+      } else {
+        availableOptions.add(additionalOptions[i]);
+      }
+    }
+    additionalOptions = availableOptions.toList();
+  }
+
+  void removeAdditionalOption(int index) {
+    final optionToRemove = additionalOptions[index];
+    final List<AdditionalOption> availableOptions = [];
+    availableOptions.addAll(additionalOptions);
+    availableOptions.remove(optionToRemove);
+    additionalOptions = availableOptions.toList();
+  }
+
+  //endregion
+
+  //region shipping fees
+  void addEmptyShippingFee() {
+    final List<ShippingFee> availableFees = [];
+    availableFees.addAll(shippingFees);
+    availableFees.add(ShippingFee.empty());
+    shippingFees = availableFees.toList();
+  }
+
+  void editShippingFee(int index, ShippingFee newFee) {
+    final List<ShippingFee> availableFees = [];
+    for (int i = 0; i < shippingFees.length; i++) {
+      if (i == index) {
+        availableFees.add(newFee);
+      } else {
+        availableFees.add(shippingFees[i]);
+      }
+    }
+    shippingFees = availableFees.toList();
+  }
+
+  void removeShippingFee(int index) {
+    final feeToRemove = shippingFees[index];
+    final List<ShippingFee> availableFees = [];
+    availableFees.addAll(shippingFees);
+    availableFees.remove(feeToRemove);
+    shippingFees = availableFees.toList();
+  }
+
+  //endregion
+
+  //region variations
+  void addEmptyVariation() {
+    final List<Variation> availableVariations = [];
+    availableVariations.addAll(variations);
+    availableVariations.add(Variation.empty());
+    variations = availableVariations.toList();
+  }
+
+  void addValueToVariation(int index, String newValue) {
+    final List<String> availableValues = [];
+    availableValues.addAll(variations[index].values);
+    availableValues.add(newValue);
+    final List<Variation> availableVariations = [];
+    for (int i = 0; i < variations.length; i++) {
+      if (i == index) {
+        final toUpdateVariation = Variation(
+            attribute: variations[i].attribute, values: availableValues);
+        availableVariations.add(toUpdateVariation);
+      } else {
+        availableVariations.add(variations[i]);
+      }
+    }
+    variations = availableVariations.toList();
+  }
+
+  void removeValueFromVariation(int index, String valueToRemove) {
+    final List<String> availableValues = [];
+    availableValues.addAll(variations[index].values);
+    availableValues.remove(valueToRemove);
+    final List<Variation> availableVariations = [];
+    for (int i = 0; i < variations.length; i++) {
+      if (i == index) {
+        final toUpdateVariation = Variation(
+            attribute: variations[i].attribute, values: availableValues);
+        availableVariations.add(toUpdateVariation);
+      } else {
+        availableVariations.add(variations[i]);
+      }
+    }
+    variations = availableVariations.toList();
+  }
+
+  void editVariation(int index, Variation newVariation) {
+    final List<Variation> availableVariations = [];
+    for (int i = 0; i < variations.length; i++) {
+      if (i == index) {
+        availableVariations.add(newVariation);
+      } else {
+        availableVariations.add(variations[i]);
+      }
+    }
+    variations = availableVariations.toList();
+  }
+
+  void removeVariation(int index) {
+    final variationToRemove = variations[index];
+    final List<Variation> availableVariations = [];
+    availableVariations.addAll(variations);
+    availableVariations.remove(variationToRemove);
+    variations = availableVariations.toList();
+  }
+
+  //endregion
+
+  //endregion
 
   Future<void> getPricingModels() async {
     httpRequestStateProvider.setLoading();
@@ -258,7 +417,8 @@ class PostListingProvider extends StateNotifier<PostListingModel> {
           },
           (response) {
             httpRequestStateProvider.setSuccess(
-                "Your listing has been created as draft successfully");
+              "Your listing has been created as draft successfully",
+            );
             postedListing = response.postedListing;
           },
         );

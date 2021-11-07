@@ -5,14 +5,13 @@
 // **************************************************************************
 
 import 'package:auto_route/auto_route.dart' as _i11;
-import 'package:flutter/cupertino.dart' as _i14;
 import 'package:flutter/material.dart' as _i12;
 
 import '../../features/authentication/forgot_password_screen.dart' as _i4;
 import '../../features/authentication/login_screen.dart' as _i3;
 import '../../features/authentication/register_screen.dart' as _i2;
 import '../../features/browsing/about_us/about_us_screen.dart' as _i9;
-import '../../features/browsing/browse/models/gear/gear.dart' as _i15;
+import '../../features/browsing/browse/models/gear/gear.dart' as _i14;
 import '../../features/browsing/browse/widgets/browse_details_screen.dart'
     as _i6;
 import '../../features/browsing/browse/widgets/browse_screen/browse_screen.dart'
@@ -119,7 +118,7 @@ class HomeScreenRoute extends _i11.PageRouteInfo<void> {
 
 /// generated route for [_i2.RegisterScreen]
 class RegisterScreenRoute extends _i11.PageRouteInfo<RegisterScreenRouteArgs> {
-  RegisterScreenRoute({void Function()? onSuccessRegistration, _i14.Key? key})
+  RegisterScreenRoute({void Function()? onSuccessRegistration, _i12.Key? key})
       : super(name,
             path: '/register-screen',
             args: RegisterScreenRouteArgs(
@@ -133,12 +132,12 @@ class RegisterScreenRouteArgs {
 
   final void Function()? onSuccessRegistration;
 
-  final _i14.Key? key;
+  final _i12.Key? key;
 }
 
 /// generated route for [_i3.LoginScreen]
 class LoginScreenRoute extends _i11.PageRouteInfo<LoginScreenRouteArgs> {
-  LoginScreenRoute({_i14.Key? key, void Function()? onSuccessLogin})
+  LoginScreenRoute({_i12.Key? key, void Function()? onSuccessLogin})
       : super(name,
             path: '/login-screen',
             args:
@@ -150,7 +149,7 @@ class LoginScreenRoute extends _i11.PageRouteInfo<LoginScreenRouteArgs> {
 class LoginScreenRouteArgs {
   const LoginScreenRouteArgs({this.key, this.onSuccessLogin});
 
-  final _i14.Key? key;
+  final _i12.Key? key;
 
   final void Function()? onSuccessLogin;
 }
@@ -173,7 +172,7 @@ class BrowseScreenRoute extends _i11.PageRouteInfo<void> {
 /// generated route for [_i6.BrowseDetailsScreen]
 class BrowseDetailsScreenRoute
     extends _i11.PageRouteInfo<BrowseDetailsScreenRouteArgs> {
-  BrowseDetailsScreenRoute({_i14.Key? key, required _i15.Gear gear})
+  BrowseDetailsScreenRoute({_i12.Key? key, required _i14.Gear gear})
       : super(name,
             path: '/browse-details-screen',
             args: BrowseDetailsScreenRouteArgs(key: key, gear: gear));
@@ -184,9 +183,9 @@ class BrowseDetailsScreenRoute
 class BrowseDetailsScreenRouteArgs {
   const BrowseDetailsScreenRouteArgs({this.key, required this.gear});
 
-  final _i14.Key? key;
+  final _i12.Key? key;
 
-  final _i15.Gear gear;
+  final _i14.Gear gear;
 }
 
 /// generated route for [_i7.PostListingScreen]
@@ -214,7 +213,7 @@ class AboutUsScreenRoute extends _i11.PageRouteInfo<void> {
 class VerifyYourEmailScreenRoute
     extends _i11.PageRouteInfo<VerifyYourEmailScreenRouteArgs> {
   VerifyYourEmailScreenRoute(
-      {_i14.Key? key, required void Function() onSuccessVerification})
+      {_i12.Key? key, required void Function() onSuccessVerification})
       : super(name,
             path: '/verify-your-email-screen',
             args: VerifyYourEmailScreenRouteArgs(
@@ -227,7 +226,7 @@ class VerifyYourEmailScreenRouteArgs {
   const VerifyYourEmailScreenRouteArgs(
       {this.key, required this.onSuccessVerification});
 
-  final _i14.Key? key;
+  final _i12.Key? key;
 
   final void Function() onSuccessVerification;
 }

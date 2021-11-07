@@ -5,7 +5,7 @@ import 'package:grab_grip/features/authentication/providers/auth_state.dart';
 import 'package:grab_grip/features/user_profile/providers/user_profile_provider.dart';
 import 'package:grab_grip/services/network/network_service.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
-import 'package:grab_grip/services/storage/app_shared_pereferences.dart';
+import 'package:grab_grip/services/storage/app_shared_preferences.dart';
 
 class AuthProvider extends StateNotifier<AuthState> {
   HttpRequestStateProvider httpRequestStateProvider;

@@ -16,7 +16,5 @@ class BrowseModel with _$BrowseModel {
   factory BrowseModel.fromJson(Map<String, dynamic> json) =>
       _$BrowseModelFromJson(json);
 
-  static BrowseModel getEmptyModel() {
-    return const BrowseModel(Listing(-1, -1, -1, []));
-  }
+  factory BrowseModel.empty() => const BrowseModel(Listing(-1, -1, -1, []));
 }

@@ -2,11 +2,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/features/user_profile/models/user.dart';
 import 'package:grab_grip/services/network/network_service.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
-import 'package:grab_grip/services/storage/app_shared_pereferences.dart';
+import 'package:grab_grip/services/storage/app_shared_preferences.dart';
 
 class UserProfileProvider extends StateNotifier<User> {
   UserProfileProvider(this.httpRequestStateProvider)
-      : super(User.getEmptyModel());
+      : super(User.empty());
   HttpRequestStateProvider httpRequestStateProvider;
 
   bool getVerificationStatus() => state.verified;

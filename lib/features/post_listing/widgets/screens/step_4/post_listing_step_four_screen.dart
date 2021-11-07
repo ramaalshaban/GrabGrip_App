@@ -5,7 +5,7 @@ import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/details_tab_view.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/images_tab_view.dart';
-import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/pricing_tab_view.dart';
 import 'package:grab_grip/shared/continue_button.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/functions.dart';
@@ -13,7 +13,7 @@ import 'package:grab_grip/utils/sized_box.dart';
 
 class PostListingStepFourScreen extends StatelessWidget {
   const PostListingStepFourScreen({Key? key}) : super(key: key);
-  static final formKey = GlobalKey<FormState>();
+  static final detailsTabFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class PostListingStepFourScreen extends StatelessWidget {
                         switch (DefaultTabController.of(context)!.index) {
                           case 0:
                             {
-                              if (formKey.currentState!.validate()) {
+                              if (detailsTabFormKey.currentState!.validate()) {
                                 // reset the state of the previous user actions the might be saved in the providers
                                 //   ref(postListingStepProvider.notifier).setStep1();
                                 //   ref(postListingProvider.notifier).reset();
@@ -89,7 +89,7 @@ class PostListingStepFourScreen extends StatelessWidget {
                             break;
                           case 1:
                             {
-                              if (!formKey.currentState!.validate()) {
+                              if (!detailsTabFormKey.currentState!.validate()) {
                                 showSnackBar(
                                   context,
                                   "Check the information you entered please",
@@ -160,6 +160,59 @@ class PostListingStepFourScreen extends StatelessWidget {
                           debugPrint("-------------");
                         }
                         debugPrint(
+                          "price in sar ${ref(postListingProvider.notifier).price}",
+                        );
+                        debugPrint(
+                          "stock ${ref(postListingProvider.notifier).stock}",
+                        );
+                        for (int i = 0;
+                        i <
+                            ref(postListingProvider.notifier)
+                                .additionalOptions
+                                .length;
+                        i++) {
+                          debugPrint(
+                            "       name: ${ref(postListingProvider.notifier).additionalOptions[i].name}",
+                          );
+                          debugPrint(
+                            "       price: ${ref(postListingProvider.notifier).additionalOptions[i].price}",
+                          );
+                          debugPrint(
+                            "       Max Qty: ${ref(postListingProvider.notifier).additionalOptions[i].maxQuantity}",
+                          );
+                          debugPrint("-------------");
+                        }
+                        for (int i = 0;
+                        i <
+                            ref(postListingProvider.notifier)
+                                .shippingFees
+                                .length;
+                        i++) {
+                          debugPrint(
+                            "       name: ${ref(postListingProvider.notifier).shippingFees[i].name}",
+                          );
+                          debugPrint(
+                            "       price: ${ref(postListingProvider.notifier).shippingFees[i].price}",
+                          );
+
+                          debugPrint("-------------");
+                        }
+                        for (int i = 0;
+                        i <
+                            ref(postListingProvider.notifier)
+                                .variations
+                                .length;
+                        i++) {
+                          debugPrint(
+                            "       name: ${ref(postListingProvider.notifier).variations[i].attribute}",
+                          );
+                          debugPrint(
+                            "       values: ${ref(postListingProvider.notifier).variations[i].values.toString()}",
+                          );
+
+                          debugPrint("-------------");
+                        }
+                        debugPrint(
                           "---------------------------------------------------------------------",
                         );
                         //endregion
@@ -171,7 +224,7 @@ class PostListingStepFourScreen extends StatelessWidget {
                       formKey: null,
                       buttonText: "Publish",
                       onClickAction: () {
-                        if (formKey.currentState!.validate()) {
+                        if (detailsTabFormKey.currentState!.validate()) {
                           context.router.replace(const HomeScreenRoute());
                           ref(postListingProvider.notifier).publishListing();
                         }
