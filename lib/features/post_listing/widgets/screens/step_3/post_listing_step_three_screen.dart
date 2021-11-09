@@ -92,7 +92,7 @@ class _PostListingStepThreeScreenState
                 formKey: _formKey,
                 buttonText: AppLocalizations.of(context)!.create_and_continue,
                 onClickAction: () {
-                  ref(postListingProvider.notifier).postListing();
+                  ref(postListingProvider.notifier).postListingAsDraft();
                 },
               );
             },

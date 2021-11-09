@@ -7,9 +7,10 @@ import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_mo
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/geocode_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
-import 'package:grab_grip/features/post_listing/models/post_listing_request/post_listing_request.dart';
+import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
+import 'package:grab_grip/features/post_listing/models/save_listing_request/save_listing_request.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/models/upload_photo_response/upload_photo_response.dart';
 import 'package:grab_grip/features/user_profile/models/user.dart';
 import 'package:grab_grip/utils/constants.dart';
@@ -84,10 +85,26 @@ abstract class GrabGripApi {
   });
 
   @POST("/api/v1/create")
-  Future<HttpResponse<PostListingResponse>> postListing(
+  Future<HttpResponse<PostListingResponse>> postListingAsDraft(
     @Header("Authorization") String token,
-    @Body() PostListingRequest postListingRequest,
+    @Body() PostListingAsDraftRequest postListingRequest,
   );
+
+  @PUT("/api/v1/create/{hash}")
+  Future<HttpResponse> saveListing(
+    @Header("Authorization") String token, {
+    @Path("hash") required String hash,
+    @Body() required  SaveListingRequest body,
+  });
+
+  @PUT("/api/v1/create/{hash}")
+  Future<HttpResponse> changeListingAvailability(
+    @Header("Authorization") String token, {
+    @Path("hash") required String hash,
+    @Query("publish") String? publish,
+    @Query("undraft") String? reEnable,
+    @Query("draft") String? upPublish,
+  });
 
   //endregion
 

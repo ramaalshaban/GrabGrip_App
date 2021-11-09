@@ -23,13 +23,13 @@ class _$UploadPhotoResponseTearOff {
 
   _UploadPhotoResponse call(
       String? type, String? path, String? original, String? thumbnailUrl,
-      {@JsonKey(name: 'success') required bool? succeeded}) {
+      {required bool? success}) {
     return _UploadPhotoResponse(
       type,
       path,
       original,
       thumbnailUrl,
-      succeeded: succeeded,
+      success: success,
     );
   }
 
@@ -47,8 +47,7 @@ mixin _$UploadPhotoResponse {
   String? get path => throw _privateConstructorUsedError;
   String? get original => throw _privateConstructorUsedError;
   String? get thumbnailUrl => throw _privateConstructorUsedError;
-  @JsonKey(name: 'success')
-  bool? get succeeded => throw _privateConstructorUsedError;
+  bool? get success => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -66,7 +65,7 @@ abstract class $UploadPhotoResponseCopyWith<$Res> {
       String? path,
       String? original,
       String? thumbnailUrl,
-      @JsonKey(name: 'success') bool? succeeded});
+      bool? success});
 }
 
 /// @nodoc
@@ -84,7 +83,7 @@ class _$UploadPhotoResponseCopyWithImpl<$Res>
     Object? path = freezed,
     Object? original = freezed,
     Object? thumbnailUrl = freezed,
-    Object? succeeded = freezed,
+    Object? success = freezed,
   }) {
     return _then(_value.copyWith(
       type: type == freezed
@@ -103,9 +102,9 @@ class _$UploadPhotoResponseCopyWithImpl<$Res>
           ? _value.thumbnailUrl
           : thumbnailUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      succeeded: succeeded == freezed
-          ? _value.succeeded
-          : succeeded // ignore: cast_nullable_to_non_nullable
+      success: success == freezed
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
               as bool?,
     ));
   }
@@ -123,7 +122,7 @@ abstract class _$UploadPhotoResponseCopyWith<$Res>
       String? path,
       String? original,
       String? thumbnailUrl,
-      @JsonKey(name: 'success') bool? succeeded});
+      bool? success});
 }
 
 /// @nodoc
@@ -143,7 +142,7 @@ class __$UploadPhotoResponseCopyWithImpl<$Res>
     Object? path = freezed,
     Object? original = freezed,
     Object? thumbnailUrl = freezed,
-    Object? succeeded = freezed,
+    Object? success = freezed,
   }) {
     return _then(_UploadPhotoResponse(
       type == freezed
@@ -162,9 +161,9 @@ class __$UploadPhotoResponseCopyWithImpl<$Res>
           ? _value.thumbnailUrl
           : thumbnailUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      succeeded: succeeded == freezed
-          ? _value.succeeded
-          : succeeded // ignore: cast_nullable_to_non_nullable
+      success: success == freezed
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
               as bool?,
     ));
   }
@@ -177,7 +176,7 @@ class _$_UploadPhotoResponse
     implements _UploadPhotoResponse {
   const _$_UploadPhotoResponse(
       this.type, this.path, this.original, this.thumbnailUrl,
-      {@JsonKey(name: 'success') required this.succeeded});
+      {required this.success});
 
   factory _$_UploadPhotoResponse.fromJson(Map<String, dynamic> json) =>
       _$$_UploadPhotoResponseFromJson(json);
@@ -191,12 +190,11 @@ class _$_UploadPhotoResponse
   @override
   final String? thumbnailUrl;
   @override
-  @JsonKey(name: 'success')
-  final bool? succeeded;
+  final bool? success;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UploadPhotoResponse(type: $type, path: $path, original: $original, thumbnailUrl: $thumbnailUrl, succeeded: $succeeded)';
+    return 'UploadPhotoResponse(type: $type, path: $path, original: $original, thumbnailUrl: $thumbnailUrl, success: $success)';
   }
 
   @override
@@ -208,7 +206,7 @@ class _$_UploadPhotoResponse
       ..add(DiagnosticsProperty('path', path))
       ..add(DiagnosticsProperty('original', original))
       ..add(DiagnosticsProperty('thumbnailUrl', thumbnailUrl))
-      ..add(DiagnosticsProperty('succeeded', succeeded));
+      ..add(DiagnosticsProperty('success', success));
   }
 
   @override
@@ -225,9 +223,8 @@ class _$_UploadPhotoResponse
             (identical(other.thumbnailUrl, thumbnailUrl) ||
                 const DeepCollectionEquality()
                     .equals(other.thumbnailUrl, thumbnailUrl)) &&
-            (identical(other.succeeded, succeeded) ||
-                const DeepCollectionEquality()
-                    .equals(other.succeeded, succeeded)));
+            (identical(other.success, success) ||
+                const DeepCollectionEquality().equals(other.success, success)));
   }
 
   @override
@@ -237,7 +234,7 @@ class _$_UploadPhotoResponse
       const DeepCollectionEquality().hash(path) ^
       const DeepCollectionEquality().hash(original) ^
       const DeepCollectionEquality().hash(thumbnailUrl) ^
-      const DeepCollectionEquality().hash(succeeded);
+      const DeepCollectionEquality().hash(success);
 
   @JsonKey(ignore: true)
   @override
@@ -253,9 +250,8 @@ class _$_UploadPhotoResponse
 
 abstract class _UploadPhotoResponse implements UploadPhotoResponse {
   const factory _UploadPhotoResponse(
-          String? type, String? path, String? original, String? thumbnailUrl,
-          {@JsonKey(name: 'success') required bool? succeeded}) =
-      _$_UploadPhotoResponse;
+      String? type, String? path, String? original, String? thumbnailUrl,
+      {required bool? success}) = _$_UploadPhotoResponse;
 
   factory _UploadPhotoResponse.fromJson(Map<String, dynamic> json) =
       _$_UploadPhotoResponse.fromJson;
@@ -269,8 +265,7 @@ abstract class _UploadPhotoResponse implements UploadPhotoResponse {
   @override
   String? get thumbnailUrl => throw _privateConstructorUsedError;
   @override
-  @JsonKey(name: 'success')
-  bool? get succeeded => throw _privateConstructorUsedError;
+  bool? get success => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UploadPhotoResponseCopyWith<_UploadPhotoResponse> get copyWith =>

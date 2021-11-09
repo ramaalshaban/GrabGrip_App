@@ -13,6 +13,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Variation _$VariationFromJson(Map<String, dynamic> json) {
+  return _Variation.fromJson(json);
+}
+
 /// @nodoc
 class _$VariationTearOff {
   const _$VariationTearOff();
@@ -22,6 +26,10 @@ class _$VariationTearOff {
       attribute: attribute,
       values: values,
     );
+  }
+
+  Variation fromJson(Map<String, Object> json) {
+    return Variation.fromJson(json);
   }
 }
 
@@ -33,6 +41,7 @@ mixin _$Variation {
   String? get attribute => throw _privateConstructorUsedError;
   List<String> get values => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $VariationCopyWith<Variation> get copyWith =>
       throw _privateConstructorUsedError;
@@ -108,9 +117,12 @@ class __$VariationCopyWithImpl<$Res> extends _$VariationCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_Variation with DiagnosticableTreeMixin implements _Variation {
   const _$_Variation({this.attribute, this.values = const []});
+
+  factory _$_Variation.fromJson(Map<String, dynamic> json) =>
+      _$$_VariationFromJson(json);
 
   @override
   final String? attribute;
@@ -153,11 +165,19 @@ class _$_Variation with DiagnosticableTreeMixin implements _Variation {
   @override
   _$VariationCopyWith<_Variation> get copyWith =>
       __$VariationCopyWithImpl<_Variation>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_VariationToJson(this);
+  }
 }
 
 abstract class _Variation implements Variation {
   const factory _Variation({String? attribute, List<String> values}) =
       _$_Variation;
+
+  factory _Variation.fromJson(Map<String, dynamic> json) =
+      _$_Variation.fromJson;
 
   @override
   String? get attribute => throw _privateConstructorUsedError;
