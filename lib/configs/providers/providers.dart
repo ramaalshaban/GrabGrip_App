@@ -10,8 +10,10 @@ import 'package:grab_grip/features/browsing/browse/providers/view_mode_provider.
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
 import 'package:grab_grip/features/browsing/filter/providers/filter_sort_provider.dart';
 import 'package:grab_grip/features/feedback/contact_us/providers/feedback_provider.dart';
-import 'package:grab_grip/features/post_listing/models/post_listing_model/post_listing_model.dart';
+import 'package:grab_grip/features/post_listing/models/post_listing_availability_model/post_listing_availability_state.dart';
+import 'package:grab_grip/features/post_listing/models/post_listing_state/post_listing_state.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_step_number_model/post_listing_step_number.dart';
+import 'package:grab_grip/features/post_listing/providers/post_listing_availability_state_provider.dart';
 import 'package:grab_grip/features/post_listing/providers/post_listing_provider.dart';
 import 'package:grab_grip/features/post_listing/providers/post_listing_step_number_provider.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/models/listing_pricing_model/listing_pricing_model.dart';
@@ -61,9 +63,10 @@ final feedbackProvider = Provider((reference) {
 });
 
 final postListingProvider =
-    StateNotifierProvider<PostListingProvider, PostListingModel>((reference) {
-  final provider = reference.watch(httpRequestStateProvider.notifier);
-  return PostListingProvider(provider);
+    StateNotifierProvider<PostListingProvider, PostListingState>((reference) {
+  final httpProvider = reference.watch(httpRequestStateProvider.notifier);
+  final listingAvailabilityProvider = reference.watch(listingAvailabilityStateProvider.notifier);
+  return PostListingProvider(httpProvider, listingAvailabilityProvider);
 });
 
 final postListingStepProvider =
@@ -91,4 +94,10 @@ final listingPricingProvider =
         (reference) {
   final provider = reference.watch(postListingProvider.notifier);
   return ListingPricingProvider(provider);
+});
+
+final listingAvailabilityStateProvider = StateNotifierProvider<
+    PostListingAvailabilityStateProvider,
+    PostListingAvailabilityState>((reference) {
+  return PostListingAvailabilityStateProvider();
 });

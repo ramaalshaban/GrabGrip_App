@@ -5,6 +5,7 @@ import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/variations/widgets/value_view.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text_fields.dart';
+import 'package:grab_grip/utils/functions.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
 class VariationItem extends StatelessWidget {
@@ -62,7 +63,7 @@ class VariationItem extends StatelessWidget {
                         variation =
                             variation.copyWith(attribute: text, values: values);
                         ref(postListingProvider.notifier)
-                            .editVariation(index, variation);
+                            .editVariationAttribute(index, variation);
                       },
                       keyboardType: TextInputType.text,
                       decoration: standardInputDecoration.copyWith(
@@ -100,12 +101,22 @@ class VariationItem extends StatelessWidget {
                                 final enteredValue =
                                     valueTextController.text.trim();
                                 if (enteredValue.isNotEmpty) {
-                                  ref(postListingProvider.notifier)
-                                      .addValueToVariation(
+                                  final valueAdded =
+                                      ref(postListingProvider.notifier)
+                                          .addValueToVariation(
                                     index,
                                     enteredValue,
                                   );
-                                  valueTextController.text = "";
+                                  if (valueAdded) {
+                                    valueTextController.text = "";
+                                  } else {
+                                    showSnackBar(
+                                      context,
+                                      "There is another variation that has the same attribute. Add this value to that variation or change the attribute of this variation please.",
+                                      Colors.amber[800],
+                                      const Duration(seconds: 9),
+                                    );
+                                  }
                                 }
                               },
                               icon: const Icon(

@@ -12,8 +12,20 @@ class UploadPhotoResponse with _$UploadPhotoResponse {
     String? path,
     String? original,
     String? thumbnailUrl, {
-    @JsonKey(name: 'success') required bool? succeeded,
+    required bool? success,
   }) = _UploadPhotoResponse;
 
-  factory UploadPhotoResponse.fromJson(Map<String, dynamic> json) => _$UploadPhotoResponseFromJson(json);
+  factory UploadPhotoResponse.fromJson(Map<String, dynamic> json) =>
+      _$UploadPhotoResponseFromJson(json);
+
+
+  // static Map<String, dynamic> uploadPhotoResponsesToJson(
+  //   List<UploadPhotoResponse> uploadPhotoResponses,
+  // ) {
+  //   final Map<String, dynamic> json = {};
+  //   for (int i = 0; i < uploadPhotoResponses.length; i++) {
+  //     json['photos[$i]'] = uploadPhotoResponses[i].toJson();
+  //   }
+  //   return json;
+  // }
 }

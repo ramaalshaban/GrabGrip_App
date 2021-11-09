@@ -13,6 +13,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+ShippingFee _$ShippingFeeFromJson(Map<String, dynamic> json) {
+  return _ShippingFee.fromJson(json);
+}
+
 /// @nodoc
 class _$ShippingFeeTearOff {
   const _$ShippingFeeTearOff();
@@ -22,6 +26,10 @@ class _$ShippingFeeTearOff {
       name: name,
       price: price,
     );
+  }
+
+  ShippingFee fromJson(Map<String, Object> json) {
+    return ShippingFee.fromJson(json);
   }
 }
 
@@ -33,6 +41,7 @@ mixin _$ShippingFee {
   String? get name => throw _privateConstructorUsedError;
   double? get price => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ShippingFeeCopyWith<ShippingFee> get copyWith =>
       throw _privateConstructorUsedError;
@@ -111,9 +120,12 @@ class __$ShippingFeeCopyWithImpl<$Res> extends _$ShippingFeeCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_ShippingFee with DiagnosticableTreeMixin implements _ShippingFee {
   const _$_ShippingFee({this.name, this.price});
+
+  factory _$_ShippingFee.fromJson(Map<String, dynamic> json) =>
+      _$$_ShippingFeeFromJson(json);
 
   @override
   final String? name;
@@ -154,10 +166,18 @@ class _$_ShippingFee with DiagnosticableTreeMixin implements _ShippingFee {
   @override
   _$ShippingFeeCopyWith<_ShippingFee> get copyWith =>
       __$ShippingFeeCopyWithImpl<_ShippingFee>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ShippingFeeToJson(this);
+  }
 }
 
 abstract class _ShippingFee implements ShippingFee {
   const factory _ShippingFee({String? name, double? price}) = _$_ShippingFee;
+
+  factory _ShippingFee.fromJson(Map<String, dynamic> json) =
+      _$_ShippingFee.fromJson;
 
   @override
   String? get name => throw _privateConstructorUsedError;

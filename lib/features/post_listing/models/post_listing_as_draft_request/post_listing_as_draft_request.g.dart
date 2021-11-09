@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'post_listing_request.dart';
+part of 'post_listing_as_draft_request.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PostListingRequest _$$_PostListingRequestFromJson(
+_$_PostListingAsDraftRequest _$$_PostListingAsDraftRequestFromJson(
         Map<String, dynamic> json) =>
-    _$_PostListingRequest(
+    _$_PostListingAsDraftRequest(
       selectedCategoryId: json['category'] as int?,
       pricingModelId: json['pricing_model'] as int?,
       title: json['title'] as String?,
       description: json['description_new'] as String?,
     );
 
-Map<String, dynamic> _$$_PostListingRequestToJson(
-        _$_PostListingRequest instance) =>
+Map<String, dynamic> _$$_PostListingAsDraftRequestToJson(
+        _$_PostListingAsDraftRequest instance) =>
     <String, dynamic>{
       'category': instance.selectedCategoryId,
       'pricing_model': instance.pricingModelId,

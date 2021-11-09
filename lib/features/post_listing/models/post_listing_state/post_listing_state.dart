@@ -11,11 +11,11 @@ import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/shipping_fees/models/shipping_fee/shipping_fee.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/variations/models/variation/variation.dart';
 
-part 'post_listing_model.freezed.dart';
+part 'post_listing_state.freezed.dart';
 
 @freezed
-class PostListingModel with _$PostListingModel {
-  const factory PostListingModel([
+class PostListingState with _$PostListingState {
+  const factory PostListingState([
     Category? category,
     Category? subcategory,
     int? listingTypeId,
@@ -32,11 +32,11 @@ class PostListingModel with _$PostListingModel {
     String? region,
     @Default([]) List<Photo> photos,
     @Default([]) List<UploadPhotoResponse> photosAsJson,
-    @Default({}) Map<String, UploadPhotoResponse> photosToPost,
     int? price,
     int? stock,
     @Default([AdditionalOption()]) List<AdditionalOption> additionalOptions,
     @Default([ShippingFee()]) List<ShippingFee> shippingFees,
     @Default([Variation()]) List<Variation> variations,
-  ]) = _PostListingModel;
+    bool? hasListingBeenSaved,
+  ]) = _PostListingState;
 }

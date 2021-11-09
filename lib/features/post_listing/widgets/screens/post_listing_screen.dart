@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
+import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_step_number_model/post_listing_step_number.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_1/post_listing_step_one_screen.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_2/post_listing_step_two_screen.dart';
@@ -38,7 +40,18 @@ class PostListingScreen extends StatelessWidget {
                 step1: () => Navigator.pop(context),
                 step2: () => ref(postListingStepProvider.notifier).setStep1(),
                 step3: () => ref(postListingStepProvider.notifier).setStep2(),
-                step4: () {},
+                step4: () {
+                  final listingHasBeenSaved =
+                      ref(postListingProvider.notifier).hasListingBeenSaved ??
+                          false;
+
+                  if (listingHasBeenSaved) {
+                    context.router.replace(const HomeScreenRoute());
+                    // reset the state saved in the providers
+                    ref(postListingProvider.notifier).reset();
+                    ref(listingAvailabilityStateProvider.notifier).reset();
+                  }
+                },
               );
               return false;
             },
