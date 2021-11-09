@@ -13,16 +13,27 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+AdditionalOption _$AdditionalOptionFromJson(Map<String, dynamic> json) {
+  return _AdditionalOption.fromJson(json);
+}
+
 /// @nodoc
 class _$AdditionalOptionTearOff {
   const _$AdditionalOptionTearOff();
 
-  _AdditionalOption call({String? name, double? price, int? maxQuantity}) {
+  _AdditionalOption call(
+      {String? name,
+      double? price,
+      @JsonKey(name: "max_quantity") int? maxQuantity}) {
     return _AdditionalOption(
       name: name,
       price: price,
       maxQuantity: maxQuantity,
     );
+  }
+
+  AdditionalOption fromJson(Map<String, Object> json) {
+    return AdditionalOption.fromJson(json);
   }
 }
 
@@ -33,8 +44,10 @@ const $AdditionalOption = _$AdditionalOptionTearOff();
 mixin _$AdditionalOption {
   String? get name => throw _privateConstructorUsedError;
   double? get price => throw _privateConstructorUsedError;
+  @JsonKey(name: "max_quantity")
   int? get maxQuantity => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $AdditionalOptionCopyWith<AdditionalOption> get copyWith =>
       throw _privateConstructorUsedError;
@@ -45,7 +58,10 @@ abstract class $AdditionalOptionCopyWith<$Res> {
   factory $AdditionalOptionCopyWith(
           AdditionalOption value, $Res Function(AdditionalOption) then) =
       _$AdditionalOptionCopyWithImpl<$Res>;
-  $Res call({String? name, double? price, int? maxQuantity});
+  $Res call(
+      {String? name,
+      double? price,
+      @JsonKey(name: "max_quantity") int? maxQuantity});
 }
 
 /// @nodoc
@@ -87,7 +103,10 @@ abstract class _$AdditionalOptionCopyWith<$Res>
           _AdditionalOption value, $Res Function(_AdditionalOption) then) =
       __$AdditionalOptionCopyWithImpl<$Res>;
   @override
-  $Res call({String? name, double? price, int? maxQuantity});
+  $Res call(
+      {String? name,
+      double? price,
+      @JsonKey(name: "max_quantity") int? maxQuantity});
 }
 
 /// @nodoc
@@ -125,17 +144,22 @@ class __$AdditionalOptionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_AdditionalOption
     with DiagnosticableTreeMixin
     implements _AdditionalOption {
-  const _$_AdditionalOption({this.name, this.price, this.maxQuantity});
+  const _$_AdditionalOption(
+      {this.name, this.price, @JsonKey(name: "max_quantity") this.maxQuantity});
+
+  factory _$_AdditionalOption.fromJson(Map<String, dynamic> json) =>
+      _$$_AdditionalOptionFromJson(json);
 
   @override
   final String? name;
   @override
   final double? price;
   @override
+  @JsonKey(name: "max_quantity")
   final int? maxQuantity;
 
   @override
@@ -177,17 +201,28 @@ class _$_AdditionalOption
   @override
   _$AdditionalOptionCopyWith<_AdditionalOption> get copyWith =>
       __$AdditionalOptionCopyWithImpl<_AdditionalOption>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_AdditionalOptionToJson(this);
+  }
 }
 
 abstract class _AdditionalOption implements AdditionalOption {
   const factory _AdditionalOption(
-      {String? name, double? price, int? maxQuantity}) = _$_AdditionalOption;
+      {String? name,
+      double? price,
+      @JsonKey(name: "max_quantity") int? maxQuantity}) = _$_AdditionalOption;
+
+  factory _AdditionalOption.fromJson(Map<String, dynamic> json) =
+      _$_AdditionalOption.fromJson;
 
   @override
   String? get name => throw _privateConstructorUsedError;
   @override
   double? get price => throw _privateConstructorUsedError;
   @override
+  @JsonKey(name: "max_quantity")
   int? get maxQuantity => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

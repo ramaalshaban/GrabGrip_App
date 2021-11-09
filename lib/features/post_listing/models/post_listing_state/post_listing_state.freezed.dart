@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'post_listing_model.dart';
+part of 'post_listing_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,10 +14,10 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$PostListingModelTearOff {
-  const _$PostListingModelTearOff();
+class _$PostListingStateTearOff {
+  const _$PostListingStateTearOff();
 
-  _PostListingModel call(
+  _PostListingState call(
       [Category? category,
       Category? subcategory,
       int? listingTypeId,
@@ -34,13 +34,13 @@ class _$PostListingModelTearOff {
       String? region,
       List<Photo> photos = const [],
       List<UploadPhotoResponse> photosAsJson = const [],
-      Map<String, UploadPhotoResponse> photosToPost = const {},
       int? price,
       int? stock,
       List<AdditionalOption> additionalOptions = const [AdditionalOption()],
       List<ShippingFee> shippingFees = const [ShippingFee()],
-      List<Variation> variations = const [Variation()]]) {
-    return _PostListingModel(
+      List<Variation> variations = const [Variation()],
+      bool? hasListingBeenSaved]) {
+    return _PostListingState(
       category,
       subcategory,
       listingTypeId,
@@ -57,21 +57,21 @@ class _$PostListingModelTearOff {
       region,
       photos,
       photosAsJson,
-      photosToPost,
       price,
       stock,
       additionalOptions,
       shippingFees,
       variations,
+      hasListingBeenSaved,
     );
   }
 }
 
 /// @nodoc
-const $PostListingModel = _$PostListingModelTearOff();
+const $PostListingState = _$PostListingStateTearOff();
 
 /// @nodoc
-mixin _$PostListingModel {
+mixin _$PostListingState {
   Category? get category => throw _privateConstructorUsedError;
   Category? get subcategory => throw _privateConstructorUsedError;
   int? get listingTypeId => throw _privateConstructorUsedError;
@@ -89,25 +89,24 @@ mixin _$PostListingModel {
   List<Photo> get photos => throw _privateConstructorUsedError;
   List<UploadPhotoResponse> get photosAsJson =>
       throw _privateConstructorUsedError;
-  Map<String, UploadPhotoResponse> get photosToPost =>
-      throw _privateConstructorUsedError;
   int? get price => throw _privateConstructorUsedError;
   int? get stock => throw _privateConstructorUsedError;
   List<AdditionalOption> get additionalOptions =>
       throw _privateConstructorUsedError;
   List<ShippingFee> get shippingFees => throw _privateConstructorUsedError;
   List<Variation> get variations => throw _privateConstructorUsedError;
+  bool? get hasListingBeenSaved => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PostListingModelCopyWith<PostListingModel> get copyWith =>
+  $PostListingStateCopyWith<PostListingState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PostListingModelCopyWith<$Res> {
-  factory $PostListingModelCopyWith(
-          PostListingModel value, $Res Function(PostListingModel) then) =
-      _$PostListingModelCopyWithImpl<$Res>;
+abstract class $PostListingStateCopyWith<$Res> {
+  factory $PostListingStateCopyWith(
+          PostListingState value, $Res Function(PostListingState) then) =
+      _$PostListingStateCopyWithImpl<$Res>;
   $Res call(
       {Category? category,
       Category? subcategory,
@@ -125,12 +124,12 @@ abstract class $PostListingModelCopyWith<$Res> {
       String? region,
       List<Photo> photos,
       List<UploadPhotoResponse> photosAsJson,
-      Map<String, UploadPhotoResponse> photosToPost,
       int? price,
       int? stock,
       List<AdditionalOption> additionalOptions,
       List<ShippingFee> shippingFees,
-      List<Variation> variations});
+      List<Variation> variations,
+      bool? hasListingBeenSaved});
 
   $CategoryCopyWith<$Res>? get category;
   $CategoryCopyWith<$Res>? get subcategory;
@@ -139,13 +138,13 @@ abstract class $PostListingModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PostListingModelCopyWithImpl<$Res>
-    implements $PostListingModelCopyWith<$Res> {
-  _$PostListingModelCopyWithImpl(this._value, this._then);
+class _$PostListingStateCopyWithImpl<$Res>
+    implements $PostListingStateCopyWith<$Res> {
+  _$PostListingStateCopyWithImpl(this._value, this._then);
 
-  final PostListingModel _value;
+  final PostListingState _value;
   // ignore: unused_field
-  final $Res Function(PostListingModel) _then;
+  final $Res Function(PostListingState) _then;
 
   @override
   $Res call({
@@ -165,12 +164,12 @@ class _$PostListingModelCopyWithImpl<$Res>
     Object? region = freezed,
     Object? photos = freezed,
     Object? photosAsJson = freezed,
-    Object? photosToPost = freezed,
     Object? price = freezed,
     Object? stock = freezed,
     Object? additionalOptions = freezed,
     Object? shippingFees = freezed,
     Object? variations = freezed,
+    Object? hasListingBeenSaved = freezed,
   }) {
     return _then(_value.copyWith(
       category: category == freezed
@@ -237,10 +236,6 @@ class _$PostListingModelCopyWithImpl<$Res>
           ? _value.photosAsJson
           : photosAsJson // ignore: cast_nullable_to_non_nullable
               as List<UploadPhotoResponse>,
-      photosToPost: photosToPost == freezed
-          ? _value.photosToPost
-          : photosToPost // ignore: cast_nullable_to_non_nullable
-              as Map<String, UploadPhotoResponse>,
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -261,6 +256,10 @@ class _$PostListingModelCopyWithImpl<$Res>
           ? _value.variations
           : variations // ignore: cast_nullable_to_non_nullable
               as List<Variation>,
+      hasListingBeenSaved: hasListingBeenSaved == freezed
+          ? _value.hasListingBeenSaved
+          : hasListingBeenSaved // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 
@@ -310,11 +309,11 @@ class _$PostListingModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$PostListingModelCopyWith<$Res>
-    implements $PostListingModelCopyWith<$Res> {
-  factory _$PostListingModelCopyWith(
-          _PostListingModel value, $Res Function(_PostListingModel) then) =
-      __$PostListingModelCopyWithImpl<$Res>;
+abstract class _$PostListingStateCopyWith<$Res>
+    implements $PostListingStateCopyWith<$Res> {
+  factory _$PostListingStateCopyWith(
+          _PostListingState value, $Res Function(_PostListingState) then) =
+      __$PostListingStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {Category? category,
@@ -333,12 +332,12 @@ abstract class _$PostListingModelCopyWith<$Res>
       String? region,
       List<Photo> photos,
       List<UploadPhotoResponse> photosAsJson,
-      Map<String, UploadPhotoResponse> photosToPost,
       int? price,
       int? stock,
       List<AdditionalOption> additionalOptions,
       List<ShippingFee> shippingFees,
-      List<Variation> variations});
+      List<Variation> variations,
+      bool? hasListingBeenSaved});
 
   @override
   $CategoryCopyWith<$Res>? get category;
@@ -351,15 +350,15 @@ abstract class _$PostListingModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$PostListingModelCopyWithImpl<$Res>
-    extends _$PostListingModelCopyWithImpl<$Res>
-    implements _$PostListingModelCopyWith<$Res> {
-  __$PostListingModelCopyWithImpl(
-      _PostListingModel _value, $Res Function(_PostListingModel) _then)
-      : super(_value, (v) => _then(v as _PostListingModel));
+class __$PostListingStateCopyWithImpl<$Res>
+    extends _$PostListingStateCopyWithImpl<$Res>
+    implements _$PostListingStateCopyWith<$Res> {
+  __$PostListingStateCopyWithImpl(
+      _PostListingState _value, $Res Function(_PostListingState) _then)
+      : super(_value, (v) => _then(v as _PostListingState));
 
   @override
-  _PostListingModel get _value => super._value as _PostListingModel;
+  _PostListingState get _value => super._value as _PostListingState;
 
   @override
   $Res call({
@@ -379,14 +378,14 @@ class __$PostListingModelCopyWithImpl<$Res>
     Object? region = freezed,
     Object? photos = freezed,
     Object? photosAsJson = freezed,
-    Object? photosToPost = freezed,
     Object? price = freezed,
     Object? stock = freezed,
     Object? additionalOptions = freezed,
     Object? shippingFees = freezed,
     Object? variations = freezed,
+    Object? hasListingBeenSaved = freezed,
   }) {
-    return _then(_PostListingModel(
+    return _then(_PostListingState(
       category == freezed
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -451,10 +450,6 @@ class __$PostListingModelCopyWithImpl<$Res>
           ? _value.photosAsJson
           : photosAsJson // ignore: cast_nullable_to_non_nullable
               as List<UploadPhotoResponse>,
-      photosToPost == freezed
-          ? _value.photosToPost
-          : photosToPost // ignore: cast_nullable_to_non_nullable
-              as Map<String, UploadPhotoResponse>,
       price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -475,16 +470,20 @@ class __$PostListingModelCopyWithImpl<$Res>
           ? _value.variations
           : variations // ignore: cast_nullable_to_non_nullable
               as List<Variation>,
+      hasListingBeenSaved == freezed
+          ? _value.hasListingBeenSaved
+          : hasListingBeenSaved // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_PostListingModel
+class _$_PostListingState
     with DiagnosticableTreeMixin
-    implements _PostListingModel {
-  const _$_PostListingModel(
+    implements _PostListingState {
+  const _$_PostListingState(
       [this.category,
       this.subcategory,
       this.listingTypeId,
@@ -501,12 +500,12 @@ class _$_PostListingModel
       this.region,
       this.photos = const [],
       this.photosAsJson = const [],
-      this.photosToPost = const {},
       this.price,
       this.stock,
       this.additionalOptions = const [AdditionalOption()],
       this.shippingFees = const [ShippingFee()],
-      this.variations = const [Variation()]]);
+      this.variations = const [Variation()],
+      this.hasListingBeenSaved]);
 
   @override
   final Category? category;
@@ -544,9 +543,6 @@ class _$_PostListingModel
   @JsonKey(defaultValue: const [])
   @override
   final List<UploadPhotoResponse> photosAsJson;
-  @JsonKey(defaultValue: const {})
-  @override
-  final Map<String, UploadPhotoResponse> photosToPost;
   @override
   final int? price;
   @override
@@ -560,17 +556,19 @@ class _$_PostListingModel
   @JsonKey(defaultValue: const [Variation()])
   @override
   final List<Variation> variations;
+  @override
+  final bool? hasListingBeenSaved;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostListingModel(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, title: $title, description: $description, postedListing: $postedListing, tags: $tags, listingEndDate: $listingEndDate, pricingModels: $pricingModels, place: $place, latLng: $latLng, country: $country, city: $city, region: $region, photos: $photos, photosAsJson: $photosAsJson, photosToPost: $photosToPost, price: $price, stock: $stock, additionalOptions: $additionalOptions, shippingFees: $shippingFees, variations: $variations)';
+    return 'PostListingState(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, title: $title, description: $description, postedListing: $postedListing, tags: $tags, listingEndDate: $listingEndDate, pricingModels: $pricingModels, place: $place, latLng: $latLng, country: $country, city: $city, region: $region, photos: $photos, photosAsJson: $photosAsJson, price: $price, stock: $stock, additionalOptions: $additionalOptions, shippingFees: $shippingFees, variations: $variations, hasListingBeenSaved: $hasListingBeenSaved)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'PostListingModel'))
+      ..add(DiagnosticsProperty('type', 'PostListingState'))
       ..add(DiagnosticsProperty('category', category))
       ..add(DiagnosticsProperty('subcategory', subcategory))
       ..add(DiagnosticsProperty('listingTypeId', listingTypeId))
@@ -587,18 +585,18 @@ class _$_PostListingModel
       ..add(DiagnosticsProperty('region', region))
       ..add(DiagnosticsProperty('photos', photos))
       ..add(DiagnosticsProperty('photosAsJson', photosAsJson))
-      ..add(DiagnosticsProperty('photosToPost', photosToPost))
       ..add(DiagnosticsProperty('price', price))
       ..add(DiagnosticsProperty('stock', stock))
       ..add(DiagnosticsProperty('additionalOptions', additionalOptions))
       ..add(DiagnosticsProperty('shippingFees', shippingFees))
-      ..add(DiagnosticsProperty('variations', variations));
+      ..add(DiagnosticsProperty('variations', variations))
+      ..add(DiagnosticsProperty('hasListingBeenSaved', hasListingBeenSaved));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _PostListingModel &&
+        (other is _PostListingState &&
             (identical(other.category, category) ||
                 const DeepCollectionEquality()
                     .equals(other.category, category)) &&
@@ -640,9 +638,6 @@ class _$_PostListingModel
             (identical(other.photosAsJson, photosAsJson) ||
                 const DeepCollectionEquality()
                     .equals(other.photosAsJson, photosAsJson)) &&
-            (identical(other.photosToPost, photosToPost) ||
-                const DeepCollectionEquality()
-                    .equals(other.photosToPost, photosToPost)) &&
             (identical(other.price, price) ||
                 const DeepCollectionEquality().equals(other.price, price)) &&
             (identical(other.stock, stock) ||
@@ -655,7 +650,10 @@ class _$_PostListingModel
                     .equals(other.shippingFees, shippingFees)) &&
             (identical(other.variations, variations) ||
                 const DeepCollectionEquality()
-                    .equals(other.variations, variations)));
+                    .equals(other.variations, variations)) &&
+            (identical(other.hasListingBeenSaved, hasListingBeenSaved) ||
+                const DeepCollectionEquality()
+                    .equals(other.hasListingBeenSaved, hasListingBeenSaved)));
   }
 
   @override
@@ -677,21 +675,21 @@ class _$_PostListingModel
       const DeepCollectionEquality().hash(region) ^
       const DeepCollectionEquality().hash(photos) ^
       const DeepCollectionEquality().hash(photosAsJson) ^
-      const DeepCollectionEquality().hash(photosToPost) ^
       const DeepCollectionEquality().hash(price) ^
       const DeepCollectionEquality().hash(stock) ^
       const DeepCollectionEquality().hash(additionalOptions) ^
       const DeepCollectionEquality().hash(shippingFees) ^
-      const DeepCollectionEquality().hash(variations);
+      const DeepCollectionEquality().hash(variations) ^
+      const DeepCollectionEquality().hash(hasListingBeenSaved);
 
   @JsonKey(ignore: true)
   @override
-  _$PostListingModelCopyWith<_PostListingModel> get copyWith =>
-      __$PostListingModelCopyWithImpl<_PostListingModel>(this, _$identity);
+  _$PostListingStateCopyWith<_PostListingState> get copyWith =>
+      __$PostListingStateCopyWithImpl<_PostListingState>(this, _$identity);
 }
 
-abstract class _PostListingModel implements PostListingModel {
-  const factory _PostListingModel(
+abstract class _PostListingState implements PostListingState {
+  const factory _PostListingState(
       [Category? category,
       Category? subcategory,
       int? listingTypeId,
@@ -708,12 +706,12 @@ abstract class _PostListingModel implements PostListingModel {
       String? region,
       List<Photo> photos,
       List<UploadPhotoResponse> photosAsJson,
-      Map<String, UploadPhotoResponse> photosToPost,
       int? price,
       int? stock,
       List<AdditionalOption> additionalOptions,
       List<ShippingFee> shippingFees,
-      List<Variation> variations]) = _$_PostListingModel;
+      List<Variation> variations,
+      bool? hasListingBeenSaved]) = _$_PostListingState;
 
   @override
   Category? get category => throw _privateConstructorUsedError;
@@ -749,9 +747,6 @@ abstract class _PostListingModel implements PostListingModel {
   List<UploadPhotoResponse> get photosAsJson =>
       throw _privateConstructorUsedError;
   @override
-  Map<String, UploadPhotoResponse> get photosToPost =>
-      throw _privateConstructorUsedError;
-  @override
   int? get price => throw _privateConstructorUsedError;
   @override
   int? get stock => throw _privateConstructorUsedError;
@@ -763,7 +758,9 @@ abstract class _PostListingModel implements PostListingModel {
   @override
   List<Variation> get variations => throw _privateConstructorUsedError;
   @override
+  bool? get hasListingBeenSaved => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
-  _$PostListingModelCopyWith<_PostListingModel> get copyWith =>
+  _$PostListingStateCopyWith<_PostListingState> get copyWith =>
       throw _privateConstructorUsedError;
 }

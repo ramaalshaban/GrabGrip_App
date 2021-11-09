@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:grab_grip/features/browsing/browse/models/geocode_response/lat_lng/lat_lng.dart';
 import 'package:grab_grip/features/browsing/browse/providers/browse_provider.dart';
 import 'package:grab_grip/features/browsing/filter/providers/filter_sort_provider.dart';
 import 'package:grab_grip/features/post_listing/providers/post_listing_provider.dart';

@@ -9,9 +9,10 @@ import 'package:grab_grip/features/browsing/browse/models/geocode_response/geoco
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
-import 'package:grab_grip/features/post_listing/models/post_listing_request/post_listing_request.dart';
+import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
+import 'package:grab_grip/features/post_listing/models/save_listing_request/save_listing_request.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/models/upload_photo_response/upload_photo_response.dart';
 import 'package:grab_grip/features/user_profile/models/user.dart';
 import 'package:grab_grip/services/network/api/grab_grip_api.dart';
@@ -174,18 +175,77 @@ class NetworkService {
     }
   }
 
-  Future<Result<String, PostListingResponse>> postListing(
+  Future<Result<String, PostListingResponse>> postListingAsDraft(
     String token,
-    PostListingRequest postListingRequest,
+    PostListingAsDraftRequest postListingRequest,
   ) async {
     try {
-      final postListingCall = await _grabGripApi.postListing(
+      final postListingCall = await _grabGripApi.postListingAsDraft(
         "Bearer $token",
         postListingRequest,
       );
       return Success(postListingCall.data);
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  Future<Result<String, String>> saveListing(
+    String token,
+    String listingHash,
+      SaveListingRequest body,
+  ) async {
+    try {
+      print("***********************************");
+      print("save listing is about to launch...");
+      print("hash is $listingHash");
+      print("body : ${body.toString()}");
+
+      final saveListingCall = await _grabGripApi.saveListing(
+        "Bearer $token",
+        hash: listingHash,
+        body: body,
+      );
+      print(
+          "successfully done and response is ${saveListingCall.response.toString()}");
+      return Success(saveListingCall.data.toString());
+    } catch (error) {
+  //    final errorMessage = _errorHandler(error as DioError);
+      print("saveListingCall error occurred and it is ${error.toString()}");
+      return const Error("");
+    }
+  }
+
+  Future<Result<String, String>> changeListingAvailability(
+    String token,
+    String listingHash, {
+    bool? publish,
+    bool? reEnable,
+    bool? unPublish,
+  }) async {
+    try {
+      print("*******************************");
+      print("changeListingAvailability is about to launch...");
+      print("hash is $listingHash");
+      print(
+          "publish : $publish  ------- unpublish : $unPublish ---------  re-enable: $reEnable ");
+
+      final changeListingAvailabilityCall =
+          await _grabGripApi.changeListingAvailability(
+        "Bearer $token",
+        hash: listingHash,
+        publish: publish == true ? "Publish" : null,
+        reEnable: reEnable == true ? "Re-enable" : null,
+        upPublish: unPublish == true ? "Unpublish" : null,
+      );
+      print(
+          "changeListingAvailabilityCall successfully done and response is ${changeListingAvailabilityCall.response.toString()}");
+      return Success(changeListingAvailabilityCall.data.toString());
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      print(
+          "changeListingAvailabilityCall error occurred and it is ${error.toString()}");
       return Error(errorMessage);
     }
   }

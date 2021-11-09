@@ -4,8 +4,10 @@ import 'package:grab_grip/style/colors.dart';
 
 const String noInternetConnection = "no internet connection";
 const String googleApiKey = "AIzaSyDgRW2kCiet1O-yY2YViStzDVe9ld_DSXo";
+const String saveListingSuccess = "saveListingSuccess";
+const String saveListingError = "saveListingError";
 const int postListingPhotosLimit = 20;
-FilteringTextInputFormatter doubleNumFilter = FilteringTextInputFormatter.allow(RegExp(r'^(?!\.)(\d*.?\d*)'));
+FilteringTextInputFormatter doubleNumFilter = FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}'));
 //region durations
 const Duration duration300Milli = Duration(milliseconds: 300);
 const Duration duration500Milli = Duration(milliseconds: 500);

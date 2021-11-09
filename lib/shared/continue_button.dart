@@ -5,7 +5,7 @@ import 'package:grab_grip/utils/device.dart';
 class ContinueButton extends StatelessWidget {
   const ContinueButton({
     Key? key,
-    required this.formKey,
+    this.formKey,
     required this.onClickAction,
     required this.buttonText,
     this.isPurple = true,

@@ -74,12 +74,12 @@ class AdditionalOptionItem extends StatelessWidget {
                 child: TextField(
                   controller: priceTextController,
                   onChanged: (text) {
-                    final price = text.isEmpty ? null : double.parse(text);
+                    final price = (text.isEmpty) ? null : double.parse(text);
                     option = option.copyWith(price: price);
                     ref(postListingProvider.notifier)
                         .editAdditionalOption(index, option);
                   },
-                  keyboardType: TextInputType.number,
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
                   inputFormatters: [doubleNumFilter],
                   decoration: standardInputDecoration.copyWith(
                     labelText: "Price",

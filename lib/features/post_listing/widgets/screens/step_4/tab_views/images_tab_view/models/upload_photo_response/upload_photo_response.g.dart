@@ -13,7 +13,7 @@ _$_UploadPhotoResponse _$$_UploadPhotoResponseFromJson(
       json['path'] as String?,
       json['original'] as String?,
       json['thumbnailUrl'] as String?,
-      succeeded: json['success'] as bool?,
+      success: json['success'] as bool?,
     );
 
 Map<String, dynamic> _$$_UploadPhotoResponseToJson(
@@ -23,5 +23,5 @@ Map<String, dynamic> _$$_UploadPhotoResponseToJson(
       'path': instance.path,
       'original': instance.original,
       'thumbnailUrl': instance.thumbnailUrl,
-      'success': instance.succeeded,
+      'success': instance.success,
     };

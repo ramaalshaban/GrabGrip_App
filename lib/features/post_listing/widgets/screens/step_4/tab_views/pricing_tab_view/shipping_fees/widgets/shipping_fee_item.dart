@@ -69,7 +69,8 @@ class ShippingFeeItem extends StatelessWidget {
                     ref(postListingProvider.notifier)
                         .editShippingFee(index, shippingFee);
                   },
-                  keyboardType: TextInputType.number,
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
                   inputFormatters: [doubleNumFilter],
                   decoration: standardInputDecoration.copyWith(
                     labelText: "Price",
