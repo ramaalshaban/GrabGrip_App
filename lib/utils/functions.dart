@@ -1,18 +1,11 @@
 import 'dart:io';
 
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/geometry/geometry.dart';
-import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
-import 'package:grab_grip/features/post_listing/models/save_listing_request/save_listing_request.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/models/photo/photo.dart';
-import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/models/upload_photo_response/upload_photo_response.dart';
-import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/additional_options/models/additional_option/additional_option.dart';
-import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/shipping_fees/models/shipping_fee/shipping_fee.dart';
-import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/variations/models/variation/variation.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:intl/intl.dart';
@@ -102,19 +95,19 @@ LatLng getLatLng(Geometry geometry) {
   return LatLng(geometry.latLng.lat, geometry.latLng.lng);
 }
 
-String formatDate(String? dateTime) {
+String? formatDate(String? dateTime) {
   // the input of this function is a time in this format : 2021-10-27 hh:mm:ss.some_digits
-  // the output is a time in this format : 2021-10-27 00:00:00
+  // the output is a time in this format : 2021-10-27
   if (dateTime == null) {
-    return "";
+    return null;
   }
   final dateFormatter = DateFormat("yyyy-MM-dd");
   final dateTimeObj = DateTime.parse(dateTime);
-  return "${dateFormatter.format(dateTimeObj)} 00:00:00";
+  return dateFormatter.format(dateTimeObj);
 }
 
 String formatDateForView(String? dateTime) {
-  // the input of this function is a time in this format : 2021-10-27 00:00:00
+  // the input of this function is a time in this format : 2021-10-27
   // the output is a time in this format : October 27, 2021
   if (dateTime == null || dateTime.isEmpty) {
     return "";
@@ -139,52 +132,4 @@ Future<Photo> makePhotoFromFile(
     path: file.path,
   );
 }
-//endregion
-
-//region mapping
-// Map<String, dynamic> getFullSaveListingRequestAsJson(
-//   SaveListingRequest saveListingRequest,
-//   List<UploadPhotoResponse> photosAsJson,
-//   List<AdditionalOption> additionalOptions,
-//   List<ShippingFee> shippingFees,
-//   List<Variation> variations,
-// ) {
-//   final Map<String, dynamic> json = {};
-//   json['title'] = saveListingRequest.title;
-//   json['description'] = saveListingRequest.description;
-//   json['tags_string'] = saveListingRequest.tags;
-//   json['ends_at'] = saveListingRequest.listingEndDate;
-//   json['lat'] = saveListingRequest.lat;
-//   json['lng'] = saveListingRequest.lng;
-//   json['country'] = saveListingRequest.country;
-//   json['city'] = saveListingRequest.city;
-//   json['region'] = saveListingRequest.region;
-//   json['price'] = saveListingRequest.price;
-//   json['stock'] = saveListingRequest.stock;
-//   json['photos'] = photosAsJson;
-//
-//  // final jsonPhotos =
-//  //     UploadPhotoResponse.uploadPhotoResponsesToJson(photosAsJson);
-//  // final jsonAdditionalOptions =
-//  //     AdditionalOption.additionalOptionsToJson(additionalOptions);
-//  // final jsonShippingFees = ShippingFee.shippingFeesToJson(shippingFees);
-//  // final jsonVariations = Variation.variationsToJson(variations);
-//
-//   // for (int i = 0; i < jsonPhotos.length; i++) {
-//   //   json[jsonPhotos.keys.elementAt(i)] = jsonPhotos.values.elementAt(i);
-//   // }
-//   // for (int i = 0; i < jsonAdditionalOptions.length; i++) {
-//   //   json[jsonAdditionalOptions.keys.elementAt(i)] =
-//   //       jsonAdditionalOptions.values.elementAt(i);
-//   // }
-//   // for (int i = 0; i < jsonShippingFees.length; i++) {
-//   //   json[jsonShippingFees.keys.elementAt(i)] =
-//   //       jsonShippingFees.values.elementAt(i);
-//   // }
-//   // for (int i = 0; i < jsonVariations.length; i++) {
-//   //   json[jsonVariations.keys.elementAt(i)] = jsonVariations.values.elementAt(i);
-//   // }
-//   return json;
-// }
-
 //endregion

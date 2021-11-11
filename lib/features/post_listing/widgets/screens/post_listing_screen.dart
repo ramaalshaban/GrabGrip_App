@@ -1,15 +1,14 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
-import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_step_number_model/post_listing_step_number.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_1/post_listing_step_one_screen.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_2/post_listing_step_two_screen.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_3/post_listing_step_three_screen.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/post_listing_step_four_screen.dart';
 import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
+import 'package:grab_grip/shared/are_you_sure_dialog.dart';
 import 'package:grab_grip/shared/custom_app_bar.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
@@ -32,7 +31,7 @@ class PostListingScreen extends StatelessWidget {
         );
       },
       child: Consumer(
-        builder: (_, ref, __) {
+        builder: (context, ref, __) {
           final stepState = ref(postListingStepProvider);
           return WillPopScope(
             onWillPop: () async {
@@ -41,16 +40,35 @@ class PostListingScreen extends StatelessWidget {
                 step2: () => ref(postListingStepProvider.notifier).setStep1(),
                 step3: () => ref(postListingStepProvider.notifier).setStep2(),
                 step4: () {
-                  final listingHasBeenSaved =
-                      ref(postListingProvider.notifier).hasListingBeenSaved ??
-                          false;
-
-                  if (listingHasBeenSaved) {
-                    context.router.replace(const HomeScreenRoute());
-                    // reset the state saved in the providers
-                    ref(postListingProvider.notifier).reset();
-                    ref(listingAvailabilityStateProvider.notifier).reset();
-                  }
+                  showDialog(
+                    context: context,
+                    builder: (_) => AreYouSureDialog(
+                      continueAction: () async {
+                        // pop the dialog
+                        Navigator.pop(context);
+                        // pop this screen
+                        Navigator.pop(context);
+                        // reset the state saved in the providers
+                        Future.delayed(const Duration(seconds: 2), () {
+                          // reset them after 2 seconds to ensure that this screen has been popped so we avoid
+                          // any consequences that can happen since the providers are listening to their states
+                          ref(postListingProvider.notifier).reset();
+                          ref(photosProvider.notifier).reset();
+                          ref(listingAvailabilityStateProvider.notifier)
+                              .reset();
+                        });
+                      },
+                      cancelAction: () {
+                        Navigator.pop(context);
+                        // prevent the previously focused text field from receiving the focus again after popping the dialog
+                        FocusScope.of(context).requestFocus(FocusNode());
+                      },
+                      contentText:
+                          "Before leaving, make sure that you have saved your changes by clicking on Save listing button",
+                      continueActionText: "Leave. I have saved my changes",
+                      cancelActionText: "Wait. I want to save my changes",
+                    ),
+                  );
                 },
               );
               return false;

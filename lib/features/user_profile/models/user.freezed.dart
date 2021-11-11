@@ -25,15 +25,15 @@ class _$UserTearOff {
       int id,
       @JsonKey(name: 'display_name') String displayName,
       @JsonKey(name: 'username') String userName,
-      String email,
+      String? email,
       String? bio,
       String? phone,
       String avatar,
       String lat,
       String lng,
-      String city,
-      @JsonKey(name: 'country') String countryCode,
-      @JsonKey(name: 'country_name') String countryName,
+      String? city,
+      @JsonKey(name: 'country') String? countryCode,
+      @JsonKey(name: 'country_name') String? countryName,
       @JsonKey(name: 'unread_messages') int unreadMessagesCount,
       @JsonKey(name: 'can_accept_payments') int canAcceptPayments,
       {required bool verified}) {
@@ -71,17 +71,17 @@ mixin _$User {
   String get displayName => throw _privateConstructorUsedError;
   @JsonKey(name: 'username')
   String get userName => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
   String? get bio => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   String get avatar => throw _privateConstructorUsedError;
   String get lat => throw _privateConstructorUsedError;
   String get lng => throw _privateConstructorUsedError;
-  String get city => throw _privateConstructorUsedError;
+  String? get city => throw _privateConstructorUsedError;
   @JsonKey(name: 'country')
-  String get countryCode => throw _privateConstructorUsedError;
+  String? get countryCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'country_name')
-  String get countryName => throw _privateConstructorUsedError;
+  String? get countryName => throw _privateConstructorUsedError;
   @JsonKey(name: 'unread_messages')
   int get unreadMessagesCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'can_accept_payments')
@@ -101,15 +101,15 @@ abstract class $UserCopyWith<$Res> {
       {int id,
       @JsonKey(name: 'display_name') String displayName,
       @JsonKey(name: 'username') String userName,
-      String email,
+      String? email,
       String? bio,
       String? phone,
       String avatar,
       String lat,
       String lng,
-      String city,
-      @JsonKey(name: 'country') String countryCode,
-      @JsonKey(name: 'country_name') String countryName,
+      String? city,
+      @JsonKey(name: 'country') String? countryCode,
+      @JsonKey(name: 'country_name') String? countryName,
       @JsonKey(name: 'unread_messages') int unreadMessagesCount,
       @JsonKey(name: 'can_accept_payments') int canAcceptPayments,
       bool verified});
@@ -157,7 +157,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       bio: bio == freezed
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
@@ -181,15 +181,15 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       city: city == freezed
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       countryCode: countryCode == freezed
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       countryName: countryName == freezed
           ? _value.countryName
           : countryName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       unreadMessagesCount: unreadMessagesCount == freezed
           ? _value.unreadMessagesCount
           : unreadMessagesCount // ignore: cast_nullable_to_non_nullable
@@ -215,15 +215,15 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       {int id,
       @JsonKey(name: 'display_name') String displayName,
       @JsonKey(name: 'username') String userName,
-      String email,
+      String? email,
       String? bio,
       String? phone,
       String avatar,
       String lat,
       String lng,
-      String city,
-      @JsonKey(name: 'country') String countryCode,
-      @JsonKey(name: 'country_name') String countryName,
+      String? city,
+      @JsonKey(name: 'country') String? countryCode,
+      @JsonKey(name: 'country_name') String? countryName,
       @JsonKey(name: 'unread_messages') int unreadMessagesCount,
       @JsonKey(name: 'can_accept_payments') int canAcceptPayments,
       bool verified});
@@ -272,7 +272,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       bio == freezed
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
@@ -296,15 +296,15 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       city == freezed
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       countryCode == freezed
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       countryName == freezed
           ? _value.countryName
           : countryName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       unreadMessagesCount == freezed
           ? _value.unreadMessagesCount
           : unreadMessagesCount // ignore: cast_nullable_to_non_nullable
@@ -352,7 +352,7 @@ class _$_User with DiagnosticableTreeMixin implements _User {
   @JsonKey(name: 'username')
   final String userName;
   @override
-  final String email;
+  final String? email;
   @override
   final String? bio;
   @override
@@ -364,13 +364,13 @@ class _$_User with DiagnosticableTreeMixin implements _User {
   @override
   final String lng;
   @override
-  final String city;
+  final String? city;
   @override
   @JsonKey(name: 'country')
-  final String countryCode;
+  final String? countryCode;
   @override
   @JsonKey(name: 'country_name')
-  final String countryName;
+  final String? countryName;
   @override
   @JsonKey(name: 'unread_messages')
   final int unreadMessagesCount;
@@ -485,15 +485,15 @@ abstract class _User implements User {
       int id,
       @JsonKey(name: 'display_name') String displayName,
       @JsonKey(name: 'username') String userName,
-      String email,
+      String? email,
       String? bio,
       String? phone,
       String avatar,
       String lat,
       String lng,
-      String city,
-      @JsonKey(name: 'country') String countryCode,
-      @JsonKey(name: 'country_name') String countryName,
+      String? city,
+      @JsonKey(name: 'country') String? countryCode,
+      @JsonKey(name: 'country_name') String? countryName,
       @JsonKey(name: 'unread_messages') int unreadMessagesCount,
       @JsonKey(name: 'can_accept_payments') int canAcceptPayments,
       {required bool verified}) = _$_User;
@@ -509,7 +509,7 @@ abstract class _User implements User {
   @JsonKey(name: 'username')
   String get userName => throw _privateConstructorUsedError;
   @override
-  String get email => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
   @override
   String? get bio => throw _privateConstructorUsedError;
   @override
@@ -521,13 +521,13 @@ abstract class _User implements User {
   @override
   String get lng => throw _privateConstructorUsedError;
   @override
-  String get city => throw _privateConstructorUsedError;
+  String? get city => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'country')
-  String get countryCode => throw _privateConstructorUsedError;
+  String? get countryCode => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'country_name')
-  String get countryName => throw _privateConstructorUsedError;
+  String? get countryName => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'unread_messages')
   int get unreadMessagesCount => throw _privateConstructorUsedError;

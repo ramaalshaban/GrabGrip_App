@@ -51,7 +51,7 @@ class _PricingTabViewState extends State<PricingTabView>
                   Expanded(
                     child: TextField(
                       onChanged: (text) {
-                        price = int.parse(text);
+                        price = (text.isEmpty) ? 0 : int.parse(text);
                         context.read(postListingProvider.notifier).price =
                             price;
                       },
@@ -72,7 +72,7 @@ class _PricingTabViewState extends State<PricingTabView>
                       children: [
                         TextField(
                           onChanged: (text) {
-                            stock = int.parse(text);
+                            stock = (text.isEmpty) ? 0 : int.parse(text);
                             context.read(postListingProvider.notifier).stock =
                                 stock;
                           },

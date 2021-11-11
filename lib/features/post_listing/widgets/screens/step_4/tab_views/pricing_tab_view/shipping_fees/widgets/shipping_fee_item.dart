@@ -83,7 +83,6 @@ class ShippingFeeItem extends StatelessWidget {
               //region Delete button
               InkWell(
                 onTap: () {
-                  debugPrint("index of removed shipping is $index");
                   ref(postListingProvider.notifier).removeShippingFee(index);
                   ref(listingPricingProvider.notifier)
                       .changeNumOfCreatedShippingFees(-1);

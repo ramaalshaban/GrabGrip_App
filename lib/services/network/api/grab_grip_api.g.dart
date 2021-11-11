@@ -165,7 +165,7 @@ class _GrabGripApi implements GrabGripApi {
   }
 
   @override
-  Future<HttpResponse<UploadPhotoResponse>> uploadPhoto(token,
+  Future<HttpResponse<dynamic>> uploadPhoto(token,
       {required hash, required file}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -176,13 +176,12 @@ class _GrabGripApi implements GrabGripApi {
         'qqfile',
         MultipartFile.fromFileSync(file.path,
             filename: file.path.split(Platform.pathSeparator).last)));
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<UploadPhotoResponse>>(
-            Options(method: 'POST', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/api/v1/create/$hash/uploads',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UploadPhotoResponse.fromJson(_result.data!);
+    final _result = await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/api/v1/create/$hash/uploads',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

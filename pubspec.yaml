@@ -32,6 +32,8 @@ dependencies:
   flash: ^2.0.3
   flutter:
     sdk: flutter
+  # flutter_exif_rotation is used to fix the wrong rotation that occurs in some cases for the photos taken by camera
+  flutter_exif_rotation: ^0.4.1
   # flutter_html is used for rendering html coming from the server
   flutter_html: ^2.1.5
   flutter_localizations:
@@ -52,6 +54,8 @@ dependencies:
   material_floating_search_bar: ^0.3.5
   # multiple_result makes it easy to return two valued from a function
   multiple_result: ^1.0.4
+  # permission_handler is for asking the user for permissions while the app is running
+  permission_handler: ^8.2.6
   # retrofit is used for making http requests
   retrofit: ^2.0.1
   shared_preferences: ^2.0.8

@@ -13,7 +13,6 @@ import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_req
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
 import 'package:grab_grip/features/post_listing/models/save_listing_request/save_listing_request.dart';
-import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/models/upload_photo_response/upload_photo_response.dart';
 import 'package:grab_grip/features/user_profile/models/user.dart';
 import 'package:grab_grip/services/network/api/grab_grip_api.dart';
 import 'package:grab_grip/utils/constants.dart';
@@ -145,7 +144,7 @@ class NetworkService {
     }
   }
 
-  Future<Result<String, UploadPhotoResponse>> uploadPhoto(
+  Future<Result<String, String>> uploadPhoto(
     String token,
     String listingHash,
     File file,
@@ -153,7 +152,7 @@ class NetworkService {
     try {
       final uploadPhotoCall = await _grabGripApi.uploadPhoto("Bearer $token",
           hash: listingHash, file: file);
-      return Success(uploadPhotoCall.data);
+      return Success(uploadPhotoCall.data.toString());
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);
       return Error(errorMessage);
@@ -166,8 +165,11 @@ class NetworkService {
     String photoIndex,
   ) async {
     try {
-      final deletePhotoCall = await _grabGripApi.deletePhoto("Bearer $token",
-          hash: listingHash, photoIndex: photoIndex);
+      final deletePhotoCall = await _grabGripApi.deletePhoto(
+        "Bearer $token",
+        hash: listingHash,
+        photoIndex: photoIndex,
+      );
       return Success(deletePhotoCall.data.toString());
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);
@@ -194,25 +196,17 @@ class NetworkService {
   Future<Result<String, String>> saveListing(
     String token,
     String listingHash,
-      SaveListingRequest body,
+    SaveListingRequest body,
   ) async {
     try {
-      print("***********************************");
-      print("save listing is about to launch...");
-      print("hash is $listingHash");
-      print("body : ${body.toString()}");
-
       final saveListingCall = await _grabGripApi.saveListing(
         "Bearer $token",
         hash: listingHash,
         body: body,
       );
-      print(
-          "successfully done and response is ${saveListingCall.response.toString()}");
       return Success(saveListingCall.data.toString());
     } catch (error) {
-  //    final errorMessage = _errorHandler(error as DioError);
-      print("saveListingCall error occurred and it is ${error.toString()}");
+      //    final errorMessage = _errorHandler(error as DioError);
       return const Error("");
     }
   }
@@ -225,12 +219,6 @@ class NetworkService {
     bool? unPublish,
   }) async {
     try {
-      print("*******************************");
-      print("changeListingAvailability is about to launch...");
-      print("hash is $listingHash");
-      print(
-          "publish : $publish  ------- unpublish : $unPublish ---------  re-enable: $reEnable ");
-
       final changeListingAvailabilityCall =
           await _grabGripApi.changeListingAvailability(
         "Bearer $token",
@@ -239,13 +227,9 @@ class NetworkService {
         reEnable: reEnable == true ? "Re-enable" : null,
         upPublish: unPublish == true ? "Unpublish" : null,
       );
-      print(
-          "changeListingAvailabilityCall successfully done and response is ${changeListingAvailabilityCall.response.toString()}");
       return Success(changeListingAvailabilityCall.data.toString());
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);
-      print(
-          "changeListingAvailabilityCall error occurred and it is ${error.toString()}");
       return Error(errorMessage);
     }
   }

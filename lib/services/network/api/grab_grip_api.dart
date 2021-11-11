@@ -11,7 +11,6 @@ import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_req
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
 import 'package:grab_grip/features/post_listing/models/save_listing_request/save_listing_request.dart';
-import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/models/upload_photo_response/upload_photo_response.dart';
 import 'package:grab_grip/features/user_profile/models/user.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:retrofit/http.dart';
@@ -70,8 +69,9 @@ abstract class GrabGripApi {
     @Query("category") required int categoryId,
   });
 
+  //region photos
   @POST("/api/v1/create/{hash}/uploads")
-  Future<HttpResponse<UploadPhotoResponse>> uploadPhoto(
+  Future<HttpResponse> uploadPhoto(
     @Header("Authorization") String token, {
     @Path("hash") required String hash,
     @Part(name: "qqfile") required File file,
@@ -84,6 +84,8 @@ abstract class GrabGripApi {
     @Path("index") required String photoIndex,
   });
 
+  //endregion
+
   @POST("/api/v1/create")
   Future<HttpResponse<PostListingResponse>> postListingAsDraft(
     @Header("Authorization") String token,
@@ -94,7 +96,7 @@ abstract class GrabGripApi {
   Future<HttpResponse> saveListing(
     @Header("Authorization") String token, {
     @Path("hash") required String hash,
-    @Body() required  SaveListingRequest body,
+    @Body() required SaveListingRequest body,
   });
 
   @PUT("/api/v1/create/{hash}")

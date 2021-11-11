@@ -45,7 +45,7 @@ class BrowseDetailsScreen extends StatelessWidget {
                 ),
               ),
               background: CachedNetworkImage(
-                imageUrl: gear.thumbnail,
+                imageUrl: gear.thumbnail ?? "",
                 placeholder: (context, url) => const Center(
                   child: SizedBox(
                     height: 28,
@@ -78,7 +78,7 @@ class BrowseDetailsScreen extends StatelessWidget {
                 height12(),
                 Text(gear.currency),
                 height12(),
-                Text(gear.formattedPrice??""),
+                Text(gear.formattedPrice ?? ""),
                 height12(),
                 Text(
                   gear.stockQuantity.toString(),
@@ -146,9 +146,9 @@ class OwnerWidget extends StatelessWidget {
         height12(),
         Text(owner.bio ?? ""),
         height12(),
-        Text(owner.city),
+        Text(owner.city ?? ""),
         height12(),
-        Text(owner.countryName),
+        Text(owner.countryName ?? ""),
         height12(),
       ],
     );

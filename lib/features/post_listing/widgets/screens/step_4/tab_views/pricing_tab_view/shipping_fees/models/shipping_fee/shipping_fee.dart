@@ -14,15 +14,4 @@ class ShippingFee with _$ShippingFee {
 
   factory ShippingFee.fromJson(Map<String, dynamic> json) =>
       _$ShippingFeeFromJson(json);
-
-// static Map<String, dynamic> shippingFeesToJson(
-//   List<ShippingFee> shippingFees,
-// ) {
-//   final Map<String, dynamic> json = {};
-//   for (int i = 0; i < shippingFees.length; i++) {
-//     json['shipping[$i][name]'] = shippingFees[i].name;
-//     json['shipping[$i][price]'] = shippingFees[i].price;
-//   }
-//   return json;
-// }
 }

@@ -41,11 +41,12 @@ class LocationPicker extends StatelessWidget {
             fit: StackFit.expand,
             children: [
               Consumer(
-                builder: (_,ref,__){
-                  final lat = ref(postListingProvider).postedListing!.lat;
-                  final lng = ref(postListingProvider).postedListing!.lng;
+                builder: (_, ref, __) {
+                  final postedListing = ref(postListingProvider).postedListing!;
+                  final lat = postedListing.lat;
+                  final lng = postedListing.lng;
                   final latLngToShow = LatLng(lat, lng);
-                  return  GoogleMap(
+                  return GoogleMap(
                     initialCameraPosition: _getCameraPosition(latLngToShow),
                     onMapCreated: (controller) {
                       mapController.complete(controller);
@@ -55,7 +56,6 @@ class LocationPicker extends StatelessWidget {
                     },
                   );
                 },
-
               ),
               FloatingPlacesSearchBar(mapController),
             ],

@@ -135,7 +135,6 @@ class VariationItem extends StatelessWidget {
                   //region Delete button
                   InkWell(
                     onTap: () {
-                      debugPrint("index of removed shipping is ${index}");
                       ref(postListingProvider.notifier).removeVariation(index);
                       ref(listingPricingProvider.notifier)
                           .changeNumOfCreatedVariations(-1);

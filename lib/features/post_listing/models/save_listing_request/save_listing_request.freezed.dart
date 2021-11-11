@@ -76,8 +76,7 @@ mixin _$SaveListingRequest {
   String? get region => throw _privateConstructorUsedError;
   String? get country => throw _privateConstructorUsedError;
   int? get price => throw _privateConstructorUsedError;
-  int? get stock =>
-      throw _privateConstructorUsedError; //   List<UploadPhotoResponse>? photos,
+  int? get stock => throw _privateConstructorUsedError;
   @JsonKey(name: "additional")
   List<AdditionalOption>? get additionalOptions =>
       throw _privateConstructorUsedError;
@@ -362,7 +361,7 @@ class _$_SaveListingRequest
   final int? price;
   @override
   final int? stock;
-  @override //   List<UploadPhotoResponse>? photos,
+  @override
   @JsonKey(name: "additional")
   final List<AdditionalOption>? additionalOptions;
   @override
@@ -510,7 +509,7 @@ abstract class _SaveListingRequest implements SaveListingRequest {
   int? get price => throw _privateConstructorUsedError;
   @override
   int? get stock => throw _privateConstructorUsedError;
-  @override //   List<UploadPhotoResponse>? photos,
+  @override
   @JsonKey(name: "additional")
   List<AdditionalOption>? get additionalOptions =>
       throw _privateConstructorUsedError;

@@ -16,6 +16,8 @@ import 'package:grab_grip/features/post_listing/models/post_listing_step_number_
 import 'package:grab_grip/features/post_listing/providers/post_listing_availability_state_provider.dart';
 import 'package:grab_grip/features/post_listing/providers/post_listing_provider.dart';
 import 'package:grab_grip/features/post_listing/providers/post_listing_step_number_provider.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/models/photo/photo.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/providers/photos_provider.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/models/listing_pricing_model/listing_pricing_model.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/providers/listing_pricing_provider.dart';
 import 'package:grab_grip/features/user_profile/models/user.dart';
@@ -63,10 +65,22 @@ final feedbackProvider = Provider((reference) {
 });
 
 final postListingProvider =
-    StateNotifierProvider<PostListingProvider, PostListingState>((reference) {
-  final httpProvider = reference.watch(httpRequestStateProvider.notifier);
-  final listingAvailabilityProvider = reference.watch(listingAvailabilityStateProvider.notifier);
-  return PostListingProvider(httpProvider, listingAvailabilityProvider);
+    StateNotifierProvider<PostListingProvider, PostListingState>((ref) {
+  final httpProvider = ref.watch(httpRequestStateProvider.notifier);
+  final listingAvailabilityProvider =
+      ref.watch(listingAvailabilityStateProvider.notifier);
+  final photoProvider = ref.watch(photosProvider.notifier);
+  return PostListingProvider(
+    httpProvider,
+    listingAvailabilityProvider,
+    photoProvider,
+  );
+});
+
+final photosProvider =
+    StateNotifierProvider<PhotosProvider, List<Photo>>((reference) {
+  final provider = reference.watch(httpRequestStateProvider.notifier);
+  return PhotosProvider(provider);
 });
 
 final postListingStepProvider =

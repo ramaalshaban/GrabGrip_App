@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:collection/collection.dart';
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/features/browsing/browse/models/category/category.dart';
@@ -11,8 +10,7 @@ import 'package:grab_grip/features/post_listing/models/post_listing_state/post_l
 import 'package:grab_grip/features/post_listing/models/pricing_model/pricing_model.dart';
 import 'package:grab_grip/features/post_listing/models/save_listing_request/save_listing_request.dart';
 import 'package:grab_grip/features/post_listing/providers/post_listing_availability_state_provider.dart';
-import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/models/photo/photo.dart';
-import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/models/upload_photo_response/upload_photo_response.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/providers/photos_provider.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/additional_options/models/additional_option/additional_option.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/shipping_fees/models/shipping_fee/shipping_fee.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/variations/models/variation/variation.dart';
@@ -22,15 +20,16 @@ import 'package:grab_grip/services/network/providers/http_request_state_provider
 import 'package:grab_grip/services/storage/app_shared_preferences.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/functions.dart';
-import 'package:image_picker/image_picker.dart';
 
 class PostListingProvider extends StateNotifier<PostListingState> {
   HttpRequestStateProvider httpRequestStateProvider;
   PostListingAvailabilityStateProvider listingAvailabilityProvider;
+  PhotosProvider photosProvider;
 
   PostListingProvider(
     this.httpRequestStateProvider,
     this.listingAvailabilityProvider,
+    this.photosProvider,
   ) : super(const PostListingState());
 
   //region reset methods
@@ -129,15 +128,6 @@ class PostListingProvider extends StateNotifier<PostListingState> {
 
   String? get region => state.region;
 
-  List<Photo> get photos => state.photos;
-
-  set photos(List<Photo> photos) => state = state.copyWith(photos: photos);
-
-  List<UploadPhotoResponse> get photosAsJson => state.photosAsJson;
-
-  set photosAsJson(List<UploadPhotoResponse> photosAsJson) =>
-      state = state.copyWith(photosAsJson: photosAsJson);
-
   set price(int? price) => state = state.copyWith(price: price);
 
   int? get price => state.price;
@@ -161,11 +151,6 @@ class PostListingProvider extends StateNotifier<PostListingState> {
   set variations(List<Variation> variations) =>
       state = state.copyWith(variations: variations);
 
-  bool? get hasListingBeenSaved => state.hasListingBeenSaved;
-
-  set hasListingBeenSaved(bool? saved) =>
-      state = state.copyWith(hasListingBeenSaved: saved);
-
 //endregion
 
   //region add/remove methods
@@ -182,48 +167,6 @@ class PostListingProvider extends StateNotifier<PostListingState> {
     availableTags.addAll(tags);
     availableTags.remove(tagToRemove);
     tags = availableTags.toList();
-  }
-
-  //endregion
-
-  //region photos
-  Future<void> addPhoto(File file) async {
-    final photoIndex = photos.length.toString();
-    final newPhotoName = "$title - photo #${photos.length + 1}";
-    final newPhoto = await makePhotoFromFile(file, photoIndex, newPhotoName);
-    final List<Photo> availablePhotos = [];
-    availablePhotos.addAll(photos);
-    availablePhotos.add(newPhoto);
-    photos = availablePhotos.toList();
-  }
-
-  void removePhoto(String photoIndex) {
-    final List<Photo> availablePhotos = [];
-    for (int i = 0; i < photos.length; i++) {
-      // don't add the photo that should be removed
-      if (i == int.parse(photoIndex)) {
-        continue;
-      }
-      // since a photo will be removed, then give the remaining photos a new index
-      final newIndex = availablePhotos.length.toString();
-      availablePhotos.add(photos[i].copyWith(index: newIndex));
-    }
-    photos = availablePhotos.toList();
-  }
-
-  void addPhotoAsJson(UploadPhotoResponse response) {
-    final List<UploadPhotoResponse> availableResponses = [];
-    availableResponses.addAll(photosAsJson);
-    availableResponses.add(response);
-    photosAsJson = availableResponses.toList();
-  }
-
-  void removePhotoAsJson(String photoIndex) {
-    final photoResponseToRemove = photosAsJson[int.parse(photoIndex)];
-    final List<UploadPhotoResponse> availableResponses = [];
-    availableResponses.addAll(photosAsJson);
-    availableResponses.remove(photoResponseToRemove);
-    photosAsJson = availableResponses.toList();
   }
 
   //endregion
@@ -254,9 +197,6 @@ class PostListingProvider extends StateNotifier<PostListingState> {
     availableOptions.addAll(additionalOptions);
     availableOptions.remove(optionToRemove);
     additionalOptions = availableOptions.toList();
-    print("$additionalOptions is heeeeeeeeeeeeeeeeee");
-    print("${additionalOptions.length} is heeeeeeeeeeeeeeeeee");
-    print("${additionalOptions.toString()} is heeeeeeeeeeeeeeeeee");
   }
 
   //endregion
@@ -318,7 +258,9 @@ class PostListingProvider extends StateNotifier<PostListingState> {
     for (int i = 0; i < variations.length; i++) {
       if (i == index) {
         final toUpdateVariation = Variation(
-            attribute: variations[i].attribute, values: availableValues);
+          attribute: variations[i].attribute,
+          values: availableValues,
+        );
         availableVariations.add(toUpdateVariation);
       } else {
         availableVariations.add(variations[i]);
@@ -336,7 +278,9 @@ class PostListingProvider extends StateNotifier<PostListingState> {
     for (int i = 0; i < variations.length; i++) {
       if (i == index) {
         final toUpdateVariation = Variation(
-            attribute: variations[i].attribute, values: availableValues);
+          attribute: variations[i].attribute,
+          values: availableValues,
+        );
         availableVariations.add(toUpdateVariation);
       } else {
         availableVariations.add(variations[i]);
@@ -370,49 +314,20 @@ class PostListingProvider extends StateNotifier<PostListingState> {
   //endregion
 
   //region photos upload/delete
-  Future<void> uploadPhoto(XFile xFile) async {
-    httpRequestStateProvider.setInnerLoading();
-    final file = File(xFile.path);
-    final token = await AppSharedPreferences().getToken();
-    await NetworkService()
-        .uploadPhoto(token!, state.postedListing!.hash, file)
-        .then((result) {
-      result.when((errorMessage) {
-        httpRequestStateProvider.setError(errorMessage);
-      }, (response) async {
-        addPhotoAsJson(response);
-        await addPhoto(file);
-        httpRequestStateProvider.setSuccess();
-      });
-    });
+  Future<void> uploadPhoto(File file, {bool? takenByCamera}) async {
+    photosProvider.uploadPhoto(
+      file: file,
+      hash: state.postedListing!.hash,
+      listingTitle: title ?? "",
+      takenByCamera: takenByCamera,
+    );
   }
 
   Future<void> deletePhoto(String photoIndex) async {
-    // deleting the photo can be done in two ways:
-    // locally: removing the photo from the listing without making any API call
-    // remotely: this is done only when the listing that is being edited is saved (i.e. save listing call has been made)
-    // if user deletes a photo before saving the listing, then the photo will be deleted locally.
-
-    if (photos.firstWhereOrNull((photo) => photo.index == photoIndex) == null) {
-      // the photo has not been found locally so save listing call has been made. so delete the photo remotely
-      httpRequestStateProvider.setInnerLoading();
-      final token = await AppSharedPreferences().getToken();
-      await NetworkService()
-          .deletePhoto(token!, state.postedListing!.hash, photoIndex)
-          .then((result) {
-        result.when((errorMessage) {
-          httpRequestStateProvider.setError(errorMessage);
-        }, (response) async {
-          removePhotoAsJson(photoIndex);
-          removePhoto(photoIndex);
-          httpRequestStateProvider.setSuccess();
-        });
-      });
-    } else {
-      // the photo has been found locally, so delete it locally only since user has not saved the listing yet
-      removePhotoAsJson(photoIndex);
-      removePhoto(photoIndex);
-    }
+    photosProvider.deletePhoto(
+      hash: state.postedListing!.hash,
+      photoIndex: photoIndex,
+    );
   }
 
   //endregion
@@ -446,123 +361,29 @@ class PostListingProvider extends StateNotifier<PostListingState> {
   }
 
   SaveListingRequest getSaveListingRequestBody() {
-    // check if availableOptions/shippingFees are empty, then add an empty item to them
-    // In order for the backend to be able to delete all additionalOptions/shippingFees, this addition is required.
+    // check if availableOptions/shippingFees/variations are empty, then add an empty item to them
+    // In order for the backend to be able to delete all additionalOptions/shippingFees/variations, this addition is required.
     final additionalOptionsToSave = additionalOptions.isEmpty
         ? [const AdditionalOption()]
         : additionalOptions;
     final shippingFeesToSave =
         shippingFees.isEmpty ? [const ShippingFee()] : shippingFees;
-    final variationsToSave = variations
-        .map(
-          (variation) => VariationStringValue(
-            attribute: variation.attribute,
-            values: variation.values.join(','),
-          ),
-        )
-        .toList();
-    //region debugging print statements
-    debugPrint(
-      "-----------------listing saving button clicked-----------------------",
-    );
-    debugPrint(
-      "category id ${category!.id}",
-    );
-    debugPrint(
-      "pricing model id $listingTypeId",
-    );
-    debugPrint(
-      "title $title",
-    );
-    debugPrint(
-      "description $description",
-    );
-    debugPrint(
-      "tags ${tags.toString()}",
-    );
-    debugPrint(
-      "listing end date $listingEndDate",
-    );
-    debugPrint(
-      "lat ${postedListing!.lat.toString()}",
-    );
-    debugPrint(
-      "lng ${postedListing!.lng.toString()}",
-    );
-    debugPrint(
-      "country code ${country?.code}",
-    );
-    debugPrint(
-      "city $city",
-    );
-    debugPrint(
-      "region $region",
-    );
-    debugPrint(
-      "photos : ",
-    );
-    for (int i = 0; i < photosAsJson.length; i++) {
-      debugPrint(
-        "       type: ${photosAsJson[i].type}",
-      );
-      debugPrint(
-        "       path: ${photosAsJson[i].path}",
-      );
-      debugPrint(
-        "       uploaded: ${photosAsJson[i].success}",
-      );
-      debugPrint(
-        "${photosAsJson[i]}",
-      );
-      debugPrint("-------------");
-    }
-    debugPrint(
-      "price in sar $price",
-    );
-    debugPrint(
-      "stock $stock",
-    );
-    for (int i = 0; i < additionalOptions.length; i++) {
-      debugPrint(
-        "       name: ${additionalOptions[i].name}",
-      );
-      debugPrint(
-        "       price: ${additionalOptions[i].price}",
-      );
-      debugPrint(
-        "       Max Qty: ${additionalOptions[i].maxQuantity}",
-      );
-      debugPrint("-------------");
-    }
-    for (int i = 0; i < shippingFees.length; i++) {
-      debugPrint(
-        "       name: ${shippingFees[i].name}",
-      );
-      debugPrint(
-        "       price: ${shippingFees[i].price}",
-      );
+    final variationsToSave = variations.isEmpty
+        ? [const VariationStringValue()]
+        : variations
+            .map(
+              (variation) => VariationStringValue(
+                attribute: variation.attribute,
+                values: variation.values.join(','),
+              ),
+            )
+            .toList();
 
-      debugPrint("-------------");
-    }
-    for (int i = 0; i < variations.length; i++) {
-      debugPrint(
-        "       name: ${variations[i].attribute}",
-      );
-      debugPrint(
-        "       values: ${variations[i].values.toString()}",
-      );
-
-      debugPrint("-------------");
-    }
-    debugPrint(
-      "---------------------------------------------------------------------",
-    );
-    //endregion
     return SaveListingRequest(
       title: title,
       description: description,
       tags: tags.join(','),
-      listingEndDate: listingEndDate ?? " . ",
+      listingEndDate: listingEndDate,
       lat: postedListing?.lat,
       lng: postedListing?.lng,
       city: city,
@@ -570,7 +391,6 @@ class PostListingProvider extends StateNotifier<PostListingState> {
       country: country?.code,
       price: price,
       stock: stock,
-      //  photos: photosAsJson,
       additionalOptions: additionalOptionsToSave,
       shippingFees: shippingFeesToSave,
       variations: variationsToSave,
@@ -579,11 +399,8 @@ class PostListingProvider extends StateNotifier<PostListingState> {
 
   Future<void> saveListing() async {
     httpRequestStateProvider.setInnerLoading();
-
     final saveListingRequestBody = getSaveListingRequestBody();
-
     final token = await AppSharedPreferences().getToken();
-    print("token is $token");
     await NetworkService()
         .saveListing(
       token!,
@@ -592,10 +409,8 @@ class PostListingProvider extends StateNotifier<PostListingState> {
     )
         .then((result) {
       result.when((errorMessage) {
-        hasListingBeenSaved = false;
         httpRequestStateProvider.setError(saveListingError);
       }, (response) {
-        hasListingBeenSaved = true;
         httpRequestStateProvider.setSuccess(saveListingSuccess);
       });
     });

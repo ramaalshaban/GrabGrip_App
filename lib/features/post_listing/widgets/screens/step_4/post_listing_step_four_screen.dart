@@ -78,8 +78,6 @@ class PostListingStepFourScreen extends StatelessWidget {
                 provider: listingAvailabilityStateProvider,
                 onChange:
                     (context, PostListingAvailabilityState availabilityState) {
-                  print(
-                      "the PostListingAvailabilityState has been changed to $availabilityState");
                   //region snack bars
                   availabilityState.when(
                     published: (successfullyPublished) =>
@@ -197,20 +195,20 @@ class PostListingStepFourScreen extends StatelessWidget {
                                           listingAvailabilityState:
                                               listingAvailabilityState,
                                           onClickAction: () {
-                                              ref(postListingProvider.notifier)
-                                                  .changeListingAvailability(
-                                                isUnPublish: true,
-                                              );
+                                            ref(postListingProvider.notifier)
+                                                .changeListingAvailability(
+                                              isUnPublish: true,
+                                            );
                                           },
                                         )
                                       : PublishButton(
                                           listingAvailabilityState:
                                               listingAvailabilityState,
                                           onClickAction: () {
-                                              ref(postListingProvider.notifier)
-                                                  .changeListingAvailability(
-                                                isPublish: true,
-                                              );
+                                            ref(postListingProvider.notifier)
+                                                .changeListingAvailability(
+                                              isPublish: true,
+                                            );
                                           },
                                         ),
                               unPublished: (successfullyUnPublished) =>
@@ -219,20 +217,20 @@ class PostListingStepFourScreen extends StatelessWidget {
                                           listingAvailabilityState:
                                               listingAvailabilityState,
                                           onClickAction: () {
-                                              ref(postListingProvider.notifier)
-                                                  .changeListingAvailability(
-                                                isReEnable: true,
-                                              );
+                                            ref(postListingProvider.notifier)
+                                                .changeListingAvailability(
+                                              isReEnable: true,
+                                            );
                                           },
                                         )
                                       : PublishButton(
                                           listingAvailabilityState:
                                               listingAvailabilityState,
                                           onClickAction: () {
-                                              ref(postListingProvider.notifier)
-                                                  .changeListingAvailability(
-                                                isUnPublish: true,
-                                              );
+                                            ref(postListingProvider.notifier)
+                                                .changeListingAvailability(
+                                              isUnPublish: true,
+                                            );
                                           },
                                         ),
                               reEnabled: (successfullyReEnabled) =>
@@ -241,20 +239,20 @@ class PostListingStepFourScreen extends StatelessWidget {
                                           listingAvailabilityState:
                                               listingAvailabilityState,
                                           onClickAction: () {
-                                              ref(postListingProvider.notifier)
-                                                  .changeListingAvailability(
-                                                isUnPublish: true,
-                                              );
+                                            ref(postListingProvider.notifier)
+                                                .changeListingAvailability(
+                                              isUnPublish: true,
+                                            );
                                           },
                                         )
                                       : PublishButton(
                                           listingAvailabilityState:
                                               listingAvailabilityState,
                                           onClickAction: () {
-                                              ref(postListingProvider.notifier)
-                                                  .changeListingAvailability(
-                                                isReEnable: true,
-                                              );
+                                            ref(postListingProvider.notifier)
+                                                .changeListingAvailability(
+                                              isReEnable: true,
+                                            );
                                           },
                                         ),
                             ),

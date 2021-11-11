@@ -30,7 +30,7 @@ class GridGearItem extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: CachedNetworkImage(
-                  imageUrl: gear.thumbnail,
+                  imageUrl: gear.thumbnail ?? "",
                   placeholder: (context, url) => const Center(
                     child: SizedBox(
                       height: 28,
@@ -75,7 +75,7 @@ class GridGearItem extends StatelessWidget {
                         style: AppTextStyles.subtitle,
                       ),
                       Text(
-                        gear.formattedPrice??"",
+                        gear.formattedPrice ?? "",
                         maxLines: 2,
                         style: AppTextStyles.price,
                       ),

@@ -1,4 +1,6 @@
 import 'dart:io';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,12 +19,9 @@ class PhotoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => showDialog(
-        context: context,
-        builder: (context) => ImagePreviewDialog(
-          photo: photo,
-        ),
-      ),
+      onTap: () {
+        context.router.pushWidget(ImagePreviewDialog(photo: photo));
+      },
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
@@ -85,18 +84,18 @@ class PhotoItem extends StatelessWidget {
                       .deletePhoto(photo.index),
                   child: Container(
                     margin: const EdgeInsets.only(top: 4, right: 4),
-                    height: 20,
-                    width: 20,
+                    height: 24,
+                    width: 24,
                     decoration: const BoxDecoration(
                       color: AppColors.white,
                       borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+                        Radius.circular(20),
                       ),
                     ),
                     child: const Icon(
                       Icons.delete,
                       color: Colors.red,
-                      size: 18,
+                      size: 20,
                     ),
                   ),
                 );
