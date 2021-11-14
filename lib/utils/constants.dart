@@ -16,9 +16,14 @@ const Duration duration3Seconds = Duration(seconds: 3);
 //endregion
 
 //region dividers
-const Divider dividerThickness0_5 = Divider(
+const Divider lightPurpleDividerThickness0_5 = Divider(
   thickness: 0.5,
   color: AppColors.lightPurple,
+);
+
+const Divider lightGrayDividerThickness0_5 = Divider(
+  thickness: 0.5,
+  color: AppColors.lightGray,
 );
 //endregion
 

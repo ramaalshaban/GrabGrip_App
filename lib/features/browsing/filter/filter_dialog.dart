@@ -47,7 +47,7 @@ class FilterDialog extends ConsumerWidget {
                 ),
               ),
             ),
-            dividerThickness0_5,
+            lightPurpleDividerThickness0_5,
             height8(),
             Text(
               AppLocalizations.of(context)!.distance,
@@ -63,7 +63,7 @@ class FilterDialog extends ConsumerWidget {
             height8(),
             const CategoriesWidget(),
             height12(),
-            dividerThickness0_5,
+            lightPurpleDividerThickness0_5,
             height12(),
             Text(
               AppLocalizations.of(context)!.price,
@@ -131,7 +131,7 @@ class FilterDialog extends ConsumerWidget {
               ),
             ),
             height12(),
-            dividerThickness0_5,
+            lightPurpleDividerThickness0_5,
             height8(),
             Text(
               AppLocalizations.of(context)!.listing_type,

@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:grab_grip/features/user_profile/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppSharedPreferences {
@@ -44,19 +47,24 @@ class AppSharedPreferences {
     return (await _sharedPreferences).getString(key);
   }
 
-  Future<void> setUserVerified({required bool verificationStatus}) async {
+  Future<void> setUser({required User user}) async {
     (await _sharedPreferences)
-        .setBool(SharedPreferencesKeys.isUserVerified, verificationStatus);
+        .setString(SharedPreferencesKeys.user, jsonEncode(user));
   }
 
   Future<bool?> isUserVerified() async {
-    return (await _sharedPreferences)
-        .getBool(SharedPreferencesKeys.isUserVerified);
+    final userString =
+        (await _sharedPreferences).getString(SharedPreferencesKeys.user);
+    if (userString == null) {
+      return null;
+    }
+    final userJson = jsonDecode(userString) as  Map<String, dynamic>;
+    return User.fromJson(userJson).verified;
   }
 }
 
 class SharedPreferencesKeys {
   static const token = "token";
   static const tokenDuration = "tokenDuration";
-  static const isUserVerified = "isUserVerified";
+  static const user = "user";
 }

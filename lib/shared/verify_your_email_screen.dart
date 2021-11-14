@@ -35,7 +35,9 @@ class VerifyYourEmailScreen extends StatelessWidget {
             ),
             height12(),
             const Text(
-                "Verify your email please and click on the button below"),
+              "Verify your email please and click on the button below",
+              textAlign: TextAlign.center,
+            ),
             height60(),
             Consumer(
               builder: (_, ref, __) {
@@ -60,11 +62,12 @@ class VerifyYourEmailScreen extends StatelessWidget {
                         }
                       },
                       child: ContinueButton(
-                        formKey: null,
                         buttonText: "I have verified my email",
                         onClickAction: () async {
-                          final isVerified = await ref(authProvider.notifier)
-                              .getUserVerificationStatus();
+                          await ref(userProfileProvider.notifier)
+                              .getUserProfileAndSaveIt();
+                          final isVerified = ref(userProfileProvider.notifier)
+                              .getVerificationStatus();
                           ref(authProvider.notifier)
                               .setAuthenticated(isVerified: isVerified);
                         },

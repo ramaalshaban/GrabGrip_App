@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
 import 'package:grab_grip/features/authentication/providers/auth_state.dart';
+import 'package:grab_grip/features/user_profile/models/user.dart';
 import 'package:grab_grip/features/user_profile/providers/user_profile_provider.dart';
 import 'package:grab_grip/services/network/network_service.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
@@ -20,16 +21,20 @@ class AuthProvider extends StateNotifier<AuthState> {
   }
 
   void _initialize() {
+    httpRequestStateProvider.setLoading();
     AppSharedPreferences().getToken().then(
       (token) async {
         if (token == null) {
           state = const AuthState.notAuthenticated();
+          httpRequestStateProvider.setNoRequestInProgress();
         } else {
-          // check if use is verified (i.e. got his email verified)
-          final isVerified = await getUserVerificationStatus();
+          await userProfileProvider.getUserProfileAndSaveIt();
+          // check if user is verified (i.e. got his email verified)
+          final isVerified = userProfileProvider.getVerificationStatus();
           state = AuthState.authenticated(
             isVerified: isVerified == true ? userIsVerified : userIsNotVerified,
           );
+          httpRequestStateProvider.setNoRequestInProgress();
         }
       },
     );
@@ -45,17 +50,6 @@ class AuthProvider extends StateNotifier<AuthState> {
     state = const AuthState.notAuthenticated();
   }
 
-  Future<bool> getUserVerificationStatus() async {
-    final isVerified = await AppSharedPreferences().isUserVerified();
-    if (isVerified == true) {
-      return userIsVerified;
-    } else {
-      await userProfileProvider.getUserProfileAndSaveVerificationStatus();
-      final isVerified = userProfileProvider.getVerificationStatus();
-      return isVerified;
-    }
-  }
-
   Future<void> _saveTokenData(LoginResponse response) async {
     final token = response.accessToken;
     final tokenDuration = response.expirationDuration;
@@ -69,9 +63,10 @@ class AuthProvider extends StateNotifier<AuthState> {
       result.when((errorMessage) {
         state = const AuthState.notAuthenticated();
         httpRequestStateProvider.setError(errorMessage);
-      }, (response) {
-        state = const AuthState.authenticated(isVerified: false);
+      }, (response) async {
         _saveTokenData(response);
+        await userProfileProvider.getUserProfileAndSaveIt();
+        state = const AuthState.authenticated(isVerified: false);
         httpRequestStateProvider.setSuccess();
       });
     });
@@ -85,7 +80,8 @@ class AuthProvider extends StateNotifier<AuthState> {
         httpRequestStateProvider.setError(errorMessage);
       }, (response) async {
         await _saveTokenData(response);
-        final isVerified = await getUserVerificationStatus();
+        await userProfileProvider.getUserProfileAndSaveIt();
+        final isVerified = userProfileProvider.getVerificationStatus();
         state = AuthState.authenticated(isVerified: isVerified);
         httpRequestStateProvider.setSuccess(state.toString());
       });
@@ -103,7 +99,8 @@ class AuthProvider extends StateNotifier<AuthState> {
         (successMessage) {
           state = const AuthState.notAuthenticated();
           AppSharedPreferences().deleteTokenData();
-          AppSharedPreferences().setUserVerified(verificationStatus: false);
+          AppSharedPreferences().setUser(user: User.empty());
+          userProfileProvider.reset();
           httpRequestStateProvider.setSuccess();
         },
       );

@@ -56,6 +56,7 @@ class PostListingScreen extends StatelessWidget {
                           ref(photosProvider.notifier).reset();
                           ref(listingAvailabilityStateProvider.notifier)
                               .reset();
+                          ref(postListingStepProvider.notifier).setStep1();
                         });
                       },
                       cancelAction: () {

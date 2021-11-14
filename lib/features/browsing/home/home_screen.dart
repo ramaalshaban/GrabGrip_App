@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
-import 'package:grab_grip/features/browsing/home/widgets/drawer.dart';
+import 'package:grab_grip/features/browsing/home/widgets/drawer/drawer.dart';
 import 'package:grab_grip/features/browsing/home/widgets/home_app_bar.dart';
 import 'package:grab_grip/features/browsing/home/widgets/horizontal_list.dart';
 import 'package:grab_grip/style/colors.dart';
@@ -16,52 +16,41 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // let the authProvider be initialized (i.e. let its _initialize() method run)
     context.read(authProvider);
-    return Scaffold(
-      backgroundColor: AppColors.white,
-      appBar: const HomeAppBar(),
-      drawer: const AppDrawer(),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Consumer(
-              builder: (_, watch, __) {
-                return TextButton(
-                  onPressed: () {
-                    context.router.push(
-                      const BrowseScreenRoute(),
-                    );
-                  },
-                  child: const Text("Browse Gears"),
-                );
-              },
-            ),
-            Consumer(
-              builder: (_, ref, __) {
-                return TextButton(
-                  onPressed: () {
-                    ref(postListingStepProvider.notifier).setStep1();
-                    context.router.push(
-                      const PostListingScreenRoute(),
-                    );
-                  },
-                  child: const Text("Post a Listing"),
-                );
-              },
-            ),
-            HorizontalList(
-              title: AppLocalizations.of(context)!.explore,
-              data: const ["", "", "", "", "", "", "", "", "", ""],
-            ),
-            HorizontalList(
-              title: AppLocalizations.of(context)!.best_sellers,
-              data: const ["", "", "", "", "", ""],
-            ),
-            HorizontalList(
-              title: AppLocalizations.of(context)!.top_trends,
-              data: const ["", "", "", "", "", "", "", "", "", ""],
-            )
-          ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.white,
+        appBar: const HomeAppBar(),
+        drawer: const AppDrawer(),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Consumer(
+                builder: (_, watch, __) {
+                  return TextButton(
+                    onPressed: () {
+                      context.router.push(
+                        const BrowseScreenRoute(),
+                      );
+                    },
+                    child: const Text("Browse Gears"),
+                  );
+                },
+              ),
+              HorizontalList(
+                title: AppLocalizations.of(context)!.explore,
+                data: const ["", "", "", "", "", "", "", "", "", ""],
+              ),
+              HorizontalList(
+                title: AppLocalizations.of(context)!.best_sellers,
+                data: const ["", "", "", "", "", ""],
+              ),
+              HorizontalList(
+                title: AppLocalizations.of(context)!.top_trends,
+                data: const ["", "", "", "", "", "", "", "", "", ""],
+              )
+            ],
+          ),
         ),
       ),
     );

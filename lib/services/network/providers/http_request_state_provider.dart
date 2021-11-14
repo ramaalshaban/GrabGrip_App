@@ -5,6 +5,10 @@ class HttpRequestStateProvider extends StateNotifier<HttpRequestState> {
   HttpRequestStateProvider()
       : super(const HttpRequestState.noRequestInProgress());
 
+  void setNoRequestInProgress() {
+    state = const HttpRequestState.noRequestInProgress();
+  }
+
   void setLoading() {
     state = const HttpRequestState.loading();
   }

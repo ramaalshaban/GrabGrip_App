@@ -95,7 +95,7 @@ class _DetailsTabViewState extends State<DetailsTabView>
               height24(),
               DatePicker(),
               height36(),
-              dividerThickness0_5,
+              lightPurpleDividerThickness0_5,
               height36(),
               LocationPicker(
                 label: "Location",

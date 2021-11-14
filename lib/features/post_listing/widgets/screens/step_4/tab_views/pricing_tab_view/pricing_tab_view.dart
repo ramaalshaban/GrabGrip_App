@@ -99,7 +99,7 @@ class _PricingTabViewState extends State<PricingTabView>
               ),
             ),
             //endregion
-            dividerThickness0_5,
+            lightPurpleDividerThickness0_5,
             height24(),
             //region Additional options & services
             const Text(
@@ -110,7 +110,7 @@ class _PricingTabViewState extends State<PricingTabView>
             const AdditionalOptionsWidget(),
             //endregion
             height24(),
-            dividerThickness0_5,
+            lightPurpleDividerThickness0_5,
             height24(),
             //region Shipping fees
             const Text(
@@ -121,7 +121,7 @@ class _PricingTabViewState extends State<PricingTabView>
             const ShippingFeesWidget(),
             //endregion
             height24(),
-            dividerThickness0_5,
+            lightPurpleDividerThickness0_5,
             height24(),
             //region Variations
             const Text(
