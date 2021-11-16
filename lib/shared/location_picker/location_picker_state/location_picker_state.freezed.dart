@@ -25,6 +25,10 @@ class _$LocationPickerStateTearOff {
     return const _Posting();
   }
 
+  _ChoosingPreferences choosingPreferences() {
+    return const _ChoosingPreferences();
+  }
+
   _EditingProfile editingProfile() {
     return const _EditingProfile();
   }
@@ -39,6 +43,7 @@ mixin _$LocationPickerState {
   TResult when<TResult extends Object?>({
     required TResult Function() browsing,
     required TResult Function() posting,
+    required TResult Function() choosingPreferences,
     required TResult Function() editingProfile,
   }) =>
       throw _privateConstructorUsedError;
@@ -46,6 +51,7 @@ mixin _$LocationPickerState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? browsing,
     TResult Function()? posting,
+    TResult Function()? choosingPreferences,
     TResult Function()? editingProfile,
   }) =>
       throw _privateConstructorUsedError;
@@ -53,6 +59,7 @@ mixin _$LocationPickerState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? browsing,
     TResult Function()? posting,
+    TResult Function()? choosingPreferences,
     TResult Function()? editingProfile,
     required TResult orElse(),
   }) =>
@@ -61,6 +68,7 @@ mixin _$LocationPickerState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Browsing value) browsing,
     required TResult Function(_Posting value) posting,
+    required TResult Function(_ChoosingPreferences value) choosingPreferences,
     required TResult Function(_EditingProfile value) editingProfile,
   }) =>
       throw _privateConstructorUsedError;
@@ -68,6 +76,7 @@ mixin _$LocationPickerState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Browsing value)? browsing,
     TResult Function(_Posting value)? posting,
+    TResult Function(_ChoosingPreferences value)? choosingPreferences,
     TResult Function(_EditingProfile value)? editingProfile,
   }) =>
       throw _privateConstructorUsedError;
@@ -75,6 +84,7 @@ mixin _$LocationPickerState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Browsing value)? browsing,
     TResult Function(_Posting value)? posting,
+    TResult Function(_ChoosingPreferences value)? choosingPreferences,
     TResult Function(_EditingProfile value)? editingProfile,
     required TResult orElse(),
   }) =>
@@ -145,6 +155,7 @@ class _$_Browsing with DiagnosticableTreeMixin implements _Browsing {
   TResult when<TResult extends Object?>({
     required TResult Function() browsing,
     required TResult Function() posting,
+    required TResult Function() choosingPreferences,
     required TResult Function() editingProfile,
   }) {
     return browsing();
@@ -155,6 +166,7 @@ class _$_Browsing with DiagnosticableTreeMixin implements _Browsing {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? browsing,
     TResult Function()? posting,
+    TResult Function()? choosingPreferences,
     TResult Function()? editingProfile,
   }) {
     return browsing?.call();
@@ -165,6 +177,7 @@ class _$_Browsing with DiagnosticableTreeMixin implements _Browsing {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? browsing,
     TResult Function()? posting,
+    TResult Function()? choosingPreferences,
     TResult Function()? editingProfile,
     required TResult orElse(),
   }) {
@@ -179,6 +192,7 @@ class _$_Browsing with DiagnosticableTreeMixin implements _Browsing {
   TResult map<TResult extends Object?>({
     required TResult Function(_Browsing value) browsing,
     required TResult Function(_Posting value) posting,
+    required TResult Function(_ChoosingPreferences value) choosingPreferences,
     required TResult Function(_EditingProfile value) editingProfile,
   }) {
     return browsing(this);
@@ -189,6 +203,7 @@ class _$_Browsing with DiagnosticableTreeMixin implements _Browsing {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Browsing value)? browsing,
     TResult Function(_Posting value)? posting,
+    TResult Function(_ChoosingPreferences value)? choosingPreferences,
     TResult Function(_EditingProfile value)? editingProfile,
   }) {
     return browsing?.call(this);
@@ -199,6 +214,7 @@ class _$_Browsing with DiagnosticableTreeMixin implements _Browsing {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Browsing value)? browsing,
     TResult Function(_Posting value)? posting,
+    TResult Function(_ChoosingPreferences value)? choosingPreferences,
     TResult Function(_EditingProfile value)? editingProfile,
     required TResult orElse(),
   }) {
@@ -259,6 +275,7 @@ class _$_Posting with DiagnosticableTreeMixin implements _Posting {
   TResult when<TResult extends Object?>({
     required TResult Function() browsing,
     required TResult Function() posting,
+    required TResult Function() choosingPreferences,
     required TResult Function() editingProfile,
   }) {
     return posting();
@@ -269,6 +286,7 @@ class _$_Posting with DiagnosticableTreeMixin implements _Posting {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? browsing,
     TResult Function()? posting,
+    TResult Function()? choosingPreferences,
     TResult Function()? editingProfile,
   }) {
     return posting?.call();
@@ -279,6 +297,7 @@ class _$_Posting with DiagnosticableTreeMixin implements _Posting {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? browsing,
     TResult Function()? posting,
+    TResult Function()? choosingPreferences,
     TResult Function()? editingProfile,
     required TResult orElse(),
   }) {
@@ -293,6 +312,7 @@ class _$_Posting with DiagnosticableTreeMixin implements _Posting {
   TResult map<TResult extends Object?>({
     required TResult Function(_Browsing value) browsing,
     required TResult Function(_Posting value) posting,
+    required TResult Function(_ChoosingPreferences value) choosingPreferences,
     required TResult Function(_EditingProfile value) editingProfile,
   }) {
     return posting(this);
@@ -303,6 +323,7 @@ class _$_Posting with DiagnosticableTreeMixin implements _Posting {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Browsing value)? browsing,
     TResult Function(_Posting value)? posting,
+    TResult Function(_ChoosingPreferences value)? choosingPreferences,
     TResult Function(_EditingProfile value)? editingProfile,
   }) {
     return posting?.call(this);
@@ -313,6 +334,7 @@ class _$_Posting with DiagnosticableTreeMixin implements _Posting {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Browsing value)? browsing,
     TResult Function(_Posting value)? posting,
+    TResult Function(_ChoosingPreferences value)? choosingPreferences,
     TResult Function(_EditingProfile value)? editingProfile,
     required TResult orElse(),
   }) {
@@ -325,6 +347,132 @@ class _$_Posting with DiagnosticableTreeMixin implements _Posting {
 
 abstract class _Posting implements LocationPickerState {
   const factory _Posting() = _$_Posting;
+}
+
+/// @nodoc
+abstract class _$ChoosingPreferencesCopyWith<$Res> {
+  factory _$ChoosingPreferencesCopyWith(_ChoosingPreferences value,
+          $Res Function(_ChoosingPreferences) then) =
+      __$ChoosingPreferencesCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$ChoosingPreferencesCopyWithImpl<$Res>
+    extends _$LocationPickerStateCopyWithImpl<$Res>
+    implements _$ChoosingPreferencesCopyWith<$Res> {
+  __$ChoosingPreferencesCopyWithImpl(
+      _ChoosingPreferences _value, $Res Function(_ChoosingPreferences) _then)
+      : super(_value, (v) => _then(v as _ChoosingPreferences));
+
+  @override
+  _ChoosingPreferences get _value => super._value as _ChoosingPreferences;
+}
+
+/// @nodoc
+
+class _$_ChoosingPreferences
+    with DiagnosticableTreeMixin
+    implements _ChoosingPreferences {
+  const _$_ChoosingPreferences();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'LocationPickerState.choosingPreferences()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'LocationPickerState.choosingPreferences'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _ChoosingPreferences);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() browsing,
+    required TResult Function() posting,
+    required TResult Function() choosingPreferences,
+    required TResult Function() editingProfile,
+  }) {
+    return choosingPreferences();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? browsing,
+    TResult Function()? posting,
+    TResult Function()? choosingPreferences,
+    TResult Function()? editingProfile,
+  }) {
+    return choosingPreferences?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? browsing,
+    TResult Function()? posting,
+    TResult Function()? choosingPreferences,
+    TResult Function()? editingProfile,
+    required TResult orElse(),
+  }) {
+    if (choosingPreferences != null) {
+      return choosingPreferences();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Browsing value) browsing,
+    required TResult Function(_Posting value) posting,
+    required TResult Function(_ChoosingPreferences value) choosingPreferences,
+    required TResult Function(_EditingProfile value) editingProfile,
+  }) {
+    return choosingPreferences(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Browsing value)? browsing,
+    TResult Function(_Posting value)? posting,
+    TResult Function(_ChoosingPreferences value)? choosingPreferences,
+    TResult Function(_EditingProfile value)? editingProfile,
+  }) {
+    return choosingPreferences?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Browsing value)? browsing,
+    TResult Function(_Posting value)? posting,
+    TResult Function(_ChoosingPreferences value)? choosingPreferences,
+    TResult Function(_EditingProfile value)? editingProfile,
+    required TResult orElse(),
+  }) {
+    if (choosingPreferences != null) {
+      return choosingPreferences(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ChoosingPreferences implements LocationPickerState {
+  const factory _ChoosingPreferences() = _$_ChoosingPreferences;
 }
 
 /// @nodoc
@@ -378,6 +526,7 @@ class _$_EditingProfile
   TResult when<TResult extends Object?>({
     required TResult Function() browsing,
     required TResult Function() posting,
+    required TResult Function() choosingPreferences,
     required TResult Function() editingProfile,
   }) {
     return editingProfile();
@@ -388,6 +537,7 @@ class _$_EditingProfile
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? browsing,
     TResult Function()? posting,
+    TResult Function()? choosingPreferences,
     TResult Function()? editingProfile,
   }) {
     return editingProfile?.call();
@@ -398,6 +548,7 @@ class _$_EditingProfile
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? browsing,
     TResult Function()? posting,
+    TResult Function()? choosingPreferences,
     TResult Function()? editingProfile,
     required TResult orElse(),
   }) {
@@ -412,6 +563,7 @@ class _$_EditingProfile
   TResult map<TResult extends Object?>({
     required TResult Function(_Browsing value) browsing,
     required TResult Function(_Posting value) posting,
+    required TResult Function(_ChoosingPreferences value) choosingPreferences,
     required TResult Function(_EditingProfile value) editingProfile,
   }) {
     return editingProfile(this);
@@ -422,6 +574,7 @@ class _$_EditingProfile
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Browsing value)? browsing,
     TResult Function(_Posting value)? posting,
+    TResult Function(_ChoosingPreferences value)? choosingPreferences,
     TResult Function(_EditingProfile value)? editingProfile,
   }) {
     return editingProfile?.call(this);
@@ -432,6 +585,7 @@ class _$_EditingProfile
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Browsing value)? browsing,
     TResult Function(_Posting value)? posting,
+    TResult Function(_ChoosingPreferences value)? choosingPreferences,
     TResult Function(_EditingProfile value)? editingProfile,
     required TResult orElse(),
   }) {

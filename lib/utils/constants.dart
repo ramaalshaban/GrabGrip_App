@@ -6,6 +6,7 @@ const String noInternetConnection = "no internet connection";
 const String googleApiKey = "AIzaSyDgRW2kCiet1O-yY2YViStzDVe9ld_DSXo";
 const String saveListingSuccess = "saveListingSuccess";
 const String saveListingError = "saveListingError";
+const String unknown = "Unknown";
 const int postListingPhotosLimit = 20;
 FilteringTextInputFormatter doubleNumFilter = FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}'));
 //region durations

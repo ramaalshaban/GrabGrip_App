@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio_http/dio_http.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
 import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
@@ -41,6 +42,34 @@ class NetworkService {
       baseUrl: "https://maps.googleapis.com/maps/api/geocode",
     );
   }
+
+  //region google apis
+  Future<Result<String, GeocodeResponse>> getBoundsByPlaceId({
+    required String placeId,
+  }) async {
+    try {
+      final getBoundsCall =
+      await _googleGeocodeApi.getBoundsByPlaceId(placeId: placeId);
+      return Success(getBoundsCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  Future<Result<String, GeocodeResponse>> getBoundsByLatLng({
+    required LatLng latLng,
+  }) async {
+    try {
+      final getBoundsCall =
+      await _googleGeocodeApi.getBoundsByLatLng(latlng: "${latLng.latitude},${latLng.longitude}");
+      return Success(getBoundsCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+  //endregion
 
   //region auth calls
   Future<Result<String, LoginResponse>> register(AuthModel authModel) async {
@@ -108,19 +137,6 @@ class NetworkService {
     try {
       final getCategoriesCall = await _grabGripApi.getCategories();
       return Success(getCategoriesCall.data);
-    } catch (error) {
-      final errorMessage = _errorHandler(error as DioError);
-      return Error(errorMessage);
-    }
-  }
-
-  Future<Result<String, GeocodeResponse>> getBoundsByPlaceId({
-    required String placeId,
-  }) async {
-    try {
-      final getBoundsCall =
-          await _googleGeocodeApi.getBoundsByPlaceId(placeId: placeId);
-      return Success(getBoundsCall.data);
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);
       return Error(errorMessage);

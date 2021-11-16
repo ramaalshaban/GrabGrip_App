@@ -30,6 +30,7 @@ class FilterDialog extends ConsumerWidget {
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            //region Reset button
             TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.red[600],
@@ -38,6 +39,9 @@ class FilterDialog extends ConsumerWidget {
                 watch(filterAndSortProvider.notifier).reset();
                 minPriceTextController.text = "";
                 maxPriceTextController.text = "";
+                watch(filterAndSortProvider.notifier).resetPlace();
+                BrowseProvider.pagingController.refresh();
+                Navigator.pop(context);
               },
               child: Text(
                 AppLocalizations.of(context)!.reset,
@@ -47,8 +51,10 @@ class FilterDialog extends ConsumerWidget {
                 ),
               ),
             ),
+            //endregion
             lightPurpleDividerThickness0_5,
             height8(),
+            //region Distance dropdown list
             Text(
               AppLocalizations.of(context)!.distance,
             ),
@@ -56,15 +62,19 @@ class FilterDialog extends ConsumerWidget {
               data: distanceOptions,
               dataType: const DropDownType.distanceOptions(),
             ),
+            //endregion
             height12(),
+            //region Categories widget
             Text(
               AppLocalizations.of(context)!.categories,
             ),
             height8(),
             const CategoriesWidget(),
+            //endregion
             height12(),
             lightPurpleDividerThickness0_5,
             height12(),
+            //region Price fields
             Text(
               AppLocalizations.of(context)!.price,
             ),
@@ -130,9 +140,11 @@ class FilterDialog extends ConsumerWidget {
                 ],
               ),
             ),
+            //endregion
             height12(),
             lightPurpleDividerThickness0_5,
             height8(),
+            //region Listing type dropdown list
             Text(
               AppLocalizations.of(context)!.listing_type,
             ),
@@ -140,10 +152,12 @@ class FilterDialog extends ConsumerWidget {
               data: listingTypeOptions,
               dataType: const DropDownType.listingTypeOptions(),
             ),
+            //endregion
           ],
         ),
         actionsAlignment: MainAxisAlignment.center,
         actions: <Widget>[
+          //region Cancel button
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
@@ -154,6 +168,8 @@ class FilterDialog extends ConsumerWidget {
               ),
             ),
           ),
+          //endregion
+          //region Apply button
           TextButton(
             style: TextButton.styleFrom(
               backgroundColor: AppColors.purple,
@@ -170,6 +186,7 @@ class FilterDialog extends ConsumerWidget {
               ),
             ),
           ),
+          //endregion
         ],
       ),
     );

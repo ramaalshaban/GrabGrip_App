@@ -74,6 +74,11 @@ class AppDrawer extends StatelessWidget {
               const AboutUsScreenRoute(),
             ),
             lightGrayDividerThickness0_5,
+            const AppDrawerButton(
+              "Change My Preferences",
+              SelectRentBuyScreenRoute(),
+            ),
+            lightGrayDividerThickness0_5,
             AppDrawerButton(
               AppLocalizations.of(context)!.insurance,
               const AboutUsScreenRoute(),

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/style/colors.dart';
 
 class AppDrawerButton extends StatelessWidget {
@@ -25,7 +26,11 @@ class AppDrawerButton extends StatelessWidget {
         size: 16,
       ),
       onTap: () {
-        context.router.push(toGoToScreenRoute);
+        if (toGoToScreenRoute == const SelectRentBuyScreenRoute()) {
+          context.router.replace(toGoToScreenRoute);
+        } else {
+          context.router.push(toGoToScreenRoute);
+        }
         Navigator.pop(context);
       },
     );

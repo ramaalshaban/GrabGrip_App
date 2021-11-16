@@ -17,6 +17,8 @@ class BrowseScreen extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       context.read(locationPickerStateProvider.notifier).setBrowsing();
+      // refresh the list so when user changes his preferences and opens up this screen it gets refreshed with respect to the chosen preferences
+      BrowseProvider.pagingController.refresh();
     });
     final itemsSearchBoxController = TextEditingController(
       text: watch(filterAndSortProvider.notifier).searchText,
@@ -35,6 +37,7 @@ class BrowseScreen extends ConsumerWidget {
                     height: 40,
                     child: Row(
                       children: [
+                        //region Search by gear name field
                         Expanded(
                           flex: 6,
                           child: TextField(
@@ -72,6 +75,8 @@ class BrowseScreen extends ConsumerWidget {
                             ),
                           ),
                         ),
+                        //endregion
+                        //region Filter button
                         Expanded(
                           child: IconButton(
                             onPressed: () {
@@ -87,6 +92,7 @@ class BrowseScreen extends ConsumerWidget {
                             ),
                           ),
                         ),
+                        //endregion
                       ],
                     ),
                   ),
@@ -96,6 +102,7 @@ class BrowseScreen extends ConsumerWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        //region View mode buttons
                         Expanded(
                           flex: 3,
                           child: Consumer(
@@ -135,6 +142,8 @@ class BrowseScreen extends ConsumerWidget {
                             },
                           ),
                         ),
+                        //endregion
+                        //region Sort dropdown list
                         Expanded(
                           flex: 2,
                           child: DropDownList(
@@ -142,17 +151,22 @@ class BrowseScreen extends ConsumerWidget {
                             dataType: const DropDownType.sortOptions(),
                           ),
                         ),
+                        //endregion
                       ],
                     ),
                   ),
                   height8(),
+                  //region BrowseScreen body
                   Expanded(
                     child: BrowseScreenBody(),
                   ),
+                  //endregion
                 ],
               ),
             ),
+            //region Search by location field
             const FloatingPlacesSearchBar(),
+            //endregion
           ],
         ),
       ),

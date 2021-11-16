@@ -21,6 +21,7 @@ class _$FilterSortModelTearOff {
       [String? searchText,
       String? place,
       String? bounds,
+      LatLng? latLng,
       DropDownItem? sortOption,
       DropDownItem? distance,
       Category? category,
@@ -33,6 +34,7 @@ class _$FilterSortModelTearOff {
       searchText,
       place,
       bounds,
+      latLng,
       sortOption,
       distance,
       category,
@@ -53,6 +55,7 @@ mixin _$FilterSortModel {
   String? get searchText => throw _privateConstructorUsedError;
   String? get place => throw _privateConstructorUsedError;
   String? get bounds => throw _privateConstructorUsedError;
+  LatLng? get latLng => throw _privateConstructorUsedError;
   DropDownItem? get sortOption => throw _privateConstructorUsedError;
   DropDownItem? get distance => throw _privateConstructorUsedError;
   Category? get category => throw _privateConstructorUsedError;
@@ -76,6 +79,7 @@ abstract class $FilterSortModelCopyWith<$Res> {
       {String? searchText,
       String? place,
       String? bounds,
+      LatLng? latLng,
       DropDownItem? sortOption,
       DropDownItem? distance,
       Category? category,
@@ -103,6 +107,7 @@ class _$FilterSortModelCopyWithImpl<$Res>
     Object? searchText = freezed,
     Object? place = freezed,
     Object? bounds = freezed,
+    Object? latLng = freezed,
     Object? sortOption = freezed,
     Object? distance = freezed,
     Object? category = freezed,
@@ -125,6 +130,10 @@ class _$FilterSortModelCopyWithImpl<$Res>
           ? _value.bounds
           : bounds // ignore: cast_nullable_to_non_nullable
               as String?,
+      latLng: latLng == freezed
+          ? _value.latLng
+          : latLng // ignore: cast_nullable_to_non_nullable
+              as LatLng?,
       sortOption: sortOption == freezed
           ? _value.sortOption
           : sortOption // ignore: cast_nullable_to_non_nullable
@@ -194,6 +203,7 @@ abstract class _$FilterSortModelCopyWith<$Res>
       {String? searchText,
       String? place,
       String? bounds,
+      LatLng? latLng,
       DropDownItem? sortOption,
       DropDownItem? distance,
       Category? category,
@@ -225,6 +235,7 @@ class __$FilterSortModelCopyWithImpl<$Res>
     Object? searchText = freezed,
     Object? place = freezed,
     Object? bounds = freezed,
+    Object? latLng = freezed,
     Object? sortOption = freezed,
     Object? distance = freezed,
     Object? category = freezed,
@@ -247,6 +258,10 @@ class __$FilterSortModelCopyWithImpl<$Res>
           ? _value.bounds
           : bounds // ignore: cast_nullable_to_non_nullable
               as String?,
+      latLng == freezed
+          ? _value.latLng
+          : latLng // ignore: cast_nullable_to_non_nullable
+              as LatLng?,
       sortOption == freezed
           ? _value.sortOption
           : sortOption // ignore: cast_nullable_to_non_nullable
@@ -292,6 +307,7 @@ class _$_FilterSortModel
       [this.searchText,
       this.place,
       this.bounds,
+      this.latLng,
       this.sortOption,
       this.distance,
       this.category,
@@ -307,6 +323,8 @@ class _$_FilterSortModel
   final String? place;
   @override
   final String? bounds;
+  @override
+  final LatLng? latLng;
   @override
   final DropDownItem? sortOption;
   @override
@@ -327,7 +345,7 @@ class _$_FilterSortModel
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FilterSortModel(searchText: $searchText, place: $place, bounds: $bounds, sortOption: $sortOption, distance: $distance, category: $category, subcategory: $subcategory, minPrice: $minPrice, maxPrice: $maxPrice, listingType: $listingType, filteringCategories: $filteringCategories)';
+    return 'FilterSortModel(searchText: $searchText, place: $place, bounds: $bounds, latLng: $latLng, sortOption: $sortOption, distance: $distance, category: $category, subcategory: $subcategory, minPrice: $minPrice, maxPrice: $maxPrice, listingType: $listingType, filteringCategories: $filteringCategories)';
   }
 
   @override
@@ -338,6 +356,7 @@ class _$_FilterSortModel
       ..add(DiagnosticsProperty('searchText', searchText))
       ..add(DiagnosticsProperty('place', place))
       ..add(DiagnosticsProperty('bounds', bounds))
+      ..add(DiagnosticsProperty('latLng', latLng))
       ..add(DiagnosticsProperty('sortOption', sortOption))
       ..add(DiagnosticsProperty('distance', distance))
       ..add(DiagnosticsProperty('category', category))
@@ -359,6 +378,8 @@ class _$_FilterSortModel
                 const DeepCollectionEquality().equals(other.place, place)) &&
             (identical(other.bounds, bounds) ||
                 const DeepCollectionEquality().equals(other.bounds, bounds)) &&
+            (identical(other.latLng, latLng) ||
+                const DeepCollectionEquality().equals(other.latLng, latLng)) &&
             (identical(other.sortOption, sortOption) ||
                 const DeepCollectionEquality()
                     .equals(other.sortOption, sortOption)) &&
@@ -391,6 +412,7 @@ class _$_FilterSortModel
       const DeepCollectionEquality().hash(searchText) ^
       const DeepCollectionEquality().hash(place) ^
       const DeepCollectionEquality().hash(bounds) ^
+      const DeepCollectionEquality().hash(latLng) ^
       const DeepCollectionEquality().hash(sortOption) ^
       const DeepCollectionEquality().hash(distance) ^
       const DeepCollectionEquality().hash(category) ^
@@ -411,6 +433,7 @@ abstract class _FilterSortModel implements FilterSortModel {
       [String? searchText,
       String? place,
       String? bounds,
+      LatLng? latLng,
       DropDownItem? sortOption,
       DropDownItem? distance,
       Category? category,
@@ -426,6 +449,8 @@ abstract class _FilterSortModel implements FilterSortModel {
   String? get place => throw _privateConstructorUsedError;
   @override
   String? get bounds => throw _privateConstructorUsedError;
+  @override
+  LatLng? get latLng => throw _privateConstructorUsedError;
   @override
   DropDownItem? get sortOption => throw _privateConstructorUsedError;
   @override

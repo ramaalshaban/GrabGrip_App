@@ -2,8 +2,10 @@
     package="com.carboncd.grab_grip">
 
     <!--    the following two permissions are required for the flutter_exif_rotation package. read about it in pubspec.yaml-->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--    the following permission is required for getting the device location-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:icon="@mipmap/ic_launcher"

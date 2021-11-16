@@ -23,18 +23,18 @@ class _DropDownListState extends State<DropDownList> {
     return Material(
       color: Colors.transparent,
       child: Consumer(
-        builder: (_, watch, __) {
+        builder: (_, ref, __) {
           final DropDownItem? selectedDropDownItem = widget.dataType.when(
             sortOptions: () {
-              return watch(filterAndSortProvider.notifier).sortOption;
+              return ref(filterAndSortProvider.notifier).sortOption;
             },
             distanceOptions: () {
-              return watch(
+              return ref(
                 filterAndSortProvider,
               ).distance;
             },
             listingTypeOptions: () {
-              return watch(
+              return ref(
                 filterAndSortProvider,
               ).listingType;
             },
@@ -50,14 +50,14 @@ class _DropDownListState extends State<DropDownList> {
               setState(() {});
               widget.dataType.when(
                 sortOptions: () {
-                  watch(filterAndSortProvider.notifier).sortOption = newValue;
+                  ref(filterAndSortProvider.notifier).sortOption = newValue;
                   BrowseProvider.pagingController.refresh();
                 },
                 distanceOptions: () {
-                  watch(filterAndSortProvider.notifier).distance = newValue;
+                  ref(filterAndSortProvider.notifier).distance = newValue;
                 },
                 listingTypeOptions: () {
-                  watch(filterAndSortProvider.notifier).listingType = newValue;
+                  ref(filterAndSortProvider.notifier).listingType = newValue;
                 },
               );
             },

@@ -7,5 +7,6 @@ part 'location_picker_state.freezed.dart';
 class LocationPickerState with _$LocationPickerState {
   const factory LocationPickerState.browsing() = _Browsing;
   const factory LocationPickerState.posting() = _Posting;
+  const factory LocationPickerState.choosingPreferences() = _ChoosingPreferences;
   const factory LocationPickerState.editingProfile() = _EditingProfile;
 }

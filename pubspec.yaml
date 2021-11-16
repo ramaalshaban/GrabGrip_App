@@ -40,8 +40,6 @@ dependencies:
     sdk: flutter
   # flutter_riverpod is used for state management
   flutter_riverpod: ^0.14.0+3
-  # google_geocoding is used to get the bounds of the location the user selects in browse screen
-  google_geocoding: ^0.2.0
   google_maps_flutter: ^2.0.11
   # google_place is used to implement the autocomplete for the search box in browse screen
   google_place: ^0.4.3
@@ -50,6 +48,8 @@ dependencies:
   infinite_scroll_pagination: ^3.1.0
   intl: ^0.17.0
   json_annotation: ^4.1.0
+  # location is for getting device location
+  location: ^4.3.0
   # material_floating_search_bar is used in browse screen for filtering gears by their locations
   material_floating_search_bar: ^0.3.5
   # multiple_result makes it easy to return two valued from a function

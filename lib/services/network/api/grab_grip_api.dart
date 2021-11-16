@@ -22,6 +22,24 @@ part 'grab_grip_api.g.dart';
 abstract class GrabGripApi {
   factory GrabGripApi(Dio dio, {String baseUrl}) = _GrabGripApi;
 
+  //region google apis
+  @GET("/json")
+  Future<HttpResponse<GeocodeResponse>> getBoundsByPlaceId({
+    // this is a geocoding call which means, getting a geographical location by a human-readable address
+    @Query("key") String googleApiKey = googleApiKey,
+    @Query("place_id") required String placeId,
+  });
+
+  @GET("/json")
+  Future<HttpResponse<GeocodeResponse>> getBoundsByLatLng({
+    // this is a reverse geocoding call which means, getting a human-readable address by LatLng
+    @Query("key") String googleApiKey = googleApiKey,
+    @Query("result_type") String placeId = "street_address",
+    @Query("latlng") required String latlng,
+  });
+
+  //endregion
+
   //region auth requests
   @POST("/api/v1/auth/register")
   Future<HttpResponse<RegisterResponse>> register(
@@ -53,12 +71,6 @@ abstract class GrabGripApi {
 
   @GET("/categories")
   Future<HttpResponse<CategoriesResponse>> getCategories();
-
-  @GET("/json")
-  Future<HttpResponse<GeocodeResponse>> getBoundsByPlaceId({
-    @Query("key") String googleApiKey = googleApiKey,
-    @Query("place_id") required String placeId,
-  });
 
 //endregion
 

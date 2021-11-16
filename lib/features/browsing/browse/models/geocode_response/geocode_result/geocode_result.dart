@@ -10,6 +10,7 @@ part 'geocode_result.g.dart';
 class GeocodeResult with _$GeocodeResult {
   const factory GeocodeResult(
     Geometry geometry,
+    @JsonKey(name: "formatted_address") String formattedAddress,
   ) = _GeocodeResult;
 
   factory GeocodeResult.fromJson(Map<String, dynamic> json) =>

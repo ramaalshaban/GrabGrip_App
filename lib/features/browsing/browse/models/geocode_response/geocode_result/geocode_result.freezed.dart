@@ -21,9 +21,11 @@ GeocodeResult _$GeocodeResultFromJson(Map<String, dynamic> json) {
 class _$GeocodeResultTearOff {
   const _$GeocodeResultTearOff();
 
-  _GeocodeResult call(Geometry geometry) {
+  _GeocodeResult call(Geometry geometry,
+      @JsonKey(name: "formatted_address") String formattedAddress) {
     return _GeocodeResult(
       geometry,
+      formattedAddress,
     );
   }
 
@@ -38,6 +40,8 @@ const $GeocodeResult = _$GeocodeResultTearOff();
 /// @nodoc
 mixin _$GeocodeResult {
   Geometry get geometry => throw _privateConstructorUsedError;
+  @JsonKey(name: "formatted_address")
+  String get formattedAddress => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,7 +54,9 @@ abstract class $GeocodeResultCopyWith<$Res> {
   factory $GeocodeResultCopyWith(
           GeocodeResult value, $Res Function(GeocodeResult) then) =
       _$GeocodeResultCopyWithImpl<$Res>;
-  $Res call({Geometry geometry});
+  $Res call(
+      {Geometry geometry,
+      @JsonKey(name: "formatted_address") String formattedAddress});
 
   $GeometryCopyWith<$Res> get geometry;
 }
@@ -67,12 +73,17 @@ class _$GeocodeResultCopyWithImpl<$Res>
   @override
   $Res call({
     Object? geometry = freezed,
+    Object? formattedAddress = freezed,
   }) {
     return _then(_value.copyWith(
       geometry: geometry == freezed
           ? _value.geometry
           : geometry // ignore: cast_nullable_to_non_nullable
               as Geometry,
+      formattedAddress: formattedAddress == freezed
+          ? _value.formattedAddress
+          : formattedAddress // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -91,7 +102,9 @@ abstract class _$GeocodeResultCopyWith<$Res>
           _GeocodeResult value, $Res Function(_GeocodeResult) then) =
       __$GeocodeResultCopyWithImpl<$Res>;
   @override
-  $Res call({Geometry geometry});
+  $Res call(
+      {Geometry geometry,
+      @JsonKey(name: "formatted_address") String formattedAddress});
 
   @override
   $GeometryCopyWith<$Res> get geometry;
@@ -111,12 +124,17 @@ class __$GeocodeResultCopyWithImpl<$Res>
   @override
   $Res call({
     Object? geometry = freezed,
+    Object? formattedAddress = freezed,
   }) {
     return _then(_GeocodeResult(
       geometry == freezed
           ? _value.geometry
           : geometry // ignore: cast_nullable_to_non_nullable
               as Geometry,
+      formattedAddress == freezed
+          ? _value.formattedAddress
+          : formattedAddress // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -124,17 +142,21 @@ class __$GeocodeResultCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_GeocodeResult with DiagnosticableTreeMixin implements _GeocodeResult {
-  const _$_GeocodeResult(this.geometry);
+  const _$_GeocodeResult(
+      this.geometry, @JsonKey(name: "formatted_address") this.formattedAddress);
 
   factory _$_GeocodeResult.fromJson(Map<String, dynamic> json) =>
       _$$_GeocodeResultFromJson(json);
 
   @override
   final Geometry geometry;
+  @override
+  @JsonKey(name: "formatted_address")
+  final String formattedAddress;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'GeocodeResult(geometry: $geometry)';
+    return 'GeocodeResult(geometry: $geometry, formattedAddress: $formattedAddress)';
   }
 
   @override
@@ -142,7 +164,8 @@ class _$_GeocodeResult with DiagnosticableTreeMixin implements _GeocodeResult {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'GeocodeResult'))
-      ..add(DiagnosticsProperty('geometry', geometry));
+      ..add(DiagnosticsProperty('geometry', geometry))
+      ..add(DiagnosticsProperty('formattedAddress', formattedAddress));
   }
 
   @override
@@ -151,12 +174,17 @@ class _$_GeocodeResult with DiagnosticableTreeMixin implements _GeocodeResult {
         (other is _GeocodeResult &&
             (identical(other.geometry, geometry) ||
                 const DeepCollectionEquality()
-                    .equals(other.geometry, geometry)));
+                    .equals(other.geometry, geometry)) &&
+            (identical(other.formattedAddress, formattedAddress) ||
+                const DeepCollectionEquality()
+                    .equals(other.formattedAddress, formattedAddress)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(geometry);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(geometry) ^
+      const DeepCollectionEquality().hash(formattedAddress);
 
   @JsonKey(ignore: true)
   @override
@@ -170,13 +198,18 @@ class _$_GeocodeResult with DiagnosticableTreeMixin implements _GeocodeResult {
 }
 
 abstract class _GeocodeResult implements GeocodeResult {
-  const factory _GeocodeResult(Geometry geometry) = _$_GeocodeResult;
+  const factory _GeocodeResult(Geometry geometry,
+          @JsonKey(name: "formatted_address") String formattedAddress) =
+      _$_GeocodeResult;
 
   factory _GeocodeResult.fromJson(Map<String, dynamic> json) =
       _$_GeocodeResult.fromJson;
 
   @override
   Geometry get geometry => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "formatted_address")
+  String get formattedAddress => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$GeocodeResultCopyWith<_GeocodeResult> get copyWith =>

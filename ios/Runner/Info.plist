@@ -45,5 +45,7 @@
     <string>Used to select gears photos when the user posts a listing</string>
 	<key>NSCameraUsageDescription</key>
     <string>Used to take gears photos when the user posts a listing</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Used to take device location in set location screen</string>
 </dict>
 </plist>

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/features/browsing/browse/models/category/category.dart';
 import 'package:grab_grip/features/browsing/filter/models/drop_down_item.dart';
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
@@ -37,8 +38,10 @@ class FilterSortProvider extends StateNotifier<FilterSortModel> {
         key: '-1',
       ),
     );
-    // also, reset the bounds that are related to this place
+    // reset the bounds that are related to this place
     bounds = null;
+    // also, reset the latLng that are related to this place
+    latLng = null;
   }
 
   void reset() {
@@ -50,9 +53,9 @@ class FilterSortProvider extends StateNotifier<FilterSortModel> {
   }
 
   Future<void> getCategories() async {
-   WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       httpRequestStateProvider.setLoading();
-   });
+    });
     await NetworkService().getCategories().then((result) {
       result.when((errorMessage) {
         httpRequestStateProvider.setError(errorMessage);
@@ -112,6 +115,12 @@ class FilterSortProvider extends StateNotifier<FilterSortModel> {
   set bounds(String? bounds) => state = state.copyWith(bounds: bounds);
 
   String? get bounds => state.bounds;
+
+  set latLng(LatLng? latLng) {
+    state = state.copyWith(latLng: latLng);
+  }
+
+  LatLng? get latLng => state.latLng;
 
   set listingType(DropDownItem? listingType) =>
       state = state.copyWith(listingType: listingType);
