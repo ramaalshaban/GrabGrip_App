@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -49,13 +50,19 @@ class AppDrawer extends StatelessWidget {
                 child: Column(
                   children: [
                     AppDrawerButton(
-                      AppLocalizations.of(context)!.join_grab_grip,
-                      RegisterScreenRoute(),
+                      title: AppLocalizations.of(context)!.join_grab_grip,
+                      onTabFunction: () {
+                        context.router.push(RegisterScreenRoute());
+                        Navigator.pop(context);
+                      },
                     ),
                     lightGrayDividerThickness0_5,
                     AppDrawerButton(
-                      AppLocalizations.of(context)!.login,
-                      LoginScreenRoute(),
+                      title: AppLocalizations.of(context)!.login,
+                      onTabFunction: () {
+                        context.router.push(LoginScreenRoute());
+                        Navigator.pop(context);
+                      },
                     ),
                     lightGrayDividerThickness0_5,
                   ],
@@ -63,45 +70,68 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             //endregion
-
-            const AppDrawerButton(
-              "Post a Listing",
-              PostListingScreenRoute(),
+            AppDrawerButton(
+              title: "Post a Listing",
+              onTabFunction: () {
+                context.router.push(const PostListingScreenRoute());
+                Navigator.pop(context);
+              },
             ),
             lightGrayDividerThickness0_5,
             AppDrawerButton(
-              AppLocalizations.of(context)!.search,
-              const AboutUsScreenRoute(),
-            ),
-            lightGrayDividerThickness0_5,
-            const AppDrawerButton(
-              "Change My Preferences",
-              SelectRentBuyScreenRoute(),
-            ),
-            lightGrayDividerThickness0_5,
-            AppDrawerButton(
-              AppLocalizations.of(context)!.insurance,
-              const AboutUsScreenRoute(),
+              title: AppLocalizations.of(context)!.search,
+              onTabFunction: () {
+                context.router.push(const AboutUsScreenRoute());
+                Navigator.pop(context);
+              },
             ),
             lightGrayDividerThickness0_5,
             AppDrawerButton(
-              AppLocalizations.of(context)!.blog,
-              const AboutUsScreenRoute(),
+              title: "Change My Preferences",
+              onTabFunction: () {
+                context.router.replace(const SelectRentBuyScreenRoute());
+                Navigator.pop(context);
+              },
             ),
             lightGrayDividerThickness0_5,
             AppDrawerButton(
-              AppLocalizations.of(context)!.about_us,
-              const AboutUsScreenRoute(),
+              title: AppLocalizations.of(context)!.insurance,
+              onTabFunction: () {
+                context.router.push(const AboutUsScreenRoute());
+                Navigator.pop(context);
+              },
             ),
             lightGrayDividerThickness0_5,
             AppDrawerButton(
-              AppLocalizations.of(context)!.contact_us,
-              const ContactUsScreenRoute(),
+              title: AppLocalizations.of(context)!.blog,
+              onTabFunction: () {
+                context.router.push(const AboutUsScreenRoute());
+                Navigator.pop(context);
+              },
             ),
             lightGrayDividerThickness0_5,
             AppDrawerButton(
-              AppLocalizations.of(context)!.terms_and_privacy,
-              const AboutUsScreenRoute(),
+              title: AppLocalizations.of(context)!.about_us,
+              onTabFunction: () {
+                context.router.push(const AboutUsScreenRoute());
+                Navigator.pop(context);
+              },
+            ),
+            lightGrayDividerThickness0_5,
+            AppDrawerButton(
+              title: AppLocalizations.of(context)!.contact_us,
+              onTabFunction: () {
+                context.router.push(const ContactUsScreenRoute());
+                Navigator.pop(context);
+              },
+            ),
+            lightGrayDividerThickness0_5,
+            AppDrawerButton(
+              title: AppLocalizations.of(context)!.terms_and_privacy,
+              onTabFunction: () {
+                context.router.push(const AboutUsScreenRoute());
+                Navigator.pop(context);
+              },
             ),
             lightGrayDividerThickness0_5,
             const LanguagePicker(),

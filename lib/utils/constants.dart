@@ -23,7 +23,7 @@ const Divider lightPurpleDividerThickness0_5 = Divider(
 );
 
 const Divider lightGrayDividerThickness0_5 = Divider(
-  thickness: 0.5,
+  thickness: 0.25,
   color: AppColors.lightGray,
 );
 //endregion

@@ -12,6 +12,7 @@ import 'package:grab_grip/features/choosing_preferences/widgets/screens/select_r
 import 'package:grab_grip/features/choosing_preferences/widgets/screens/set_location_screen.dart';
 import 'package:grab_grip/features/feedback/contact_us/contact_us_screen.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/post_listing_screen.dart';
+import 'package:grab_grip/features/user_profile/user_profile_screen.dart';
 import 'package:grab_grip/shared/verify_your_email_screen.dart';
 
 @MaterialAutoRouter(
@@ -41,6 +42,7 @@ import 'package:grab_grip/shared/verify_your_email_screen.dart';
     AutoRoute(page: ContactUsScreen),
     AutoRoute(page: AboutUsScreen),
     AutoRoute(page: VerifyYourEmailScreen),
+    AutoRoute(page: UserProfileScreen),
   ],
 )
 class $AppRouter {}

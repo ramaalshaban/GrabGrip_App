@@ -1,13 +1,14 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/style/colors.dart';
 
 class AppDrawerButton extends StatelessWidget {
-  const AppDrawerButton(this.title, this.toGoToScreenRoute);
+  const AppDrawerButton({
+    required this.title,
+    required this.onTabFunction,
+  });
 
   final String title;
-  final PageRouteInfo toGoToScreenRoute;
+  final VoidCallback onTabFunction;
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +27,7 @@ class AppDrawerButton extends StatelessWidget {
         size: 16,
       ),
       onTap: () {
-        if (toGoToScreenRoute == const SelectRentBuyScreenRoute()) {
-          context.router.replace(toGoToScreenRoute);
-        } else {
-          context.router.push(toGoToScreenRoute);
-        }
-        Navigator.pop(context);
+        onTabFunction.call();
       },
     );
   }
