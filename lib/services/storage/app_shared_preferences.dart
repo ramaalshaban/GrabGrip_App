@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:grab_grip/features/user_profile/models/user.dart';
+import 'package:grab_grip/features/user_profile/shared/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppSharedPreferences {

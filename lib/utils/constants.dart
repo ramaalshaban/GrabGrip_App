@@ -8,7 +8,12 @@ const String saveListingSuccess = "saveListingSuccess";
 const String saveListingError = "saveListingError";
 const String unknown = "Unknown";
 const int postListingPhotosLimit = 20;
-FilteringTextInputFormatter doubleNumFilter = FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}'));
+FilteringTextInputFormatter doubleNumFilter =
+    FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}'));
+
+//region actions name
+const String logoutAction = "logoutAction";
+//region
 //region durations
 const Duration duration300Milli = Duration(milliseconds: 300);
 const Duration duration500Milli = Duration(milliseconds: 500);
@@ -27,4 +32,3 @@ const Divider lightGrayDividerThickness0_5 = Divider(
   color: AppColors.lightGray,
 );
 //endregion
-

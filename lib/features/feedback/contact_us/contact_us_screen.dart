@@ -101,7 +101,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       provider: httpRequestStateProvider,
                       onChange: (context, HttpRequestState httpRequestState) {
                         httpRequestState.whenOrNull(
-                          success: (successMessage) {
+                          success: (successMessage, _) {
                             showSnackBar(
                               context,
                               successMessage!,

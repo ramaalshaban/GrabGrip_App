@@ -177,8 +177,6 @@ class SetLocationScreen extends ConsumerWidget {
               userLocation.longitude!,
             );
             getLocationBoundsAndAddress(context, currentLocation);
-            print(
-                "currentLocation currentLocation currentLocation : $currentLocation");
           });
         } else if (status == permission_handler.PermissionStatus.denied) {
           showDialog(

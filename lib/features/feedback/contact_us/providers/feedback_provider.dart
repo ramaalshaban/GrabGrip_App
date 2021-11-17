@@ -2,7 +2,7 @@ import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact
 import 'package:grab_grip/services/network/network_service.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
 
-class FeedbackProvider  {
+class FeedbackProvider {
   HttpRequestStateProvider httpRequestStateProvider;
 
   FeedbackProvider(this.httpRequestStateProvider);
@@ -13,7 +13,7 @@ class FeedbackProvider  {
       result.when((errorMessage) {
         httpRequestStateProvider.setError(errorMessage);
       }, (successMessage) {
-        httpRequestStateProvider.setSuccess(successMessage);
+        httpRequestStateProvider.setSuccess(successMessage: successMessage);
       });
     });
   }

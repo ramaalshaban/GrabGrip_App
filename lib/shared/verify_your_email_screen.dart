@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
-import 'package:grab_grip/features/user_profile/models/user.dart';
+import 'package:grab_grip/features/user_profile/shared/models/user.dart';
 import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 import 'package:grab_grip/shared/continue_button.dart';
 import 'package:grab_grip/shared/custom_app_bar.dart';
@@ -78,7 +78,7 @@ class VerifyYourEmailScreen extends StatelessWidget {
                       provider: httpRequestStateProvider,
                       onChange: (context, HttpRequestState state) {
                         state.whenOrNull(
-                          success: (successMessage) {
+                          success: (successMessage, _) {
                             if (successMessage != null) {
                               showSnackBar(context, successMessage);
                             }

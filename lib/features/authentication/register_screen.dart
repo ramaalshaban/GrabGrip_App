@@ -114,7 +114,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         provider: httpRequestStateProvider,
                         onChange: (context, HttpRequestState httpRequestState) {
                           httpRequestState.whenOrNull(
-                            success: (_) {
+                            success: (_, __) {
                               showSnackBar(
                                 context,
                                 AppLocalizations.of(context)!

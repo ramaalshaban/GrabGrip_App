@@ -351,7 +351,8 @@ class PostListingProvider extends StateNotifier<PostListingState> {
           },
           (response) {
             httpRequestStateProvider.setSuccess(
-              "Your listing has been created as draft successfully",
+              successMessage:
+                  "Your listing has been created as draft successfully",
             );
             postedListing = response.postedListing;
           },
@@ -411,7 +412,7 @@ class PostListingProvider extends StateNotifier<PostListingState> {
       result.when((errorMessage) {
         httpRequestStateProvider.setError(saveListingError);
       }, (response) {
-        httpRequestStateProvider.setSuccess(saveListingSuccess);
+        httpRequestStateProvider.setSuccess(successMessage: saveListingSuccess);
       });
     });
   }

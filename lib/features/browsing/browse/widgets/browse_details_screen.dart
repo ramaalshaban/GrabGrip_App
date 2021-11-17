@@ -7,7 +7,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
-import 'package:grab_grip/features/user_profile/models/user.dart';
+import 'package:grab_grip/features/user_profile/shared/models/user.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/device.dart';
 import 'package:grab_grip/utils/sized_box.dart';

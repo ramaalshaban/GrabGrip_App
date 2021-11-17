@@ -19,8 +19,8 @@ class HttpRequestStateProvider extends StateNotifier<HttpRequestState> {
     state = const HttpRequestState.innerLoading();
   }
 
-  void setSuccess([String? successMessage]) {
-    state = HttpRequestState.success(successMessage);
+  void setSuccess({String? successMessage, String? actionSucceeded}) {
+    state = HttpRequestState.success(successMessage, actionSucceeded);
   }
 
   void setError(String errorMessage) {

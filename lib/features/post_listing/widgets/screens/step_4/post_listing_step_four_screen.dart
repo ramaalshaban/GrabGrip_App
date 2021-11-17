@@ -117,7 +117,7 @@ class PostListingStepFourScreen extends StatelessWidget {
                   provider: httpRequestStateProvider,
                   onChange: (context, HttpRequestState httpRequestState) {
                     httpRequestState.whenOrNull(
-                      success: (string) {
+                      success: (string, _) {
                         if (string == saveListingSuccess) {
                           showSnackBar(
                             context,

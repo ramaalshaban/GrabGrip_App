@@ -7,7 +7,7 @@ import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/browsing/home/widgets/drawer/widgets/app_drawer_button.dart';
 import 'package:grab_grip/features/browsing/home/widgets/drawer/widgets/app_drawer_header.dart';
 import 'package:grab_grip/features/browsing/home/widgets/drawer/widgets/language_picker.dart';
-import 'package:grab_grip/features/user_profile/models/user.dart';
+import 'package:grab_grip/features/user_profile/shared/models/user.dart';
 import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
@@ -140,12 +140,17 @@ class AppDrawer extends StatelessWidget {
               provider: httpRequestStateProvider,
               onChange: (context, HttpRequestState httpRequestState) {
                 httpRequestState.whenOrNull(
-                  success: (_) {
-                    showSnackBar(
-                      context,
-                      AppLocalizations.of(context)!.you_logged_out_successfully,
-                    );
-                    Navigator.pop(context);
+                  success: (_, actionSucceeded) {
+                    // check for the succeeded action so if there are more than
+                    // one provider listener listening to the same state, they don't run together
+                    if (actionSucceeded == logoutAction) {
+                      showSnackBar(
+                        context,
+                        AppLocalizations.of(context)!
+                            .you_logged_out_successfully,
+                      );
+                      Navigator.pop(context);
+                    }
                   },
                   error: (errorMessage) => showSnackBarForError(
                     context,

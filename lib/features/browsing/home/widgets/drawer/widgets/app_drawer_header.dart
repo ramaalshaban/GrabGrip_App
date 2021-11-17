@@ -14,7 +14,11 @@ class AppDrawerHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.router.push(const UserProfileScreenRoute()),
+      onTap: () {
+        // close the drawer first
+        context.router.pop();
+        context.router.push(const UserProfileScreenRoute());
+      },
       child: SizedBox(
         height: screenHeightWithoutExtras(context) / 3.5,
         child: DrawerHeader(

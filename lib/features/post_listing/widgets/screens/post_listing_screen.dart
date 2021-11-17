@@ -84,7 +84,7 @@ class PostListingScreen extends StatelessWidget {
                 onChange: (context, HttpRequestState httpRequestState) {
                   if (stepState == const PostListingStepNumber.step3()) {
                     httpRequestState.whenOrNull(
-                      success: (successMessage) {
+                      success: (successMessage, _) {
                         showSnackBar(
                           context,
                           successMessage!,

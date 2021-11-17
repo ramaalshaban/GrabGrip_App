@@ -1,12 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
+import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/browsing/home/widgets/drawer/widgets/app_drawer_button.dart';
+import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/device.dart';
+import 'package:grab_grip/utils/functions.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
 class UserProfileScreen extends StatelessWidget {
@@ -144,18 +148,49 @@ class UserProfileScreen extends StatelessWidget {
                 lightGrayDividerThickness0_5,
                 AppDrawerButton(
                   title: "Payments",
-                  onTabFunction: () {},
+                  onTabFunction: () {
+                    context.router.push(const PaymentsScreenRoute());
+                  },
                 ),
                 lightGrayDividerThickness0_5,
-                Consumer(
-                  builder: (_, ref, __) {
-                    return AppDrawerButton(
-                      title: AppLocalizations.of(context)!.logout,
-                      onTabFunction: () {
-                        ref(authProvider.notifier).logout();
+                ProviderListener(
+                  provider: httpRequestStateProvider,
+                  onChange: (context, HttpRequestState httpRequestState) {
+                    httpRequestState.whenOrNull(
+                      success: (_, actionSucceeded) {
+                        // check for the succeeded action so if there are more than
+                        // one provider listener listening to the same state, they don't run together
+                        if (actionSucceeded == logoutAction) {
+                          showSnackBar(
+                            context,
+                            AppLocalizations.of(context)!
+                                .you_logged_out_successfully,
+                          );
+                          Navigator.pop(context);
+                        }
                       },
+                      error: (errorMessage) => showSnackBarForError(
+                        context,
+                        errorMessage,
+                      ),
                     );
                   },
+                  child: Consumer(
+                    builder: (_, ref, __) {
+                      final httpRequestState = ref(httpRequestStateProvider);
+                      return httpRequestState.maybeWhen(
+                        loading: () => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        orElse: () => AppDrawerButton(
+                          title: AppLocalizations.of(context)!.logout,
+                          onTabFunction: () {
+                            ref(authProvider.notifier).logout();
+                          },
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),

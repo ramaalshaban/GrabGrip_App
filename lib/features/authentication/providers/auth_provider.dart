@@ -2,11 +2,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
 import 'package:grab_grip/features/authentication/providers/auth_state.dart';
-import 'package:grab_grip/features/user_profile/models/user.dart';
-import 'package:grab_grip/features/user_profile/providers/user_profile_provider.dart';
+import 'package:grab_grip/features/user_profile/shared/models/user.dart';
+import 'package:grab_grip/features/user_profile/shared/providers/user_profile_provider.dart';
 import 'package:grab_grip/services/network/network_service.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
 import 'package:grab_grip/services/storage/app_shared_preferences.dart';
+import 'package:grab_grip/utils/constants.dart';
 
 class AuthProvider extends StateNotifier<AuthState> {
   HttpRequestStateProvider httpRequestStateProvider;
@@ -83,7 +84,7 @@ class AuthProvider extends StateNotifier<AuthState> {
         await userProfileProvider.getUserProfileAndSaveIt();
         final isVerified = userProfileProvider.getVerificationStatus();
         state = AuthState.authenticated(isVerified: isVerified);
-        httpRequestStateProvider.setSuccess(state.toString());
+        httpRequestStateProvider.setSuccess(successMessage: state.toString());
       });
     });
   }
@@ -101,7 +102,7 @@ class AuthProvider extends StateNotifier<AuthState> {
           AppSharedPreferences().deleteTokenData();
           AppSharedPreferences().setUser(user: User.empty());
           userProfileProvider.reset();
-          httpRequestStateProvider.setSuccess();
+          httpRequestStateProvider.setSuccess(actionSucceeded: logoutAction);
         },
       );
     });

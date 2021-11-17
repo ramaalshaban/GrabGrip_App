@@ -11,7 +11,8 @@ import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_req
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
 import 'package:grab_grip/features/post_listing/models/save_listing_request/save_listing_request.dart';
-import 'package:grab_grip/features/user_profile/models/user.dart';
+import 'package:grab_grip/features/user_profile/payments/models/payment_method/payment_method.dart';
+import 'package:grab_grip/features/user_profile/shared/models/user.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
@@ -138,6 +139,26 @@ abstract class GrabGripApi {
   Future<HttpResponse> resendVerificationEmail(
     @Header("Authorization") String token,
   );
+
+  //region payment methods
+  @GET("/api/v1/account/bank-account")
+  Future<HttpResponse<List<PaymentMethod>>> getPaymentMethods(
+    @Header("Authorization") String token,
+  );
+
+  @GET("/api/v1/account/payments/{key}/link")
+  Future<HttpResponse<List<PaymentMethod>>> linkPaymentMethod(
+    @Header("Authorization") String token, {
+    @Path("key") required String key,
+  });
+
+  @GET("/api/v1/account/payments/{id}/unlink")
+  Future<HttpResponse<List<PaymentMethod>>> unlinkPaymentMethod(
+    @Header("Authorization") String token, {
+    @Path("id") required String id,
+  });
+
+//endregion
 
 //endregion
 }

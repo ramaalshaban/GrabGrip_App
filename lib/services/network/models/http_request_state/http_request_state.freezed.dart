@@ -21,9 +21,10 @@ class _$HttpRequestStateTearOff {
     return const _Nothing();
   }
 
-  _Data success([String? message]) {
+  _Data success([String? message, String? actionSucceeded]) {
     return _Data(
       message,
+      actionSucceeded,
     );
   }
 
@@ -50,7 +51,7 @@ mixin _$HttpRequestState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() noRequestInProgress,
-    required TResult Function(String? message) success,
+    required TResult Function(String? message, String? actionSucceeded) success,
     required TResult Function() loading,
     required TResult Function() innerLoading,
     required TResult Function(String message) error,
@@ -59,7 +60,7 @@ mixin _$HttpRequestState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? noRequestInProgress,
-    TResult Function(String? message)? success,
+    TResult Function(String? message, String? actionSucceeded)? success,
     TResult Function()? loading,
     TResult Function()? innerLoading,
     TResult Function(String message)? error,
@@ -68,7 +69,7 @@ mixin _$HttpRequestState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noRequestInProgress,
-    TResult Function(String? message)? success,
+    TResult Function(String? message, String? actionSucceeded)? success,
     TResult Function()? loading,
     TResult Function()? innerLoading,
     TResult Function(String message)? error,
@@ -168,7 +169,7 @@ class _$_Nothing with DiagnosticableTreeMixin implements _Nothing {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() noRequestInProgress,
-    required TResult Function(String? message) success,
+    required TResult Function(String? message, String? actionSucceeded) success,
     required TResult Function() loading,
     required TResult Function() innerLoading,
     required TResult Function(String message) error,
@@ -180,7 +181,7 @@ class _$_Nothing with DiagnosticableTreeMixin implements _Nothing {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? noRequestInProgress,
-    TResult Function(String? message)? success,
+    TResult Function(String? message, String? actionSucceeded)? success,
     TResult Function()? loading,
     TResult Function()? innerLoading,
     TResult Function(String message)? error,
@@ -192,7 +193,7 @@ class _$_Nothing with DiagnosticableTreeMixin implements _Nothing {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noRequestInProgress,
-    TResult Function(String? message)? success,
+    TResult Function(String? message, String? actionSucceeded)? success,
     TResult Function()? loading,
     TResult Function()? innerLoading,
     TResult Function(String message)? error,
@@ -253,7 +254,7 @@ abstract class _Nothing implements HttpRequestState {
 abstract class _$DataCopyWith<$Res> {
   factory _$DataCopyWith(_Data value, $Res Function(_Data) then) =
       __$DataCopyWithImpl<$Res>;
-  $Res call({String? message});
+  $Res call({String? message, String? actionSucceeded});
 }
 
 /// @nodoc
@@ -268,11 +269,16 @@ class __$DataCopyWithImpl<$Res> extends _$HttpRequestStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = freezed,
+    Object? actionSucceeded = freezed,
   }) {
     return _then(_Data(
       message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      actionSucceeded == freezed
+          ? _value.actionSucceeded
+          : actionSucceeded // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -281,14 +287,16 @@ class __$DataCopyWithImpl<$Res> extends _$HttpRequestStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Data with DiagnosticableTreeMixin implements _Data {
-  const _$_Data([this.message]);
+  const _$_Data([this.message, this.actionSucceeded]);
 
   @override
   final String? message;
+  @override
+  final String? actionSucceeded;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HttpRequestState.success(message: $message)';
+    return 'HttpRequestState.success(message: $message, actionSucceeded: $actionSucceeded)';
   }
 
   @override
@@ -296,7 +304,8 @@ class _$_Data with DiagnosticableTreeMixin implements _Data {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'HttpRequestState.success'))
-      ..add(DiagnosticsProperty('message', message));
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('actionSucceeded', actionSucceeded));
   }
 
   @override
@@ -304,12 +313,18 @@ class _$_Data with DiagnosticableTreeMixin implements _Data {
     return identical(this, other) ||
         (other is _Data &&
             (identical(other.message, message) ||
-                const DeepCollectionEquality().equals(other.message, message)));
+                const DeepCollectionEquality()
+                    .equals(other.message, message)) &&
+            (identical(other.actionSucceeded, actionSucceeded) ||
+                const DeepCollectionEquality()
+                    .equals(other.actionSucceeded, actionSucceeded)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(message) ^
+      const DeepCollectionEquality().hash(actionSucceeded);
 
   @JsonKey(ignore: true)
   @override
@@ -320,38 +335,38 @@ class _$_Data with DiagnosticableTreeMixin implements _Data {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() noRequestInProgress,
-    required TResult Function(String? message) success,
+    required TResult Function(String? message, String? actionSucceeded) success,
     required TResult Function() loading,
     required TResult Function() innerLoading,
     required TResult Function(String message) error,
   }) {
-    return success(message);
+    return success(message, actionSucceeded);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? noRequestInProgress,
-    TResult Function(String? message)? success,
+    TResult Function(String? message, String? actionSucceeded)? success,
     TResult Function()? loading,
     TResult Function()? innerLoading,
     TResult Function(String message)? error,
   }) {
-    return success?.call(message);
+    return success?.call(message, actionSucceeded);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noRequestInProgress,
-    TResult Function(String? message)? success,
+    TResult Function(String? message, String? actionSucceeded)? success,
     TResult Function()? loading,
     TResult Function()? innerLoading,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(message);
+      return success(message, actionSucceeded);
     }
     return orElse();
   }
@@ -398,9 +413,10 @@ class _$_Data with DiagnosticableTreeMixin implements _Data {
 }
 
 abstract class _Data implements HttpRequestState {
-  const factory _Data([String? message]) = _$_Data;
+  const factory _Data([String? message, String? actionSucceeded]) = _$_Data;
 
   String? get message => throw _privateConstructorUsedError;
+  String? get actionSucceeded => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$DataCopyWith<_Data> get copyWith => throw _privateConstructorUsedError;
 }
@@ -449,7 +465,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() noRequestInProgress,
-    required TResult Function(String? message) success,
+    required TResult Function(String? message, String? actionSucceeded) success,
     required TResult Function() loading,
     required TResult Function() innerLoading,
     required TResult Function(String message) error,
@@ -461,7 +477,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? noRequestInProgress,
-    TResult Function(String? message)? success,
+    TResult Function(String? message, String? actionSucceeded)? success,
     TResult Function()? loading,
     TResult Function()? innerLoading,
     TResult Function(String message)? error,
@@ -473,7 +489,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noRequestInProgress,
-    TResult Function(String? message)? success,
+    TResult Function(String? message, String? actionSucceeded)? success,
     TResult Function()? loading,
     TResult Function()? innerLoading,
     TResult Function(String message)? error,
@@ -578,7 +594,7 @@ class _$_InnerLoading with DiagnosticableTreeMixin implements _InnerLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() noRequestInProgress,
-    required TResult Function(String? message) success,
+    required TResult Function(String? message, String? actionSucceeded) success,
     required TResult Function() loading,
     required TResult Function() innerLoading,
     required TResult Function(String message) error,
@@ -590,7 +606,7 @@ class _$_InnerLoading with DiagnosticableTreeMixin implements _InnerLoading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? noRequestInProgress,
-    TResult Function(String? message)? success,
+    TResult Function(String? message, String? actionSucceeded)? success,
     TResult Function()? loading,
     TResult Function()? innerLoading,
     TResult Function(String message)? error,
@@ -602,7 +618,7 @@ class _$_InnerLoading with DiagnosticableTreeMixin implements _InnerLoading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noRequestInProgress,
-    TResult Function(String? message)? success,
+    TResult Function(String? message, String? actionSucceeded)? success,
     TResult Function()? loading,
     TResult Function()? innerLoading,
     TResult Function(String message)? error,
@@ -733,7 +749,7 @@ class _$_ErrorDetails with DiagnosticableTreeMixin implements _ErrorDetails {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() noRequestInProgress,
-    required TResult Function(String? message) success,
+    required TResult Function(String? message, String? actionSucceeded) success,
     required TResult Function() loading,
     required TResult Function() innerLoading,
     required TResult Function(String message) error,
@@ -745,7 +761,7 @@ class _$_ErrorDetails with DiagnosticableTreeMixin implements _ErrorDetails {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? noRequestInProgress,
-    TResult Function(String? message)? success,
+    TResult Function(String? message, String? actionSucceeded)? success,
     TResult Function()? loading,
     TResult Function()? innerLoading,
     TResult Function(String message)? error,
@@ -757,7 +773,7 @@ class _$_ErrorDetails with DiagnosticableTreeMixin implements _ErrorDetails {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noRequestInProgress,
-    TResult Function(String? message)? success,
+    TResult Function(String? message, String? actionSucceeded)? success,
     TResult Function()? loading,
     TResult Function()? innerLoading,
     TResult Function(String message)? error,

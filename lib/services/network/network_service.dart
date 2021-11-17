@@ -14,7 +14,8 @@ import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_req
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
 import 'package:grab_grip/features/post_listing/models/save_listing_request/save_listing_request.dart';
-import 'package:grab_grip/features/user_profile/models/user.dart';
+import 'package:grab_grip/features/user_profile/payments/models/payment_method/payment_method.dart';
+import 'package:grab_grip/features/user_profile/shared/models/user.dart';
 import 'package:grab_grip/services/network/api/grab_grip_api.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:multiple_result/multiple_result.dart';
@@ -49,7 +50,7 @@ class NetworkService {
   }) async {
     try {
       final getBoundsCall =
-      await _googleGeocodeApi.getBoundsByPlaceId(placeId: placeId);
+          await _googleGeocodeApi.getBoundsByPlaceId(placeId: placeId);
       return Success(getBoundsCall.data);
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);
@@ -61,14 +62,16 @@ class NetworkService {
     required LatLng latLng,
   }) async {
     try {
-      final getBoundsCall =
-      await _googleGeocodeApi.getBoundsByLatLng(latlng: "${latLng.latitude},${latLng.longitude}");
+      final getBoundsCall = await _googleGeocodeApi.getBoundsByLatLng(
+        latlng: "${latLng.latitude},${latLng.longitude}",
+      );
       return Success(getBoundsCall.data);
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);
       return Error(errorMessage);
     }
   }
+
   //endregion
 
   //region auth calls
@@ -283,9 +286,7 @@ class NetworkService {
     }
   }
 
-  Future<Result<String, String>> resendVerificationEmail(
-    String token,
-  ) async {
+  Future<Result<String, String>> resendVerificationEmail(String token) async {
     try {
       final resendCall =
           await _grabGripApi.resendVerificationEmail("Bearer $token");
@@ -295,6 +296,51 @@ class NetworkService {
       return Error(errorMessage);
     }
   }
+
+  //region payment methods
+
+  Future<Result<String, List<PaymentMethod>>> getPaymentMethods(
+    String token,
+  ) async {
+    try {
+      final getPaymentMethodsCall =
+          await _grabGripApi.getPaymentMethods("Bearer $token");
+      return Success(getPaymentMethodsCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  Future<Result<String, List<PaymentMethod>>> linkPaymentMethod(
+    String token,
+    String key,
+  ) async {
+    try {
+      final linkPaymentMethodCall =
+          await _grabGripApi.linkPaymentMethod("Bearer $token", key: key);
+      return Success(linkPaymentMethodCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  Future<Result<String, List<PaymentMethod>>> unlinkPaymentMethod(
+    String token,
+    String id,
+  ) async {
+    try {
+      final unlinkPaymentMethodCall =
+          await _grabGripApi.unlinkPaymentMethod("Bearer $token", id: id);
+      return Success(unlinkPaymentMethodCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  //endregion
 
   //endregion
 

@@ -20,8 +20,10 @@ import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/providers/photos_provider.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/models/listing_pricing_model/listing_pricing_model.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/providers/listing_pricing_provider.dart';
-import 'package:grab_grip/features/user_profile/models/user.dart';
-import 'package:grab_grip/features/user_profile/providers/user_profile_provider.dart';
+import 'package:grab_grip/features/user_profile/payments/models/payment_method/payment_method.dart';
+import 'package:grab_grip/features/user_profile/payments/providers/payment_methods_provider.dart';
+import 'package:grab_grip/features/user_profile/shared/models/user.dart';
+import 'package:grab_grip/features/user_profile/shared/providers/user_profile_provider.dart';
 import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
 import 'package:grab_grip/shared/location_picker/location_picker_state/location_picker_state.dart';
@@ -114,4 +116,11 @@ final listingAvailabilityStateProvider = StateNotifierProvider<
     PostListingAvailabilityStateProvider,
     PostListingAvailabilityState>((reference) {
   return PostListingAvailabilityStateProvider();
+});
+
+final paymentMethodsProvider =
+    StateNotifierProvider<PaymentMethodsProvider, List<PaymentMethod>>(
+        (reference) {
+  final provider = reference.watch(httpRequestStateProvider.notifier);
+  return PaymentMethodsProvider(provider);
 });
