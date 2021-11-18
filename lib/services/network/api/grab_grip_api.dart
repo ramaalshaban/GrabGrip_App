@@ -5,6 +5,7 @@ import 'package:grab_grip/features/authentication/models/login_response/login_re
 import 'package:grab_grip/features/authentication/models/register_response/register_response.dart';
 import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/geocode_response.dart';
+import 'package:grab_grip/features/browsing/browse/models/listing/listings_page.dart';
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
@@ -160,5 +161,13 @@ abstract class GrabGripApi {
 
 //endregion
 
+//endregion
+
+  //region listings
+  @GET("/api/v1/account/listings")
+  Future<HttpResponse<ListingsPage>> getListings(
+    @Header("Authorization") String token, {
+    @Query("page") required int pageNumber,
+  });
 //endregion
 }

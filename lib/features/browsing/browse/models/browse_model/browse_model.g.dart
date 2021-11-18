@@ -8,7 +8,7 @@ part of 'browse_model.dart';
 
 _$_BrowseModel _$$_BrowseModelFromJson(Map<String, dynamic> json) =>
     _$_BrowseModel(
-      Listing.fromJson(json['listings'] as Map<String, dynamic>),
+      ListingsPage.fromJson(json['listings'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_BrowseModelToJson(_$_BrowseModel instance) =>

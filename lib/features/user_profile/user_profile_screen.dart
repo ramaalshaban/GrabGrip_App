@@ -138,7 +138,9 @@ class UserProfileScreen extends StatelessWidget {
                 lightGrayDividerThickness0_5,
                 AppDrawerButton(
                   title: "Listings",
-                  onTabFunction: () {},
+                  onTabFunction: () {
+                    context.router.push(const ListingsScreenRoute());
+                  },
                 ),
                 lightGrayDividerThickness0_5,
                 AppDrawerButton(

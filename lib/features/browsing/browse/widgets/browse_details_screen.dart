@@ -106,9 +106,11 @@ class BrowseDetailsScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                OwnerWidget(
-                  owner: gear.owner!,
-                )
+                // if user wants to see the details of his own listing then the owner is null so check before showing this widget
+                if (gear.owner != null)
+                  OwnerWidget(
+                    owner: gear.owner!,
+                  )
               ],
             ),
           ),

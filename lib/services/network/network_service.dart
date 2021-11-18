@@ -7,6 +7,7 @@ import 'package:grab_grip/features/authentication/models/auth_request/auth_reque
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
 import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/geocode_response.dart';
+import 'package:grab_grip/features/browsing/browse/models/listing/listings_page.dart';
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
@@ -341,6 +342,25 @@ class NetworkService {
   }
 
   //endregion
+
+  //endregion
+
+  //region listings
+  Future<Result<String, ListingsPage>> getListings(
+    String token, {
+    required int pageNumber,
+  }) async {
+    try {
+      final getListingsCall = await _grabGripApi.getListings(
+        "Bearer $token",
+        pageNumber: pageNumber,
+      );
+      return Success(getListingsCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
 
   //endregion
 

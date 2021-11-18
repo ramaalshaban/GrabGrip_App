@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:grab_grip/features/browsing/browse/providers/browse_provider.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/sized_box.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class BrowseScreenErrorBody extends ConsumerWidget {
-  const BrowseScreenErrorBody({Key? key}) : super(key: key);
+class PagedListErrorWidget extends ConsumerWidget {
+  const PagedListErrorWidget({Key? key, required this.pagingController})
+      : super(key: key);
+
+  final PagingController pagingController;
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
@@ -29,7 +32,7 @@ class BrowseScreenErrorBody extends ConsumerWidget {
               primary: AppColors.white,
             ),
             onPressed: () async {
-              BrowseProvider.pagingController.retryLastFailedRequest();
+              pagingController.retryLastFailedRequest();
             },
             child: Text(
               AppLocalizations.of(context)!.refresh,

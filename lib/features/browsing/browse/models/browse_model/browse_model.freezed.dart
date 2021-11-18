@@ -21,7 +21,7 @@ BrowseModel _$BrowseModelFromJson(Map<String, dynamic> json) {
 class _$BrowseModelTearOff {
   const _$BrowseModelTearOff();
 
-  _BrowseModel call(@JsonKey(name: 'listings') Listing data) {
+  _BrowseModel call(@JsonKey(name: 'listings') ListingsPage data) {
     return _BrowseModel(
       data,
     );
@@ -38,7 +38,7 @@ const $BrowseModel = _$BrowseModelTearOff();
 /// @nodoc
 mixin _$BrowseModel {
   @JsonKey(name: 'listings')
-  Listing get data => throw _privateConstructorUsedError;
+  ListingsPage get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,9 +51,9 @@ abstract class $BrowseModelCopyWith<$Res> {
   factory $BrowseModelCopyWith(
           BrowseModel value, $Res Function(BrowseModel) then) =
       _$BrowseModelCopyWithImpl<$Res>;
-  $Res call({@JsonKey(name: 'listings') Listing data});
+  $Res call({@JsonKey(name: 'listings') ListingsPage data});
 
-  $ListingCopyWith<$Res> get data;
+  $ListingsPageCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -72,13 +72,13 @@ class _$BrowseModelCopyWithImpl<$Res> implements $BrowseModelCopyWith<$Res> {
       data: data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Listing,
+              as ListingsPage,
     ));
   }
 
   @override
-  $ListingCopyWith<$Res> get data {
-    return $ListingCopyWith<$Res>(_value.data, (value) {
+  $ListingsPageCopyWith<$Res> get data {
+    return $ListingsPageCopyWith<$Res>(_value.data, (value) {
       return _then(_value.copyWith(data: value));
     });
   }
@@ -91,10 +91,10 @@ abstract class _$BrowseModelCopyWith<$Res>
           _BrowseModel value, $Res Function(_BrowseModel) then) =
       __$BrowseModelCopyWithImpl<$Res>;
   @override
-  $Res call({@JsonKey(name: 'listings') Listing data});
+  $Res call({@JsonKey(name: 'listings') ListingsPage data});
 
   @override
-  $ListingCopyWith<$Res> get data;
+  $ListingsPageCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -115,7 +115,7 @@ class __$BrowseModelCopyWithImpl<$Res> extends _$BrowseModelCopyWithImpl<$Res>
       data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Listing,
+              as ListingsPage,
     ));
   }
 }
@@ -130,7 +130,7 @@ class _$_BrowseModel with DiagnosticableTreeMixin implements _BrowseModel {
 
   @override
   @JsonKey(name: 'listings')
-  final Listing data;
+  final ListingsPage data;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -169,7 +169,7 @@ class _$_BrowseModel with DiagnosticableTreeMixin implements _BrowseModel {
 }
 
 abstract class _BrowseModel implements BrowseModel {
-  const factory _BrowseModel(@JsonKey(name: 'listings') Listing data) =
+  const factory _BrowseModel(@JsonKey(name: 'listings') ListingsPage data) =
       _$_BrowseModel;
 
   factory _BrowseModel.fromJson(Map<String, dynamic> json) =
@@ -177,7 +177,7 @@ abstract class _BrowseModel implements BrowseModel {
 
   @override
   @JsonKey(name: 'listings')
-  Listing get data => throw _privateConstructorUsedError;
+  ListingsPage get data => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$BrowseModelCopyWith<_BrowseModel> get copyWith =>

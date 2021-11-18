@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'listing.dart';
+part of 'listings_page.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,20 +13,20 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Listing _$ListingFromJson(Map<String, dynamic> json) {
-  return _Listing.fromJson(json);
+ListingsPage _$ListingsPageFromJson(Map<String, dynamic> json) {
+  return _ListingsPage.fromJson(json);
 }
 
 /// @nodoc
-class _$ListingTearOff {
-  const _$ListingTearOff();
+class _$ListingsPageTearOff {
+  const _$ListingsPageTearOff();
 
-  _Listing call(
+  _ListingsPage call(
       @JsonKey(name: 'current_page') int pageNumber,
       @JsonKey(name: 'last_page') int lastPageNumber,
       @JsonKey(name: 'total') int gearsCount,
       @JsonKey(name: 'data') List<Gear> gears) {
-    return _Listing(
+    return _ListingsPage(
       pageNumber,
       lastPageNumber,
       gearsCount,
@@ -34,16 +34,16 @@ class _$ListingTearOff {
     );
   }
 
-  Listing fromJson(Map<String, Object> json) {
-    return Listing.fromJson(json);
+  ListingsPage fromJson(Map<String, Object> json) {
+    return ListingsPage.fromJson(json);
   }
 }
 
 /// @nodoc
-const $Listing = _$ListingTearOff();
+const $ListingsPage = _$ListingsPageTearOff();
 
 /// @nodoc
-mixin _$Listing {
+mixin _$ListingsPage {
   @JsonKey(name: 'current_page')
   int get pageNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'last_page')
@@ -55,13 +55,15 @@ mixin _$Listing {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ListingCopyWith<Listing> get copyWith => throw _privateConstructorUsedError;
+  $ListingsPageCopyWith<ListingsPage> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ListingCopyWith<$Res> {
-  factory $ListingCopyWith(Listing value, $Res Function(Listing) then) =
-      _$ListingCopyWithImpl<$Res>;
+abstract class $ListingsPageCopyWith<$Res> {
+  factory $ListingsPageCopyWith(
+          ListingsPage value, $Res Function(ListingsPage) then) =
+      _$ListingsPageCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'current_page') int pageNumber,
       @JsonKey(name: 'last_page') int lastPageNumber,
@@ -70,12 +72,12 @@ abstract class $ListingCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ListingCopyWithImpl<$Res> implements $ListingCopyWith<$Res> {
-  _$ListingCopyWithImpl(this._value, this._then);
+class _$ListingsPageCopyWithImpl<$Res> implements $ListingsPageCopyWith<$Res> {
+  _$ListingsPageCopyWithImpl(this._value, this._then);
 
-  final Listing _value;
+  final ListingsPage _value;
   // ignore: unused_field
-  final $Res Function(Listing) _then;
+  final $Res Function(ListingsPage) _then;
 
   @override
   $Res call({
@@ -106,9 +108,11 @@ class _$ListingCopyWithImpl<$Res> implements $ListingCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ListingCopyWith<$Res> implements $ListingCopyWith<$Res> {
-  factory _$ListingCopyWith(_Listing value, $Res Function(_Listing) then) =
-      __$ListingCopyWithImpl<$Res>;
+abstract class _$ListingsPageCopyWith<$Res>
+    implements $ListingsPageCopyWith<$Res> {
+  factory _$ListingsPageCopyWith(
+          _ListingsPage value, $Res Function(_ListingsPage) then) =
+      __$ListingsPageCopyWithImpl<$Res>;
   @override
   $Res call(
       {@JsonKey(name: 'current_page') int pageNumber,
@@ -118,13 +122,14 @@ abstract class _$ListingCopyWith<$Res> implements $ListingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
-    implements _$ListingCopyWith<$Res> {
-  __$ListingCopyWithImpl(_Listing _value, $Res Function(_Listing) _then)
-      : super(_value, (v) => _then(v as _Listing));
+class __$ListingsPageCopyWithImpl<$Res> extends _$ListingsPageCopyWithImpl<$Res>
+    implements _$ListingsPageCopyWith<$Res> {
+  __$ListingsPageCopyWithImpl(
+      _ListingsPage _value, $Res Function(_ListingsPage) _then)
+      : super(_value, (v) => _then(v as _ListingsPage));
 
   @override
-  _Listing get _value => super._value as _Listing;
+  _ListingsPage get _value => super._value as _ListingsPage;
 
   @override
   $Res call({
@@ -133,7 +138,7 @@ class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
     Object? gearsCount = freezed,
     Object? gears = freezed,
   }) {
-    return _then(_Listing(
+    return _then(_ListingsPage(
       pageNumber == freezed
           ? _value.pageNumber
           : pageNumber // ignore: cast_nullable_to_non_nullable
@@ -156,15 +161,15 @@ class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Listing with DiagnosticableTreeMixin implements _Listing {
-  const _$_Listing(
+class _$_ListingsPage with DiagnosticableTreeMixin implements _ListingsPage {
+  const _$_ListingsPage(
       @JsonKey(name: 'current_page') this.pageNumber,
       @JsonKey(name: 'last_page') this.lastPageNumber,
       @JsonKey(name: 'total') this.gearsCount,
       @JsonKey(name: 'data') this.gears);
 
-  factory _$_Listing.fromJson(Map<String, dynamic> json) =>
-      _$$_ListingFromJson(json);
+  factory _$_ListingsPage.fromJson(Map<String, dynamic> json) =>
+      _$$_ListingsPageFromJson(json);
 
   @override
   @JsonKey(name: 'current_page')
@@ -181,14 +186,14 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Listing(pageNumber: $pageNumber, lastPageNumber: $lastPageNumber, gearsCount: $gearsCount, gears: $gears)';
+    return 'ListingsPage(pageNumber: $pageNumber, lastPageNumber: $lastPageNumber, gearsCount: $gearsCount, gears: $gears)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'Listing'))
+      ..add(DiagnosticsProperty('type', 'ListingsPage'))
       ..add(DiagnosticsProperty('pageNumber', pageNumber))
       ..add(DiagnosticsProperty('lastPageNumber', lastPageNumber))
       ..add(DiagnosticsProperty('gearsCount', gearsCount))
@@ -198,7 +203,7 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Listing &&
+        (other is _ListingsPage &&
             (identical(other.pageNumber, pageNumber) ||
                 const DeepCollectionEquality()
                     .equals(other.pageNumber, pageNumber)) &&
@@ -222,23 +227,24 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
 
   @JsonKey(ignore: true)
   @override
-  _$ListingCopyWith<_Listing> get copyWith =>
-      __$ListingCopyWithImpl<_Listing>(this, _$identity);
+  _$ListingsPageCopyWith<_ListingsPage> get copyWith =>
+      __$ListingsPageCopyWithImpl<_ListingsPage>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ListingToJson(this);
+    return _$$_ListingsPageToJson(this);
   }
 }
 
-abstract class _Listing implements Listing {
-  const factory _Listing(
+abstract class _ListingsPage implements ListingsPage {
+  const factory _ListingsPage(
       @JsonKey(name: 'current_page') int pageNumber,
       @JsonKey(name: 'last_page') int lastPageNumber,
       @JsonKey(name: 'total') int gearsCount,
-      @JsonKey(name: 'data') List<Gear> gears) = _$_Listing;
+      @JsonKey(name: 'data') List<Gear> gears) = _$_ListingsPage;
 
-  factory _Listing.fromJson(Map<String, dynamic> json) = _$_Listing.fromJson;
+  factory _ListingsPage.fromJson(Map<String, dynamic> json) =
+      _$_ListingsPage.fromJson;
 
   @override
   @JsonKey(name: 'current_page')
@@ -254,6 +260,6 @@ abstract class _Listing implements Listing {
   List<Gear> get gears => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ListingCopyWith<_Listing> get copyWith =>
+  _$ListingsPageCopyWith<_ListingsPage> get copyWith =>
       throw _privateConstructorUsedError;
 }
