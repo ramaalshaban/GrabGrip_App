@@ -179,6 +179,15 @@ abstract class GrabGripApi {
     @Header("Authorization") String token, {
     @Query("page") required int pageNumber,
   });
+
+//endregion
+
+  //region my orders
+  @GET("/api/v1/account/purchase-history")
+  Future<HttpResponse<OrdersPage>> getMyOrders(
+    @Header("Authorization") String token, {
+    @Query("page") required int pageNumber,
+  });
 //endregion
 
 }

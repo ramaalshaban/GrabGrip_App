@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/user_profile/incoming_orders/providers/incoming_orders_provider.dart';
-import 'package:grab_grip/features/user_profile/incoming_orders/widgets/order_item.dart';
-import 'package:grab_grip/features/user_profile/incoming_orders/widgets/order_item_skeleton_loader.dart';
+import 'package:grab_grip/features/user_profile/incoming_orders/widgets/incoming_order_item.dart';
+import 'package:grab_grip/features/user_profile/incoming_orders/widgets/incoming_order_item_skeleton_loader.dart';
 import 'package:grab_grip/shared/models/order/order.dart';
 import 'package:grab_grip/shared/widgets/custom_app_bar.dart';
 import 'package:grab_grip/shared/widgets/paged_list_error_widget.dart';
@@ -66,7 +66,7 @@ class _IncomingOrdersScreenState extends State<IncomingOrdersScreen> {
           child: PagedListView<int, Order>(
             pagingController: IncomingOrdersProvider.pagingController,
             builderDelegate: PagedChildBuilderDelegate<Order>(
-              itemBuilder: (context, item, index) => OrderItem(order: item),
+              itemBuilder: (context, item, index) => IncomingOrderItem(order: item),
               firstPageErrorIndicatorBuilder: (context) => PagedListErrorWidget(
                 pagingController: IncomingOrdersProvider.pagingController,
               ),

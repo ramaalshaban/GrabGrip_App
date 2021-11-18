@@ -5,19 +5,19 @@ import 'package:grab_grip/shared/models/order/order.dart';
 import 'package:grab_grip/shared/models/orders_page/orders_page.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class IncomingOrdersProvider extends StateNotifier<OrdersPage> {
+class MyOrdersProvider extends StateNotifier<OrdersPage> {
   static PagingController<int, Order> pagingController =
       PagingController(firstPageKey: 1);
 
-  IncomingOrdersProvider() : super(OrdersPage.empty());
+  MyOrdersProvider() : super(OrdersPage.empty());
 
-  Future<void> getIncomingOrders(int pageKey) async {
+  Future<void> getMyOrders(int pageKey) async {
     final token = await AppSharedPreferences().getToken();
-    await NetworkService().getIncomingOrders(token!, pageNumber: pageKey).then(
+    await NetworkService().getMyOrders(token!, pageNumber: pageKey).then(
       (result) {
         result.when(
           (errorMessage) {
-            IncomingOrdersProvider.pagingController.error = errorMessage;
+            MyOrdersProvider.pagingController.error = errorMessage;
           },
           (ordersPage) {
             state = ordersPage;

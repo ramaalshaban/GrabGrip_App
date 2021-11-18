@@ -6,10 +6,10 @@ import 'package:grab_grip/style/text.dart';
 import 'package:grab_grip/utils/device.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
-class OrderItem extends StatelessWidget {
+class MyOrderItem extends StatelessWidget {
   final Order order;
 
-  const OrderItem({required this.order});
+  const MyOrderItem({required this.order});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class OrderItem extends StatelessWidget {
                     ),
                     height8(),
                     Text(
-                      "Ordered by: ${order.orderOwner.displayName}",
+                      "Posted by: ${order.orderedGear.owner!.displayName}",
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: AppTextStyles.subtitle,

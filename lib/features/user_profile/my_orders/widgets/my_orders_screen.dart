@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
-import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
-import 'package:grab_grip/features/user_profile/listings/providers/listings_provider.dart';
-import 'package:grab_grip/features/user_profile/listings/widgets/listing_item.dart';
-import 'package:grab_grip/features/user_profile/listings/widgets/listing_item_skeleton_loader.dart';
+import 'package:grab_grip/features/user_profile/my_orders/providers/my_orders_provider.dart';
+import 'package:grab_grip/features/user_profile/my_orders/widgets/my_order_item.dart';
+import 'package:grab_grip/features/user_profile/my_orders/widgets/my_order_item_skeleton_loader.dart';
+import 'package:grab_grip/shared/models/order/order.dart';
 import 'package:grab_grip/shared/widgets/custom_app_bar.dart';
 import 'package:grab_grip/shared/widgets/paged_list_error_widget.dart';
 import 'package:grab_grip/style/colors.dart';
@@ -15,30 +15,30 @@ import 'package:grab_grip/utils/functions.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class ListingsScreen extends StatefulWidget {
-  const ListingsScreen({Key? key}) : super(key: key);
+class MyOrdersScreen extends StatefulWidget {
+  const MyOrdersScreen({Key? key}) : super(key: key);
 
   @override
-  State<ListingsScreen> createState() => _ListingsScreenState();
+  State<MyOrdersScreen> createState() => _MyOrdersScreenState();
 }
 
-class _ListingsScreenState extends State<ListingsScreen> {
+class _MyOrdersScreenState extends State<MyOrdersScreen> {
   @override
   void initState() {
-    ListingsProvider.pagingController.addPageRequestListener((pageKey) {
+    MyOrdersProvider.pagingController.addPageRequestListener((pageKey) {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
         if (mounted) {
-          context.read(listingsProvider.notifier).getListings(pageKey);
+          context.read(myOrdersProvider.notifier).getMyOrders(pageKey);
         }
       });
     });
 
-    ListingsProvider.pagingController.addStatusListener((status) {
-      if (ListingsProvider.pagingController.error == noInternetConnection) {
+    MyOrdersProvider.pagingController.addStatusListener((status) {
+      if (MyOrdersProvider.pagingController.error == noInternetConnection) {
         if (mounted) {
           showSnackBarForError(
             context,
-            ListingsProvider.pagingController.error.toString(),
+            MyOrdersProvider.pagingController.error.toString(),
           );
         }
       }
@@ -50,37 +50,36 @@ class _ListingsScreenState extends State<ListingsScreen> {
   Widget build(BuildContext context) {
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       // refresh the list when user opens up this screen
-      ListingsProvider.pagingController.refresh();
+      MyOrdersProvider.pagingController.refresh();
     });
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: const CustomAppBar(
-        appBarTitle: "My Listings",
+        appBarTitle: "My Orders",
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(4, 20, 4, 10),
         child: RefreshIndicator(
           onRefresh: () async {
-            ListingsProvider.pagingController.refresh();
+            MyOrdersProvider.pagingController.refresh();
           },
-          child: PagedListView<int, Gear>(
-            pagingController: ListingsProvider.pagingController,
-            builderDelegate: PagedChildBuilderDelegate<Gear>(
-              itemBuilder: (context, item, index) => ListingItem(gear: item),
+          child: PagedListView<int, Order>(
+            pagingController: MyOrdersProvider.pagingController,
+            builderDelegate: PagedChildBuilderDelegate<Order>(
+              itemBuilder: (context, item, index) => MyOrderItem(order: item),
               firstPageErrorIndicatorBuilder: (context) => PagedListErrorWidget(
-                pagingController: ListingsProvider.pagingController,
+                pagingController: MyOrdersProvider.pagingController,
               ),
               firstPageProgressIndicatorBuilder: (context) =>
-                  const ListingItemSkeletonLoader(),
+                  const MyOrderItemSkeletonLoader(),
               newPageProgressIndicatorBuilder: (context) =>
-                  const ListingItemSkeletonLoader(),
+                  const MyOrderItemSkeletonLoader(),
               noItemsFoundIndicatorBuilder: (context) => Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "You have not posted any listing yet.",
+                    "You have not placed any order yet.",
                   ),
-                  height12(),
                   height24(),
                   SizedBox(
                     height: 48,
@@ -91,10 +90,10 @@ class _ListingsScreenState extends State<ListingsScreen> {
                         primary: AppColors.white,
                       ),
                       onPressed: () {
-                        context.router.replace(const PostListingScreenRoute());
+                        context.router.replace(const BrowseScreenRoute());
                       },
                       child: const Text(
-                        "Post Now",
+                        "Browse Gears Now",
                         style: TextStyle(
                           fontSize: 18,
                           color: AppColors.purple,
@@ -105,7 +104,7 @@ class _ListingsScreenState extends State<ListingsScreen> {
                 ],
               ),
               newPageErrorIndicatorBuilder: (context) => PagedListErrorWidget(
-                pagingController: ListingsProvider.pagingController,
+                pagingController: MyOrdersProvider.pagingController,
               ),
             ),
           ),

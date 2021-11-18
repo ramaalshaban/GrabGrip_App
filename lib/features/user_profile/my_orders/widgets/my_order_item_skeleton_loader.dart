@@ -5,8 +5,8 @@ import 'package:grab_grip/utils/device.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 
-class OrderItemSkeletonLoader extends StatelessWidget {
-  const OrderItemSkeletonLoader({Key? key}) : super(key: key);
+class MyOrderItemSkeletonLoader extends StatelessWidget {
+  const MyOrderItemSkeletonLoader({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -128,7 +128,9 @@ class UserProfileScreen extends StatelessWidget {
                 lightGrayDividerThickness0_5,
                 AppDrawerButton(
                   title: "My Orders History",
-                  onTabFunction: () {},
+                  onTabFunction: () {
+                    context.router.push(const MyOrdersScreenRoute());
+                  },
                 ),
                 lightGrayDividerThickness0_5,
                 AppDrawerButton(

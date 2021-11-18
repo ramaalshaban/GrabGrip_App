@@ -30,7 +30,7 @@ class _$OrderTearOff {
       String currency,
       @JsonKey(name: 'stock') int? stockQuantity,
       @JsonKey(name: 'listing') Gear orderedGear,
-      @JsonKey(name: 'user') User orderOwner) {
+      @JsonKey(name: 'user') User? orderOwner) {
     return _Order(
       hash,
       id,
@@ -66,7 +66,7 @@ mixin _$Order {
   @JsonKey(name: 'listing')
   Gear get orderedGear => throw _privateConstructorUsedError;
   @JsonKey(name: 'user')
-  User get orderOwner => throw _privateConstructorUsedError;
+  User? get orderOwner => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -86,10 +86,10 @@ abstract class $OrderCopyWith<$Res> {
       String currency,
       @JsonKey(name: 'stock') int? stockQuantity,
       @JsonKey(name: 'listing') Gear orderedGear,
-      @JsonKey(name: 'user') User orderOwner});
+      @JsonKey(name: 'user') User? orderOwner});
 
   $GearCopyWith<$Res> get orderedGear;
-  $UserCopyWith<$Res> get orderOwner;
+  $UserCopyWith<$Res>? get orderOwner;
 }
 
 /// @nodoc
@@ -148,7 +148,7 @@ class _$OrderCopyWithImpl<$Res> implements $OrderCopyWith<$Res> {
       orderOwner: orderOwner == freezed
           ? _value.orderOwner
           : orderOwner // ignore: cast_nullable_to_non_nullable
-              as User,
+              as User?,
     ));
   }
 
@@ -160,8 +160,12 @@ class _$OrderCopyWithImpl<$Res> implements $OrderCopyWith<$Res> {
   }
 
   @override
-  $UserCopyWith<$Res> get orderOwner {
-    return $UserCopyWith<$Res>(_value.orderOwner, (value) {
+  $UserCopyWith<$Res>? get orderOwner {
+    if (_value.orderOwner == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.orderOwner!, (value) {
       return _then(_value.copyWith(orderOwner: value));
     });
   }
@@ -181,12 +185,12 @@ abstract class _$OrderCopyWith<$Res> implements $OrderCopyWith<$Res> {
       String currency,
       @JsonKey(name: 'stock') int? stockQuantity,
       @JsonKey(name: 'listing') Gear orderedGear,
-      @JsonKey(name: 'user') User orderOwner});
+      @JsonKey(name: 'user') User? orderOwner});
 
   @override
   $GearCopyWith<$Res> get orderedGear;
   @override
-  $UserCopyWith<$Res> get orderOwner;
+  $UserCopyWith<$Res>? get orderOwner;
 }
 
 /// @nodoc
@@ -246,7 +250,7 @@ class __$OrderCopyWithImpl<$Res> extends _$OrderCopyWithImpl<$Res>
       orderOwner == freezed
           ? _value.orderOwner
           : orderOwner // ignore: cast_nullable_to_non_nullable
-              as User,
+              as User?,
     ));
   }
 }
@@ -289,7 +293,7 @@ class _$_Order with DiagnosticableTreeMixin implements _Order {
   final Gear orderedGear;
   @override
   @JsonKey(name: 'user')
-  final User orderOwner;
+  final User? orderOwner;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -375,7 +379,7 @@ abstract class _Order implements Order {
       String currency,
       @JsonKey(name: 'stock') int? stockQuantity,
       @JsonKey(name: 'listing') Gear orderedGear,
-      @JsonKey(name: 'user') User orderOwner) = _$_Order;
+      @JsonKey(name: 'user') User? orderOwner) = _$_Order;
 
   factory _Order.fromJson(Map<String, dynamic> json) = _$_Order.fromJson;
 
@@ -400,7 +404,7 @@ abstract class _Order implements Order {
   Gear get orderedGear => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'user')
-  User get orderOwner => throw _privateConstructorUsedError;
+  User? get orderOwner => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$OrderCopyWith<_Order> get copyWith => throw _privateConstructorUsedError;

@@ -15,7 +15,9 @@ _$_Order _$$_OrderFromJson(Map<String, dynamic> json) => _$_Order(
       json['currency'] as String,
       json['stock'] as int?,
       Gear.fromJson(json['listing'] as Map<String, dynamic>),
-      User.fromJson(json['user'] as Map<String, dynamic>),
+      json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_OrderToJson(_$_Order instance) => <String, dynamic>{

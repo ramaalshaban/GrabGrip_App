@@ -22,6 +22,7 @@ import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/providers/listing_pricing_provider.dart';
 import 'package:grab_grip/features/user_profile/incoming_orders/providers/incoming_orders_provider.dart';
 import 'package:grab_grip/features/user_profile/listings/providers/listings_provider.dart';
+import 'package:grab_grip/features/user_profile/my_orders/providers/my_orders_provider.dart';
 import 'package:grab_grip/features/user_profile/payments/models/payment_method/payment_method.dart';
 import 'package:grab_grip/features/user_profile/payments/providers/payment_methods_provider.dart';
 import 'package:grab_grip/features/user_profile/shared/models/user.dart';
@@ -137,4 +138,9 @@ final listingsProvider =
 final incomingOrdersProvider =
     StateNotifierProvider<IncomingOrdersProvider, OrdersPage>((reference) {
   return IncomingOrdersProvider();
+});
+
+final myOrdersProvider =
+    StateNotifierProvider<MyOrdersProvider, OrdersPage>((reference) {
+  return MyOrdersProvider();
 });

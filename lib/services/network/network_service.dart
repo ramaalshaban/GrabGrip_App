@@ -375,11 +375,30 @@ class NetworkService {
     required int pageNumber,
   }) async {
     try {
-      final getListingsCall = await _grabGripApi.getIncomingOrders(
+      final getIncomingOrdersCall = await _grabGripApi.getIncomingOrders(
         "Bearer $token",
         pageNumber: pageNumber,
       );
-      return Success(getListingsCall.data);
+      return Success(getIncomingOrdersCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  //endregion
+
+  //region my orders
+  Future<Result<String, OrdersPage>> getMyOrders(
+    String token, {
+    required int pageNumber,
+  }) async {
+    try {
+      final getMyOrdersCall = await _grabGripApi.getMyOrders(
+        "Bearer $token",
+        pageNumber: pageNumber,
+      );
+      return Success(getMyOrdersCall.data);
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);
       return Error(errorMessage);

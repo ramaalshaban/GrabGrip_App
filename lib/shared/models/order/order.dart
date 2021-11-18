@@ -19,7 +19,7 @@ class Order with _$Order {
     String currency,
     @JsonKey(name: 'stock') int? stockQuantity,
     @JsonKey(name: 'listing') Gear orderedGear,
-    @JsonKey(name: 'user') User orderOwner,
+    @JsonKey(name: 'user') User? orderOwner,
   ) = _Order;
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
