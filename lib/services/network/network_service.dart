@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:dio_http/dio_http.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
 import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/geocode_response.dart';
-import 'package:grab_grip/features/browsing/browse/models/listing/listings_page.dart';
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
@@ -18,6 +18,8 @@ import 'package:grab_grip/features/post_listing/models/save_listing_request/save
 import 'package:grab_grip/features/user_profile/payments/models/payment_method/payment_method.dart';
 import 'package:grab_grip/features/user_profile/shared/models/user.dart';
 import 'package:grab_grip/services/network/api/grab_grip_api.dart';
+import 'package:grab_grip/shared/models/listings_page/listings_page.dart';
+import 'package:grab_grip/shared/models/orders_page/orders_page.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:multiple_result/multiple_result.dart';
 
@@ -170,8 +172,11 @@ class NetworkService {
     File file,
   ) async {
     try {
-      final uploadPhotoCall = await _grabGripApi.uploadPhoto("Bearer $token",
-          hash: listingHash, file: file);
+      final uploadPhotoCall = await _grabGripApi.uploadPhoto(
+        "Bearer $token",
+        hash: listingHash,
+        file: file,
+      );
       return Success(uploadPhotoCall.data.toString());
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);
@@ -352,6 +357,25 @@ class NetworkService {
   }) async {
     try {
       final getListingsCall = await _grabGripApi.getListings(
+        "Bearer $token",
+        pageNumber: pageNumber,
+      );
+      return Success(getListingsCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  //endregion
+
+  //region incoming orders
+  Future<Result<String, OrdersPage>> getIncomingOrders(
+    String token, {
+    required int pageNumber,
+  }) async {
+    try {
+      final getListingsCall = await _grabGripApi.getIncomingOrders(
         "Bearer $token",
         pageNumber: pageNumber,
       );

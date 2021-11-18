@@ -5,7 +5,6 @@ import 'package:grab_grip/features/authentication/models/login_response/login_re
 import 'package:grab_grip/features/authentication/models/register_response/register_response.dart';
 import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/geocode_response.dart';
-import 'package:grab_grip/features/browsing/browse/models/listing/listings_page.dart';
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
@@ -14,6 +13,8 @@ import 'package:grab_grip/features/post_listing/models/pricing_models_response/p
 import 'package:grab_grip/features/post_listing/models/save_listing_request/save_listing_request.dart';
 import 'package:grab_grip/features/user_profile/payments/models/payment_method/payment_method.dart';
 import 'package:grab_grip/features/user_profile/shared/models/user.dart';
+import 'package:grab_grip/shared/models/listings_page/listings_page.dart';
+import 'package:grab_grip/shared/models/orders_page/orders_page.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
@@ -169,5 +170,15 @@ abstract class GrabGripApi {
     @Header("Authorization") String token, {
     @Query("page") required int pageNumber,
   });
+
 //endregion
+
+  //region incoming orders
+  @GET("/api/v1/account/orders")
+  Future<HttpResponse<OrdersPage>> getIncomingOrders(
+    @Header("Authorization") String token, {
+    @Query("page") required int pageNumber,
+  });
+//endregion
+
 }

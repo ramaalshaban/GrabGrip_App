@@ -8,8 +8,8 @@ import 'package:grab_grip/features/post_listing/widgets/screens/step_2/post_list
 import 'package:grab_grip/features/post_listing/widgets/screens/step_3/post_listing_step_three_screen.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/post_listing_step_four_screen.dart';
 import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
-import 'package:grab_grip/shared/are_you_sure_dialog.dart';
-import 'package:grab_grip/shared/custom_app_bar.dart';
+import 'package:grab_grip/shared/widgets/are_you_sure_dialog.dart';
+import 'package:grab_grip/shared/widgets/custom_app_bar.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/functions.dart';

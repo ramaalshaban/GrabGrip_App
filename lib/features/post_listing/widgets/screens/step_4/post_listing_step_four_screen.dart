@@ -7,7 +7,7 @@ import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/pricing_tab_view.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/widgets/publish_button.dart';
 import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
-import 'package:grab_grip/shared/continue_button.dart';
+import 'package:grab_grip/shared/widgets/continue_button.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/device.dart';

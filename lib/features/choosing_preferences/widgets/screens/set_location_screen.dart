@@ -7,7 +7,7 @@ import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/browsing/browse/widgets/browse_screen/floating_places_search_bar.dart';
 import 'package:grab_grip/features/choosing_preferences/widgets/map_placeholder_loader.dart';
-import 'package:grab_grip/shared/are_you_sure_dialog.dart';
+import 'package:grab_grip/shared/widgets/are_you_sure_dialog.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/functions.dart';

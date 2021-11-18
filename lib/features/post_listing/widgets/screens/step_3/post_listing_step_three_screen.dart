@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/authentication/utils/text_field_validators.dart';
-import 'package:grab_grip/shared/continue_button.dart';
+import 'package:grab_grip/shared/widgets/continue_button.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text_fields.dart';
 import 'package:grab_grip/utils/sized_box.dart';

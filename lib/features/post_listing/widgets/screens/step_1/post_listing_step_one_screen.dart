@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_1/drop_down_lists/categories_drop_down_list.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_1/drop_down_lists/subcategories_drop_down_list.dart';
-import 'package:grab_grip/shared/continue_button.dart';
+import 'package:grab_grip/shared/widgets/continue_button.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/sized_box.dart';

@@ -4,7 +4,7 @@ import 'package:grab_grip/features/browsing/browse/providers/browse_provider.dar
 import 'package:grab_grip/features/browsing/filter/providers/filter_sort_provider.dart';
 import 'package:grab_grip/features/post_listing/providers/post_listing_provider.dart';
 import 'package:grab_grip/services/network/network_service.dart';
-import 'package:grab_grip/shared/location_picker/location_picker_state/location_picker_state.dart';
+import 'package:grab_grip/shared/widgets/location_picker/location_picker_state/location_picker_state.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/functions.dart';
 

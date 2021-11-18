@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/user_profile/payments/widgets/payment_method_tab_view.dart';
-import 'package:grab_grip/shared/custom_app_bar.dart';
+import 'package:grab_grip/shared/widgets/custom_app_bar.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 

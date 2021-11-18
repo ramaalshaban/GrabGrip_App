@@ -7,7 +7,7 @@ import 'package:grab_grip/features/post_listing/widgets/screens/step_4/post_list
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/widgets/country_picker.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/widgets/date_picker.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/widgets/tags_widget.dart';
-import 'package:grab_grip/shared/location_picker/location_picker.dart';
+import 'package:grab_grip/shared/widgets/location_picker/location_picker.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text_fields.dart';
 import 'package:grab_grip/utils/constants.dart';

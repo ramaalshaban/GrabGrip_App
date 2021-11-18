@@ -6,7 +6,7 @@ import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/widgets/photo_item.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/widgets/photos_skeleton_gird_loader.dart';
 import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
-import 'package:grab_grip/shared/are_you_sure_dialog.dart';
+import 'package:grab_grip/shared/widgets/are_you_sure_dialog.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/functions.dart';

@@ -1,32 +1,32 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/services/network/network_service.dart';
 import 'package:grab_grip/services/storage/app_shared_preferences.dart';
-import 'package:grab_grip/shared/models/listings_page/listings_page.dart';
+import 'package:grab_grip/shared/models/order/order.dart';
+import 'package:grab_grip/shared/models/orders_page/orders_page.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class ListingsProvider extends StateNotifier<ListingsPage> {
-  static PagingController<int, Gear> pagingController =
+class IncomingOrdersProvider extends StateNotifier<OrdersPage> {
+  static PagingController<int, Order> pagingController =
       PagingController(firstPageKey: 1);
 
-  ListingsProvider() : super(ListingsPage.empty());
+  IncomingOrdersProvider() : super(OrdersPage.empty());
 
-  Future<void> getListings(int pageKey) async {
+  Future<void> getIncomingOrders(int pageKey) async {
     final token = await AppSharedPreferences().getToken();
-    await NetworkService().getListings(token!, pageNumber: pageKey).then(
+    await NetworkService().getIncomingOrders(token!, pageNumber: pageKey).then(
       (result) {
         result.when(
           (errorMessage) {
-            ListingsProvider.pagingController.error = errorMessage;
+            IncomingOrdersProvider.pagingController.error = errorMessage;
           },
           (listingsPage) {
             state = listingsPage;
             final isLastPage = listingsPage.lastPageNumber == pageKey;
             if (isLastPage) {
-              pagingController.appendLastPage(listingsPage.gears);
+              pagingController.appendLastPage(listingsPage.orders);
             } else {
               final nextPageKey = pageKey + 1;
-              pagingController.appendPage(listingsPage.gears, nextPageKey);
+              pagingController.appendPage(listingsPage.orders, nextPageKey);
             }
           },
         );

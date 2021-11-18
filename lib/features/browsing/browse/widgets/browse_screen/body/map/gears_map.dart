@@ -6,7 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
-import 'package:grab_grip/features/browsing/browse/models/listing/listings_page.dart';
+import 'package:grab_grip/shared/models/listings_page/listings_page.dart';
 
 class GearsMap extends StatelessWidget {
   GearsMap({Key? key, required this.browseData}) : super(key: key);
