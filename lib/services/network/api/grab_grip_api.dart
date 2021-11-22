@@ -26,6 +26,12 @@ part 'grab_grip_api.g.dart';
 abstract class GrabGripApi {
   factory GrabGripApi(Dio dio, {String baseUrl}) = _GrabGripApi;
 
+  //region pinging the server
+
+  @GET("")
+  Future<HttpResponse> pingGrabGrip();
+
+  //endregion
   //region google apis
   @GET("/json")
   Future<HttpResponse<GeocodeResponse>> getBoundsByPlaceId({

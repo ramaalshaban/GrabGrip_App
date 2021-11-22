@@ -33,6 +33,7 @@ import 'package:grab_grip/services/network/models/http_request_state/http_reques
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
 import 'package:grab_grip/shared/models/listings_page/listings_page.dart';
 import 'package:grab_grip/shared/models/orders_page/orders_page.dart';
+import 'package:grab_grip/shared/providers/ping_provider.dart';
 import 'package:grab_grip/shared/widgets/location_picker/location_picker_state/location_picker_state.dart';
 import 'package:grab_grip/shared/widgets/location_picker/providers/location_picker_state_provider.dart';
 
@@ -151,4 +152,9 @@ final favoritesProvider =
     StateNotifierProvider<FavoritesProvider, List<Gear>>((reference) {
   final provider = reference.watch(httpRequestStateProvider.notifier);
   return FavoritesProvider(provider);
+});
+
+final pingProvider = Provider((reference) {
+  final provider = reference.watch(httpRequestStateProvider.notifier);
+  return PingProvider(provider);
 });

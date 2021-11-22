@@ -21,6 +21,9 @@ _$_Gear _$$_GearFromJson(Map<String, dynamic> json) => _$_Gear(
       json['city'] as String?,
       json['country'] as String?,
       json['thumbnail'] as String?,
+      (json['media'] as List<dynamic>)
+          .map((e) => ListingPhoto.fromJson(e as Map<String, dynamic>))
+          .toList(),
       json['price_formatted'] as String?,
       json['user'] == null
           ? null
@@ -42,6 +45,7 @@ Map<String, dynamic> _$$_GearToJson(_$_Gear instance) => <String, dynamic>{
       'city': instance.city,
       'country': instance.country,
       'thumbnail': instance.thumbnail,
+      'media': instance.photos,
       'price_formatted': instance.formattedPrice,
       'user': instance.owner,
     };

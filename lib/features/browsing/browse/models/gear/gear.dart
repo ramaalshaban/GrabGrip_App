@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:grab_grip/features/browsing/listing_details/models/listing_photo/listing_photo.dart';
 import 'package:grab_grip/features/user_profile/shared/models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -24,6 +25,7 @@ class Gear with _$Gear {
     String? city,
     String? country,
     String? thumbnail,
+    @JsonKey(name: 'media') List<ListingPhoto> photos,
     @JsonKey(name: 'price_formatted') String? formattedPrice,
     @JsonKey(name: 'user') User? owner,
   ) = _Gear;

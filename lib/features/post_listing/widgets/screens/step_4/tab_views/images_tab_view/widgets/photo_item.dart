@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/models/photo/photo.dart';
-import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/widgets/image_preview_dialog.dart';
+import 'package:grab_grip/shared/image_preview_dialog.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text.dart';
 import 'package:grab_grip/utils/sized_box.dart';
@@ -20,7 +20,8 @@ class PhotoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.router.pushWidget(ImagePreviewDialog(photo: photo));
+        context.router
+            .pushWidget(ImagePreviewDialog(photo: photo, isFile: true));
       },
       child: Card(
         shape: RoundedRectangleBorder(

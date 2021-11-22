@@ -25,6 +25,8 @@ dependencies:
   auto_route: ^2.3.2
   # cached_network_image is for showing images from the internet and caching them
   cached_network_image: ^3.1.0
+  # carousel_slider is used for showing images in a slider
+  carousel_slider: ^4.0.0
   country_code_picker: ^2.0.2
   cupertino_icons: ^1.0.2
   email_validator: ^2.0.1

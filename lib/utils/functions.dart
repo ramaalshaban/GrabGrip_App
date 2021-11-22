@@ -46,7 +46,7 @@ void showSnackBar(
   });
 }
 
-void showSnackBarForError(BuildContext context, String errorMessage) {
+void showSnackBarForError(BuildContext context, String errorMessage ,  [Duration? customDuration]) {
   WidgetsBinding.instance?.addPostFrameCallback((_) {
     String messageToShow = errorMessage;
     // showFlash function was put inside this block
@@ -56,7 +56,7 @@ void showSnackBarForError(BuildContext context, String errorMessage) {
     }
     showFlash(
       context: context,
-      duration: duration3Seconds,
+      duration: customDuration ?? duration3Seconds,
       builder: (context, controller) {
         return Flash(
           backgroundColor: Colors.red[900],

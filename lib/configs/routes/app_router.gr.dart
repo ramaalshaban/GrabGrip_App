@@ -12,11 +12,11 @@ import '../../features/authentication/login_screen.dart' as _i5;
 import '../../features/authentication/register_screen.dart' as _i4;
 import '../../features/browsing/about_us/about_us_screen.dart' as _i11;
 import '../../features/browsing/browse/models/gear/gear.dart' as _i22;
-import '../../features/browsing/browse/widgets/browse_details_screen.dart'
-    as _i8;
 import '../../features/browsing/browse/widgets/browse_screen/browse_screen.dart'
     as _i7;
 import '../../features/browsing/home/home_screen.dart' as _i3;
+import '../../features/browsing/listing_details/widgets/listing_details_screen.dart'
+    as _i8;
 import '../../features/choosing_preferences/widgets/screens/select_rent_buy_screen.dart'
     as _i1;
 import '../../features/choosing_preferences/widgets/screens/set_location_screen.dart'
@@ -102,11 +102,11 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.MaterialPageX<dynamic>(
           routeData: routeData, child: _i7.BrowseScreen());
     },
-    BrowseDetailsScreenRoute.name: (routeData) {
-      final args = routeData.argsAs<BrowseDetailsScreenRouteArgs>();
+    ListingDetailsScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<ListingDetailsScreenRouteArgs>();
       return _i19.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i8.BrowseDetailsScreen(key: args.key, gear: args.gear));
+          child: _i8.ListingDetailsScreen(key: args.key, gear: args.gear));
     },
     PostListingScreenRoute.name: (routeData) {
       return _i19.MaterialPageX<dynamic>(
@@ -156,17 +156,18 @@ class AppRouter extends _i19.RootStackRouter {
 
   @override
   List<_i19.RouteConfig> get routes => [
-        _i19.RouteConfig(SelectRentBuyScreenRoute.name, path: '/'),
+        _i19.RouteConfig(SelectRentBuyScreenRoute.name,
+            path: '/select-rent-buy-screen'),
         _i19.RouteConfig(SetLocationScreenRoute.name,
             path: '/set-location-screen'),
-        _i19.RouteConfig(HomeScreenRoute.name, path: '/home-screen'),
+        _i19.RouteConfig(HomeScreenRoute.name, path: '/'),
         _i19.RouteConfig(RegisterScreenRoute.name, path: '/register-screen'),
         _i19.RouteConfig(LoginScreenRoute.name, path: '/login-screen'),
         _i19.RouteConfig(ForgotPasswordScreenRoute.name,
             path: '/forgot-password-screen'),
         _i19.RouteConfig(BrowseScreenRoute.name, path: '/browse-screen'),
-        _i19.RouteConfig(BrowseDetailsScreenRoute.name,
-            path: '/browse-details-screen'),
+        _i19.RouteConfig(ListingDetailsScreenRoute.name,
+            path: '/listing-details-screen'),
         _i19.RouteConfig(PostListingScreenRoute.name,
             path: '/post-listing-screen', guards: [authGuard]),
         _i19.RouteConfig(ContactUsScreenRoute.name, path: '/contact-us-screen'),
@@ -190,7 +191,8 @@ class AppRouter extends _i19.RootStackRouter {
 
 /// generated route for [_i1.SelectRentBuyScreen]
 class SelectRentBuyScreenRoute extends _i19.PageRouteInfo<void> {
-  const SelectRentBuyScreenRoute() : super(name, path: '/');
+  const SelectRentBuyScreenRoute()
+      : super(name, path: '/select-rent-buy-screen');
 
   static const String name = 'SelectRentBuyScreenRoute';
 }
@@ -214,7 +216,7 @@ class SetLocationScreenRouteArgs {
 
 /// generated route for [_i3.HomeScreen]
 class HomeScreenRoute extends _i19.PageRouteInfo<void> {
-  const HomeScreenRoute() : super(name, path: '/home-screen');
+  const HomeScreenRoute() : super(name, path: '/');
 
   static const String name = 'HomeScreenRoute';
 }
@@ -272,19 +274,19 @@ class BrowseScreenRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'BrowseScreenRoute';
 }
 
-/// generated route for [_i8.BrowseDetailsScreen]
-class BrowseDetailsScreenRoute
-    extends _i19.PageRouteInfo<BrowseDetailsScreenRouteArgs> {
-  BrowseDetailsScreenRoute({_i20.Key? key, required _i22.Gear gear})
+/// generated route for [_i8.ListingDetailsScreen]
+class ListingDetailsScreenRoute
+    extends _i19.PageRouteInfo<ListingDetailsScreenRouteArgs> {
+  ListingDetailsScreenRoute({_i20.Key? key, required _i22.Gear gear})
       : super(name,
-            path: '/browse-details-screen',
-            args: BrowseDetailsScreenRouteArgs(key: key, gear: gear));
+            path: '/listing-details-screen',
+            args: ListingDetailsScreenRouteArgs(key: key, gear: gear));
 
-  static const String name = 'BrowseDetailsScreenRoute';
+  static const String name = 'ListingDetailsScreenRoute';
 }
 
-class BrowseDetailsScreenRouteArgs {
-  const BrowseDetailsScreenRouteArgs({this.key, required this.gear});
+class ListingDetailsScreenRouteArgs {
+  const ListingDetailsScreenRouteArgs({this.key, required this.gear});
 
   final _i20.Key? key;
 

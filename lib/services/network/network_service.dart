@@ -48,6 +48,19 @@ class NetworkService {
     );
   }
 
+  //region pinging the server
+  Future<Result<String, String>> pingGrabGrip() async {
+    try {
+      final pingCall = await _grabGripApi.pingGrabGrip();
+      return Success(pingCall.data.toString());
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  //endregion
+
   //region google apis
   Future<Result<String, GeocodeResponse>> getBoundsByPlaceId({
     required String placeId,

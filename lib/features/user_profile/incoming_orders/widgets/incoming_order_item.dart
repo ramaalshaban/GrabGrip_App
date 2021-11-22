@@ -118,7 +118,7 @@ class IncomingOrderItem extends StatelessWidget {
 
 //region actions
   void moveToOrderDetailsScreen(BuildContext context, Gear clickedGear) {
-    // context.router.push(BrowseDetailsScreenRoute(gear: clickedGear));
+    // context.router.push(ListingDetailsScreenRoute(gear: clickedGear));
   }
 //endregion
 }

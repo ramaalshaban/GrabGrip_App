@@ -36,6 +36,7 @@ class _$GearTearOff {
       String? city,
       String? country,
       String? thumbnail,
+      @JsonKey(name: 'media') List<ListingPhoto> photos,
       @JsonKey(name: 'price_formatted') String? formattedPrice,
       @JsonKey(name: 'user') User? owner) {
     return _Gear(
@@ -53,6 +54,7 @@ class _$GearTearOff {
       city,
       country,
       thumbnail,
+      photos,
       formattedPrice,
       owner,
     );
@@ -85,6 +87,8 @@ mixin _$Gear {
   String? get city => throw _privateConstructorUsedError;
   String? get country => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
+  @JsonKey(name: 'media')
+  List<ListingPhoto> get photos => throw _privateConstructorUsedError;
   @JsonKey(name: 'price_formatted')
   String? get formattedPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'user')
@@ -114,6 +118,7 @@ abstract class $GearCopyWith<$Res> {
       String? city,
       String? country,
       String? thumbnail,
+      @JsonKey(name: 'media') List<ListingPhoto> photos,
       @JsonKey(name: 'price_formatted') String? formattedPrice,
       @JsonKey(name: 'user') User? owner});
 
@@ -144,6 +149,7 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
     Object? city = freezed,
     Object? country = freezed,
     Object? thumbnail = freezed,
+    Object? photos = freezed,
     Object? formattedPrice = freezed,
     Object? owner = freezed,
   }) {
@@ -204,6 +210,10 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
+      photos: photos == freezed
+          ? _value.photos
+          : photos // ignore: cast_nullable_to_non_nullable
+              as List<ListingPhoto>,
       formattedPrice: formattedPrice == freezed
           ? _value.formattedPrice
           : formattedPrice // ignore: cast_nullable_to_non_nullable
@@ -247,6 +257,7 @@ abstract class _$GearCopyWith<$Res> implements $GearCopyWith<$Res> {
       String? city,
       String? country,
       String? thumbnail,
+      @JsonKey(name: 'media') List<ListingPhoto> photos,
       @JsonKey(name: 'price_formatted') String? formattedPrice,
       @JsonKey(name: 'user') User? owner});
 
@@ -279,6 +290,7 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
     Object? city = freezed,
     Object? country = freezed,
     Object? thumbnail = freezed,
+    Object? photos = freezed,
     Object? formattedPrice = freezed,
     Object? owner = freezed,
   }) {
@@ -339,6 +351,10 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
+      photos == freezed
+          ? _value.photos
+          : photos // ignore: cast_nullable_to_non_nullable
+              as List<ListingPhoto>,
       formattedPrice == freezed
           ? _value.formattedPrice
           : formattedPrice // ignore: cast_nullable_to_non_nullable
@@ -369,6 +385,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       this.city,
       this.country,
       this.thumbnail,
+      @JsonKey(name: 'media') this.photos,
       @JsonKey(name: 'price_formatted') this.formattedPrice,
       @JsonKey(name: 'user') this.owner);
 
@@ -406,6 +423,9 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
   @override
   final String? thumbnail;
   @override
+  @JsonKey(name: 'media')
+  final List<ListingPhoto> photos;
+  @override
   @JsonKey(name: 'price_formatted')
   final String? formattedPrice;
   @override
@@ -414,7 +434,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Gear(hash: $hash, id: $id, categoryId: $categoryId, title: $title, stockQuantity: $stockQuantity, description: $description, shortDescription: $shortDescription, currency: $currency, slug: $slug, lat: $lat, lng: $lng, city: $city, country: $country, thumbnail: $thumbnail, formattedPrice: $formattedPrice, owner: $owner)';
+    return 'Gear(hash: $hash, id: $id, categoryId: $categoryId, title: $title, stockQuantity: $stockQuantity, description: $description, shortDescription: $shortDescription, currency: $currency, slug: $slug, lat: $lat, lng: $lng, city: $city, country: $country, thumbnail: $thumbnail, photos: $photos, formattedPrice: $formattedPrice, owner: $owner)';
   }
 
   @override
@@ -436,6 +456,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       ..add(DiagnosticsProperty('city', city))
       ..add(DiagnosticsProperty('country', country))
       ..add(DiagnosticsProperty('thumbnail', thumbnail))
+      ..add(DiagnosticsProperty('photos', photos))
       ..add(DiagnosticsProperty('formattedPrice', formattedPrice))
       ..add(DiagnosticsProperty('owner', owner));
   }
@@ -479,6 +500,8 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
             (identical(other.thumbnail, thumbnail) ||
                 const DeepCollectionEquality()
                     .equals(other.thumbnail, thumbnail)) &&
+            (identical(other.photos, photos) ||
+                const DeepCollectionEquality().equals(other.photos, photos)) &&
             (identical(other.formattedPrice, formattedPrice) ||
                 const DeepCollectionEquality()
                     .equals(other.formattedPrice, formattedPrice)) &&
@@ -503,6 +526,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       const DeepCollectionEquality().hash(city) ^
       const DeepCollectionEquality().hash(country) ^
       const DeepCollectionEquality().hash(thumbnail) ^
+      const DeepCollectionEquality().hash(photos) ^
       const DeepCollectionEquality().hash(formattedPrice) ^
       const DeepCollectionEquality().hash(owner);
 
@@ -533,6 +557,7 @@ abstract class _Gear implements Gear {
       String? city,
       String? country,
       String? thumbnail,
+      @JsonKey(name: 'media') List<ListingPhoto> photos,
       @JsonKey(name: 'price_formatted') String? formattedPrice,
       @JsonKey(name: 'user') User? owner) = _$_Gear;
 
@@ -569,6 +594,9 @@ abstract class _Gear implements Gear {
   String? get country => throw _privateConstructorUsedError;
   @override
   String? get thumbnail => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'media')
+  List<ListingPhoto> get photos => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'price_formatted')
   String? get formattedPrice => throw _privateConstructorUsedError;

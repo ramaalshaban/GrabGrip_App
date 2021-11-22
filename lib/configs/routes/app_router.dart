@@ -5,9 +5,9 @@ import 'package:grab_grip/features/authentication/forgot_password_screen.dart';
 import 'package:grab_grip/features/authentication/login_screen.dart';
 import 'package:grab_grip/features/authentication/register_screen.dart';
 import 'package:grab_grip/features/browsing/about_us/about_us_screen.dart';
-import 'package:grab_grip/features/browsing/browse/widgets/browse_details_screen.dart';
 import 'package:grab_grip/features/browsing/browse/widgets/browse_screen/browse_screen.dart';
 import 'package:grab_grip/features/browsing/home/home_screen.dart';
+import 'package:grab_grip/features/browsing/listing_details/widgets/listing_details_screen.dart';
 import 'package:grab_grip/features/choosing_preferences/widgets/screens/select_rent_buy_screen.dart';
 import 'package:grab_grip/features/choosing_preferences/widgets/screens/set_location_screen.dart';
 import 'package:grab_grip/features/feedback/contact_us/contact_us_screen.dart';
@@ -24,7 +24,7 @@ import 'package:grab_grip/shared/widgets/verify_your_email_screen.dart';
   routes: <AutoRoute>[
     CustomRoute(
       page: SelectRentBuyScreen,
-      initial: true,
+      // initial: true,
       transitionsBuilder: TransitionsBuilders.slideTop,
       durationInMilliseconds: 400,
     ),
@@ -34,6 +34,9 @@ import 'package:grab_grip/shared/widgets/verify_your_email_screen.dart';
       durationInMilliseconds: 400,
     ),
     CustomRoute(
+      initial: true,
+
+
       page: HomeScreen,
       transitionsBuilder: TransitionsBuilders.zoomIn,
       durationInMilliseconds: 400,
@@ -42,7 +45,7 @@ import 'package:grab_grip/shared/widgets/verify_your_email_screen.dart';
     AutoRoute(page: LoginScreen),
     AutoRoute(page: ForgotPasswordScreen),
     AutoRoute(page: BrowseScreen),
-    AutoRoute(page: BrowseDetailsScreen),
+    AutoRoute(page: ListingDetailsScreen),
     AutoRoute(page: PostListingScreen, guards: [AuthGuard]),
     AutoRoute(page: ContactUsScreen),
     AutoRoute(page: AboutUsScreen),
