@@ -7,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
 import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
+import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/geocode_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
@@ -348,8 +349,6 @@ class NetworkService {
 
   //endregion
 
-  //endregion
-
   //region listings
   Future<Result<String, ListingsPage>> getListings(
     String token, {
@@ -407,6 +406,37 @@ class NetworkService {
 
   //endregion
 
+  //region favorites
+  Future<Result<String, List<Gear>>> getFavorites(
+    String token,
+  ) async {
+    try {
+      final getFavoritesCall = await _grabGripApi.getFavorites("Bearer $token");
+      return Success(getFavoritesCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  Future<Result<String, String>> toggleFavoriteStatus(
+    String token,
+    String hash,
+    String slug,
+  ) async {
+    try {
+      final toggleFavoriteStatusCall = await _grabGripApi
+          .toggleFavoriteStatus("Bearer $token", hash: hash, slug: slug);
+      return Success(toggleFavoriteStatusCall.data.toString());
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  //endregion
+
+  //endregion
   //region error handling
   bool _isNoInternetError(DioError dioError) =>
       dioError.error != null &&

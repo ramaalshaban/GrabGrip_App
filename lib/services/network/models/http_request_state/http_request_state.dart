@@ -8,6 +8,6 @@ abstract class HttpRequestState with _$HttpRequestState {
   const factory HttpRequestState.noRequestInProgress() = _Nothing;
   const factory HttpRequestState.success([String? message , String? actionSucceeded]) = _Data;
   const factory HttpRequestState.loading() = _Loading;
-  const factory HttpRequestState.innerLoading() = _InnerLoading;
+  const factory HttpRequestState.innerLoading([int? index ]) = _InnerLoading;
   const factory HttpRequestState.error(String message) = _ErrorDetails;
 }

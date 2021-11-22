@@ -12,6 +12,7 @@ import 'package:grab_grip/features/choosing_preferences/widgets/screens/select_r
 import 'package:grab_grip/features/choosing_preferences/widgets/screens/set_location_screen.dart';
 import 'package:grab_grip/features/feedback/contact_us/contact_us_screen.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/post_listing_screen.dart';
+import 'package:grab_grip/features/user_profile/favorites/widgets/favorites_screen.dart';
 import 'package:grab_grip/features/user_profile/incoming_orders/widgets/incoming_orders_screen.dart';
 import 'package:grab_grip/features/user_profile/listings/widgets/listings_screen.dart';
 import 'package:grab_grip/features/user_profile/my_orders/widgets/my_orders_screen.dart';
@@ -51,6 +52,7 @@ import 'package:grab_grip/shared/widgets/verify_your_email_screen.dart';
     AutoRoute(page: ListingsScreen, guards: [AuthGuard]),
     AutoRoute(page: IncomingOrdersScreen, guards: [AuthGuard]),
     AutoRoute(page: MyOrdersScreen, guards: [AuthGuard]),
+    AutoRoute(page: FavoritesScreen, guards: [AuthGuard]),
   ],
 )
 class $AppRouter {}

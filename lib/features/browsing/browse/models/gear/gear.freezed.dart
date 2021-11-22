@@ -30,6 +30,7 @@ class _$GearTearOff {
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
+      String slug,
       double lat,
       double lng,
       String? city,
@@ -46,6 +47,7 @@ class _$GearTearOff {
       description,
       shortDescription,
       currency,
+      slug,
       lat,
       lng,
       city,
@@ -77,6 +79,7 @@ mixin _$Gear {
   @JsonKey(name: 'short_description')
   String get shortDescription => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
+  String get slug => throw _privateConstructorUsedError;
   double get lat => throw _privateConstructorUsedError;
   double get lng => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
@@ -105,6 +108,7 @@ abstract class $GearCopyWith<$Res> {
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
+      String slug,
       double lat,
       double lng,
       String? city,
@@ -134,6 +138,7 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
     Object? description = freezed,
     Object? shortDescription = freezed,
     Object? currency = freezed,
+    Object? slug = freezed,
     Object? lat = freezed,
     Object? lng = freezed,
     Object? city = freezed,
@@ -174,6 +179,10 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
       currency: currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
+              as String,
+      slug: slug == freezed
+          ? _value.slug
+          : slug // ignore: cast_nullable_to_non_nullable
               as String,
       lat: lat == freezed
           ? _value.lat
@@ -232,6 +241,7 @@ abstract class _$GearCopyWith<$Res> implements $GearCopyWith<$Res> {
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
+      String slug,
       double lat,
       double lng,
       String? city,
@@ -263,6 +273,7 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
     Object? description = freezed,
     Object? shortDescription = freezed,
     Object? currency = freezed,
+    Object? slug = freezed,
     Object? lat = freezed,
     Object? lng = freezed,
     Object? city = freezed,
@@ -303,6 +314,10 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
       currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
+              as String,
+      slug == freezed
+          ? _value.slug
+          : slug // ignore: cast_nullable_to_non_nullable
               as String,
       lat == freezed
           ? _value.lat
@@ -348,6 +363,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       this.description,
       @JsonKey(name: 'short_description') this.shortDescription,
       this.currency,
+      this.slug,
       this.lat,
       this.lng,
       this.city,
@@ -378,6 +394,8 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
   @override
   final String currency;
   @override
+  final String slug;
+  @override
   final double lat;
   @override
   final double lng;
@@ -396,7 +414,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Gear(hash: $hash, id: $id, categoryId: $categoryId, title: $title, stockQuantity: $stockQuantity, description: $description, shortDescription: $shortDescription, currency: $currency, lat: $lat, lng: $lng, city: $city, country: $country, thumbnail: $thumbnail, formattedPrice: $formattedPrice, owner: $owner)';
+    return 'Gear(hash: $hash, id: $id, categoryId: $categoryId, title: $title, stockQuantity: $stockQuantity, description: $description, shortDescription: $shortDescription, currency: $currency, slug: $slug, lat: $lat, lng: $lng, city: $city, country: $country, thumbnail: $thumbnail, formattedPrice: $formattedPrice, owner: $owner)';
   }
 
   @override
@@ -412,6 +430,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('shortDescription', shortDescription))
       ..add(DiagnosticsProperty('currency', currency))
+      ..add(DiagnosticsProperty('slug', slug))
       ..add(DiagnosticsProperty('lat', lat))
       ..add(DiagnosticsProperty('lng', lng))
       ..add(DiagnosticsProperty('city', city))
@@ -446,6 +465,8 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
             (identical(other.currency, currency) ||
                 const DeepCollectionEquality()
                     .equals(other.currency, currency)) &&
+            (identical(other.slug, slug) ||
+                const DeepCollectionEquality().equals(other.slug, slug)) &&
             (identical(other.lat, lat) ||
                 const DeepCollectionEquality().equals(other.lat, lat)) &&
             (identical(other.lng, lng) ||
@@ -476,6 +497,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(shortDescription) ^
       const DeepCollectionEquality().hash(currency) ^
+      const DeepCollectionEquality().hash(slug) ^
       const DeepCollectionEquality().hash(lat) ^
       const DeepCollectionEquality().hash(lng) ^
       const DeepCollectionEquality().hash(city) ^
@@ -505,6 +527,7 @@ abstract class _Gear implements Gear {
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
+      String slug,
       double lat,
       double lng,
       String? city,
@@ -534,6 +557,8 @@ abstract class _Gear implements Gear {
   String get shortDescription => throw _privateConstructorUsedError;
   @override
   String get currency => throw _privateConstructorUsedError;
+  @override
+  String get slug => throw _privateConstructorUsedError;
   @override
   double get lat => throw _privateConstructorUsedError;
   @override

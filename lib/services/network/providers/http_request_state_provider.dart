@@ -13,10 +13,10 @@ class HttpRequestStateProvider extends StateNotifier<HttpRequestState> {
     state = const HttpRequestState.loading();
   }
 
-  void setInnerLoading() {
+  void setInnerLoading({int? index}) {
     // innerLoading is set when we want to show loading in the inner widget while
     //    the outer widget is listening to loading state too.
-    state = const HttpRequestState.innerLoading();
+    state = HttpRequestState.innerLoading(index);
   }
 
   void setSuccess({String? successMessage, String? actionSucceeded}) {

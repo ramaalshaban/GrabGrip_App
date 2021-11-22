@@ -4,9 +4,8 @@
 // AutoRouteGenerator
 // **************************************************************************
 
-import 'package:auto_route/auto_route.dart' as _i18;
-import 'package:flutter/cupertino.dart' as _i21;
-import 'package:flutter/material.dart' as _i19;
+import 'package:auto_route/auto_route.dart' as _i19;
+import 'package:flutter/material.dart' as _i20;
 
 import '../../features/authentication/forgot_password_screen.dart' as _i6;
 import '../../features/authentication/login_screen.dart' as _i5;
@@ -25,6 +24,8 @@ import '../../features/choosing_preferences/widgets/screens/set_location_screen.
 import '../../features/feedback/contact_us/contact_us_screen.dart' as _i10;
 import '../../features/post_listing/widgets/screens/post_listing_screen.dart'
     as _i9;
+import '../../features/user_profile/favorites/widgets/favorites_screen.dart'
+    as _i18;
 import '../../features/user_profile/incoming_orders/widgets/incoming_orders_screen.dart'
     as _i16;
 import '../../features/user_profile/listings/widgets/listings_screen.dart'
@@ -35,23 +36,23 @@ import '../../features/user_profile/payments/widgets/payments_screen.dart'
     as _i14;
 import '../../features/user_profile/user_profile_screen.dart' as _i13;
 import '../../shared/widgets/verify_your_email_screen.dart' as _i12;
-import 'guards/auth_guard.dart' as _i20;
+import 'guards/auth_guard.dart' as _i21;
 
-class AppRouter extends _i18.RootStackRouter {
+class AppRouter extends _i19.RootStackRouter {
   AppRouter(
-      {_i19.GlobalKey<_i19.NavigatorState>? navigatorKey,
+      {_i20.GlobalKey<_i20.NavigatorState>? navigatorKey,
       required this.authGuard})
       : super(navigatorKey);
 
-  final _i20.AuthGuard authGuard;
+  final _i21.AuthGuard authGuard;
 
   @override
-  final Map<String, _i18.PageFactory> pagesMap = {
+  final Map<String, _i19.PageFactory> pagesMap = {
     SelectRentBuyScreenRoute.name: (routeData) {
-      return _i18.CustomPage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i1.SelectRentBuyScreen(),
-          transitionsBuilder: _i18.TransitionsBuilders.slideTop,
+          transitionsBuilder: _i19.TransitionsBuilders.slideTop,
           durationInMilliseconds: 400,
           opaque: true,
           barrierDismissible: false);
@@ -59,19 +60,19 @@ class AppRouter extends _i18.RootStackRouter {
     SetLocationScreenRoute.name: (routeData) {
       final args = routeData.argsAs<SetLocationScreenRouteArgs>(
           orElse: () => const SetLocationScreenRouteArgs());
-      return _i18.CustomPage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i2.SetLocationScreen(key: args.key),
-          transitionsBuilder: _i18.TransitionsBuilders.slideTop,
+          transitionsBuilder: _i19.TransitionsBuilders.slideTop,
           durationInMilliseconds: 400,
           opaque: true,
           barrierDismissible: false);
     },
     HomeScreenRoute.name: (routeData) {
-      return _i18.CustomPage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i3.HomeScreen(),
-          transitionsBuilder: _i18.TransitionsBuilders.zoomIn,
+          transitionsBuilder: _i19.TransitionsBuilders.zoomIn,
           durationInMilliseconds: 400,
           opaque: true,
           barrierDismissible: false);
@@ -79,7 +80,7 @@ class AppRouter extends _i18.RootStackRouter {
     RegisterScreenRoute.name: (routeData) {
       final args = routeData.argsAs<RegisterScreenRouteArgs>(
           orElse: () => const RegisterScreenRouteArgs());
-      return _i18.MaterialPageX<dynamic>(
+      return _i19.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i4.RegisterScreen(
               onSuccessRegistration: args.onSuccessRegistration,
@@ -88,101 +89,107 @@ class AppRouter extends _i18.RootStackRouter {
     LoginScreenRoute.name: (routeData) {
       final args = routeData.argsAs<LoginScreenRouteArgs>(
           orElse: () => const LoginScreenRouteArgs());
-      return _i18.MaterialPageX<dynamic>(
+      return _i19.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i5.LoginScreen(
               key: args.key, onSuccessLogin: args.onSuccessLogin));
     },
     ForgotPasswordScreenRoute.name: (routeData) {
-      return _i18.MaterialPageX<dynamic>(
+      return _i19.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i6.ForgotPasswordScreen());
     },
     BrowseScreenRoute.name: (routeData) {
-      return _i18.MaterialPageX<dynamic>(
+      return _i19.MaterialPageX<dynamic>(
           routeData: routeData, child: _i7.BrowseScreen());
     },
     BrowseDetailsScreenRoute.name: (routeData) {
       final args = routeData.argsAs<BrowseDetailsScreenRouteArgs>();
-      return _i18.MaterialPageX<dynamic>(
+      return _i19.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i8.BrowseDetailsScreen(key: args.key, gear: args.gear));
     },
     PostListingScreenRoute.name: (routeData) {
-      return _i18.MaterialPageX<dynamic>(
+      return _i19.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i9.PostListingScreen());
     },
     ContactUsScreenRoute.name: (routeData) {
-      return _i18.MaterialPageX<dynamic>(
+      return _i19.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i10.ContactUsScreen());
     },
     AboutUsScreenRoute.name: (routeData) {
-      return _i18.MaterialPageX<dynamic>(
+      return _i19.MaterialPageX<dynamic>(
           routeData: routeData, child: _i11.AboutUsScreen());
     },
     VerifyYourEmailScreenRoute.name: (routeData) {
       final args = routeData.argsAs<VerifyYourEmailScreenRouteArgs>();
-      return _i18.MaterialPageX<dynamic>(
+      return _i19.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i12.VerifyYourEmailScreen(
               key: args.key,
               onSuccessVerification: args.onSuccessVerification));
     },
     UserProfileScreenRoute.name: (routeData) {
-      return _i18.MaterialPageX<dynamic>(
+      return _i19.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i13.UserProfileScreen());
     },
     PaymentsScreenRoute.name: (routeData) {
-      return _i18.MaterialPageX<dynamic>(
+      return _i19.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i14.PaymentsScreen());
     },
     ListingsScreenRoute.name: (routeData) {
-      return _i18.MaterialPageX<dynamic>(
+      return _i19.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i15.ListingsScreen());
     },
     IncomingOrdersScreenRoute.name: (routeData) {
-      return _i18.MaterialPageX<dynamic>(
+      return _i19.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i16.IncomingOrdersScreen());
     },
     MyOrdersScreenRoute.name: (routeData) {
-      return _i18.MaterialPageX<dynamic>(
+      return _i19.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i17.MyOrdersScreen());
+    },
+    FavoritesScreenRoute.name: (routeData) {
+      return _i19.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i18.FavoritesScreen());
     }
   };
 
   @override
-  List<_i18.RouteConfig> get routes => [
-        _i18.RouteConfig(SelectRentBuyScreenRoute.name, path: '/'),
-        _i18.RouteConfig(SetLocationScreenRoute.name,
+  List<_i19.RouteConfig> get routes => [
+        _i19.RouteConfig(SelectRentBuyScreenRoute.name, path: '/'),
+        _i19.RouteConfig(SetLocationScreenRoute.name,
             path: '/set-location-screen'),
-        _i18.RouteConfig(HomeScreenRoute.name, path: '/home-screen'),
-        _i18.RouteConfig(RegisterScreenRoute.name, path: '/register-screen'),
-        _i18.RouteConfig(LoginScreenRoute.name, path: '/login-screen'),
-        _i18.RouteConfig(ForgotPasswordScreenRoute.name,
+        _i19.RouteConfig(HomeScreenRoute.name, path: '/home-screen'),
+        _i19.RouteConfig(RegisterScreenRoute.name, path: '/register-screen'),
+        _i19.RouteConfig(LoginScreenRoute.name, path: '/login-screen'),
+        _i19.RouteConfig(ForgotPasswordScreenRoute.name,
             path: '/forgot-password-screen'),
-        _i18.RouteConfig(BrowseScreenRoute.name, path: '/browse-screen'),
-        _i18.RouteConfig(BrowseDetailsScreenRoute.name,
+        _i19.RouteConfig(BrowseScreenRoute.name, path: '/browse-screen'),
+        _i19.RouteConfig(BrowseDetailsScreenRoute.name,
             path: '/browse-details-screen'),
-        _i18.RouteConfig(PostListingScreenRoute.name,
+        _i19.RouteConfig(PostListingScreenRoute.name,
             path: '/post-listing-screen', guards: [authGuard]),
-        _i18.RouteConfig(ContactUsScreenRoute.name, path: '/contact-us-screen'),
-        _i18.RouteConfig(AboutUsScreenRoute.name, path: '/about-us-screen'),
-        _i18.RouteConfig(VerifyYourEmailScreenRoute.name,
+        _i19.RouteConfig(ContactUsScreenRoute.name, path: '/contact-us-screen'),
+        _i19.RouteConfig(AboutUsScreenRoute.name, path: '/about-us-screen'),
+        _i19.RouteConfig(VerifyYourEmailScreenRoute.name,
             path: '/verify-your-email-screen'),
-        _i18.RouteConfig(UserProfileScreenRoute.name,
+        _i19.RouteConfig(UserProfileScreenRoute.name,
             path: '/user-profile-screen'),
-        _i18.RouteConfig(PaymentsScreenRoute.name,
+        _i19.RouteConfig(PaymentsScreenRoute.name,
             path: '/payments-screen', guards: [authGuard]),
-        _i18.RouteConfig(ListingsScreenRoute.name,
+        _i19.RouteConfig(ListingsScreenRoute.name,
             path: '/listings-screen', guards: [authGuard]),
-        _i18.RouteConfig(IncomingOrdersScreenRoute.name,
+        _i19.RouteConfig(IncomingOrdersScreenRoute.name,
             path: '/incoming-orders-screen', guards: [authGuard]),
-        _i18.RouteConfig(MyOrdersScreenRoute.name,
-            path: '/my-orders-screen', guards: [authGuard])
+        _i19.RouteConfig(MyOrdersScreenRoute.name,
+            path: '/my-orders-screen', guards: [authGuard]),
+        _i19.RouteConfig(FavoritesScreenRoute.name,
+            path: '/favorites-screen', guards: [authGuard])
       ];
 }
 
 /// generated route for [_i1.SelectRentBuyScreen]
-class SelectRentBuyScreenRoute extends _i18.PageRouteInfo<void> {
+class SelectRentBuyScreenRoute extends _i19.PageRouteInfo<void> {
   const SelectRentBuyScreenRoute() : super(name, path: '/');
 
   static const String name = 'SelectRentBuyScreenRoute';
@@ -190,8 +197,8 @@ class SelectRentBuyScreenRoute extends _i18.PageRouteInfo<void> {
 
 /// generated route for [_i2.SetLocationScreen]
 class SetLocationScreenRoute
-    extends _i18.PageRouteInfo<SetLocationScreenRouteArgs> {
-  SetLocationScreenRoute({_i21.Key? key})
+    extends _i19.PageRouteInfo<SetLocationScreenRouteArgs> {
+  SetLocationScreenRoute({_i20.Key? key})
       : super(name,
             path: '/set-location-screen',
             args: SetLocationScreenRouteArgs(key: key));
@@ -202,19 +209,19 @@ class SetLocationScreenRoute
 class SetLocationScreenRouteArgs {
   const SetLocationScreenRouteArgs({this.key});
 
-  final _i21.Key? key;
+  final _i20.Key? key;
 }
 
 /// generated route for [_i3.HomeScreen]
-class HomeScreenRoute extends _i18.PageRouteInfo<void> {
+class HomeScreenRoute extends _i19.PageRouteInfo<void> {
   const HomeScreenRoute() : super(name, path: '/home-screen');
 
   static const String name = 'HomeScreenRoute';
 }
 
 /// generated route for [_i4.RegisterScreen]
-class RegisterScreenRoute extends _i18.PageRouteInfo<RegisterScreenRouteArgs> {
-  RegisterScreenRoute({void Function()? onSuccessRegistration, _i21.Key? key})
+class RegisterScreenRoute extends _i19.PageRouteInfo<RegisterScreenRouteArgs> {
+  RegisterScreenRoute({void Function()? onSuccessRegistration, _i20.Key? key})
       : super(name,
             path: '/register-screen',
             args: RegisterScreenRouteArgs(
@@ -228,12 +235,12 @@ class RegisterScreenRouteArgs {
 
   final void Function()? onSuccessRegistration;
 
-  final _i21.Key? key;
+  final _i20.Key? key;
 }
 
 /// generated route for [_i5.LoginScreen]
-class LoginScreenRoute extends _i18.PageRouteInfo<LoginScreenRouteArgs> {
-  LoginScreenRoute({_i21.Key? key, void Function()? onSuccessLogin})
+class LoginScreenRoute extends _i19.PageRouteInfo<LoginScreenRouteArgs> {
+  LoginScreenRoute({_i20.Key? key, void Function()? onSuccessLogin})
       : super(name,
             path: '/login-screen',
             args:
@@ -245,13 +252,13 @@ class LoginScreenRoute extends _i18.PageRouteInfo<LoginScreenRouteArgs> {
 class LoginScreenRouteArgs {
   const LoginScreenRouteArgs({this.key, this.onSuccessLogin});
 
-  final _i21.Key? key;
+  final _i20.Key? key;
 
   final void Function()? onSuccessLogin;
 }
 
 /// generated route for [_i6.ForgotPasswordScreen]
-class ForgotPasswordScreenRoute extends _i18.PageRouteInfo<void> {
+class ForgotPasswordScreenRoute extends _i19.PageRouteInfo<void> {
   const ForgotPasswordScreenRoute()
       : super(name, path: '/forgot-password-screen');
 
@@ -259,7 +266,7 @@ class ForgotPasswordScreenRoute extends _i18.PageRouteInfo<void> {
 }
 
 /// generated route for [_i7.BrowseScreen]
-class BrowseScreenRoute extends _i18.PageRouteInfo<void> {
+class BrowseScreenRoute extends _i19.PageRouteInfo<void> {
   const BrowseScreenRoute() : super(name, path: '/browse-screen');
 
   static const String name = 'BrowseScreenRoute';
@@ -267,8 +274,8 @@ class BrowseScreenRoute extends _i18.PageRouteInfo<void> {
 
 /// generated route for [_i8.BrowseDetailsScreen]
 class BrowseDetailsScreenRoute
-    extends _i18.PageRouteInfo<BrowseDetailsScreenRouteArgs> {
-  BrowseDetailsScreenRoute({_i21.Key? key, required _i22.Gear gear})
+    extends _i19.PageRouteInfo<BrowseDetailsScreenRouteArgs> {
+  BrowseDetailsScreenRoute({_i20.Key? key, required _i22.Gear gear})
       : super(name,
             path: '/browse-details-screen',
             args: BrowseDetailsScreenRouteArgs(key: key, gear: gear));
@@ -279,27 +286,27 @@ class BrowseDetailsScreenRoute
 class BrowseDetailsScreenRouteArgs {
   const BrowseDetailsScreenRouteArgs({this.key, required this.gear});
 
-  final _i21.Key? key;
+  final _i20.Key? key;
 
   final _i22.Gear gear;
 }
 
 /// generated route for [_i9.PostListingScreen]
-class PostListingScreenRoute extends _i18.PageRouteInfo<void> {
+class PostListingScreenRoute extends _i19.PageRouteInfo<void> {
   const PostListingScreenRoute() : super(name, path: '/post-listing-screen');
 
   static const String name = 'PostListingScreenRoute';
 }
 
 /// generated route for [_i10.ContactUsScreen]
-class ContactUsScreenRoute extends _i18.PageRouteInfo<void> {
+class ContactUsScreenRoute extends _i19.PageRouteInfo<void> {
   const ContactUsScreenRoute() : super(name, path: '/contact-us-screen');
 
   static const String name = 'ContactUsScreenRoute';
 }
 
 /// generated route for [_i11.AboutUsScreen]
-class AboutUsScreenRoute extends _i18.PageRouteInfo<void> {
+class AboutUsScreenRoute extends _i19.PageRouteInfo<void> {
   const AboutUsScreenRoute() : super(name, path: '/about-us-screen');
 
   static const String name = 'AboutUsScreenRoute';
@@ -307,9 +314,9 @@ class AboutUsScreenRoute extends _i18.PageRouteInfo<void> {
 
 /// generated route for [_i12.VerifyYourEmailScreen]
 class VerifyYourEmailScreenRoute
-    extends _i18.PageRouteInfo<VerifyYourEmailScreenRouteArgs> {
+    extends _i19.PageRouteInfo<VerifyYourEmailScreenRouteArgs> {
   VerifyYourEmailScreenRoute(
-      {_i21.Key? key, required void Function() onSuccessVerification})
+      {_i20.Key? key, required void Function() onSuccessVerification})
       : super(name,
             path: '/verify-your-email-screen',
             args: VerifyYourEmailScreenRouteArgs(
@@ -322,34 +329,34 @@ class VerifyYourEmailScreenRouteArgs {
   const VerifyYourEmailScreenRouteArgs(
       {this.key, required this.onSuccessVerification});
 
-  final _i21.Key? key;
+  final _i20.Key? key;
 
   final void Function() onSuccessVerification;
 }
 
 /// generated route for [_i13.UserProfileScreen]
-class UserProfileScreenRoute extends _i18.PageRouteInfo<void> {
+class UserProfileScreenRoute extends _i19.PageRouteInfo<void> {
   const UserProfileScreenRoute() : super(name, path: '/user-profile-screen');
 
   static const String name = 'UserProfileScreenRoute';
 }
 
 /// generated route for [_i14.PaymentsScreen]
-class PaymentsScreenRoute extends _i18.PageRouteInfo<void> {
+class PaymentsScreenRoute extends _i19.PageRouteInfo<void> {
   const PaymentsScreenRoute() : super(name, path: '/payments-screen');
 
   static const String name = 'PaymentsScreenRoute';
 }
 
 /// generated route for [_i15.ListingsScreen]
-class ListingsScreenRoute extends _i18.PageRouteInfo<void> {
+class ListingsScreenRoute extends _i19.PageRouteInfo<void> {
   const ListingsScreenRoute() : super(name, path: '/listings-screen');
 
   static const String name = 'ListingsScreenRoute';
 }
 
 /// generated route for [_i16.IncomingOrdersScreen]
-class IncomingOrdersScreenRoute extends _i18.PageRouteInfo<void> {
+class IncomingOrdersScreenRoute extends _i19.PageRouteInfo<void> {
   const IncomingOrdersScreenRoute()
       : super(name, path: '/incoming-orders-screen');
 
@@ -357,8 +364,15 @@ class IncomingOrdersScreenRoute extends _i18.PageRouteInfo<void> {
 }
 
 /// generated route for [_i17.MyOrdersScreen]
-class MyOrdersScreenRoute extends _i18.PageRouteInfo<void> {
+class MyOrdersScreenRoute extends _i19.PageRouteInfo<void> {
   const MyOrdersScreenRoute() : super(name, path: '/my-orders-screen');
 
   static const String name = 'MyOrdersScreenRoute';
+}
+
+/// generated route for [_i18.FavoritesScreen]
+class FavoritesScreenRoute extends _i19.PageRouteInfo<void> {
+  const FavoritesScreenRoute() : super(name, path: '/favorites-screen');
+
+  static const String name = 'FavoritesScreenRoute';
 }

@@ -140,7 +140,7 @@ class PostListingStepFourScreen extends StatelessWidget {
                       final listingAvailabilityState =
                           ref(listingAvailabilityStateProvider);
                       return ref(httpRequestStateProvider).maybeWhen(
-                        innerLoading: () => Container(
+                        innerLoading: (_) => Container(
                           constraints:
                               BoxConstraints(minWidth: screenWidth(context)) /
                                   3,

@@ -72,7 +72,6 @@ class PostListingStepOneScreen extends StatelessWidget {
               opacity: visibilityConditions ? 1.0 : 0.0,
               duration: duration300Milli,
               child: ContinueButton(
-                formKey: null,
                 buttonText: AppLocalizations.of(context)!.continue_label,
                 onClickAction: () {
                   ref(postListingStepProvider.notifier).setStep2();

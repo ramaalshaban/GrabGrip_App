@@ -33,7 +33,7 @@ class ImagesTabView extends StatelessWidget {
             final photos = ref(photosProvider);
             final httpStatus = ref(httpRequestStateProvider);
             return httpStatus.maybeWhen(
-              innerLoading: () => const PhotosSkeletonGridLoader(),
+              innerLoading: (_) => const PhotosSkeletonGridLoader(),
               orElse: () => photos.isNotEmpty
                   ? GridView.count(
                       crossAxisSpacing: 20,

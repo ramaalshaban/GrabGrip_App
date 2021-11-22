@@ -135,7 +135,9 @@ class UserProfileScreen extends StatelessWidget {
                 lightGrayDividerThickness0_5,
                 AppDrawerButton(
                   title: "Favorites",
-                  onTabFunction: () {},
+                  onTabFunction: () {
+                    context.router.push(const FavoritesScreenRoute());
+                  },
                 ),
                 lightGrayDividerThickness0_5,
                 AppDrawerButton(

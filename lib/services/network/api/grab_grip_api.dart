@@ -4,6 +4,7 @@ import 'package:grab_grip/features/authentication/models/auth_request/auth_reque
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
 import 'package:grab_grip/features/authentication/models/register_response/register_response.dart';
 import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
+import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/geocode_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
@@ -162,8 +163,6 @@ abstract class GrabGripApi {
 
 //endregion
 
-//endregion
-
   //region listings
   @GET("/api/v1/account/listings")
   Future<HttpResponse<ListingsPage>> getListings(
@@ -188,6 +187,23 @@ abstract class GrabGripApi {
     @Header("Authorization") String token, {
     @Query("page") required int pageNumber,
   });
+
+//endregion
+
+  //region favorites
+  @GET("/api/v1/account/favorites")
+  Future<HttpResponse<List<Gear>>> getFavorites(
+    @Header("Authorization") String token,
+  );
+
+  @GET("/api/v1/listing/{hash}/{slug}/star")
+  Future<HttpResponse> toggleFavoriteStatus(
+    @Header("Authorization") String token, {
+    @Path("hash") required String hash,
+    @Path("slug") required String slug,
+  });
+//endregion
+
 //endregion
 
 }
