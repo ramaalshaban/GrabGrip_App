@@ -31,6 +31,7 @@ class _$GearTearOff {
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
+      List<String>? tags,
       String slug,
       double lat,
       double lng,
@@ -50,6 +51,7 @@ class _$GearTearOff {
       description,
       shortDescription,
       currency,
+      tags,
       slug,
       lat,
       lng,
@@ -85,6 +87,7 @@ mixin _$Gear {
   @JsonKey(name: 'short_description')
   String get shortDescription => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
+  List<String>? get tags => throw _privateConstructorUsedError;
   String get slug => throw _privateConstructorUsedError;
   double get lat => throw _privateConstructorUsedError;
   double get lng => throw _privateConstructorUsedError;
@@ -117,6 +120,7 @@ abstract class $GearCopyWith<$Res> {
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
+      List<String>? tags,
       String slug,
       double lat,
       double lng,
@@ -149,6 +153,7 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
     Object? description = freezed,
     Object? shortDescription = freezed,
     Object? currency = freezed,
+    Object? tags = freezed,
     Object? slug = freezed,
     Object? lat = freezed,
     Object? lng = freezed,
@@ -196,6 +201,10 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String,
+      tags: tags == freezed
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       slug: slug == freezed
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
@@ -262,6 +271,7 @@ abstract class _$GearCopyWith<$Res> implements $GearCopyWith<$Res> {
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
+      List<String>? tags,
       String slug,
       double lat,
       double lng,
@@ -296,6 +306,7 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
     Object? description = freezed,
     Object? shortDescription = freezed,
     Object? currency = freezed,
+    Object? tags = freezed,
     Object? slug = freezed,
     Object? lat = freezed,
     Object? lng = freezed,
@@ -343,6 +354,10 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String,
+      tags == freezed
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       slug == freezed
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
@@ -396,6 +411,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       this.description,
       @JsonKey(name: 'short_description') this.shortDescription,
       this.currency,
+      this.tags,
       this.slug,
       this.lat,
       this.lng,
@@ -431,6 +447,8 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
   @override
   final String currency;
   @override
+  final List<String>? tags;
+  @override
   final String slug;
   @override
   final double lat;
@@ -454,7 +472,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Gear(hash: $hash, id: $id, categoryId: $categoryId, pricingModelId: $pricingModelId, title: $title, stockQuantity: $stockQuantity, description: $description, shortDescription: $shortDescription, currency: $currency, slug: $slug, lat: $lat, lng: $lng, city: $city, country: $country, thumbnail: $thumbnail, photos: $photos, formattedPrice: $formattedPrice, owner: $owner)';
+    return 'Gear(hash: $hash, id: $id, categoryId: $categoryId, pricingModelId: $pricingModelId, title: $title, stockQuantity: $stockQuantity, description: $description, shortDescription: $shortDescription, currency: $currency, tags: $tags, slug: $slug, lat: $lat, lng: $lng, city: $city, country: $country, thumbnail: $thumbnail, photos: $photos, formattedPrice: $formattedPrice, owner: $owner)';
   }
 
   @override
@@ -471,6 +489,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('shortDescription', shortDescription))
       ..add(DiagnosticsProperty('currency', currency))
+      ..add(DiagnosticsProperty('tags', tags))
       ..add(DiagnosticsProperty('slug', slug))
       ..add(DiagnosticsProperty('lat', lat))
       ..add(DiagnosticsProperty('lng', lng))
@@ -510,6 +529,8 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
             (identical(other.currency, currency) ||
                 const DeepCollectionEquality()
                     .equals(other.currency, currency)) &&
+            (identical(other.tags, tags) ||
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.slug, slug) ||
                 const DeepCollectionEquality().equals(other.slug, slug)) &&
             (identical(other.lat, lat) ||
@@ -545,6 +566,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(shortDescription) ^
       const DeepCollectionEquality().hash(currency) ^
+      const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(slug) ^
       const DeepCollectionEquality().hash(lat) ^
       const DeepCollectionEquality().hash(lng) ^
@@ -577,6 +599,7 @@ abstract class _Gear implements Gear {
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
+      List<String>? tags,
       String slug,
       double lat,
       double lng,
@@ -611,6 +634,8 @@ abstract class _Gear implements Gear {
   String get shortDescription => throw _privateConstructorUsedError;
   @override
   String get currency => throw _privateConstructorUsedError;
+  @override
+  List<String>? get tags => throw _privateConstructorUsedError;
   @override
   String get slug => throw _privateConstructorUsedError;
   @override

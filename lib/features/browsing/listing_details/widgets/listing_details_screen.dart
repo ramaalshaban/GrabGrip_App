@@ -11,6 +11,7 @@ import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/slider_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/user_widget.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/widgets/tag_view.dart';
 import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/device.dart';
@@ -20,6 +21,7 @@ import 'package:grab_grip/utils/sized_box.dart';
 class ListingDetailsScreen extends StatelessWidget {
   final Gear gear;
   final Completer<GoogleMapController> mapController = Completer();
+  final horizontalPaddingValue = 12.0;
 
   ListingDetailsScreen({Key? key, required this.gear}) : super(key: key);
 
@@ -153,8 +155,38 @@ class ListingDetailsScreen extends StatelessWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  height12(),
-                  Html(data: gear.description),
+                  //region Description
+                  Html(
+                    data: gear.description,
+                    style: {
+                      // "p" to style text in <p> tags
+                      "p": Style(
+                        fontSize: FontSize.large,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                        ),
+                      )
+                    },
+                  ),
+                  //endregion
+                  //region Tags
+                  if (gear.tags != null)
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: horizontalPaddingValue,
+                      ),
+                      child: Wrap(
+                        spacing: 6,
+                        children: List.generate(
+                          gear.tags!.length,
+                          (index) => TagView(
+                            tag: gear.tags![index],
+                            isEditable: false,
+                          ),
+                        ),
+                      ),
+                    ),
+                  //endregion
                   height12(),
                   Text(gear.currency),
                   height12(),

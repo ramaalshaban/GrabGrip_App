@@ -29,7 +29,10 @@ class _TagsWidgetState extends State<TagsWidget> {
               spacing: 4,
               children: List.generate(
                 tags.length,
-                (index) => TagView(tag: tags[index]),
+                (index) => TagView(
+                  tag: tags[index],
+                  isEditable: true,
+                ),
               ),
             );
           },

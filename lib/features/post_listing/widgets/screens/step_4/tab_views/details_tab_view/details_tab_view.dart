@@ -77,8 +77,8 @@ class _DetailsTabViewState extends State<DetailsTabView>
                 minLines: 10,
                 maxLines: 10,
                 onChanged: (text) {
-                  description = text;
-                  context.read(postListingProvider.notifier).description = text;
+                  description = text.trim();
+                  context.read(postListingProvider.notifier).description = text.trim();
                 },
                 controller: descriptionTextController,
                 validator: listingDescriptionFieldValidator,

@@ -64,9 +64,9 @@ class _PostListingStepThreeScreenState
                   minLines: 10,
                   maxLines: 10,
                   onChanged: (text) {
-                    description = text;
+                    description = text.trim();
                     context.read(postListingProvider.notifier).description =
-                        text;
+                        text.trim();
                   },
                   controller: descriptionTextController,
                   validator: listingDescriptionFieldValidator,

@@ -20,6 +20,7 @@ class Gear with _$Gear {
     String description,
     @JsonKey(name: 'short_description') String shortDescription,
     String currency,
+    List<String>? tags,
     String slug,
     double lat,
     double lng,
