@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +25,11 @@ class ListingDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ping the server to check the internet connection when user navigates to this screen
-    // if there is no internet connection then an error snack bar will be displayed
     WidgetsBinding.instance?.addPostFrameCallback((_) {
-      context.read(pingProvider).pingGrabGrip();
+      // get listings' categories and pricing models to display the current listing's category and pricing model
+      context
+          .read(listingDetailsProvider.notifier)
+          .getCategoriesAndPricingModels();
     });
     return Material(
       child: ProviderListener(
@@ -68,7 +70,7 @@ class ListingDetailsScreen extends StatelessWidget {
               ),
               //endregion
               flexibleSpace: FlexibleSpaceBar(
-                //region Listing title
+                //region Listing title, Category & Pricing model
                 title: ConstrainedBox(
                   constraints: BoxConstraints(minWidth: screenWidth(context)),
                   child: Container(
@@ -77,12 +79,68 @@ class ListingDetailsScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(4),
                     ),
                     padding: const EdgeInsets.all(4),
-                    child: Text(
-                      gear.title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        //region Category & Pricing model
+                        Consumer(
+                          builder: (_, ref, __) {
+                            return ref(httpRequestStateProvider).maybeWhen(
+                              loading: () => const Center(
+                                child: SizedBox(
+                                  height: 14,
+                                  width: 14,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: AppColors.purple,
+                                  ),
+                                ),
+                              ),
+                              error: (_) => Container(),
+                              orElse: () => Row(
+                                children: [
+                                  Text(
+                                    ref(listingDetailsProvider.notifier)
+                                        .getCategoryName(gear.categoryId),
+                                    style: const TextStyle(
+                                      fontSize: 8,
+                                      color: AppColors.white,
+                                    ),
+                                  ),
+                                  const Text(
+                                    " / ",
+                                    style: TextStyle(
+                                      fontSize: 8,
+                                      color: AppColors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    ref(listingDetailsProvider.notifier)
+                                        .getPricingModelName(
+                                      gear.pricingModelId,
+                                    ),
+                                    style: const TextStyle(
+                                      fontSize: 8,
+                                      color: AppColors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                        //endregion
+                        height4(),
+                        //region Title
+                        Text(
+                          gear.title,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        //endregion
+                      ],
                     ),
                   ),
                 ),

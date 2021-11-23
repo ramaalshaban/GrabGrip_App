@@ -7,6 +7,7 @@ import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_mo
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/geocode_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
+import 'package:grab_grip/features/browsing/listing_details/models/categories_pricing_models_response/categories_pricing_models_response.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
@@ -32,6 +33,7 @@ abstract class GrabGripApi {
   Future<HttpResponse> pingGrabGrip();
 
   //endregion
+
   //region google apis
   @GET("/json")
   Future<HttpResponse<GeocodeResponse>> getBoundsByPlaceId({
@@ -208,8 +210,15 @@ abstract class GrabGripApi {
     @Path("hash") required String hash,
     @Path("slug") required String slug,
   });
+
 //endregion
 
+//endregion
+
+  //region listing details
+  @GET("/api/v1/create")
+  Future<HttpResponse<CategoriesPricingModelsResponse>>
+      getCategoriesAndPricingModels(@Header("Authorization") String token);
 //endregion
 
 }

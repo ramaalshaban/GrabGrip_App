@@ -10,6 +10,8 @@ import 'package:grab_grip/features/browsing/browse/providers/browse_provider.dar
 import 'package:grab_grip/features/browsing/browse/providers/view_mode_provider.dart';
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
 import 'package:grab_grip/features/browsing/filter/providers/filter_sort_provider.dart';
+import 'package:grab_grip/features/browsing/listing_details/models/listing_details_state/listing_details_state.dart';
+import 'package:grab_grip/features/browsing/listing_details/providers/listing_details_provider.dart';
 import 'package:grab_grip/features/feedback/contact_us/providers/feedback_provider.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_availability_model/post_listing_availability_state.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_state/post_listing_state.dart';
@@ -157,4 +159,10 @@ final favoritesProvider =
 final pingProvider = Provider((reference) {
   final provider = reference.watch(httpRequestStateProvider.notifier);
   return PingProvider(provider);
+});
+
+final listingDetailsProvider =
+    StateNotifierProvider<ListingDetailsProvider, ListingDetailsState>((ref) {
+  final httpProvider = ref.watch(httpRequestStateProvider.notifier);
+  return ListingDetailsProvider(httpProvider);
 });

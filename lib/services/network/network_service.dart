@@ -11,6 +11,7 @@ import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/geocode_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
+import 'package:grab_grip/features/browsing/listing_details/models/categories_pricing_models_response/categories_pricing_models_response.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
@@ -450,6 +451,22 @@ class NetworkService {
   //endregion
 
   //endregion
+
+  //region listing details
+  Future<Result<String, CategoriesPricingModelsResponse>>
+      getCategoriesAndPricingModels(String token) async {
+    try {
+      final getCategoriesAndPricingModelsCall =
+          await _grabGripApi.getCategoriesAndPricingModels("Bearer $token");
+      return Success(getCategoriesAndPricingModelsCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  //endregion
+
   //region error handling
   bool _isNoInternetError(DioError dioError) =>
       dioError.error != null &&
