@@ -7,7 +7,7 @@ import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_mo
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/geocode_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
-import 'package:grab_grip/features/browsing/listing_details/models/categories_pricing_models_response/categories_pricing_models_response.dart';
+import 'package:grab_grip/features/browsing/listing_details/models/listing_response/listing_response.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
@@ -216,9 +216,25 @@ abstract class GrabGripApi {
 //endregion
 
   //region listing details
-  @GET("/api/v1/create")
-  Future<HttpResponse<CategoriesPricingModelsResponse>>
-      getCategoriesAndPricingModels(@Header("Authorization") String token);
+  @GET("/api/v1/listing/{hash}/{slug}")
+  Future<HttpResponse<ListingResponse>> getListing(
+    @Path("hash") String hash,
+    @Path("slug") String slug,
+  );
+
+  @GET("/api/v1/listing/{hash}/{slug}")
+  Future<HttpResponse<ListingResponse>> pickListingDetails(
+    @Path("hash") String hash,
+    @Path("slug") String slug, {
+    @Query("quantity") int quantity = 1,
+    @Query("shipping_option") int? shippingOptionId,
+    @Query("variant") Map<String, String>? variants,
+    @Query("additional_option") Map<int, int>? additionalOptions,
+    @Query("additional_options_meta")
+        Map<int, Map<String, int>>? additionalOptionsMeta,
+    @Query("start_date") String? startDate,
+    @Query("end_date") String? endDate,
+  });
 //endregion
 
 }

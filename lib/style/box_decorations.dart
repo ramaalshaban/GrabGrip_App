@@ -27,3 +27,10 @@ final reEnableButton = BoxDecoration(
     color: Colors.red,
   ),
 );
+
+final listingDetailsBoxDecoration = BoxDecoration(
+  borderRadius: BorderRadius.circular(8),
+  border: Border.all(
+    color: AppColors.veryLightPurple,
+  ),
+);

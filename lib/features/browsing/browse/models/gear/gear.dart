@@ -16,7 +16,7 @@ class Gear with _$Gear {
     @JsonKey(name: 'category_id') int categoryId,
     @JsonKey(name: 'pricing_model_id') String pricingModelId,
     String title,
-    @JsonKey(name: 'stock') int? stockQuantity,
+    @JsonKey(name: 'stock') int stockQuantity,
     String description,
     @JsonKey(name: 'short_description') String shortDescription,
     String currency,

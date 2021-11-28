@@ -8,8 +8,9 @@ part 'shipping_fee.g.dart';
 @freezed
 class ShippingFee with _$ShippingFee {
   const factory ShippingFee({
+    int? id,
     String? name,
-    double? price,
+    String? price,
   }) = _ShippingFee;
 
   factory ShippingFee.fromJson(Map<String, dynamic> json) =>

@@ -516,20 +516,51 @@ class _GrabGripApi implements GrabGripApi {
   }
 
   @override
-  Future<HttpResponse<CategoriesPricingModelsResponse>>
-      getCategoriesAndPricingModels(token) async {
+  Future<HttpResponse<ListingResponse>> getListing(hash, slug) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<CategoriesPricingModelsResponse>>(
+        _setStreamType<HttpResponse<ListingResponse>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/api/v1/create',
+                .compose(_dio.options, '/api/v1/listing/$hash/$slug',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CategoriesPricingModelsResponse.fromJson(_result.data!);
+    final value = ListingResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<ListingResponse>> pickListingDetails(hash, slug,
+      {quantity = 1,
+      shippingOptionId,
+      variants,
+      additionalOptions,
+      additionalOptionsMeta,
+      startDate,
+      endDate}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'quantity': quantity,
+      r'shipping_option': shippingOptionId,
+      r'variant': variants,
+      r'additional_option': additionalOptions,
+      r'additional_options_meta': additionalOptionsMeta,
+      r'start_date': startDate,
+      r'end_date': endDate
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<ListingResponse>>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/api/v1/listing/$hash/$slug',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ListingResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

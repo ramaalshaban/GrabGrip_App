@@ -27,7 +27,7 @@ class _$GearTearOff {
       @JsonKey(name: 'category_id') int categoryId,
       @JsonKey(name: 'pricing_model_id') String pricingModelId,
       String title,
-      @JsonKey(name: 'stock') int? stockQuantity,
+      @JsonKey(name: 'stock') int stockQuantity,
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
@@ -82,7 +82,7 @@ mixin _$Gear {
   String get pricingModelId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'stock')
-  int? get stockQuantity => throw _privateConstructorUsedError;
+  int get stockQuantity => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'short_description')
   String get shortDescription => throw _privateConstructorUsedError;
@@ -116,7 +116,7 @@ abstract class $GearCopyWith<$Res> {
       @JsonKey(name: 'category_id') int categoryId,
       @JsonKey(name: 'pricing_model_id') String pricingModelId,
       String title,
-      @JsonKey(name: 'stock') int? stockQuantity,
+      @JsonKey(name: 'stock') int stockQuantity,
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
@@ -188,7 +188,7 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
       stockQuantity: stockQuantity == freezed
           ? _value.stockQuantity
           : stockQuantity // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -267,7 +267,7 @@ abstract class _$GearCopyWith<$Res> implements $GearCopyWith<$Res> {
       @JsonKey(name: 'category_id') int categoryId,
       @JsonKey(name: 'pricing_model_id') String pricingModelId,
       String title,
-      @JsonKey(name: 'stock') int? stockQuantity,
+      @JsonKey(name: 'stock') int stockQuantity,
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
@@ -341,7 +341,7 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
       stockQuantity == freezed
           ? _value.stockQuantity
           : stockQuantity // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -438,7 +438,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
   final String title;
   @override
   @JsonKey(name: 'stock')
-  final int? stockQuantity;
+  final int stockQuantity;
   @override
   final String description;
   @override
@@ -595,7 +595,7 @@ abstract class _Gear implements Gear {
       @JsonKey(name: 'category_id') int categoryId,
       @JsonKey(name: 'pricing_model_id') String pricingModelId,
       String title,
-      @JsonKey(name: 'stock') int? stockQuantity,
+      @JsonKey(name: 'stock') int stockQuantity,
       String description,
       @JsonKey(name: 'short_description') String shortDescription,
       String currency,
@@ -626,7 +626,7 @@ abstract class _Gear implements Gear {
   String get title => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'stock')
-  int? get stockQuantity => throw _privateConstructorUsedError;
+  int get stockQuantity => throw _privateConstructorUsedError;
   @override
   String get description => throw _privateConstructorUsedError;
   @override

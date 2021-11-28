@@ -11,7 +11,7 @@ import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/browsing/browse/models/geocode_response/geocode_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/categories_response/categories_response.dart';
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
-import 'package:grab_grip/features/browsing/listing_details/models/categories_pricing_models_response/categories_pricing_models_response.dart';
+import 'package:grab_grip/features/browsing/listing_details/models/listing_response/listing_response.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
@@ -453,12 +453,33 @@ class NetworkService {
   //endregion
 
   //region listing details
-  Future<Result<String, CategoriesPricingModelsResponse>>
-      getCategoriesAndPricingModels(String token) async {
+  Future<Result<String, ListingResponse>> getListing(
+      String hash, String slug) async {
     try {
-      final getCategoriesAndPricingModelsCall =
-          await _grabGripApi.getCategoriesAndPricingModels("Bearer $token");
-      return Success(getCategoriesAndPricingModelsCall.data);
+      final getListingCall = await _grabGripApi.getListing(hash, slug);
+      return Success(getListingCall.data);
+    } catch (error) {
+      print(error);
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  Future<Result<String, ListingResponse>> pickListingDetails(
+    String hash,
+    String slug, {
+    int? quantity,
+    int? shippingOptionId,
+    Map<String, String>? variants,
+    Map<int, int>? additionalOptions,
+    Map<int, Map<String, int>>? additionalOptionsMeta,
+    String? startDate,
+    String? endDate,
+  }) async {
+    try {
+      final pickListingDetailsCall =
+          await _grabGripApi.pickListingDetails(hash, slug);
+      return Success(pickListingDetailsCall.data);
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);
       return Error(errorMessage);

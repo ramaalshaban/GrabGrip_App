@@ -74,7 +74,7 @@ class AdditionalOptionItem extends StatelessWidget {
                 child: TextField(
                   controller: priceTextController,
                   onChanged: (text) {
-                    final price = (text.isEmpty) ? null : double.parse(text);
+                    final price = (text.isEmpty) ? null : text;
                     option = option.copyWith(price: price);
                     ref(postListingProvider.notifier)
                         .editAdditionalOption(index, option);

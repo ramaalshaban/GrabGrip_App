@@ -27,6 +27,11 @@ const Divider lightPurpleDividerThickness0_5 = Divider(
   color: AppColors.lightPurple,
 );
 
+const Divider veryLightPurpleDividerThickness0_5 = Divider(
+  thickness: 0.5,
+  color: AppColors.veryLightPurple,
+);
+
 const Divider lightGrayDividerThickness0_5 = Divider(
   thickness: 0.25,
   color: AppColors.lightGray,

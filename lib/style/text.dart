@@ -28,4 +28,9 @@ class AppTextStyles {
     fontSize: 16.0,
     color: AppColors.purple,
   );
+
+  static const listingDetailsTitleStyle = TextStyle(
+    fontSize: 16.0,
+    fontWeight: FontWeight.bold,
+  );
 }

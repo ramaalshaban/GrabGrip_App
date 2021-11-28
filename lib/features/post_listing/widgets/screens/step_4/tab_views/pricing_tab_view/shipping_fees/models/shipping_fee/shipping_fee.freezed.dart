@@ -21,8 +21,9 @@ ShippingFee _$ShippingFeeFromJson(Map<String, dynamic> json) {
 class _$ShippingFeeTearOff {
   const _$ShippingFeeTearOff();
 
-  _ShippingFee call({String? name, double? price}) {
+  _ShippingFee call({int? id, String? name, String? price}) {
     return _ShippingFee(
+      id: id,
       name: name,
       price: price,
     );
@@ -38,8 +39,9 @@ const $ShippingFee = _$ShippingFeeTearOff();
 
 /// @nodoc
 mixin _$ShippingFee {
+  int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  double? get price => throw _privateConstructorUsedError;
+  String? get price => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,7 +54,7 @@ abstract class $ShippingFeeCopyWith<$Res> {
   factory $ShippingFeeCopyWith(
           ShippingFee value, $Res Function(ShippingFee) then) =
       _$ShippingFeeCopyWithImpl<$Res>;
-  $Res call({String? name, double? price});
+  $Res call({int? id, String? name, String? price});
 }
 
 /// @nodoc
@@ -65,10 +67,15 @@ class _$ShippingFeeCopyWithImpl<$Res> implements $ShippingFeeCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? price = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -76,7 +83,7 @@ class _$ShippingFeeCopyWithImpl<$Res> implements $ShippingFeeCopyWith<$Res> {
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
     ));
   }
 }
@@ -88,7 +95,7 @@ abstract class _$ShippingFeeCopyWith<$Res>
           _ShippingFee value, $Res Function(_ShippingFee) then) =
       __$ShippingFeeCopyWithImpl<$Res>;
   @override
-  $Res call({String? name, double? price});
+  $Res call({int? id, String? name, String? price});
 }
 
 /// @nodoc
@@ -103,10 +110,15 @@ class __$ShippingFeeCopyWithImpl<$Res> extends _$ShippingFeeCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? price = freezed,
   }) {
     return _then(_ShippingFee(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -114,7 +126,7 @@ class __$ShippingFeeCopyWithImpl<$Res> extends _$ShippingFeeCopyWithImpl<$Res>
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
     ));
   }
 }
@@ -122,19 +134,21 @@ class __$ShippingFeeCopyWithImpl<$Res> extends _$ShippingFeeCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ShippingFee with DiagnosticableTreeMixin implements _ShippingFee {
-  const _$_ShippingFee({this.name, this.price});
+  const _$_ShippingFee({this.id, this.name, this.price});
 
   factory _$_ShippingFee.fromJson(Map<String, dynamic> json) =>
       _$$_ShippingFeeFromJson(json);
 
   @override
+  final int? id;
+  @override
   final String? name;
   @override
-  final double? price;
+  final String? price;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ShippingFee(name: $name, price: $price)';
+    return 'ShippingFee(id: $id, name: $name, price: $price)';
   }
 
   @override
@@ -142,6 +156,7 @@ class _$_ShippingFee with DiagnosticableTreeMixin implements _ShippingFee {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ShippingFee'))
+      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('price', price));
   }
@@ -150,6 +165,8 @@ class _$_ShippingFee with DiagnosticableTreeMixin implements _ShippingFee {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _ShippingFee &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.price, price) ||
@@ -159,6 +176,7 @@ class _$_ShippingFee with DiagnosticableTreeMixin implements _ShippingFee {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(price);
 
@@ -174,15 +192,18 @@ class _$_ShippingFee with DiagnosticableTreeMixin implements _ShippingFee {
 }
 
 abstract class _ShippingFee implements ShippingFee {
-  const factory _ShippingFee({String? name, double? price}) = _$_ShippingFee;
+  const factory _ShippingFee({int? id, String? name, String? price}) =
+      _$_ShippingFee;
 
   factory _ShippingFee.fromJson(Map<String, dynamic> json) =
       _$_ShippingFee.fromJson;
 
   @override
+  int? get id => throw _privateConstructorUsedError;
+  @override
   String? get name => throw _privateConstructorUsedError;
   @override
-  double? get price => throw _privateConstructorUsedError;
+  String? get price => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ShippingFeeCopyWith<_ShippingFee> get copyWith =>

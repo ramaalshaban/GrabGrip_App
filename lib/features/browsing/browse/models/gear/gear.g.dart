@@ -12,7 +12,7 @@ _$_Gear _$$_GearFromJson(Map<String, dynamic> json) => _$_Gear(
       json['category_id'] as int,
       json['pricing_model_id'] as String,
       json['title'] as String,
-      json['stock'] as int?,
+      json['stock'] as int,
       json['description'] as String,
       json['short_description'] as String,
       json['currency'] as String,

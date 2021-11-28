@@ -22,10 +22,12 @@ class _$AdditionalOptionTearOff {
   const _$AdditionalOptionTearOff();
 
   _AdditionalOption call(
-      {String? name,
-      double? price,
+      {int? id,
+      String? name,
+      String? price,
       @JsonKey(name: "max_quantity") int? maxQuantity}) {
     return _AdditionalOption(
+      id: id,
       name: name,
       price: price,
       maxQuantity: maxQuantity,
@@ -42,8 +44,9 @@ const $AdditionalOption = _$AdditionalOptionTearOff();
 
 /// @nodoc
 mixin _$AdditionalOption {
+  int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  double? get price => throw _privateConstructorUsedError;
+  String? get price => throw _privateConstructorUsedError;
   @JsonKey(name: "max_quantity")
   int? get maxQuantity => throw _privateConstructorUsedError;
 
@@ -59,8 +62,9 @@ abstract class $AdditionalOptionCopyWith<$Res> {
           AdditionalOption value, $Res Function(AdditionalOption) then) =
       _$AdditionalOptionCopyWithImpl<$Res>;
   $Res call(
-      {String? name,
-      double? price,
+      {int? id,
+      String? name,
+      String? price,
       @JsonKey(name: "max_quantity") int? maxQuantity});
 }
 
@@ -75,11 +79,16 @@ class _$AdditionalOptionCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? price = freezed,
     Object? maxQuantity = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -87,7 +96,7 @@ class _$AdditionalOptionCopyWithImpl<$Res>
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
       maxQuantity: maxQuantity == freezed
           ? _value.maxQuantity
           : maxQuantity // ignore: cast_nullable_to_non_nullable
@@ -104,8 +113,9 @@ abstract class _$AdditionalOptionCopyWith<$Res>
       __$AdditionalOptionCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? name,
-      double? price,
+      {int? id,
+      String? name,
+      String? price,
       @JsonKey(name: "max_quantity") int? maxQuantity});
 }
 
@@ -122,11 +132,16 @@ class __$AdditionalOptionCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? price = freezed,
     Object? maxQuantity = freezed,
   }) {
     return _then(_AdditionalOption(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -134,7 +149,7 @@ class __$AdditionalOptionCopyWithImpl<$Res>
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
       maxQuantity: maxQuantity == freezed
           ? _value.maxQuantity
           : maxQuantity // ignore: cast_nullable_to_non_nullable
@@ -149,22 +164,27 @@ class _$_AdditionalOption
     with DiagnosticableTreeMixin
     implements _AdditionalOption {
   const _$_AdditionalOption(
-      {this.name, this.price, @JsonKey(name: "max_quantity") this.maxQuantity});
+      {this.id,
+      this.name,
+      this.price,
+      @JsonKey(name: "max_quantity") this.maxQuantity});
 
   factory _$_AdditionalOption.fromJson(Map<String, dynamic> json) =>
       _$$_AdditionalOptionFromJson(json);
 
   @override
+  final int? id;
+  @override
   final String? name;
   @override
-  final double? price;
+  final String? price;
   @override
   @JsonKey(name: "max_quantity")
   final int? maxQuantity;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AdditionalOption(name: $name, price: $price, maxQuantity: $maxQuantity)';
+    return 'AdditionalOption(id: $id, name: $name, price: $price, maxQuantity: $maxQuantity)';
   }
 
   @override
@@ -172,6 +192,7 @@ class _$_AdditionalOption
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'AdditionalOption'))
+      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('price', price))
       ..add(DiagnosticsProperty('maxQuantity', maxQuantity));
@@ -181,6 +202,8 @@ class _$_AdditionalOption
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _AdditionalOption &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.price, price) ||
@@ -193,6 +216,7 @@ class _$_AdditionalOption
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(price) ^
       const DeepCollectionEquality().hash(maxQuantity);
@@ -210,17 +234,20 @@ class _$_AdditionalOption
 
 abstract class _AdditionalOption implements AdditionalOption {
   const factory _AdditionalOption(
-      {String? name,
-      double? price,
+      {int? id,
+      String? name,
+      String? price,
       @JsonKey(name: "max_quantity") int? maxQuantity}) = _$_AdditionalOption;
 
   factory _AdditionalOption.fromJson(Map<String, dynamic> json) =
       _$_AdditionalOption.fromJson;
 
   @override
+  int? get id => throw _privateConstructorUsedError;
+  @override
   String? get name => throw _privateConstructorUsedError;
   @override
-  double? get price => throw _privateConstructorUsedError;
+  String? get price => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "max_quantity")
   int? get maxQuantity => throw _privateConstructorUsedError;

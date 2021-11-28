@@ -8,8 +8,9 @@ part 'additional_option.g.dart';
 @freezed
 class AdditionalOption with _$AdditionalOption {
   const factory AdditionalOption({
+    int? id,
     String? name,
-    double? price,
+    String? price,
     @JsonKey(name: "max_quantity") int? maxQuantity,
   }) = _AdditionalOption;
 
