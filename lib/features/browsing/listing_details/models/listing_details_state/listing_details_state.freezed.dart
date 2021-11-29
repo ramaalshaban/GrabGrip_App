@@ -29,7 +29,8 @@ class _$ListingDetailsStateTearOff {
       int? selectedShippingOptionId,
       Map<String, String> selectedVariantOptions = const {},
       String? startDate,
-      String? endDate]) {
+      String? endDate,
+      User? listingOwner]) {
     return _ListingDetailsState(
       category,
       pricingModel,
@@ -43,6 +44,7 @@ class _$ListingDetailsStateTearOff {
       selectedVariantOptions,
       startDate,
       endDate,
+      listingOwner,
     );
   }
 }
@@ -69,6 +71,7 @@ mixin _$ListingDetailsState {
       throw _privateConstructorUsedError;
   String? get startDate => throw _privateConstructorUsedError;
   String? get endDate => throw _privateConstructorUsedError;
+  User? get listingOwner => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ListingDetailsStateCopyWith<ListingDetailsState> get copyWith =>
@@ -92,10 +95,12 @@ abstract class $ListingDetailsStateCopyWith<$Res> {
       int? selectedShippingOptionId,
       Map<String, String> selectedVariantOptions,
       String? startDate,
-      String? endDate});
+      String? endDate,
+      User? listingOwner});
 
   $ListingCategoryCopyWith<$Res>? get category;
   $PricingModelCopyWith<$Res>? get pricingModel;
+  $UserCopyWith<$Res>? get listingOwner;
 }
 
 /// @nodoc
@@ -121,6 +126,7 @@ class _$ListingDetailsStateCopyWithImpl<$Res>
     Object? selectedVariantOptions = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
+    Object? listingOwner = freezed,
   }) {
     return _then(_value.copyWith(
       category: category == freezed
@@ -171,6 +177,10 @@ class _$ListingDetailsStateCopyWithImpl<$Res>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as String?,
+      listingOwner: listingOwner == freezed
+          ? _value.listingOwner
+          : listingOwner // ignore: cast_nullable_to_non_nullable
+              as User?,
     ));
   }
 
@@ -195,6 +205,17 @@ class _$ListingDetailsStateCopyWithImpl<$Res>
       return _then(_value.copyWith(pricingModel: value));
     });
   }
+
+  @override
+  $UserCopyWith<$Res>? get listingOwner {
+    if (_value.listingOwner == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.listingOwner!, (value) {
+      return _then(_value.copyWith(listingOwner: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -216,12 +237,15 @@ abstract class _$ListingDetailsStateCopyWith<$Res>
       int? selectedShippingOptionId,
       Map<String, String> selectedVariantOptions,
       String? startDate,
-      String? endDate});
+      String? endDate,
+      User? listingOwner});
 
   @override
   $ListingCategoryCopyWith<$Res>? get category;
   @override
   $PricingModelCopyWith<$Res>? get pricingModel;
+  @override
+  $UserCopyWith<$Res>? get listingOwner;
 }
 
 /// @nodoc
@@ -249,6 +273,7 @@ class __$ListingDetailsStateCopyWithImpl<$Res>
     Object? selectedVariantOptions = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
+    Object? listingOwner = freezed,
   }) {
     return _then(_ListingDetailsState(
       category == freezed
@@ -299,6 +324,10 @@ class __$ListingDetailsStateCopyWithImpl<$Res>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as String?,
+      listingOwner == freezed
+          ? _value.listingOwner
+          : listingOwner // ignore: cast_nullable_to_non_nullable
+              as User?,
     ));
   }
 }
@@ -320,7 +349,8 @@ class _$_ListingDetailsState
       this.selectedShippingOptionId,
       this.selectedVariantOptions = const {},
       this.startDate,
-      this.endDate]);
+      this.endDate,
+      this.listingOwner]);
 
   @override
   final ListingCategory? category;
@@ -353,10 +383,12 @@ class _$_ListingDetailsState
   final String? startDate;
   @override
   final String? endDate;
+  @override
+  final User? listingOwner;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ListingDetailsState(category: $category, pricingModel: $pricingModel, selectedQuantity: $selectedQuantity, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, selectedAdditionalOptions: $selectedAdditionalOptions, selectedAdditionalOptionsMeta: $selectedAdditionalOptionsMeta, selectedShippingOptionId: $selectedShippingOptionId, selectedVariantOptions: $selectedVariantOptions, startDate: $startDate, endDate: $endDate)';
+    return 'ListingDetailsState(category: $category, pricingModel: $pricingModel, selectedQuantity: $selectedQuantity, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, selectedAdditionalOptions: $selectedAdditionalOptions, selectedAdditionalOptionsMeta: $selectedAdditionalOptionsMeta, selectedShippingOptionId: $selectedShippingOptionId, selectedVariantOptions: $selectedVariantOptions, startDate: $startDate, endDate: $endDate, listingOwner: $listingOwner)';
   }
 
   @override
@@ -379,7 +411,8 @@ class _$_ListingDetailsState
       ..add(
           DiagnosticsProperty('selectedVariantOptions', selectedVariantOptions))
       ..add(DiagnosticsProperty('startDate', startDate))
-      ..add(DiagnosticsProperty('endDate', endDate));
+      ..add(DiagnosticsProperty('endDate', endDate))
+      ..add(DiagnosticsProperty('listingOwner', listingOwner));
   }
 
   @override
@@ -404,17 +437,16 @@ class _$_ListingDetailsState
             (identical(other.variantOptions, variantOptions) ||
                 const DeepCollectionEquality()
                     .equals(other.variantOptions, variantOptions)) &&
-            (identical(other.selectedAdditionalOptions,
-                    selectedAdditionalOptions) ||
+            (identical(other.selectedAdditionalOptions, selectedAdditionalOptions) ||
                 const DeepCollectionEquality().equals(
                     other.selectedAdditionalOptions,
                     selectedAdditionalOptions)) &&
-            (identical(other.selectedAdditionalOptionsMeta,
-                    selectedAdditionalOptionsMeta) ||
+            (identical(other.selectedAdditionalOptionsMeta, selectedAdditionalOptionsMeta) ||
                 const DeepCollectionEquality().equals(
                     other.selectedAdditionalOptionsMeta,
                     selectedAdditionalOptionsMeta)) &&
-            (identical(other.selectedShippingOptionId, selectedShippingOptionId) ||
+            (identical(
+                    other.selectedShippingOptionId, selectedShippingOptionId) ||
                 const DeepCollectionEquality().equals(
                     other.selectedShippingOptionId,
                     selectedShippingOptionId)) &&
@@ -425,7 +457,11 @@ class _$_ListingDetailsState
                 const DeepCollectionEquality()
                     .equals(other.startDate, startDate)) &&
             (identical(other.endDate, endDate) ||
-                const DeepCollectionEquality().equals(other.endDate, endDate)));
+                const DeepCollectionEquality()
+                    .equals(other.endDate, endDate)) &&
+            (identical(other.listingOwner, listingOwner) ||
+                const DeepCollectionEquality()
+                    .equals(other.listingOwner, listingOwner)));
   }
 
   @override
@@ -442,7 +478,8 @@ class _$_ListingDetailsState
       const DeepCollectionEquality().hash(selectedShippingOptionId) ^
       const DeepCollectionEquality().hash(selectedVariantOptions) ^
       const DeepCollectionEquality().hash(startDate) ^
-      const DeepCollectionEquality().hash(endDate);
+      const DeepCollectionEquality().hash(endDate) ^
+      const DeepCollectionEquality().hash(listingOwner);
 
   @JsonKey(ignore: true)
   @override
@@ -464,7 +501,8 @@ abstract class _ListingDetailsState implements ListingDetailsState {
       int? selectedShippingOptionId,
       Map<String, String> selectedVariantOptions,
       String? startDate,
-      String? endDate]) = _$_ListingDetailsState;
+      String? endDate,
+      User? listingOwner]) = _$_ListingDetailsState;
 
   @override
   ListingCategory? get category => throw _privateConstructorUsedError;
@@ -495,6 +533,8 @@ abstract class _ListingDetailsState implements ListingDetailsState {
   String? get startDate => throw _privateConstructorUsedError;
   @override
   String? get endDate => throw _privateConstructorUsedError;
+  @override
+  User? get listingOwner => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ListingDetailsStateCopyWith<_ListingDetailsState> get copyWith =>

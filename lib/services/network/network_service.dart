@@ -454,9 +454,16 @@ class NetworkService {
 
   //region listing details
   Future<Result<String, ListingResponse>> getListing(
-      String hash, String slug) async {
+    String hash,
+    String slug,
+    String? token,
+  ) async {
     try {
-      final getListingCall = await _grabGripApi.getListing(hash, slug);
+      final getListingCall = await _grabGripApi.getListing(
+        "Bearer $token",
+        hash: hash,
+        slug: slug,
+      );
       return Success(getListingCall.data);
     } catch (error) {
       print(error);

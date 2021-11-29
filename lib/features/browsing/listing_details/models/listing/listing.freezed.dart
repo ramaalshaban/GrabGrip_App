@@ -31,13 +31,16 @@ class _$ListingTearOff {
       @JsonKey(name: "shipping_options")
           List<ShippingFee>? shippingOptions,
       @JsonKey(name: "variant_options")
-          Map<String, List<String>>? variantOptions) {
+          Map<String, List<String>>? variantOptions,
+      @JsonKey(name: "user")
+          User? user) {
     return _Listing(
       category,
       pricingModel,
       additionalOptions,
       shippingOptions,
       variantOptions,
+      user,
     );
   }
 
@@ -63,6 +66,8 @@ mixin _$Listing {
   @JsonKey(name: "variant_options")
   Map<String, List<String>>? get variantOptions =>
       throw _privateConstructorUsedError;
+  @JsonKey(name: "user")
+  User? get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -83,10 +88,13 @@ abstract class $ListingCopyWith<$Res> {
       @JsonKey(name: "shipping_options")
           List<ShippingFee>? shippingOptions,
       @JsonKey(name: "variant_options")
-          Map<String, List<String>>? variantOptions});
+          Map<String, List<String>>? variantOptions,
+      @JsonKey(name: "user")
+          User? user});
 
   $ListingCategoryCopyWith<$Res> get category;
   $PricingModelCopyWith<$Res> get pricingModel;
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -104,6 +112,7 @@ class _$ListingCopyWithImpl<$Res> implements $ListingCopyWith<$Res> {
     Object? additionalOptions = freezed,
     Object? shippingOptions = freezed,
     Object? variantOptions = freezed,
+    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
       category: category == freezed
@@ -126,6 +135,10 @@ class _$ListingCopyWithImpl<$Res> implements $ListingCopyWith<$Res> {
           ? _value.variantOptions
           : variantOptions // ignore: cast_nullable_to_non_nullable
               as Map<String, List<String>>?,
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
     ));
   }
 
@@ -140,6 +153,17 @@ class _$ListingCopyWithImpl<$Res> implements $ListingCopyWith<$Res> {
   $PricingModelCopyWith<$Res> get pricingModel {
     return $PricingModelCopyWith<$Res>(_value.pricingModel, (value) {
       return _then(_value.copyWith(pricingModel: value));
+    });
+  }
+
+  @override
+  $UserCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.user!, (value) {
+      return _then(_value.copyWith(user: value));
     });
   }
 }
@@ -159,12 +183,16 @@ abstract class _$ListingCopyWith<$Res> implements $ListingCopyWith<$Res> {
       @JsonKey(name: "shipping_options")
           List<ShippingFee>? shippingOptions,
       @JsonKey(name: "variant_options")
-          Map<String, List<String>>? variantOptions});
+          Map<String, List<String>>? variantOptions,
+      @JsonKey(name: "user")
+          User? user});
 
   @override
   $ListingCategoryCopyWith<$Res> get category;
   @override
   $PricingModelCopyWith<$Res> get pricingModel;
+  @override
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -183,6 +211,7 @@ class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
     Object? additionalOptions = freezed,
     Object? shippingOptions = freezed,
     Object? variantOptions = freezed,
+    Object? user = freezed,
   }) {
     return _then(_Listing(
       category == freezed
@@ -205,6 +234,10 @@ class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
           ? _value.variantOptions
           : variantOptions // ignore: cast_nullable_to_non_nullable
               as Map<String, List<String>>?,
+      user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
     ));
   }
 }
@@ -217,7 +250,8 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
       @JsonKey(name: "pricing_model") this.pricingModel,
       @JsonKey(name: "additional_options") this.additionalOptions,
       @JsonKey(name: "shipping_options") this.shippingOptions,
-      @JsonKey(name: "variant_options") this.variantOptions);
+      @JsonKey(name: "variant_options") this.variantOptions,
+      @JsonKey(name: "user") this.user);
 
   factory _$_Listing.fromJson(Map<String, dynamic> json) =>
       _$$_ListingFromJson(json);
@@ -237,10 +271,13 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
   @override
   @JsonKey(name: "variant_options")
   final Map<String, List<String>>? variantOptions;
+  @override
+  @JsonKey(name: "user")
+  final User? user;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Listing(category: $category, pricingModel: $pricingModel, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions)';
+    return 'Listing(category: $category, pricingModel: $pricingModel, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, user: $user)';
   }
 
   @override
@@ -252,7 +289,8 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
       ..add(DiagnosticsProperty('pricingModel', pricingModel))
       ..add(DiagnosticsProperty('additionalOptions', additionalOptions))
       ..add(DiagnosticsProperty('shippingOptions', shippingOptions))
-      ..add(DiagnosticsProperty('variantOptions', variantOptions));
+      ..add(DiagnosticsProperty('variantOptions', variantOptions))
+      ..add(DiagnosticsProperty('user', user));
   }
 
   @override
@@ -273,7 +311,9 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
                     .equals(other.shippingOptions, shippingOptions)) &&
             (identical(other.variantOptions, variantOptions) ||
                 const DeepCollectionEquality()
-                    .equals(other.variantOptions, variantOptions)));
+                    .equals(other.variantOptions, variantOptions)) &&
+            (identical(other.user, user) ||
+                const DeepCollectionEquality().equals(other.user, user)));
   }
 
   @override
@@ -283,7 +323,8 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
       const DeepCollectionEquality().hash(pricingModel) ^
       const DeepCollectionEquality().hash(additionalOptions) ^
       const DeepCollectionEquality().hash(shippingOptions) ^
-      const DeepCollectionEquality().hash(variantOptions);
+      const DeepCollectionEquality().hash(variantOptions) ^
+      const DeepCollectionEquality().hash(user);
 
   @JsonKey(ignore: true)
   @override
@@ -307,7 +348,9 @@ abstract class _Listing implements Listing {
       @JsonKey(name: "shipping_options")
           List<ShippingFee>? shippingOptions,
       @JsonKey(name: "variant_options")
-          Map<String, List<String>>? variantOptions) = _$_Listing;
+          Map<String, List<String>>? variantOptions,
+      @JsonKey(name: "user")
+          User? user) = _$_Listing;
 
   factory _Listing.fromJson(Map<String, dynamic> json) = _$_Listing.fromJson;
 
@@ -328,6 +371,9 @@ abstract class _Listing implements Listing {
   @JsonKey(name: "variant_options")
   Map<String, List<String>>? get variantOptions =>
       throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "user")
+  User? get user => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ListingCopyWith<_Listing> get copyWith =>

@@ -19,6 +19,9 @@ _$_Listing _$$_ListingFromJson(Map<String, dynamic> json) => _$_Listing(
         (k, e) =>
             MapEntry(k, (e as List<dynamic>).map((e) => e as String).toList()),
       ),
+      json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_ListingToJson(_$_Listing instance) =>
@@ -28,4 +31,5 @@ Map<String, dynamic> _$$_ListingToJson(_$_Listing instance) =>
       'additional_options': instance.additionalOptions,
       'shipping_options': instance.shippingOptions,
       'variant_options': instance.variantOptions,
+      'user': instance.user,
     };

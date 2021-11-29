@@ -103,7 +103,7 @@ class GridGearItem extends StatelessWidget {
 
 //region actions
   void moveToDetailsScreen(BuildContext context, Gear clickedGear) {
-    context.router.push(ListingDetailsScreenRoute(gear: clickedGear));
+    context.router.push(ListingDetailsScreenRoute(listing: clickedGear));
   }
 //endregion
 }

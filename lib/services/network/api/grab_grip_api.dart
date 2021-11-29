@@ -218,9 +218,10 @@ abstract class GrabGripApi {
   //region listing details
   @GET("/api/v1/listing/{hash}/{slug}")
   Future<HttpResponse<ListingResponse>> getListing(
-    @Path("hash") String hash,
-    @Path("slug") String slug,
-  );
+    @Header("Authorization") String? token, {
+    @Path("hash") required String hash,
+    @Path("slug") required String slug,
+  });
 
   @GET("/api/v1/listing/{hash}/{slug}")
   Future<HttpResponse<ListingResponse>> pickListingDetails(

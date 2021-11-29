@@ -13,6 +13,7 @@ import 'package:grab_grip/features/browsing/listing_details/widgets/listing_desc
 import 'package:grab_grip/features/browsing/listing_details/widgets/quantity_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/shipping_options_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/slider_widget.dart';
+import 'package:grab_grip/features/browsing/listing_details/widgets/status_edit_button_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/user_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/variant_options_widget.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/widgets/tag_view.dart';
@@ -23,19 +24,24 @@ import 'package:grab_grip/utils/functions.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
 class ListingDetailsScreen extends StatelessWidget {
-  final Gear gear;
-  final Completer<GoogleMapController> mapController = Completer();
+  ListingDetailsScreen(
+      {Key? key, required this.listing, this.getListingForOwner})
+      : super(key: key);
 
-  ListingDetailsScreen({Key? key, required this.gear}) : super(key: key);
+  final Completer<GoogleMapController> mapController = Completer();
+  final Gear listing;
+  final bool? getListingForOwner;
 
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       // The gear object that is passed to this screen doesn't contain all listing data that has to be displayed
       // so get listing data
-      context
-          .read(listingDetailsProvider.notifier)
-          .getListing(hash: gear.hash, slug: gear.slug);
+      context.read(listingDetailsProvider.notifier).getListing(
+            hash: listing.hash,
+            slug: listing.slug,
+            getListingForOwner: getListingForOwner,
+          );
     });
     return Material(
       child: ProviderListener(
@@ -137,7 +143,7 @@ class ListingDetailsScreen extends StatelessWidget {
                         height4(),
                         //region Title
                         Text(
-                          gear.title,
+                          listing.title,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -150,18 +156,21 @@ class ListingDetailsScreen extends StatelessWidget {
                 ),
                 //endregion
                 //region Photos slider
-                background: SliderWidget(photos: gear.photos),
+                background: SliderWidget(photos: listing.photos),
                 //endregion
               ),
             ),
             SliverList(
               delegate: SliverChildListDelegate(
                 [
+                  //region Status & Edit button
+                  StatusEditButtonWidget(listing: listing),
+                  //endregion
                   //region Description
-                  ListingDescriptionWidget(description: gear.description),
+                  ListingDescriptionWidget(description: listing.description),
                   //endregion
                   //region Tags
-                  if (gear.tags != null)
+                  if (listing.tags != null)
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 12.0,
@@ -169,9 +178,9 @@ class ListingDetailsScreen extends StatelessWidget {
                       child: Wrap(
                         spacing: 6,
                         children: List.generate(
-                          gear.tags!.length,
+                          listing.tags!.length,
                           (index) => TagView(
-                            tag: gear.tags![index],
+                            tag: listing.tags![index],
                             isEditable: false,
                           ),
                         ),
@@ -185,7 +194,7 @@ class ListingDetailsScreen extends StatelessWidget {
                     height: screenHeightWithoutExtras(context) / 2,
                     child: GoogleMap(
                       initialCameraPosition: _getInitialCameraPosition(
-                        gear,
+                        listing,
                       ),
                       onMapCreated: (controller) {
                         if (!mapController.isCompleted) {
@@ -195,10 +204,10 @@ class ListingDetailsScreen extends StatelessWidget {
                       markers: {
                         Marker(
                           icon: BitmapDescriptor.defaultMarkerWithHue(256),
-                          markerId: MarkerId("${gear.id}"),
+                          markerId: MarkerId("${listing.id}"),
                           position: LatLng(
-                            gear.lat,
-                            gear.lng,
+                            listing.lat,
+                            listing.lng,
                           ),
                         ),
                       },
@@ -207,7 +216,7 @@ class ListingDetailsScreen extends StatelessWidget {
                   //endregion
                   height8(),
                   //region Quantity
-                  QuantityWidget(stock: gear.stockQuantity),
+                  QuantityWidget(stock: listing.stockQuantity),
                   //endregion
                   height8(),
                   //region variant options
@@ -299,18 +308,16 @@ class ListingDetailsScreen extends StatelessWidget {
                           child: const Text("check values"));
                     },
                   ),
-                  Text(gear.currency),
+                  Text(listing.currency),
                   height12(),
-                  Text(gear.formattedPrice ?? ""),
+                  Text(listing.formattedPrice ?? ""),
                   height12(),
                   Text(
-                    gear.stockQuantity.toString(),
+                    listing.stockQuantity.toString(),
                   ),
                   height12(),
                   //region User widget
-                  UserWidget(
-                    user: gear.owner!,
-                  )
+                  const UserWidget()
                   //endregion
                 ],
               ),

@@ -40,7 +40,11 @@ class _$GearTearOff {
       String? thumbnail,
       @JsonKey(name: 'media') List<ListingPhoto> photos,
       @JsonKey(name: 'price_formatted') String? formattedPrice,
-      @JsonKey(name: 'user') User? owner) {
+      @JsonKey(name: 'user') User? owner,
+      @JsonKey(name: "is_published") int? isPublished,
+      @JsonKey(name: "is_draft") int? isDraft,
+      @JsonKey(name: "is_admin_verified") String? isVerifiedByAdmin,
+      @JsonKey(name: "is_disabled") String? isDisabled) {
     return _Gear(
       hash,
       id,
@@ -61,6 +65,10 @@ class _$GearTearOff {
       photos,
       formattedPrice,
       owner,
+      isPublished,
+      isDraft,
+      isVerifiedByAdmin,
+      isDisabled,
     );
   }
 
@@ -100,6 +108,14 @@ mixin _$Gear {
   String? get formattedPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'user')
   User? get owner => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_published")
+  int? get isPublished => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_draft")
+  int? get isDraft => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_admin_verified")
+  String? get isVerifiedByAdmin => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_disabled")
+  String? get isDisabled => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -129,7 +145,11 @@ abstract class $GearCopyWith<$Res> {
       String? thumbnail,
       @JsonKey(name: 'media') List<ListingPhoto> photos,
       @JsonKey(name: 'price_formatted') String? formattedPrice,
-      @JsonKey(name: 'user') User? owner});
+      @JsonKey(name: 'user') User? owner,
+      @JsonKey(name: "is_published") int? isPublished,
+      @JsonKey(name: "is_draft") int? isDraft,
+      @JsonKey(name: "is_admin_verified") String? isVerifiedByAdmin,
+      @JsonKey(name: "is_disabled") String? isDisabled});
 
   $UserCopyWith<$Res>? get owner;
 }
@@ -163,6 +183,10 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
     Object? photos = freezed,
     Object? formattedPrice = freezed,
     Object? owner = freezed,
+    Object? isPublished = freezed,
+    Object? isDraft = freezed,
+    Object? isVerifiedByAdmin = freezed,
+    Object? isDisabled = freezed,
   }) {
     return _then(_value.copyWith(
       hash: hash == freezed
@@ -241,6 +265,22 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
               as User?,
+      isPublished: isPublished == freezed
+          ? _value.isPublished
+          : isPublished // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isDraft: isDraft == freezed
+          ? _value.isDraft
+          : isDraft // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isVerifiedByAdmin: isVerifiedByAdmin == freezed
+          ? _value.isVerifiedByAdmin
+          : isVerifiedByAdmin // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isDisabled: isDisabled == freezed
+          ? _value.isDisabled
+          : isDisabled // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 
@@ -280,7 +320,11 @@ abstract class _$GearCopyWith<$Res> implements $GearCopyWith<$Res> {
       String? thumbnail,
       @JsonKey(name: 'media') List<ListingPhoto> photos,
       @JsonKey(name: 'price_formatted') String? formattedPrice,
-      @JsonKey(name: 'user') User? owner});
+      @JsonKey(name: 'user') User? owner,
+      @JsonKey(name: "is_published") int? isPublished,
+      @JsonKey(name: "is_draft") int? isDraft,
+      @JsonKey(name: "is_admin_verified") String? isVerifiedByAdmin,
+      @JsonKey(name: "is_disabled") String? isDisabled});
 
   @override
   $UserCopyWith<$Res>? get owner;
@@ -316,6 +360,10 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
     Object? photos = freezed,
     Object? formattedPrice = freezed,
     Object? owner = freezed,
+    Object? isPublished = freezed,
+    Object? isDraft = freezed,
+    Object? isVerifiedByAdmin = freezed,
+    Object? isDisabled = freezed,
   }) {
     return _then(_Gear(
       hash == freezed
@@ -394,6 +442,22 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
               as User?,
+      isPublished == freezed
+          ? _value.isPublished
+          : isPublished // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isDraft == freezed
+          ? _value.isDraft
+          : isDraft // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isVerifiedByAdmin == freezed
+          ? _value.isVerifiedByAdmin
+          : isVerifiedByAdmin // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isDisabled == freezed
+          ? _value.isDisabled
+          : isDisabled // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -420,7 +484,11 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       this.thumbnail,
       @JsonKey(name: 'media') this.photos,
       @JsonKey(name: 'price_formatted') this.formattedPrice,
-      @JsonKey(name: 'user') this.owner);
+      @JsonKey(name: 'user') this.owner,
+      @JsonKey(name: "is_published") this.isPublished,
+      @JsonKey(name: "is_draft") this.isDraft,
+      @JsonKey(name: "is_admin_verified") this.isVerifiedByAdmin,
+      @JsonKey(name: "is_disabled") this.isDisabled);
 
   factory _$_Gear.fromJson(Map<String, dynamic> json) => _$$_GearFromJson(json);
 
@@ -469,10 +537,22 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
   @override
   @JsonKey(name: 'user')
   final User? owner;
+  @override
+  @JsonKey(name: "is_published")
+  final int? isPublished;
+  @override
+  @JsonKey(name: "is_draft")
+  final int? isDraft;
+  @override
+  @JsonKey(name: "is_admin_verified")
+  final String? isVerifiedByAdmin;
+  @override
+  @JsonKey(name: "is_disabled")
+  final String? isDisabled;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Gear(hash: $hash, id: $id, categoryId: $categoryId, pricingModelId: $pricingModelId, title: $title, stockQuantity: $stockQuantity, description: $description, shortDescription: $shortDescription, currency: $currency, tags: $tags, slug: $slug, lat: $lat, lng: $lng, city: $city, country: $country, thumbnail: $thumbnail, photos: $photos, formattedPrice: $formattedPrice, owner: $owner)';
+    return 'Gear(hash: $hash, id: $id, categoryId: $categoryId, pricingModelId: $pricingModelId, title: $title, stockQuantity: $stockQuantity, description: $description, shortDescription: $shortDescription, currency: $currency, tags: $tags, slug: $slug, lat: $lat, lng: $lng, city: $city, country: $country, thumbnail: $thumbnail, photos: $photos, formattedPrice: $formattedPrice, owner: $owner, isPublished: $isPublished, isDraft: $isDraft, isVerifiedByAdmin: $isVerifiedByAdmin, isDisabled: $isDisabled)';
   }
 
   @override
@@ -498,7 +578,11 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       ..add(DiagnosticsProperty('thumbnail', thumbnail))
       ..add(DiagnosticsProperty('photos', photos))
       ..add(DiagnosticsProperty('formattedPrice', formattedPrice))
-      ..add(DiagnosticsProperty('owner', owner));
+      ..add(DiagnosticsProperty('owner', owner))
+      ..add(DiagnosticsProperty('isPublished', isPublished))
+      ..add(DiagnosticsProperty('isDraft', isDraft))
+      ..add(DiagnosticsProperty('isVerifiedByAdmin', isVerifiedByAdmin))
+      ..add(DiagnosticsProperty('isDisabled', isDisabled));
   }
 
   @override
@@ -551,7 +635,19 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
                 const DeepCollectionEquality()
                     .equals(other.formattedPrice, formattedPrice)) &&
             (identical(other.owner, owner) ||
-                const DeepCollectionEquality().equals(other.owner, owner)));
+                const DeepCollectionEquality().equals(other.owner, owner)) &&
+            (identical(other.isPublished, isPublished) ||
+                const DeepCollectionEquality()
+                    .equals(other.isPublished, isPublished)) &&
+            (identical(other.isDraft, isDraft) ||
+                const DeepCollectionEquality()
+                    .equals(other.isDraft, isDraft)) &&
+            (identical(other.isVerifiedByAdmin, isVerifiedByAdmin) ||
+                const DeepCollectionEquality()
+                    .equals(other.isVerifiedByAdmin, isVerifiedByAdmin)) &&
+            (identical(other.isDisabled, isDisabled) ||
+                const DeepCollectionEquality()
+                    .equals(other.isDisabled, isDisabled)));
   }
 
   @override
@@ -575,7 +671,11 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       const DeepCollectionEquality().hash(thumbnail) ^
       const DeepCollectionEquality().hash(photos) ^
       const DeepCollectionEquality().hash(formattedPrice) ^
-      const DeepCollectionEquality().hash(owner);
+      const DeepCollectionEquality().hash(owner) ^
+      const DeepCollectionEquality().hash(isPublished) ^
+      const DeepCollectionEquality().hash(isDraft) ^
+      const DeepCollectionEquality().hash(isVerifiedByAdmin) ^
+      const DeepCollectionEquality().hash(isDisabled);
 
   @JsonKey(ignore: true)
   @override
@@ -608,7 +708,11 @@ abstract class _Gear implements Gear {
       String? thumbnail,
       @JsonKey(name: 'media') List<ListingPhoto> photos,
       @JsonKey(name: 'price_formatted') String? formattedPrice,
-      @JsonKey(name: 'user') User? owner) = _$_Gear;
+      @JsonKey(name: 'user') User? owner,
+      @JsonKey(name: "is_published") int? isPublished,
+      @JsonKey(name: "is_draft") int? isDraft,
+      @JsonKey(name: "is_admin_verified") String? isVerifiedByAdmin,
+      @JsonKey(name: "is_disabled") String? isDisabled) = _$_Gear;
 
   factory _Gear.fromJson(Map<String, dynamic> json) = _$_Gear.fromJson;
 
@@ -657,6 +761,18 @@ abstract class _Gear implements Gear {
   @override
   @JsonKey(name: 'user')
   User? get owner => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "is_published")
+  int? get isPublished => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "is_draft")
+  int? get isDraft => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "is_admin_verified")
+  String? get isVerifiedByAdmin => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "is_disabled")
+  String? get isDisabled => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$GearCopyWith<_Gear> get copyWith => throw _privateConstructorUsedError;

@@ -30,6 +30,10 @@ _$_Gear _$$_GearFromJson(Map<String, dynamic> json) => _$_Gear(
       json['user'] == null
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),
+      json['is_published'] as int?,
+      json['is_draft'] as int?,
+      json['is_admin_verified'] as String?,
+      json['is_disabled'] as String?,
     );
 
 Map<String, dynamic> _$$_GearToJson(_$_Gear instance) => <String, dynamic>{
@@ -52,4 +56,8 @@ Map<String, dynamic> _$$_GearToJson(_$_Gear instance) => <String, dynamic>{
       'media': instance.photos,
       'price_formatted': instance.formattedPrice,
       'user': instance.owner,
+      'is_published': instance.isPublished,
+      'is_draft': instance.isDraft,
+      'is_admin_verified': instance.isVerifiedByAdmin,
+      'is_disabled': instance.isDisabled,
     };

@@ -4,6 +4,7 @@ import 'package:grab_grip/features/browsing/listing_details/models/listing_categ
 import 'package:grab_grip/features/post_listing/models/pricing_model/pricing_model.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/additional_options/models/additional_option/additional_option.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/shipping_fees/models/shipping_fee/shipping_fee.dart';
+import 'package:grab_grip/features/user_profile/shared/models/user.dart';
 
 part 'listing_details_state.freezed.dart';
 
@@ -22,5 +23,6 @@ class ListingDetailsState with _$ListingDetailsState {
     @Default({}) Map<String, String> selectedVariantOptions,
     String? startDate,
     String? endDate,
+    User? listingOwner,
   ]) = _ListingDetailsState;
 }

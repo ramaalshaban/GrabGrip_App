@@ -24,6 +24,8 @@ class UserProfileProvider extends StateNotifier<User> {
     }
   }
 
+  bool isIdOfCurrentUser(int id) => state.id == id;
+
   Future<void> getUserProfileAndSaveIt() async {
     final token = await AppSharedPreferences().getToken();
     await NetworkService().getUserProfile(token ?? "").then((result) {

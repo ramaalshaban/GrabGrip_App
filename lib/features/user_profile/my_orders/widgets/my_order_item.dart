@@ -72,7 +72,7 @@ class MyOrderItem extends StatelessWidget {
 
 //region actions
   void moveToOrderDetailsScreen(BuildContext context, Gear clickedGear) {
-    // context.router.push(BrowseDetailsScreenRoute(gear: clickedGear));
+    // context.router.push(BrowseDetailsScreenRoute(listing: clickedGear));
   }
 //endregion
 }

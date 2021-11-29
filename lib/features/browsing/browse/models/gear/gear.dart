@@ -30,6 +30,10 @@ class Gear with _$Gear {
     @JsonKey(name: 'media') List<ListingPhoto> photos,
     @JsonKey(name: 'price_formatted') String? formattedPrice,
     @JsonKey(name: 'user') User? owner,
+    @JsonKey(name: "is_published") int? isPublished,
+    @JsonKey(name: "is_draft") int? isDraft,
+    @JsonKey(name: "is_admin_verified") String? isVerifiedByAdmin,
+    @JsonKey(name: "is_disabled") String? isDisabled,
   ) = _Gear;
 
   factory Gear.fromJson(Map<String, dynamic> json) => _$GearFromJson(json);

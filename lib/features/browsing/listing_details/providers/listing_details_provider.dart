@@ -5,8 +5,10 @@ import 'package:grab_grip/features/browsing/listing_details/models/listing_respo
 import 'package:grab_grip/features/post_listing/models/pricing_model/pricing_model.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/additional_options/models/additional_option/additional_option.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/shipping_fees/models/shipping_fee/shipping_fee.dart';
+import 'package:grab_grip/features/user_profile/shared/models/user.dart';
 import 'package:grab_grip/services/network/network_service.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
+import 'package:grab_grip/services/storage/app_shared_preferences.dart';
 
 class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
   HttpRequestStateProvider httpRequestStateProvider;
@@ -101,6 +103,11 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
         selectedVariantOptions: selectedVariantOptions,
       );
 
+  User? get listingOwner => state.listingOwner;
+
+  set listingOwner(User? listingOwner) =>
+      state = state.copyWith(listingOwner: listingOwner);
+
   //endregion
 
   //region Additional options
@@ -156,11 +163,22 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
 
   //endregion
 
-  Future<void> getListing({required String hash, required String slug}) async {
+  Future<void> getListing({
+    required String hash,
+    required String slug,
+    bool? getListingForOwner,
+  }) async {
     httpRequestStateProvider.setLoading();
+    final String? token;
+    // getting an unpublished listing (i.e. the listing owner browsing its details while it's unpublished) needs token
+    if (getListingForOwner == true) {
+      token = await AppSharedPreferences().getToken();
+    } else {
+      token = null;
+    }
     // reset the state so old values get deleted (old values that where fetched for the previously browsed listing)
     state = const ListingDetailsState();
-    await NetworkService().getListing(hash, slug).then((result) {
+    await NetworkService().getListing(hash, slug, token).then((result) {
       result.when((errorMessage) {
         httpRequestStateProvider.setError(errorMessage);
         category = null;
@@ -178,5 +196,6 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
     additionalOptions = response.listing.additionalOptions ?? [];
     shippingOptions = response.listing.shippingOptions ?? [];
     variantOptions = response.listing.variantOptions ?? {};
+    listingOwner = response.listing.user;
   }
 }
