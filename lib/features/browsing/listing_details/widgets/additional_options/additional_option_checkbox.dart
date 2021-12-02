@@ -15,14 +15,14 @@ class AdditionalOptionCheckbox extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader ref) {
     final isOptionSelected = ref(listingDetailsProvider)
         .selectedAdditionalOptions
-        .containsKey(additionalOption.id);
+        .containsKey(additionalOption.id.toString());
     return InkWell(
       onTap: () {
         final selectedQuantity = ref(listingDetailsProvider.notifier)
                 .selectedAdditionalOptions[additionalOption.id] ??
             1;
         ref(listingDetailsProvider.notifier).toggleAdditionalOptionStatus(
-          additionalOption: {additionalOption.id!: selectedQuantity},
+          additionalOption: {additionalOption.id.toString(): selectedQuantity},
           isSelected: !isOptionSelected,
         );
       },
@@ -41,7 +41,9 @@ class AdditionalOptionCheckbox extends ConsumerWidget {
                     1;
                 ref(listingDetailsProvider.notifier)
                     .toggleAdditionalOptionStatus(
-                  additionalOption: {additionalOption.id!: selectedQuantity},
+                  additionalOption: {
+                    additionalOption.id.toString(): selectedQuantity
+                  },
                   isSelected: !isOptionSelected,
                 );
               },

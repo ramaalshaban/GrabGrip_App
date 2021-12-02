@@ -24,8 +24,7 @@ class ShippingFeeItem extends StatelessWidget {
       price: this.shippingFee.price,
     );
     nameTextController.text = shippingFee.name ?? "";
-    priceTextController.text =
-        shippingFee.price == null ? "" : shippingFee.price.toString();
+    priceTextController.text = shippingFee.price;
 
     return Consumer(
       builder: (_, ref, __) {
@@ -64,7 +63,7 @@ class ShippingFeeItem extends StatelessWidget {
                 child: TextField(
                   controller: priceTextController,
                   onChanged: (text) {
-                    final price = text.isEmpty ? null : text;
+                    final price = text.isEmpty ? "" : text;
                     shippingFee = shippingFee.copyWith(price: price);
                     ref(postListingProvider.notifier)
                         .editShippingFee(index, shippingFee);

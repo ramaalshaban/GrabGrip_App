@@ -24,7 +24,7 @@ class _$AdditionalOptionTearOff {
   _AdditionalOption call(
       {int? id,
       String? name,
-      String? price,
+      String price = "0.00",
       @JsonKey(name: "max_quantity") int? maxQuantity}) {
     return _AdditionalOption(
       id: id,
@@ -46,7 +46,7 @@ const $AdditionalOption = _$AdditionalOptionTearOff();
 mixin _$AdditionalOption {
   int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  String? get price => throw _privateConstructorUsedError;
+  String get price => throw _privateConstructorUsedError;
   @JsonKey(name: "max_quantity")
   int? get maxQuantity => throw _privateConstructorUsedError;
 
@@ -64,7 +64,7 @@ abstract class $AdditionalOptionCopyWith<$Res> {
   $Res call(
       {int? id,
       String? name,
-      String? price,
+      String price,
       @JsonKey(name: "max_quantity") int? maxQuantity});
 }
 
@@ -96,7 +96,7 @@ class _$AdditionalOptionCopyWithImpl<$Res>
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       maxQuantity: maxQuantity == freezed
           ? _value.maxQuantity
           : maxQuantity // ignore: cast_nullable_to_non_nullable
@@ -115,7 +115,7 @@ abstract class _$AdditionalOptionCopyWith<$Res>
   $Res call(
       {int? id,
       String? name,
-      String? price,
+      String price,
       @JsonKey(name: "max_quantity") int? maxQuantity});
 }
 
@@ -149,7 +149,7 @@ class __$AdditionalOptionCopyWithImpl<$Res>
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       maxQuantity: maxQuantity == freezed
           ? _value.maxQuantity
           : maxQuantity // ignore: cast_nullable_to_non_nullable
@@ -166,7 +166,7 @@ class _$_AdditionalOption
   const _$_AdditionalOption(
       {this.id,
       this.name,
-      this.price,
+      this.price = "0.00",
       @JsonKey(name: "max_quantity") this.maxQuantity});
 
   factory _$_AdditionalOption.fromJson(Map<String, dynamic> json) =>
@@ -176,8 +176,9 @@ class _$_AdditionalOption
   final int? id;
   @override
   final String? name;
+  @JsonKey(defaultValue: "0.00")
   @override
-  final String? price;
+  final String price;
   @override
   @JsonKey(name: "max_quantity")
   final int? maxQuantity;
@@ -236,7 +237,7 @@ abstract class _AdditionalOption implements AdditionalOption {
   const factory _AdditionalOption(
       {int? id,
       String? name,
-      String? price,
+      String price,
       @JsonKey(name: "max_quantity") int? maxQuantity}) = _$_AdditionalOption;
 
   factory _AdditionalOption.fromJson(Map<String, dynamic> json) =
@@ -247,7 +248,7 @@ abstract class _AdditionalOption implements AdditionalOption {
   @override
   String? get name => throw _privateConstructorUsedError;
   @override
-  String? get price => throw _privateConstructorUsedError;
+  String get price => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "max_quantity")
   int? get maxQuantity => throw _privateConstructorUsedError;

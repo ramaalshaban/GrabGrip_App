@@ -21,7 +21,7 @@ ShippingFee _$ShippingFeeFromJson(Map<String, dynamic> json) {
 class _$ShippingFeeTearOff {
   const _$ShippingFeeTearOff();
 
-  _ShippingFee call({int? id, String? name, String? price}) {
+  _ShippingFee call({int? id, String? name, String price = "0.00"}) {
     return _ShippingFee(
       id: id,
       name: name,
@@ -41,7 +41,7 @@ const $ShippingFee = _$ShippingFeeTearOff();
 mixin _$ShippingFee {
   int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  String? get price => throw _privateConstructorUsedError;
+  String get price => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,7 +54,7 @@ abstract class $ShippingFeeCopyWith<$Res> {
   factory $ShippingFeeCopyWith(
           ShippingFee value, $Res Function(ShippingFee) then) =
       _$ShippingFeeCopyWithImpl<$Res>;
-  $Res call({int? id, String? name, String? price});
+  $Res call({int? id, String? name, String price});
 }
 
 /// @nodoc
@@ -83,7 +83,7 @@ class _$ShippingFeeCopyWithImpl<$Res> implements $ShippingFeeCopyWith<$Res> {
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -95,7 +95,7 @@ abstract class _$ShippingFeeCopyWith<$Res>
           _ShippingFee value, $Res Function(_ShippingFee) then) =
       __$ShippingFeeCopyWithImpl<$Res>;
   @override
-  $Res call({int? id, String? name, String? price});
+  $Res call({int? id, String? name, String price});
 }
 
 /// @nodoc
@@ -126,7 +126,7 @@ class __$ShippingFeeCopyWithImpl<$Res> extends _$ShippingFeeCopyWithImpl<$Res>
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -134,7 +134,7 @@ class __$ShippingFeeCopyWithImpl<$Res> extends _$ShippingFeeCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ShippingFee with DiagnosticableTreeMixin implements _ShippingFee {
-  const _$_ShippingFee({this.id, this.name, this.price});
+  const _$_ShippingFee({this.id, this.name, this.price = "0.00"});
 
   factory _$_ShippingFee.fromJson(Map<String, dynamic> json) =>
       _$$_ShippingFeeFromJson(json);
@@ -143,8 +143,9 @@ class _$_ShippingFee with DiagnosticableTreeMixin implements _ShippingFee {
   final int? id;
   @override
   final String? name;
+  @JsonKey(defaultValue: "0.00")
   @override
-  final String? price;
+  final String price;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -192,7 +193,7 @@ class _$_ShippingFee with DiagnosticableTreeMixin implements _ShippingFee {
 }
 
 abstract class _ShippingFee implements ShippingFee {
-  const factory _ShippingFee({int? id, String? name, String? price}) =
+  const factory _ShippingFee({int? id, String? name, String price}) =
       _$_ShippingFee;
 
   factory _ShippingFee.fromJson(Map<String, dynamic> json) =
@@ -203,7 +204,7 @@ abstract class _ShippingFee implements ShippingFee {
   @override
   String? get name => throw _privateConstructorUsedError;
   @override
-  String? get price => throw _privateConstructorUsedError;
+  String get price => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ShippingFeeCopyWith<_ShippingFee> get copyWith =>

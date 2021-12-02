@@ -13,6 +13,7 @@ class Gear with _$Gear {
   const factory Gear(
     String hash,
     int id,
+    @JsonKey(name: 'user_id') int ownerId,
     @JsonKey(name: 'category_id') int categoryId,
     @JsonKey(name: 'pricing_model_id') String pricingModelId,
     String title,

@@ -10,7 +10,7 @@ _$_ShippingFee _$$_ShippingFeeFromJson(Map<String, dynamic> json) =>
     _$_ShippingFee(
       id: json['id'] as int?,
       name: json['name'] as String?,
-      price: json['price'] as String?,
+      price: json['price'] as String? ?? '0.00',
     );
 
 Map<String, dynamic> _$$_ShippingFeeToJson(_$_ShippingFee instance) =>

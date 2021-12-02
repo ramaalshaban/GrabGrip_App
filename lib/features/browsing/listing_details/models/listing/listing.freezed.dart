@@ -22,10 +22,14 @@ class _$ListingTearOff {
   const _$ListingTearOff();
 
   _Listing call(
+      @JsonKey(name: 'user_id')
+          int ownerId,
       @JsonKey(name: "category")
           ListingCategory category,
       @JsonKey(name: "pricing_model")
           PricingModel pricingModel,
+      String price,
+      int stock,
       @JsonKey(name: "additional_options")
           List<AdditionalOption>? additionalOptions,
       @JsonKey(name: "shipping_options")
@@ -35,8 +39,11 @@ class _$ListingTearOff {
       @JsonKey(name: "user")
           User? user) {
     return _Listing(
+      ownerId,
       category,
       pricingModel,
+      price,
+      stock,
       additionalOptions,
       shippingOptions,
       variantOptions,
@@ -54,10 +61,14 @@ const $Listing = _$ListingTearOff();
 
 /// @nodoc
 mixin _$Listing {
+  @JsonKey(name: 'user_id')
+  int get ownerId => throw _privateConstructorUsedError;
   @JsonKey(name: "category")
   ListingCategory get category => throw _privateConstructorUsedError;
   @JsonKey(name: "pricing_model")
   PricingModel get pricingModel => throw _privateConstructorUsedError;
+  String get price => throw _privateConstructorUsedError;
+  int get stock => throw _privateConstructorUsedError;
   @JsonKey(name: "additional_options")
   List<AdditionalOption>? get additionalOptions =>
       throw _privateConstructorUsedError;
@@ -79,10 +90,14 @@ abstract class $ListingCopyWith<$Res> {
   factory $ListingCopyWith(Listing value, $Res Function(Listing) then) =
       _$ListingCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: "category")
+      {@JsonKey(name: 'user_id')
+          int ownerId,
+      @JsonKey(name: "category")
           ListingCategory category,
       @JsonKey(name: "pricing_model")
           PricingModel pricingModel,
+      String price,
+      int stock,
       @JsonKey(name: "additional_options")
           List<AdditionalOption>? additionalOptions,
       @JsonKey(name: "shipping_options")
@@ -107,14 +122,21 @@ class _$ListingCopyWithImpl<$Res> implements $ListingCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? ownerId = freezed,
     Object? category = freezed,
     Object? pricingModel = freezed,
+    Object? price = freezed,
+    Object? stock = freezed,
     Object? additionalOptions = freezed,
     Object? shippingOptions = freezed,
     Object? variantOptions = freezed,
     Object? user = freezed,
   }) {
     return _then(_value.copyWith(
+      ownerId: ownerId == freezed
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
+              as int,
       category: category == freezed
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -123,6 +145,14 @@ class _$ListingCopyWithImpl<$Res> implements $ListingCopyWith<$Res> {
           ? _value.pricingModel
           : pricingModel // ignore: cast_nullable_to_non_nullable
               as PricingModel,
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as String,
+      stock: stock == freezed
+          ? _value.stock
+          : stock // ignore: cast_nullable_to_non_nullable
+              as int,
       additionalOptions: additionalOptions == freezed
           ? _value.additionalOptions
           : additionalOptions // ignore: cast_nullable_to_non_nullable
@@ -174,10 +204,14 @@ abstract class _$ListingCopyWith<$Res> implements $ListingCopyWith<$Res> {
       __$ListingCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: "category")
+      {@JsonKey(name: 'user_id')
+          int ownerId,
+      @JsonKey(name: "category")
           ListingCategory category,
       @JsonKey(name: "pricing_model")
           PricingModel pricingModel,
+      String price,
+      int stock,
       @JsonKey(name: "additional_options")
           List<AdditionalOption>? additionalOptions,
       @JsonKey(name: "shipping_options")
@@ -206,14 +240,21 @@ class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? ownerId = freezed,
     Object? category = freezed,
     Object? pricingModel = freezed,
+    Object? price = freezed,
+    Object? stock = freezed,
     Object? additionalOptions = freezed,
     Object? shippingOptions = freezed,
     Object? variantOptions = freezed,
     Object? user = freezed,
   }) {
     return _then(_Listing(
+      ownerId == freezed
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
+              as int,
       category == freezed
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -222,6 +263,14 @@ class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
           ? _value.pricingModel
           : pricingModel // ignore: cast_nullable_to_non_nullable
               as PricingModel,
+      price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as String,
+      stock == freezed
+          ? _value.stock
+          : stock // ignore: cast_nullable_to_non_nullable
+              as int,
       additionalOptions == freezed
           ? _value.additionalOptions
           : additionalOptions // ignore: cast_nullable_to_non_nullable
@@ -246,8 +295,11 @@ class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Listing with DiagnosticableTreeMixin implements _Listing {
   const _$_Listing(
+      @JsonKey(name: 'user_id') this.ownerId,
       @JsonKey(name: "category") this.category,
       @JsonKey(name: "pricing_model") this.pricingModel,
+      this.price,
+      this.stock,
       @JsonKey(name: "additional_options") this.additionalOptions,
       @JsonKey(name: "shipping_options") this.shippingOptions,
       @JsonKey(name: "variant_options") this.variantOptions,
@@ -257,11 +309,18 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
       _$$_ListingFromJson(json);
 
   @override
+  @JsonKey(name: 'user_id')
+  final int ownerId;
+  @override
   @JsonKey(name: "category")
   final ListingCategory category;
   @override
   @JsonKey(name: "pricing_model")
   final PricingModel pricingModel;
+  @override
+  final String price;
+  @override
+  final int stock;
   @override
   @JsonKey(name: "additional_options")
   final List<AdditionalOption>? additionalOptions;
@@ -277,7 +336,7 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Listing(category: $category, pricingModel: $pricingModel, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, user: $user)';
+    return 'Listing(ownerId: $ownerId, category: $category, pricingModel: $pricingModel, price: $price, stock: $stock, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, user: $user)';
   }
 
   @override
@@ -285,8 +344,11 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Listing'))
+      ..add(DiagnosticsProperty('ownerId', ownerId))
       ..add(DiagnosticsProperty('category', category))
       ..add(DiagnosticsProperty('pricingModel', pricingModel))
+      ..add(DiagnosticsProperty('price', price))
+      ..add(DiagnosticsProperty('stock', stock))
       ..add(DiagnosticsProperty('additionalOptions', additionalOptions))
       ..add(DiagnosticsProperty('shippingOptions', shippingOptions))
       ..add(DiagnosticsProperty('variantOptions', variantOptions))
@@ -297,12 +359,19 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Listing &&
+            (identical(other.ownerId, ownerId) ||
+                const DeepCollectionEquality()
+                    .equals(other.ownerId, ownerId)) &&
             (identical(other.category, category) ||
                 const DeepCollectionEquality()
                     .equals(other.category, category)) &&
             (identical(other.pricingModel, pricingModel) ||
                 const DeepCollectionEquality()
                     .equals(other.pricingModel, pricingModel)) &&
+            (identical(other.price, price) ||
+                const DeepCollectionEquality().equals(other.price, price)) &&
+            (identical(other.stock, stock) ||
+                const DeepCollectionEquality().equals(other.stock, stock)) &&
             (identical(other.additionalOptions, additionalOptions) ||
                 const DeepCollectionEquality()
                     .equals(other.additionalOptions, additionalOptions)) &&
@@ -319,8 +388,11 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(ownerId) ^
       const DeepCollectionEquality().hash(category) ^
       const DeepCollectionEquality().hash(pricingModel) ^
+      const DeepCollectionEquality().hash(price) ^
+      const DeepCollectionEquality().hash(stock) ^
       const DeepCollectionEquality().hash(additionalOptions) ^
       const DeepCollectionEquality().hash(shippingOptions) ^
       const DeepCollectionEquality().hash(variantOptions) ^
@@ -339,10 +411,14 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
 
 abstract class _Listing implements Listing {
   const factory _Listing(
+      @JsonKey(name: 'user_id')
+          int ownerId,
       @JsonKey(name: "category")
           ListingCategory category,
       @JsonKey(name: "pricing_model")
           PricingModel pricingModel,
+      String price,
+      int stock,
       @JsonKey(name: "additional_options")
           List<AdditionalOption>? additionalOptions,
       @JsonKey(name: "shipping_options")
@@ -355,11 +431,18 @@ abstract class _Listing implements Listing {
   factory _Listing.fromJson(Map<String, dynamic> json) = _$_Listing.fromJson;
 
   @override
+  @JsonKey(name: 'user_id')
+  int get ownerId => throw _privateConstructorUsedError;
+  @override
   @JsonKey(name: "category")
   ListingCategory get category => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "pricing_model")
   PricingModel get pricingModel => throw _privateConstructorUsedError;
+  @override
+  String get price => throw _privateConstructorUsedError;
+  @override
+  int get stock => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "additional_options")
   List<AdditionalOption>? get additionalOptions =>

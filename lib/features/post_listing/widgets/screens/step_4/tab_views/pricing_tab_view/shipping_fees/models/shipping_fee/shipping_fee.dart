@@ -10,7 +10,7 @@ class ShippingFee with _$ShippingFee {
   const factory ShippingFee({
     int? id,
     String? name,
-    String? price,
+    @Default("0.00") String price,
   }) = _ShippingFee;
 
   factory ShippingFee.fromJson(Map<String, dynamic> json) =>

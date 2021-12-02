@@ -221,21 +221,16 @@ abstract class GrabGripApi {
     @Header("Authorization") String? token, {
     @Path("hash") required String hash,
     @Path("slug") required String slug,
-  });
-
-  @GET("/api/v1/listing/{hash}/{slug}")
-  Future<HttpResponse<ListingResponse>> pickListingDetails(
-    @Path("hash") String hash,
-    @Path("slug") String slug, {
-    @Query("quantity") int quantity = 1,
+    @Query("quantity") int? quantity = 1,
     @Query("shipping_option") int? shippingOptionId,
     @Query("variant") Map<String, String>? variants,
-    @Query("additional_option") Map<int, int>? additionalOptions,
+    @Query("additional_option") Map<String, int>? additionalOptions,
     @Query("additional_options_meta")
-        Map<int, Map<String, int>>? additionalOptionsMeta,
-    @Query("start_date") String? startDate,
-    @Query("end_date") String? endDate,
+        Map<String, Map<String, int>>? additionalOptionsMeta,
+    //   @Query("start_date") String? startDate,
+    //   @Query("end_date") String? endDate,
   });
+
 //endregion
 
 }

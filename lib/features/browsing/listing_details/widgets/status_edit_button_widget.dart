@@ -56,7 +56,7 @@ class StatusEditButtonWidget extends StatelessWidget {
           error: (_) => Container(),
           orElse: () => Visibility(
             visible: ref(userProfileProvider.notifier)
-                .isIdOfCurrentUser(listingOwner!.id),
+                .isIdOfCurrentUser(listingOwner?.id ?? -1),
             child: Container(
               padding: const EdgeInsets.all(8.0),
               margin: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0),

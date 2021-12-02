@@ -21,9 +21,10 @@ ListingResponse _$ListingResponseFromJson(Map<String, dynamic> json) {
 class _$ListingResponseTearOff {
   const _$ListingResponseTearOff();
 
-  _ListingResponse call(Listing listing) {
+  _ListingResponse call(Listing listing, Widget widget) {
     return _ListingResponse(
       listing,
+      widget,
     );
   }
 
@@ -38,6 +39,7 @@ const $ListingResponse = _$ListingResponseTearOff();
 /// @nodoc
 mixin _$ListingResponse {
   Listing get listing => throw _privateConstructorUsedError;
+  Widget get widget => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,9 +52,10 @@ abstract class $ListingResponseCopyWith<$Res> {
   factory $ListingResponseCopyWith(
           ListingResponse value, $Res Function(ListingResponse) then) =
       _$ListingResponseCopyWithImpl<$Res>;
-  $Res call({Listing listing});
+  $Res call({Listing listing, Widget widget});
 
   $ListingCopyWith<$Res> get listing;
+  $WidgetCopyWith<$Res> get widget;
 }
 
 /// @nodoc
@@ -67,12 +70,17 @@ class _$ListingResponseCopyWithImpl<$Res>
   @override
   $Res call({
     Object? listing = freezed,
+    Object? widget = freezed,
   }) {
     return _then(_value.copyWith(
       listing: listing == freezed
           ? _value.listing
           : listing // ignore: cast_nullable_to_non_nullable
               as Listing,
+      widget: widget == freezed
+          ? _value.widget
+          : widget // ignore: cast_nullable_to_non_nullable
+              as Widget,
     ));
   }
 
@@ -80,6 +88,13 @@ class _$ListingResponseCopyWithImpl<$Res>
   $ListingCopyWith<$Res> get listing {
     return $ListingCopyWith<$Res>(_value.listing, (value) {
       return _then(_value.copyWith(listing: value));
+    });
+  }
+
+  @override
+  $WidgetCopyWith<$Res> get widget {
+    return $WidgetCopyWith<$Res>(_value.widget, (value) {
+      return _then(_value.copyWith(widget: value));
     });
   }
 }
@@ -91,10 +106,12 @@ abstract class _$ListingResponseCopyWith<$Res>
           _ListingResponse value, $Res Function(_ListingResponse) then) =
       __$ListingResponseCopyWithImpl<$Res>;
   @override
-  $Res call({Listing listing});
+  $Res call({Listing listing, Widget widget});
 
   @override
   $ListingCopyWith<$Res> get listing;
+  @override
+  $WidgetCopyWith<$Res> get widget;
 }
 
 /// @nodoc
@@ -111,12 +128,17 @@ class __$ListingResponseCopyWithImpl<$Res>
   @override
   $Res call({
     Object? listing = freezed,
+    Object? widget = freezed,
   }) {
     return _then(_ListingResponse(
       listing == freezed
           ? _value.listing
           : listing // ignore: cast_nullable_to_non_nullable
               as Listing,
+      widget == freezed
+          ? _value.widget
+          : widget // ignore: cast_nullable_to_non_nullable
+              as Widget,
     ));
   }
 }
@@ -126,17 +148,19 @@ class __$ListingResponseCopyWithImpl<$Res>
 class _$_ListingResponse
     with DiagnosticableTreeMixin
     implements _ListingResponse {
-  const _$_ListingResponse(this.listing);
+  const _$_ListingResponse(this.listing, this.widget);
 
   factory _$_ListingResponse.fromJson(Map<String, dynamic> json) =>
       _$$_ListingResponseFromJson(json);
 
   @override
   final Listing listing;
+  @override
+  final Widget widget;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ListingResponse(listing: $listing)';
+    return 'ListingResponse(listing: $listing, widget: $widget)';
   }
 
   @override
@@ -144,7 +168,8 @@ class _$_ListingResponse
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ListingResponse'))
-      ..add(DiagnosticsProperty('listing', listing));
+      ..add(DiagnosticsProperty('listing', listing))
+      ..add(DiagnosticsProperty('widget', widget));
   }
 
   @override
@@ -152,12 +177,17 @@ class _$_ListingResponse
     return identical(this, other) ||
         (other is _ListingResponse &&
             (identical(other.listing, listing) ||
-                const DeepCollectionEquality().equals(other.listing, listing)));
+                const DeepCollectionEquality()
+                    .equals(other.listing, listing)) &&
+            (identical(other.widget, widget) ||
+                const DeepCollectionEquality().equals(other.widget, widget)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(listing);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(listing) ^
+      const DeepCollectionEquality().hash(widget);
 
   @JsonKey(ignore: true)
   @override
@@ -171,13 +201,16 @@ class _$_ListingResponse
 }
 
 abstract class _ListingResponse implements ListingResponse {
-  const factory _ListingResponse(Listing listing) = _$_ListingResponse;
+  const factory _ListingResponse(Listing listing, Widget widget) =
+      _$_ListingResponse;
 
   factory _ListingResponse.fromJson(Map<String, dynamic> json) =
       _$_ListingResponse.fromJson;
 
   @override
   Listing get listing => throw _privateConstructorUsedError;
+  @override
+  Widget get widget => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ListingResponseCopyWith<_ListingResponse> get copyWith =>

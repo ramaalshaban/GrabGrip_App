@@ -33,8 +33,7 @@ class AdditionalOptionItem extends StatelessWidget {
       maxQuantity: additionalOption.maxQuantity,
     );
     nameTextController.text = option.name ?? "";
-    priceTextController.text =
-        option.price == null ? "" : option.price.toString();
+    priceTextController.text = option.price;
     maxQuantityTextController.text =
         option.maxQuantity == null ? "" : option.maxQuantity.toString();
     return Consumer(
@@ -74,12 +73,13 @@ class AdditionalOptionItem extends StatelessWidget {
                 child: TextField(
                   controller: priceTextController,
                   onChanged: (text) {
-                    final price = (text.isEmpty) ? null : text;
+                    final price = (text.isEmpty) ? "" : text;
                     option = option.copyWith(price: price);
                     ref(postListingProvider.notifier)
                         .editAdditionalOption(index, option);
                   },
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
                   inputFormatters: [doubleNumFilter],
                   decoration: standardInputDecoration.copyWith(
                     labelText: "Price",

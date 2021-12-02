@@ -10,6 +10,8 @@ const String unknown = "Unknown";
 const int postListingPhotosLimit = 20;
 FilteringTextInputFormatter doubleNumFilter =
     FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}'));
+const String buy = "buy";
+const String bookDate = "book_date";
 
 //region actions name
 const String logoutAction = "logoutAction";

@@ -7,8 +7,11 @@ part of 'listing.dart';
 // **************************************************************************
 
 _$_Listing _$$_ListingFromJson(Map<String, dynamic> json) => _$_Listing(
+      json['user_id'] as int,
       ListingCategory.fromJson(json['category'] as Map<String, dynamic>),
       PricingModel.fromJson(json['pricing_model'] as Map<String, dynamic>),
+      json['price'] as String,
+      json['stock'] as int,
       (json['additional_options'] as List<dynamic>?)
           ?.map((e) => AdditionalOption.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -26,8 +29,11 @@ _$_Listing _$$_ListingFromJson(Map<String, dynamic> json) => _$_Listing(
 
 Map<String, dynamic> _$$_ListingToJson(_$_Listing instance) =>
     <String, dynamic>{
+      'user_id': instance.ownerId,
       'category': instance.category,
       'pricing_model': instance.pricingModel,
+      'price': instance.price,
+      'stock': instance.stock,
       'additional_options': instance.additionalOptions,
       'shipping_options': instance.shippingOptions,
       'variant_options': instance.variantOptions,

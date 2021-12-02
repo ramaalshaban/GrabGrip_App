@@ -13,16 +13,6 @@ class ShippingOptionsWidget extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader ref) {
     final shippingOptions = ref(listingDetailsProvider).shippingOptions;
     return ref(httpRequestStateProvider).maybeWhen(
-      loading: () => const Center(
-        child: SizedBox(
-          height: 14,
-          width: 14,
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            color: AppColors.purple,
-          ),
-        ),
-      ),
       error: (_) => Container(),
       orElse: () => Visibility(
         visible: shippingOptions.isNotEmpty,
@@ -57,7 +47,7 @@ class ShippingOptionsWidget extends ConsumerWidget {
                             .selectedShippingOptionId,
                         onChanged: (int? newlySelectedShippingId) {
                           ref(listingDetailsProvider.notifier)
-                              .selectedShippingId = newlySelectedShippingId;
+                              .setShippingId(newlySelectedShippingId);
                         },
                       );
                     },

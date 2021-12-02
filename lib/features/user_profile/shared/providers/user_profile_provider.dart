@@ -24,6 +24,8 @@ class UserProfileProvider extends StateNotifier<User> {
     }
   }
 
+ int get userId => state.id;
+
   bool isIdOfCurrentUser(int id) => state.id == id;
 
   Future<void> getUserProfileAndSaveIt() async {

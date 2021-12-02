@@ -10,10 +10,12 @@ _$_PricingModel _$$_PricingModelFromJson(Map<String, dynamic> json) =>
     _$_PricingModel(
       id: json['id'] as int,
       name: json['name'] as String,
+      widget: json['widget'] as String,
     );
 
 Map<String, dynamic> _$$_PricingModelToJson(_$_PricingModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'widget': instance.widget,
     };

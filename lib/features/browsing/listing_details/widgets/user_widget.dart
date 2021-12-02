@@ -28,21 +28,21 @@ class UserWidget extends ConsumerWidget {
           children: [
             CircleAvatar(
               backgroundImage: NetworkImage(
-                listingOwner!.avatar,
+                listingOwner?.avatar ?? "",
               ),
             ),
             height12(),
             Text(
-              listingOwner.userName,
+              listingOwner?.userName ?? "",
             ),
             height12(),
-            Text(listingOwner.phone ?? ""),
+            Text(listingOwner?.phone ?? ""),
             height12(),
-            Text(listingOwner.bio ?? ""),
+            Text(listingOwner?.bio ?? ""),
             height12(),
-            Text(listingOwner.city ?? ""),
+            Text(listingOwner?.city ?? ""),
             height12(),
-            Text(listingOwner.countryName ?? ""),
+            Text(listingOwner?.countryName ?? ""),
             height12(),
           ],
         ),

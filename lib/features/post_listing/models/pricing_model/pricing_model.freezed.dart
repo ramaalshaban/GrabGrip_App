@@ -21,10 +21,12 @@ PricingModel _$PricingModelFromJson(Map<String, dynamic> json) {
 class _$PricingModelTearOff {
   const _$PricingModelTearOff();
 
-  _PricingModel call({required int id, required String name}) {
+  _PricingModel call(
+      {required int id, required String name, required String widget}) {
     return _PricingModel(
       id: id,
       name: name,
+      widget: widget,
     );
   }
 
@@ -40,6 +42,7 @@ const $PricingModel = _$PricingModelTearOff();
 mixin _$PricingModel {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get widget => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,7 +55,7 @@ abstract class $PricingModelCopyWith<$Res> {
   factory $PricingModelCopyWith(
           PricingModel value, $Res Function(PricingModel) then) =
       _$PricingModelCopyWithImpl<$Res>;
-  $Res call({int id, String name});
+  $Res call({int id, String name, String widget});
 }
 
 /// @nodoc
@@ -67,6 +70,7 @@ class _$PricingModelCopyWithImpl<$Res> implements $PricingModelCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? widget = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -76,6 +80,10 @@ class _$PricingModelCopyWithImpl<$Res> implements $PricingModelCopyWith<$Res> {
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      widget: widget == freezed
+          ? _value.widget
+          : widget // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -88,7 +96,7 @@ abstract class _$PricingModelCopyWith<$Res>
           _PricingModel value, $Res Function(_PricingModel) then) =
       __$PricingModelCopyWithImpl<$Res>;
   @override
-  $Res call({int id, String name});
+  $Res call({int id, String name, String widget});
 }
 
 /// @nodoc
@@ -105,6 +113,7 @@ class __$PricingModelCopyWithImpl<$Res> extends _$PricingModelCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? widget = freezed,
   }) {
     return _then(_PricingModel(
       id: id == freezed
@@ -115,6 +124,10 @@ class __$PricingModelCopyWithImpl<$Res> extends _$PricingModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      widget: widget == freezed
+          ? _value.widget
+          : widget // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -122,7 +135,8 @@ class __$PricingModelCopyWithImpl<$Res> extends _$PricingModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_PricingModel with DiagnosticableTreeMixin implements _PricingModel {
-  const _$_PricingModel({required this.id, required this.name});
+  const _$_PricingModel(
+      {required this.id, required this.name, required this.widget});
 
   factory _$_PricingModel.fromJson(Map<String, dynamic> json) =>
       _$$_PricingModelFromJson(json);
@@ -131,10 +145,12 @@ class _$_PricingModel with DiagnosticableTreeMixin implements _PricingModel {
   final int id;
   @override
   final String name;
+  @override
+  final String widget;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PricingModel(id: $id, name: $name)';
+    return 'PricingModel(id: $id, name: $name, widget: $widget)';
   }
 
   @override
@@ -143,7 +159,8 @@ class _$_PricingModel with DiagnosticableTreeMixin implements _PricingModel {
     properties
       ..add(DiagnosticsProperty('type', 'PricingModel'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('name', name));
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('widget', widget));
   }
 
   @override
@@ -153,14 +170,17 @@ class _$_PricingModel with DiagnosticableTreeMixin implements _PricingModel {
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)));
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.widget, widget) ||
+                const DeepCollectionEquality().equals(other.widget, widget)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name);
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(widget);
 
   @JsonKey(ignore: true)
   @override
@@ -174,8 +194,10 @@ class _$_PricingModel with DiagnosticableTreeMixin implements _PricingModel {
 }
 
 abstract class _PricingModel implements PricingModel {
-  const factory _PricingModel({required int id, required String name}) =
-      _$_PricingModel;
+  const factory _PricingModel(
+      {required int id,
+      required String name,
+      required String widget}) = _$_PricingModel;
 
   factory _PricingModel.fromJson(Map<String, dynamic> json) =
       _$_PricingModel.fromJson;
@@ -184,6 +206,8 @@ abstract class _PricingModel implements PricingModel {
   int get id => throw _privateConstructorUsedError;
   @override
   String get name => throw _privateConstructorUsedError;
+  @override
+  String get widget => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PricingModelCopyWith<_PricingModel> get copyWith =>

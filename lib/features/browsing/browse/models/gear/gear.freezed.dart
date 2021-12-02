@@ -24,6 +24,7 @@ class _$GearTearOff {
   _Gear call(
       String hash,
       int id,
+      @JsonKey(name: 'user_id') int ownerId,
       @JsonKey(name: 'category_id') int categoryId,
       @JsonKey(name: 'pricing_model_id') String pricingModelId,
       String title,
@@ -48,6 +49,7 @@ class _$GearTearOff {
     return _Gear(
       hash,
       id,
+      ownerId,
       categoryId,
       pricingModelId,
       title,
@@ -84,6 +86,8 @@ const $Gear = _$GearTearOff();
 mixin _$Gear {
   String get hash => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_id')
+  int get ownerId => throw _privateConstructorUsedError;
   @JsonKey(name: 'category_id')
   int get categoryId => throw _privateConstructorUsedError;
   @JsonKey(name: 'pricing_model_id')
@@ -129,6 +133,7 @@ abstract class $GearCopyWith<$Res> {
   $Res call(
       {String hash,
       int id,
+      @JsonKey(name: 'user_id') int ownerId,
       @JsonKey(name: 'category_id') int categoryId,
       @JsonKey(name: 'pricing_model_id') String pricingModelId,
       String title,
@@ -166,6 +171,7 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
   $Res call({
     Object? hash = freezed,
     Object? id = freezed,
+    Object? ownerId = freezed,
     Object? categoryId = freezed,
     Object? pricingModelId = freezed,
     Object? title = freezed,
@@ -196,6 +202,10 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      ownerId: ownerId == freezed
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
               as int,
       categoryId: categoryId == freezed
           ? _value.categoryId
@@ -304,6 +314,7 @@ abstract class _$GearCopyWith<$Res> implements $GearCopyWith<$Res> {
   $Res call(
       {String hash,
       int id,
+      @JsonKey(name: 'user_id') int ownerId,
       @JsonKey(name: 'category_id') int categoryId,
       @JsonKey(name: 'pricing_model_id') String pricingModelId,
       String title,
@@ -343,6 +354,7 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
   $Res call({
     Object? hash = freezed,
     Object? id = freezed,
+    Object? ownerId = freezed,
     Object? categoryId = freezed,
     Object? pricingModelId = freezed,
     Object? title = freezed,
@@ -373,6 +385,10 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      ownerId == freezed
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
               as int,
       categoryId == freezed
           ? _value.categoryId
@@ -468,6 +484,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
   const _$_Gear(
       this.hash,
       this.id,
+      @JsonKey(name: 'user_id') this.ownerId,
       @JsonKey(name: 'category_id') this.categoryId,
       @JsonKey(name: 'pricing_model_id') this.pricingModelId,
       this.title,
@@ -496,6 +513,9 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
   final String hash;
   @override
   final int id;
+  @override
+  @JsonKey(name: 'user_id')
+  final int ownerId;
   @override
   @JsonKey(name: 'category_id')
   final int categoryId;
@@ -552,7 +572,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Gear(hash: $hash, id: $id, categoryId: $categoryId, pricingModelId: $pricingModelId, title: $title, stockQuantity: $stockQuantity, description: $description, shortDescription: $shortDescription, currency: $currency, tags: $tags, slug: $slug, lat: $lat, lng: $lng, city: $city, country: $country, thumbnail: $thumbnail, photos: $photos, formattedPrice: $formattedPrice, owner: $owner, isPublished: $isPublished, isDraft: $isDraft, isVerifiedByAdmin: $isVerifiedByAdmin, isDisabled: $isDisabled)';
+    return 'Gear(hash: $hash, id: $id, ownerId: $ownerId, categoryId: $categoryId, pricingModelId: $pricingModelId, title: $title, stockQuantity: $stockQuantity, description: $description, shortDescription: $shortDescription, currency: $currency, tags: $tags, slug: $slug, lat: $lat, lng: $lng, city: $city, country: $country, thumbnail: $thumbnail, photos: $photos, formattedPrice: $formattedPrice, owner: $owner, isPublished: $isPublished, isDraft: $isDraft, isVerifiedByAdmin: $isVerifiedByAdmin, isDisabled: $isDisabled)';
   }
 
   @override
@@ -562,6 +582,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       ..add(DiagnosticsProperty('type', 'Gear'))
       ..add(DiagnosticsProperty('hash', hash))
       ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('ownerId', ownerId))
       ..add(DiagnosticsProperty('categoryId', categoryId))
       ..add(DiagnosticsProperty('pricingModelId', pricingModelId))
       ..add(DiagnosticsProperty('title', title))
@@ -593,6 +614,9 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
                 const DeepCollectionEquality().equals(other.hash, hash)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.ownerId, ownerId) ||
+                const DeepCollectionEquality()
+                    .equals(other.ownerId, ownerId)) &&
             (identical(other.categoryId, categoryId) ||
                 const DeepCollectionEquality()
                     .equals(other.categoryId, categoryId)) &&
@@ -655,6 +679,7 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(hash) ^
       const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(ownerId) ^
       const DeepCollectionEquality().hash(categoryId) ^
       const DeepCollectionEquality().hash(pricingModelId) ^
       const DeepCollectionEquality().hash(title) ^
@@ -692,6 +717,7 @@ abstract class _Gear implements Gear {
   const factory _Gear(
       String hash,
       int id,
+      @JsonKey(name: 'user_id') int ownerId,
       @JsonKey(name: 'category_id') int categoryId,
       @JsonKey(name: 'pricing_model_id') String pricingModelId,
       String title,
@@ -720,6 +746,9 @@ abstract class _Gear implements Gear {
   String get hash => throw _privateConstructorUsedError;
   @override
   int get id => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'user_id')
+  int get ownerId => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'category_id')
   int get categoryId => throw _privateConstructorUsedError;

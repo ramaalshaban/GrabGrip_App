@@ -10,6 +10,7 @@ class PricingModel with _$PricingModel {
   const factory PricingModel({
     required int id,
     required String name,
+    required String widget,
   }) = _PricingModel;
 
   factory PricingModel.fromJson(Map<String, dynamic> json) =>

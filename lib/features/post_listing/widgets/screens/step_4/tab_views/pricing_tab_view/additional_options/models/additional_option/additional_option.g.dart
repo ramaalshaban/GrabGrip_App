@@ -10,7 +10,7 @@ _$_AdditionalOption _$$_AdditionalOptionFromJson(Map<String, dynamic> json) =>
     _$_AdditionalOption(
       id: json['id'] as int?,
       name: json['name'] as String?,
-      price: json['price'] as String?,
+      price: json['price'] as String? ?? '0.00',
       maxQuantity: json['max_quantity'] as int?,
     );
 

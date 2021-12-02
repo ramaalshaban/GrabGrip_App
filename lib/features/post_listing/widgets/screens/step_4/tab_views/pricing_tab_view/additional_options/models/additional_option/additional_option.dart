@@ -10,7 +10,7 @@ class AdditionalOption with _$AdditionalOption {
   const factory AdditionalOption({
     int? id,
     String? name,
-    String? price,
+    @Default("0.00") String price,
     @JsonKey(name: "max_quantity") int? maxQuantity,
   }) = _AdditionalOption;
 

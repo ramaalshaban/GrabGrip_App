@@ -106,10 +106,8 @@ class AppRouter extends _i19.RootStackRouter {
       final args = routeData.argsAs<ListingDetailsScreenRouteArgs>();
       return _i19.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i8.ListingDetailsScreen(
-              key: args.key,
-              listing: args.listing,
-              getListingForOwner: args.getListingForOwner));
+          child:
+              _i8.ListingDetailsScreen(key: args.key, listing: args.listing));
     },
     PostListingScreenRoute.name: (routeData) {
       return _i19.MaterialPageX<dynamic>(
@@ -280,27 +278,20 @@ class BrowseScreenRoute extends _i19.PageRouteInfo<void> {
 /// generated route for [_i8.ListingDetailsScreen]
 class ListingDetailsScreenRoute
     extends _i19.PageRouteInfo<ListingDetailsScreenRouteArgs> {
-  ListingDetailsScreenRoute(
-      {_i20.Key? key, required _i22.Gear listing, bool? getListingForOwner})
+  ListingDetailsScreenRoute({_i20.Key? key, required _i22.Gear listing})
       : super(name,
             path: '/listing-details-screen',
-            args: ListingDetailsScreenRouteArgs(
-                key: key,
-                listing: listing,
-                getListingForOwner: getListingForOwner));
+            args: ListingDetailsScreenRouteArgs(key: key, listing: listing));
 
   static const String name = 'ListingDetailsScreenRoute';
 }
 
 class ListingDetailsScreenRouteArgs {
-  const ListingDetailsScreenRouteArgs(
-      {this.key, required this.listing, this.getListingForOwner});
+  const ListingDetailsScreenRouteArgs({this.key, required this.listing});
 
   final _i20.Key? key;
 
   final _i22.Gear listing;
-
-  final bool? getListingForOwner;
 }
 
 /// generated route for [_i9.PostListingScreen]

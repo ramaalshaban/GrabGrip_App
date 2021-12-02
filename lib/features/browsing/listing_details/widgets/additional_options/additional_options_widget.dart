@@ -15,16 +15,6 @@ class AdditionalOptionsWidget extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader ref) {
     final additionalOptions = ref(listingDetailsProvider).additionalOptions;
     return ref(httpRequestStateProvider).maybeWhen(
-      loading: () => const Center(
-        child: SizedBox(
-          height: 14,
-          width: 14,
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            color: AppColors.purple,
-          ),
-        ),
-      ),
       error: (_) => Container(),
       orElse: () => Visibility(
         visible: additionalOptions.isNotEmpty,
@@ -58,7 +48,7 @@ class AdditionalOptionsWidget extends ConsumerWidget {
                           final additionalOption = additionalOptions[index];
                           final isOptionSelected = ref(listingDetailsProvider)
                               .selectedAdditionalOptions
-                              .containsKey(additionalOption.id);
+                              .containsKey(additionalOption.id.toString());
                           return Visibility(
                             visible: isOptionSelected &&
                                 additionalOption.maxQuantity != null &&
@@ -87,14 +77,14 @@ class AdditionalOptionsWidget extends ConsumerWidget {
                                         elevation: 16,
                                         value: ref(listingDetailsProvider)
                                                     .selectedAdditionalOptionsMeta[
-                                                additionalOption
-                                                    .id!]?["quantity"] ??
+                                                additionalOption.id
+                                                    .toString()]?["quantity"] ??
                                             1,
                                         onChanged: (int? selectedValue) {
                                           ref(
                                             listingDetailsProvider.notifier,
                                           ).changeAdditionalOptionValue(
-                                            additionalOption.id!,
+                                            additionalOption.id.toString(),
                                             selectedValue ?? 0,
                                           );
                                         },

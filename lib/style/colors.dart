@@ -5,6 +5,7 @@ class AppColors {
   static const purple = Color(0xff6936fa);
   static const lightPurple = Color(0xffb59bfd);
   static const transparentLightPurple = Color(0xaab59bfd);
+  static const transparentVeryLightPurple = Color(0x55b59bfd);
   static const veryLightPurple = Color(0xffede6fe);
   static const white = Color(0xffffffff);
   static const transparentWhite = Color(0x77f0f0f0);

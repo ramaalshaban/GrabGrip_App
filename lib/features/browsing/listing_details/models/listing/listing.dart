@@ -14,8 +14,11 @@ part 'listing.g.dart';
 @freezed
 class Listing with _$Listing {
   const factory Listing(
+    @JsonKey(name: 'user_id') int ownerId,
     @JsonKey(name: "category") ListingCategory category,
     @JsonKey(name: "pricing_model") PricingModel pricingModel,
+    String price,
+    int stock,
     @JsonKey(name: "additional_options")
         List<AdditionalOption>? additionalOptions,
     @JsonKey(name: "shipping_options") List<ShippingFee>? shippingOptions,

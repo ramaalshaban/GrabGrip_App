@@ -9,6 +9,7 @@ part of 'gear.dart';
 _$_Gear _$$_GearFromJson(Map<String, dynamic> json) => _$_Gear(
       json['hash'] as String,
       json['id'] as int,
+      json['user_id'] as int,
       json['category_id'] as int,
       json['pricing_model_id'] as String,
       json['title'] as String,
@@ -39,6 +40,7 @@ _$_Gear _$$_GearFromJson(Map<String, dynamic> json) => _$_Gear(
 Map<String, dynamic> _$$_GearToJson(_$_Gear instance) => <String, dynamic>{
       'hash': instance.hash,
       'id': instance.id,
+      'user_id': instance.ownerId,
       'category_id': instance.categoryId,
       'pricing_model_id': instance.pricingModelId,
       'title': instance.title,

@@ -164,5 +164,6 @@ final pingProvider = Provider((reference) {
 final listingDetailsProvider =
     StateNotifierProvider<ListingDetailsProvider, ListingDetailsState>((ref) {
   final httpProvider = ref.watch(httpRequestStateProvider.notifier);
-  return ListingDetailsProvider(httpProvider);
+  final userProvider = ref.watch(userProfileProvider.notifier);
+  return ListingDetailsProvider(httpProvider, userProvider);
 });
