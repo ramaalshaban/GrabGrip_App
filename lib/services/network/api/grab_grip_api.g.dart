@@ -547,6 +547,24 @@ class _GrabGripApi implements GrabGripApi {
     return httpResponse;
   }
 
+  @override
+  Future<HttpResponse<ReviewsResponse>> getReviews(
+      {required hash, required slug, required pageNumber}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'page': pageNumber};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<ReviewsResponse>>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/api/v1/listing/$hash/$slug/reviews',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ReviewsResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

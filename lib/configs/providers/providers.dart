@@ -11,7 +11,9 @@ import 'package:grab_grip/features/browsing/browse/providers/view_mode_provider.
 import 'package:grab_grip/features/browsing/filter/models/filter_sort_model/filter_sort_model.dart';
 import 'package:grab_grip/features/browsing/filter/providers/filter_sort_provider.dart';
 import 'package:grab_grip/features/browsing/listing_details/models/listing_details_state/listing_details_state.dart';
+import 'package:grab_grip/features/browsing/listing_details/models/reviews_page/reviews_page.dart';
 import 'package:grab_grip/features/browsing/listing_details/providers/listing_details_provider.dart';
+import 'package:grab_grip/features/browsing/listing_details/providers/reviews_provider.dart';
 import 'package:grab_grip/features/feedback/contact_us/providers/feedback_provider.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_availability_model/post_listing_availability_state.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_state/post_listing_state.dart';
@@ -166,4 +168,10 @@ final listingDetailsProvider =
   final httpProvider = ref.watch(httpRequestStateProvider.notifier);
   final userProvider = ref.watch(userProfileProvider.notifier);
   return ListingDetailsProvider(httpProvider, userProvider);
+});
+
+final reviewsProvider =
+    StateNotifierProvider<ReviewsProvider, ReviewsPage>((ref) {
+  final listingProvider = ref.watch(listingDetailsProvider.notifier);
+  return ReviewsProvider(listingProvider);
 });

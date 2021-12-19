@@ -12,6 +12,7 @@ import 'package:grab_grip/features/browsing/listing_details/widgets/additional_o
 import 'package:grab_grip/features/browsing/listing_details/widgets/listing_description_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/owner_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/quantity_widget.dart';
+import 'package:grab_grip/features/browsing/listing_details/widgets/reviews/reviews_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/shipping_options_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/slider_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/status_edit_button_widget.dart';
@@ -121,9 +122,9 @@ class ListingDetailsScreen extends StatelessWidget {
                                         orElse: () => Row(
                                           children: [
                                             Text(
-                                              ref(listingDetailsProvider
-                                                      .notifier)
-                                                  .getCategoryName(),
+                                              ref(
+                                                listingDetailsProvider.notifier,
+                                              ).getCategoryName(),
                                               style: const TextStyle(
                                                 fontSize: 8,
                                                 color: AppColors.white,
@@ -137,9 +138,9 @@ class ListingDetailsScreen extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              ref(listingDetailsProvider
-                                                      .notifier)
-                                                  .getPricingModelName(),
+                                              ref(
+                                                listingDetailsProvider.notifier,
+                                              ).getPricingModelName(),
                                               style: const TextStyle(
                                                 fontSize: 8,
                                                 color: AppColors.white,
@@ -219,7 +220,8 @@ class ListingDetailsScreen extends StatelessWidget {
                                 markers: {
                                   Marker(
                                     icon: BitmapDescriptor.defaultMarkerWithHue(
-                                        256),
+                                      256,
+                                    ),
                                     markerId: MarkerId("${listing.id}"),
                                     position: LatLng(
                                       listing.lat,
@@ -388,6 +390,10 @@ class ListingDetailsScreen extends StatelessWidget {
                             const OwnerWidget(),
                             //endregion
                             height12(),
+                            //region Reviews
+                            const ReviewsWidget(),
+                            //endregion
+                            height18(),
                           ],
                         ),
                       ),

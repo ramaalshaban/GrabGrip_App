@@ -22,6 +22,7 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
 
   HttpRequestStateProvider httpRequestStateProvider;
   UserProfileProvider userProfileProvider;
+
   final equalityChecker = const DeepCollectionEquality().equals;
 
   void reset() => state = const ListingDetailsState();

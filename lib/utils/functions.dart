@@ -46,7 +46,8 @@ void showSnackBar(
   });
 }
 
-void showSnackBarForError(BuildContext context, String errorMessage ,  [Duration? customDuration]) {
+void showSnackBarForError(BuildContext context, String errorMessage,
+    [Duration? customDuration]) {
   WidgetsBinding.instance?.addPostFrameCallback((_) {
     String messageToShow = errorMessage;
     // showFlash function was put inside this block
@@ -113,6 +114,17 @@ String formatDateForView(String? dateTime) {
     return "";
   }
   final dateFormatter = DateFormat("MMMM dd, yyyy");
+  final dateTimeObj = DateTime.parse(dateTime);
+  return dateFormatter.format(dateTimeObj);
+}
+
+String formatDateForReview(String? dateTime) {
+  // the input of this function is a time in this format : 2021-10-27
+  // the output is a time in this format : Dec 19, 2021
+  if (dateTime == null || dateTime.isEmpty) {
+    return "";
+  }
+  final dateFormatter = DateFormat("MMM dd, yyyy");
   final dateTimeObj = DateTime.parse(dateTime);
   return dateFormatter.format(dateTimeObj);
 }

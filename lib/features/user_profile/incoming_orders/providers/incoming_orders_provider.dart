@@ -17,7 +17,7 @@ class IncomingOrdersProvider extends StateNotifier<OrdersPage> {
       (result) {
         result.when(
           (errorMessage) {
-            IncomingOrdersProvider.pagingController.error = errorMessage;
+            pagingController.error = errorMessage;
           },
           (ordersPage) {
             state = ordersPage;
