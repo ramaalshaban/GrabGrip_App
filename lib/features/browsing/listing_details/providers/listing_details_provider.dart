@@ -62,6 +62,14 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
     }
   }
 
+  String getOwnerWidgetLabel() {
+    if (pricingModel?.widget == buy) {
+      return "Seller info";
+    } else /* i.e. pricingModel.widget == bookDate */ {
+      return "Owner info";
+    }
+  }
+
   //region getters and setters
   ListingCategory? get category => state.category;
 

@@ -10,12 +10,12 @@ import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/additional_options/additional_options_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/listing_description_widget.dart';
+import 'package:grab_grip/features/browsing/listing_details/widgets/owner_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/quantity_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/shipping_options_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/slider_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/status_edit_button_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/total_price_widget.dart';
-import 'package:grab_grip/features/browsing/listing_details/widgets/user_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/variant_options_widget.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/widgets/tag_view.dart';
 import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
@@ -296,102 +296,98 @@ class ListingDetailsScreen extends StatelessWidget {
                             Consumer(
                               builder: (_, ref, __) {
                                 return TextButton(
-                                    onPressed: () {
-                                      if (!ref(listingDetailsProvider.notifier)
-                                          .areAllVariantOptionsSelected()) {
-                                        showSnackBar(
-                                          context,
-                                          "Select all variant options please",
-                                          Colors.amber[800],
-                                        );
-                                      } else if (!ref(
-                                              listingDetailsProvider.notifier)
-                                          .isShippingIdSelected()) {
-                                        showSnackBar(
-                                          context,
-                                          "Select a shipping method please",
-                                          Colors.amber[800],
-                                        );
-                                      } else {
-                                        //region Debugging prints
-                                        print(
-                                            "-==-=-=========================================-=-=-=-");
-                                        print(
-                                            "Quantity : ${ref(listingDetailsProvider.notifier).selectedQuantity}");
-                                        for (int i = 0;
-                                            i <
-                                                ref(listingDetailsProvider
-                                                        .notifier)
-                                                    .selectedVariantOptions
-                                                    .length;
-                                            i++) {
-                                          final variant = ref(
-                                                  listingDetailsProvider
+                                  onPressed: () {
+                                    if (!ref(listingDetailsProvider.notifier)
+                                        .areAllVariantOptionsSelected()) {
+                                      showSnackBar(
+                                        context,
+                                        "Select all variant options please",
+                                        Colors.amber[800],
+                                      );
+                                    } else if (!ref(
+                                            listingDetailsProvider.notifier)
+                                        .isShippingIdSelected()) {
+                                      showSnackBar(
+                                        context,
+                                        "Select a shipping method please",
+                                        Colors.amber[800],
+                                      );
+                                    } else {
+                                      //region Debugging prints
+                                      print(
+                                          "-==-=-=========================================-=-=-=-");
+                                      print(
+                                          "Quantity : ${ref(listingDetailsProvider.notifier).selectedQuantity}");
+                                      for (int i = 0;
+                                          i <
+                                              ref(listingDetailsProvider
                                                       .notifier)
-                                              .selectedVariantOptions
-                                              .entries
-                                              .elementAt(i);
-                                          print(
-                                              "variant #$i : ${variant.key} => ${variant.value}");
-                                          print("-------");
-                                        }
-                                        print(
-                                            "Shipping id : ${ref(listingDetailsProvider.notifier).selectedShippingId}");
-                                        for (int i = 0;
-                                            i <
-                                                ref(listingDetailsProvider
-                                                        .notifier)
-                                                    .selectedAdditionalOptions
-                                                    .length;
-                                            i++) {
-                                          final additionalOption = ref(
-                                                  listingDetailsProvider
-                                                      .notifier)
-                                              .selectedAdditionalOptions
-                                              .entries
-                                              .elementAt(i);
-                                          print(
-                                              "additional option #$i : ${additionalOption.key} => ${additionalOption.value}");
-                                        }
-                                        for (int i = 0;
-                                            i <
-                                                ref(listingDetailsProvider
-                                                        .notifier)
-                                                    .selectedAdditionalOptionsMeta
-                                                    .length;
-                                            i++) {
-                                          if (ref(listingDetailsProvider
-                                                      .notifier)
-                                                  .selectedAdditionalOptionsMeta
-                                                  .entries
-                                                  .length >
-                                              i) {
-                                            final additionalOptionMeta = ref(
-                                                    listingDetailsProvider
-                                                        .notifier)
-                                                .selectedAdditionalOptionsMeta
+                                                  .selectedVariantOptions
+                                                  .length;
+                                          i++) {
+                                        final variant =
+                                            ref(listingDetailsProvider.notifier)
+                                                .selectedVariantOptions
                                                 .entries
                                                 .elementAt(i);
-                                            print(
-                                                "additional option meta #$i : ${additionalOptionMeta.key} => ${additionalOptionMeta.value}");
-                                          }
-                                        }
                                         print(
-                                            "-==-=-=========================================-=-=-=-");
-                                        //endregion
+                                            "variant #$i : ${variant.key} => ${variant.value}");
+                                        print("-------");
                                       }
-                                    },
-                                    child: const Text("check values"));
+                                      print(
+                                          "Shipping id : ${ref(listingDetailsProvider.notifier).selectedShippingId}");
+                                      for (int i = 0;
+                                          i <
+                                              ref(listingDetailsProvider
+                                                      .notifier)
+                                                  .selectedAdditionalOptions
+                                                  .length;
+                                          i++) {
+                                        final additionalOption =
+                                            ref(listingDetailsProvider.notifier)
+                                                .selectedAdditionalOptions
+                                                .entries
+                                                .elementAt(i);
+                                        print(
+                                            "additional option #$i : ${additionalOption.key} => ${additionalOption.value}");
+                                      }
+                                      for (int i = 0;
+                                          i <
+                                              ref(listingDetailsProvider
+                                                      .notifier)
+                                                  .selectedAdditionalOptionsMeta
+                                                  .length;
+                                          i++) {
+                                        if (ref(listingDetailsProvider.notifier)
+                                                .selectedAdditionalOptionsMeta
+                                                .entries
+                                                .length >
+                                            i) {
+                                          final additionalOptionMeta = ref(
+                                                  listingDetailsProvider
+                                                      .notifier)
+                                              .selectedAdditionalOptionsMeta
+                                              .entries
+                                              .elementAt(i);
+                                          print(
+                                              "additional option meta #$i : ${additionalOptionMeta.key} => ${additionalOptionMeta.value}");
+                                        }
+                                      }
+                                      print(
+                                          "-==-=-=========================================-=-=-=-");
+                                      //endregion
+                                    }
+                                  },
+                                  child: const Text(
+                                      "check values (debugging button)"),
+                                );
                               },
                             ),
-                            Text(listing.currency),
                             height12(),
-                            Text(listing.formattedPrice ?? ""),
-
-                            height12(),
-                            //region User widget
-                            const UserWidget(),
+                            //region Owner/Seller widget
+                            const OwnerWidget(),
                             //endregion
+                            height12(),
                           ],
                         ),
                       ),
