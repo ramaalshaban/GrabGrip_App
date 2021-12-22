@@ -10,14 +10,14 @@ import 'package:grab_grip/style/text_fields.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
-class PricingTabView extends StatefulWidget {
+class PricingTabView extends ConsumerStatefulWidget {
   const PricingTabView({Key? key}) : super(key: key);
 
   @override
-  State<PricingTabView> createState() => _PricingTabViewState();
+  ConsumerState<PricingTabView> createState() => _PricingTabViewState();
 }
 
-class _PricingTabViewState extends State<PricingTabView>
+class _PricingTabViewState extends ConsumerState<PricingTabView>
     with AutomaticKeepAliveClientMixin {
   int price = 0;
   int stock = 0;
@@ -52,7 +52,7 @@ class _PricingTabViewState extends State<PricingTabView>
                     child: TextField(
                       onChanged: (text) {
                         price = (text.isEmpty) ? 0 : int.parse(text);
-                        context.read(postListingProvider.notifier).price =
+                        ref.watch(postListingProvider.notifier).price =
                             price;
                       },
                       keyboardType: TextInputType.number,
@@ -73,7 +73,7 @@ class _PricingTabViewState extends State<PricingTabView>
                         TextField(
                           onChanged: (text) {
                             stock = (text.isEmpty) ? 0 : int.parse(text);
-                            context.read(postListingProvider.notifier).stock =
+                            ref.watch(postListingProvider.notifier).stock =
                                 stock;
                           },
                           keyboardType: TextInputType.number,

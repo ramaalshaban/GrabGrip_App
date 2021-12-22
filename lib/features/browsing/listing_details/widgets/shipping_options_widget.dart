@@ -10,9 +10,9 @@ class ShippingOptionsWidget extends ConsumerWidget {
   const ShippingOptionsWidget({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader ref) {
-    final shippingOptions = ref(listingDetailsProvider).shippingOptions;
-    return ref(httpRequestStateProvider).maybeWhen(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final shippingOptions = ref.watch(listingDetailsProvider).shippingOptions;
+    return ref.watch(httpRequestStateProvider).maybeWhen(
       error: (_) => Container(),
       orElse: () => Visibility(
         visible: shippingOptions.isNotEmpty,
@@ -43,10 +43,10 @@ class ShippingOptionsWidget extends ConsumerWidget {
                         contentPadding: EdgeInsets.zero,
                         activeColor: AppColors.purple,
                         value: shippingOption.id!,
-                        groupValue: ref(listingDetailsProvider)
+                        groupValue: ref.watch(listingDetailsProvider)
                             .selectedShippingOptionId,
                         onChanged: (int? newlySelectedShippingId) {
-                          ref(listingDetailsProvider.notifier)
+                          ref.watch(listingDetailsProvider.notifier)
                               .setShippingId(newlySelectedShippingId);
                         },
                       );

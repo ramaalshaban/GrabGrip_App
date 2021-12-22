@@ -21,7 +21,8 @@ import '../../features/choosing_preferences/widgets/screens/select_rent_buy_scre
     as _i1;
 import '../../features/choosing_preferences/widgets/screens/set_location_screen.dart'
     as _i2;
-import '../../features/feedback/contact_us/contact_us_screen.dart' as _i10;
+import '../../features/feedback/contact_us/widgets/contact_us_screen.dart'
+    as _i10;
 import '../../features/post_listing/widgets/screens/post_listing_screen.dart'
     as _i9;
 import '../../features/user_profile/favorites/widgets/favorites_screen.dart'
@@ -111,7 +112,7 @@ class AppRouter extends _i19.RootStackRouter {
     },
     PostListingScreenRoute.name: (routeData) {
       return _i19.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i9.PostListingScreen());
+          routeData: routeData, child: _i9.PostListingScreen());
     },
     ContactUsScreenRoute.name: (routeData) {
       return _i19.MaterialPageX<dynamic>(
@@ -157,11 +158,10 @@ class AppRouter extends _i19.RootStackRouter {
 
   @override
   List<_i19.RouteConfig> get routes => [
-        _i19.RouteConfig(SelectRentBuyScreenRoute.name,
-            path: '/select-rent-buy-screen'),
+        _i19.RouteConfig(SelectRentBuyScreenRoute.name, path: '/'),
         _i19.RouteConfig(SetLocationScreenRoute.name,
             path: '/set-location-screen'),
-        _i19.RouteConfig(HomeScreenRoute.name, path: '/'),
+        _i19.RouteConfig(HomeScreenRoute.name, path: '/home-screen'),
         _i19.RouteConfig(RegisterScreenRoute.name, path: '/register-screen'),
         _i19.RouteConfig(LoginScreenRoute.name, path: '/login-screen'),
         _i19.RouteConfig(ForgotPasswordScreenRoute.name,
@@ -192,8 +192,7 @@ class AppRouter extends _i19.RootStackRouter {
 
 /// generated route for [_i1.SelectRentBuyScreen]
 class SelectRentBuyScreenRoute extends _i19.PageRouteInfo<void> {
-  const SelectRentBuyScreenRoute()
-      : super(name, path: '/select-rent-buy-screen');
+  const SelectRentBuyScreenRoute() : super(name, path: '/');
 
   static const String name = 'SelectRentBuyScreenRoute';
 }
@@ -217,7 +216,7 @@ class SetLocationScreenRouteArgs {
 
 /// generated route for [_i3.HomeScreen]
 class HomeScreenRoute extends _i19.PageRouteInfo<void> {
-  const HomeScreenRoute() : super(name, path: '/');
+  const HomeScreenRoute() : super(name, path: '/home-screen');
 
   static const String name = 'HomeScreenRoute';
 }

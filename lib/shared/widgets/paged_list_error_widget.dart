@@ -12,7 +12,7 @@ class PagedListErrorWidget extends ConsumerWidget {
   final PagingController pagingController;
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context, WidgetRef watch) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

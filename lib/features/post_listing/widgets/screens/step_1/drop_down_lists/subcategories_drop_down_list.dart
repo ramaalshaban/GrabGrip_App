@@ -11,9 +11,9 @@ class SubcategoriesDropDownList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (_, ref, __) {
-        final selectedSubcategory = ref(postListingProvider).subcategory;
+        final selectedSubcategory = ref.watch(postListingProvider).subcategory;
         final subcategories =
-            ref(postListingProvider).category?.subCategories ?? [];
+            ref.watch(postListingProvider).category?.subCategories ?? [];
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
@@ -30,7 +30,7 @@ class SubcategoriesDropDownList extends StatelessWidget {
               elevation: 16,
               style: const TextStyle(color: AppColors.purple),
               onChanged: (Category? newValue) {
-                ref(postListingProvider.notifier).subcategory = newValue;
+                ref.watch(postListingProvider.notifier).subcategory = newValue;
               },
               items: subcategories
                   .map<DropdownMenuItem<Category>>((Category category) {

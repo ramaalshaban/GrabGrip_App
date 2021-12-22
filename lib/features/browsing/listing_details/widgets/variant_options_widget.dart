@@ -11,9 +11,9 @@ class VariantOptionsWidget extends ConsumerWidget {
   const VariantOptionsWidget({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader ref) {
-    final variantOptions = ref(listingDetailsProvider).variantOptions;
-    return ref(httpRequestStateProvider).maybeWhen(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final variantOptions = ref.watch(listingDetailsProvider).variantOptions;
+    return ref.watch(httpRequestStateProvider).maybeWhen(
       error: (_) => Container(),
       orElse: () => Visibility(
         visible: variantOptions.isNotEmpty,
@@ -65,11 +65,11 @@ class VariantOptionsWidget extends ConsumerWidget {
                                           color: AppColors.purple,
                                         ),
                                         elevation: 16,
-                                        value: ref(listingDetailsProvider)
+                                        value: ref.watch(listingDetailsProvider)
                                                 .selectedVariantOptions[
                                             variantOption.key],
                                         onChanged: (String? selectedValue) {
-                                          ref(
+                                          ref.watch(
                                             listingDetailsProvider.notifier,
                                           ).setVariantOptionValue(
                                             variantOption.key,

@@ -15,7 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: Consumer(
         builder: (_, ref, __) {
-          final stepState = ref(postListingStepProvider);
+          final stepState = ref.watch(postListingStepProvider);
           return Visibility(
             visible: stepState != const PostListingStepNumber.step4(),
             child: IconButton(
@@ -23,8 +23,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               onPressed: () {
                 stepState.when(
                   step1: () => Navigator.pop(context),
-                  step2: () => ref(postListingStepProvider.notifier).setStep1(),
-                  step3: () => ref(postListingStepProvider.notifier).setStep2(),
+                  step2: () => ref.watch(postListingStepProvider.notifier).setStep1(),
+                  step3: () => ref.watch(postListingStepProvider.notifier).setStep2(),
                   step4: () {},
                 );
               },

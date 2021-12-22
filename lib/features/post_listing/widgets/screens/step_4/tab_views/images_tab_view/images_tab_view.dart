@@ -13,55 +13,54 @@ import 'package:grab_grip/utils/functions.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class ImagesTabView extends StatelessWidget {
+class ImagesTabView extends ConsumerWidget {
   const ImagesTabView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    //region Listeners
+    ref.listen<HttpRequestState>(httpRequestStateProvider,
+        (_, httpRequestState) {
+      httpRequestState.whenOrNull(
+        error: (errorMessage) => showSnackBarForError(context, errorMessage),
+      );
+    });
+    //endregion
     return Scaffold(
       backgroundColor: AppColors.white,
-      body: ProviderListener(
-        provider: httpRequestStateProvider,
-        onChange: (context, HttpRequestState httpRequestState) {
-          httpRequestState.whenOrNull(
-            error: (errorMessage) =>
-                showSnackBarForError(context, errorMessage),
-          );
-        },
-        child: Consumer(
-          builder: (_, ref, __) {
-            final photos = ref(photosProvider);
-            final httpStatus = ref(httpRequestStateProvider);
-            return httpStatus.maybeWhen(
-              innerLoading: (_) => const PhotosSkeletonGridLoader(),
-              orElse: () => photos.isNotEmpty
-                  ? GridView.count(
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                      crossAxisCount: 2,
-                      children: List.generate(
-                        photos.length,
-                        (index) => PhotoItem(photo: photos[index]),
-                      ),
-                    )
-                  : const Center(
-                      child: Text(
-                        "Add photos for your listing",
-                        style: TextStyle(
-                          color: AppColors.purple,
-                        ),
+      body: Consumer(
+        builder: (_, ref, __) {
+          final photos = ref.watch(photosProvider);
+          final httpStatus = ref.watch(httpRequestStateProvider);
+          return httpStatus.maybeWhen(
+            innerLoading: (_) => const PhotosSkeletonGridLoader(),
+            orElse: () => photos.isNotEmpty
+                ? GridView.count(
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    crossAxisCount: 2,
+                    children: List.generate(
+                      photos.length,
+                      (index) => PhotoItem(photo: photos[index]),
+                    ),
+                  )
+                : const Center(
+                    child: Text(
+                      "Add photos for your listing",
+                      style: TextStyle(
+                        color: AppColors.purple,
                       ),
                     ),
-            );
-          },
-        ),
+                  ),
+          );
+        },
       ),
       floatingActionButton: Consumer(
         builder: (_, ref, __) {
           return FloatingActionButton(
             onPressed: () {
               final numOfCurrentPhotos =
-                  ref(photosProvider.notifier).photos.length;
+                  ref.watch(photosProvider.notifier).photos.length;
               if (numOfCurrentPhotos == postListingPhotosLimit) {
                 showSnackBar(
                   context,
@@ -113,10 +112,15 @@ class ImagesTabView extends StatelessWidget {
                                 (capturedImage) async {
                                   if (capturedImage != null) {
                                     final file = File(capturedImage.path);
-                                    ref(postListingProvider.notifier)
+                                    ref
+                                        .watch(postListingProvider.notifier)
                                         .uploadPhoto(file, takenByCamera: true);
                                   } else {
-                                    handlePickedImageIsNull(context, _picker);
+                                    handlePickedImageIsNull(
+                                      context,
+                                      ref,
+                                      _picker,
+                                    );
                                   }
                                 },
                               );
@@ -181,10 +185,11 @@ class ImagesTabView extends StatelessWidget {
                             (pickedImage) {
                               if (pickedImage != null) {
                                 final file = File(pickedImage.path);
-                                ref(postListingProvider.notifier)
+                                ref
+                                    .watch(postListingProvider.notifier)
                                     .uploadPhoto(file);
                               } else {
-                                handlePickedImageIsNull(context, _picker);
+                                handlePickedImageIsNull(context, ref, _picker);
                               }
                             },
                           );
@@ -222,6 +227,7 @@ class ImagesTabView extends StatelessWidget {
 
   Future<void> handlePickedImageIsNull(
     BuildContext context,
+    WidgetRef ref,
     ImagePicker picker,
   ) async {
     // read here please to understand the goal of this method: https://pub.dev/packages/image_picker#handling-mainactivity-destruction-on-android
@@ -232,7 +238,7 @@ class ImagesTabView extends StatelessWidget {
         }
         if (response.file != null) {
           final file = File(response.file!.path);
-          context.read(postListingProvider.notifier).uploadPhoto(file);
+          ref.watch(postListingProvider.notifier).uploadPhoto(file);
         } else {
           showSnackBarForError(
             context,

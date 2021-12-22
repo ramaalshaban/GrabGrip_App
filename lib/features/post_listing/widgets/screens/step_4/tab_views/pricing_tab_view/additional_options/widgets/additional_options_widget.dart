@@ -19,9 +19,9 @@ class AdditionalOptionsWidget extends StatelessWidget {
         Consumer(
           builder: (_, ref, __) {
             final additionalOptionsLength =
-                ref(listingPricingProvider).additionalOptionsLength;
+                ref.watch(listingPricingProvider).additionalOptionsLength;
             final additionalOptions =
-                ref(postListingProvider.notifier).additionalOptions;
+                ref.watch(postListingProvider.notifier).additionalOptions;
             return Wrap(
               children: List.generate(
                 additionalOptionsLength,
@@ -53,8 +53,8 @@ class AdditionalOptionsWidget extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                ref(postListingProvider.notifier).addEmptyAdditionalOption();
-                ref(listingPricingProvider.notifier)
+                ref.watch(postListingProvider.notifier).addEmptyAdditionalOption();
+                ref.watch(listingPricingProvider.notifier)
                     .changeNumOfCreatedAdditionalOptions(1);
                 // prevent the previously focused text field from receiving the focus again after adding a new additional option item
                 FocusScope.of(context).requestFocus(FocusNode());

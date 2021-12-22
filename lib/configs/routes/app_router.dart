@@ -10,7 +10,7 @@ import 'package:grab_grip/features/browsing/home/home_screen.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/listing_details_screen.dart';
 import 'package:grab_grip/features/choosing_preferences/widgets/screens/select_rent_buy_screen.dart';
 import 'package:grab_grip/features/choosing_preferences/widgets/screens/set_location_screen.dart';
-import 'package:grab_grip/features/feedback/contact_us/contact_us_screen.dart';
+import 'package:grab_grip/features/feedback/contact_us/widgets/contact_us_screen.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/post_listing_screen.dart';
 import 'package:grab_grip/features/user_profile/favorites/widgets/favorites_screen.dart';
 import 'package:grab_grip/features/user_profile/incoming_orders/widgets/incoming_orders_screen.dart';
@@ -24,7 +24,7 @@ import 'package:grab_grip/shared/widgets/verify_your_email_screen.dart';
   routes: <AutoRoute>[
     CustomRoute(
       page: SelectRentBuyScreen,
-      // initial: true,
+      initial: true,
       transitionsBuilder: TransitionsBuilders.slideTop,
       durationInMilliseconds: 400,
     ),
@@ -34,9 +34,6 @@ import 'package:grab_grip/shared/widgets/verify_your_email_screen.dart';
       durationInMilliseconds: 400,
     ),
     CustomRoute(
-      initial: true,
-
-
       page: HomeScreen,
       transitionsBuilder: TransitionsBuilders.zoomIn,
       durationInMilliseconds: 400,

@@ -54,7 +54,7 @@ class DatePicker extends StatelessWidget {
                     builder: (_, ref, __) {
                       return SfDateRangePicker(
                         onSubmit: (pickedTime) {
-                          ref(postListingProvider.notifier).listingEndDate =
+                          ref.watch(postListingProvider.notifier).listingEndDate =
                               pickedTime.toString();
                           context.router.pop();
                         },
@@ -98,7 +98,7 @@ class DatePicker extends StatelessWidget {
             constraints: const BoxConstraints.expand(height: 50),
             child: Consumer(
               builder: (_, ref, __) {
-                final listingEndDate = ref(postListingProvider).listingEndDate;
+                final listingEndDate = ref.watch(postListingProvider).listingEndDate;
                 final formattedDate = formatDateForView(listingEndDate);
                 return Row(
                   children: [
@@ -114,7 +114,7 @@ class DatePicker extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {
-                        ref(postListingProvider.notifier).listingEndDate = null;
+                        ref.watch(postListingProvider.notifier).listingEndDate = null;
                       },
                       icon: const Icon(
                         Icons.remove,

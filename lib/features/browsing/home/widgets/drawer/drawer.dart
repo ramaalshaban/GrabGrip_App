@@ -28,7 +28,7 @@ class AppDrawer extends StatelessWidget {
             //region drawer header
             Consumer(
               builder: (_, ref, __) {
-                final user = ref(userProfileProvider);
+                final user = ref.watch(userProfileProvider);
                 final isVisible = user != User.empty();
                 return Visibility(
                   visible: isVisible,
@@ -43,10 +43,10 @@ class AppDrawer extends StatelessWidget {
             //region join/login buttons
             Consumer(
               builder: (_, ref, __) => Visibility(
-                visible: ref(authProvider).when(
-                  authenticated: (_) => false,
-                  notAuthenticated: () => true,
-                ),
+                visible: ref.watch(authProvider).when(
+                      authenticated: (_) => false,
+                      notAuthenticated: () => true,
+                    ),
                 child: Column(
                   children: [
                     AppDrawerButton(
@@ -136,69 +136,70 @@ class AppDrawer extends StatelessWidget {
             lightGrayDividerThickness0_5,
             const LanguagePicker(),
             //region logout button
-            ProviderListener(
-              provider: httpRequestStateProvider,
-              onChange: (context, HttpRequestState httpRequestState) {
-                httpRequestState.whenOrNull(
-                  success: (_, actionSucceeded) {
-                    // check for the succeeded action so if there are more than
-                    // one provider listener listening to the same state, they don't run together
-                    if (actionSucceeded == logoutAction) {
-                      showSnackBar(
-                        context,
-                        AppLocalizations.of(context)!
-                            .you_logged_out_successfully,
-                      );
-                      Navigator.pop(context);
-                    }
-                  },
-                  error: (errorMessage) => showSnackBarForError(
-                    context,
-                    errorMessage,
+            Consumer(
+              builder: (_, ref, __) {
+                //region Listeners
+                ref.listen<HttpRequestState>(httpRequestStateProvider,
+                    (_, httpRequestState) {
+                  httpRequestState.whenOrNull(
+                    success: (_, actionSucceeded) {
+                      // check for the succeeded action so if there are more than
+                      // one provider listener listening to the same state, they don't run together
+                      if (actionSucceeded == logoutAction) {
+                        showSnackBar(
+                          context,
+                          AppLocalizations.of(context)!
+                              .you_logged_out_successfully,
+                        );
+                        Navigator.pop(context);
+                      }
+                    },
+                    error: (errorMessage) => showSnackBarForError(
+                      context,
+                      errorMessage,
+                    ),
+                  );
+                });
+                //endregion
+                final httpRequestState = ref.watch(httpRequestStateProvider);
+                return httpRequestState.maybeWhen(
+                  loading: () => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  orElse: () => Visibility(
+                    visible: ref.watch(authProvider).when(
+                          authenticated: (_) => true,
+                          notAuthenticated: () => false,
+                        ),
+                    child: Column(
+                      children: [
+                        lightGrayDividerThickness0_5,
+                        ListTile(
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 34),
+                          title: Text(
+                            AppLocalizations.of(context)!.logout,
+                            style: const TextStyle(
+                              color: AppColors.gray,
+                              fontSize: 16,
+                            ),
+                          ),
+                          trailing: const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: AppColors.gray,
+                            size: 16,
+                          ),
+                          onTap: () {
+                            ref.watch(authProvider.notifier).logout();
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
-              child: Consumer(
-                builder: (_, watch, __) {
-                  final httpRequestState = watch(httpRequestStateProvider);
-                  return httpRequestState.maybeWhen(
-                    loading: () => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                    orElse: () => Visibility(
-                      visible: watch(authProvider).when(
-                        authenticated: (_) => true,
-                        notAuthenticated: () => false,
-                      ),
-                      child: Column(
-                        children: [
-                          lightGrayDividerThickness0_5,
-                          ListTile(
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 34),
-                            title: Text(
-                              AppLocalizations.of(context)!.logout,
-                              style: const TextStyle(
-                                color: AppColors.gray,
-                                fontSize: 16,
-                              ),
-                            ),
-                            trailing: const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: AppColors.gray,
-                              size: 16,
-                            ),
-                            onTap: () {
-                              watch(authProvider.notifier).logout();
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
             ),
+
             //endregion
             height36(),
           ],

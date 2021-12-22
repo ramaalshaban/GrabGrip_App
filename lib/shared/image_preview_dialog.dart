@@ -7,7 +7,7 @@ import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/device.dart';
 
-class ImagePreviewDialog extends StatelessWidget {
+class ImagePreviewDialog extends ConsumerWidget {
   const ImagePreviewDialog({
     this.photo,
     this.url,
@@ -20,11 +20,11 @@ class ImagePreviewDialog extends StatelessWidget {
   final bool isFile;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // ping the server to check the internet connection when user navigates to this screen
     // if there is no internet connection then an error snack bar will be displayed
     WidgetsBinding.instance?.addPostFrameCallback((_) {
-      context.read(pingProvider).pingGrabGrip();
+      ref.watch(pingProvider).pingGrabGrip();
     });
     final imageProvider = isFile
         ? FileImage(File(photo!.path))

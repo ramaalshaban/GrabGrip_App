@@ -1,16 +1,12 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/authentication/utils/text_field_validators.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
-import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
+import 'package:grab_grip/features/feedback/contact_us/widgets/submit_button.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text_fields.dart';
 import 'package:grab_grip/utils/device.dart';
-import 'package:grab_grip/utils/functions.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
 class ContactUsScreen extends StatefulWidget {
@@ -97,37 +93,12 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     ),
                     width: screenWidth(context) / 3,
                     height: 40.0,
-                    child: ProviderListener(
-                      provider: httpRequestStateProvider,
-                      onChange: (context, HttpRequestState httpRequestState) {
-                        httpRequestState.whenOrNull(
-                          success: (successMessage, _) {
-                            showSnackBar(
-                              context,
-                              successMessage!,
-                            );
-                            context.router.pop();
-                          },
-                          error: (errorMessage) =>
-                              showSnackBarForError(context, errorMessage),
-                        );
-                      },
-                      child: Consumer(
-                        builder: (_, watch, __) {
-                          return watch(httpRequestStateProvider).maybeWhen(
-                            loading: () => const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                            orElse: () => SubmitButton(
-                              formKey: _formKey,
-                              contactUsFormModel: ContactUsForm(
-                                name,
-                                email,
-                                comments,
-                              ),
-                            ),
-                          );
-                        },
+                    child: SubmitButton(
+                      formKey: _formKey,
+                      contactUsFormModel: ContactUsForm(
+                        name,
+                        email,
+                        comments,
                       ),
                     ),
                   ),
@@ -138,41 +109,6 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class SubmitButton extends StatelessWidget {
-  const SubmitButton({
-    Key? key,
-    required this.formKey,
-    required this.contactUsFormModel,
-  }) : super(key: key);
-
-  final GlobalKey<FormState> formKey;
-  final ContactUsForm contactUsFormModel;
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer(
-      builder: (_, ref, __) {
-        return TextButton(
-          onPressed: () async {
-            if (formKey.currentState!.validate()) {
-              ref(feedbackProvider).sendContactUsForm(
-                contactUsFormModel,
-              );
-            }
-          },
-          child: const Text(
-            "Submit",
-            style: TextStyle(
-              color: AppColors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        );
-      },
     );
   }
 }

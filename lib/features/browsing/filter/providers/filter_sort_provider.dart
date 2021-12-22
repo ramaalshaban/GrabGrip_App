@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +16,7 @@ class FilterSortProvider extends StateNotifier<FilterSortModel> {
   FilterSortProvider(this.httpRequestStateProvider)
       : super(const FilterSortModel()) {
     _initializeDropDownLists();
+    getCategories();
   }
 
   void _initializeDropDownLists() {
@@ -53,6 +55,8 @@ class FilterSortProvider extends StateNotifier<FilterSortModel> {
   }
 
   Future<void> getCategories() async {
+    print(
+        "getCategories get called getCategories get called getCategories get called getCategories get called ");
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       httpRequestStateProvider.setLoading();
     });

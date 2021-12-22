@@ -10,9 +10,9 @@ class QuantityWidget extends ConsumerWidget {
   const QuantityWidget({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader ref) {
-    final quantityInStock = ref(listingDetailsProvider).stockQuantity;
-    return ref(httpRequestStateProvider).maybeWhen(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final quantityInStock = ref.watch(listingDetailsProvider).stockQuantity;
+    return ref.watch(httpRequestStateProvider).maybeWhen(
       error: (_) => Container(),
       orElse: () {
         if (quantityInStock >= 1) {
@@ -54,9 +54,9 @@ class QuantityWidget extends ConsumerWidget {
                               ),
                               elevation: 16,
                               value:
-                                  ref(listingDetailsProvider).selectedQuantity,
+                                  ref.watch(listingDetailsProvider).selectedQuantity,
                               onChanged: (int? selectedValue) {
-                                ref(listingDetailsProvider.notifier)
+                                ref.watch(listingDetailsProvider.notifier)
                                     .setQuantity(selectedValue ?? 1);
                               },
                               items: [

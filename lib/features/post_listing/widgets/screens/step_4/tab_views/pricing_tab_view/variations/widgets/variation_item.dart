@@ -34,7 +34,7 @@ class VariationItem extends StatelessWidget {
         //region Values
         Consumer(
           builder: (_, ref, __) {
-            values = ref(postListingProvider).variations[index].values;
+            values = ref.watch(postListingProvider).variations[index].values;
             return Wrap(
               spacing: 4,
               children: List.generate(
@@ -62,7 +62,7 @@ class VariationItem extends StatelessWidget {
                       onChanged: (text) {
                         variation =
                             variation.copyWith(attribute: text, values: values);
-                        ref(postListingProvider.notifier)
+                        ref.watch(postListingProvider.notifier)
                             .editVariationAttribute(index, variation);
                       },
                       keyboardType: TextInputType.text,
@@ -102,7 +102,7 @@ class VariationItem extends StatelessWidget {
                                     valueTextController.text.trim();
                                 if (enteredValue.isNotEmpty) {
                                   final valueAdded =
-                                      ref(postListingProvider.notifier)
+                                  ref.watch(postListingProvider.notifier)
                                           .addValueToVariation(
                                     index,
                                     enteredValue,
@@ -135,8 +135,8 @@ class VariationItem extends StatelessWidget {
                   //region Delete button
                   InkWell(
                     onTap: () {
-                      ref(postListingProvider.notifier).removeVariation(index);
-                      ref(listingPricingProvider.notifier)
+                      ref.watch(postListingProvider.notifier).removeVariation(index);
+                      ref.watch(listingPricingProvider.notifier)
                           .changeNumOfCreatedVariations(-1);
                       // prevent the previously focused text field from receiving the focus again after removing a variation item
                       FocusScope.of(context).requestFocus(FocusNode());

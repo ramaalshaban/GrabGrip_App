@@ -49,7 +49,7 @@ class AdditionalOptionItem extends StatelessWidget {
                   controller: nameTextController,
                   onChanged: (text) {
                     option = option.copyWith(name: text);
-                    ref(postListingProvider.notifier)
+                    ref.watch(postListingProvider.notifier)
                         .editAdditionalOption(index, option);
                   },
                   keyboardType: TextInputType.text,
@@ -75,7 +75,7 @@ class AdditionalOptionItem extends StatelessWidget {
                   onChanged: (text) {
                     final price = (text.isEmpty) ? "" : text;
                     option = option.copyWith(price: price);
-                    ref(postListingProvider.notifier)
+                    ref.watch(postListingProvider.notifier)
                         .editAdditionalOption(index, option);
                   },
                   keyboardType:
@@ -98,7 +98,7 @@ class AdditionalOptionItem extends StatelessWidget {
                   onChanged: (text) {
                     final maxQuantity = text.isEmpty ? null : int.parse(text);
                     option = option.copyWith(maxQuantity: maxQuantity);
-                    ref(postListingProvider.notifier)
+                    ref.watch(postListingProvider.notifier)
                         .editAdditionalOption(index, option);
                   },
                   keyboardType: TextInputType.number,
@@ -114,9 +114,9 @@ class AdditionalOptionItem extends StatelessWidget {
               //region Delete button
               InkWell(
                 onTap: () {
-                  ref(postListingProvider.notifier)
+                  ref.watch(postListingProvider.notifier)
                       .removeAdditionalOption(index);
-                  ref(listingPricingProvider.notifier)
+                  ref.watch(listingPricingProvider.notifier)
                       .changeNumOfCreatedAdditionalOptions(-1);
                   // prevent the previously focused text field from receiving the focus again after removing an additional option item
                   FocusScope.of(context).requestFocus(FocusNode());

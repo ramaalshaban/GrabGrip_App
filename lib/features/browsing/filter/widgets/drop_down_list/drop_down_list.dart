@@ -26,15 +26,15 @@ class _DropDownListState extends State<DropDownList> {
         builder: (_, ref, __) {
           final DropDownItem? selectedDropDownItem = widget.dataType.when(
             sortOptions: () {
-              return ref(filterAndSortProvider.notifier).sortOption;
+              return ref.watch(filterAndSortProvider.notifier).sortOption;
             },
             distanceOptions: () {
-              return ref(
+              return ref.watch(
                 filterAndSortProvider,
               ).distance;
             },
             listingTypeOptions: () {
-              return ref(
+              return ref.watch(
                 filterAndSortProvider,
               ).listingType;
             },
@@ -50,14 +50,14 @@ class _DropDownListState extends State<DropDownList> {
               setState(() {});
               widget.dataType.when(
                 sortOptions: () {
-                  ref(filterAndSortProvider.notifier).sortOption = newValue;
+                  ref.watch(filterAndSortProvider.notifier).sortOption = newValue;
                   BrowseProvider.pagingController.refresh();
                 },
                 distanceOptions: () {
-                  ref(filterAndSortProvider.notifier).distance = newValue;
+                  ref.watch(filterAndSortProvider.notifier).distance = newValue;
                 },
                 listingTypeOptions: () {
-                  ref(filterAndSortProvider.notifier).listingType = newValue;
+                  ref.watch(filterAndSortProvider.notifier).listingType = newValue;
                 },
               );
             },

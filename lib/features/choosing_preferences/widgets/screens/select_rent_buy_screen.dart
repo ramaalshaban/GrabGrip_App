@@ -39,10 +39,10 @@ class SelectRentBuyScreen extends StatelessWidget {
                   child: Consumer(
                     builder: (_, ref, __) {
                       final selectedListingType =
-                          ref(filterAndSortProvider).listingType;
+                          ref.watch(filterAndSortProvider).listingType;
                       return InkWell(
                         onTap: () {
-                          ref(filterAndSortProvider.notifier).listingType =
+                          ref.watch(filterAndSortProvider.notifier).listingType =
                               listingTypeOptions[2];
                           context.router.push(
                             SetLocationScreenRoute(),
@@ -81,10 +81,10 @@ class SelectRentBuyScreen extends StatelessWidget {
                   child: Consumer(
                     builder: (_, ref, __) {
                       final selectedListingType =
-                          ref(filterAndSortProvider).listingType;
+                          ref.watch(filterAndSortProvider).listingType;
                       return InkWell(
                         onTap: () {
-                          ref(filterAndSortProvider.notifier).listingType =
+                          ref.watch(filterAndSortProvider.notifier).listingType =
                               listingTypeOptions[1];
                           context.router.push(
                             SetLocationScreenRoute(),

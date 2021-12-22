@@ -10,16 +10,19 @@ void main() {
   runApp(ProviderScope(child: GrabGripApp()));
 }
 
-class GrabGripApp extends StatefulWidget {
+class GrabGripApp extends ConsumerStatefulWidget {
+
   @override
-  State<GrabGripApp> createState() => _GrabGripAppState();
+  ConsumerState<GrabGripApp> createState() => _GrabGripAppState();
 }
 
-class _GrabGripAppState extends State<GrabGripApp> {
-  AppRouter? _appRouter;
+class _GrabGripAppState extends ConsumerState<GrabGripApp> {
+  late AppRouter? _appRouter;
 
-  void initAppRouterIfNot(BuildContext context) {
-    _appRouter ??= AppRouter(authGuard: AuthGuard(context: context));
+  @override
+  void initState() {
+    _appRouter = AppRouter(authGuard: AuthGuard(ref: ref));
+    super.initState();
   }
 
   ThemeData _initTheme() {
@@ -39,19 +42,14 @@ class _GrabGripAppState extends State<GrabGripApp> {
 
   @override
   Widget build(BuildContext context) {
-    initAppRouterIfNot(context);
-    return Consumer(
-      builder: (_, reference, __) {
-        return MaterialApp.router(
-          locale: reference(localeProvider),
-          title: 'Grab Grip',
-          theme: _initTheme(),
-          routerDelegate: _appRouter!.delegate(),
-          routeInformationParser: _appRouter!.defaultRouteParser(),
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-        );
-      },
+    return MaterialApp.router(
+      locale: ref.watch(localeProvider),
+      title: 'Grab Grip',
+      theme: _initTheme(),
+      routerDelegate: _appRouter!.delegate(),
+      routeInformationParser: _appRouter!.defaultRouteParser(),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }

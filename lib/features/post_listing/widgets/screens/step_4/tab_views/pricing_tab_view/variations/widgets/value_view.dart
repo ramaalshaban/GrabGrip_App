@@ -22,7 +22,7 @@ class ValueView extends StatelessWidget {
           size: 20,
         ),
         onDeleted: () {
-          ref(postListingProvider.notifier)
+          ref.watch(postListingProvider.notifier)
               .removeValueFromVariation(variationIndex, value);
         },
         label: Text(

@@ -10,13 +10,13 @@ class OwnerWidget extends ConsumerWidget {
   const OwnerWidget({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader ref) {
-    final listingOwner = ref(listingDetailsProvider).listingOwner;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final listingOwner = ref.watch(listingDetailsProvider).listingOwner;
     final ownerCity = listingOwner?.city ?? "";
     final ownerCountry = listingOwner?.countryCode == null
         ? ""
         : ",${listingOwner?.countryCode}";
-    return ref(httpRequestStateProvider).maybeWhen(
+    return ref.watch(httpRequestStateProvider).maybeWhen(
       loading: () => const Center(
         child: SizedBox(
           height: 14,
@@ -38,7 +38,7 @@ class OwnerWidget extends ConsumerWidget {
             children: [
               //region Label
               Text(
-                ref(listingDetailsProvider.notifier).getOwnerWidgetLabel(),
+                ref.watch(listingDetailsProvider.notifier).getOwnerWidgetLabel(),
                 style: AppTextStyles.listingDetailsTitleStyle,
               ),
               //endregion

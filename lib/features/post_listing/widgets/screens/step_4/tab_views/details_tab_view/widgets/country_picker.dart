@@ -20,7 +20,7 @@ class CountryPicker extends StatelessWidget {
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.only(left: 12),
               decoration: fieldDecoration,
-              child: ref(postListingProvider).country == null
+              child: ref.watch(postListingProvider).country == null
                   ? const Text(
                       "Country",
                       style: TextStyle(
@@ -28,7 +28,7 @@ class CountryPicker extends StatelessWidget {
                       ),
                     )
                   : Text(
-                      ref(postListingProvider.notifier).country!.name!,
+                ref.watch(postListingProvider.notifier).country!.name!,
                       style: const TextStyle(
                         color: AppColors.purple,
                       ),
@@ -37,7 +37,7 @@ class CountryPicker extends StatelessWidget {
           },
           hideMainText: true,
           onChanged: (selectedCountry) {
-            ref(postListingProvider.notifier).country = selectedCountry;
+            ref.watch(postListingProvider.notifier).country = selectedCountry;
             // prevent the previously focused text field from receiving the focus again after closing the picker
             FocusScope.of(context).requestFocus(FocusNode());
           },

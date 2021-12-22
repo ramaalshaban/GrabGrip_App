@@ -29,10 +29,11 @@ class TotalPriceWidget extends StatelessWidget {
           Consumer(
             builder: (_, ref, __) {
               final listingOwnerFetched =
-                  ref(listingDetailsProvider).listingOwner != null;
+                  ref.watch(listingDetailsProvider).listingOwner != null;
               return AnimatedOpacity(
                 opacity: listingOwnerFetched &&
-                        ref(listingDetailsProvider.notifier)
+                        ref
+                            .watch(listingDetailsProvider.notifier)
                             .userOwnsThisListing()
                     ? 0.0
                     : 1.0,
@@ -47,7 +48,9 @@ class TotalPriceWidget extends StatelessWidget {
                       primary: AppColors.white,
                     ),
                     child: Text(
-                      ref(listingDetailsProvider.notifier).getButtonLabel(),
+                      ref
+                          .watch(listingDetailsProvider.notifier)
+                          .getButtonLabel(),
                       style: const TextStyle(
                         color: AppColors.purple,
                         fontWeight: FontWeight.bold,
@@ -79,47 +82,47 @@ class TotalPriceWidget extends StatelessWidget {
               //endregion
               //region Price
               Expanded(
-                child: ProviderListener(
-                  provider: listingDetailsProvider,
-                  onChange: (_, ListingDetailsState state) {
-                    if (state.widget?.error is String) {
-                      // when an error happens, error's value is the error message string
-                      // otherwise, it's the boolean value false
-                      if (state.widget?.startDate == null ||
-                          state.widget?.endDate == null) {
-                        // when user first opens up listing details screen for a listing of type rent, the error message "These dates cannot be booked" shows up
-                        // to avoid showing the snack bar, the above if statement has been added (to check start and end date)
-                        return;
+                child: Consumer(
+                  builder: (_, ref, __) {
+                    //region Listeners
+                    ref.listen<ListingDetailsState>(listingDetailsProvider,
+                        (_, state) {
+                      if (state.widget?.error is String) {
+                        // when an error happens, error's value is the error message string
+                        // otherwise, it's the boolean value false
+                        if (state.widget?.startDate == null ||
+                            state.widget?.endDate == null) {
+                          // when user first opens up listing details screen for a listing of type rent, the error message "These dates cannot be booked" shows up
+                          // to avoid showing the snack bar, the above if statement has been added (to check start and end date)
+                          return;
+                        }
+                        showSnackBarForError(
+                          context,
+                          state.widget?.error as String,
+                        );
                       }
-                      showSnackBarForError(
-                        context,
-                        state.widget?.error as String,
-                      );
-                    }
-                  },
-                  child: Consumer(
-                    builder: (_, ref, __) {
-                      return AnimatedOpacity(
-                        opacity: ref(httpRequestStateProvider).maybeWhen(
-                          loading: () => 0.0,
-                          orElse: () => 1.0,
-                        ),
-                        duration: duration300Milli,
-                        child: SizedBox(
-                          width: screenWidth(context) / 4,
-                          child: Text(
-                            "SAR ${ref(listingDetailsProvider).widget?.total}",
-                            style: const TextStyle(
-                              color: AppColors.green,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                            textAlign: TextAlign.center,
+                    });
+                    //endregion
+                    return AnimatedOpacity(
+                      opacity: ref.watch(httpRequestStateProvider).maybeWhen(
+                            loading: () => 0.0,
+                            orElse: () => 1.0,
                           ),
+                      duration: duration300Milli,
+                      child: SizedBox(
+                        width: screenWidth(context) / 4,
+                        child: Text(
+                          "SAR ${ref.watch(listingDetailsProvider).widget?.total}",
+                          style: const TextStyle(
+                            color: AppColors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               ),
               //endregion

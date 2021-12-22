@@ -15,20 +15,20 @@ import 'package:grab_grip/utils/functions.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class ListingsScreen extends StatefulWidget {
+class ListingsScreen extends ConsumerStatefulWidget {
   const ListingsScreen({Key? key}) : super(key: key);
 
   @override
-  State<ListingsScreen> createState() => _ListingsScreenState();
+  ConsumerState<ListingsScreen> createState() => _ListingsScreenState();
 }
 
-class _ListingsScreenState extends State<ListingsScreen> {
+class _ListingsScreenState extends ConsumerState<ListingsScreen> {
   @override
   void initState() {
     ListingsProvider.pagingController.addPageRequestListener((pageKey) {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
         if (mounted) {
-          context.read(listingsProvider.notifier).getListings(pageKey);
+          ref.watch(listingsProvider.notifier).getListings(pageKey);
         }
       });
     });

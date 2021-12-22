@@ -14,14 +14,14 @@ import 'package:grab_grip/utils/sized_box.dart';
 
 class BrowseScreen extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context, WidgetRef ref) {
     WidgetsBinding.instance?.addPostFrameCallback((_) {
-      context.read(locationPickerStateProvider.notifier).setBrowsing();
+      ref.watch(locationPickerStateProvider.notifier).setBrowsing();
       // refresh the list so when user changes his preferences and opens up this screen it gets refreshed with respect to the chosen preferences
       BrowseProvider.pagingController.refresh();
     });
     final itemsSearchBoxController = TextEditingController(
-      text: watch(filterAndSortProvider.notifier).searchText,
+      text: ref.watch(filterAndSortProvider.notifier).searchText,
     );
     final sortOptions = FilterSortProvider.getSortOptions(context);
     return SafeArea(
@@ -43,7 +43,7 @@ class BrowseScreen extends ConsumerWidget {
                           child: TextField(
                             controller: itemsSearchBoxController,
                             onSubmitted: (enteredText) {
-                              watch(filterAndSortProvider.notifier).searchText =
+                              ref.watch(filterAndSortProvider.notifier).searchText =
                                   enteredText;
                               BrowseProvider.pagingController.refresh();
                             },
@@ -106,8 +106,8 @@ class BrowseScreen extends ConsumerWidget {
                         Expanded(
                           flex: 3,
                           child: Consumer(
-                            builder: (_, watch, __) {
-                              final viewModeSelections = watch(gearsViewMode);
+                            builder: (_, ref, __) {
+                              final viewModeSelections = ref.watch(gearsViewMode);
                               return ToggleButtons(
                                 selectedColor: AppColors.purple,
                                 selectedBorderColor: AppColors.purple,
@@ -118,7 +118,7 @@ class BrowseScreen extends ConsumerWidget {
                                   map: () => [false, false, true],
                                 ),
                                 onPressed: (int index) {
-                                  watch(gearsViewMode.notifier)
+                                  ref.watch(gearsViewMode.notifier)
                                       .setViewModeByIndex(index);
                                 },
                                 children: const [

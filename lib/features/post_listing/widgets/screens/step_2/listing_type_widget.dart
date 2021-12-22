@@ -8,8 +8,8 @@ class ListingTypeWidget extends ConsumerWidget {
   const ListingTypeWidget({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader ref) {
-    final listingTypes = ref(postListingProvider.notifier).pricingModels;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final listingTypes = ref.watch(postListingProvider.notifier).pricingModels;
     return GridView.count(
       crossAxisSpacing: 12,
       mainAxisSpacing: 12,

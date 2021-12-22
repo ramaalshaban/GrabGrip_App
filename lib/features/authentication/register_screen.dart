@@ -1,17 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/utils/text_field_validators.dart';
+import 'package:grab_grip/features/authentication/widgets/register_button.dart';
 import 'package:grab_grip/features/authentication/widgets/registration_app_bar.dart';
-import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text_fields.dart';
 import 'package:grab_grip/utils/device.dart';
-import 'package:grab_grip/utils/functions.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -51,6 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              //region Personal details label
               Text(
                 AppLocalizations.of(context)!.personal_details,
                 style: const TextStyle(
@@ -59,11 +57,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   fontSize: 30.0,
                 ),
               ),
+              //endregion
               height48(),
               Form(
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
+                    //region Name text field
                     TextFormField(
                       onChanged: (text) => name = text,
                       validator: nameFieldValidator,
@@ -73,7 +73,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       cursorColor: AppColors.purple,
                     ),
+                    //endregion
                     height36(),
+                    //region Email text field
                     TextFormField(
                       onChanged: (text) => email = text,
                       validator: emailFieldValidator,
@@ -83,7 +85,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       cursorColor: AppColors.purple,
                     ),
+                    //endregion
                     height36(),
+                    //region Password text field
                     TextFormField(
                       onChanged: (text) => password = text,
                       validator: passwordFieldValidator,
@@ -93,7 +97,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         hintText: AppLocalizations.of(context)!.password,
                       ),
                     ),
+                    //endregion
                     height36(),
+                    //region Password confirmation text field
                     TextFormField(
                       onChanged: (text) => passwordConfirmation = text,
                       validator: _passwordConfirmationFieldValidator,
@@ -104,56 +110,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             AppLocalizations.of(context)!.password_confirmation,
                       ),
                     ),
+                    //endregion
                     height48(),
                     height48(),
+                    //region Join button
                     Container(
                       width: screenWidth(context),
                       height: 48.0,
                       color: AppColors.purple,
-                      child: ProviderListener(
-                        provider: httpRequestStateProvider,
-                        onChange: (context, HttpRequestState httpRequestState) {
-                          httpRequestState.whenOrNull(
-                            success: (_, __) {
-                              showSnackBar(
-                                context,
-                                AppLocalizations.of(context)!
-                                    .you_registered_successfully,
-                              );
-                              context.router.pop();
-                            },
-                            error: (errorMessage) =>
-                                showSnackBarForError(context, errorMessage),
-                          );
-                        },
-                        child: Consumer(
-                          builder: (_, watch, __) {
-                            final httpRequestState =
-                                watch(httpRequestStateProvider);
-                            return httpRequestState.maybeWhen(
-                              loading: () {
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              },
-                              orElse: () {
-                                return RegisterButton(
-                                  formKey: _formKey,
-                                  authModel: AuthModel(
-                                    email,
-                                    password,
-                                    name,
-                                    passwordConfirmation,
-                                  ),
-                                  watch: watch,
-                                );
-                              },
-                            );
-                          },
+                      child: RegisterButton(
+                        formKey: _formKey,
+                        authModel: AuthModel(
+                          email,
+                          password,
+                          name,
+                          passwordConfirmation,
                         ),
+                        onSuccessRegistration: widget.onSuccessRegistration,
                       ),
                     ),
+                    //endregion
                     height24(),
+                    //region Already have an account button
                     TextButton(
                       onPressed: () => context.router.replace(
                         LoginScreenRoute(
@@ -166,42 +144,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           color: AppColors.purple,
                         ),
                       ),
-                    )
+                    ),
+                    //endregion
                   ],
                 ),
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class RegisterButton extends StatelessWidget {
-  const RegisterButton({
-    Key? key,
-    required this.formKey,
-    required this.watch,
-    required this.authModel,
-  }) : super(key: key);
-  final GlobalKey<FormState> formKey;
-  final AuthModel authModel;
-  final ScopedReader watch;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () async {
-        if (formKey.currentState!.validate()) {
-          watch(authProvider.notifier).register(authModel);
-        }
-      },
-      child: Text(
-        AppLocalizations.of(context)!.join,
-        style: const TextStyle(
-          color: AppColors.white,
-          fontWeight: FontWeight.bold,
         ),
       ),
     );

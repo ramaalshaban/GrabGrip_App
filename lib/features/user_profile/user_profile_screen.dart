@@ -13,13 +13,35 @@ import 'package:grab_grip/utils/device.dart';
 import 'package:grab_grip/utils/functions.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
-class UserProfileScreen extends StatelessWidget {
+class UserProfileScreen extends ConsumerWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final coloredHeaderHeight = screenHeightWithoutSafeAreaPadding(context) / 5;
     const avatarWidthHeight = 82.0;
+    //region Listeners
+    ref.listen<HttpRequestState>(httpRequestStateProvider,
+        (_, httpRequestState) {
+      httpRequestState.whenOrNull(
+        success: (_, actionSucceeded) {
+          // check for the succeeded action so if there are more than
+          // one provider listener listening to the same state, they don't run together
+          if (actionSucceeded == logoutAction) {
+            showSnackBar(
+              context,
+              AppLocalizations.of(context)!.you_logged_out_successfully,
+            );
+            Navigator.pop(context);
+          }
+        },
+        error: (errorMessage) => showSnackBarForError(
+          context,
+          errorMessage,
+        ),
+      );
+    });
+    //endregion
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SingleChildScrollView(
@@ -49,7 +71,7 @@ class UserProfileScreen extends StatelessWidget {
                               width: avatarWidthHeight,
                               height: avatarWidthHeight,
                               child: CachedNetworkImage(
-                                imageUrl: ref(userProfileProvider).avatar,
+                                imageUrl: ref.watch(userProfileProvider).avatar,
                                 placeholder: (context, url) => const Center(
                                   child: SizedBox(
                                     height: 28,
@@ -89,7 +111,7 @@ class UserProfileScreen extends StatelessWidget {
                             height6(),
                             //region User name and email
                             Text(
-                              ref(userProfileProvider).displayName,
+                              ref.watch(userProfileProvider).displayName,
                               style: const TextStyle(
                                 color: AppColors.purple,
                                 fontSize: 17,
@@ -97,7 +119,7 @@ class UserProfileScreen extends StatelessWidget {
                             ),
                             height2(),
                             Text(
-                              ref(userProfileProvider).email ?? "",
+                              ref.watch(userProfileProvider).email ?? "",
                               style: const TextStyle(
                                 color: AppColors.lightGray,
                                 fontSize: 9,
@@ -161,44 +183,22 @@ class UserProfileScreen extends StatelessWidget {
                   },
                 ),
                 lightGrayDividerThickness0_5,
-                ProviderListener(
-                  provider: httpRequestStateProvider,
-                  onChange: (context, HttpRequestState httpRequestState) {
-                    httpRequestState.whenOrNull(
-                      success: (_, actionSucceeded) {
-                        // check for the succeeded action so if there are more than
-                        // one provider listener listening to the same state, they don't run together
-                        if (actionSucceeded == logoutAction) {
-                          showSnackBar(
-                            context,
-                            AppLocalizations.of(context)!
-                                .you_logged_out_successfully,
-                          );
-                          Navigator.pop(context);
-                        }
-                      },
-                      error: (errorMessage) => showSnackBarForError(
-                        context,
-                        errorMessage,
+                Consumer(
+                  builder: (_, ref, __) {
+                    final httpRequestState =
+                        ref.watch(httpRequestStateProvider);
+                    return httpRequestState.maybeWhen(
+                      loading: () => const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                      orElse: () => AppDrawerButton(
+                        title: AppLocalizations.of(context)!.logout,
+                        onTabFunction: () {
+                          ref.watch(authProvider.notifier).logout();
+                        },
                       ),
                     );
                   },
-                  child: Consumer(
-                    builder: (_, ref, __) {
-                      final httpRequestState = ref(httpRequestStateProvider);
-                      return httpRequestState.maybeWhen(
-                        loading: () => const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                        orElse: () => AppDrawerButton(
-                          title: AppLocalizations.of(context)!.logout,
-                          onTabFunction: () {
-                            ref(authProvider.notifier).logout();
-                          },
-                        ),
-                      );
-                    },
-                  ),
                 ),
               ],
             ),

@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -42,7 +43,7 @@ class LocationPicker extends StatelessWidget {
             children: [
               Consumer(
                 builder: (_, ref, __) {
-                  final postedListing = ref(postListingProvider).postedListing!;
+                  final postedListing = ref.watch(postListingProvider).postedListing!;
                   final lat = postedListing.lat;
                   final lng = postedListing.lng;
                   final latLngToShow = LatLng(lat, lng);

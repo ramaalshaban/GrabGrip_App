@@ -14,15 +14,72 @@ import 'package:grab_grip/utils/device.dart';
 import 'package:grab_grip/utils/functions.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
-class PostListingStepFourScreen extends StatelessWidget {
+class PostListingStepFourScreen extends ConsumerWidget {
   const PostListingStepFourScreen({Key? key}) : super(key: key);
   static final detailsTabFormKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     WidgetsBinding.instance?.addPostFrameCallback((_) {
-      context.read(locationPickerStateProvider.notifier).setPosting();
+      ref.watch(locationPickerStateProvider.notifier).setPosting();
     });
+    //region Listeners
+    ref.listen<HttpRequestState>(httpRequestStateProvider,
+        (_, httpRequestState) {
+      httpRequestState.whenOrNull(
+        success: (string, _) {
+          if (string == saveListingSuccess) {
+            showSnackBar(
+              context,
+              "Your listing has been saved successfully",
+            );
+          }
+        },
+        error: (string) {
+          if (string == saveListingError) {
+            showSnackBarForError(
+              context,
+              "Unable to save Your listing",
+            );
+          }
+        },
+      );
+    });
+    ref.listen<PostListingAvailabilityState>(listingAvailabilityStateProvider,
+        (_, availabilityState) {
+
+      availabilityState.when(
+        published: (successfullyPublished) => successfullyPublished == true
+            ? showSnackBar(
+                context,
+                "Your listing has been published successfully",
+              )
+            : showSnackBarForError(
+                context,
+                "Unable to publish Your listing",
+              ),
+        unPublished: (successfullyUnPublished) =>
+            successfullyUnPublished == true
+                ? showSnackBar(
+                    context,
+                    "Your listing has been unpublished successfully",
+                  )
+                : showSnackBarForError(
+                    context,
+                    "Unable to unpublish Your listing",
+                  ),
+        reEnabled: (successfullyReEnabled) => successfullyReEnabled == true
+            ? showSnackBar(
+                context,
+                "Your listing has been re-enabled successfully",
+              )
+            : showSnackBarForError(
+                context,
+                "Unable to re-enable Your listing",
+              ),
+      );
+    });
+    //endregion
     return DefaultTabController(
       length: 3,
       child: Column(
@@ -74,72 +131,11 @@ class PostListingStepFourScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
               ),
-              child: ProviderListener(
-                provider: listingAvailabilityStateProvider,
-                onChange:
-                    (context, PostListingAvailabilityState availabilityState) {
-                  //region snack bars
-                  availabilityState.when(
-                    published: (successfullyPublished) =>
-                        successfullyPublished == true
-                            ? showSnackBar(
-                                context,
-                                "Your listing has been published successfully",
-                              )
-                            : showSnackBarForError(
-                                context,
-                                "Unable to publish Your listing",
-                              ),
-                    unPublished: (successfullyUnPublished) =>
-                        successfullyUnPublished == true
-                            ? showSnackBar(
-                                context,
-                                "Your listing has been unpublished successfully",
-                              )
-                            : showSnackBarForError(
-                                context,
-                                "Unable to unpublish Your listing",
-                              ),
-                    reEnabled: (successfullyReEnabled) =>
-                        successfullyReEnabled == true
-                            ? showSnackBar(
-                                context,
-                                "Your listing has been re-enabled successfully",
-                              )
-                            : showSnackBarForError(
-                                context,
-                                "Unable to re-enable Your listing",
-                              ),
-                  );
-                  //endregion
-                },
-                child: ProviderListener(
-                  provider: httpRequestStateProvider,
-                  onChange: (context, HttpRequestState httpRequestState) {
-                    httpRequestState.whenOrNull(
-                      success: (string, _) {
-                        if (string == saveListingSuccess) {
-                          showSnackBar(
-                            context,
-                            "Your listing has been saved successfully",
-                          );
-                        }
-                      },
-                      error: (string) {
-                        if (string == saveListingError) {
-                          showSnackBarForError(
-                            context,
-                            "Unable to save Your listing",
-                          );
-                        }
-                      },
-                    );
-                  },
-                  child: Consumer(
-                    builder: (context, ref, __) {
-                      final listingAvailabilityState =
-                          ref(listingAvailabilityStateProvider);
-                      return ref(httpRequestStateProvider).maybeWhen(
+              child: Consumer(
+                builder: (context, ref, __) {
+                  final listingAvailabilityState =
+                      ref.watch(listingAvailabilityStateProvider);
+                  return ref.watch(httpRequestStateProvider).maybeWhen(
                         innerLoading: (_) => Container(
                           constraints:
                               BoxConstraints(minWidth: screenWidth(context)) /
@@ -164,7 +160,8 @@ class PostListingStepFourScreen extends StatelessWidget {
                                     {
                                       if (detailsTabFormKey.currentState!
                                           .validate()) {
-                                        ref(postListingProvider.notifier)
+                                        ref
+                                            .watch(postListingProvider.notifier)
                                             .saveListing();
                                       }
                                     }
@@ -180,7 +177,8 @@ class PostListingStepFourScreen extends StatelessWidget {
                                           Colors.amber[800],
                                         );
                                       } else {
-                                        ref(postListingProvider.notifier)
+                                        ref
+                                            .watch(postListingProvider.notifier)
                                             .saveListing();
                                       }
                                     }
@@ -195,20 +193,26 @@ class PostListingStepFourScreen extends StatelessWidget {
                                           listingAvailabilityState:
                                               listingAvailabilityState,
                                           onClickAction: () {
-                                            ref(postListingProvider.notifier)
+                                            ref
+                                                .watch(
+                                                  postListingProvider.notifier,
+                                                )
                                                 .changeListingAvailability(
-                                              isUnPublish: true,
-                                            );
+                                                  isUnPublish: true,
+                                                );
                                           },
                                         )
                                       : PublishButton(
                                           listingAvailabilityState:
                                               listingAvailabilityState,
                                           onClickAction: () {
-                                            ref(postListingProvider.notifier)
+                                            ref
+                                                .watch(
+                                                  postListingProvider.notifier,
+                                                )
                                                 .changeListingAvailability(
-                                              isPublish: true,
-                                            );
+                                                  isPublish: true,
+                                                );
                                           },
                                         ),
                               unPublished: (successfullyUnPublished) =>
@@ -217,20 +221,26 @@ class PostListingStepFourScreen extends StatelessWidget {
                                           listingAvailabilityState:
                                               listingAvailabilityState,
                                           onClickAction: () {
-                                            ref(postListingProvider.notifier)
+                                            ref
+                                                .watch(
+                                                  postListingProvider.notifier,
+                                                )
                                                 .changeListingAvailability(
-                                              isReEnable: true,
-                                            );
+                                                  isReEnable: true,
+                                                );
                                           },
                                         )
                                       : PublishButton(
                                           listingAvailabilityState:
                                               listingAvailabilityState,
                                           onClickAction: () {
-                                            ref(postListingProvider.notifier)
+                                            ref
+                                                .watch(
+                                                  postListingProvider.notifier,
+                                                )
                                                 .changeListingAvailability(
-                                              isUnPublish: true,
-                                            );
+                                                  isUnPublish: true,
+                                                );
                                           },
                                         ),
                               reEnabled: (successfullyReEnabled) =>
@@ -239,29 +249,33 @@ class PostListingStepFourScreen extends StatelessWidget {
                                           listingAvailabilityState:
                                               listingAvailabilityState,
                                           onClickAction: () {
-                                            ref(postListingProvider.notifier)
+                                            ref
+                                                .watch(
+                                                  postListingProvider.notifier,
+                                                )
                                                 .changeListingAvailability(
-                                              isUnPublish: true,
-                                            );
+                                                  isUnPublish: true,
+                                                );
                                           },
                                         )
                                       : PublishButton(
                                           listingAvailabilityState:
                                               listingAvailabilityState,
                                           onClickAction: () {
-                                            ref(postListingProvider.notifier)
+                                            ref
+                                                .watch(
+                                                  postListingProvider.notifier,
+                                                )
                                                 .changeListingAvailability(
-                                              isReEnable: true,
-                                            );
+                                                  isReEnable: true,
+                                                );
                                           },
                                         ),
                             ),
                           ],
                         ),
                       );
-                    },
-                  ),
-                ),
+                },
               ),
             ),
           ),

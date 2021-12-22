@@ -13,20 +13,20 @@ import 'package:grab_grip/utils/device.dart';
 import 'package:grab_grip/utils/functions.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class ReviewsWidget extends StatefulWidget {
+class ReviewsWidget extends ConsumerStatefulWidget {
   const ReviewsWidget({Key? key}) : super(key: key);
 
   @override
-  State<ReviewsWidget> createState() => _ReviewsWidgetState();
+  ConsumerState<ReviewsWidget> createState() => _ReviewsWidgetState();
 }
 
-class _ReviewsWidgetState extends State<ReviewsWidget> {
+class _ReviewsWidgetState extends ConsumerState<ReviewsWidget> {
   @override
   void initState() {
     ReviewsProvider.pagingController.addPageRequestListener((pageKey) {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
         if (mounted) {
-          context.read(reviewsProvider.notifier).getReviews(pageKey);
+          ref.watch(reviewsProvider.notifier).getReviews(pageKey);
         }
       });
     });

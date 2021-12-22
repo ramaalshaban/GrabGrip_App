@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,18 +22,16 @@ class SetLocationScreen extends ConsumerWidget {
   final Completer<GoogleMapController> mapController = Completer();
 
   @override
-  Widget build(BuildContext context, ScopedReader ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     WidgetsBinding.instance?.addPostFrameCallback((_) {
-      context
-          .read(locationPickerStateProvider.notifier)
-          .setChoosingPreferences();
+      ref.watch(locationPickerStateProvider.notifier).setChoosingPreferences();
     });
-    if (ref(filterAndSortProvider).place == unknown) {
+    if (ref.watch(filterAndSortProvider).place == unknown) {
       // check if google api returns no results or error for the location that user dragged the marker to
       showSnackBar(context, "Pick another location please", Colors.amber[800]);
     }
-    if (ref(filterAndSortProvider).latLng == null) {
-      getUserCurrentLocation(context);
+    if (ref.watch(filterAndSortProvider).latLng == null) {
+      getUserCurrentLocation(context, ref);
       return const MapPlaceholderLoader();
     } else {
       return Scaffold(
@@ -48,7 +47,7 @@ class SetLocationScreen extends ConsumerWidget {
                 children: [
                   GoogleMap(
                     initialCameraPosition: getCameraPosition(
-                      ref(filterAndSortProvider.notifier).latLng!,
+                      ref.watch(filterAndSortProvider.notifier).latLng!,
                     ),
                     onMapCreated: (controller) {
                       if (!mapController.isCompleted) {
@@ -58,7 +57,8 @@ class SetLocationScreen extends ConsumerWidget {
                     markers: {
                       getMarker(
                         context,
-                        ref(filterAndSortProvider.notifier).latLng!,
+                        ref.watch(filterAndSortProvider.notifier).latLng!,
+                        ref,
                       ),
                     },
                   ),
@@ -124,17 +124,14 @@ class SetLocationScreen extends ConsumerWidget {
     return CameraPosition(target: latLng, zoom: 13);
   }
 
-  Marker getMarker(
-    BuildContext context,
-    LatLng latLng,
-  ) {
+  Marker getMarker(BuildContext context, LatLng latLng, WidgetRef ref) {
     return Marker(
       icon: BitmapDescriptor.defaultMarkerWithHue(256),
       markerId: MarkerId("${latLng.latitude},${latLng.longitude}"),
       position: latLng,
       draggable: true,
       onDragEnd: (LatLng pickedLatLng) async {
-        await getLocationBoundsAndAddress(context, pickedLatLng);
+        await getLocationBoundsAndAddress(ref, pickedLatLng);
         final cameraPosition = CameraPosition(target: pickedLatLng, zoom: 13);
         (await mapController.future).animateCamera(
           CameraUpdate.newCameraPosition(cameraPosition),
@@ -146,7 +143,10 @@ class SetLocationScreen extends ConsumerWidget {
     );
   }
 
-  Future<void> getUserCurrentLocation(BuildContext context) async {
+  Future<void> getUserCurrentLocation(
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
     final locationPackage = Location();
 // check if the location service is enabled
     final serviceEnabled = await locationPackage.requestService();
@@ -161,7 +161,7 @@ class SetLocationScreen extends ConsumerWidget {
           },
           continueAction: () {
             Navigator.pop(context);
-            getUserCurrentLocation(context);
+            getUserCurrentLocation(context, ref);
           },
           cancelActionText: "Continue without location",
           continueActionText: "Okay",
@@ -176,7 +176,7 @@ class SetLocationScreen extends ConsumerWidget {
               userLocation.latitude!,
               userLocation.longitude!,
             );
-            getLocationBoundsAndAddress(context, currentLocation);
+            getLocationBoundsAndAddress(ref, currentLocation);
           });
         } else if (status == permission_handler.PermissionStatus.denied) {
           showDialog(
@@ -190,7 +190,7 @@ class SetLocationScreen extends ConsumerWidget {
               },
               continueAction: () {
                 Navigator.pop(context);
-                getUserCurrentLocation(context);
+                getUserCurrentLocation(context, ref);
               },
               cancelActionText: "Continue without location",
               continueActionText: "Okay",
@@ -220,11 +220,11 @@ class SetLocationScreen extends ConsumerWidget {
   }
 
   Future<void> getLocationBoundsAndAddress(
-    BuildContext context,
+    WidgetRef ref,
     LatLng latLng,
   ) async {
-    await context
-        .read(locationPickerStateProvider.notifier)
+    await ref
+        .watch(locationPickerStateProvider.notifier)
         .getLocationBoundsAndAddress(latLng);
   }
 

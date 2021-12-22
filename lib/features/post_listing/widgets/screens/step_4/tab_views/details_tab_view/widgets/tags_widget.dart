@@ -24,7 +24,7 @@ class _TagsWidgetState extends State<TagsWidget> {
       children: [
         Consumer(
           builder: (_, ref, __) {
-            final tags = ref(postListingProvider).tags;
+            final tags = ref.watch(postListingProvider).tags;
             return Wrap(
               spacing: 4,
               children: List.generate(
@@ -55,7 +55,7 @@ class _TagsWidgetState extends State<TagsWidget> {
                       return IconButton(
                         onPressed: () {
                           if (tagTextController.text.trim().isNotEmpty) {
-                            ref(postListingProvider.notifier)
+                            ref.watch(postListingProvider.notifier)
                                 .addTag(tagTextController.text.trim());
                             tagTextController.text = "";
                           }

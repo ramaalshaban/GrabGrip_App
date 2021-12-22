@@ -151,6 +151,7 @@ class NetworkService {
       );
       return Success(browseCall.data);
     } catch (error) {
+      print((error as TypeError).stackTrace);
       final errorMessage = _errorHandler(error as DioError);
       return Error(errorMessage);
     }
@@ -230,6 +231,7 @@ class NetworkService {
       );
       return Success(postListingCall.data);
     } catch (error) {
+      print((error as TypeError).stackTrace);
       final errorMessage = _errorHandler(error as DioError);
       return Error(errorMessage);
     }

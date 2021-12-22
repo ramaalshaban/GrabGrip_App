@@ -12,9 +12,9 @@ class AdditionalOptionsWidget extends ConsumerWidget {
   const AdditionalOptionsWidget({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader ref) {
-    final additionalOptions = ref(listingDetailsProvider).additionalOptions;
-    return ref(httpRequestStateProvider).maybeWhen(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final additionalOptions = ref.watch(listingDetailsProvider).additionalOptions;
+    return ref.watch(httpRequestStateProvider).maybeWhen(
       error: (_) => Container(),
       orElse: () => Visibility(
         visible: additionalOptions.isNotEmpty,
@@ -46,7 +46,7 @@ class AdditionalOptionsWidget extends ConsumerWidget {
                       Consumer(
                         builder: (_, ref, __) {
                           final additionalOption = additionalOptions[index];
-                          final isOptionSelected = ref(listingDetailsProvider)
+                          final isOptionSelected = ref.watch(listingDetailsProvider)
                               .selectedAdditionalOptions
                               .containsKey(additionalOption.id.toString());
                           return Visibility(
@@ -75,13 +75,13 @@ class AdditionalOptionsWidget extends ConsumerWidget {
                                           color: AppColors.purple,
                                         ),
                                         elevation: 16,
-                                        value: ref(listingDetailsProvider)
+                                        value: ref.watch(listingDetailsProvider)
                                                     .selectedAdditionalOptionsMeta[
                                                 additionalOption.id
                                                     .toString()]?["quantity"] ??
                                             1,
                                         onChanged: (int? selectedValue) {
-                                          ref(
+                                          ref.watch(
                                             listingDetailsProvider.notifier,
                                           ).changeAdditionalOptionValue(
                                             additionalOption.id.toString(),

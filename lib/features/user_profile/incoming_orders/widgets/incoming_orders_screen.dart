@@ -12,22 +12,21 @@ import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/functions.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class IncomingOrdersScreen extends StatefulWidget {
+class IncomingOrdersScreen extends ConsumerStatefulWidget {
   const IncomingOrdersScreen({Key? key}) : super(key: key);
 
   @override
-  State<IncomingOrdersScreen> createState() => _IncomingOrdersScreenState();
+  ConsumerState<IncomingOrdersScreen> createState() =>
+      _IncomingOrdersScreenState();
 }
 
-class _IncomingOrdersScreenState extends State<IncomingOrdersScreen> {
+class _IncomingOrdersScreenState extends ConsumerState<IncomingOrdersScreen> {
   @override
   void initState() {
     IncomingOrdersProvider.pagingController.addPageRequestListener((pageKey) {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
         if (mounted) {
-          context
-              .read(incomingOrdersProvider.notifier)
-              .getIncomingOrders(pageKey);
+          ref.watch(incomingOrdersProvider.notifier).getIncomingOrders(pageKey);
         }
       });
     });
@@ -66,7 +65,8 @@ class _IncomingOrdersScreenState extends State<IncomingOrdersScreen> {
           child: PagedListView<int, Order>(
             pagingController: IncomingOrdersProvider.pagingController,
             builderDelegate: PagedChildBuilderDelegate<Order>(
-              itemBuilder: (context, item, index) => IncomingOrderItem(order: item),
+              itemBuilder: (context, item, index) =>
+                  IncomingOrderItem(order: item),
               firstPageErrorIndicatorBuilder: (context) => PagedListErrorWidget(
                 pagingController: IncomingOrdersProvider.pagingController,
               ),

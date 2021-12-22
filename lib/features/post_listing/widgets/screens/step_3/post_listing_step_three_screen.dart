@@ -8,33 +8,14 @@ import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text_fields.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
-class PostListingStepThreeScreen extends StatefulWidget {
-  const PostListingStepThreeScreen({Key? key}) : super(key: key);
+class PostListingStepThreeScreen extends ConsumerWidget {
+  const PostListingStepThreeScreen();
+
+
 
   @override
-  State<PostListingStepThreeScreen> createState() =>
-      _PostListingStepThreeScreenState();
-}
-
-class _PostListingStepThreeScreenState
-    extends State<PostListingStepThreeScreen> {
-  final _formKey = GlobalKey<FormState>();
-  String title = "";
-  String description = "";
-  final titleTextController = TextEditingController();
-  final descriptionTextController = TextEditingController();
-
-  @override
-  void initState() {
-    titleTextController.text =
-        context.read(postListingProvider.notifier).title ?? "";
-    descriptionTextController.text =
-        context.read(postListingProvider.notifier).description ?? "";
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _formKey = GlobalKey<FormState>();
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -47,10 +28,11 @@ class _PostListingStepThreeScreenState
               children: <Widget>[
                 TextFormField(
                   onChanged: (text) {
-                    title = text;
-                    context.read(postListingProvider.notifier).title = title;
+                    ref.watch(postListingProvider.notifier).title = text.trim();
                   },
-                  controller: titleTextController,
+                  controller: TextEditingController(
+                    text: ref.watch(postListingProvider.notifier).title ?? "",
+                  ),
                   validator: listingTitleFieldValidator,
                   keyboardType: TextInputType.name,
                   decoration: standardInputDecoration.copyWith(
@@ -64,11 +46,13 @@ class _PostListingStepThreeScreenState
                   minLines: 10,
                   maxLines: 10,
                   onChanged: (text) {
-                    description = text.trim();
-                    context.read(postListingProvider.notifier).description =
+                    ref.watch(postListingProvider.notifier).description =
                         text.trim();
                   },
-                  controller: descriptionTextController,
+                  controller: TextEditingController(
+                    text: ref.watch(postListingProvider.notifier).description ??
+                        "",
+                  ),
                   validator: listingDescriptionFieldValidator,
                   keyboardType: TextInputType.multiline,
                   decoration: standardInputDecoration.copyWith(
@@ -86,15 +70,11 @@ class _PostListingStepThreeScreenState
               ],
             ),
           ),
-          Consumer(
-            builder: (_, ref, __) {
-              return ContinueButton(
-                formKey: _formKey,
-                buttonText: AppLocalizations.of(context)!.create_and_continue,
-                onClickAction: () {
-                  ref(postListingProvider.notifier).postListingAsDraft();
-                },
-              );
+          ContinueButton(
+            formKey: _formKey,
+            buttonText: AppLocalizations.of(context)!.create_and_continue,
+            onClickAction: () {
+              ref.watch(postListingProvider.notifier).postListingAsDraft();
             },
           ),
         ],

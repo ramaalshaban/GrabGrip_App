@@ -39,7 +39,7 @@ class ShippingFeeItem extends StatelessWidget {
                   controller: nameTextController,
                   onChanged: (text) {
                     shippingFee = shippingFee.copyWith(name: text);
-                    ref(postListingProvider.notifier)
+                    ref.watch(postListingProvider.notifier)
                         .editShippingFee(index, shippingFee);
                   },
                   keyboardType: TextInputType.text,
@@ -65,7 +65,7 @@ class ShippingFeeItem extends StatelessWidget {
                   onChanged: (text) {
                     final price = text.isEmpty ? "" : text;
                     shippingFee = shippingFee.copyWith(price: price);
-                    ref(postListingProvider.notifier)
+                    ref.watch(postListingProvider.notifier)
                         .editShippingFee(index, shippingFee);
                   },
                   keyboardType:
@@ -82,8 +82,8 @@ class ShippingFeeItem extends StatelessWidget {
               //region Delete button
               InkWell(
                 onTap: () {
-                  ref(postListingProvider.notifier).removeShippingFee(index);
-                  ref(listingPricingProvider.notifier)
+                  ref.watch(postListingProvider.notifier).removeShippingFee(index);
+                  ref.watch(listingPricingProvider.notifier)
                       .changeNumOfCreatedShippingFees(-1);
                   // prevent the previously focused text field from receiving the focus again after removing a shipping fee item
                   FocusScope.of(context).requestFocus(FocusNode());

@@ -34,7 +34,7 @@ class AppDrawerHeader extends StatelessWidget {
                       width: 70,
                       height: 70,
                       child: CachedNetworkImage(
-                        imageUrl: ref(userProfileProvider).avatar,
+                        imageUrl: ref.watch(userProfileProvider).avatar,
                         placeholder: (context, url) => const Center(
                           child: SizedBox(
                             height: 28,
@@ -67,7 +67,7 @@ class AppDrawerHeader extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          ref(userProfileProvider).displayName,
+                          ref.watch(userProfileProvider).displayName,
                           style: const TextStyle(
                             color: AppColors.purple,
                             fontSize: 17,
@@ -75,7 +75,7 @@ class AppDrawerHeader extends StatelessWidget {
                         ),
                         height2(),
                         Text(
-                          ref(userProfileProvider).email ?? "",
+                          ref.watch(userProfileProvider).email ?? "",
                           style: const TextStyle(
                             color: AppColors.lightGray,
                             fontSize: 14,

@@ -9,13 +9,13 @@ import 'package:grab_grip/features/browsing/home/widgets/home_app_bar.dart';
 import 'package:grab_grip/features/browsing/home/widgets/horizontal_list.dart';
 import 'package:grab_grip/style/colors.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // let the authProvider be initialized (i.e. let its _initialize() method run)
-    context.read(authProvider);
+    ref.watch(authProvider);
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.white,
@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Consumer(
-                builder: (_, watch, __) {
+                builder: (_, ref, __) {
                   return TextButton(
                     onPressed: () {
                       context.router.push(

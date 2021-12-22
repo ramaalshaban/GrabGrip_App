@@ -6,21 +6,21 @@ import 'package:grab_grip/features/user_profile/favorites/widgets/favorite_item_
 import 'package:grab_grip/shared/widgets/custom_app_bar.dart';
 import 'package:grab_grip/style/colors.dart';
 
-class FavoritesScreen extends StatelessWidget {
+class FavoritesScreen extends ConsumerWidget {
   const FavoritesScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     WidgetsBinding.instance?.addPostFrameCallback((_) {
-      context.read(favoritesProvider.notifier).getFavorites();
+      ref.watch(favoritesProvider.notifier).getFavorites();
     });
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: const CustomAppBar(appBarTitle: "Favorites"),
       body: Consumer(
         builder: (context, ref, __) {
-          final favorites = ref(favoritesProvider);
-          return ref(httpRequestStateProvider).maybeWhen(
+          final favorites = ref.watch(favoritesProvider);
+          return ref.watch(httpRequestStateProvider).maybeWhen(
             loading: () => const FavoriteItemSkeletonLoader(),
             error: (errorMessage) => Center(
               child: Text(

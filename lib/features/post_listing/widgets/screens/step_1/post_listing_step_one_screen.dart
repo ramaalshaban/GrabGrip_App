@@ -33,7 +33,7 @@ class PostListingStepOneScreen extends StatelessWidget {
             Consumer(
               builder: (_, ref, __) {
                 return AnimatedOpacity(
-                  opacity: ref(postListingProvider)
+                  opacity: ref.watch(postListingProvider)
                               .category
                               ?.subCategories
                               .isNotEmpty ??
@@ -62,8 +62,8 @@ class PostListingStepOneScreen extends StatelessWidget {
         ),
         Consumer(
           builder: (_, ref, __) {
-            final selectedCategory = ref(postListingProvider).category;
-            final selectedSubcategory = ref(postListingProvider).subcategory;
+            final selectedCategory = ref.watch(postListingProvider).category;
+            final selectedSubcategory = ref.watch(postListingProvider).subcategory;
             final visibilityConditions = (selectedCategory != null) &&
                 (selectedCategory.subCategories.isEmpty ||
                     (selectedCategory.subCategories.isNotEmpty &&
@@ -74,8 +74,8 @@ class PostListingStepOneScreen extends StatelessWidget {
               child: ContinueButton(
                 buttonText: AppLocalizations.of(context)!.continue_label,
                 onClickAction: () {
-                  ref(postListingStepProvider.notifier).setStep2();
-                  context.read(postListingProvider.notifier).getPricingModels();
+                  ref.watch(postListingStepProvider.notifier).setStep2();
+                  ref.watch(postListingProvider.notifier).getPricingModels();
                 },
               ),
             );

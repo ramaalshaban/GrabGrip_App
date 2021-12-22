@@ -12,18 +12,14 @@ import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
-class FilterDialog extends ConsumerWidget {
+class FilterDialog extends StatelessWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context) {
     final distanceOptions = FilterSortProvider.getDistanceOptions(context);
     final listingTypeOptions =
         FilterSortProvider.getListingTypeOptions(context);
-    final minPriceTextController = TextEditingController(
-      text: watch(filterAndSortProvider.notifier).minPrice,
-    );
-    final maxPriceTextController = TextEditingController(
-      text: watch(filterAndSortProvider.notifier).maxPrice,
-    );
+    final minPriceTextController = TextEditingController();
+    final maxPriceTextController = TextEditingController();
     return SingleChildScrollView(
       child: AlertDialog(
         backgroundColor: AppColors.white,
@@ -31,25 +27,29 @@ class FilterDialog extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             //region Reset button
-            TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.red[600],
-              ),
-              onPressed: () {
-                watch(filterAndSortProvider.notifier).reset();
-                minPriceTextController.text = "";
-                maxPriceTextController.text = "";
-                watch(filterAndSortProvider.notifier).resetPlace();
-                BrowseProvider.pagingController.refresh();
-                Navigator.pop(context);
+            Consumer(
+              builder: (_, ref, __) {
+                return TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.red[600],
+                  ),
+                  onPressed: () {
+                    ref.watch(filterAndSortProvider.notifier).reset();
+                    minPriceTextController.text = "";
+                    maxPriceTextController.text = "";
+                    ref.watch(filterAndSortProvider.notifier).resetPlace();
+                    BrowseProvider.pagingController.refresh();
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    AppLocalizations.of(context)!.reset,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                );
               },
-              child: Text(
-                AppLocalizations.of(context)!.reset,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
             ),
             //endregion
             lightPurpleDividerThickness0_5,
@@ -81,63 +81,75 @@ class FilterDialog extends ConsumerWidget {
             height12(),
             SizedBox(
               height: 36,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: TextField(
-                      onChanged: (minPrice) {
-                        watch(filterAndSortProvider.notifier).minPrice =
-                            minPrice;
-                      },
-                      controller: minPriceTextController,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.lightPurple,
+              child: Consumer(
+                builder: (_, ref, __) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        flex: 4,
+                        child: TextField(
+                          onChanged: (minPrice) {
+                            ref.watch(filterAndSortProvider.notifier).minPrice =
+                                minPrice;
+                          },
+                          controller: TextEditingController(
+                            text: ref
+                                .watch(filterAndSortProvider.notifier)
+                                .minPrice,
                           ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.purple,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Text(
-                      AppLocalizations.of(context)!.to,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Expanded(
-                    flex: 4,
-                    child: TextField(
-                      onChanged: (maxPrice) {
-                        watch(filterAndSortProvider.notifier).maxPrice =
-                            maxPrice;
-                      },
-                      controller: maxPriceTextController,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.lightPurple,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.purple,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColors.lightPurple,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColors.purple,
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                ],
+                      Expanded(
+                        flex: 3,
+                        child: Text(
+                          AppLocalizations.of(context)!.to,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Expanded(
+                        flex: 4,
+                        child: TextField(
+                          onChanged: (maxPrice) {
+                            ref.watch(filterAndSortProvider.notifier).maxPrice =
+                                maxPrice;
+                          },
+                          controller: TextEditingController(
+                            text: ref
+                                .watch(filterAndSortProvider.notifier)
+                                .maxPrice,
+                          ),
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColors.lightPurple,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColors.purple,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
             //endregion

@@ -12,16 +12,16 @@ class ListingTypeItem extends ConsumerWidget {
   final PricingModel listingType;
 
   @override
-  Widget build(BuildContext context, ScopedReader ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
-        ref(postListingProvider.notifier).listingTypeId = listingType.id;
+        ref.watch(postListingProvider.notifier).listingTypeId = listingType.id;
       },
       child: Container(
         alignment: Alignment.center,
         height: 24.0,
         decoration: BoxDecoration(
-          color: ref(postListingProvider).listingTypeId == listingType.id
+          color: ref.watch(postListingProvider).listingTypeId == listingType.id
               ? AppColors.purple
               : AppColors.white,
           borderRadius: BorderRadius.circular(4),
@@ -34,7 +34,7 @@ class ListingTypeItem extends ConsumerWidget {
           listingType.name,
           style: TextStyle(
             fontSize: 12,
-            color: ref(postListingProvider).listingTypeId == listingType.id
+            color: ref.watch(postListingProvider).listingTypeId == listingType.id
                 ? AppColors.white
                 : AppColors.purple,
           ),

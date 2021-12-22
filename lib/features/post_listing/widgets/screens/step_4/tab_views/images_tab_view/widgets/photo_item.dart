@@ -81,7 +81,7 @@ class PhotoItem extends StatelessWidget {
             Consumer(
               builder: (_, ref, __) {
                 return InkWell(
-                  onTap: () => ref(postListingProvider.notifier)
+                  onTap: () => ref.watch(postListingProvider.notifier)
                       .deletePhoto(photo.index),
                   child: Container(
                     margin: const EdgeInsets.only(top: 4, right: 4),

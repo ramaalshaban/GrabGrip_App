@@ -8,25 +8,25 @@ import 'package:grab_grip/features/browsing/browse/widgets/browse_screen/body/ma
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/functions.dart';
 
-class BrowseScreenBody extends StatefulWidget {
+class BrowseScreenBody extends ConsumerStatefulWidget {
   @override
-  _BrowseScreenBodyState createState() => _BrowseScreenBodyState();
+  ConsumerState<BrowseScreenBody> createState() => _BrowseScreenBodyState();
 }
 
-class _BrowseScreenBodyState extends State<BrowseScreenBody> {
+class _BrowseScreenBodyState extends ConsumerState<BrowseScreenBody> {
   @override
   void initState() {
     BrowseProvider.pagingController.addPageRequestListener((pageKey) {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        if(mounted){
-        context.read(browseDataProvider.notifier).browse(pageKey);
+        if (mounted) {
+          ref.watch(browseDataProvider.notifier).browse(pageKey);
         }
       });
     });
 
     BrowseProvider.pagingController.addStatusListener((status) {
       if (BrowseProvider.pagingController.error == noInternetConnection) {
-        if(mounted){
+        if (mounted) {
           showSnackBarForError(
             context,
             BrowseProvider.pagingController.error.toString(),
@@ -40,8 +40,8 @@ class _BrowseScreenBodyState extends State<BrowseScreenBody> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
-        final currentViewMode = watch(gearsViewMode);
+      builder: (context, ref, child) {
+        final currentViewMode = ref.watch(gearsViewMode);
         return RefreshIndicator(
           onRefresh: () async {
             BrowseProvider.pagingController.refresh();
@@ -50,8 +50,8 @@ class _BrowseScreenBodyState extends State<BrowseScreenBody> {
             grid: () => const PaginatedGridView(),
             list: () => const PaginatedListView(),
             map: () => Consumer(
-              builder: (_, watch, __) {
-                final browseData = watch(browseDataProvider);
+              builder: (_, ref, __) {
+                final browseData = ref.watch(browseDataProvider);
                 return GearsMap(
                   browseData: browseData,
                 );
@@ -62,5 +62,4 @@ class _BrowseScreenBodyState extends State<BrowseScreenBody> {
       },
     );
   }
-
 }

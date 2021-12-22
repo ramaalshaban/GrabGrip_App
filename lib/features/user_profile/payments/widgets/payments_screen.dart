@@ -6,12 +6,12 @@ import 'package:grab_grip/shared/widgets/custom_app_bar.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
-class PaymentsScreen extends StatelessWidget {
+class PaymentsScreen extends ConsumerWidget {
   const PaymentsScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    context.read(paymentMethodsProvider.notifier).getPaymentMethods();
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(paymentMethodsProvider.notifier).getPaymentMethods();
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: const CustomAppBar(
@@ -21,7 +21,7 @@ class PaymentsScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 42.0),
         child: Consumer(
           builder: (_, ref, __) {
-            final paymentMethods = ref(paymentMethodsProvider);
+            final paymentMethods = ref.watch(paymentMethodsProvider);
             return DefaultTabController(
               length: paymentMethods.length,
               child: paymentMethods.isNotEmpty

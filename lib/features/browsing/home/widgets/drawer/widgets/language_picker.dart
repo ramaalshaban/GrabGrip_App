@@ -26,27 +26,31 @@ class LanguagePicker extends StatelessWidget {
       onTap: () => showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            title: Text(AppLocalizations.of(context)!.change_app_lang),
-            actionsAlignment: MainAxisAlignment.center,
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  const english = Locale('en');
-                  context.read(localeProvider.notifier).locale = english;
-                  Navigator.pop(context);
-                },
-                child: const Text("English"),
-              ),
-              TextButton(
-                onPressed: () {
-                  const arabic = Locale('ar');
-                  context.read(localeProvider.notifier).locale = arabic;
-                  Navigator.pop(context);
-                },
-                child: const Text("العربيّة"),
-              )
-            ],
+          return Consumer(
+            builder: (_, ref, __) {
+              return AlertDialog(
+                title: Text(AppLocalizations.of(context)!.change_app_lang),
+                actionsAlignment: MainAxisAlignment.center,
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      const english = Locale('en');
+                      ref.watch(localeProvider.notifier).locale = english;
+                      Navigator.pop(context);
+                    },
+                    child: const Text("English"),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      const arabic = Locale('ar');
+                      ref.watch(localeProvider.notifier).locale = arabic;
+                      Navigator.pop(context);
+                    },
+                    child: const Text("العربيّة"),
+                  )
+                ],
+              );
+            },
           );
         },
       ),

@@ -19,8 +19,8 @@ class ShippingFeesWidget extends StatelessWidget {
         Consumer(
           builder: (_, ref, __) {
             final shippingFeesLength =
-                ref(listingPricingProvider).shippingFeesLength;
-            final shippingFees = ref(postListingProvider.notifier).shippingFees;
+                ref.watch(listingPricingProvider).shippingFeesLength;
+            final shippingFees = ref.watch(postListingProvider.notifier).shippingFees;
             return Wrap(
               children: List.generate(
                 shippingFeesLength,
@@ -52,8 +52,8 @@ class ShippingFeesWidget extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                ref(postListingProvider.notifier).addEmptyShippingFee();
-                ref(listingPricingProvider.notifier)
+                ref.watch(postListingProvider.notifier).addEmptyShippingFee();
+                ref.watch(listingPricingProvider.notifier)
                     .changeNumOfCreatedShippingFees(1);
                 // prevent the previously focused text field from receiving the focus again after adding a new shipping fee item
                 FocusScope.of(context).requestFocus(FocusNode());

@@ -19,8 +19,8 @@ class BrowseScreenLoadingBody extends StatelessWidget {
           children: [
             Expanded(
               child: Consumer(
-                builder: (_, watch, __) {
-                  final currentViewMode = watch(gearsViewMode);
+                builder: (_, ref, __) {
+                  final currentViewMode = ref.watch(gearsViewMode);
                   return currentViewMode.when(
                     grid: () => const GearsSkeletonGridLoader(),
                     list: () => const GearsSkeletonListLoader(),

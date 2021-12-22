@@ -41,8 +41,8 @@ class StatusEditButtonWidget extends StatelessWidget {
     //endregion
     return Consumer(
       builder: (_, ref, __) {
-        final listingOwner = ref(listingDetailsProvider).listingOwner;
-        return ref(httpRequestStateProvider).maybeWhen(
+        final listingOwner = ref.watch(listingDetailsProvider).listingOwner;
+        return ref.watch(httpRequestStateProvider).maybeWhen(
           loading: () => const Center(
             child: SizedBox(
               height: 14,
@@ -55,7 +55,7 @@ class StatusEditButtonWidget extends StatelessWidget {
           ),
           error: (_) => Container(),
           orElse: () => Visibility(
-            visible: ref(userProfileProvider.notifier)
+            visible: ref.watch(userProfileProvider.notifier)
                 .isIdOfCurrentUser(listingOwner?.id ?? -1),
             child: Container(
               padding: const EdgeInsets.all(8.0),

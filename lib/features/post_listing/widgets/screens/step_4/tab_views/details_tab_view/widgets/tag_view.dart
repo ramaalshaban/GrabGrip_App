@@ -23,7 +23,7 @@ class TagView extends StatelessWidget {
                 size: 20,
               ),
               onDeleted: () {
-                ref(postListingProvider.notifier).removeTag(tag);
+                ref.watch(postListingProvider.notifier).removeTag(tag);
               },
               label: Text(
                 tag,

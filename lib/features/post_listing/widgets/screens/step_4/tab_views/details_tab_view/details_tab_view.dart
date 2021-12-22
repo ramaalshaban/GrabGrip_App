@@ -13,14 +13,14 @@ import 'package:grab_grip/style/text_fields.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
-class DetailsTabView extends StatefulWidget {
+class DetailsTabView extends ConsumerStatefulWidget {
   const DetailsTabView({Key? key}) : super(key: key);
 
   @override
-  State<DetailsTabView> createState() => _DetailsTabViewState();
+  ConsumerState<DetailsTabView> createState() => _DetailsTabViewState();
 }
 
-class _DetailsTabViewState extends State<DetailsTabView>
+class _DetailsTabViewState extends ConsumerState<DetailsTabView>
     with AutomaticKeepAliveClientMixin {
   String title = "";
   String description = "";
@@ -33,9 +33,9 @@ class _DetailsTabViewState extends State<DetailsTabView>
   @override
   void initState() {
     titleTextController.text =
-        context.read(postListingProvider.notifier).title!;
+        ref.watch(postListingProvider.notifier).title!;
     descriptionTextController.text =
-        context.read(postListingProvider.notifier).description!;
+    ref.watch(postListingProvider.notifier).description!;
     super.initState();
   }
 
@@ -59,7 +59,7 @@ class _DetailsTabViewState extends State<DetailsTabView>
               TextFormField(
                 onChanged: (text) {
                   title = text;
-                  context.read(postListingProvider.notifier).title = title;
+                  ref.watch(postListingProvider.notifier).title = title;
                 },
                 controller: titleTextController,
                 validator: listingTitleFieldValidator,
@@ -78,7 +78,7 @@ class _DetailsTabViewState extends State<DetailsTabView>
                 maxLines: 10,
                 onChanged: (text) {
                   description = text.trim();
-                  context.read(postListingProvider.notifier).description = text.trim();
+                  ref.watch(postListingProvider.notifier).description = text.trim();
                 },
                 controller: descriptionTextController,
                 validator: listingDescriptionFieldValidator,
@@ -107,7 +107,7 @@ class _DetailsTabViewState extends State<DetailsTabView>
               TextFormField(
                 onChanged: (text) {
                   city = text;
-                  context.read(postListingProvider.notifier).city = text;
+                  ref.watch(postListingProvider.notifier).city = text;
                 },
                 keyboardType: TextInputType.text,
                 decoration: standardInputDecoration.copyWith(
@@ -122,7 +122,7 @@ class _DetailsTabViewState extends State<DetailsTabView>
               TextFormField(
                 onChanged: (text) {
                   region = text;
-                  context.read(postListingProvider.notifier).region = text;
+                  ref.watch(postListingProvider.notifier).region = text;
                 },
                 keyboardType: TextInputType.text,
                 decoration: standardInputDecoration.copyWith(

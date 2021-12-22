@@ -19,44 +19,44 @@ class LikeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (_, ref, __) {
-        return ref(httpRequestStateProvider).maybeWhen(
-          innerLoading: (toggledItemIndex) => toggledItemIndex == index
-              ? const SizedBox(
-                  height: 24,
-                  width: 24,
-                  child: CircularProgressIndicator(
-                    color: AppColors.green,
-                  ),
-                )
-              : IconButton(
-                  padding: const EdgeInsets.only(right: 8),
-                  splashColor: AppColors.green,
-                  constraints: const BoxConstraints(),
-                  onPressed: () => toggleFavoriteStatus(context),
-                  icon: const Icon(
-                    Icons.favorite,
-                    color: AppColors.green,
-                  ),
+        return ref.watch(httpRequestStateProvider).maybeWhen(
+              innerLoading: (toggledItemIndex) => toggledItemIndex == index
+                  ? const SizedBox(
+                      height: 24,
+                      width: 24,
+                      child: CircularProgressIndicator(
+                        color: AppColors.green,
+                      ),
+                    )
+                  : IconButton(
+                      padding: const EdgeInsets.only(right: 8),
+                      splashColor: AppColors.green,
+                      constraints: const BoxConstraints(),
+                      onPressed: () => toggleFavoriteStatus(context, ref),
+                      icon: const Icon(
+                        Icons.favorite,
+                        color: AppColors.green,
+                      ),
+                    ),
+              orElse: () => IconButton(
+                padding: const EdgeInsets.only(right: 8),
+                splashColor: AppColors.green,
+                constraints: const BoxConstraints(),
+                onPressed: () => toggleFavoriteStatus(context, ref),
+                icon: const Icon(
+                  Icons.favorite,
+                  color: AppColors.green,
                 ),
-          orElse: () => IconButton(
-            padding: const EdgeInsets.only(right: 8),
-            splashColor: AppColors.green,
-            constraints: const BoxConstraints(),
-            onPressed: () => toggleFavoriteStatus(context),
-            icon: const Icon(
-              Icons.favorite,
-              color: AppColors.green,
-            ),
-          ),
-        );
+              ),
+            );
       },
     );
   }
 
-  void toggleFavoriteStatus(BuildContext context) {
+  void toggleFavoriteStatus(BuildContext context, WidgetRef ref) {
     {
-      context
-          .read(favoritesProvider.notifier)
+      ref
+          .watch(favoritesProvider.notifier)
           .toggleFavoriteStatus(
             hash: favoriteGear.hash,
             slug: favoriteGear.slug,

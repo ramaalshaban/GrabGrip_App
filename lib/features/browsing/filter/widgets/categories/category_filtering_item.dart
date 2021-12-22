@@ -12,7 +12,7 @@ class CategoryFilteringItem extends ConsumerWidget {
   final bool isSelected;
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ChoiceChip(
       selectedColor: AppColors.purple,
       elevation: 1,
@@ -20,10 +20,10 @@ class CategoryFilteringItem extends ConsumerWidget {
       onSelected: (selected) {
         if (category!.parentId != 0) {
           // i.e. if the clicked category is a subcategory
-          watch(filterAndSortProvider.notifier).subcategory = category;
+          ref.watch(filterAndSortProvider.notifier).subcategory = category;
         } else {
-          watch(filterAndSortProvider.notifier).category = category;
-          watch(filterAndSortProvider.notifier).subcategory = null;
+          ref.watch(filterAndSortProvider.notifier).category = category;
+          ref.watch(filterAndSortProvider.notifier).subcategory = null;
         }
       },
       label: Text(

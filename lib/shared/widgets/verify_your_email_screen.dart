@@ -41,64 +41,65 @@ class VerifyYourEmailScreen extends StatelessWidget {
             height60(),
             Consumer(
               builder: (_, ref, __) {
+                //region Listeners
+                ref.listen<HttpRequestState>(httpRequestStateProvider,
+                    (_, httpRequestState) {
+                  httpRequestState.whenOrNull(
+                    success: (successMessage, _) {
+                      if (successMessage != null) {
+                        showSnackBar(context, successMessage);
+                      }
+                    },
+                    error: (errorMessage) =>
+                        showSnackBarForError(context, errorMessage),
+                  );
+                });
+                ref.listen<User>(userProfileProvider, (_, user) {
+                  final isVerified = user.verified;
+                  if (isVerified) {
+                    context.router.pop();
+                    onSuccessVerification.call();
+                    showSnackBar(
+                      context,
+                      "The email has been verified successfully",
+                    );
+                  } else {
+                    showSnackBarForError(
+                      context,
+                      "The email is still not verified",
+                    );
+                  }
+                });
+                //endregion
                 return Column(
                   children: [
-                    ProviderListener(
-                      provider: userProfileProvider,
-                      onChange: (context, User user) {
-                        final isVerified = user.verified;
-                        if (isVerified) {
-                          context.router.pop();
-                          onSuccessVerification.call();
-                          showSnackBar(
-                            context,
-                            "The email has been verified successfully",
-                          );
-                        } else {
-                          showSnackBarForError(
-                            context,
-                            "The email is still not verified",
-                          );
-                        }
+                    ContinueButton(
+                      buttonText: "I have verified my email",
+                      onClickAction: () async {
+                        await ref
+                            .watch(userProfileProvider.notifier)
+                            .getUserProfileAndSaveIt();
+                        final isVerified = ref
+                            .watch(userProfileProvider.notifier)
+                            .getVerificationStatus();
+                        ref
+                            .watch(authProvider.notifier)
+                            .setAuthenticated(isVerified: isVerified);
                       },
-                      child: ContinueButton(
-                        buttonText: "I have verified my email",
-                        onClickAction: () async {
-                          await ref(userProfileProvider.notifier)
-                              .getUserProfileAndSaveIt();
-                          final isVerified = ref(userProfileProvider.notifier)
-                              .getVerificationStatus();
-                          ref(authProvider.notifier)
-                              .setAuthenticated(isVerified: isVerified);
-                        },
-                      ),
                     ),
                     height12(),
-                    ProviderListener(
-                      provider: httpRequestStateProvider,
-                      onChange: (context, HttpRequestState state) {
-                        state.whenOrNull(
-                          success: (successMessage, _) {
-                            if (successMessage != null) {
-                              showSnackBar(context, successMessage);
-                            }
-                          },
-                          error: (errorMessage) =>
-                              showSnackBarForError(context, errorMessage),
-                        );
+                    TextButton(
+                      onPressed: () async {
+                        await ref
+                            .watch(userProfileProvider.notifier)
+                            .resendVerificationEmail();
                       },
-                      child: TextButton(
-                        onPressed: () async {
-                          await ref(userProfileProvider.notifier)
-                              .resendVerificationEmail();
-                        },
-                        child: const Text(
-                          "Send me verification email again",
-                          style: TextStyle(
-                            fontSize: 14,
-                            decoration: TextDecoration.underline,
-                            color: AppColors.purple,
-                          ),
+                      child: const Text(
+                        "Send me verification email again",
+                        style: TextStyle(
+                          fontSize: 14,
+                          decoration: TextDecoration.underline,
+                          color: AppColors.purple,
                         ),
                       ),
                     ),
