@@ -47,7 +47,6 @@ class PostListingStepFourScreen extends ConsumerWidget {
     });
     ref.listen<PostListingAvailabilityState>(listingAvailabilityStateProvider,
         (_, availabilityState) {
-
       availabilityState.when(
         published: (successfullyPublished) => successfullyPublished == true
             ? showSnackBar(

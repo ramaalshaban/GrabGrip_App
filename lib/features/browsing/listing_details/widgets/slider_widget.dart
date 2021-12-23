@@ -27,12 +27,16 @@ class SliderWidget extends StatelessWidget {
             itemCount: photos.length,
             itemBuilder: (context, itemIndex, pageViewIndex) => InkWell(
               onTap: () {
-                context.router.pushWidget(
+                context.router
+                    .pushWidget(
                   ImagePreviewDialog(
                     url: photos[itemIndex].originalPhotoUrl,
                     isFile: false,
                   ),
-                );
+                ).then((_) {
+                  // prevent the previously focused text field from receiving the focus again after closing the image preview dialog
+                  FocusScope.of(context).requestFocus(FocusNode());
+                });
               },
               child: CachedNetworkImage(
                 imageUrl: photos[itemIndex].photoUrl,

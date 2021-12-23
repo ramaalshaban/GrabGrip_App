@@ -7,7 +7,6 @@ class PingProvider {
   PingProvider(this.httpRequestStateProvider);
 
   Future<void> pingGrabGrip() async {
-    httpRequestStateProvider.setLoading();
     await NetworkService().pingGrabGrip().then((result) {
       result.when((errorMessage) {
         httpRequestStateProvider.setError(errorMessage);

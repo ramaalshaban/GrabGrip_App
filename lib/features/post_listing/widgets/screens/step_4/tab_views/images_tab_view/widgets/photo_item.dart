@@ -21,7 +21,11 @@ class PhotoItem extends StatelessWidget {
     return InkWell(
       onTap: () {
         context.router
-            .pushWidget(ImagePreviewDialog(photo: photo, isFile: true));
+            .pushWidget(ImagePreviewDialog(photo: photo, isFile: true))
+            .then((_) {
+          // prevent the previously focused text field from receiving the focus again after closing the image preview dialog
+          FocusScope.of(context).requestFocus(FocusNode());
+        });
       },
       child: Card(
         shape: RoundedRectangleBorder(
@@ -81,7 +85,8 @@ class PhotoItem extends StatelessWidget {
             Consumer(
               builder: (_, ref, __) {
                 return InkWell(
-                  onTap: () => ref.watch(postListingProvider.notifier)
+                  onTap: () => ref
+                      .watch(postListingProvider.notifier)
                       .deletePhoto(photo.index),
                   child: Container(
                     margin: const EdgeInsets.only(top: 4, right: 4),

@@ -158,10 +158,11 @@ class AppRouter extends _i19.RootStackRouter {
 
   @override
   List<_i19.RouteConfig> get routes => [
-        _i19.RouteConfig(SelectRentBuyScreenRoute.name, path: '/'),
+        _i19.RouteConfig(SelectRentBuyScreenRoute.name,
+            path: '/select-rent-buy-screen'),
         _i19.RouteConfig(SetLocationScreenRoute.name,
             path: '/set-location-screen'),
-        _i19.RouteConfig(HomeScreenRoute.name, path: '/home-screen'),
+        _i19.RouteConfig(HomeScreenRoute.name, path: '/'),
         _i19.RouteConfig(RegisterScreenRoute.name, path: '/register-screen'),
         _i19.RouteConfig(LoginScreenRoute.name, path: '/login-screen'),
         _i19.RouteConfig(ForgotPasswordScreenRoute.name,
@@ -192,7 +193,8 @@ class AppRouter extends _i19.RootStackRouter {
 
 /// generated route for [_i1.SelectRentBuyScreen]
 class SelectRentBuyScreenRoute extends _i19.PageRouteInfo<void> {
-  const SelectRentBuyScreenRoute() : super(name, path: '/');
+  const SelectRentBuyScreenRoute()
+      : super(name, path: '/select-rent-buy-screen');
 
   static const String name = 'SelectRentBuyScreenRoute';
 }
@@ -216,7 +218,7 @@ class SetLocationScreenRouteArgs {
 
 /// generated route for [_i3.HomeScreen]
 class HomeScreenRoute extends _i19.PageRouteInfo<void> {
-  const HomeScreenRoute() : super(name, path: '/home-screen');
+  const HomeScreenRoute() : super(name, path: '/');
 
   static const String name = 'HomeScreenRoute';
 }

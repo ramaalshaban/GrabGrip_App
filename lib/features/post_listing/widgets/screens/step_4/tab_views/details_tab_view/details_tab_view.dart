@@ -13,35 +13,17 @@ import 'package:grab_grip/style/text_fields.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
-class DetailsTabView extends ConsumerStatefulWidget {
+class DetailsTabView extends ConsumerStatefulWidget    {
   const DetailsTabView({Key? key}) : super(key: key);
 
   @override
   ConsumerState<DetailsTabView> createState() => _DetailsTabViewState();
 }
 
-class _DetailsTabViewState extends ConsumerState<DetailsTabView>
-    with AutomaticKeepAliveClientMixin {
-  String title = "";
-  String description = "";
-  String city = "";
-  String region = "";
-
-  final titleTextController = TextEditingController();
-  final descriptionTextController = TextEditingController();
-
-  @override
-  void initState() {
-    titleTextController.text =
-        ref.watch(postListingProvider.notifier).title!;
-    descriptionTextController.text =
-    ref.watch(postListingProvider.notifier).description!;
-    super.initState();
-  }
-
+class _DetailsTabViewState extends ConsumerState<DetailsTabView> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
+     super.build(context);
     return SingleChildScrollView(
       padding: const EdgeInsets.only(
         top: 10,
@@ -52,88 +34,96 @@ class _DetailsTabViewState extends ConsumerState<DetailsTabView>
           padding: const EdgeInsets.symmetric(
             horizontal: 10,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              //region Title text field
-              TextFormField(
-                onChanged: (text) {
-                  title = text;
-                  ref.watch(postListingProvider.notifier).title = title;
-                },
-                controller: titleTextController,
-                validator: listingTitleFieldValidator,
-                keyboardType: TextInputType.name,
-                decoration: standardInputDecoration.copyWith(
-                  labelText: AppLocalizations.of(context)!.title,
-                  contentPadding: const EdgeInsets.fromLTRB(8, 14, 8, 8),
-                ),
-                cursorColor: AppColors.purple,
-              ),
-              //endregion
-              height24(),
-              //region Description text field
-              TextFormField(
-                minLines: 10,
-                maxLines: 10,
-                onChanged: (text) {
-                  description = text.trim();
-                  ref.watch(postListingProvider.notifier).description = text.trim();
-                },
-                controller: descriptionTextController,
-                validator: listingDescriptionFieldValidator,
-                keyboardType: TextInputType.multiline,
-                decoration: standardInputDecoration.copyWith(
-                  labelText: AppLocalizations.of(context)!.description_label,
-                  contentPadding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
-                ),
-                cursorColor: AppColors.purple,
-              ),
-              //endregion
-              height24(),
-              const TagsWidget(),
-              height24(),
-              DatePicker(),
-              height36(),
-              lightPurpleDividerThickness0_5,
-              height36(),
-              LocationPicker(
-                label: "Location",
-              ),
-              height36(),
-              const CountryPicker(),
-              height24(),
-              //region City text field
-              TextFormField(
-                onChanged: (text) {
-                  city = text;
-                  ref.watch(postListingProvider.notifier).city = text;
-                },
-                keyboardType: TextInputType.text,
-                decoration: standardInputDecoration.copyWith(
-                  labelText: "City",
-                  contentPadding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
-                ),
-                cursorColor: AppColors.purple,
-              ),
-              //endregion
-              height24(),
-              //region Region text field
-              TextFormField(
-                onChanged: (text) {
-                  region = text;
-                  ref.watch(postListingProvider.notifier).region = text;
-                },
-                keyboardType: TextInputType.text,
-                decoration: standardInputDecoration.copyWith(
-                  labelText: "Region",
-                  contentPadding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
-                ),
-                cursorColor: AppColors.purple,
-              ),
-              //endregion
-              height48(),
-            ],
+          child: Consumer(
+            builder: (_, ref, __) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  //region Title text field
+                  TextFormField(
+                    onChanged: (text) {
+                      ref.watch(postListingProvider.notifier).title =
+                          text.trim();
+                    },
+                    controller: TextEditingController(
+                        text: ref.watch(postListingProvider.notifier).title),
+                    validator: listingTitleFieldValidator,
+                    keyboardType: TextInputType.name,
+                    decoration: standardInputDecoration.copyWith(
+                      labelText: AppLocalizations.of(context)!.title,
+                      contentPadding: const EdgeInsets.fromLTRB(8, 14, 8, 8),
+                    ),
+                    cursorColor: AppColors.purple,
+                  ),
+                  //endregion
+                  height24(),
+                  //region Description text field
+                  TextFormField(
+                    minLines: 10,
+                    maxLines: 10,
+                    onChanged: (text) {
+                      ref.watch(postListingProvider.notifier).description =
+                          text.trim();
+                    },
+                    controller: TextEditingController(
+                      text: ref.watch(postListingProvider.notifier).description,
+                    ),
+                    validator: listingDescriptionFieldValidator,
+                    keyboardType: TextInputType.multiline,
+                    decoration: standardInputDecoration.copyWith(
+                      labelText:
+                          AppLocalizations.of(context)!.description_label,
+                      contentPadding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
+                    ),
+                    cursorColor: AppColors.purple,
+                  ),
+                  //endregion
+                  height24(),
+                  const TagsWidget(),
+                  height24(),
+                  DatePicker(),
+                  height36(),
+                  lightPurpleDividerThickness0_5,
+                  height36(),
+                  LocationPicker(
+                    label: "Location",
+                  ),
+                  height36(),
+                  const CountryPicker(),
+                  height24(),
+                  //region City text field
+                  TextFormField(
+                    onChanged: (text) {
+                      ref.watch(postListingProvider.notifier).city =
+                          text.trim();
+                    },
+                    keyboardType: TextInputType.text,
+                    decoration: standardInputDecoration.copyWith(
+                      labelText: "City",
+                      contentPadding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
+                    ),
+                    cursorColor: AppColors.purple,
+                  ),
+                  //endregion
+                  height24(),
+                  //region Region text field
+                  TextFormField(
+                    onChanged: (text) {
+                      ref.watch(postListingProvider.notifier).region =
+                          text.trim();
+                    },
+                    keyboardType: TextInputType.text,
+                    decoration: standardInputDecoration.copyWith(
+                      labelText: "Region",
+                      contentPadding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
+                    ),
+                    cursorColor: AppColors.purple,
+                  ),
+                  //endregion
+                  height48(),
+                ],
+              );
+            },
           ),
         ),
       ),

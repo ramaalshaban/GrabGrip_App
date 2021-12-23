@@ -24,7 +24,7 @@ import 'package:grab_grip/shared/widgets/verify_your_email_screen.dart';
   routes: <AutoRoute>[
     CustomRoute(
       page: SelectRentBuyScreen,
-      initial: true,
+     // initial: true,
       transitionsBuilder: TransitionsBuilders.slideTop,
       durationInMilliseconds: 400,
     ),
@@ -34,6 +34,7 @@ import 'package:grab_grip/shared/widgets/verify_your_email_screen.dart';
       durationInMilliseconds: 400,
     ),
     CustomRoute(
+      initial: true,
       page: HomeScreen,
       transitionsBuilder: TransitionsBuilders.zoomIn,
       durationInMilliseconds: 400,

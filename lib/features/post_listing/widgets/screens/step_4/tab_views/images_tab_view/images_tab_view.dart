@@ -55,35 +55,31 @@ class ImagesTabView extends ConsumerWidget {
           );
         },
       ),
-      floatingActionButton: Consumer(
-        builder: (_, ref, __) {
-          return FloatingActionButton(
-            onPressed: () {
-              final numOfCurrentPhotos =
-                  ref.watch(photosProvider.notifier).photos.length;
-              if (numOfCurrentPhotos == postListingPhotosLimit) {
-                showSnackBar(
-                  context,
-                  "Sorry, you can only add $postListingPhotosLimit photos",
-                  Colors.amber[800],
-                );
-              } else {
-                showCameraGalleryDialog(context);
-              }
-            },
-            backgroundColor: AppColors.purple,
-            child: const Icon(
-              Icons.add_a_photo_outlined,
-              color: AppColors.green,
-              size: 28,
-            ),
-          );
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          final numOfCurrentPhotos =
+              ref.watch(photosProvider.notifier).photos.length;
+          if (numOfCurrentPhotos == postListingPhotosLimit) {
+            showSnackBar(
+              context,
+              "Sorry, you can only add $postListingPhotosLimit photos",
+              Colors.amber[800],
+            );
+          } else {
+            showCameraGalleryDialog(context, ref);
+          }
         },
+        backgroundColor: AppColors.purple,
+        child: const Icon(
+          Icons.add_a_photo_outlined,
+          color: AppColors.green,
+          size: 28,
+        ),
       ),
     );
   }
 
-  void showCameraGalleryDialog(BuildContext context) {
+  void showCameraGalleryDialog(BuildContext context, WidgetRef ref) {
     final ImagePicker _picker = ImagePicker();
     showDialog(
       context: context,
@@ -97,76 +93,70 @@ class ImagesTabView extends ConsumerWidget {
               children: [
                 //region Camera button
                 Expanded(
-                  child: Consumer(
-                    builder: (_, ref, __) {
-                      return InkWell(
-                        onTap: () async {
-                          Navigator.pop(context);
-                          // check if the storage permissions are granted or not
-                          // storage permissions are required for the flutter_exif_rotation package
-                          Permission.storage.request().then((status) {
-                            if (status == PermissionStatus.granted) {
-                              _picker
-                                  .pickImage(source: ImageSource.camera)
-                                  .then(
-                                (capturedImage) async {
-                                  if (capturedImage != null) {
-                                    final file = File(capturedImage.path);
-                                    ref
-                                        .watch(postListingProvider.notifier)
-                                        .uploadPhoto(file, takenByCamera: true);
-                                  } else {
-                                    handlePickedImageIsNull(
-                                      context,
-                                      ref,
-                                      _picker,
-                                    );
-                                  }
-                                },
-                              );
-                            } else if (status ==
-                                PermissionStatus.permanentlyDenied) {
-                              // the execution will enter this block if the user opted to never again see the permission request dialog for this
-                              // app. The only way to change the permission's status now is to let the
-                              // user manually enable it in the system settings.
-                              showDialog(
-                                context: context,
-                                builder: (_) => AreYouSureDialog(
-                                  contentText:
-                                      "Storage permission is required for processing the photos taken by camera.\n"
-                                      "Allow the storage permission from the app settings please",
-                                  continueAction: () {
-                                    Navigator.pop(context);
-                                    openAppSettings();
-                                  },
-                                  cancelAction: () => Navigator.pop(context),
-                                  continueActionText: "Open app settings",
-                                  cancelActionText: "Cancel",
-                                ),
-                              );
-                            }
-                          });
-                        },
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: const [
-                            Icon(
-                              Icons.camera_alt_rounded,
-                              color: AppColors.purple,
-                              size: 38,
+                  child: InkWell(
+                    onTap: () async {
+                      Navigator.pop(context);
+                      // check if the storage permissions are granted or not
+                      // storage permissions are required for the flutter_exif_rotation package
+                      Permission.storage.request().then((status) {
+                        if (status == PermissionStatus.granted) {
+                          _picker.pickImage(source: ImageSource.camera).then(
+                            (capturedImage) {
+                              if (capturedImage != null) {
+                                final file = File(capturedImage.path);
+                                ref
+                                    .watch(postListingProvider.notifier)
+                                    .uploadPhoto(file, takenByCamera: true);
+                              } else {
+                                handlePickedImageIsNull(
+                                  context,
+                                  ref,
+                                  _picker,
+                                );
+                              }
+                            },
+                          );
+                        } else if (status ==
+                            PermissionStatus.permanentlyDenied) {
+                          // the execution will enter this block if the user opted to never again see the permission request dialog for this
+                          // app. The only way to change the permission's status now is to let the
+                          // user manually enable it in the system settings.
+                          showDialog(
+                            context: context,
+                            builder: (_) => AreYouSureDialog(
+                              contentText:
+                                  "Storage permission is required for processing the photos taken by camera.\n"
+                                  "Allow the storage permission from the app settings please",
+                              continueAction: () {
+                                Navigator.pop(context);
+                                openAppSettings();
+                              },
+                              cancelAction: () => Navigator.pop(context),
+                              continueActionText: "Open app settings",
+                              cancelActionText: "Cancel",
                             ),
-                            Text(
-                              "Camera",
-                              style: TextStyle(
-                                color: AppColors.purple,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1.5,
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
+                          );
+                        }
+                      });
                     },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: const [
+                        Icon(
+                          Icons.camera_alt_rounded,
+                          color: AppColors.purple,
+                          size: 38,
+                        ),
+                        Text(
+                          "Camera",
+                          style: TextStyle(
+                            color: AppColors.purple,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.5,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 //endregion
@@ -176,44 +166,40 @@ class ImagesTabView extends ConsumerWidget {
                 ),
                 //region Gallery button
                 Expanded(
-                  child: Consumer(
-                    builder: (_, ref, __) {
-                      return InkWell(
-                        onTap: () async {
-                          Navigator.pop(context);
-                          _picker.pickImage(source: ImageSource.gallery).then(
-                            (pickedImage) {
-                              if (pickedImage != null) {
-                                final file = File(pickedImage.path);
-                                ref
-                                    .watch(postListingProvider.notifier)
-                                    .uploadPhoto(file);
-                              } else {
-                                handlePickedImageIsNull(context, ref, _picker);
-                              }
-                            },
-                          );
+                  child: InkWell(
+                    onTap: () async {
+                      Navigator.pop(context);
+                      _picker.pickImage(source: ImageSource.gallery).then(
+                        (pickedImage) {
+                          if (pickedImage != null) {
+                            final file = File(pickedImage.path);
+                            ref
+                                .watch(postListingProvider.notifier)
+                                .uploadPhoto(file);
+                          } else {
+                            handlePickedImageIsNull(context, ref, _picker);
+                          }
                         },
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: const [
-                            Icon(
-                              Icons.photo_library_rounded,
-                              color: AppColors.purple,
-                              size: 38,
-                            ),
-                            Text(
-                              "Gallery",
-                              style: TextStyle(
-                                color: AppColors.purple,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1.5,
-                              ),
-                            )
-                          ],
-                        ),
                       );
                     },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: const [
+                        Icon(
+                          Icons.photo_library_rounded,
+                          color: AppColors.purple,
+                          size: 38,
+                        ),
+                        Text(
+                          "Gallery",
+                          style: TextStyle(
+                            color: AppColors.purple,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.5,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 //endregion
