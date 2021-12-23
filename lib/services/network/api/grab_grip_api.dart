@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:dio_http/dio_http.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
@@ -228,8 +229,9 @@ abstract class GrabGripApi {
     @Query("additional_option") Map<String, int>? additionalOptions,
     @Query("additional_options_meta")
         Map<String, Map<String, int>>? additionalOptionsMeta,
-    //   @Query("start_date") String? startDate,
-    //   @Query("end_date") String? endDate,
+    @Query("start_date") String? startDate,
+    @Query("end_date") String? endDate,
+    @Query("range") String? range,
   });
 
   @GET("/api/v1/listing/{hash}/{slug}/reviews")

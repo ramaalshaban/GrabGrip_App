@@ -35,7 +35,10 @@ class _$ListingDetailsStateTearOff {
       String? endDate,
       User? listingOwner,
       int stockQuantity = 0,
-      Widget? widget}) {
+      Widget? widget,
+      DateTime? listingEndDate,
+      PickerDateRange? pickerDateRange,
+      bool? isForRent}) {
     return _ListingDetailsState(
       category: category,
       pricingModel: pricingModel,
@@ -55,6 +58,9 @@ class _$ListingDetailsStateTearOff {
       listingOwner: listingOwner,
       stockQuantity: stockQuantity,
       widget: widget,
+      listingEndDate: listingEndDate,
+      pickerDateRange: pickerDateRange,
+      isForRent: isForRent,
     );
   }
 }
@@ -87,6 +93,9 @@ mixin _$ListingDetailsState {
   User? get listingOwner => throw _privateConstructorUsedError;
   int get stockQuantity => throw _privateConstructorUsedError;
   Widget? get widget => throw _privateConstructorUsedError;
+  DateTime? get listingEndDate => throw _privateConstructorUsedError;
+  PickerDateRange? get pickerDateRange => throw _privateConstructorUsedError;
+  bool? get isForRent => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ListingDetailsStateCopyWith<ListingDetailsState> get copyWith =>
@@ -116,7 +125,10 @@ abstract class $ListingDetailsStateCopyWith<$Res> {
       String? endDate,
       User? listingOwner,
       int stockQuantity,
-      Widget? widget});
+      Widget? widget,
+      DateTime? listingEndDate,
+      PickerDateRange? pickerDateRange,
+      bool? isForRent});
 
   $ListingCategoryCopyWith<$Res>? get category;
   $PricingModelCopyWith<$Res>? get pricingModel;
@@ -153,6 +165,9 @@ class _$ListingDetailsStateCopyWithImpl<$Res>
     Object? listingOwner = freezed,
     Object? stockQuantity = freezed,
     Object? widget = freezed,
+    Object? listingEndDate = freezed,
+    Object? pickerDateRange = freezed,
+    Object? isForRent = freezed,
   }) {
     return _then(_value.copyWith(
       category: category == freezed
@@ -227,6 +242,18 @@ class _$ListingDetailsStateCopyWithImpl<$Res>
           ? _value.widget
           : widget // ignore: cast_nullable_to_non_nullable
               as Widget?,
+      listingEndDate: listingEndDate == freezed
+          ? _value.listingEndDate
+          : listingEndDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      pickerDateRange: pickerDateRange == freezed
+          ? _value.pickerDateRange
+          : pickerDateRange // ignore: cast_nullable_to_non_nullable
+              as PickerDateRange?,
+      isForRent: isForRent == freezed
+          ? _value.isForRent
+          : isForRent // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 
@@ -300,7 +327,10 @@ abstract class _$ListingDetailsStateCopyWith<$Res>
       String? endDate,
       User? listingOwner,
       int stockQuantity,
-      Widget? widget});
+      Widget? widget,
+      DateTime? listingEndDate,
+      PickerDateRange? pickerDateRange,
+      bool? isForRent});
 
   @override
   $ListingCategoryCopyWith<$Res>? get category;
@@ -343,6 +373,9 @@ class __$ListingDetailsStateCopyWithImpl<$Res>
     Object? listingOwner = freezed,
     Object? stockQuantity = freezed,
     Object? widget = freezed,
+    Object? listingEndDate = freezed,
+    Object? pickerDateRange = freezed,
+    Object? isForRent = freezed,
   }) {
     return _then(_ListingDetailsState(
       category: category == freezed
@@ -417,6 +450,18 @@ class __$ListingDetailsStateCopyWithImpl<$Res>
           ? _value.widget
           : widget // ignore: cast_nullable_to_non_nullable
               as Widget?,
+      listingEndDate: listingEndDate == freezed
+          ? _value.listingEndDate
+          : listingEndDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      pickerDateRange: pickerDateRange == freezed
+          ? _value.pickerDateRange
+          : pickerDateRange // ignore: cast_nullable_to_non_nullable
+              as PickerDateRange?,
+      isForRent: isForRent == freezed
+          ? _value.isForRent
+          : isForRent // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -444,7 +489,10 @@ class _$_ListingDetailsState
       this.endDate,
       this.listingOwner,
       this.stockQuantity = 0,
-      this.widget});
+      this.widget,
+      this.listingEndDate,
+      this.pickerDateRange,
+      this.isForRent});
 
   @override
   final ListingCategory? category;
@@ -490,10 +538,16 @@ class _$_ListingDetailsState
   final int stockQuantity;
   @override
   final Widget? widget;
+  @override
+  final DateTime? listingEndDate;
+  @override
+  final PickerDateRange? pickerDateRange;
+  @override
+  final bool? isForRent;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ListingDetailsState(category: $category, pricingModel: $pricingModel, ownerId: $ownerId, hash: $hash, slug: $slug, selectedQuantity: $selectedQuantity, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, selectedAdditionalOptions: $selectedAdditionalOptions, selectedAdditionalOptionsMeta: $selectedAdditionalOptionsMeta, selectedShippingOptionId: $selectedShippingOptionId, selectedVariantOptions: $selectedVariantOptions, startDate: $startDate, endDate: $endDate, listingOwner: $listingOwner, stockQuantity: $stockQuantity, widget: $widget)';
+    return 'ListingDetailsState(category: $category, pricingModel: $pricingModel, ownerId: $ownerId, hash: $hash, slug: $slug, selectedQuantity: $selectedQuantity, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, selectedAdditionalOptions: $selectedAdditionalOptions, selectedAdditionalOptionsMeta: $selectedAdditionalOptionsMeta, selectedShippingOptionId: $selectedShippingOptionId, selectedVariantOptions: $selectedVariantOptions, startDate: $startDate, endDate: $endDate, listingOwner: $listingOwner, stockQuantity: $stockQuantity, widget: $widget, listingEndDate: $listingEndDate, pickerDateRange: $pickerDateRange, isForRent: $isForRent)';
   }
 
   @override
@@ -522,7 +576,10 @@ class _$_ListingDetailsState
       ..add(DiagnosticsProperty('endDate', endDate))
       ..add(DiagnosticsProperty('listingOwner', listingOwner))
       ..add(DiagnosticsProperty('stockQuantity', stockQuantity))
-      ..add(DiagnosticsProperty('widget', widget));
+      ..add(DiagnosticsProperty('widget', widget))
+      ..add(DiagnosticsProperty('listingEndDate', listingEndDate))
+      ..add(DiagnosticsProperty('pickerDateRange', pickerDateRange))
+      ..add(DiagnosticsProperty('isForRent', isForRent));
   }
 
   @override
@@ -580,7 +637,10 @@ class _$_ListingDetailsState
                     .equals(other.listingOwner, listingOwner)) &&
             (identical(other.stockQuantity, stockQuantity) ||
                 const DeepCollectionEquality().equals(other.stockQuantity, stockQuantity)) &&
-            (identical(other.widget, widget) || const DeepCollectionEquality().equals(other.widget, widget)));
+            (identical(other.widget, widget) || const DeepCollectionEquality().equals(other.widget, widget)) &&
+            (identical(other.listingEndDate, listingEndDate) || const DeepCollectionEquality().equals(other.listingEndDate, listingEndDate)) &&
+            (identical(other.pickerDateRange, pickerDateRange) || const DeepCollectionEquality().equals(other.pickerDateRange, pickerDateRange)) &&
+            (identical(other.isForRent, isForRent) || const DeepCollectionEquality().equals(other.isForRent, isForRent)));
   }
 
   @override
@@ -603,7 +663,10 @@ class _$_ListingDetailsState
       const DeepCollectionEquality().hash(endDate) ^
       const DeepCollectionEquality().hash(listingOwner) ^
       const DeepCollectionEquality().hash(stockQuantity) ^
-      const DeepCollectionEquality().hash(widget);
+      const DeepCollectionEquality().hash(widget) ^
+      const DeepCollectionEquality().hash(listingEndDate) ^
+      const DeepCollectionEquality().hash(pickerDateRange) ^
+      const DeepCollectionEquality().hash(isForRent);
 
   @JsonKey(ignore: true)
   @override
@@ -631,7 +694,10 @@ abstract class _ListingDetailsState implements ListingDetailsState {
       String? endDate,
       User? listingOwner,
       int stockQuantity,
-      Widget? widget}) = _$_ListingDetailsState;
+      Widget? widget,
+      DateTime? listingEndDate,
+      PickerDateRange? pickerDateRange,
+      bool? isForRent}) = _$_ListingDetailsState;
 
   @override
   ListingCategory? get category => throw _privateConstructorUsedError;
@@ -674,6 +740,12 @@ abstract class _ListingDetailsState implements ListingDetailsState {
   int get stockQuantity => throw _privateConstructorUsedError;
   @override
   Widget? get widget => throw _privateConstructorUsedError;
+  @override
+  DateTime? get listingEndDate => throw _privateConstructorUsedError;
+  @override
+  PickerDateRange? get pickerDateRange => throw _privateConstructorUsedError;
+  @override
+  bool? get isForRent => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ListingDetailsStateCopyWith<_ListingDetailsState> get copyWith =>

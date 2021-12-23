@@ -8,7 +8,6 @@ import 'package:grab_grip/features/user_profile/shared/models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'listing.freezed.dart';
-
 part 'listing.g.dart';
 
 @freezed
@@ -23,6 +22,7 @@ class Listing with _$Listing {
         List<AdditionalOption>? additionalOptions,
     @JsonKey(name: "shipping_options") List<ShippingFee>? shippingOptions,
     @JsonKey(name: "variant_options") Map<String, List<String>>? variantOptions,
+    @JsonKey(name: "ends_at") String? listingEndDate,
     @JsonKey(name: "user") User? user,
   ) = _Listing;
 

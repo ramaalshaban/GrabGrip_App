@@ -36,6 +36,8 @@ class _$ListingTearOff {
           List<ShippingFee>? shippingOptions,
       @JsonKey(name: "variant_options")
           Map<String, List<String>>? variantOptions,
+      @JsonKey(name: "ends_at")
+          String? listingEndDate,
       @JsonKey(name: "user")
           User? user) {
     return _Listing(
@@ -47,6 +49,7 @@ class _$ListingTearOff {
       additionalOptions,
       shippingOptions,
       variantOptions,
+      listingEndDate,
       user,
     );
   }
@@ -77,6 +80,8 @@ mixin _$Listing {
   @JsonKey(name: "variant_options")
   Map<String, List<String>>? get variantOptions =>
       throw _privateConstructorUsedError;
+  @JsonKey(name: "ends_at")
+  String? get listingEndDate => throw _privateConstructorUsedError;
   @JsonKey(name: "user")
   User? get user => throw _privateConstructorUsedError;
 
@@ -104,6 +109,8 @@ abstract class $ListingCopyWith<$Res> {
           List<ShippingFee>? shippingOptions,
       @JsonKey(name: "variant_options")
           Map<String, List<String>>? variantOptions,
+      @JsonKey(name: "ends_at")
+          String? listingEndDate,
       @JsonKey(name: "user")
           User? user});
 
@@ -130,6 +137,7 @@ class _$ListingCopyWithImpl<$Res> implements $ListingCopyWith<$Res> {
     Object? additionalOptions = freezed,
     Object? shippingOptions = freezed,
     Object? variantOptions = freezed,
+    Object? listingEndDate = freezed,
     Object? user = freezed,
   }) {
     return _then(_value.copyWith(
@@ -165,6 +173,10 @@ class _$ListingCopyWithImpl<$Res> implements $ListingCopyWith<$Res> {
           ? _value.variantOptions
           : variantOptions // ignore: cast_nullable_to_non_nullable
               as Map<String, List<String>>?,
+      listingEndDate: listingEndDate == freezed
+          ? _value.listingEndDate
+          : listingEndDate // ignore: cast_nullable_to_non_nullable
+              as String?,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -218,6 +230,8 @@ abstract class _$ListingCopyWith<$Res> implements $ListingCopyWith<$Res> {
           List<ShippingFee>? shippingOptions,
       @JsonKey(name: "variant_options")
           Map<String, List<String>>? variantOptions,
+      @JsonKey(name: "ends_at")
+          String? listingEndDate,
       @JsonKey(name: "user")
           User? user});
 
@@ -248,6 +262,7 @@ class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
     Object? additionalOptions = freezed,
     Object? shippingOptions = freezed,
     Object? variantOptions = freezed,
+    Object? listingEndDate = freezed,
     Object? user = freezed,
   }) {
     return _then(_Listing(
@@ -283,6 +298,10 @@ class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
           ? _value.variantOptions
           : variantOptions // ignore: cast_nullable_to_non_nullable
               as Map<String, List<String>>?,
+      listingEndDate == freezed
+          ? _value.listingEndDate
+          : listingEndDate // ignore: cast_nullable_to_non_nullable
+              as String?,
       user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -303,6 +322,7 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
       @JsonKey(name: "additional_options") this.additionalOptions,
       @JsonKey(name: "shipping_options") this.shippingOptions,
       @JsonKey(name: "variant_options") this.variantOptions,
+      @JsonKey(name: "ends_at") this.listingEndDate,
       @JsonKey(name: "user") this.user);
 
   factory _$_Listing.fromJson(Map<String, dynamic> json) =>
@@ -331,12 +351,15 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
   @JsonKey(name: "variant_options")
   final Map<String, List<String>>? variantOptions;
   @override
+  @JsonKey(name: "ends_at")
+  final String? listingEndDate;
+  @override
   @JsonKey(name: "user")
   final User? user;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Listing(ownerId: $ownerId, category: $category, pricingModel: $pricingModel, price: $price, stock: $stock, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, user: $user)';
+    return 'Listing(ownerId: $ownerId, category: $category, pricingModel: $pricingModel, price: $price, stock: $stock, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, listingEndDate: $listingEndDate, user: $user)';
   }
 
   @override
@@ -352,6 +375,7 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
       ..add(DiagnosticsProperty('additionalOptions', additionalOptions))
       ..add(DiagnosticsProperty('shippingOptions', shippingOptions))
       ..add(DiagnosticsProperty('variantOptions', variantOptions))
+      ..add(DiagnosticsProperty('listingEndDate', listingEndDate))
       ..add(DiagnosticsProperty('user', user));
   }
 
@@ -381,6 +405,9 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
             (identical(other.variantOptions, variantOptions) ||
                 const DeepCollectionEquality()
                     .equals(other.variantOptions, variantOptions)) &&
+            (identical(other.listingEndDate, listingEndDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.listingEndDate, listingEndDate)) &&
             (identical(other.user, user) ||
                 const DeepCollectionEquality().equals(other.user, user)));
   }
@@ -396,6 +423,7 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
       const DeepCollectionEquality().hash(additionalOptions) ^
       const DeepCollectionEquality().hash(shippingOptions) ^
       const DeepCollectionEquality().hash(variantOptions) ^
+      const DeepCollectionEquality().hash(listingEndDate) ^
       const DeepCollectionEquality().hash(user);
 
   @JsonKey(ignore: true)
@@ -425,6 +453,8 @@ abstract class _Listing implements Listing {
           List<ShippingFee>? shippingOptions,
       @JsonKey(name: "variant_options")
           Map<String, List<String>>? variantOptions,
+      @JsonKey(name: "ends_at")
+          String? listingEndDate,
       @JsonKey(name: "user")
           User? user) = _$_Listing;
 
@@ -454,6 +484,9 @@ abstract class _Listing implements Listing {
   @JsonKey(name: "variant_options")
   Map<String, List<String>>? get variantOptions =>
       throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "ends_at")
+  String? get listingEndDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "user")
   User? get user => throw _privateConstructorUsedError;

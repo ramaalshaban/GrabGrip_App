@@ -523,14 +523,20 @@ class _GrabGripApi implements GrabGripApi {
       shippingOptionId,
       variants,
       additionalOptions,
-      additionalOptionsMeta}) async {
+      additionalOptionsMeta,
+      startDate,
+      endDate,
+      range}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'quantity': quantity,
       r'shipping_option': shippingOptionId,
       r'variant': variants,
       r'additional_option': additionalOptions,
-      r'additional_options_meta': additionalOptionsMeta
+      r'additional_options_meta': additionalOptionsMeta,
+      r'start_date': startDate,
+      r'end_date': endDate,
+      r'range': range
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};

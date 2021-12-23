@@ -2,11 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
-import 'package:grab_grip/features/browsing/listing_details/models/listing_details_state/listing_details_state.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/device.dart';
-import 'package:grab_grip/utils/functions.dart';
 
 class TotalPriceWidget extends StatelessWidget {
   const TotalPriceWidget({Key? key}) : super(key: key);
@@ -82,48 +80,29 @@ class TotalPriceWidget extends StatelessWidget {
               //endregion
               //region Price
               Expanded(
-                child: Consumer(
-                  builder: (_, ref, __) {
-                    //region Listeners
-                    ref.listen<ListingDetailsState>(listingDetailsProvider,
-                        (_, state) {
-                      if (state.widget?.error is String) {
-                        // when an error happens, error's value is the error message string
-                        // otherwise, it's the boolean value false
-                        if (state.widget?.startDate == null ||
-                            state.widget?.endDate == null) {
-                          // when user first opens up listing details screen for a listing of type rent, the error message "These dates cannot be booked" shows up
-                          // to avoid showing the snack bar, the above if statement has been added (to check start and end date)
-                          return;
-                        }
-                        showSnackBarForError(
-                          context,
-                          state.widget?.error as String,
-                        );
-                      }
-                    });
-                    //endregion
-                    return AnimatedOpacity(
-                      opacity: ref.watch(httpRequestStateProvider).maybeWhen(
-                            loading: () => 0.0,
-                            orElse: () => 1.0,
-                          ),
-                      duration: duration300Milli,
-                      child: SizedBox(
-                        width: screenWidth(context) / 4,
-                        child: Text(
-                          "SAR ${ref.watch(listingDetailsProvider).widget?.total}",
-                          style: const TextStyle(
-                            color: AppColors.green,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                          textAlign: TextAlign.center,
+                  child: Consumer(
+                    builder: (_, ref, __) {
+                      return AnimatedOpacity(
+                        opacity: ref.watch(httpRequestStateProvider).maybeWhen(
+                          loading: () => 0.0,
+                          orElse: () => 1.0,
                         ),
-                      ),
-                    );
-                  },
-                ),
+                        duration: duration300Milli,
+                        child: SizedBox(
+                          width: screenWidth(context) / 4,
+                          child: Text(
+                            "SAR ${ref.watch(listingDetailsProvider).widget?.total}",
+                            style: const TextStyle(
+                              color: AppColors.green,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
               ),
               //endregion
             ],

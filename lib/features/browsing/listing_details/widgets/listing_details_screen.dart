@@ -8,7 +8,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
+import 'package:grab_grip/features/browsing/listing_details/models/widget/widget.dart'
+    as listing_widget;
 import 'package:grab_grip/features/browsing/listing_details/widgets/additional_options/additional_options_widget.dart';
+import 'package:grab_grip/features/browsing/listing_details/widgets/date_range_picker/date_range_picker.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/listing_description_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/owner_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/quantity_widget.dart';
@@ -55,375 +58,391 @@ class ListingDetailsScreen extends ConsumerWidget {
         ),
       );
     });
+    ref.listen<listing_widget.Widget?>(
+        listingDetailsProvider.select((state) => state.widget),
+        (_, listing_widget.Widget? widget) {
+      if (widget?.error is String) {
+        // when an error happens, error's value is the error message string
+        final startDate = ref.watch(listingDetailsProvider.notifier).startDate;
+        final endDate = ref.watch(listingDetailsProvider.notifier).endDate;
+        if (startDate == null || endDate == null) {
+          // when user first opens up listing details screen for a listing of type rent, the error message "These dates cannot be booked" shows up
+          // to avoid showing the snack bar, the above if statement has been added (to check start and end date)
+          return;
+        }
+        showSnackBarForError(
+          context,
+          widget!.error as String,
+        );
+      }
+      // otherwise, error is equal to the boolean value false
+    });
     //endregion
     return Material(
-      child: Consumer(
-        builder: (_, ref, __) {
-          return Column(
-            children: [
-              //region Details & Options
-              Expanded(
-                flex: 16,
-                child: CustomScrollView(
-                  slivers: [
-                    SliverAppBar(
-                      backgroundColor: AppColors.transparentLightPurple,
-                      expandedHeight: screenHeightWithoutExtras(context) / 2,
-                      //region Back button
-                      leading: InkWell(
-                        onTap: () => context.router.pop(),
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 8, left: 8),
-                          height: 36,
-                          width: 36,
-                          decoration: const BoxDecoration(
-                            color: AppColors.transparentWhite,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(50),
-                            ),
-                          ),
-                          child: const Icon(
-                            Icons.arrow_back_rounded,
-                            color: AppColors.purple,
-                            size: 30,
-                          ),
+      child: Column(
+        children: [
+          //region Details & Options
+          Expanded(
+            flex: 16,
+            child: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  backgroundColor: AppColors.transparentLightPurple,
+                  expandedHeight: screenHeightWithoutExtras(context) / 2,
+                  //region Back button
+                  leading: InkWell(
+                    onTap: () => context.router.pop(),
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 8, left: 8),
+                      height: 36,
+                      width: 36,
+                      decoration: const BoxDecoration(
+                        color: AppColors.transparentWhite,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50),
                         ),
                       ),
-                      //endregion
-                      flexibleSpace: FlexibleSpaceBar(
-                        //region Listing title, Category & Pricing model
-                        title: ConstrainedBox(
-                          constraints:
-                              BoxConstraints(minWidth: screenWidth(context)),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColors.transparentLightPurple,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            padding: const EdgeInsets.all(4),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                //region Category & Pricing model
-                                Consumer(
-                                  builder: (_, ref, __) {
-                                    return ref
-                                        .watch(httpRequestStateProvider)
-                                        .maybeWhen(
-                                          loading: () => const Center(
-                                            child: SizedBox(
-                                              height: 14,
-                                              width: 14,
-                                              child: CircularProgressIndicator(
-                                                strokeWidth: 2,
-                                                color: AppColors.purple,
-                                              ),
-                                            ),
-                                          ),
-                                          error: (_) => Container(),
-                                          orElse: () => Row(
-                                            children: [
-                                              Text(
-                                                ref
-                                                    .watch(
-                                                      listingDetailsProvider
-                                                          .notifier,
-                                                    )
-                                                    .getCategoryName(),
-                                                style: const TextStyle(
-                                                  fontSize: 8,
-                                                  color: AppColors.white,
-                                                ),
-                                              ),
-                                              const Text(
-                                                " / ",
-                                                style: TextStyle(
-                                                  fontSize: 8,
-                                                  color: AppColors.white,
-                                                ),
-                                              ),
-                                              Text(
-                                                ref
-                                                    .watch(
-                                                      listingDetailsProvider
-                                                          .notifier,
-                                                    )
-                                                    .getPricingModelName(),
-                                                style: const TextStyle(
-                                                  fontSize: 8,
-                                                  color: AppColors.white,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                  },
-                                ),
-                                //endregion
-                                height4(),
-                                //region Title
-                                Text(
-                                  listing.title,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                //endregion
-                              ],
-                            ),
-                          ),
-                        ),
-                        //endregion
-                        //region Photos slider
-                        background: SliderWidget(photos: listing.photos),
-                        //endregion
+                      child: const Icon(
+                        Icons.arrow_back_rounded,
+                        color: AppColors.purple,
+                        size: 30,
                       ),
                     ),
-                    SliverList(
-                      delegate: SliverChildListDelegate(
-                        [
-                          //region Status & Edit button
-                          StatusEditButtonWidget(listing: listing),
-                          //endregion
-                          //region Description
-                          ListingDescriptionWidget(
-                            description: listing.description,
-                          ),
-                          //endregion
-                          //region Tags
-                          if (listing.tags != null)
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12.0,
-                              ),
-                              child: Wrap(
-                                spacing: 6,
-                                children: List.generate(
-                                  listing.tags!.length,
-                                  (index) => TagView(
-                                    tag: listing.tags![index],
-                                    isEditable: false,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          //endregion
-                          height12(),
-                          //region Map
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 12),
-                            height: screenHeightWithoutExtras(context) / 2,
-                            child: GoogleMap(
-                              initialCameraPosition: _getInitialCameraPosition(
-                                listing,
-                              ),
-                              onMapCreated: (controller) {
-                                if (!mapController.isCompleted) {
-                                  mapController.complete(controller);
-                                }
-                              },
-                              markers: {
-                                Marker(
-                                  icon: BitmapDescriptor.defaultMarkerWithHue(
-                                    256,
-                                  ),
-                                  markerId: MarkerId("${listing.id}"),
-                                  position: LatLng(
-                                    listing.lat,
-                                    listing.lng,
-                                  ),
-                                ),
-                              },
-                            ),
-                          ),
-                          //endregion
-                          height8(),
-                          //region Listing Options
-                          Consumer(
-                            builder: (_, ref, __) {
-                              bool isLoading = false;
-                              ref.watch(httpRequestStateProvider).maybeWhen(
-                                    loading: () => isLoading = true,
-                                    orElse: () => isLoading = false,
-                                  );
-                              return Stack(
-                                children: [
-                                  Column(
-                                    children: [
-                                      //region Quantity
-                                      const QuantityWidget(),
-                                      //endregion
-                                      height8(),
-                                      //region variant options
-                                      const VariantOptionsWidget(),
-                                      //endregion
-                                      height8(),
-                                      //region Shipping options
-                                      const ShippingOptionsWidget(),
-                                      //endregion
-                                      height8(),
-                                      //region Additional options
-                                      const AdditionalOptionsWidget(),
-                                      //endregion
-                                    ],
-                                  ),
-                                  //region Loading indicator
-                                  Visibility(
-                                    visible: isLoading,
-                                    child: Positioned(
-                                      right: 0,
-                                      top: 0,
-                                      left: 0,
-                                      bottom: 0,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          color: AppColors
-                                              .transparentVeryLightPurple,
-                                        ),
-                                        margin: const EdgeInsets.symmetric(
-                                          horizontal: 12.0,
-                                        ),
-                                        child: const Center(
+                  ),
+                  //endregion
+                  flexibleSpace: FlexibleSpaceBar(
+                    //region Listing title, Category & Pricing model
+                    title: ConstrainedBox(
+                      constraints:
+                          BoxConstraints(minWidth: screenWidth(context)),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.transparentLightPurple,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        padding: const EdgeInsets.all(4),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            //region Category & Pricing model
+                            Consumer(
+                              builder: (_, ref, __) {
+                                return ref
+                                    .watch(httpRequestStateProvider)
+                                    .maybeWhen(
+                                      loading: () => const Center(
+                                        child: SizedBox(
+                                          height: 14,
+                                          width: 14,
                                           child: CircularProgressIndicator(
+                                            strokeWidth: 2,
                                             color: AppColors.purple,
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ),
+                                      error: (_) => Container(),
+                                      orElse: () => Row(
+                                        children: [
+                                          Text(
+                                            ref
+                                                .watch(
+                                                  listingDetailsProvider
+                                                      .notifier,
+                                                )
+                                                .getCategoryName(),
+                                            style: const TextStyle(
+                                              fontSize: 8,
+                                              color: AppColors.white,
+                                            ),
+                                          ),
+                                          const Text(
+                                            " / ",
+                                            style: TextStyle(
+                                              fontSize: 8,
+                                              color: AppColors.white,
+                                            ),
+                                          ),
+                                          Text(
+                                            ref
+                                                .watch(
+                                                  listingDetailsProvider
+                                                      .notifier,
+                                                )
+                                                .getPricingModelName(),
+                                            style: const TextStyle(
+                                              fontSize: 8,
+                                              color: AppColors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                              },
+                            ),
+                            //endregion
+                            height4(),
+                            //region Title
+                            Text(
+                              listing.title,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                            //endregion
+                          ],
+                        ),
+                      ),
+                    ),
+                    //endregion
+                    //region Photos slider
+                    background: SliderWidget(photos: listing.photos),
+                    //endregion
+                  ),
+                ),
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      //region Status & Edit button
+                      StatusEditButtonWidget(listing: listing),
+                      //endregion
+                      //region Description
+                      ListingDescriptionWidget(
+                        description: listing.description,
+                      ),
+                      //endregion
+                      //region Tags
+                      if (listing.tags != null)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12.0,
+                          ),
+                          child: Wrap(
+                            spacing: 6,
+                            children: List.generate(
+                              listing.tags!.length,
+                              (index) => TagView(
+                                tag: listing.tags![index],
+                                isEditable: false,
+                              ),
+                            ),
+                          ),
+                        ),
+                      //endregion
+                      height12(),
+                      //region Map
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 12),
+                        height: screenHeightWithoutExtras(context) / 2,
+                        child: GoogleMap(
+                          initialCameraPosition: _getInitialCameraPosition(
+                            listing,
+                          ),
+                          onMapCreated: (controller) {
+                            if (!mapController.isCompleted) {
+                              mapController.complete(controller);
+                            }
+                          },
+                          markers: {
+                            Marker(
+                              icon: BitmapDescriptor.defaultMarkerWithHue(
+                                256,
+                              ),
+                              markerId: MarkerId("${listing.id}"),
+                              position: LatLng(
+                                listing.lat,
+                                listing.lng,
+                              ),
+                            ),
+                          },
+                        ),
+                      ),
+                      //endregion
+                      height8(),
+                      //region Listing Options
+                      Consumer(
+                        builder: (_, ref, __) {
+                          bool isLoading = false;
+                          ref.watch(httpRequestStateProvider).maybeWhen(
+                                loading: () => isLoading = true,
+                                orElse: () => isLoading = false,
+                              );
+                          return Stack(
+                            children: [
+                              Column(
+                                children: [
+                                  //region Quantity
+                                  const QuantityWidget(),
+                                  //endregion
+                                  height8(),
+                                  //region Date range picker
+                                  const DateRangePicker(),
+                                  //endregion
+                                  //region variant options
+                                  const VariantOptionsWidget(),
+                                  //endregion
+                                  height8(),
+                                  //region Shipping options
+                                  const ShippingOptionsWidget(),
+                                  //endregion
+                                  height8(),
+                                  //region Additional options
+                                  const AdditionalOptionsWidget(),
                                   //endregion
                                 ],
-                              );
-                            },
-                          ),
-                          //endregion
-                          height12(),
-                          Consumer(
-                            builder: (_, ref, __) {
-                              return TextButton(
-                                onPressed: () {
-                                  if (!ref
+                              ),
+                              //region Loading indicator
+                              Visibility(
+                                visible: isLoading,
+                                child: Positioned(
+                                  right: 0,
+                                  top: 0,
+                                  left: 0,
+                                  bottom: 0,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color:
+                                          AppColors.transparentVeryLightPurple,
+                                    ),
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 12.0,
+                                    ),
+                                    child: const Center(
+                                      child: CircularProgressIndicator(
+                                        color: AppColors.purple,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              //endregion
+                            ],
+                          );
+                        },
+                      ),
+                      //endregion
+                      height12(),
+                      //region Debugging button
+                      Consumer(
+                        builder: (_, ref, __) {
+                          return TextButton(
+                            onPressed: () {
+                              if (!ref
+                                  .watch(listingDetailsProvider.notifier)
+                                  .areAllVariantOptionsSelected()) {
+                                showSnackBar(
+                                  context,
+                                  "Select all variant options please",
+                                  Colors.amber[800],
+                                );
+                              } else if (!ref
+                                  .watch(listingDetailsProvider.notifier)
+                                  .isShippingIdSelected()) {
+                                showSnackBar(
+                                  context,
+                                  "Select a shipping method please",
+                                  Colors.amber[800],
+                                );
+                              } else {
+                                //region Debugging prints
+                                print(
+                                    "-==-=-=========================================-=-=-=-");
+                                print(
+                                    "Quantity : ${ref.watch(listingDetailsProvider.notifier).selectedQuantity}");
+                                for (int i = 0;
+                                    i <
+                                        ref
+                                            .watch(
+                                                listingDetailsProvider.notifier)
+                                            .selectedVariantOptions
+                                            .length;
+                                    i++) {
+                                  final variant = ref
                                       .watch(listingDetailsProvider.notifier)
-                                      .areAllVariantOptionsSelected()) {
-                                    showSnackBar(
-                                      context,
-                                      "Select all variant options please",
-                                      Colors.amber[800],
-                                    );
-                                  } else if (!ref
+                                      .selectedVariantOptions
+                                      .entries
+                                      .elementAt(i);
+                                  print(
+                                      "variant #$i : ${variant.key} => ${variant.value}");
+                                  print("-------");
+                                }
+                                print(
+                                    "Shipping id : ${ref.watch(listingDetailsProvider.notifier).selectedShippingId}");
+                                for (int i = 0;
+                                    i <
+                                        ref
+                                            .watch(
+                                                listingDetailsProvider.notifier)
+                                            .selectedAdditionalOptions
+                                            .length;
+                                    i++) {
+                                  final additionalOption = ref
                                       .watch(listingDetailsProvider.notifier)
-                                      .isShippingIdSelected()) {
-                                    showSnackBar(
-                                      context,
-                                      "Select a shipping method please",
-                                      Colors.amber[800],
-                                    );
-                                  } else {
-                                    //region Debugging prints
-                                    print(
-                                        "-==-=-=========================================-=-=-=-");
-                                    print(
-                                        "Quantity : ${ref.watch(listingDetailsProvider.notifier).selectedQuantity}");
-                                    for (int i = 0;
-                                        i <
-                                            ref
-                                                .watch(listingDetailsProvider
-                                                    .notifier)
-                                                .selectedVariantOptions
-                                                .length;
-                                        i++) {
-                                      final variant = ref
-                                          .watch(
-                                              listingDetailsProvider.notifier)
-                                          .selectedVariantOptions
-                                          .entries
-                                          .elementAt(i);
-                                      print(
-                                          "variant #$i : ${variant.key} => ${variant.value}");
-                                      print("-------");
-                                    }
-                                    print(
-                                        "Shipping id : ${ref.watch(listingDetailsProvider.notifier).selectedShippingId}");
-                                    for (int i = 0;
-                                        i <
-                                            ref
-                                                .watch(listingDetailsProvider
-                                                    .notifier)
-                                                .selectedAdditionalOptions
-                                                .length;
-                                        i++) {
-                                      final additionalOption = ref
-                                          .watch(
-                                              listingDetailsProvider.notifier)
-                                          .selectedAdditionalOptions
-                                          .entries
-                                          .elementAt(i);
-                                      print(
-                                          "additional option #$i : ${additionalOption.key} => ${additionalOption.value}");
-                                    }
-                                    for (int i = 0;
-                                        i <
-                                            ref
-                                                .watch(listingDetailsProvider
-                                                    .notifier)
-                                                .selectedAdditionalOptionsMeta
-                                                .length;
-                                        i++) {
-                                      if (ref
-                                              .watch(listingDetailsProvider
-                                                  .notifier)
-                                              .selectedAdditionalOptionsMeta
-                                              .entries
-                                              .length >
-                                          i) {
-                                        final additionalOptionMeta = ref
+                                      .selectedAdditionalOptions
+                                      .entries
+                                      .elementAt(i);
+                                  print(
+                                      "additional option #$i : ${additionalOption.key} => ${additionalOption.value}");
+                                }
+                                for (int i = 0;
+                                    i <
+                                        ref
                                             .watch(
                                                 listingDetailsProvider.notifier)
                                             .selectedAdditionalOptionsMeta
-                                            .entries
-                                            .elementAt(i);
-                                        print(
-                                            "additional option meta #$i : ${additionalOptionMeta.key} => ${additionalOptionMeta.value}");
-                                      }
-                                    }
+                                            .length;
+                                    i++) {
+                                  if (ref
+                                          .watch(
+                                              listingDetailsProvider.notifier)
+                                          .selectedAdditionalOptionsMeta
+                                          .entries
+                                          .length >
+                                      i) {
+                                    final additionalOptionMeta = ref
+                                        .watch(listingDetailsProvider.notifier)
+                                        .selectedAdditionalOptionsMeta
+                                        .entries
+                                        .elementAt(i);
                                     print(
-                                        "-==-=-=========================================-=-=-=-");
-                                    //endregion
+                                        "additional option meta #$i : ${additionalOptionMeta.key} => ${additionalOptionMeta.value}");
                                   }
-                                },
-                                child: const Text(
-                                    "check values (debugging button)"),
-                              );
+                                }
+                                print(
+                                    "-==-=-=========================================-=-=-=-");
+                                //endregion
+                              }
                             },
-                          ),
-                          height12(),
-                          //region Owner/Seller widget
-                          const OwnerWidget(),
-                          //endregion
-                          height12(),
-                          //region Reviews
-                          const ReviewsWidget(),
-                          //endregion
-                          height18(),
-                        ],
+                            child:
+                                const Text("check values (debugging button)"),
+                          );
+                        },
                       ),
-                    ),
-                  ],
+                      //endregion
+                      height12(),
+                      //region Owner/Seller widget
+                      const OwnerWidget(),
+                      //endregion
+                      height12(),
+                      //region Reviews
+                      const ReviewsWidget(),
+                      //endregion
+                      height18(),
+                    ],
+                  ),
                 ),
-              ),
-              //endregion
-              //region Total price widget
-              const Expanded(
-                flex: 2,
-                child: TotalPriceWidget(),
-              ),
-              //endregion
-            ],
-          );
-        },
+              ],
+            ),
+          ),
+          //endregion
+          //region Total price widget
+          const Expanded(
+            flex: 2,
+            child: TotalPriceWidget(),
+          ),
+          //endregion
+        ],
       ),
     );
   }

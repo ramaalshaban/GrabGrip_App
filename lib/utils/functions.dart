@@ -107,6 +107,17 @@ String? formatDate(String? dateTime) {
   return dateFormatter.format(dateTimeObj);
 }
 
+String? formatDateForRequest(String? dateTime) {
+  // the input of this function is a time in this format : 2021-10-27 hh:mm:ss.some_digits
+  // the output is a time in this format : 27-10-2021
+  if (dateTime == null) {
+    return null;
+  }
+  final dateFormatter = DateFormat("dd-MM-yyyy");
+  final dateTimeObj = DateTime.parse(dateTime);
+  return dateFormatter.format(dateTimeObj);
+}
+
 String formatDateForView(String? dateTime) {
   // the input of this function is a time in this format : 2021-10-27
   // the output is a time in this format : October 27, 2021
@@ -128,6 +139,16 @@ String formatDateForReview(String? dateTime) {
   final dateTimeObj = DateTime.parse(dateTime);
   return dateFormatter.format(dateTimeObj);
 }
+
+String formatBookingDate(String? startDate, String? endDate) {
+  if (startDate == null || endDate == null) {
+    return "Pick your booking date";
+  } else {
+    return "$startDate to $endDate";
+  }
+}
+
+DateTime stringToDateTime(String dateTime) => DateTime.parse(dateTime);
 //endregion
 
 //region files

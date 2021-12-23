@@ -13,6 +13,8 @@ import 'package:grab_grip/services/network/network_service.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
 import 'package:grab_grip/services/storage/app_shared_preferences.dart';
 import 'package:grab_grip/utils/constants.dart';
+import 'package:grab_grip/utils/functions.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
   ListingDetailsProvider(
@@ -163,6 +165,31 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
 
   set widget(Widget? widget) => state = state.copyWith(widget: widget);
 
+  DateTime? get listingEndDate => state.listingEndDate;
+
+  set listingEndDate(DateTime? listingEndDate) =>
+      state = state.copyWith(listingEndDate: listingEndDate);
+
+  String? get startDate => state.startDate;
+
+  set startDate(String? startDate) =>
+      state = state.copyWith(startDate: formatDateForRequest(startDate));
+
+  String? get endDate => state.endDate;
+
+  set endDate(String? endDate) =>
+      state = state.copyWith(endDate: formatDateForRequest(endDate));
+
+  PickerDateRange? get pickerDateRange => state.pickerDateRange;
+
+  set pickerDateRange(PickerDateRange? pickerDateRange) =>
+      state = state.copyWith(pickerDateRange: pickerDateRange);
+
+  bool? get isForRent => state.isForRent;
+
+  set isForRent(bool? isForRent) =>
+      state = state.copyWith(isForRent: isForRent);
+
   //endregion
 
   //region Quantity
@@ -237,6 +264,15 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
 
   //endregion
 
+  //region Booking date
+  Future<void> setBookingDate(String startDate, String endDate) async {
+    this.startDate = startDate;
+    this.endDate = endDate;
+    await getListing();
+  }
+
+  //endregion
+
   Future<void> getListing({
     String? passedHash,
     String? passedSlug,
@@ -283,6 +319,10 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
     variantOptions = response.listing.variantOptions ?? {};
     listingOwner = response.listing.user;
     widget = response.widget;
+    isForRent = pricingModel?.widget == bookDate;
+    listingEndDate = response.listing.listingEndDate != null
+        ? stringToDateTime(response.listing.listingEndDate!)
+        : null;
   }
 
   void _updateCurrentSelectedValues(

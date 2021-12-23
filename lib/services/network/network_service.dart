@@ -151,7 +151,6 @@ class NetworkService {
       );
       return Success(browseCall.data);
     } catch (error) {
-      print((error as TypeError).stackTrace);
       final errorMessage = _errorHandler(error as DioError);
       return Error(errorMessage);
     }
@@ -231,7 +230,6 @@ class NetworkService {
       );
       return Success(postListingCall.data);
     } catch (error) {
-      print((error as TypeError).stackTrace);
       final errorMessage = _errorHandler(error as DioError);
       return Error(errorMessage);
     }
@@ -471,8 +469,9 @@ class NetworkService {
         variants: state.selectedVariantOptions,
         additionalOptions: state.selectedAdditionalOptions,
         additionalOptionsMeta: state.selectedAdditionalOptionsMeta,
-        //   startDate: state.startDate,
-        //   endDate: state.endDate,
+        startDate: state.startDate,
+        endDate: state.endDate,
+        range: "${state.startDate} to ${state.endDate}",
       );
       return Success(getListingCall.data);
     } catch (error) {
