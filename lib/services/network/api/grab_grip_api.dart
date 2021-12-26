@@ -15,6 +15,7 @@ import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_req
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
 import 'package:grab_grip/features/post_listing/models/save_listing_request/save_listing_request.dart';
+import 'package:grab_grip/features/user_profile/change_password/models/change_password_request.dart';
 import 'package:grab_grip/features/user_profile/payments/models/payment_method/payment_method.dart';
 import 'package:grab_grip/features/user_profile/shared/models/user.dart';
 import 'package:grab_grip/shared/models/listings_page/listings_page.dart';
@@ -65,6 +66,12 @@ abstract class GrabGripApi {
 
   @POST("/api/v1/auth/logout")
   Future<HttpResponse> logout(@Header("Authorization") String token);
+
+  @POST("/api/v1/account/change_password")
+  Future<HttpResponse> changePassword(
+    @Header("Authorization") String token,
+    @Body() ChangePasswordRequest requestBody,
+  );
 
   //endregion
 

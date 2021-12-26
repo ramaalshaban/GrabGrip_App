@@ -34,3 +34,10 @@ final listingDetailsBoxDecoration = BoxDecoration(
     color: AppColors.veryLightPurple,
   ),
 );
+
+final standardBoxDecoration = BoxDecoration(
+  borderRadius: BorderRadius.circular(6),
+  border: Border.all(
+    color: AppColors.lightPurple,
+  ),
+);

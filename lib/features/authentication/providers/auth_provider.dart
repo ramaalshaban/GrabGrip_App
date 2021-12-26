@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
 import 'package:grab_grip/features/authentication/providers/auth_state.dart';
+import 'package:grab_grip/features/user_profile/change_password/models/change_password_request.dart';
 import 'package:grab_grip/features/user_profile/shared/models/user.dart';
 import 'package:grab_grip/features/user_profile/shared/providers/user_profile_provider.dart';
 import 'package:grab_grip/services/network/network_service.dart';
@@ -103,6 +104,21 @@ class AuthProvider extends StateNotifier<AuthState> {
           AppSharedPreferences().setUser(user: User.empty());
           userProfileProvider.reset();
           httpRequestStateProvider.setSuccess(actionSucceeded: logoutAction);
+        },
+      );
+    });
+  }
+
+  Future<void> changePassword(ChangePasswordRequest requestBody) async {
+    httpRequestStateProvider.setLoading();
+    final token = await AppSharedPreferences().getToken();
+    await NetworkService().changePassword(token!, requestBody).then((result) {
+      result.when(
+        (errorMessage) {
+          httpRequestStateProvider.setError(errorMessage);
+        },
+        (successMessage) {
+          httpRequestStateProvider.setSuccess();
         },
       );
     });

@@ -26,19 +26,16 @@ const standardInputDecoration = InputDecoration(
   ),
   enabledBorder: OutlineInputBorder(
     borderSide: BorderSide(
-      width: 0.5,
       color: AppColors.lightPurple,
     ),
   ),
   errorBorder: OutlineInputBorder(
     borderSide: BorderSide(
-      width: 0.5,
       color: Colors.red,
     ),
   ),
   focusedErrorBorder: OutlineInputBorder(
     borderSide: BorderSide(
-      width: 0.5,
       color: Colors.red,
     ),
   ),

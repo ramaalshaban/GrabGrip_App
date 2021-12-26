@@ -145,7 +145,9 @@ class UserProfileScreen extends ConsumerWidget {
                 lightGrayDividerThickness0_5,
                 AppDrawerButton(
                   title: "Change Password",
-                  onTabFunction: () {},
+                  onTabFunction: () {
+                    context.router.push(const ChangePasswordScreenRoute());
+                  },
                 ),
                 lightGrayDividerThickness0_5,
                 AppDrawerButton(

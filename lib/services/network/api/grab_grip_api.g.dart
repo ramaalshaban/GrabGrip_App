@@ -130,6 +130,24 @@ class _GrabGripApi implements GrabGripApi {
   }
 
   @override
+  Future<HttpResponse<dynamic>> changePassword(token, requestBody) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(requestBody.toJson());
+    final _result = await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/api/v1/account/change_password',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
   Future<HttpResponse<BrowseModel>> browse(
       {required pageNumber,
       searchText,
