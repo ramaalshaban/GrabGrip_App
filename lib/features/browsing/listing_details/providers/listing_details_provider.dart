@@ -73,6 +73,16 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
     }
   }
 
+  String getUserCountryAndCity() {
+    final ownerCity = listingOwner?.city ?? "";
+    final ownerCountry = listingOwner?.countryCode == null
+        ? ""
+        : ",${listingOwner?.countryCode}";
+    return ownerCity + ownerCountry;
+  }
+
+  double getUserRating() => double.parse(userRating!);
+
   //region getters and setters
   ListingCategory? get category => state.category;
 
@@ -195,6 +205,16 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
 
   set isFavorited(bool? isFavorited) =>
       state = state.copyWith(isFavorited: isFavorited);
+
+  String? get userRating => state.userRating;
+
+  set userRating(String? userRating) =>
+      state = state.copyWith(userRating: userRating);
+
+  int? get userListingsCount => state.userListingsCount;
+
+  set userListingsCount(int? userListingsCount) =>
+      state = state.copyWith(userListingsCount: userListingsCount);
 
   //endregion
 
@@ -324,6 +344,8 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
     widget = response.widget;
     isForRent = pricingModel?.widget == bookDate;
     isFavorited = response.listing.isFavorited as bool?;
+    userRating = response.listing.userRating;
+    userListingsCount = response.listing.userListingsCount;
     listingEndDate = response.listing.listingEndDate != null
         ? stringToDateTime(response.listing.listingEndDate!)
         : null;

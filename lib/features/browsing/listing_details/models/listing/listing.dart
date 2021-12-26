@@ -25,6 +25,8 @@ class Listing with _$Listing {
     @JsonKey(name: "ends_at") String? listingEndDate,
     @JsonKey(name: "user") User? user,
     @JsonKey(name: "is_favorited") isFavorited,
+    @JsonKey(name: "user_rating") String userRating,
+    @JsonKey(name: "user_listings_count") int userListingsCount,
   ) = _Listing;
 
   factory Listing.fromJson(Map<String, dynamic> json) =>

@@ -27,6 +27,8 @@ _$_Listing _$$_ListingFromJson(Map<String, dynamic> json) => _$_Listing(
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),
       json['is_favorited'],
+      json['user_rating'] as String,
+      json['user_listings_count'] as int,
     );
 
 Map<String, dynamic> _$$_ListingToJson(_$_Listing instance) =>
@@ -42,4 +44,6 @@ Map<String, dynamic> _$$_ListingToJson(_$_Listing instance) =>
       'ends_at': instance.listingEndDate,
       'user': instance.user,
       'is_favorited': instance.isFavorited,
+      'user_rating': instance.userRating,
+      'user_listings_count': instance.userListingsCount,
     };

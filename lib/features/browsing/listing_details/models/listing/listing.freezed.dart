@@ -41,7 +41,11 @@ class _$ListingTearOff {
       @JsonKey(name: "user")
           User? user,
       @JsonKey(name: "is_favorited")
-          dynamic isFavorited) {
+          dynamic isFavorited,
+      @JsonKey(name: "user_rating")
+          String userRating,
+      @JsonKey(name: "user_listings_count")
+          int userListingsCount) {
     return _Listing(
       ownerId,
       category,
@@ -54,6 +58,8 @@ class _$ListingTearOff {
       listingEndDate,
       user,
       isFavorited,
+      userRating,
+      userListingsCount,
     );
   }
 
@@ -89,6 +95,10 @@ mixin _$Listing {
   User? get user => throw _privateConstructorUsedError;
   @JsonKey(name: "is_favorited")
   dynamic get isFavorited => throw _privateConstructorUsedError;
+  @JsonKey(name: "user_rating")
+  String get userRating => throw _privateConstructorUsedError;
+  @JsonKey(name: "user_listings_count")
+  int get userListingsCount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -119,7 +129,11 @@ abstract class $ListingCopyWith<$Res> {
       @JsonKey(name: "user")
           User? user,
       @JsonKey(name: "is_favorited")
-          dynamic isFavorited});
+          dynamic isFavorited,
+      @JsonKey(name: "user_rating")
+          String userRating,
+      @JsonKey(name: "user_listings_count")
+          int userListingsCount});
 
   $ListingCategoryCopyWith<$Res> get category;
   $PricingModelCopyWith<$Res> get pricingModel;
@@ -147,6 +161,8 @@ class _$ListingCopyWithImpl<$Res> implements $ListingCopyWith<$Res> {
     Object? listingEndDate = freezed,
     Object? user = freezed,
     Object? isFavorited = freezed,
+    Object? userRating = freezed,
+    Object? userListingsCount = freezed,
   }) {
     return _then(_value.copyWith(
       ownerId: ownerId == freezed
@@ -193,6 +209,14 @@ class _$ListingCopyWithImpl<$Res> implements $ListingCopyWith<$Res> {
           ? _value.isFavorited
           : isFavorited // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      userRating: userRating == freezed
+          ? _value.userRating
+          : userRating // ignore: cast_nullable_to_non_nullable
+              as String,
+      userListingsCount: userListingsCount == freezed
+          ? _value.userListingsCount
+          : userListingsCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 
@@ -247,7 +271,11 @@ abstract class _$ListingCopyWith<$Res> implements $ListingCopyWith<$Res> {
       @JsonKey(name: "user")
           User? user,
       @JsonKey(name: "is_favorited")
-          dynamic isFavorited});
+          dynamic isFavorited,
+      @JsonKey(name: "user_rating")
+          String userRating,
+      @JsonKey(name: "user_listings_count")
+          int userListingsCount});
 
   @override
   $ListingCategoryCopyWith<$Res> get category;
@@ -279,6 +307,8 @@ class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
     Object? listingEndDate = freezed,
     Object? user = freezed,
     Object? isFavorited = freezed,
+    Object? userRating = freezed,
+    Object? userListingsCount = freezed,
   }) {
     return _then(_Listing(
       ownerId == freezed
@@ -322,6 +352,14 @@ class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
       isFavorited == freezed ? _value.isFavorited : isFavorited,
+      userRating == freezed
+          ? _value.userRating
+          : userRating // ignore: cast_nullable_to_non_nullable
+              as String,
+      userListingsCount == freezed
+          ? _value.userListingsCount
+          : userListingsCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -340,7 +378,9 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
       @JsonKey(name: "variant_options") this.variantOptions,
       @JsonKey(name: "ends_at") this.listingEndDate,
       @JsonKey(name: "user") this.user,
-      @JsonKey(name: "is_favorited") this.isFavorited);
+      @JsonKey(name: "is_favorited") this.isFavorited,
+      @JsonKey(name: "user_rating") this.userRating,
+      @JsonKey(name: "user_listings_count") this.userListingsCount);
 
   factory _$_Listing.fromJson(Map<String, dynamic> json) =>
       _$$_ListingFromJson(json);
@@ -376,10 +416,16 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
   @override
   @JsonKey(name: "is_favorited")
   final dynamic isFavorited;
+  @override
+  @JsonKey(name: "user_rating")
+  final String userRating;
+  @override
+  @JsonKey(name: "user_listings_count")
+  final int userListingsCount;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Listing(ownerId: $ownerId, category: $category, pricingModel: $pricingModel, price: $price, stock: $stock, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, listingEndDate: $listingEndDate, user: $user, isFavorited: $isFavorited)';
+    return 'Listing(ownerId: $ownerId, category: $category, pricingModel: $pricingModel, price: $price, stock: $stock, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, listingEndDate: $listingEndDate, user: $user, isFavorited: $isFavorited, userRating: $userRating, userListingsCount: $userListingsCount)';
   }
 
   @override
@@ -397,7 +443,9 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
       ..add(DiagnosticsProperty('variantOptions', variantOptions))
       ..add(DiagnosticsProperty('listingEndDate', listingEndDate))
       ..add(DiagnosticsProperty('user', user))
-      ..add(DiagnosticsProperty('isFavorited', isFavorited));
+      ..add(DiagnosticsProperty('isFavorited', isFavorited))
+      ..add(DiagnosticsProperty('userRating', userRating))
+      ..add(DiagnosticsProperty('userListingsCount', userListingsCount));
   }
 
   @override
@@ -433,7 +481,13 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
                 const DeepCollectionEquality().equals(other.user, user)) &&
             (identical(other.isFavorited, isFavorited) ||
                 const DeepCollectionEquality()
-                    .equals(other.isFavorited, isFavorited)));
+                    .equals(other.isFavorited, isFavorited)) &&
+            (identical(other.userRating, userRating) ||
+                const DeepCollectionEquality()
+                    .equals(other.userRating, userRating)) &&
+            (identical(other.userListingsCount, userListingsCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.userListingsCount, userListingsCount)));
   }
 
   @override
@@ -449,7 +503,9 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
       const DeepCollectionEquality().hash(variantOptions) ^
       const DeepCollectionEquality().hash(listingEndDate) ^
       const DeepCollectionEquality().hash(user) ^
-      const DeepCollectionEquality().hash(isFavorited);
+      const DeepCollectionEquality().hash(isFavorited) ^
+      const DeepCollectionEquality().hash(userRating) ^
+      const DeepCollectionEquality().hash(userListingsCount);
 
   @JsonKey(ignore: true)
   @override
@@ -483,7 +539,11 @@ abstract class _Listing implements Listing {
       @JsonKey(name: "user")
           User? user,
       @JsonKey(name: "is_favorited")
-          dynamic isFavorited) = _$_Listing;
+          dynamic isFavorited,
+      @JsonKey(name: "user_rating")
+          String userRating,
+      @JsonKey(name: "user_listings_count")
+          int userListingsCount) = _$_Listing;
 
   factory _Listing.fromJson(Map<String, dynamic> json) = _$_Listing.fromJson;
 
@@ -520,6 +580,12 @@ abstract class _Listing implements Listing {
   @override
   @JsonKey(name: "is_favorited")
   dynamic get isFavorited => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "user_rating")
+  String get userRating => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "user_listings_count")
+  int get userListingsCount => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ListingCopyWith<_Listing> get copyWith =>
