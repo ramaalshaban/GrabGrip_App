@@ -38,7 +38,8 @@ class _$ListingDetailsStateTearOff {
       Widget? widget,
       DateTime? listingEndDate,
       PickerDateRange? pickerDateRange,
-      bool? isForRent}) {
+      bool? isForRent,
+      bool? isFavorited}) {
     return _ListingDetailsState(
       category: category,
       pricingModel: pricingModel,
@@ -61,6 +62,7 @@ class _$ListingDetailsStateTearOff {
       listingEndDate: listingEndDate,
       pickerDateRange: pickerDateRange,
       isForRent: isForRent,
+      isFavorited: isFavorited,
     );
   }
 }
@@ -96,6 +98,7 @@ mixin _$ListingDetailsState {
   DateTime? get listingEndDate => throw _privateConstructorUsedError;
   PickerDateRange? get pickerDateRange => throw _privateConstructorUsedError;
   bool? get isForRent => throw _privateConstructorUsedError;
+  bool? get isFavorited => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ListingDetailsStateCopyWith<ListingDetailsState> get copyWith =>
@@ -128,7 +131,8 @@ abstract class $ListingDetailsStateCopyWith<$Res> {
       Widget? widget,
       DateTime? listingEndDate,
       PickerDateRange? pickerDateRange,
-      bool? isForRent});
+      bool? isForRent,
+      bool? isFavorited});
 
   $ListingCategoryCopyWith<$Res>? get category;
   $PricingModelCopyWith<$Res>? get pricingModel;
@@ -168,6 +172,7 @@ class _$ListingDetailsStateCopyWithImpl<$Res>
     Object? listingEndDate = freezed,
     Object? pickerDateRange = freezed,
     Object? isForRent = freezed,
+    Object? isFavorited = freezed,
   }) {
     return _then(_value.copyWith(
       category: category == freezed
@@ -254,6 +259,10 @@ class _$ListingDetailsStateCopyWithImpl<$Res>
           ? _value.isForRent
           : isForRent // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isFavorited: isFavorited == freezed
+          ? _value.isFavorited
+          : isFavorited // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 
@@ -330,7 +339,8 @@ abstract class _$ListingDetailsStateCopyWith<$Res>
       Widget? widget,
       DateTime? listingEndDate,
       PickerDateRange? pickerDateRange,
-      bool? isForRent});
+      bool? isForRent,
+      bool? isFavorited});
 
   @override
   $ListingCategoryCopyWith<$Res>? get category;
@@ -376,6 +386,7 @@ class __$ListingDetailsStateCopyWithImpl<$Res>
     Object? listingEndDate = freezed,
     Object? pickerDateRange = freezed,
     Object? isForRent = freezed,
+    Object? isFavorited = freezed,
   }) {
     return _then(_ListingDetailsState(
       category: category == freezed
@@ -462,6 +473,10 @@ class __$ListingDetailsStateCopyWithImpl<$Res>
           ? _value.isForRent
           : isForRent // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isFavorited: isFavorited == freezed
+          ? _value.isFavorited
+          : isFavorited // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -492,7 +507,8 @@ class _$_ListingDetailsState
       this.widget,
       this.listingEndDate,
       this.pickerDateRange,
-      this.isForRent});
+      this.isForRent,
+      this.isFavorited});
 
   @override
   final ListingCategory? category;
@@ -544,10 +560,12 @@ class _$_ListingDetailsState
   final PickerDateRange? pickerDateRange;
   @override
   final bool? isForRent;
+  @override
+  final bool? isFavorited;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ListingDetailsState(category: $category, pricingModel: $pricingModel, ownerId: $ownerId, hash: $hash, slug: $slug, selectedQuantity: $selectedQuantity, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, selectedAdditionalOptions: $selectedAdditionalOptions, selectedAdditionalOptionsMeta: $selectedAdditionalOptionsMeta, selectedShippingOptionId: $selectedShippingOptionId, selectedVariantOptions: $selectedVariantOptions, startDate: $startDate, endDate: $endDate, listingOwner: $listingOwner, stockQuantity: $stockQuantity, widget: $widget, listingEndDate: $listingEndDate, pickerDateRange: $pickerDateRange, isForRent: $isForRent)';
+    return 'ListingDetailsState(category: $category, pricingModel: $pricingModel, ownerId: $ownerId, hash: $hash, slug: $slug, selectedQuantity: $selectedQuantity, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, selectedAdditionalOptions: $selectedAdditionalOptions, selectedAdditionalOptionsMeta: $selectedAdditionalOptionsMeta, selectedShippingOptionId: $selectedShippingOptionId, selectedVariantOptions: $selectedVariantOptions, startDate: $startDate, endDate: $endDate, listingOwner: $listingOwner, stockQuantity: $stockQuantity, widget: $widget, listingEndDate: $listingEndDate, pickerDateRange: $pickerDateRange, isForRent: $isForRent, isFavorited: $isFavorited)';
   }
 
   @override
@@ -579,7 +597,8 @@ class _$_ListingDetailsState
       ..add(DiagnosticsProperty('widget', widget))
       ..add(DiagnosticsProperty('listingEndDate', listingEndDate))
       ..add(DiagnosticsProperty('pickerDateRange', pickerDateRange))
-      ..add(DiagnosticsProperty('isForRent', isForRent));
+      ..add(DiagnosticsProperty('isForRent', isForRent))
+      ..add(DiagnosticsProperty('isFavorited', isFavorited));
   }
 
   @override
@@ -640,7 +659,8 @@ class _$_ListingDetailsState
             (identical(other.widget, widget) || const DeepCollectionEquality().equals(other.widget, widget)) &&
             (identical(other.listingEndDate, listingEndDate) || const DeepCollectionEquality().equals(other.listingEndDate, listingEndDate)) &&
             (identical(other.pickerDateRange, pickerDateRange) || const DeepCollectionEquality().equals(other.pickerDateRange, pickerDateRange)) &&
-            (identical(other.isForRent, isForRent) || const DeepCollectionEquality().equals(other.isForRent, isForRent)));
+            (identical(other.isForRent, isForRent) || const DeepCollectionEquality().equals(other.isForRent, isForRent)) &&
+            (identical(other.isFavorited, isFavorited) || const DeepCollectionEquality().equals(other.isFavorited, isFavorited)));
   }
 
   @override
@@ -666,7 +686,8 @@ class _$_ListingDetailsState
       const DeepCollectionEquality().hash(widget) ^
       const DeepCollectionEquality().hash(listingEndDate) ^
       const DeepCollectionEquality().hash(pickerDateRange) ^
-      const DeepCollectionEquality().hash(isForRent);
+      const DeepCollectionEquality().hash(isForRent) ^
+      const DeepCollectionEquality().hash(isFavorited);
 
   @JsonKey(ignore: true)
   @override
@@ -697,7 +718,8 @@ abstract class _ListingDetailsState implements ListingDetailsState {
       Widget? widget,
       DateTime? listingEndDate,
       PickerDateRange? pickerDateRange,
-      bool? isForRent}) = _$_ListingDetailsState;
+      bool? isForRent,
+      bool? isFavorited}) = _$_ListingDetailsState;
 
   @override
   ListingCategory? get category => throw _privateConstructorUsedError;
@@ -746,6 +768,8 @@ abstract class _ListingDetailsState implements ListingDetailsState {
   PickerDateRange? get pickerDateRange => throw _privateConstructorUsedError;
   @override
   bool? get isForRent => throw _privateConstructorUsedError;
+  @override
+  bool? get isFavorited => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ListingDetailsStateCopyWith<_ListingDetailsState> get copyWith =>

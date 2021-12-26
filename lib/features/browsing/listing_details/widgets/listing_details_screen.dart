@@ -19,6 +19,7 @@ import 'package:grab_grip/features/browsing/listing_details/widgets/reviews/revi
 import 'package:grab_grip/features/browsing/listing_details/widgets/shipping_options_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/slider_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/status_edit_button_widget.dart';
+import 'package:grab_grip/features/browsing/listing_details/widgets/toggle_favorite_button.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/total_price_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/variant_options_widget.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/widgets/tag_view.dart';
@@ -44,7 +45,6 @@ class ListingDetailsScreen extends ConsumerWidget {
       ref.watch(listingDetailsProvider.notifier).getListing(
             passedHash: listing.hash,
             passedSlug: listing.slug,
-            listingOwnerId: listing.ownerId,
           );
     });
     //region Listeners
@@ -109,6 +109,9 @@ class ListingDetailsScreen extends ConsumerWidget {
                       ),
                     ),
                   ),
+                  //endregion
+                  //region Favorite button
+                  actions: const [ToggleFavoriteButton()],
                   //endregion
                   flexibleSpace: FlexibleSpaceBar(
                     //region Listing title, Category & Pricing model

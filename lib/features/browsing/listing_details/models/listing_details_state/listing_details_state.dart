@@ -34,5 +34,6 @@ class ListingDetailsState with _$ListingDetailsState {
     DateTime? listingEndDate,
     PickerDateRange? pickerDateRange,
     bool? isForRent,
+    bool? isFavorited,
   }) = _ListingDetailsState;
 }

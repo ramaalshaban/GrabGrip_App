@@ -39,7 +39,9 @@ class _$ListingTearOff {
       @JsonKey(name: "ends_at")
           String? listingEndDate,
       @JsonKey(name: "user")
-          User? user) {
+          User? user,
+      @JsonKey(name: "is_favorited")
+          dynamic isFavorited) {
     return _Listing(
       ownerId,
       category,
@@ -51,6 +53,7 @@ class _$ListingTearOff {
       variantOptions,
       listingEndDate,
       user,
+      isFavorited,
     );
   }
 
@@ -84,6 +87,8 @@ mixin _$Listing {
   String? get listingEndDate => throw _privateConstructorUsedError;
   @JsonKey(name: "user")
   User? get user => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_favorited")
+  dynamic get isFavorited => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -112,7 +117,9 @@ abstract class $ListingCopyWith<$Res> {
       @JsonKey(name: "ends_at")
           String? listingEndDate,
       @JsonKey(name: "user")
-          User? user});
+          User? user,
+      @JsonKey(name: "is_favorited")
+          dynamic isFavorited});
 
   $ListingCategoryCopyWith<$Res> get category;
   $PricingModelCopyWith<$Res> get pricingModel;
@@ -139,6 +146,7 @@ class _$ListingCopyWithImpl<$Res> implements $ListingCopyWith<$Res> {
     Object? variantOptions = freezed,
     Object? listingEndDate = freezed,
     Object? user = freezed,
+    Object? isFavorited = freezed,
   }) {
     return _then(_value.copyWith(
       ownerId: ownerId == freezed
@@ -181,6 +189,10 @@ class _$ListingCopyWithImpl<$Res> implements $ListingCopyWith<$Res> {
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      isFavorited: isFavorited == freezed
+          ? _value.isFavorited
+          : isFavorited // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 
@@ -233,7 +245,9 @@ abstract class _$ListingCopyWith<$Res> implements $ListingCopyWith<$Res> {
       @JsonKey(name: "ends_at")
           String? listingEndDate,
       @JsonKey(name: "user")
-          User? user});
+          User? user,
+      @JsonKey(name: "is_favorited")
+          dynamic isFavorited});
 
   @override
   $ListingCategoryCopyWith<$Res> get category;
@@ -264,6 +278,7 @@ class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
     Object? variantOptions = freezed,
     Object? listingEndDate = freezed,
     Object? user = freezed,
+    Object? isFavorited = freezed,
   }) {
     return _then(_Listing(
       ownerId == freezed
@@ -306,6 +321,7 @@ class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      isFavorited == freezed ? _value.isFavorited : isFavorited,
     ));
   }
 }
@@ -323,7 +339,8 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
       @JsonKey(name: "shipping_options") this.shippingOptions,
       @JsonKey(name: "variant_options") this.variantOptions,
       @JsonKey(name: "ends_at") this.listingEndDate,
-      @JsonKey(name: "user") this.user);
+      @JsonKey(name: "user") this.user,
+      @JsonKey(name: "is_favorited") this.isFavorited);
 
   factory _$_Listing.fromJson(Map<String, dynamic> json) =>
       _$$_ListingFromJson(json);
@@ -356,10 +373,13 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
   @override
   @JsonKey(name: "user")
   final User? user;
+  @override
+  @JsonKey(name: "is_favorited")
+  final dynamic isFavorited;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Listing(ownerId: $ownerId, category: $category, pricingModel: $pricingModel, price: $price, stock: $stock, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, listingEndDate: $listingEndDate, user: $user)';
+    return 'Listing(ownerId: $ownerId, category: $category, pricingModel: $pricingModel, price: $price, stock: $stock, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, listingEndDate: $listingEndDate, user: $user, isFavorited: $isFavorited)';
   }
 
   @override
@@ -376,7 +396,8 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
       ..add(DiagnosticsProperty('shippingOptions', shippingOptions))
       ..add(DiagnosticsProperty('variantOptions', variantOptions))
       ..add(DiagnosticsProperty('listingEndDate', listingEndDate))
-      ..add(DiagnosticsProperty('user', user));
+      ..add(DiagnosticsProperty('user', user))
+      ..add(DiagnosticsProperty('isFavorited', isFavorited));
   }
 
   @override
@@ -409,7 +430,10 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
                 const DeepCollectionEquality()
                     .equals(other.listingEndDate, listingEndDate)) &&
             (identical(other.user, user) ||
-                const DeepCollectionEquality().equals(other.user, user)));
+                const DeepCollectionEquality().equals(other.user, user)) &&
+            (identical(other.isFavorited, isFavorited) ||
+                const DeepCollectionEquality()
+                    .equals(other.isFavorited, isFavorited)));
   }
 
   @override
@@ -424,7 +448,8 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
       const DeepCollectionEquality().hash(shippingOptions) ^
       const DeepCollectionEquality().hash(variantOptions) ^
       const DeepCollectionEquality().hash(listingEndDate) ^
-      const DeepCollectionEquality().hash(user);
+      const DeepCollectionEquality().hash(user) ^
+      const DeepCollectionEquality().hash(isFavorited);
 
   @JsonKey(ignore: true)
   @override
@@ -456,7 +481,9 @@ abstract class _Listing implements Listing {
       @JsonKey(name: "ends_at")
           String? listingEndDate,
       @JsonKey(name: "user")
-          User? user) = _$_Listing;
+          User? user,
+      @JsonKey(name: "is_favorited")
+          dynamic isFavorited) = _$_Listing;
 
   factory _Listing.fromJson(Map<String, dynamic> json) = _$_Listing.fromJson;
 
@@ -490,6 +517,9 @@ abstract class _Listing implements Listing {
   @override
   @JsonKey(name: "user")
   User? get user => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "is_favorited")
+  dynamic get isFavorited => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ListingCopyWith<_Listing> get copyWith =>

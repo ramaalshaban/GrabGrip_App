@@ -154,8 +154,9 @@ final myOrdersProvider =
 
 final favoritesProvider =
     StateNotifierProvider<FavoritesProvider, List<Gear>>((reference) {
-  final provider = reference.watch(httpRequestStateProvider.notifier);
-  return FavoritesProvider(provider);
+  final httpProvider = reference.watch(httpRequestStateProvider.notifier);
+  final listingProvider = reference.watch(listingDetailsProvider.notifier);
+  return FavoritesProvider(httpProvider, listingProvider);
 });
 
 final pingProvider = Provider((reference) {

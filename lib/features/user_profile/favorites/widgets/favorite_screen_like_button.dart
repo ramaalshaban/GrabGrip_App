@@ -5,8 +5,8 @@ import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/user_profile/favorites/widgets/favorite_item.dart';
 import 'package:grab_grip/style/colors.dart';
 
-class LikeButton extends StatelessWidget {
-  const LikeButton({
+class FavoriteScreenLikeButton extends StatelessWidget {
+  const FavoriteScreenLikeButton({
     Key? key,
     required this.favoriteGear,
     required this.index,
@@ -32,7 +32,7 @@ class LikeButton extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 8),
                       splashColor: AppColors.green,
                       constraints: const BoxConstraints(),
-                      onPressed: () => toggleFavoriteStatus(context, ref),
+                      onPressed: () => unlikeListing(context, ref),
                       icon: const Icon(
                         Icons.favorite,
                         color: AppColors.green,
@@ -42,7 +42,7 @@ class LikeButton extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 8),
                 splashColor: AppColors.green,
                 constraints: const BoxConstraints(),
-                onPressed: () => toggleFavoriteStatus(context, ref),
+                onPressed: () => unlikeListing(context, ref),
                 icon: const Icon(
                   Icons.favorite,
                   color: AppColors.green,
@@ -53,11 +53,11 @@ class LikeButton extends StatelessWidget {
     );
   }
 
-  void toggleFavoriteStatus(BuildContext context, WidgetRef ref) {
+  void unlikeListing(BuildContext context, WidgetRef ref) {
     {
       ref
           .watch(favoritesProvider.notifier)
-          .toggleFavoriteStatus(
+          .removeFromFavoriteListings(
             hash: favoriteGear.hash,
             slug: favoriteGear.slug,
             index: index,

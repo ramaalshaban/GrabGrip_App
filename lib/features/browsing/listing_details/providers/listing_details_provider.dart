@@ -190,6 +190,12 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
   set isForRent(bool? isForRent) =>
       state = state.copyWith(isForRent: isForRent);
 
+  //isFavorited is null when user is not authenticated, so return false instead because unauthenticated users should see listings as not favorites.
+  bool? get isFavorited => state.isFavorited ?? false;
+
+  set isFavorited(bool? isFavorited) =>
+      state = state.copyWith(isFavorited: isFavorited);
+
   //endregion
 
   //region Quantity
@@ -276,14 +282,11 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
   Future<void> getListing({
     String? passedHash,
     String? passedSlug,
-    int? listingOwnerId,
   }) async {
     String? token;
     httpRequestStateProvider.setLoading();
-    if (userOwnsThisListing(listingOwnerId: listingOwnerId)) {
-      // getting an unpublished listing (i.e. the listing owner browsing its details while it's unpublished) needs token
-      token = await AppSharedPreferences().getToken();
-    }
+    // for these two cases : 1) getting an unpublished listing 2) to get is_favorited key in response, token is required
+    token = await AppSharedPreferences().getToken();
     //set the listing hash and slug to the state since we need them when we call getListing again without passing hash and slug (i.e. when user picks listing options)
     if (passedHash != null && passedSlug != null) {
       hash = passedHash;
@@ -320,6 +323,7 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
     listingOwner = response.listing.user;
     widget = response.widget;
     isForRent = pricingModel?.widget == bookDate;
+    isFavorited = response.listing.isFavorited as bool?;
     listingEndDate = response.listing.listingEndDate != null
         ? stringToDateTime(response.listing.listingEndDate!)
         : null;

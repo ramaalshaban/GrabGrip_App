@@ -24,6 +24,7 @@ class Listing with _$Listing {
     @JsonKey(name: "variant_options") Map<String, List<String>>? variantOptions,
     @JsonKey(name: "ends_at") String? listingEndDate,
     @JsonKey(name: "user") User? user,
+    @JsonKey(name: "is_favorited") isFavorited,
   ) = _Listing;
 
   factory Listing.fromJson(Map<String, dynamic> json) =>

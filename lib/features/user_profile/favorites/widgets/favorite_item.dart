@@ -3,7 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
-import 'package:grab_grip/features/user_profile/favorites/widgets/like_button.dart';
+import 'package:grab_grip/features/user_profile/favorites/widgets/favorite_screen_like_button.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text.dart';
 import 'package:grab_grip/utils/device.dart';
@@ -81,7 +81,7 @@ class FavoriteItem extends StatelessWidget {
                             favoriteGear.title,
                             style: AppTextStyles.title,
                           ),
-                          LikeButton(favoriteGear: favoriteGear, index: index),
+                          FavoriteScreenLikeButton(favoriteGear: favoriteGear, index: index),
                         ],
                       ),
                       //endregion

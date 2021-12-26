@@ -24,7 +24,9 @@ class UserProfileProvider extends StateNotifier<User> {
     }
   }
 
- int get userId => state.id;
+  bool userIsAuthenticated() => getUser() != null;
+
+  int get userId => state.id;
 
   bool isIdOfCurrentUser(int id) => state.id == id;
 
