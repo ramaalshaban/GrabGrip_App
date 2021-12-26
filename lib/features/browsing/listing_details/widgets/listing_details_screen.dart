@@ -337,7 +337,7 @@ class ListingDetailsScreen extends ConsumerWidget {
                                 showSnackBar(
                                   context,
                                   "Select all variant options please",
-                                  Colors.amber[800],
+                                  AppColors.amber,
                                 );
                               } else if (!ref
                                   .watch(listingDetailsProvider.notifier)
@@ -345,7 +345,7 @@ class ListingDetailsScreen extends ConsumerWidget {
                                 showSnackBar(
                                   context,
                                   "Select a shipping method please",
-                                  Colors.amber[800],
+                                  AppColors.amber,
                                 );
                               } else {
                                 //region Debugging prints

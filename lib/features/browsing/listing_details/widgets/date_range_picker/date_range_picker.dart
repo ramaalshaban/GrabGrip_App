@@ -69,7 +69,7 @@ class DateRangePicker extends ConsumerWidget {
                                         showSnackBar(
                                           context,
                                           "Pick the booking end date please",
-                                          Colors.amber[800],
+                                          AppColors.amber,
                                         );
                                       } else {
                                         final startDate =

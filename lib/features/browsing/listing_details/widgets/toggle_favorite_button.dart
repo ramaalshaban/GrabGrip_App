@@ -51,7 +51,7 @@ class ToggleFavoriteButton extends ConsumerWidget {
                   showSnackBar(
                     context,
                     "Log in please to add this listing to your favorites list",
-                    Colors.amber[800],
+                    AppColors.amber,
                   );
                 }
               },

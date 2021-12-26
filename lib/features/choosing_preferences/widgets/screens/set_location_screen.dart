@@ -28,7 +28,7 @@ class SetLocationScreen extends ConsumerWidget {
     });
     if (ref.watch(filterAndSortProvider).place == unknown) {
       // check if google api returns no results or error for the location that user dragged the marker to
-      showSnackBar(context, "Pick another location please", Colors.amber[800]);
+      showSnackBar(context, "Pick another location please", AppColors.amber);
     }
     if (ref.watch(filterAndSortProvider).latLng == null) {
       getUserCurrentLocation(context, ref);

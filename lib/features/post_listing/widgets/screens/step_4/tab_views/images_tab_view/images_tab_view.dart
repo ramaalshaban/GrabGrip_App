@@ -63,7 +63,7 @@ class ImagesTabView extends ConsumerWidget {
             showSnackBar(
               context,
               "Sorry, you can only add $postListingPhotosLimit photos",
-              Colors.amber[800],
+              AppColors.amber,
             );
           } else {
             showCameraGalleryDialog(context, ref);

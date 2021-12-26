@@ -113,7 +113,7 @@ class VariationItem extends StatelessWidget {
                                     showSnackBar(
                                       context,
                                       "There is another variation that has the same attribute. Add this value to that variation or change the attribute of this variation please.",
-                                      Colors.amber[800],
+                                      AppColors.amber,
                                       const Duration(seconds: 9),
                                     );
                                   }

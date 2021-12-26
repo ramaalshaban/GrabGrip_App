@@ -173,7 +173,7 @@ class PostListingStepFourScreen extends ConsumerWidget {
                                         showSnackBar(
                                           context,
                                           "Check the information you entered please",
-                                          Colors.amber[800],
+                                          AppColors.amber,
                                         );
                                       } else {
                                         ref
