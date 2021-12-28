@@ -55,7 +55,7 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
 
   String getButtonLabel() {
     if (listingOwner?.canAcceptPayments == 0) {
-      return "Ask about availability";
+      return "Ask about\navailability"; // show it on two lines to avoid ui issues when the total price (which is the widget that's by side the button) is a big price
     } else {
       if (pricingModel?.widget == buy) {
         return "Buy now";

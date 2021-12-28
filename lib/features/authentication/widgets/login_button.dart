@@ -17,8 +17,8 @@ class LoginButton extends ConsumerWidget {
     required this.authModel,
   }) : super(key: key);
   final GlobalKey<FormState> formKey;
-  final AuthModel authModel;
   final VoidCallback? onSuccessLogin;
+  final AuthModel authModel;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

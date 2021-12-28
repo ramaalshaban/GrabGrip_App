@@ -12,7 +12,7 @@ class TotalPriceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      padding: const EdgeInsets.symmetric(horizontal: 14),
       decoration: const BoxDecoration(
         color: AppColors.purple,
         borderRadius: BorderRadius.only(
@@ -36,9 +36,10 @@ class TotalPriceWidget extends StatelessWidget {
                     ? 0.0
                     : 1.0,
                 duration: duration300Milli,
-                child: SizedBox(
-                  width: screenWidth(context) / 2,
-                  height: screenWidth(context) / 7,
+                child: Container(
+                  constraints:
+                      BoxConstraints(minWidth: screenWidth(context) / 2.7),
+                  height: 60,
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
@@ -80,29 +81,53 @@ class TotalPriceWidget extends StatelessWidget {
               //endregion
               //region Price
               Expanded(
-                  child: Consumer(
-                    builder: (_, ref, __) {
-                      return AnimatedOpacity(
-                        opacity: ref.watch(httpRequestStateProvider).maybeWhen(
-                          loading: () => 0.0,
-                          orElse: () => 1.0,
-                        ),
-                        duration: duration300Milli,
-                        child: SizedBox(
-                          width: screenWidth(context) / 4,
-                          child: Text(
-                            "SAR ${ref.watch(listingDetailsProvider).widget?.total}",
-                            style: const TextStyle(
-                              color: AppColors.green,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                            textAlign: TextAlign.center,
+                child: Consumer(
+                  builder: (_, ref, __) {
+                    final isThisListingForRent =
+                        ref.watch(listingDetailsProvider.notifier).isForRent ??
+                            false;
+                    return AnimatedOpacity(
+                      opacity: ref.watch(httpRequestStateProvider).maybeWhen(
+                            loading: () => 0.0,
+                            orElse: () => 1.0,
                           ),
+                      duration: duration300Milli,
+                      child: SizedBox(
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  "SAR ${ref.watch(listingDetailsProvider).widget?.total}",
+                                  style: const TextStyle(
+                                    color: AppColors.green,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Text(
+                                  isThisListingForRent ? " per day" : "",
+                                  style: const TextStyle(
+                                    color: AppColors.green,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                            Text(
+                              isThisListingForRent ? " VAT included" : "",
+                              style: const TextStyle(
+                                color: AppColors.green,
+                              ),
+                              textAlign: TextAlign.center,
+                            )
+                          ],
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
+                ),
               ),
               //endregion
             ],
