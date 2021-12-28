@@ -14,7 +14,7 @@ class ContinueButton extends ConsumerWidget {
   }) : super(key: key);
 
   final GlobalKey<FormState>? formKey;
-  final Function onClickAction;
+  final VoidCallback onClickAction;
   final String buttonText;
   final bool isPurple;
 

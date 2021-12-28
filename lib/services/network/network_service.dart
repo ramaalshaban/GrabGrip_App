@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dio_http/dio_http.dart';
+import 'package:dio/dio.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
@@ -15,6 +15,8 @@ import 'package:grab_grip/features/browsing/listing_details/models/listing_detai
 import 'package:grab_grip/features/browsing/listing_details/models/listing_response/listing_response.dart';
 import 'package:grab_grip/features/browsing/listing_details/models/reviews_page/reviews_page.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
+import 'package:grab_grip/features/feedback/report_listing/models/report_reasons_response/report_reasons_response.dart';
+import 'package:grab_grip/features/feedback/report_listing/models/report_request/report_listing_request.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
@@ -297,6 +299,8 @@ class NetworkService {
   //endregion
 
   //region feedback
+
+  //region contact us
   Future<Result<String, String>> sendContactUsForm(
     ContactUsForm contactUsForm,
   ) async {
@@ -310,6 +314,45 @@ class NetworkService {
       return Error(errorMessage);
     }
   }
+
+  //endregion
+
+  //region report listing
+  Future<Result<String, String>> reportListing(
+    String token,
+    String hash,
+    ReportListingRequest reportListingRequest,
+  ) async {
+    try {
+      final reportListingCall = await _grabGripApi.reportListing(
+        "Bearer $token",
+        hash,
+        reportListingRequest,
+      );
+      final successMessage =
+          (reportListingCall.data as Map<String, dynamic>)['message'];
+      return Success(successMessage.toString());
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  Future<Result<String, ReportReasonsResponse>> getReportReasons(
+    String token,
+    String hash,
+  ) async {
+    try {
+      final getReportReasonsCall =
+          await _grabGripApi.getReportReasons("Bearer $token", hash);
+      return Success(getReportReasonsCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  //endregion
 
   //endregion
 
@@ -561,6 +604,9 @@ class NetworkService {
     // when an exception occurs while deleting an image while posting a listing, "success" is not null
     else if (errorData?["success"] != null) {
       aggregatedErrorMessage += "The photo has not been deleted successfully";
+      // when the response is 400 for a report listing request, then "message" is not null and has the error message
+    } else if (errorData?["message"] != null) {
+      aggregatedErrorMessage += "${errorData!["message"] as String}\n";
     } else if (error.response?.statusCode == 401) {
       // user is unauthorized
       aggregatedErrorMessage += "You are not authorized to do so";

@@ -1,12 +1,11 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
+import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/browsing/listing_details/models/widget/widget.dart'
     as listing_widget;
@@ -432,6 +431,42 @@ class ListingDetailsScreen extends ConsumerWidget {
                       const ReviewsWidget(),
                       //endregion
                       height18(),
+                      //region Report listing button
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        child: Wrap(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color: AppColors.white,
+                                border: Border.all(
+                                  color: Colors.red[800]!,
+                                ),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: TextButton(
+                                onPressed: () {
+                                  //calling replace instead of push
+                                  context.router.replace(
+                                    ReportListingScreenRoute(
+                                      listingToReport: listing,
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  "Report listing",
+                                  style: TextStyle(
+                                    color: Colors.red[800],
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      //endregion
+                      height12(),
                     ],
                   ),
                 ),

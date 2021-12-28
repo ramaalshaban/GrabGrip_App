@@ -14,7 +14,8 @@ import 'package:grab_grip/features/browsing/listing_details/models/listing_detai
 import 'package:grab_grip/features/browsing/listing_details/models/reviews_page/reviews_page.dart';
 import 'package:grab_grip/features/browsing/listing_details/providers/listing_details_provider.dart';
 import 'package:grab_grip/features/browsing/listing_details/providers/reviews_provider.dart';
-import 'package:grab_grip/features/feedback/contact_us/providers/feedback_provider.dart';
+import 'package:grab_grip/features/feedback/shared/models/feedback_state.dart';
+import 'package:grab_grip/features/feedback/shared/providers/feedback_provider.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_availability_model/post_listing_availability_state.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_state/post_listing_state.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_step_number_model/post_listing_step_number.dart';
@@ -73,7 +74,8 @@ final browseDataProvider =
   return BrowseProvider(filterSortProvider);
 });
 
-final feedbackProvider = Provider((reference) {
+final feedbackProvider =
+    StateNotifierProvider<FeedbackProvider, FeedbackState>((reference) {
   final provider = reference.watch(httpRequestStateProvider.notifier);
   return FeedbackProvider(provider);
 });

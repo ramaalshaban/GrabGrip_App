@@ -11,6 +11,7 @@ import 'package:grab_grip/features/browsing/listing_details/widgets/listing_deta
 import 'package:grab_grip/features/choosing_preferences/widgets/screens/select_rent_buy_screen.dart';
 import 'package:grab_grip/features/choosing_preferences/widgets/screens/set_location_screen.dart';
 import 'package:grab_grip/features/feedback/contact_us/widgets/contact_us_screen.dart';
+import 'package:grab_grip/features/feedback/report_listing/widgets/report_listing_screen.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/post_listing_screen.dart';
 import 'package:grab_grip/features/user_profile/change_password/change_password_screen.dart';
 import 'package:grab_grip/features/user_profile/favorites/widgets/favorites_screen.dart';
@@ -25,7 +26,7 @@ import 'package:grab_grip/shared/widgets/verify_your_email_screen.dart';
   routes: <AutoRoute>[
     CustomRoute(
       page: SelectRentBuyScreen,
-     // initial: true,
+      // initial: true,
       transitionsBuilder: TransitionsBuilders.slideTop,
       durationInMilliseconds: 400,
     ),
@@ -56,6 +57,7 @@ import 'package:grab_grip/shared/widgets/verify_your_email_screen.dart';
     AutoRoute(page: MyOrdersScreen, guards: [AuthGuard]),
     AutoRoute(page: FavoritesScreen, guards: [AuthGuard]),
     AutoRoute(page: ChangePasswordScreen, guards: [AuthGuard]),
+    AutoRoute(page: ReportListingScreen, guards: [AuthGuard]),
   ],
 )
 class $AppRouter {}

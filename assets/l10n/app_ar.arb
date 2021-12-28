@@ -266,5 +266,17 @@
     "post_listing_hint": "يمكنك رفع الصّور و وضع التّسعير الخاصة بك في الخطوة التالية.",
     "@post_listing_hint": {
       "description": "text that appears in the step 3 in post a listing flow"
+    },
+    "inappropriate_report_reason": "غير مناسب",
+    "@inappropriate_report_reason": {
+      "description": "report reason drop down list item"
+    },
+    "duplicate_report_reason": "مكرّر",
+    "@duplicate_report_reason": {
+      "description": "report reason drop down list item"
+    },
+    "spam_report_reason": "مزعج",
+    "@spam_report_reason": {
+      "description": "report reason drop down list item"
     }
 }

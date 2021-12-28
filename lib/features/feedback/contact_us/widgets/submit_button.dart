@@ -41,7 +41,7 @@ class SubmitButton extends ConsumerWidget {
           orElse: () => TextButton(
             onPressed: () async {
               if (formKey.currentState!.validate()) {
-                ref.watch(feedbackProvider).sendContactUsForm(
+                ref.watch(feedbackProvider.notifier).sendContactUsForm(
                       contactUsFormModel,
                     );
               }

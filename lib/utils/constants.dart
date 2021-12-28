@@ -15,6 +15,7 @@ const String bookDate = "book_date";
 
 //region actions name
 const String logoutAction = "logoutAction";
+const String reportListingAction = "reportListingAction";
 //region
 //region durations
 const Duration duration300Milli = Duration(milliseconds: 300);

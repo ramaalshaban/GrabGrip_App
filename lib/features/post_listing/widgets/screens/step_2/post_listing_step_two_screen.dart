@@ -39,7 +39,6 @@ class PostListingStepTwoScreen extends StatelessWidget {
               ref.watch(postListingProvider).listingTypeId == null ? 0.0 : 1.0,
               duration: duration300Milli,
               child: ContinueButton(
-                formKey: null,
                 buttonText: AppLocalizations.of(context)!.continue_label,
                 onClickAction: ref.watch(postListingStepProvider.notifier).setStep3,
               ),

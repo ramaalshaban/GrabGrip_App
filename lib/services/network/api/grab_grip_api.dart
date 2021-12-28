@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dio_http/dio_http.dart';
+import 'package:dio/dio.dart';
 import 'package:grab_grip/features/authentication/models/auth_request/auth_request.dart';
 import 'package:grab_grip/features/authentication/models/login_response/login_response.dart';
 import 'package:grab_grip/features/authentication/models/register_response/register_response.dart';
@@ -11,6 +11,8 @@ import 'package:grab_grip/features/browsing/filter/models/categories_response/ca
 import 'package:grab_grip/features/browsing/listing_details/models/listing_response/listing_response.dart';
 import 'package:grab_grip/features/browsing/listing_details/models/reviews_response/reviews_response.dart';
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
+import 'package:grab_grip/features/feedback/report_listing/models/report_reasons_response/report_reasons_response.dart';
+import 'package:grab_grip/features/feedback/report_listing/models/report_request/report_listing_request.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
@@ -21,7 +23,6 @@ import 'package:grab_grip/features/user_profile/shared/models/user.dart';
 import 'package:grab_grip/shared/models/listings_page/listings_page.dart';
 import 'package:grab_grip/shared/models/orders_page/orders_page.dart';
 import 'package:grab_grip/utils/constants.dart';
-import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'grab_grip_api.g.dart';
@@ -146,6 +147,19 @@ abstract class GrabGripApi {
   //region feedback
   @POST("/api/v1/contact")
   Future<HttpResponse> sendContactUsForm(@Body() ContactUsForm contactUsForm);
+
+  @POST("/api/v1/report/{hash}")
+  Future<HttpResponse> reportListing(
+    @Header("Authorization") String token,
+    @Path("hash") String hash,
+    @Body() ReportListingRequest requestBody,
+  );
+
+  @GET("/api/v1/report/{hash}")
+  Future<HttpResponse<ReportReasonsResponse>> getReportReasons(
+    @Header("Authorization") String token,
+    @Path("hash") String hash,
+  );
 
 //endregion
 

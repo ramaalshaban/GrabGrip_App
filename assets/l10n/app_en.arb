@@ -266,5 +266,17 @@
     "post_listing_hint": "You can upload images and set your own pricing in the next step.",
     "@post_listing_hint": {
       "description": "text that appears in the step 3 in post a listing flow"
+    },
+    "inappropriate_report_reason": "Inappropriate",
+    "@inappropriate_report_reason": {
+      "description": "report reason drop down list item"
+    },
+    "duplicate_report_reason": "Duplicate",
+    "@duplicate_report_reason": {
+      "description": "report reason drop down list item"
+    },
+    "spam_report_reason": "Spam",
+    "@spam_report_reason": {
+      "description": "report reason drop down list item"
     }
 }
