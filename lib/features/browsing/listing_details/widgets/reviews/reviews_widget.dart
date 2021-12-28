@@ -20,7 +20,8 @@ class ReviewsWidget extends ConsumerStatefulWidget {
   ConsumerState<ReviewsWidget> createState() => _ReviewsWidgetState();
 }
 
-class _ReviewsWidgetState extends ConsumerState<ReviewsWidget> {
+class _ReviewsWidgetState extends ConsumerState<ReviewsWidget>
+    with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     ReviewsProvider.pagingController.addPageRequestListener((pageKey) {
@@ -46,6 +47,7 @@ class _ReviewsWidgetState extends ConsumerState<ReviewsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       // refresh the (cached review) items when user browses another listing
       ReviewsProvider.pagingController.refresh();
@@ -131,6 +133,10 @@ class _ReviewsWidgetState extends ConsumerState<ReviewsWidget> {
       ),
     );
   }
+
+  // keep this Reviews Widget alive so it doesn't get rebuilt when user scrolls up and down in listing details screen
+  @override
+  bool get wantKeepAlive => true;
 
   double _getAverageRating(List<Review>? reviews) {
     if (reviews == null) {
