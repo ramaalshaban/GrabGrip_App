@@ -22,7 +22,8 @@ class _$SaveListingRequestTearOff {
   const _$SaveListingRequestTearOff();
 
   _SaveListingRequest call(
-      {String? title,
+      {@JsonKey(ignore: true) bool? publish,
+      String? title,
       String? description,
       @JsonKey(name: "tags_string") String? tags,
       @JsonKey(name: "ends_at") String? listingEndDate,
@@ -37,6 +38,7 @@ class _$SaveListingRequestTearOff {
       @JsonKey(name: "shipping") List<ShippingFee>? shippingFees,
       List<VariationStringValue>? variations}) {
     return _SaveListingRequest(
+      publish: publish,
       title: title,
       description: description,
       tags: tags,
@@ -64,6 +66,8 @@ const $SaveListingRequest = _$SaveListingRequestTearOff();
 
 /// @nodoc
 mixin _$SaveListingRequest {
+  @JsonKey(ignore: true)
+  bool? get publish => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   @JsonKey(name: "tags_string")
@@ -97,7 +101,8 @@ abstract class $SaveListingRequestCopyWith<$Res> {
           SaveListingRequest value, $Res Function(SaveListingRequest) then) =
       _$SaveListingRequestCopyWithImpl<$Res>;
   $Res call(
-      {String? title,
+      {@JsonKey(ignore: true) bool? publish,
+      String? title,
       String? description,
       @JsonKey(name: "tags_string") String? tags,
       @JsonKey(name: "ends_at") String? listingEndDate,
@@ -124,6 +129,7 @@ class _$SaveListingRequestCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? publish = freezed,
     Object? title = freezed,
     Object? description = freezed,
     Object? tags = freezed,
@@ -140,6 +146,10 @@ class _$SaveListingRequestCopyWithImpl<$Res>
     Object? variations = freezed,
   }) {
     return _then(_value.copyWith(
+      publish: publish == freezed
+          ? _value.publish
+          : publish // ignore: cast_nullable_to_non_nullable
+              as bool?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -208,7 +218,8 @@ abstract class _$SaveListingRequestCopyWith<$Res>
       __$SaveListingRequestCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? title,
+      {@JsonKey(ignore: true) bool? publish,
+      String? title,
       String? description,
       @JsonKey(name: "tags_string") String? tags,
       @JsonKey(name: "ends_at") String? listingEndDate,
@@ -237,6 +248,7 @@ class __$SaveListingRequestCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? publish = freezed,
     Object? title = freezed,
     Object? description = freezed,
     Object? tags = freezed,
@@ -253,6 +265,10 @@ class __$SaveListingRequestCopyWithImpl<$Res>
     Object? variations = freezed,
   }) {
     return _then(_SaveListingRequest(
+      publish: publish == freezed
+          ? _value.publish
+          : publish // ignore: cast_nullable_to_non_nullable
+              as bool?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -319,7 +335,8 @@ class _$_SaveListingRequest
     with DiagnosticableTreeMixin
     implements _SaveListingRequest {
   const _$_SaveListingRequest(
-      {this.title,
+      {@JsonKey(ignore: true) this.publish,
+      this.title,
       this.description,
       @JsonKey(name: "tags_string") this.tags,
       @JsonKey(name: "ends_at") this.listingEndDate,
@@ -337,6 +354,9 @@ class _$_SaveListingRequest
   factory _$_SaveListingRequest.fromJson(Map<String, dynamic> json) =>
       _$$_SaveListingRequestFromJson(json);
 
+  @override
+  @JsonKey(ignore: true)
+  final bool? publish;
   @override
   final String? title;
   @override
@@ -372,7 +392,7 @@ class _$_SaveListingRequest
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SaveListingRequest(title: $title, description: $description, tags: $tags, listingEndDate: $listingEndDate, lat: $lat, lng: $lng, city: $city, region: $region, country: $country, price: $price, stock: $stock, additionalOptions: $additionalOptions, shippingFees: $shippingFees, variations: $variations)';
+    return 'SaveListingRequest(publish: $publish, title: $title, description: $description, tags: $tags, listingEndDate: $listingEndDate, lat: $lat, lng: $lng, city: $city, region: $region, country: $country, price: $price, stock: $stock, additionalOptions: $additionalOptions, shippingFees: $shippingFees, variations: $variations)';
   }
 
   @override
@@ -380,6 +400,7 @@ class _$_SaveListingRequest
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'SaveListingRequest'))
+      ..add(DiagnosticsProperty('publish', publish))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('tags', tags))
@@ -400,6 +421,9 @@ class _$_SaveListingRequest
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _SaveListingRequest &&
+            (identical(other.publish, publish) ||
+                const DeepCollectionEquality()
+                    .equals(other.publish, publish)) &&
             (identical(other.title, title) ||
                 const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.description, description) ||
@@ -439,6 +463,7 @@ class _$_SaveListingRequest
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(publish) ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(tags) ^
@@ -467,7 +492,8 @@ class _$_SaveListingRequest
 
 abstract class _SaveListingRequest implements SaveListingRequest {
   const factory _SaveListingRequest(
-      {String? title,
+      {@JsonKey(ignore: true) bool? publish,
+      String? title,
       String? description,
       @JsonKey(name: "tags_string") String? tags,
       @JsonKey(name: "ends_at") String? listingEndDate,
@@ -485,6 +511,9 @@ abstract class _SaveListingRequest implements SaveListingRequest {
   factory _SaveListingRequest.fromJson(Map<String, dynamic> json) =
       _$_SaveListingRequest.fromJson;
 
+  @override
+  @JsonKey(ignore: true)
+  bool? get publish => throw _privateConstructorUsedError;
   @override
   String? get title => throw _privateConstructorUsedError;
   @override

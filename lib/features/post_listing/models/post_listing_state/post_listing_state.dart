@@ -19,7 +19,7 @@ class PostListingState with _$PostListingState {
     int? listingTypeId,
     String? title,
     String? description,
-    Gear? postedListing,
+    Gear? inProgressListing,
     @Default([]) List<String> tags,
     String? listingEndDate,
     @Default([]) List<PricingModel> pricingModels,

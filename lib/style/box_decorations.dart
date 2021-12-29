@@ -19,6 +19,15 @@ final unPublishButton = BoxDecoration(
   ),
 );
 
+final pendingVerification = BoxDecoration(
+  color: const Color(0xFFB71C1C),
+  borderRadius: BorderRadius.circular(4),
+  border: Border.all(
+    width: 1.5,
+    color: const Color(0xFFB71C1C),
+  ),
+);
+
 final reEnableButton = BoxDecoration(
   color: AppColors.white,
   borderRadius: BorderRadius.circular(4),

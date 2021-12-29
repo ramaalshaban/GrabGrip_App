@@ -5,12 +5,12 @@ import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/variations/models/variation_string_value/variation_string_value.dart';
 
 part 'save_listing_request.freezed.dart';
-
 part 'save_listing_request.g.dart';
 
 @freezed
 class SaveListingRequest with _$SaveListingRequest {
   const factory SaveListingRequest({
+    @JsonKey(ignore: true) bool? publish,
     String? title,
     String? description,
     @JsonKey(name: "tags_string") String? tags,

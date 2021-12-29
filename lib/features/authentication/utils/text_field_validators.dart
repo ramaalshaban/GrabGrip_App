@@ -44,3 +44,9 @@ String? listingDescriptionFieldValidator(String? enteredTitle) =>
             enteredTitle.trim().length < 5)
         ? 'The description must be at least 5 characters'
         : null;
+
+String? priceFieldValidator(String? enteredText) => (enteredText == null ||
+        enteredText.trim().isEmpty ||
+        int.parse(enteredText.trim()) < 1)
+    ? 'The price must not be\nempty and must be\ngreater than 0'
+    : null;

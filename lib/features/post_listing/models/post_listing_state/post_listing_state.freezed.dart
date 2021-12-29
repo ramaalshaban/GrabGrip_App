@@ -23,7 +23,7 @@ class _$PostListingStateTearOff {
       int? listingTypeId,
       String? title,
       String? description,
-      Gear? postedListing,
+      Gear? inProgressListing,
       List<String> tags = const [],
       String? listingEndDate,
       List<PricingModel> pricingModels = const [],
@@ -43,7 +43,7 @@ class _$PostListingStateTearOff {
       listingTypeId,
       title,
       description,
-      postedListing,
+      inProgressListing,
       tags,
       listingEndDate,
       pricingModels,
@@ -71,7 +71,7 @@ mixin _$PostListingState {
   int? get listingTypeId => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  Gear? get postedListing => throw _privateConstructorUsedError;
+  Gear? get inProgressListing => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
   String? get listingEndDate => throw _privateConstructorUsedError;
   List<PricingModel> get pricingModels => throw _privateConstructorUsedError;
@@ -103,7 +103,7 @@ abstract class $PostListingStateCopyWith<$Res> {
       int? listingTypeId,
       String? title,
       String? description,
-      Gear? postedListing,
+      Gear? inProgressListing,
       List<String> tags,
       String? listingEndDate,
       List<PricingModel> pricingModels,
@@ -120,7 +120,7 @@ abstract class $PostListingStateCopyWith<$Res> {
 
   $CategoryCopyWith<$Res>? get category;
   $CategoryCopyWith<$Res>? get subcategory;
-  $GearCopyWith<$Res>? get postedListing;
+  $GearCopyWith<$Res>? get inProgressListing;
   $LatLngCopyWith<$Res>? get latLng;
 }
 
@@ -140,7 +140,7 @@ class _$PostListingStateCopyWithImpl<$Res>
     Object? listingTypeId = freezed,
     Object? title = freezed,
     Object? description = freezed,
-    Object? postedListing = freezed,
+    Object? inProgressListing = freezed,
     Object? tags = freezed,
     Object? listingEndDate = freezed,
     Object? pricingModels = freezed,
@@ -176,9 +176,9 @@ class _$PostListingStateCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      postedListing: postedListing == freezed
-          ? _value.postedListing
-          : postedListing // ignore: cast_nullable_to_non_nullable
+      inProgressListing: inProgressListing == freezed
+          ? _value.inProgressListing
+          : inProgressListing // ignore: cast_nullable_to_non_nullable
               as Gear?,
       tags: tags == freezed
           ? _value.tags
@@ -258,13 +258,13 @@ class _$PostListingStateCopyWithImpl<$Res>
   }
 
   @override
-  $GearCopyWith<$Res>? get postedListing {
-    if (_value.postedListing == null) {
+  $GearCopyWith<$Res>? get inProgressListing {
+    if (_value.inProgressListing == null) {
       return null;
     }
 
-    return $GearCopyWith<$Res>(_value.postedListing!, (value) {
-      return _then(_value.copyWith(postedListing: value));
+    return $GearCopyWith<$Res>(_value.inProgressListing!, (value) {
+      return _then(_value.copyWith(inProgressListing: value));
     });
   }
 
@@ -293,7 +293,7 @@ abstract class _$PostListingStateCopyWith<$Res>
       int? listingTypeId,
       String? title,
       String? description,
-      Gear? postedListing,
+      Gear? inProgressListing,
       List<String> tags,
       String? listingEndDate,
       List<PricingModel> pricingModels,
@@ -313,7 +313,7 @@ abstract class _$PostListingStateCopyWith<$Res>
   @override
   $CategoryCopyWith<$Res>? get subcategory;
   @override
-  $GearCopyWith<$Res>? get postedListing;
+  $GearCopyWith<$Res>? get inProgressListing;
   @override
   $LatLngCopyWith<$Res>? get latLng;
 }
@@ -336,7 +336,7 @@ class __$PostListingStateCopyWithImpl<$Res>
     Object? listingTypeId = freezed,
     Object? title = freezed,
     Object? description = freezed,
-    Object? postedListing = freezed,
+    Object? inProgressListing = freezed,
     Object? tags = freezed,
     Object? listingEndDate = freezed,
     Object? pricingModels = freezed,
@@ -372,9 +372,9 @@ class __$PostListingStateCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      postedListing == freezed
-          ? _value.postedListing
-          : postedListing // ignore: cast_nullable_to_non_nullable
+      inProgressListing == freezed
+          ? _value.inProgressListing
+          : inProgressListing // ignore: cast_nullable_to_non_nullable
               as Gear?,
       tags == freezed
           ? _value.tags
@@ -443,7 +443,7 @@ class _$_PostListingState
       this.listingTypeId,
       this.title,
       this.description,
-      this.postedListing,
+      this.inProgressListing,
       this.tags = const [],
       this.listingEndDate,
       this.pricingModels = const [],
@@ -469,7 +469,7 @@ class _$_PostListingState
   @override
   final String? description;
   @override
-  final Gear? postedListing;
+  final Gear? inProgressListing;
   @JsonKey(defaultValue: const [])
   @override
   final List<String> tags;
@@ -504,7 +504,7 @@ class _$_PostListingState
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostListingState(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, title: $title, description: $description, postedListing: $postedListing, tags: $tags, listingEndDate: $listingEndDate, pricingModels: $pricingModels, place: $place, latLng: $latLng, country: $country, city: $city, region: $region, price: $price, stock: $stock, additionalOptions: $additionalOptions, shippingFees: $shippingFees, variations: $variations)';
+    return 'PostListingState(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, title: $title, description: $description, inProgressListing: $inProgressListing, tags: $tags, listingEndDate: $listingEndDate, pricingModels: $pricingModels, place: $place, latLng: $latLng, country: $country, city: $city, region: $region, price: $price, stock: $stock, additionalOptions: $additionalOptions, shippingFees: $shippingFees, variations: $variations)';
   }
 
   @override
@@ -517,7 +517,7 @@ class _$_PostListingState
       ..add(DiagnosticsProperty('listingTypeId', listingTypeId))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('description', description))
-      ..add(DiagnosticsProperty('postedListing', postedListing))
+      ..add(DiagnosticsProperty('inProgressListing', inProgressListing))
       ..add(DiagnosticsProperty('tags', tags))
       ..add(DiagnosticsProperty('listingEndDate', listingEndDate))
       ..add(DiagnosticsProperty('pricingModels', pricingModels))
@@ -551,9 +551,9 @@ class _$_PostListingState
             (identical(other.description, description) ||
                 const DeepCollectionEquality()
                     .equals(other.description, description)) &&
-            (identical(other.postedListing, postedListing) ||
+            (identical(other.inProgressListing, inProgressListing) ||
                 const DeepCollectionEquality()
-                    .equals(other.postedListing, postedListing)) &&
+                    .equals(other.inProgressListing, inProgressListing)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.listingEndDate, listingEndDate) ||
@@ -596,7 +596,7 @@ class _$_PostListingState
       const DeepCollectionEquality().hash(listingTypeId) ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(description) ^
-      const DeepCollectionEquality().hash(postedListing) ^
+      const DeepCollectionEquality().hash(inProgressListing) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(listingEndDate) ^
       const DeepCollectionEquality().hash(pricingModels) ^
@@ -624,7 +624,7 @@ abstract class _PostListingState implements PostListingState {
       int? listingTypeId,
       String? title,
       String? description,
-      Gear? postedListing,
+      Gear? inProgressListing,
       List<String> tags,
       String? listingEndDate,
       List<PricingModel> pricingModels,
@@ -650,7 +650,7 @@ abstract class _PostListingState implements PostListingState {
   @override
   String? get description => throw _privateConstructorUsedError;
   @override
-  Gear? get postedListing => throw _privateConstructorUsedError;
+  Gear? get inProgressListing => throw _privateConstructorUsedError;
   @override
   List<String> get tags => throw _privateConstructorUsedError;
   @override

@@ -4,8 +4,6 @@ import 'package:grab_grip/style/colors.dart';
 
 const String noInternetConnection = "no internet connection";
 const String googleApiKey = "AIzaSyDgRW2kCiet1O-yY2YViStzDVe9ld_DSXo";
-const String saveListingSuccess = "saveListingSuccess";
-const String saveListingError = "saveListingError";
 const String unknown = "Unknown";
 const int postListingPhotosLimit = 20;
 FilteringTextInputFormatter doubleNumFilter =
@@ -16,6 +14,8 @@ const String bookDate = "book_date";
 //region actions name
 const String logoutAction = "logoutAction";
 const String reportListingAction = "reportListingAction";
+const String saveListingSuccessAction = "saveListingSuccessAction";
+const String saveListingError = "saveListingError";
 //region
 //region durations
 const Duration duration300Milli = Duration(milliseconds: 300);

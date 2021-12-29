@@ -17,8 +17,8 @@ import 'package:grab_grip/features/browsing/listing_details/models/reviews_page/
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
 import 'package:grab_grip/features/feedback/report_listing/models/report_reasons_response/report_reasons_response.dart';
 import 'package:grab_grip/features/feedback/report_listing/models/report_request/report_listing_request.dart';
+import 'package:grab_grip/features/post_listing/models/post_edit_listing_response/post_edit_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
-import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
 import 'package:grab_grip/features/post_listing/models/save_listing_request/save_listing_request.dart';
 import 'package:grab_grip/features/user_profile/change_password/models/change_password_request.dart';
@@ -188,7 +188,7 @@ class NetworkService {
 
   //endregion
 
-  //region post a listing
+  //region post/edit a listing
   Future<Result<String, PricingModelsResponse>> getPricingModels(
     String token,
     int categoryId,
@@ -239,7 +239,7 @@ class NetworkService {
     }
   }
 
-  Future<Result<String, PostListingResponse>> postListingAsDraft(
+  Future<Result<String, PostEditListingResponse>> postListingAsDraft(
     String token,
     PostListingAsDraftRequest postListingRequest,
   ) async {
@@ -255,39 +255,55 @@ class NetworkService {
     }
   }
 
+  Future<Result<String, PostEditListingResponse>> getListingForEditing(
+    String token,
+    String listingHash,
+  ) async {
+    try {
+      final getListingForEditingCall = await _grabGripApi.getListingForEditing(
+        "Bearer $token",
+        hash: listingHash,
+      );
+      return Success(getListingForEditingCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
   Future<Result<String, String>> saveListing(
     String token,
     String listingHash,
-    SaveListingRequest body,
+    SaveListingRequest request,
   ) async {
     try {
       final saveListingCall = await _grabGripApi.saveListing(
         "Bearer $token",
         hash: listingHash,
-        body: body,
+        publish: request.publish == true ? "Publish" : null,
+        body: request,
       );
+      print("save listing ran ------ the request is ============> $request");
       return Success(saveListingCall.data.toString());
     } catch (error) {
-      //    final errorMessage = _errorHandler(error as DioError);
-      return const Error("");
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
     }
   }
 
   Future<Result<String, String>> changeListingAvailability(
     String token,
     String listingHash, {
-    bool? publish,
-    bool? reEnable,
     bool? unPublish,
+    bool? reEnable,
   }) async {
     try {
       final changeListingAvailabilityCall =
           await _grabGripApi.changeListingAvailability(
         "Bearer $token",
         hash: listingHash,
-        publish: publish == true ? "Publish" : null,
-        reEnable: reEnable == true ? "Re-enable" : null,
         upPublish: unPublish == true ? "Unpublish" : null,
+        reEnable: reEnable == true ? "Re-enable" : null,
       );
       return Success(changeListingAvailabilityCall.data.toString());
     } catch (error) {
@@ -591,6 +607,10 @@ class NetworkService {
       if (errorData["errors"]["title"] != null) {
         aggregatedErrorMessage +=
             "${errorData["errors"]["title"][0] as String}\n";
+      }
+      if (errorData["errors"]["description"] != null) {
+        aggregatedErrorMessage +=
+            "${errorData["errors"]["description"][0] as String}\n";
       }
       if (errorData["errors"]["description_new"] != null) {
         aggregatedErrorMessage +=

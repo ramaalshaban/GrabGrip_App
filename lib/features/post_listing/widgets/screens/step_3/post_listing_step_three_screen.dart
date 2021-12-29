@@ -11,8 +11,6 @@ import 'package:grab_grip/utils/sized_box.dart';
 class PostListingStepThreeScreen extends ConsumerWidget {
   const PostListingStepThreeScreen();
 
-
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _formKey = GlobalKey<FormState>();

@@ -37,6 +37,7 @@ class PostListingScreen extends ConsumerWidget {
               successMessage!,
             );
             ref.watch(postListingStepProvider.notifier).setStep4();
+            ref.watch(postListingProvider.notifier).getListingForEditing();
           },
           error: (errorMessage) => showSnackBarForError(context, errorMessage),
         );

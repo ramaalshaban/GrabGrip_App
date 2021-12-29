@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:collection/collection.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -74,10 +75,10 @@ class PostListingProvider extends StateNotifier<PostListingState> {
   set pricingModels(List<PricingModel> pricingModels) =>
       state = state.copyWith(pricingModels: pricingModels);
 
-  set postedListing(Gear? postedListing) =>
-      state = state.copyWith(postedListing: postedListing);
+  set inProgressListing(Gear? inProgressListing) =>
+      state = state.copyWith(inProgressListing: inProgressListing);
 
-  Gear? get postedListing => state.postedListing;
+  Gear? get inProgressListing => state.inProgressListing;
 
   set title(String? title) => state = state.copyWith(title: title);
 
@@ -104,15 +105,15 @@ class PostListingProvider extends StateNotifier<PostListingState> {
   String? get place => state.place;
 
   set latLng(LatLng? latLng) {
-    postedListing = state.postedListing!.copyWith(
+    inProgressListing = state.inProgressListing!.copyWith(
       lat: latLng!.latitude,
       lng: latLng.longitude,
     );
   }
 
   LatLng? get latLng {
-    final lat = state.postedListing!.lat;
-    final lng = state.postedListing!.lng;
+    final lat = state.inProgressListing!.lat;
+    final lng = state.inProgressListing!.lng;
     return LatLng(lat, lng);
   }
 
@@ -317,7 +318,7 @@ class PostListingProvider extends StateNotifier<PostListingState> {
   Future<void> uploadPhoto(File file, {bool? takenByCamera}) async {
     photosProvider.uploadPhoto(
       file: file,
-      hash: state.postedListing!.hash,
+      hash: state.inProgressListing!.hash,
       listingTitle: title ?? "",
       takenByCamera: takenByCamera,
     );
@@ -325,7 +326,7 @@ class PostListingProvider extends StateNotifier<PostListingState> {
 
   Future<void> deletePhoto(String photoIndex) async {
     photosProvider.deletePhoto(
-      hash: state.postedListing!.hash,
+      hash: state.inProgressListing!.hash,
       photoIndex: photoIndex,
     );
   }
@@ -347,21 +348,42 @@ class PostListingProvider extends StateNotifier<PostListingState> {
         result.when(
           (errorMessage) {
             httpRequestStateProvider.setError(errorMessage);
-            postedListing = null;
+            inProgressListing = null;
           },
           (response) {
             httpRequestStateProvider.setSuccess(
               successMessage:
                   "Your listing has been created as draft successfully",
             );
-            postedListing = response.postedListing;
+            inProgressListing = response.listing;
           },
         );
       },
     );
   }
 
-  SaveListingRequest getSaveListingRequestBody() {
+  Future<void> getListingForEditing() async {
+    httpRequestStateProvider.setLoading();
+    final token = await AppSharedPreferences().getToken();
+    await NetworkService()
+        .getListingForEditing(token!, inProgressListing!.hash)
+        .then(
+      (result) {
+        result.when(
+          (errorMessage) {
+            httpRequestStateProvider.setError(errorMessage);
+            inProgressListing = null;
+          },
+          (response) {
+            httpRequestStateProvider.setSuccess();
+            inProgressListing = response.listing;
+          },
+        );
+      },
+    );
+  }
+
+  SaveListingRequest getSaveListingRequestBody({bool? publishListing}) {
     // check if availableOptions/shippingFees/variations are empty, then add an empty item to them
     // In order for the backend to be able to delete all additionalOptions/shippingFees/variations, this addition is required.
     final additionalOptionsToSave = additionalOptions.isEmpty
@@ -381,12 +403,13 @@ class PostListingProvider extends StateNotifier<PostListingState> {
             .toList();
 
     return SaveListingRequest(
+      publish: publishListing,
       title: title,
       description: description,
       tags: tags.join(','),
       listingEndDate: listingEndDate,
-      lat: postedListing?.lat,
-      lng: postedListing?.lng,
+      lat: inProgressListing?.lat,
+      lng: inProgressListing?.lng,
       city: city,
       region: region,
       country: country?.code,
@@ -398,55 +421,59 @@ class PostListingProvider extends StateNotifier<PostListingState> {
     );
   }
 
-  Future<void> saveListing() async {
+  Future<void> saveListing({bool? publishListing}) async {
     httpRequestStateProvider.setInnerLoading();
-    final saveListingRequestBody = getSaveListingRequestBody();
+    final saveListingRequestBody =
+        getSaveListingRequestBody(publishListing: publishListing);
     final token = await AppSharedPreferences().getToken();
     await NetworkService()
         .saveListing(
       token!,
-      state.postedListing!.hash,
+      state.inProgressListing!.hash,
       saveListingRequestBody,
     )
         .then((result) {
       result.when((errorMessage) {
+        if (publishListing == true) {
+          listingAvailabilityProvider.setPublished(succeeded: false);
+        }
         httpRequestStateProvider.setError(saveListingError);
       }, (response) {
-        httpRequestStateProvider.setSuccess(successMessage: saveListingSuccess);
+        if (publishListing == true) {
+          listingAvailabilityProvider.setPublished(succeeded: true);
+          httpRequestStateProvider.setSuccess();
+        } else {
+          httpRequestStateProvider.setSuccess(
+            actionSucceeded: saveListingSuccessAction,
+          );
+        }
       });
     });
   }
 
   Future<void> changeListingAvailability({
-    bool? isPublish,
     bool? isUnPublish,
     bool? isReEnable,
   }) async {
     httpRequestStateProvider.setInnerLoading();
-
     final token = await AppSharedPreferences().getToken();
     await NetworkService()
         .changeListingAvailability(
       token!,
-      state.postedListing!.hash,
-      publish: isPublish,
-      reEnable: isReEnable,
+      state.inProgressListing!.hash,
       unPublish: isUnPublish,
+      reEnable: isReEnable,
     )
         .then((result) {
       result.when((errorMessage) {
-        if (isPublish == true) {
-          listingAvailabilityProvider.setPublished(succeeded: false);
-        } else if (isReEnable == true) {
+        if (isReEnable == true) {
           listingAvailabilityProvider.setReEnabled(succeeded: false);
         } else if (isUnPublish == true) {
           listingAvailabilityProvider.setUnpublished(succeeded: false);
         }
         httpRequestStateProvider.setError(errorMessage);
       }, (response) {
-        if (isPublish == true) {
-          listingAvailabilityProvider.setPublished(succeeded: true);
-        } else if (isReEnable == true) {
+        if (isReEnable == true) {
           listingAvailabilityProvider.setReEnabled(succeeded: true);
         } else if (isUnPublish == true) {
           listingAvailabilityProvider.setUnpublished(succeeded: true);
@@ -457,6 +484,8 @@ class PostListingProvider extends StateNotifier<PostListingState> {
   }
 
   //endregion
+
+  bool isListingVerified() => inProgressListing?.isVerifiedByAdmin != null;
 
   Future<void> getPricingModels() async {
     httpRequestStateProvider.setLoading();

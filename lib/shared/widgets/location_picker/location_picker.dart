@@ -43,9 +43,10 @@ class LocationPicker extends StatelessWidget {
             children: [
               Consumer(
                 builder: (_, ref, __) {
-                  final postedListing = ref.watch(postListingProvider).postedListing!;
-                  final lat = postedListing.lat;
-                  final lng = postedListing.lng;
+                  final inProgressListing =
+                      ref.watch(postListingProvider).inProgressListing!;
+                  final lat = inProgressListing.lat;
+                  final lng = inProgressListing.lng;
                   final latLngToShow = LatLng(lat, lng);
                   return GoogleMap(
                     initialCameraPosition: _getCameraPosition(latLngToShow),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
+import 'package:grab_grip/features/authentication/utils/text_field_validators.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/post_listing_step_four_screen.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/additional_options/widgets/additional_options_widget.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/shipping_fees/widgets/shipping_fees_widget.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/variations/widgets/variations_widget.dart';
@@ -44,58 +46,69 @@ class _PricingTabViewState extends ConsumerState<PricingTabView>
             height36(),
             SizedBox(
               height: 100,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: TextField(
-                      onChanged: (text) {
-                        price = (text.isEmpty) ? 0 : int.parse(text);
-                        ref.watch(postListingProvider.notifier).price =
-                            price;
-                      },
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      decoration: standardInputDecoration.copyWith(
-                        labelText: "Price in SAR",
-                        contentPadding: const EdgeInsets.fromLTRB(8, 14, 8, 8),
-                      ),
-                      cursorColor: AppColors.purple,
-                    ),
-                  ),
-                  width24(),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        TextField(
-                          onChanged: (text) {
-                            stock = (text.isEmpty) ? 0 : int.parse(text);
-                            ref.watch(postListingProvider.notifier).stock =
-                                stock;
-                          },
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          decoration: standardInputDecoration.copyWith(
-                            labelText: "Stock",
-                            contentPadding:
-                                const EdgeInsets.fromLTRB(8, 14, 8, 8),
-                          ),
-                          cursorColor: AppColors.purple,
+              child: Form(
+                key: PostListingStepFourScreen.pricingTabFormKey,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    //region Price
+                    Expanded(
+                      child: TextFormField(
+                        onChanged: (text) {
+                          price = (text.isEmpty) ? 0 : int.parse(text);
+                          ref.watch(postListingProvider.notifier).price = price;
+                        },
+                        keyboardType: TextInputType.number,
+                        validator: priceFieldValidator,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        decoration: standardInputDecoration.copyWith(
+                          labelText: "Price in SAR",
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(8, 14, 8, 8),
                         ),
-                        height4(),
-                        const Text(
-                          "Only applicable if the item does not have variants",
-                          style: TextStyle(fontSize: 8),
-                        )
-                      ],
+                        cursorColor: AppColors.purple,
+                      ),
                     ),
-                  ),
-                ],
+                    //endregion
+                    width24(),
+                    //region Stock
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextFormField(
+                            onChanged: (text) {
+                              stock = (text.isEmpty) ? 0 : int.parse(text);
+                              ref.watch(postListingProvider.notifier).stock =
+                                  stock;
+                            },
+                            keyboardType: TextInputType.number,
+                            validator: mustNotBeEmptyFieldValidator,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            decoration: standardInputDecoration.copyWith(
+                              labelText: "Stock",
+                              contentPadding:
+                                  const EdgeInsets.fromLTRB(8, 14, 8, 8),
+                            ),
+                            cursorColor: AppColors.purple,
+                          ),
+                          height4(),
+                          const Text(
+                            "Only applicable if the item does not have variants",
+                            style: TextStyle(fontSize: 8),
+                          )
+                        ],
+                      ),
+                    ),
+                    //endregion
+                  ],
+                ),
               ),
             ),
             //endregion

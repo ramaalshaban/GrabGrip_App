@@ -5,7 +5,7 @@ import 'package:grab_grip/features/post_listing/models/post_listing_availability
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/details_tab_view.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/images_tab_view.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/pricing_tab_view.dart';
-import 'package:grab_grip/features/post_listing/widgets/screens/step_4/widgets/publish_button.dart';
+import 'package:grab_grip/features/post_listing/widgets/screens/step_4/widgets/change_listing_availability_button.dart';
 import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 import 'package:grab_grip/shared/widgets/continue_button.dart';
 import 'package:grab_grip/style/colors.dart';
@@ -17,6 +17,7 @@ import 'package:grab_grip/utils/sized_box.dart';
 class PostListingStepFourScreen extends ConsumerWidget {
   const PostListingStepFourScreen({Key? key}) : super(key: key);
   static final detailsTabFormKey = GlobalKey<FormState>();
+  static final pricingTabFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,16 +28,16 @@ class PostListingStepFourScreen extends ConsumerWidget {
     ref.listen<HttpRequestState>(httpRequestStateProvider,
         (_, httpRequestState) {
       httpRequestState.whenOrNull(
-        success: (string, _) {
-          if (string == saveListingSuccess) {
+        success: (_, succeededAction) {
+          if (succeededAction == saveListingSuccessAction) {
             showSnackBar(
               context,
               "Your listing has been saved successfully",
             );
           }
         },
-        error: (string) {
-          if (string == saveListingError) {
+        error: (key) {
+          if (key == saveListingError) {
             showSnackBarForError(
               context,
               "Unable to save Your listing",
@@ -123,7 +124,7 @@ class PostListingStepFourScreen extends ConsumerWidget {
             ),
           ),
           //endregion
-          //region Save listing / Publish / UnPublish / ReEnable buttons
+          //region Save listing / Publish / Pending Verification / UnPublish / ReEnable buttons
           Expanded(
             flex: 2,
             child: Container(
@@ -132,8 +133,6 @@ class PostListingStepFourScreen extends ConsumerWidget {
               ),
               child: Consumer(
                 builder: (context, ref, __) {
-                  final listingAvailabilityState =
-                      ref.watch(listingAvailabilityStateProvider);
                   return ref.watch(httpRequestStateProvider).maybeWhen(
                         innerLoading: (_) => Container(
                           constraints:
@@ -149,128 +148,24 @@ class PostListingStepFourScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
+                            //region Save listing button
                             ContinueButton(
                               buttonText: "Save listing",
                               isPurple: false,
                               onClickAction: () {
-                                switch (
-                                    DefaultTabController.of(context)!.index) {
-                                  case 0:
-                                    {
-                                      if (detailsTabFormKey.currentState!
-                                          .validate()) {
-                                        ref
-                                            .watch(postListingProvider.notifier)
-                                            .saveListing();
-                                      }
-                                    }
-                                    break;
-                                  case 1:
-                                  case 2:
-                                    {
-                                      if (!detailsTabFormKey.currentState!
-                                          .validate()) {
-                                        showSnackBar(
-                                          context,
-                                          "Check the information you entered please",
-                                          AppColors.amber,
-                                        );
-                                      } else {
-                                        ref
-                                            .watch(postListingProvider.notifier)
-                                            .saveListing();
-                                      }
-                                    }
-                                    break;
+                                if (listingReadyForSavingOrPublishing(
+                                  context,
+                                )) {
+                                  ref
+                                      .watch(postListingProvider.notifier)
+                                      .saveListing();
                                 }
                               },
                             ),
-                            listingAvailabilityState.when(
-                              published: (successfullyPublished) =>
-                                  successfullyPublished == true
-                                      ? PublishButton(
-                                          listingAvailabilityState:
-                                              listingAvailabilityState,
-                                          onClickAction: () {
-                                            ref
-                                                .watch(
-                                                  postListingProvider.notifier,
-                                                )
-                                                .changeListingAvailability(
-                                                  isUnPublish: true,
-                                                );
-                                          },
-                                        )
-                                      : PublishButton(
-                                          listingAvailabilityState:
-                                              listingAvailabilityState,
-                                          onClickAction: () {
-                                            ref
-                                                .watch(
-                                                  postListingProvider.notifier,
-                                                )
-                                                .changeListingAvailability(
-                                                  isPublish: true,
-                                                );
-                                          },
-                                        ),
-                              unPublished: (successfullyUnPublished) =>
-                                  successfullyUnPublished == true
-                                      ? PublishButton(
-                                          listingAvailabilityState:
-                                              listingAvailabilityState,
-                                          onClickAction: () {
-                                            ref
-                                                .watch(
-                                                  postListingProvider.notifier,
-                                                )
-                                                .changeListingAvailability(
-                                                  isReEnable: true,
-                                                );
-                                          },
-                                        )
-                                      : PublishButton(
-                                          listingAvailabilityState:
-                                              listingAvailabilityState,
-                                          onClickAction: () {
-                                            ref
-                                                .watch(
-                                                  postListingProvider.notifier,
-                                                )
-                                                .changeListingAvailability(
-                                                  isUnPublish: true,
-                                                );
-                                          },
-                                        ),
-                              reEnabled: (successfullyReEnabled) =>
-                                  successfullyReEnabled == true
-                                      ? PublishButton(
-                                          listingAvailabilityState:
-                                              listingAvailabilityState,
-                                          onClickAction: () {
-                                            ref
-                                                .watch(
-                                                  postListingProvider.notifier,
-                                                )
-                                                .changeListingAvailability(
-                                                  isUnPublish: true,
-                                                );
-                                          },
-                                        )
-                                      : PublishButton(
-                                          listingAvailabilityState:
-                                              listingAvailabilityState,
-                                          onClickAction: () {
-                                            ref
-                                                .watch(
-                                                  postListingProvider.notifier,
-                                                )
-                                                .changeListingAvailability(
-                                                  isReEnable: true,
-                                                );
-                                          },
-                                        ),
-                            ),
+                            //endregion
+                            //region Listing availability button
+                            const ChangeListingAvailabilityButton(),
+                            //endregion
                           ],
                         ),
                       );
@@ -282,5 +177,25 @@ class PostListingStepFourScreen extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  static bool listingReadyForSavingOrPublishing(BuildContext context) {
+    if (!detailsTabFormKey.currentState!.validate()) {
+      showWarningSnackBar(
+        context,
+        "Check the information you entered in the details tab please",
+      );
+      return false;
+    } else if (!(pricingTabFormKey.currentState?.validate() ?? false)) {
+      // pricingTabFormKey.currentState is null when the post_listing_step_four_screen first gets built and the user has never opened pricing tab view yet
+      // so if it's null return false so the user see the below snack bar
+      showWarningSnackBar(
+        context,
+        "Check the information you entered in the pricing tab please",
+      );
+      return false;
+    } else {
+      return true;
+    }
   }
 }

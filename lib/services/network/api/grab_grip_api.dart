@@ -13,8 +13,8 @@ import 'package:grab_grip/features/browsing/listing_details/models/reviews_respo
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
 import 'package:grab_grip/features/feedback/report_listing/models/report_reasons_response/report_reasons_response.dart';
 import 'package:grab_grip/features/feedback/report_listing/models/report_request/report_listing_request.dart';
+import 'package:grab_grip/features/post_listing/models/post_edit_listing_response/post_edit_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
-import 'package:grab_grip/features/post_listing/models/post_listing_response/post_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
 import 'package:grab_grip/features/post_listing/models/save_listing_request/save_listing_request.dart';
 import 'package:grab_grip/features/user_profile/change_password/models/change_password_request.dart';
@@ -121,15 +121,22 @@ abstract class GrabGripApi {
   //endregion
 
   @POST("/api/v1/create")
-  Future<HttpResponse<PostListingResponse>> postListingAsDraft(
+  Future<HttpResponse<PostEditListingResponse>> postListingAsDraft(
     @Header("Authorization") String token,
     @Body() PostListingAsDraftRequest postListingRequest,
   );
+
+  @GET("/api/v1/create/{hash}/edit")
+  Future<HttpResponse<PostEditListingResponse>> getListingForEditing(
+    @Header("Authorization") String token, {
+    @Path("hash") required String hash,
+  });
 
   @PUT("/api/v1/create/{hash}")
   Future<HttpResponse> saveListing(
     @Header("Authorization") String token, {
     @Path("hash") required String hash,
+    @Query("publish") String? publish,
     @Body() required SaveListingRequest body,
   });
 
@@ -137,7 +144,6 @@ abstract class GrabGripApi {
   Future<HttpResponse> changeListingAvailability(
     @Header("Authorization") String token, {
     @Path("hash") required String hash,
-    @Query("publish") String? publish,
     @Query("undraft") String? reEnable,
     @Query("draft") String? upPublish,
   });

@@ -46,8 +46,45 @@ void showSnackBar(
   });
 }
 
-void showSnackBarForError(BuildContext context, String errorMessage,
-    [Duration? customDuration]) {
+void showWarningSnackBar(
+  BuildContext context,
+  String message, [
+  Duration? customDuration,
+]) {
+  WidgetsBinding.instance?.addPostFrameCallback((_) {
+    // showFlash function was put inside this block
+    // to avoid this exception : setState() or markNeedsBuild() called during build.
+    showFlash(
+      context: context,
+      duration: customDuration ?? duration3Seconds,
+      builder: (context, controller) {
+        return Flash(
+          backgroundColor: AppColors.amber,
+          controller: controller,
+          behavior: FlashBehavior.floating,
+          position: FlashPosition.bottom,
+          boxShadows: kElevationToShadow[4],
+          horizontalDismissDirection: HorizontalDismissDirection.horizontal,
+          child: FlashBar(
+            content: Text(
+              message,
+              style: const TextStyle(
+                color: AppColors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  });
+}
+
+void showSnackBarForError(
+  BuildContext context,
+  String errorMessage, [
+  Duration? customDuration,
+]) {
   WidgetsBinding.instance?.addPostFrameCallback((_) {
     String messageToShow = errorMessage;
     // showFlash function was put inside this block

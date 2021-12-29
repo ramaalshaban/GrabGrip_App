@@ -263,7 +263,7 @@ class _GrabGripApi implements GrabGripApi {
   }
 
   @override
-  Future<HttpResponse<PostListingResponse>> postListingAsDraft(
+  Future<HttpResponse<PostEditListingResponse>> postListingAsDraft(
       token, postListingRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -272,21 +272,41 @@ class _GrabGripApi implements GrabGripApi {
     final _data = <String, dynamic>{};
     _data.addAll(postListingRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<PostListingResponse>>(
+        _setStreamType<HttpResponse<PostEditListingResponse>>(
             Options(method: 'POST', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/api/v1/create',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = PostListingResponse.fromJson(_result.data!);
+    final value = PostEditListingResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<PostEditListingResponse>> getListingForEditing(token,
+      {required hash}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<PostEditListingResponse>>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/api/v1/create/$hash/edit',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PostEditListingResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
   Future<HttpResponse<dynamic>> saveListing(token,
-      {required hash, required body}) async {
+      {required hash, publish, required body}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'publish': publish};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
@@ -303,10 +323,9 @@ class _GrabGripApi implements GrabGripApi {
 
   @override
   Future<HttpResponse<dynamic>> changeListingAvailability(token,
-      {required hash, publish, reEnable, upPublish}) async {
+      {required hash, reEnable, upPublish}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'publish': publish,
       r'undraft': reEnable,
       r'draft': upPublish
     };
