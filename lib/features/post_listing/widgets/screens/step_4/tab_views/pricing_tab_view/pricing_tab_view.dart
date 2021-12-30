@@ -21,12 +21,11 @@ class PricingTabView extends ConsumerStatefulWidget {
 
 class _PricingTabViewState extends ConsumerState<PricingTabView>
     with AutomaticKeepAliveClientMixin {
-  int price = 0;
-  int stock = 0;
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final listingForRent =
+        ref.watch(postListingProvider.notifier).isForRent ?? false;
     return SingleChildScrollView(
       padding: const EdgeInsets.only(
         top: 10,
@@ -44,71 +43,157 @@ class _PricingTabViewState extends ConsumerState<PricingTabView>
               style: TextStyle(fontSize: 16),
             ),
             height36(),
-            SizedBox(
-              height: 100,
-              child: Form(
-                key: PostListingStepFourScreen.pricingTabFormKey,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    //region Price
-                    Expanded(
-                      child: TextFormField(
-                        onChanged: (text) {
-                          price = (text.isEmpty) ? 0 : int.parse(text);
-                          ref.watch(postListingProvider.notifier).price = price;
-                        },
-                        keyboardType: TextInputType.number,
-                        validator: priceFieldValidator,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        decoration: standardInputDecoration.copyWith(
-                          labelText: "Price in SAR",
-                          contentPadding:
-                              const EdgeInsets.fromLTRB(8, 14, 8, 8),
+            Form(
+              key: PostListingStepFourScreen.pricingTabFormKey,
+              child: Column(
+                children: [
+                  //region Price & Stock
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //region Price
+                      Expanded(
+                        child: TextFormField(
+                          onChanged: (text) {
+                            final price = (text.isEmpty) ? 0 : int.parse(text);
+                            ref.watch(postListingProvider.notifier).price =
+                                price;
+                          },
+                          keyboardType: TextInputType.number,
+                          validator: priceFieldValidator,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          decoration: standardInputDecoration.copyWith(
+                            labelText: "Price in SAR",
+                            contentPadding:
+                                const EdgeInsets.fromLTRB(8, 14, 4, 8),
+                            //region Per day label
+                            suffixIcon: listingForRent
+                                ? Container(
+                                    margin: const EdgeInsets.all(2),
+                                    color: AppColors.veryLightPurple,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: const [
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 4,
+                                          ),
+                                          child: Text("perDay"),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                : null,
+                            //endregion
+                          ),
+                          cursorColor: AppColors.purple,
                         ),
-                        cursorColor: AppColors.purple,
                       ),
-                    ),
-                    //endregion
-                    width24(),
-                    //region Stock
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          TextFormField(
+                      //endregion
+                      width24(),
+                      //region Stock
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextFormField(
+                              onChanged: (text) {
+                                final stock =
+                                    (text.isEmpty) ? 0 : int.parse(text);
+                                ref.watch(postListingProvider.notifier).stock =
+                                    stock;
+                              },
+                              keyboardType: TextInputType.number,
+                              validator: mustNotBeEmptyFieldValidator,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              decoration: standardInputDecoration.copyWith(
+                                labelText: "Stock",
+                                contentPadding:
+                                    const EdgeInsets.fromLTRB(8, 14, 8, 8),
+                              ),
+                              cursorColor: AppColors.purple,
+                            ),
+                            if (!listingForRent) height4(),
+                            if (!listingForRent)
+                              const Text(
+                                "Only applicable if the item does not have variants",
+                                style: TextStyle(fontSize: 8),
+                              )
+                          ],
+                        ),
+                      ),
+                      //endregion
+                    ],
+                  ),
+                  //endregion
+                  if (listingForRent) height36(),
+                  //region Minimum & Maximum rent period
+                  if (listingForRent)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //region Minimum rent period
+                        Expanded(
+                          child: TextFormField(
                             onChanged: (text) {
-                              stock = (text.isEmpty) ? 0 : int.parse(text);
-                              ref.watch(postListingProvider.notifier).stock =
-                                  stock;
+                              final minPeriod =
+                                  (text.isEmpty) ? 0 : int.parse(text);
+                              ref
+                                  .watch(postListingProvider.notifier)
+                                  .minRentPeriod = minPeriod;
                             },
                             keyboardType: TextInputType.number,
-                            validator: mustNotBeEmptyFieldValidator,
+                            validator: rentPeriodFieldValidator,
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             decoration: standardInputDecoration.copyWith(
-                              labelText: "Stock",
+                              labelText: "Minimum rent period\n(days)",
                               contentPadding:
                                   const EdgeInsets.fromLTRB(8, 14, 8, 8),
                             ),
                             cursorColor: AppColors.purple,
                           ),
-                          height4(),
-                          const Text(
-                            "Only applicable if the item does not have variants",
-                            style: TextStyle(fontSize: 8),
-                          )
-                        ],
-                      ),
+                        ),
+                        //endregion
+                        width24(),
+                        //region Maximum rent period
+                        Expanded(
+                          child: TextFormField(
+                            onChanged: (text) {
+                              final maxPeriod =
+                                  (text.isEmpty) ? 0 : int.parse(text);
+                              ref
+                                  .watch(postListingProvider.notifier)
+                                  .maxRentPeriod = maxPeriod;
+                            },
+                            keyboardType: TextInputType.number,
+                            validator: rentPeriodFieldValidator,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            decoration: standardInputDecoration.copyWith(
+                              labelText: "Maximum rent period\n(days)",
+                              contentPadding:
+                                  const EdgeInsets.fromLTRB(8, 14, 8, 8),
+                            ),
+                            cursorColor: AppColors.purple,
+                          ),
+                        ),
+                        //endregion
+                      ],
                     ),
-                    //endregion
-                  ],
-                ),
+                  //endregion
+                  height18(),
+                ],
               ),
             ),
             //endregion
@@ -126,23 +211,25 @@ class _PricingTabViewState extends ConsumerState<PricingTabView>
             lightPurpleDividerThickness0_5,
             height24(),
             //region Shipping fees
-            const Text(
-              "Shipping fees",
-              style: TextStyle(fontSize: 16),
-            ),
-            height36(),
-            const ShippingFeesWidget(),
+            if (!listingForRent)
+              const Text(
+                "Shipping fees",
+                style: TextStyle(fontSize: 16),
+              ),
+            if (!listingForRent) height36(),
+            if (!listingForRent) const ShippingFeesWidget(),
             //endregion
-            height24(),
-            lightPurpleDividerThickness0_5,
-            height24(),
+            if (!listingForRent) height24(),
+            if (!listingForRent) lightPurpleDividerThickness0_5,
+            if (!listingForRent) height24(),
             //region Variations
-            const Text(
-              "Variations",
-              style: TextStyle(fontSize: 16),
-            ),
-            height36(),
-            const VariationsWidget(),
+            if (!listingForRent)
+              const Text(
+                "Variations",
+                style: TextStyle(fontSize: 16),
+              ),
+            if (!listingForRent) height36(),
+            if (!listingForRent) const VariationsWidget(),
             height12(),
             //endregion
           ],

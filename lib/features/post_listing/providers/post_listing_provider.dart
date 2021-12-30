@@ -137,6 +137,16 @@ class PostListingProvider extends StateNotifier<PostListingState> {
 
   int? get stock => state.stock;
 
+  set minRentPeriod(int? minRentPeriod) =>
+      state = state.copyWith(minRentPeriod: minRentPeriod);
+
+  int? get minRentPeriod => state.minRentPeriod;
+
+  set maxRentPeriod(int? maxRentPeriod) =>
+      state = state.copyWith(maxRentPeriod: maxRentPeriod);
+
+  int? get maxRentPeriod => state.maxRentPeriod;
+
   List<AdditionalOption> get additionalOptions => state.additionalOptions;
 
   set additionalOptions(List<AdditionalOption> additionalOptions) =>
@@ -151,6 +161,11 @@ class PostListingProvider extends StateNotifier<PostListingState> {
 
   set variations(List<Variation> variations) =>
       state = state.copyWith(variations: variations);
+
+  bool? get isForRent => state.isForRent;
+
+  set isForRent(bool? isForRent) =>
+      state = state.copyWith(isForRent: isForRent);
 
 //endregion
 
@@ -377,13 +392,14 @@ class PostListingProvider extends StateNotifier<PostListingState> {
           (response) {
             httpRequestStateProvider.setSuccess();
             inProgressListing = response.listing;
+            isForRent = response.listing.pricingModel?.widget == bookDate;
           },
         );
       },
     );
   }
 
-  SaveListingRequest getSaveListingRequestBody({bool? publishListing}) {
+  SaveListingRequest _getSaveListingRequestBody({bool? publishListing}) {
     // check if availableOptions/shippingFees/variations are empty, then add an empty item to them
     // In order for the backend to be able to delete all additionalOptions/shippingFees/variations, this addition is required.
     final additionalOptionsToSave = additionalOptions.isEmpty
@@ -415,6 +431,8 @@ class PostListingProvider extends StateNotifier<PostListingState> {
       country: country?.code,
       price: price,
       stock: stock,
+      minRentPeriod: minRentPeriod,
+      maxRentPeriod: maxRentPeriod,
       additionalOptions: additionalOptionsToSave,
       shippingFees: shippingFeesToSave,
       variations: variationsToSave,
@@ -424,7 +442,7 @@ class PostListingProvider extends StateNotifier<PostListingState> {
   Future<void> saveListing({bool? publishListing}) async {
     httpRequestStateProvider.setInnerLoading();
     final saveListingRequestBody =
-        getSaveListingRequestBody(publishListing: publishListing);
+    _getSaveListingRequestBody(publishListing: publishListing);
     final token = await AppSharedPreferences().getToken();
     await NetworkService()
         .saveListing(

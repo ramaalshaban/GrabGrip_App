@@ -35,6 +35,10 @@ _$_Gear _$$_GearFromJson(Map<String, dynamic> json) => _$_Gear(
       json['is_draft'] as int?,
       json['is_admin_verified'] as String?,
       json['is_disabled'] as String?,
+      json['pricing_model'] == null
+          ? null
+          : PricingModel.fromJson(
+              json['pricing_model'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_GearToJson(_$_Gear instance) => <String, dynamic>{
@@ -62,4 +66,5 @@ Map<String, dynamic> _$$_GearToJson(_$_Gear instance) => <String, dynamic>{
       'is_draft': instance.isDraft,
       'is_admin_verified': instance.isVerifiedByAdmin,
       'is_disabled': instance.isDisabled,
+      'pricing_model': instance.pricingModel,
     };

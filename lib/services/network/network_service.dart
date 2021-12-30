@@ -283,7 +283,6 @@ class NetworkService {
         publish: request.publish == true ? "Publish" : null,
         body: request,
       );
-      print("save listing ran ------ the request is ============> $request");
       return Success(saveListingCall.data.toString());
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);

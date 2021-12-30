@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grab_grip/features/browsing/listing_details/models/listing_photo/listing_photo.dart';
+import 'package:grab_grip/features/post_listing/models/pricing_model/pricing_model.dart';
 import 'package:grab_grip/features/user_profile/shared/models/user.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'gear.freezed.dart';
 part 'gear.g.dart';
@@ -34,6 +34,7 @@ class Gear with _$Gear {
     @JsonKey(name: "is_draft") int? isDraft,
     @JsonKey(name: "is_admin_verified") String? isVerifiedByAdmin,
     @JsonKey(name: "is_disabled") String? isDisabled,
+    @JsonKey(name: "pricing_model") PricingModel? pricingModel,
   ) = _Gear;
 
   factory Gear.fromJson(Map<String, dynamic> json) => _$GearFromJson(json);

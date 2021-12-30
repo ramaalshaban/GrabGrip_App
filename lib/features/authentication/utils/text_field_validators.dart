@@ -50,3 +50,18 @@ String? priceFieldValidator(String? enteredText) => (enteredText == null ||
         int.parse(enteredText.trim()) < 1)
     ? 'The price must not be\nempty and must be\ngreater than 0'
     : null;
+
+String? rentPeriodFieldValidator(String? enteredText) {
+  if (enteredText == null || enteredText.trim().isEmpty) {
+    return 'Fill this field please';
+  } else {
+    final enteredNumber = int.parse(enteredText.trim());
+    if (enteredNumber < 1) {
+      return 'The period must be\ngreater than\nor equal to 1';
+    } else if (enteredNumber > 30) {
+      return 'The period must be\nless than\nor equal to 30';
+    } else {
+      return null;
+    }
+  }
+}

@@ -22,6 +22,8 @@ class SaveListingRequest with _$SaveListingRequest {
     String? country,
     int? price,
     int? stock,
+    @JsonKey(name: "min_duration") int? minRentPeriod,
+    @JsonKey(name: "max_duration") int? maxRentPeriod,
     @JsonKey(name: "additional") List<AdditionalOption>? additionalOptions,
     @JsonKey(name: "shipping") List<ShippingFee>? shippingFees,
     List<VariationStringValue>? variations,

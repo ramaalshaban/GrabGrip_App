@@ -13,7 +13,7 @@ part 'post_listing_state.freezed.dart';
 
 @freezed
 class PostListingState with _$PostListingState {
-  const factory PostListingState([
+  const factory PostListingState({
     Category? category,
     Category? subcategory,
     int? listingTypeId,
@@ -30,8 +30,12 @@ class PostListingState with _$PostListingState {
     String? region,
     int? price,
     int? stock,
+    int? minRentPeriod,
+    int? maxRentPeriod,
     @Default([AdditionalOption()]) List<AdditionalOption> additionalOptions,
     @Default([ShippingFee()]) List<ShippingFee> shippingFees,
     @Default([Variation()]) List<Variation> variations,
-  ]) = _PostListingState;
+    PricingModel? pricingModel,
+    bool? isForRent,
+  }) = _PostListingState;
 }

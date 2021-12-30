@@ -20,6 +20,8 @@ _$_SaveListingRequest _$$_SaveListingRequestFromJson(
       country: json['country'] as String?,
       price: json['price'] as int?,
       stock: json['stock'] as int?,
+      minRentPeriod: json['min_duration'] as int?,
+      maxRentPeriod: json['max_duration'] as int?,
       additionalOptions: (json['additional'] as List<dynamic>?)
           ?.map((e) => AdditionalOption.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -45,6 +47,8 @@ Map<String, dynamic> _$$_SaveListingRequestToJson(
       'country': instance.country,
       'price': instance.price,
       'stock': instance.stock,
+      'min_duration': instance.minRentPeriod,
+      'max_duration': instance.maxRentPeriod,
       'additional': instance.additionalOptions,
       'shipping': instance.shippingFees,
       'variations': instance.variations,
