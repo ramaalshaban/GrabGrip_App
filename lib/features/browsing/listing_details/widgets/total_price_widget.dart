@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
@@ -83,47 +82,20 @@ class TotalPriceWidget extends StatelessWidget {
               Expanded(
                 child: Consumer(
                   builder: (_, ref, __) {
-                    final isThisListingForRent =
-                        ref.watch(listingDetailsProvider.notifier).isForRent ??
-                            false;
                     return AnimatedOpacity(
                       opacity: ref.watch(httpRequestStateProvider).maybeWhen(
                             loading: () => 0.0,
                             orElse: () => 1.0,
                           ),
                       duration: duration300Milli,
-                      child: SizedBox(
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "SAR ${ref.watch(listingDetailsProvider).widget?.total}",
-                                  style: const TextStyle(
-                                    color: AppColors.green,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                Text(
-                                  isThisListingForRent ? " per day" : "",
-                                  style: const TextStyle(
-                                    color: AppColors.green,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
-                            ),
-                            Text(
-                              isThisListingForRent ? " VAT included" : "",
-                              style: const TextStyle(
-                                color: AppColors.green,
-                              ),
-                              textAlign: TextAlign.center,
-                            )
-                          ],
+                      child: Text(
+                        "SAR ${ref.watch(listingDetailsProvider).widget?.total}",
+                        style: const TextStyle(
+                          color: AppColors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     );
                   },
@@ -138,3 +110,24 @@ class TotalPriceWidget extends StatelessWidget {
     );
   }
 }
+
+/// The following widgets can be used later to customize the listings that are for rent:
+/// Column(
+///                     children: [
+///                     Text(
+///                     isThisListingForRent ? " per day" : "",
+///                       style: const TextStyle(
+///                         color: AppColors.green,
+///                       ),
+///                       textAlign: TextAlign.center,
+///                     ),
+///                     Text(
+///                     isThisListingForRent ? " VAT included" : "",
+///                     style: const TextStyle(
+///                     color: AppColors.green,
+///                     ),
+///                     textAlign: TextAlign.center,
+///                     )
+///                     ]
+///                     ,
+///                     )
