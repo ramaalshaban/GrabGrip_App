@@ -177,9 +177,9 @@ String formatDateForReview(String? dateTime) {
   return dateFormatter.format(dateTimeObj);
 }
 
-String formatBookingDate(String? startDate, String? endDate) {
+String? formatBookingDate(String? startDate, String? endDate) {
   if (startDate == null || endDate == null) {
-    return "Pick your booking date";
+    return null;
   } else {
     return "$startDate to $endDate";
   }

@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/date_range_picker/booking_info_dialog.dart';
+import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 import 'package:grab_grip/style/box_decorations.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text.dart';
@@ -18,6 +18,17 @@ class DateRangePicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //region Listeners
+    ref.listen<HttpRequestState>(httpRequestStateProvider,
+        (_, httpRequestState) {
+      httpRequestState.whenOrNull(
+        error: (errorMessage) => showSnackBarForError(
+          context,
+          errorMessage,
+        ),
+      );
+    });
+    //endregion
     final now = DateTime.now();
     final nextYearLikeToday = DateTime(
       now.year + 1,
@@ -56,16 +67,23 @@ class DateRangePicker extends ConsumerWidget {
                           builder: (context) => Center(
                             child: Container(
                               decoration: fieldDecoration,
-                              width: screenWidth(context) - 40,
-                              height: screenHeightWithoutExtras(context) / 1.5,
+                              width: screenWidth() - 40,
+                              height: screenHeightWithoutExtras() / 1.5,
                               child: Consumer(
                                 builder: (_, ref, __) {
                                   return SfDateRangePicker(
                                     onSubmit: (pickedTime) {
-                                      // check if user picked a range
-                                      if ((pickedTime as PickerDateRange)
-                                              .endDate ==
+                                      if ((pickedTime as PickerDateRange?) ==
                                           null) {
+                                        showSnackBar(
+                                          context,
+                                          "Pick your booking date range please",
+                                          AppColors.amber,
+                                        );
+                                        return;
+                                      }
+                                      // check if user picked a range
+                                      if (pickedTime!.endDate == null) {
                                         showSnackBar(
                                           context,
                                           "Pick the booking end date please",
@@ -81,12 +99,12 @@ class DateRangePicker extends ConsumerWidget {
                                               listingDetailsProvider.notifier,
                                             )
                                             .setBookingDate(startDate, endDate);
-                                        context.router.pop();
                                         ref
                                             .watch(
                                               listingDetailsProvider.notifier,
                                             )
                                             .pickerDateRange = pickedTime;
+                                        context.router.pop();
                                       }
                                     },
                                     selectionMode:
@@ -131,10 +149,7 @@ class DateRangePicker extends ConsumerWidget {
                               ),
                             ),
                           ),
-                        ).then((_) {
-                          // prevent the previously focused text field from receiving the focus again after closing the data picker
-                          FocusScope.of(context).requestFocus(FocusNode());
-                        });
+                        );
                       },
                       //endregion
                       //region Picked booking date container
@@ -150,13 +165,16 @@ class DateRangePicker extends ConsumerWidget {
                         constraints: const BoxConstraints.expand(height: 50),
                         child: Consumer(
                           builder: (_, ref, __) {
-                            final startDate =
-                                ref.watch(listingDetailsProvider).startDate;
-                            final endDate =
-                                ref.watch(listingDetailsProvider).endDate;
+                            final formattedBookingDate = ref.watch(
+                              listingDetailsProvider.select(
+                                (state) =>
+                                    state.formattedBookingDate ??
+                                    "Pick your booking date",
+                              ),
+                            );
                             return IgnorePointer(
                               child: Text(
-                                formatBookingDate(startDate, endDate),
+                                formattedBookingDate,
                                 style: const TextStyle(
                                   color: Colors.black,
                                 ),

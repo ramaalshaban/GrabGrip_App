@@ -26,31 +26,31 @@ class MyOrderItemSkeletonLoader extends StatelessWidget {
                   Container(
                     color: AppColors.purple,
                     height: 14,
-                    width: screenWidth(context) / 1.5,
+                    width: screenWidth() / 1.5,
                   ),
                   height4(),
                   Container(
                     color: AppColors.purple,
                     height: 14,
-                    width: (screenWidth(context) / 1.5) - 80,
+                    width: (screenWidth() / 1.5) - 80,
                   ),
                   height4(),
                   Container(
                     color: AppColors.purple,
                     height: 14,
-                    width: (screenWidth(context) / 1.5) - 60,
+                    width: (screenWidth() / 1.5) - 60,
                   ),
                   height4(),
                   Container(
                     color: AppColors.purple,
                     height: 14,
-                    width: (screenWidth(context) / 1.5) - 100,
+                    width: (screenWidth() / 1.5) - 100,
                   ),
                   height4(),
                   Container(
                     color: AppColors.purple,
                     height: 14,
-                    width: (screenWidth(context) / 1.5) - 60,
+                    width: (screenWidth() / 1.5) - 60,
                   ),
                 ],
               ),
@@ -61,8 +61,8 @@ class MyOrderItemSkeletonLoader extends StatelessWidget {
     );
 
     return SizedBox(
-      width: screenWidth(context),
-      height: screenHeightWithoutExtras(context),
+      width: screenWidth(),
+      height: screenHeightWithoutExtras(),
       child: Column(
         children: [
           Expanded(

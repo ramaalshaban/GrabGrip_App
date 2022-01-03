@@ -13,12 +13,16 @@ class AdditionalOptionCheckbox extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isOptionSelected = ref.watch(listingDetailsProvider)
-        .selectedAdditionalOptions
-        .containsKey(additionalOption.id.toString());
+    final isOptionSelected = ref.watch(
+      listingDetailsProvider.select(
+        (state) => state.selectedAdditionalOptions
+            .containsKey(additionalOption.id.toString()),
+      ),
+    );
     return InkWell(
       onTap: () {
-        final selectedQuantity = ref.watch(listingDetailsProvider.notifier)
+        final selectedQuantity = ref
+                .watch(listingDetailsProvider.notifier)
                 .selectedAdditionalOptions[additionalOption.id] ??
             1;
         ref.watch(listingDetailsProvider.notifier).toggleAdditionalOptionStatus(
@@ -36,10 +40,12 @@ class AdditionalOptionCheckbox extends ConsumerWidget {
               activeColor: AppColors.purple,
               value: isOptionSelected,
               onChanged: (_) {
-                final selectedQuantity = ref.watch(listingDetailsProvider.notifier)
+                final selectedQuantity = ref
+                        .watch(listingDetailsProvider.notifier)
                         .selectedAdditionalOptions[additionalOption.id] ??
                     1;
-                ref.watch(listingDetailsProvider.notifier)
+                ref
+                    .watch(listingDetailsProvider.notifier)
                     .toggleAdditionalOptionStatus(
                   additionalOption: {
                     additionalOption.id.toString(): selectedQuantity

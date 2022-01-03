@@ -26,7 +26,7 @@ class FavoriteItem extends StatelessWidget {
         moveToDetailsScreen(context, favoriteGear);
       },
       child: SizedBox(
-        height: screenHeightWithoutExtras(context) / 5,
+        height: screenHeightWithoutExtras() / 5,
         child: Card(
           elevation: 4.0,
           shadowColor: AppColors.purple,
@@ -81,7 +81,10 @@ class FavoriteItem extends StatelessWidget {
                             favoriteGear.title,
                             style: AppTextStyles.title,
                           ),
-                          FavoriteScreenLikeButton(favoriteGear: favoriteGear, index: index),
+                          FavoriteScreenLikeButton(
+                            favoriteGear: favoriteGear,
+                            index: index,
+                          ),
                         ],
                       ),
                       //endregion

@@ -48,14 +48,15 @@ class DatePicker extends StatelessWidget {
               builder: (context) => Center(
                 child: Container(
                   decoration: fieldDecoration,
-                  width: screenWidth(context) - 40,
-                  height: screenHeightWithoutExtras(context) / 1.5,
+                  width: screenWidth() - 40,
+                  height: screenHeightWithoutExtras() / 1.5,
                   child: Consumer(
                     builder: (_, ref, __) {
                       return SfDateRangePicker(
                         onSubmit: (pickedTime) {
-                          ref.watch(postListingProvider.notifier).listingEndDate =
-                              pickedTime.toString();
+                          ref
+                              .watch(postListingProvider.notifier)
+                              .listingEndDate = pickedTime.toString();
                           context.router.pop();
                         },
                         onCancel: () => context.router.pop(),
@@ -79,14 +80,12 @@ class DatePicker extends StatelessWidget {
                         backgroundColor: AppColors.white,
                         cancelText: "Cancel",
                         confirmText: "Confirm",
-
                       );
                     },
                   ),
                 ),
               ),
-
-            ).then((_){
+            ).then((_) {
               // prevent the previously focused text field from receiving the focus again after closing the data picker
               FocusScope.of(context).requestFocus(FocusNode());
             });
@@ -98,7 +97,8 @@ class DatePicker extends StatelessWidget {
             constraints: const BoxConstraints.expand(height: 50),
             child: Consumer(
               builder: (_, ref, __) {
-                final listingEndDate = ref.watch(postListingProvider).listingEndDate;
+                final listingEndDate =
+                    ref.watch(postListingProvider).listingEndDate;
                 final formattedDate = formatDateForView(listingEndDate);
                 return Row(
                   children: [
@@ -114,7 +114,8 @@ class DatePicker extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {
-                        ref.watch(postListingProvider.notifier).listingEndDate = null;
+                        ref.watch(postListingProvider.notifier).listingEndDate =
+                            null;
                       },
                       icon: const Icon(
                         Icons.remove,

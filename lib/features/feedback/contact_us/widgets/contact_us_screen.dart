@@ -91,7 +91,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       color: AppColors.purple,
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    width: screenWidth(context) / 3,
+                    width: screenWidth() / 3,
                     height: 40.0,
                     child: SubmitButton(
                       formKey: _formKey,

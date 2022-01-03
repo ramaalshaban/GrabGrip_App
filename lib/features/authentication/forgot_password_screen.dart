@@ -15,7 +15,7 @@ class ForgotPasswordScreen extends StatelessWidget {
       appBar: const RegistrationAppBar(),
       body: Container(
         color: AppColors.white,
-        height: screenHeightWithoutExtras(context),
+        height: screenHeightWithoutExtras(),
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(40.0, 40.0, 40.0, 0),
           child: Column(
@@ -44,13 +44,14 @@ class ForgotPasswordScreen extends StatelessWidget {
                   children: <Widget>[
                     TextFormField(
                       keyboardType: TextInputType.emailAddress,
-                      decoration: registrationInputDecoration
-                          .copyWith(hintText: "Email"),
+                      decoration: registrationInputDecoration.copyWith(
+                        hintText: "Email",
+                      ),
                       cursorColor: AppColors.purple,
                     ),
                     height60(),
                     Container(
-                      width: screenWidth(context),
+                      width: screenWidth(),
                       color: AppColors.purple,
                       child: TextButton(
                         onPressed: () {},

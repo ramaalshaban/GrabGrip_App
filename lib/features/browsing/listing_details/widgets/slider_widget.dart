@@ -21,7 +21,7 @@ class SliderWidget extends StatelessWidget {
               autoPlayInterval: const Duration(seconds: 2),
               enableInfiniteScroll: false,
               viewportFraction: 1,
-              height: screenHeightWithoutExtras(context) / 1.7,
+              height: screenHeightWithoutExtras() / 1.7,
               autoPlay: true,
             ),
             itemCount: photos.length,
@@ -33,7 +33,8 @@ class SliderWidget extends StatelessWidget {
                     url: photos[itemIndex].originalPhotoUrl,
                     isFile: false,
                   ),
-                ).then((_) {
+                )
+                    .then((_) {
                   // prevent the previously focused text field from receiving the focus again after closing the image preview dialog
                   FocusScope.of(context).requestFocus(FocusNode());
                 });

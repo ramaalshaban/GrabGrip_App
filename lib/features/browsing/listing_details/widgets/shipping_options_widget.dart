@@ -11,50 +11,51 @@ class ShippingOptionsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final shippingOptions = ref.watch(listingDetailsProvider).shippingOptions;
-    return ref.watch(httpRequestStateProvider).maybeWhen(
-      error: (_) => Container(),
-      orElse: () => Visibility(
-        visible: shippingOptions.isNotEmpty,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Container(
-            padding: const EdgeInsets.all(12),
-            decoration: listingDetailsBoxDecoration,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //region Shipping options label
-                const Text(
-                  "Shipping",
-                  style: AppTextStyles.listingDetailsTitleStyle,
+    final shippingOptions = ref
+        .watch(listingDetailsProvider.select((state) => state.shippingOptions));
+    return Visibility(
+      visible: shippingOptions.isNotEmpty,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: listingDetailsBoxDecoration,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //region Shipping options label
+              const Text(
+                "Shipping",
+                style: AppTextStyles.listingDetailsTitleStyle,
+              ),
+              //endregion
+              height8(),
+              ...List.generate(
+                shippingOptions.length,
+                (index) => Consumer(
+                  builder: (_, ref, __) {
+                    final shippingOption = shippingOptions[index];
+                    return RadioListTile<int>(
+                      title: Text(
+                        "${shippingOption.name!} (SAR ${shippingOption.price})",
+                      ),
+                      contentPadding: EdgeInsets.zero,
+                      activeColor: AppColors.purple,
+                      value: shippingOption.id!,
+                      groupValue: ref.watch(
+                        listingDetailsProvider
+                            .select((state) => state.selectedShippingOptionId),
+                      ),
+                      onChanged: (int? newlySelectedShippingId) {
+                        ref
+                            .watch(listingDetailsProvider.notifier)
+                            .setShippingId(newlySelectedShippingId);
+                      },
+                    );
+                  },
                 ),
-                //endregion
-                height8(),
-                ...List.generate(
-                  shippingOptions.length,
-                  (index) => Consumer(
-                    builder: (_, ref, __) {
-                      final shippingOption = shippingOptions[index];
-                      return RadioListTile<int>(
-                        title: Text(
-                          "${shippingOption.name!} (SAR ${shippingOption.price})",
-                        ),
-                        contentPadding: EdgeInsets.zero,
-                        activeColor: AppColors.purple,
-                        value: shippingOption.id!,
-                        groupValue: ref.watch(listingDetailsProvider)
-                            .selectedShippingOptionId,
-                        onChanged: (int? newlySelectedShippingId) {
-                          ref.watch(listingDetailsProvider.notifier)
-                              .setShippingId(newlySelectedShippingId);
-                        },
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

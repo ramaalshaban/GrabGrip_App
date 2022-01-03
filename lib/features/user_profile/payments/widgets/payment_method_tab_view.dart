@@ -71,8 +71,7 @@ class PaymentMethodTabView extends ConsumerWidget {
                       : Container(
                           padding: const EdgeInsets.symmetric(horizontal: 12),
                           constraints:
-                              BoxConstraints(minWidth: screenWidth(context)) /
-                                  3,
+                              BoxConstraints(minWidth: screenWidth()) / 3,
                           decoration: BoxDecoration(
                             color: AppColors.purple,
                             borderRadius: BorderRadius.circular(4),
@@ -93,7 +92,8 @@ class PaymentMethodTabView extends ConsumerWidget {
                                   onPressed: () => ref
                                       .watch(paymentMethodsProvider.notifier)
                                       .linkPaymentMethod(
-                                          key: paymentMethod.key),
+                                        key: paymentMethod.key,
+                                      ),
                                   child: Text(
                                     "Enable ${paymentMethod.displayName}",
                                     style: const TextStyle(

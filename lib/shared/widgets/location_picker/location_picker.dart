@@ -36,8 +36,8 @@ class LocationPicker extends StatelessWidget {
         ),
         height8(),
         SizedBox(
-          width: screenWidth(context) - 40,
-          height: screenWidth(context) - 40,
+          width: screenWidth() - 40,
+          height: screenWidth() - 40,
           child: Stack(
             fit: StackFit.expand,
             children: [

@@ -42,7 +42,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: const RegistrationAppBar(),
       body: Container(
         color: AppColors.white,
-        height: screenHeightWithoutExtras(context),
+        height: screenHeightWithoutExtras(),
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(40.0, 40.0, 40.0, 0),
           child: Column(
@@ -115,7 +115,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height48(),
                     //region Join button
                     Container(
-                      width: screenWidth(context),
+                      width: screenWidth(),
                       height: 48.0,
                       color: AppColors.purple,
                       child: RegisterButton(

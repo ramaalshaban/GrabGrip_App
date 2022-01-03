@@ -42,14 +42,15 @@ class SelectRentBuyScreen extends StatelessWidget {
                           ref.watch(filterAndSortProvider).listingType;
                       return InkWell(
                         onTap: () {
-                          ref.watch(filterAndSortProvider.notifier).listingType =
-                              listingTypeOptions[2];
+                          ref
+                              .watch(filterAndSortProvider.notifier)
+                              .listingType = listingTypeOptions[2];
                           context.router.push(
                             SetLocationScreenRoute(),
                           );
                         },
                         child: Container(
-                          height: screenHeightWithoutExtras(context) / 10,
+                          height: screenHeightWithoutExtras() / 10,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             color: selectedListingType == listingTypeOptions[2]
@@ -84,14 +85,15 @@ class SelectRentBuyScreen extends StatelessWidget {
                           ref.watch(filterAndSortProvider).listingType;
                       return InkWell(
                         onTap: () {
-                          ref.watch(filterAndSortProvider.notifier).listingType =
-                              listingTypeOptions[1];
+                          ref
+                              .watch(filterAndSortProvider.notifier)
+                              .listingType = listingTypeOptions[1];
                           context.router.push(
                             SetLocationScreenRoute(),
                           );
                         },
                         child: Container(
-                          height: screenHeightWithoutExtras(context) / 10,
+                          height: screenHeightWithoutExtras() / 10,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             color: selectedListingType == listingTypeOptions[1]

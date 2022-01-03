@@ -38,6 +38,7 @@ class _$ListingDetailsStateTearOff {
       Widget? widget,
       DateTime? listingEndDate,
       PickerDateRange? pickerDateRange,
+      String? formattedBookingDate,
       bool? isForRent,
       bool? isFavorited,
       String? userRating,
@@ -63,6 +64,7 @@ class _$ListingDetailsStateTearOff {
       widget: widget,
       listingEndDate: listingEndDate,
       pickerDateRange: pickerDateRange,
+      formattedBookingDate: formattedBookingDate,
       isForRent: isForRent,
       isFavorited: isFavorited,
       userRating: userRating,
@@ -101,6 +103,7 @@ mixin _$ListingDetailsState {
   Widget? get widget => throw _privateConstructorUsedError;
   DateTime? get listingEndDate => throw _privateConstructorUsedError;
   PickerDateRange? get pickerDateRange => throw _privateConstructorUsedError;
+  String? get formattedBookingDate => throw _privateConstructorUsedError;
   bool? get isForRent => throw _privateConstructorUsedError;
   bool? get isFavorited => throw _privateConstructorUsedError;
   String? get userRating => throw _privateConstructorUsedError;
@@ -137,6 +140,7 @@ abstract class $ListingDetailsStateCopyWith<$Res> {
       Widget? widget,
       DateTime? listingEndDate,
       PickerDateRange? pickerDateRange,
+      String? formattedBookingDate,
       bool? isForRent,
       bool? isFavorited,
       String? userRating,
@@ -179,6 +183,7 @@ class _$ListingDetailsStateCopyWithImpl<$Res>
     Object? widget = freezed,
     Object? listingEndDate = freezed,
     Object? pickerDateRange = freezed,
+    Object? formattedBookingDate = freezed,
     Object? isForRent = freezed,
     Object? isFavorited = freezed,
     Object? userRating = freezed,
@@ -265,6 +270,10 @@ class _$ListingDetailsStateCopyWithImpl<$Res>
           ? _value.pickerDateRange
           : pickerDateRange // ignore: cast_nullable_to_non_nullable
               as PickerDateRange?,
+      formattedBookingDate: formattedBookingDate == freezed
+          ? _value.formattedBookingDate
+          : formattedBookingDate // ignore: cast_nullable_to_non_nullable
+              as String?,
       isForRent: isForRent == freezed
           ? _value.isForRent
           : isForRent // ignore: cast_nullable_to_non_nullable
@@ -357,6 +366,7 @@ abstract class _$ListingDetailsStateCopyWith<$Res>
       Widget? widget,
       DateTime? listingEndDate,
       PickerDateRange? pickerDateRange,
+      String? formattedBookingDate,
       bool? isForRent,
       bool? isFavorited,
       String? userRating,
@@ -405,6 +415,7 @@ class __$ListingDetailsStateCopyWithImpl<$Res>
     Object? widget = freezed,
     Object? listingEndDate = freezed,
     Object? pickerDateRange = freezed,
+    Object? formattedBookingDate = freezed,
     Object? isForRent = freezed,
     Object? isFavorited = freezed,
     Object? userRating = freezed,
@@ -491,6 +502,10 @@ class __$ListingDetailsStateCopyWithImpl<$Res>
           ? _value.pickerDateRange
           : pickerDateRange // ignore: cast_nullable_to_non_nullable
               as PickerDateRange?,
+      formattedBookingDate: formattedBookingDate == freezed
+          ? _value.formattedBookingDate
+          : formattedBookingDate // ignore: cast_nullable_to_non_nullable
+              as String?,
       isForRent: isForRent == freezed
           ? _value.isForRent
           : isForRent // ignore: cast_nullable_to_non_nullable
@@ -537,6 +552,7 @@ class _$_ListingDetailsState
       this.widget,
       this.listingEndDate,
       this.pickerDateRange,
+      this.formattedBookingDate,
       this.isForRent,
       this.isFavorited,
       this.userRating,
@@ -591,6 +607,8 @@ class _$_ListingDetailsState
   @override
   final PickerDateRange? pickerDateRange;
   @override
+  final String? formattedBookingDate;
+  @override
   final bool? isForRent;
   @override
   final bool? isFavorited;
@@ -601,7 +619,7 @@ class _$_ListingDetailsState
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ListingDetailsState(category: $category, pricingModel: $pricingModel, ownerId: $ownerId, hash: $hash, slug: $slug, selectedQuantity: $selectedQuantity, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, selectedAdditionalOptions: $selectedAdditionalOptions, selectedAdditionalOptionsMeta: $selectedAdditionalOptionsMeta, selectedShippingOptionId: $selectedShippingOptionId, selectedVariantOptions: $selectedVariantOptions, startDate: $startDate, endDate: $endDate, listingOwner: $listingOwner, stockQuantity: $stockQuantity, widget: $widget, listingEndDate: $listingEndDate, pickerDateRange: $pickerDateRange, isForRent: $isForRent, isFavorited: $isFavorited, userRating: $userRating, userListingsCount: $userListingsCount)';
+    return 'ListingDetailsState(category: $category, pricingModel: $pricingModel, ownerId: $ownerId, hash: $hash, slug: $slug, selectedQuantity: $selectedQuantity, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, selectedAdditionalOptions: $selectedAdditionalOptions, selectedAdditionalOptionsMeta: $selectedAdditionalOptionsMeta, selectedShippingOptionId: $selectedShippingOptionId, selectedVariantOptions: $selectedVariantOptions, startDate: $startDate, endDate: $endDate, listingOwner: $listingOwner, stockQuantity: $stockQuantity, widget: $widget, listingEndDate: $listingEndDate, pickerDateRange: $pickerDateRange, formattedBookingDate: $formattedBookingDate, isForRent: $isForRent, isFavorited: $isFavorited, userRating: $userRating, userListingsCount: $userListingsCount)';
   }
 
   @override
@@ -633,6 +651,7 @@ class _$_ListingDetailsState
       ..add(DiagnosticsProperty('widget', widget))
       ..add(DiagnosticsProperty('listingEndDate', listingEndDate))
       ..add(DiagnosticsProperty('pickerDateRange', pickerDateRange))
+      ..add(DiagnosticsProperty('formattedBookingDate', formattedBookingDate))
       ..add(DiagnosticsProperty('isForRent', isForRent))
       ..add(DiagnosticsProperty('isFavorited', isFavorited))
       ..add(DiagnosticsProperty('userRating', userRating))
@@ -697,6 +716,7 @@ class _$_ListingDetailsState
             (identical(other.widget, widget) || const DeepCollectionEquality().equals(other.widget, widget)) &&
             (identical(other.listingEndDate, listingEndDate) || const DeepCollectionEquality().equals(other.listingEndDate, listingEndDate)) &&
             (identical(other.pickerDateRange, pickerDateRange) || const DeepCollectionEquality().equals(other.pickerDateRange, pickerDateRange)) &&
+            (identical(other.formattedBookingDate, formattedBookingDate) || const DeepCollectionEquality().equals(other.formattedBookingDate, formattedBookingDate)) &&
             (identical(other.isForRent, isForRent) || const DeepCollectionEquality().equals(other.isForRent, isForRent)) &&
             (identical(other.isFavorited, isFavorited) || const DeepCollectionEquality().equals(other.isFavorited, isFavorited)) &&
             (identical(other.userRating, userRating) || const DeepCollectionEquality().equals(other.userRating, userRating)) &&
@@ -726,6 +746,7 @@ class _$_ListingDetailsState
       const DeepCollectionEquality().hash(widget) ^
       const DeepCollectionEquality().hash(listingEndDate) ^
       const DeepCollectionEquality().hash(pickerDateRange) ^
+      const DeepCollectionEquality().hash(formattedBookingDate) ^
       const DeepCollectionEquality().hash(isForRent) ^
       const DeepCollectionEquality().hash(isFavorited) ^
       const DeepCollectionEquality().hash(userRating) ^
@@ -760,6 +781,7 @@ abstract class _ListingDetailsState implements ListingDetailsState {
       Widget? widget,
       DateTime? listingEndDate,
       PickerDateRange? pickerDateRange,
+      String? formattedBookingDate,
       bool? isForRent,
       bool? isFavorited,
       String? userRating,
@@ -810,6 +832,8 @@ abstract class _ListingDetailsState implements ListingDetailsState {
   DateTime? get listingEndDate => throw _privateConstructorUsedError;
   @override
   PickerDateRange? get pickerDateRange => throw _privateConstructorUsedError;
+  @override
+  String? get formattedBookingDate => throw _privateConstructorUsedError;
   @override
   bool? get isForRent => throw _privateConstructorUsedError;
   @override

@@ -18,7 +18,7 @@ class MyOrderItem extends StatelessWidget {
         // moveToOrderDetailsScreen(context, order);
       },
       child: SizedBox(
-        height: screenHeightWithoutExtras(context) / 5,
+        height: screenHeightWithoutExtras() / 5,
         child: Card(
           elevation: 4.0,
           shadowColor: AppColors.purple,

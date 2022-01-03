@@ -100,8 +100,8 @@ class _ReviewsWidgetState extends ConsumerState<ReviewsWidget>
               // ),
               //endregion
               SizedBox(
-                width: screenWidth(context),
-                height: screenHeightWithoutExtras(context) / 3,
+                width: screenWidth(),
+                height: screenHeightWithoutExtras() / 3,
                 child: PagedListView<int, Review>(
                   pagingController: ReviewsProvider.pagingController,
                   builderDelegate: PagedChildBuilderDelegate<Review>(

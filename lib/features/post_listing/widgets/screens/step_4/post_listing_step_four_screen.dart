@@ -136,8 +136,7 @@ class PostListingStepFourScreen extends ConsumerWidget {
                   return ref.watch(httpRequestStateProvider).maybeWhen(
                         innerLoading: (_) => Container(
                           constraints:
-                              BoxConstraints(minWidth: screenWidth(context)) /
-                                  3,
+                              BoxConstraints(minWidth: screenWidth()) / 3,
                           child: const Center(
                             child: CircularProgressIndicator(
                               color: AppColors.purple,

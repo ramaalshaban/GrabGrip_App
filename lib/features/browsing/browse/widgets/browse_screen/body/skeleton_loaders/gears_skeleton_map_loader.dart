@@ -14,7 +14,7 @@ class GearsSkeletonMapLoader extends StatelessWidget {
       color: Colors.transparent,
       child: Container(
         color: AppColors.purple,
-        height: screenHeightWithoutExtras(context) - _overflowedPixels,
+        height: screenHeightWithoutExtras() - _overflowedPixels,
       ),
     );
     return SkeletonLoader(

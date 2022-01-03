@@ -22,7 +22,6 @@ class ToggleFavoriteButton extends ConsumerWidget {
         ),
       ),
       child: ref.watch(httpRequestStateProvider).maybeWhen(
-            loading: () => Container(),
             innerLoading: (_) => const Center(
               child: SizedBox(
                 height: 24,

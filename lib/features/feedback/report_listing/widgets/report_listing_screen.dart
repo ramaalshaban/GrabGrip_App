@@ -14,7 +14,7 @@ import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/functions.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
-class ReportListingScreen extends ConsumerWidget {
+class ReportListingScreen extends ConsumerStatefulWidget {
   const ReportListingScreen({
     Key? key,
     required this.listingToReport,
@@ -22,14 +22,16 @@ class ReportListingScreen extends ConsumerWidget {
 
   final Gear listingToReport;
 
-  /// IMPORTANT NOTE: when user navigates to this screen AND clicks on the details description (so the soft keyboard appears and the screen gets rebuilt), some widgets of the screen in
-  /// the back (which is listing details screen) gets rebuilt and loses its state. I worked on keeping listing details screen alive when this screen gets rebuilt but
-  /// I couldn't manage to come up with a solution. So to avoid that, I removed listing details screen from the back by calling context.router.replace instead of context.router.push when user
-  /// navigates to this screen.
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final _formKey = GlobalKey<FormState>();
+  ConsumerState<ReportListingScreen> createState() =>
+      _ReportListingScreenState();
+}
 
+class _ReportListingScreenState extends ConsumerState<ReportListingScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
     /// NOTE: currently, the reasons are just in a static array (with translations).
     /// There is getReasons() method (that can be used later) in the FeedbackProvider to fetch them by calling the api.
     final reasons = FeedbackProvider.reasons(context);
@@ -63,7 +65,7 @@ class ReportListingScreen extends ConsumerWidget {
           children: [
             //region Reported listing title
             Text(
-              "Listing: ${listingToReport.title}",
+              "Listing: ${widget.listingToReport.title}",
               style: const TextStyle(fontWeight: FontWeight.w600),
             ),
             //endregion
@@ -134,7 +136,7 @@ class ReportListingScreen extends ConsumerWidget {
               buttonText: "Submit",
               onClickAction: () async {
                 ref.watch(feedbackProvider.notifier).reportListing(
-                      listingToReport.hash,
+                      widget.listingToReport.hash,
                     );
               },
             ),

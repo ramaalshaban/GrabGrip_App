@@ -8,8 +8,8 @@ class ListingItemSkeletonLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: screenWidth(context),
-      height: screenHeightWithoutExtras(context),
+      width: screenWidth(),
+      height: screenHeightWithoutExtras(),
       child: Column(
         children: const [
           Expanded(

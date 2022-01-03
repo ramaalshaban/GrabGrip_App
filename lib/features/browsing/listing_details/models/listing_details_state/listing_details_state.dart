@@ -33,6 +33,7 @@ class ListingDetailsState with _$ListingDetailsState {
     Widget? widget,
     DateTime? listingEndDate,
     PickerDateRange? pickerDateRange,
+    String? formattedBookingDate,
     bool? isForRent,
     bool? isFavorited,
     String? userRating,

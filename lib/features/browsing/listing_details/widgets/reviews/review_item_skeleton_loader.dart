@@ -21,25 +21,25 @@ class ReviewItemSkeletonLoader extends StatelessWidget {
             Container(
               color: AppColors.purple,
               height: 14,
-              width: (screenWidth(context) / 1.5) - 150,
+              width: (screenWidth() / 1.5) - 150,
             ),
             height8(),
             Container(
               color: AppColors.purple,
               height: 14,
-              width: (screenWidth(context) / 1.5) - 130,
+              width: (screenWidth() / 1.5) - 130,
             ),
             height8(),
             Container(
               color: AppColors.purple,
               height: 36,
-              width: (screenWidth(context) / 1.25) - 5,
+              width: (screenWidth() / 1.25) - 5,
             ),
             height4(),
             Container(
               color: AppColors.purple,
               height: 14,
-              width: (screenWidth(context) / 1.5) - 100,
+              width: (screenWidth() / 1.5) - 100,
             ),
           ],
         ),
@@ -47,8 +47,8 @@ class ReviewItemSkeletonLoader extends StatelessWidget {
     );
 
     return SizedBox(
-      width: screenWidth(context),
-      height: screenHeightWithoutExtras(context),
+      width: screenWidth(),
+      height: screenHeightWithoutExtras(),
       child: Column(
         children: [
           Expanded(

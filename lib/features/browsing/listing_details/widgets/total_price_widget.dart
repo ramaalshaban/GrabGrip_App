@@ -25,8 +25,11 @@ class TotalPriceWidget extends StatelessWidget {
           //region Book/Buy/Ask for availability button
           Consumer(
             builder: (_, ref, __) {
-              final listingOwnerFetched =
-                  ref.watch(listingDetailsProvider).listingOwner != null;
+              final listingOwnerFetched = ref.watch(
+                    listingDetailsProvider
+                        .select((state) => state.listingOwner),
+                  ) !=
+                  null;
               return AnimatedOpacity(
                 opacity: listingOwnerFetched &&
                         ref
@@ -36,8 +39,7 @@ class TotalPriceWidget extends StatelessWidget {
                     : 1.0,
                 duration: duration300Milli,
                 child: Container(
-                  constraints:
-                      BoxConstraints(minWidth: screenWidth(context) / 2.7),
+                  constraints: BoxConstraints(minWidth: screenWidth() / 2.7),
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () {},

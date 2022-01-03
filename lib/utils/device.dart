@@ -1,17 +1,22 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
+MediaQueryData? _mediaQueryData;
 
-double screenHeightWithoutSafeAreaPadding(BuildContext context) {
-  final double fullHeight = MediaQuery.of(context).size.height;
-  final safeAreaHeight = MediaQuery.of(context).padding;
+void initAppMediaQuery(BuildContext context) {
+  _mediaQueryData ??= MediaQuery.of(context);
+}
+
+double screenWidth() => _mediaQueryData!.size.width;
+
+double screenHeightWithoutSafeAreaPadding() {
+  final double fullHeight = _mediaQueryData!.size.height;
+  final safeAreaHeight = _mediaQueryData!.padding;
   return fullHeight - safeAreaHeight.top - safeAreaHeight.bottom;
 }
 
-double screenHeightWithoutExtras(BuildContext context) {
-  final double fullHeight = MediaQuery.of(context).size.height;
-  final safeAreaHeight = MediaQuery.of(context).padding;
+double screenHeightWithoutExtras() {
+  final double fullHeight = _mediaQueryData!.size.height;
+  final safeAreaHeight = _mediaQueryData!.padding;
   return fullHeight -
       safeAreaHeight.top -
       safeAreaHeight.bottom -

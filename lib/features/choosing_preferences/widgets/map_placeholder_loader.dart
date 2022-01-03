@@ -11,7 +11,7 @@ class MapPlaceholderLoader extends StatelessWidget {
   Widget build(BuildContext context) {
     final skeletonMapItem = Container(
       color: AppColors.purple,
-      height: screenHeightWithoutSafeAreaPadding(context),
+      height: screenHeightWithoutSafeAreaPadding(),
     );
     return SkeletonLoader(
       period: duration1Second,

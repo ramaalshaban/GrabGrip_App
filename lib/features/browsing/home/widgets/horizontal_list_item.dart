@@ -12,7 +12,7 @@ class HorizontalListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: screenWidth(context) / 3,
+      width: screenWidth() / 3,
       child: Card(
         elevation: 6.0,
         color: AppColors.white,

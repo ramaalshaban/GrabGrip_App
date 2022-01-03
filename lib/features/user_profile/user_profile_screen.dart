@@ -18,7 +18,7 @@ class UserProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final coloredHeaderHeight = screenHeightWithoutSafeAreaPadding(context) / 5;
+    final coloredHeaderHeight = screenHeightWithoutSafeAreaPadding() / 5;
     const avatarWidthHeight = 82.0;
     //region Listeners
     ref.listen<HttpRequestState>(httpRequestStateProvider,
@@ -49,21 +49,20 @@ class UserProfileScreen extends ConsumerWidget {
           children: [
             //region Colored header
             SizedBox(
-              width: screenWidth(context),
-              height: screenHeightWithoutSafeAreaPadding(context) / 2.5,
+              width: screenWidth(),
+              height: screenHeightWithoutSafeAreaPadding() / 2.5,
               child: Consumer(
                 builder: (_, ref, __) {
                   return Stack(
                     children: [
                       Container(
-                        width: screenWidth(context),
+                        width: screenWidth(),
                         height: coloredHeaderHeight,
                         color: AppColors.green,
                       ),
                       Positioned(
                         top: coloredHeaderHeight - (avatarWidthHeight / 2),
-                        left: (screenWidth(context) / 2) -
-                            (avatarWidthHeight / 2),
+                        left: (screenWidth() / 2) - (avatarWidthHeight / 2),
                         child: Column(
                           children: [
                             //region User profile image

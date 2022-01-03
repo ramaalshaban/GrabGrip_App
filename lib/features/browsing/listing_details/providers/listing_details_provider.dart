@@ -195,6 +195,11 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
   set pickerDateRange(PickerDateRange? pickerDateRange) =>
       state = state.copyWith(pickerDateRange: pickerDateRange);
 
+  String? get formattedBookingDate => state.formattedBookingDate;
+
+  set formattedBookingDate(String? formattedBookingDate) =>
+      state = state.copyWith(formattedBookingDate: formattedBookingDate);
+
   bool? get isForRent => state.isForRent;
 
   set isForRent(bool? isForRent) =>
@@ -294,6 +299,7 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
   Future<void> setBookingDate(String startDate, String endDate) async {
     this.startDate = startDate;
     this.endDate = endDate;
+    formattedBookingDate = formatBookingDate(this.startDate, this.endDate);
     await getListing();
   }
 
@@ -320,8 +326,6 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
         .then((result) {
       result.when((errorMessage) {
         httpRequestStateProvider.setError(errorMessage);
-        category = null;
-        pricingModel = null;
       }, (response) {
         final oldShippingOptions = shippingOptions;
         final oldAdditionalOptions = additionalOptions;

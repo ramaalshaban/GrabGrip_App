@@ -7,8 +7,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
-import 'package:grab_grip/features/browsing/listing_details/models/widget/widget.dart'
-    as listing_widget;
 import 'package:grab_grip/features/browsing/listing_details/widgets/additional_options/additional_options_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/date_range_picker/date_range_picker.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/listing_description_widget.dart';
@@ -22,7 +20,6 @@ import 'package:grab_grip/features/browsing/listing_details/widgets/toggle_favor
 import 'package:grab_grip/features/browsing/listing_details/widgets/total_price_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/variant_options_widget.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/widgets/tag_view.dart';
-import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/device.dart';
 import 'package:grab_grip/utils/functions.dart';
@@ -46,37 +43,6 @@ class ListingDetailsScreen extends ConsumerWidget {
             passedSlug: listing.slug,
           );
     });
-    //region Listeners
-    ref.listen<HttpRequestState>(httpRequestStateProvider,
-        (_, httpRequestState) {
-      httpRequestState.whenOrNull(
-        error: (errorMessage) => showSnackBarForError(
-          context,
-          errorMessage,
-          const Duration(seconds: 5),
-        ),
-      );
-    });
-    ref.listen<listing_widget.Widget?>(
-        listingDetailsProvider.select((state) => state.widget),
-        (_, listing_widget.Widget? widget) {
-      if (widget?.error is String) {
-        // when an error happens, error's value is the error message string
-        final startDate = ref.watch(listingDetailsProvider.notifier).startDate;
-        final endDate = ref.watch(listingDetailsProvider.notifier).endDate;
-        if (startDate == null || endDate == null) {
-          // when user first opens up listing details screen for a listing of type rent, the error message "These dates cannot be booked" shows up
-          // to avoid showing the snack bar, the above if statement has been added (to check start and end date)
-          return;
-        }
-        showSnackBarForError(
-          context,
-          widget!.error as String,
-        );
-      }
-      // otherwise, error is equal to the boolean value false
-    });
-    //endregion
     return Material(
       child: Column(
         children: [
@@ -87,7 +53,7 @@ class ListingDetailsScreen extends ConsumerWidget {
               slivers: [
                 SliverAppBar(
                   backgroundColor: AppColors.transparentLightPurple,
-                  expandedHeight: screenHeightWithoutExtras(context) / 2,
+                  expandedHeight: screenHeightWithoutExtras() / 2,
                   //region Back button
                   leading: InkWell(
                     onTap: () => context.router.pop(),
@@ -115,8 +81,7 @@ class ListingDetailsScreen extends ConsumerWidget {
                   flexibleSpace: FlexibleSpaceBar(
                     //region Listing title, Category & Pricing model
                     title: ConstrainedBox(
-                      constraints:
-                          BoxConstraints(minWidth: screenWidth(context)),
+                      constraints: BoxConstraints(minWidth: screenWidth()),
                       child: Container(
                         decoration: BoxDecoration(
                           color: AppColors.transparentLightPurple,
@@ -142,7 +107,6 @@ class ListingDetailsScreen extends ConsumerWidget {
                                           ),
                                         ),
                                       ),
-                                      error: (_) => Container(),
                                       orElse: () => Row(
                                         children: [
                                           Text(
@@ -235,7 +199,7 @@ class ListingDetailsScreen extends ConsumerWidget {
                       //region Map
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 12),
-                        height: screenHeightWithoutExtras(context) / 2,
+                        height: screenHeightWithoutExtras() / 2,
                         child: GoogleMap(
                           initialCameraPosition: _getInitialCameraPosition(
                             listing,
@@ -446,8 +410,7 @@ class ListingDetailsScreen extends ConsumerWidget {
                               ),
                               child: TextButton(
                                 onPressed: () {
-                                  //calling replace instead of push
-                                  context.router.replace(
+                                  context.router.push(
                                     ReportListingScreenRoute(
                                       listingToReport: listing,
                                     ),

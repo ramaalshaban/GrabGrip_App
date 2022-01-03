@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: const RegistrationAppBar(),
       body: Container(
         color: AppColors.white,
-        height: screenHeightWithoutExtras(context),
+        height: screenHeightWithoutExtras(),
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(40.0, 40.0, 40.0, 0),
           child: Column(
@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height48(),
                     //region Login button
                     Container(
-                      width: screenWidth(context),
+                      width: screenWidth(),
                       height: 48.0,
                       color: AppColors.purple,
                       child: LoginButton(
@@ -110,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height60(),
                     //region Facebook login button
                     Container(
-                      width: screenWidth(context),
+                      width: screenWidth(),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.blue,

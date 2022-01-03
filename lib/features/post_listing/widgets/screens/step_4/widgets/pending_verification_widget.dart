@@ -13,7 +13,7 @@ class PendingVerificationWidget extends StatelessWidget {
         horizontal: 12,
       ),
       constraints: BoxConstraints(
-            minWidth: screenWidth(context),
+            minWidth: screenWidth(),
           ) /
           3,
       decoration: pendingVerification,

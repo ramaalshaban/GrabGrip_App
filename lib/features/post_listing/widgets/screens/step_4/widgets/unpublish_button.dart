@@ -12,7 +12,7 @@ class UnpublishButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12),
-      constraints: BoxConstraints(minWidth: screenWidth(context)) / 3,
+      constraints: BoxConstraints(minWidth: screenWidth()) / 3,
       decoration: unPublishButton,
       height: 48.0,
       child: TextButton(

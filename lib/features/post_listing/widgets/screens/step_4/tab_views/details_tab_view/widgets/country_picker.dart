@@ -28,7 +28,7 @@ class CountryPicker extends StatelessWidget {
                       ),
                     )
                   : Text(
-                ref.watch(postListingProvider.notifier).country!.name!,
+                      ref.watch(postListingProvider.notifier).country!.name!,
                       style: const TextStyle(
                         color: AppColors.purple,
                       ),
@@ -42,8 +42,7 @@ class CountryPicker extends StatelessWidget {
             FocusScope.of(context).requestFocus(FocusNode());
           },
           alignLeft: true,
-          dialogSize:
-              Size(screenWidth(context) - 40, screenWidth(context) - 40),
+          dialogSize: Size(screenWidth() - 40, screenWidth() - 40),
           dialogBackgroundColor: AppColors.white,
           showCountryOnly: true,
           showOnlyCountryWhenClosed: true,

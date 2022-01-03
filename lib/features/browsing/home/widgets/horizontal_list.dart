@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:grab_grip/features/browsing/home/widgets/horizontal_list_item.dart';
 import 'package:grab_grip/style/text.dart';
 import 'package:grab_grip/utils/device.dart';
@@ -16,7 +15,6 @@ class HorizontalList extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(8.0, 4.0, 4.0, 4.0),
       child: Column(
-
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           height24(),
@@ -26,7 +24,7 @@ class HorizontalList extends StatelessWidget {
           ),
           height12(),
           SizedBox(
-            height: screenHeightWithoutExtras(context) * 0.3,
+            height: screenHeightWithoutExtras() * 0.3,
             child: ListView.builder(
               itemCount: data.length,
               shrinkWrap: true,

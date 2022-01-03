@@ -5,13 +5,13 @@ import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/configs/routes/guards/auth_guard.dart';
 import 'package:grab_grip/style/colors.dart';
+import 'package:grab_grip/utils/device.dart';
 
 void main() {
   runApp(ProviderScope(child: GrabGripApp()));
 }
 
 class GrabGripApp extends ConsumerStatefulWidget {
-
   @override
   ConsumerState<GrabGripApp> createState() => _GrabGripAppState();
 }
@@ -43,6 +43,10 @@ class _GrabGripAppState extends ConsumerState<GrabGripApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      builder: (context, widget) {
+        initAppMediaQuery(context);
+        return widget!;
+      },
       locale: ref.watch(localeProvider),
       title: 'Grab Grip',
       theme: _initTheme(),

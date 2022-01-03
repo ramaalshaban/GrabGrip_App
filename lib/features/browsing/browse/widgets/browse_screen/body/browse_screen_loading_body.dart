@@ -13,8 +13,8 @@ class BrowseScreenLoadingBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: SizedBox(
-        width: screenWidth(context),
-        height: screenHeightWithoutExtras(context),
+        width: screenWidth(),
+        height: screenHeightWithoutExtras(),
         child: Column(
           children: [
             Expanded(

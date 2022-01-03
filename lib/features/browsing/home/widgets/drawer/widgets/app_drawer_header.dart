@@ -20,7 +20,7 @@ class AppDrawerHeader extends StatelessWidget {
         context.router.push(const UserProfileScreenRoute());
       },
       child: SizedBox(
-        height: screenHeightWithoutExtras(context) / 3.5,
+        height: screenHeightWithoutExtras() / 3.5,
         child: DrawerHeader(
           padding: EdgeInsets.zero,
           child: Consumer(

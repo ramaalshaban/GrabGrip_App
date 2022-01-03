@@ -13,98 +13,92 @@ class QuantityWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final quantityInStock = ref
         .watch(listingDetailsProvider.select((state) => state.stockQuantity));
-    return ref.watch(httpRequestStateProvider).maybeWhen(
-          error: (_) => Container(),
-          orElse: () {
-            if (quantityInStock >= 1) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: listingDetailsBoxDecoration,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //region Quantity label
-                      const Text(
-                        "Quantity",
-                        style: AppTextStyles.listingDetailsTitleStyle,
-                      ),
-                      //endregion
-                      height18(),
-                      //region Quantity values (DropDown list)
-                      Container(
-                        height: 40,
-                        margin: const EdgeInsets.only(left: 38),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          border: Border.all(
+    if (quantityInStock >= 1) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: listingDetailsBoxDecoration,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //region Quantity label
+              const Text(
+                "Quantity",
+                style: AppTextStyles.listingDetailsTitleStyle,
+              ),
+              //endregion
+              height18(),
+              //region Quantity values (DropDown list)
+              Container(
+                height: 40,
+                margin: const EdgeInsets.only(left: 38),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(
+                    color: AppColors.purple,
+                  ),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: ButtonTheme(
+                    // align the dropdown (the popup that will show up) to the width of the dropdown button
+                    alignedDropdown: true,
+                    child: Consumer(
+                      builder: (_, ref, __) {
+                        return DropdownButton<int>(
+                          isExpanded: true,
+                          style: const TextStyle(
                             color: AppColors.purple,
                           ),
-                        ),
-                        child: DropdownButtonHideUnderline(
-                          child: ButtonTheme(
-                            // align the dropdown (the popup that will show up) to the width of the dropdown button
-                            alignedDropdown: true,
-                            child: Consumer(
-                              builder: (_, ref, __) {
-                                return DropdownButton<int>(
-                                  isExpanded: true,
-                                  style: const TextStyle(
-                                    color: AppColors.purple,
-                                  ),
-                                  elevation: 16,
-                                  value: ref.watch(
-                                    listingDetailsProvider.select(
-                                      (state) => state.selectedQuantity,
-                                    ),
-                                  ),
-                                  onChanged: (int? selectedValue) {
-                                    ref
-                                        .watch(listingDetailsProvider.notifier)
-                                        .setQuantity(selectedValue ?? 1);
-                                  },
-                                  items: [
-                                    // generate numbers from 1 to stock value
-                                    for (var i = 1; i <= quantityInStock; i++) i
-                                  ]
-                                      .map<DropdownMenuItem<int>>(
-                                        (int quantityValue) =>
-                                            DropdownMenuItem<int>(
-                                          value: quantityValue,
-                                          child: Text(quantityValue.toString()),
-                                        ),
-                                      )
-                                      .toList(),
-                                );
-                              },
+                          elevation: 16,
+                          value: ref.watch(
+                            listingDetailsProvider.select(
+                              (state) => state.selectedQuantity,
                             ),
                           ),
-                        ),
-                      ),
-                      //endregion
-                      height8(),
-                    ],
+                          onChanged: (int? selectedValue) {
+                            ref
+                                .watch(listingDetailsProvider.notifier)
+                                .setQuantity(selectedValue ?? 1);
+                          },
+                          items: [
+                            // generate numbers from 1 to stock value
+                            for (var i = 1; i <= quantityInStock; i++) i
+                          ]
+                              .map<DropdownMenuItem<int>>(
+                                (int quantityValue) => DropdownMenuItem<int>(
+                                  value: quantityValue,
+                                  child: Text(quantityValue.toString()),
+                                ),
+                              )
+                              .toList(),
+                        );
+                      },
+                    ),
                   ),
                 ),
-              );
-            } else {
-              // stock < 1
-              return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 12),
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                alignment: Alignment.center,
-                color: Colors.red[400],
-                child: const Text(
-                  "Out of stock",
-                  style: TextStyle(
-                    color: AppColors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              );
-            }
-          },
-        );
+              ),
+              //endregion
+              height8(),
+            ],
+          ),
+        ),
+      );
+    } else {
+      // stock < 1
+      return Container(
+        margin: const EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        alignment: Alignment.center,
+        color: Colors.red[400],
+        child: const Text(
+          "Out of stock",
+          style: TextStyle(
+            color: AppColors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      );
+    }
   }
 }

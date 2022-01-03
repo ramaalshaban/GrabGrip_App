@@ -38,9 +38,9 @@ class ImagePreviewDialog extends ConsumerWidget {
             children: [
               //region Image
               Container(
-                height: screenHeightWithoutExtras(context) -
-                    (screenHeightWithoutExtras(context) * 0.03),
-                width: screenWidth(context) - (screenWidth(context) * 0.03),
+                height: screenHeightWithoutExtras() -
+                    (screenHeightWithoutExtras() * 0.03),
+                width: screenWidth() - (screenWidth() * 0.03),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   image: DecorationImage(

@@ -26,7 +26,7 @@ class ContinueButton extends ConsumerWidget {
           ),
           orElse: () => Container(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            constraints: BoxConstraints(minWidth: screenWidth(context) / 3),
+            constraints: BoxConstraints(minWidth: screenWidth() / 3),
             decoration: BoxDecoration(
               color: isPurple ? AppColors.purple : AppColors.white,
               borderRadius: BorderRadius.circular(4),
