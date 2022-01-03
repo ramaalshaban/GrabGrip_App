@@ -29,7 +29,7 @@ class ListingDetailsState with _$ListingDetailsState {
     String? startDate,
     String? endDate,
     User? listingOwner,
-    @Default(0) int stockQuantity,
+    int? stockQuantity,
     Widget? widget,
     DateTime? listingEndDate,
     PickerDateRange? pickerDateRange,

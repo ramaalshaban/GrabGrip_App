@@ -34,7 +34,7 @@ class _$ListingDetailsStateTearOff {
       String? startDate,
       String? endDate,
       User? listingOwner,
-      int stockQuantity = 0,
+      int? stockQuantity,
       Widget? widget,
       DateTime? listingEndDate,
       PickerDateRange? pickerDateRange,
@@ -99,7 +99,7 @@ mixin _$ListingDetailsState {
   String? get startDate => throw _privateConstructorUsedError;
   String? get endDate => throw _privateConstructorUsedError;
   User? get listingOwner => throw _privateConstructorUsedError;
-  int get stockQuantity => throw _privateConstructorUsedError;
+  int? get stockQuantity => throw _privateConstructorUsedError;
   Widget? get widget => throw _privateConstructorUsedError;
   DateTime? get listingEndDate => throw _privateConstructorUsedError;
   PickerDateRange? get pickerDateRange => throw _privateConstructorUsedError;
@@ -136,7 +136,7 @@ abstract class $ListingDetailsStateCopyWith<$Res> {
       String? startDate,
       String? endDate,
       User? listingOwner,
-      int stockQuantity,
+      int? stockQuantity,
       Widget? widget,
       DateTime? listingEndDate,
       PickerDateRange? pickerDateRange,
@@ -257,7 +257,7 @@ class _$ListingDetailsStateCopyWithImpl<$Res>
       stockQuantity: stockQuantity == freezed
           ? _value.stockQuantity
           : stockQuantity // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       widget: widget == freezed
           ? _value.widget
           : widget // ignore: cast_nullable_to_non_nullable
@@ -362,7 +362,7 @@ abstract class _$ListingDetailsStateCopyWith<$Res>
       String? startDate,
       String? endDate,
       User? listingOwner,
-      int stockQuantity,
+      int? stockQuantity,
       Widget? widget,
       DateTime? listingEndDate,
       PickerDateRange? pickerDateRange,
@@ -489,7 +489,7 @@ class __$ListingDetailsStateCopyWithImpl<$Res>
       stockQuantity: stockQuantity == freezed
           ? _value.stockQuantity
           : stockQuantity // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       widget: widget == freezed
           ? _value.widget
           : widget // ignore: cast_nullable_to_non_nullable
@@ -548,7 +548,7 @@ class _$_ListingDetailsState
       this.startDate,
       this.endDate,
       this.listingOwner,
-      this.stockQuantity = 0,
+      this.stockQuantity,
       this.widget,
       this.listingEndDate,
       this.pickerDateRange,
@@ -597,9 +597,8 @@ class _$_ListingDetailsState
   final String? endDate;
   @override
   final User? listingOwner;
-  @JsonKey(defaultValue: 0)
   @override
-  final int stockQuantity;
+  final int? stockQuantity;
   @override
   final Widget? widget;
   @override
@@ -777,7 +776,7 @@ abstract class _ListingDetailsState implements ListingDetailsState {
       String? startDate,
       String? endDate,
       User? listingOwner,
-      int stockQuantity,
+      int? stockQuantity,
       Widget? widget,
       DateTime? listingEndDate,
       PickerDateRange? pickerDateRange,
@@ -825,7 +824,7 @@ abstract class _ListingDetailsState implements ListingDetailsState {
   @override
   User? get listingOwner => throw _privateConstructorUsedError;
   @override
-  int get stockQuantity => throw _privateConstructorUsedError;
+  int? get stockQuantity => throw _privateConstructorUsedError;
   @override
   Widget? get widget => throw _privateConstructorUsedError;
   @override

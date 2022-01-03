@@ -11,85 +11,97 @@ class OwnerWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final listingOwner =
-        ref.watch(listingDetailsProvider.notifier).listingOwner;
-    final userRating =
-        ref.watch(listingDetailsProvider.notifier).getUserRating();
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: listingDetailsBoxDecoration,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            //region Label
-            Text(
-              ref.watch(listingDetailsProvider.notifier).getOwnerWidgetLabel(),
-              style: AppTextStyles.listingDetailsTitleStyle,
-            ),
-            //endregion
-            height24(),
-            Row(
-              children: [
-                //region Avatar
-                Expanded(
-                  child: CircleAvatar(
-                    radius: 44,
-                    child: ClipOval(
-                      child: Image.network(
-                        listingOwner?.avatar ?? "",
-                        fit: BoxFit.contain,
+    // watch userListingCount state field since it's the last one to be set in the provider when the a successful response is returned.
+    final userListingCount = ref.watch(
+      listingDetailsProvider.select((state) => state.userListingsCount),
+    );
+    if (userListingCount != null) {
+      // so when userListingCount is not null this means we can get the other values (because they get set before userListingsCount is set)
+      final listingOwner =
+          ref.watch(listingDetailsProvider.notifier).listingOwner;
+      final userRating =
+          ref.watch(listingDetailsProvider.notifier).getUserRating();
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: listingDetailsBoxDecoration,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //region Label
+              Text(
+                ref
+                    .watch(listingDetailsProvider.notifier)
+                    .getOwnerWidgetLabel(),
+                style: AppTextStyles.listingDetailsTitleStyle,
+              ),
+              //endregion
+              height24(),
+              Row(
+                children: [
+                  //region Avatar
+                  Expanded(
+                    child: CircleAvatar(
+                      radius: 44,
+                      child: ClipOval(
+                        child: Image.network(
+                          listingOwner?.avatar ?? "",
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                //endregion
-                width8(),
-                //region Name, Address, Rate, Num of listings
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        listingOwner?.displayName ?? "",
-                      ),
-                      height8(),
-                      Text(
-                        ref
-                            .watch(listingDetailsProvider.notifier)
-                            .getUserCountryAndCity(),
-                      ),
-                      height8(),
-                      RatingBarIndicator(
-                        itemSize: 24,
-                        rating: userRating,
-                        itemBuilder: (context, index) {
-                          return index < userRating
-                              ? Icon(
-                                  Icons.star_rounded,
-                                  color: Colors.amber[600],
-                                )
-                              : const Icon(
-                                  Icons.star_border_rounded,
-                                );
-                        },
-                        unratedColor: Colors.amber[600],
-                      ),
-                      height8(),
-                      Text(
-                        "${ref.watch(listingDetailsProvider.notifier).userListingsCount.toString()} Items",
-                      ),
-                    ],
+                  //endregion
+                  width8(),
+                  //region Name, Address, Rate, Num of listings
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          listingOwner?.displayName ?? "",
+                        ),
+                        height8(),
+                        Text(
+                          ref
+                              .watch(listingDetailsProvider.notifier)
+                              .getUserCountryAndCity(),
+                        ),
+                        height8(),
+                        RatingBarIndicator(
+                          itemSize: 24,
+                          rating: userRating,
+                          itemBuilder: (context, index) {
+                            return index < userRating
+                                ? Icon(
+                                    Icons.star_rounded,
+                                    color: Colors.amber[600],
+                                  )
+                                : const Icon(
+                                    Icons.star_border_rounded,
+                                  );
+                          },
+                          unratedColor: Colors.amber[600],
+                        ),
+                        height8(),
+                        Text(
+                          "${userListingCount.toString()} Items",
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                //endregion
-              ],
-            ),
-          ],
+                  //endregion
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      // if userListingCount is not available yet (the http request is in progress) then return an empty container
+      return Container();
+    }
   }
 }

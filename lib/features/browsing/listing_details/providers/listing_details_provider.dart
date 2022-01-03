@@ -166,9 +166,9 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
   set listingOwner(User? listingOwner) =>
       state = state.copyWith(listingOwner: listingOwner);
 
-  int get stockQuantity => state.stockQuantity;
+  int? get stockQuantity => state.stockQuantity;
 
-  set stockQuantity(int stockQuantity) =>
+  set stockQuantity(int? stockQuantity) =>
       state = state.copyWith(stockQuantity: stockQuantity);
 
   Widget? get widget => state.widget;
@@ -360,9 +360,9 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
     List<AdditionalOption> oldAdditionalOptions,
   ) {
     //region quantity
-    if (state.selectedQuantity > stockQuantity) {
+    if (state.selectedQuantity > stockQuantity!) {
       // this block can get executed if the stock quantity changes while the currently selected quantity is greater than the the new value of stock quantity
-      selectedQuantity = stockQuantity;
+      selectedQuantity = stockQuantity!;
       // to update the calculated total price, get listing with the new selected quantity (which is equal to the stock quantity now)
       getListing();
     }
