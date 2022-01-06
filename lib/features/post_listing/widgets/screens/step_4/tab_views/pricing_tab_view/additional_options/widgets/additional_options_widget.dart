@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/additional_options/widgets/additional_option_item.dart';
@@ -18,10 +17,12 @@ class AdditionalOptionsWidget extends StatelessWidget {
         //region Additional option items
         Consumer(
           builder: (_, ref, __) {
-            final additionalOptionsLength =
-                ref.watch(listingPricingProvider).additionalOptionsLength;
             final additionalOptions =
                 ref.watch(postListingProvider.notifier).additionalOptions;
+            final additionalOptionsLength = ref.watch(
+              postListingProvider
+                  .select((value) => value.additionalOptions.length),
+            );
             return Wrap(
               children: List.generate(
                 additionalOptionsLength,
@@ -53,8 +54,11 @@ class AdditionalOptionsWidget extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                ref.watch(postListingProvider.notifier).addEmptyAdditionalOption();
-                ref.watch(listingPricingProvider.notifier)
+                ref
+                    .watch(postListingProvider.notifier)
+                    .addEmptyAdditionalOption();
+                ref
+                    .watch(listingPricingProvider.notifier)
                     .changeNumOfCreatedAdditionalOptions(1);
                 // prevent the previously focused text field from receiving the focus again after adding a new additional option item
                 FocusScope.of(context).requestFocus(FocusNode());

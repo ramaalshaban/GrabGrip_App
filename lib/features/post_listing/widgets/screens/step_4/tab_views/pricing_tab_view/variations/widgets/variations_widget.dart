@@ -17,9 +17,11 @@ class VariationsWidget extends StatelessWidget {
         //region Variation items
         Consumer(
           builder: (_, ref, __) {
-            final variationsLength =
-                ref.watch(listingPricingProvider).variationsLength;
-            final variations = ref.watch(postListingProvider.notifier).variations;
+            final variations =
+                ref.watch(postListingProvider.notifier).variations;
+            final variationsLength = ref.watch(
+              postListingProvider.select((value) => value.variations.length),
+            );
             return Wrap(
               children: List.generate(
                 variationsLength,
@@ -52,7 +54,8 @@ class VariationsWidget extends StatelessWidget {
               ),
               onPressed: () {
                 ref.watch(postListingProvider.notifier).addEmptyVariation();
-                ref.watch(listingPricingProvider.notifier)
+                ref
+                    .watch(listingPricingProvider.notifier)
                     .changeNumOfCreatedVariations(1);
                 // prevent the previously focused text field from receiving the focus again after adding a new variation item
                 FocusScope.of(context).requestFocus(FocusNode());

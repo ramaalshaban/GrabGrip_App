@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/shipping_fees/widgets/shipping_fee_item.dart';
@@ -18,9 +17,11 @@ class ShippingFeesWidget extends StatelessWidget {
         //region Shipping fee items
         Consumer(
           builder: (_, ref, __) {
-            final shippingFeesLength =
-                ref.watch(listingPricingProvider).shippingFeesLength;
-            final shippingFees = ref.watch(postListingProvider.notifier).shippingFees;
+            final shippingFees =
+                ref.watch(postListingProvider.notifier).shippingFees;
+            final shippingFeesLength = ref.watch(
+              postListingProvider.select((value) => value.shippingFees.length),
+            );
             return Wrap(
               children: List.generate(
                 shippingFeesLength,
@@ -53,7 +54,8 @@ class ShippingFeesWidget extends StatelessWidget {
               ),
               onPressed: () {
                 ref.watch(postListingProvider.notifier).addEmptyShippingFee();
-                ref.watch(listingPricingProvider.notifier)
+                ref
+                    .watch(listingPricingProvider.notifier)
                     .changeNumOfCreatedShippingFees(1);
                 // prevent the previously focused text field from receiving the focus again after adding a new shipping fee item
                 FocusScope.of(context).requestFocus(FocusNode());
