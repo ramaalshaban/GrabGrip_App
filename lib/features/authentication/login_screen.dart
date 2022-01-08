@@ -59,7 +59,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: <Widget>[
                     //region Email text field
                     TextFormField(
-                      onChanged: (text) => email = text,
+                      onChanged: (text) => setState(() {
+                        email = text;
+                      }),
                       validator: emailFieldValidator,
                       keyboardType: TextInputType.emailAddress,
                       decoration: registrationInputDecoration.copyWith(
@@ -71,7 +73,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     height36(),
                     //region Password text field
                     TextFormField(
-                      onChanged: (text) => password = text,
+                      onChanged: (text) => setState(() {
+                        password = text;
+                      }),
                       validator: passwordFieldValidator,
                       cursorColor: AppColors.purple,
                       obscureText: true,

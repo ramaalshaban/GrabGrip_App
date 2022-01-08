@@ -65,7 +65,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: <Widget>[
                     //region Name text field
                     TextFormField(
-                      onChanged: (text) => name = text,
+                      onChanged: (text) => setState(() {
+                        name = text;
+                      }),
                       validator: nameFieldValidator,
                       keyboardType: TextInputType.name,
                       decoration: registrationInputDecoration.copyWith(
@@ -77,7 +79,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height36(),
                     //region Email text field
                     TextFormField(
-                      onChanged: (text) => email = text,
+                      onChanged: (text) => setState(() {
+                        email = text;
+                      }),
                       validator: emailFieldValidator,
                       keyboardType: TextInputType.emailAddress,
                       decoration: registrationInputDecoration.copyWith(
@@ -89,7 +93,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height36(),
                     //region Password text field
                     TextFormField(
-                      onChanged: (text) => password = text,
+                      onChanged: (text) => setState(() {
+                        password = text;
+                      }),
                       validator: passwordFieldValidator,
                       cursorColor: AppColors.purple,
                       obscureText: true,
@@ -101,7 +107,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height36(),
                     //region Password confirmation text field
                     TextFormField(
-                      onChanged: (text) => passwordConfirmation = text,
+                      onChanged: (text) => setState(() {
+                        passwordConfirmation = text;
+                      }),
                       validator: _passwordConfirmationFieldValidator,
                       cursorColor: AppColors.purple,
                       obscureText: true,
