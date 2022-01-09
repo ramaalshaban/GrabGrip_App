@@ -131,7 +131,7 @@ class _PricingTabViewState extends ConsumerState<PricingTabView>
                             if (!listingForRent) height4(),
                             if (!listingForRent)
                               const Text(
-                                "Only applicable if the item does not have variants",
+                                "If this item has variants, then the total value of the variants stocks must be equal to this value",
                                 style: TextStyle(fontSize: 8),
                               )
                           ],
