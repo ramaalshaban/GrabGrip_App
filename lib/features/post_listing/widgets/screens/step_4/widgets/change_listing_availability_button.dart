@@ -13,12 +13,14 @@ class ChangeListingAvailabilityButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final listingVerifiedByAdmin =
         ref.watch(postListingProvider.notifier).isListingVerified();
+    final listingDisabled =
+        ref.watch(postListingProvider.notifier).isListingDisabled();
     final availabilityState = ref.watch(listingAvailabilityStateProvider);
     return availabilityState.when(
       published: (successfullyPublished) {
         if (successfullyPublished == true) {
-          //region check admin verification
-          if (listingVerifiedByAdmin) {
+          //region check admin verification and "disabled" status
+          if (listingVerifiedByAdmin && !listingDisabled) {
             return const UnpublishButton();
           } else {
             return const PendingVerificationWidget();

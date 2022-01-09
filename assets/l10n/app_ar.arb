@@ -239,6 +239,10 @@
     "@post_listing": {
       "description": "app bar title of post listing screen"
     },
+    "edit_listing": "عدّل قائمتك",
+    "@edit_listing": {
+      "description": "app bar title of post listing screen in editing mode"
+    },
     "continue_label": "متابعة",
     "@continue_label": {
       "description": "button text"

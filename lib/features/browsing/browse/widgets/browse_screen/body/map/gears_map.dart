@@ -1,18 +1,19 @@
 import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
-import 'package:grab_grip/features/browsing/browse/models/browse_model/browse_model.dart';
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
-import 'package:grab_grip/shared/models/listings_page/listings_page.dart';
+import 'package:grab_grip/utils/constants.dart';
 
 class GearsMap extends StatelessWidget {
-  GearsMap({Key? key, required this.browseData}) : super(key: key);
+  GearsMap({Key? key, required this.listings}) : super(key: key);
 
-  final Completer<GoogleMapController> mapController = Completer();
-  final BrowseModel browseData;
+  final Completer<GoogleMapController> mapControllerCompleter = Completer();
+  final List<Gear> listings;
+  static GoogleMapController? controller;
 
   CameraPosition _getInitialCameraPosition(Gear gear) {
     final initialLatLng = LatLng(gear.lat, gear.lng);
@@ -21,19 +22,19 @@ class GearsMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ListingsPage data = browseData.data;
     return Padding(
       padding: const EdgeInsets.all(4.0),
-      child: data.gears.isNotEmpty == true
+      child: listings.isNotEmpty == true
           ? GoogleMap(
               initialCameraPosition: _getInitialCameraPosition(
-                data.gears[0],
+                listings[0],
               ),
-              onMapCreated: (controller) {
-                mapController.complete(controller);
+              onMapCreated: (mapController) {
+                controller ??= mapController;
+                mapControllerCompleter.complete(mapController);
               },
               markers: Set.from(
-                _getMarkers(context, data.gears.length, data.gears),
+                _getMarkers(context, listings.length, listings),
               ),
             )
           : Center(
@@ -75,7 +76,12 @@ class GearsMap extends StatelessWidget {
 
 //region actions
   void moveToDetailsScreen(BuildContext context, Gear clickedGear) {
-    context.router.push(ListingDetailsScreenRoute(listing: clickedGear));
+    context.router.push(
+      ListingDetailsScreenRoute(
+        listing: clickedGear,
+        sourceScreenId: browseScreenMapViewId,
+      ),
+    );
   }
 //endregion
 }

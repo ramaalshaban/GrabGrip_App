@@ -13,7 +13,8 @@ class CategoriesDropDownList extends StatelessWidget {
     Category? selectedCategory;
     return Consumer(
       builder: (_, ref, __) {
-        selectedCategory = ref.watch(postListingProvider).category;
+        selectedCategory =
+            ref.watch(postListingProvider.select((state) => state.category));
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: standardBoxDecoration,
@@ -30,7 +31,8 @@ class CategoriesDropDownList extends StatelessWidget {
                   ref.watch(postListingProvider.notifier).subcategory = null;
                 }
               },
-              items: ref.watch(filterAndSortProvider.notifier)
+              items: ref
+                  .watch(filterAndSortProvider.notifier)
                   .filteringCategories
                   .map<DropdownMenuItem<Category>>(
                 (Category category) {

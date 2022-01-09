@@ -36,6 +36,7 @@ class PostListingScreen extends ConsumerWidget {
               context,
               successMessage!,
             );
+            // when postListingAsDraft() call succeeds, switch to step 4 and get the listing for the user to continue editing
             ref.watch(postListingStepProvider.notifier).setStep4();
             ref.watch(postListingProvider.notifier).getListingForEditing();
           },
@@ -53,23 +54,12 @@ class PostListingScreen extends ConsumerWidget {
           step4: () {
             showDialog(
               context: context,
-              builder: (_) => AreYouSureDialog(
+              builder: (context) => AreYouSureDialog(
                 continueAction: () async {
                   // pop the dialog
                   Navigator.pop(context);
                   // pop this screen
                   Navigator.pop(context);
-                  // reset the state saved in the providers
-                  Future.delayed(const Duration(seconds: 2), () {
-                    // reset them after 2 seconds to ensure that this screen has been popped so we avoid
-                    // any consequences that can happen since the providers are listening to their states
-                    ref.watch(postListingProvider.notifier).reset();
-                    ref.watch(photosProvider.notifier).reset();
-                    ref
-                        .watch(listingAvailabilityStateProvider.notifier)
-                        .reset();
-                    ref.watch(postListingStepProvider.notifier).setStep1();
-                  });
                 },
                 cancelAction: () {
                   Navigator.pop(context);
@@ -89,28 +79,34 @@ class PostListingScreen extends ConsumerWidget {
       child: Scaffold(
         backgroundColor: AppColors.white,
         appBar: CustomAppBar(
-          appBarTitle: AppLocalizations.of(context)!.post_listing,
+          appBarTitle: ref.watch(postListingProvider.notifier).isEditingMode
+              ? AppLocalizations.of(context)!.edit_listing
+              : AppLocalizations.of(context)!.post_listing,
         ),
         body: Padding(
           padding: stepState != const PostListingStepNumber.step4()
               ? const EdgeInsets.symmetric(horizontal: 30)
               : const EdgeInsets.symmetric(horizontal: 15),
-          child: ref.watch(httpRequestStateProvider).maybeWhen(
-                loading: () => const Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.purple,
-                  ),
-                ),
-                orElse: () => AnimatedSwitcher(
-                  duration: duration300Milli,
-                  child: stepState.when(
-                    step1: () => const PostListingStepOneScreen(),
-                    step2: () => const PostListingStepTwoScreen(),
-                    step3: () => const PostListingStepThreeScreen(),
-                    step4: () => const PostListingStepFourScreen(),
-                  ),
-                ),
-              ),
+          child: Consumer(
+            builder: (_, ref, __) {
+              return ref.watch(httpRequestStateProvider).maybeWhen(
+                    loading: () => const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.purple,
+                      ),
+                    ),
+                    orElse: () => AnimatedSwitcher(
+                      duration: duration300Milli,
+                      child: stepState.when(
+                        step1: () => const PostListingStepOneScreen(),
+                        step2: () => const PostListingStepTwoScreen(),
+                        step3: () => PostListingStepThreeScreen(),
+                        step4: () => const PostListingStepFourScreen(),
+                      ),
+                    ),
+                  );
+            },
+          ),
         ),
       ),
     );

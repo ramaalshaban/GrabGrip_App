@@ -100,6 +100,9 @@ class PostListingProvider extends StateNotifier<PostListingState> {
 
   String? get listingEndDate => state.listingEndDate;
 
+  DateTime? getSelectedEndDate() =>
+      listingEndDate != null ? DateTime.parse(listingEndDate!) : null;
+
   set place(String? place) => state = state.copyWith(place: place);
 
   String? get place => state.place;
@@ -166,6 +169,11 @@ class PostListingProvider extends StateNotifier<PostListingState> {
 
   set isForRent(bool? isForRent) =>
       state = state.copyWith(isForRent: isForRent);
+
+  bool get isEditingMode => state.isEditingMode;
+
+  set isEditingMode(bool isEditingMode) =>
+      state = state.copyWith(isEditingMode: isEditingMode);
 
 //endregion
 
@@ -366,22 +374,25 @@ class PostListingProvider extends StateNotifier<PostListingState> {
             inProgressListing = null;
           },
           (response) {
+            inProgressListing = response.listing;
             httpRequestStateProvider.setSuccess(
               successMessage:
                   "Your listing has been created as draft successfully",
             );
-            inProgressListing = response.listing;
           },
         );
       },
     );
   }
 
-  Future<void> getListingForEditing() async {
+  Future<void> getListingForEditing({
+    String? listingHash,
+    bool prepareForEditing = true,
+  }) async {
     httpRequestStateProvider.setLoading();
     final token = await AppSharedPreferences().getToken();
     await NetworkService()
-        .getListingForEditing(token!, inProgressListing!.hash)
+        .getListingForEditing(token!, listingHash ?? inProgressListing!.hash)
         .then(
       (result) {
         result.when(
@@ -389,10 +400,13 @@ class PostListingProvider extends StateNotifier<PostListingState> {
             httpRequestStateProvider.setError(errorMessage);
             inProgressListing = null;
           },
-          (response) {
-            httpRequestStateProvider.setSuccess();
+          (response) async {
             inProgressListing = response.listing;
             isForRent = response.listing.pricingModel?.widget == bookDate;
+            if (prepareForEditing) {
+              await _prepareForEditing();
+            }
+            httpRequestStateProvider.setSuccess();
           },
         );
       },
@@ -442,7 +456,7 @@ class PostListingProvider extends StateNotifier<PostListingState> {
   Future<void> saveListing({bool? publishListing}) async {
     httpRequestStateProvider.setInnerLoading();
     final saveListingRequestBody =
-    _getSaveListingRequestBody(publishListing: publishListing);
+        _getSaveListingRequestBody(publishListing: publishListing);
     final token = await AppSharedPreferences().getToken();
     await NetworkService()
         .saveListing(
@@ -503,7 +517,31 @@ class PostListingProvider extends StateNotifier<PostListingState> {
 
   //endregion
 
+  Future<void> _prepareForEditing() async {
+    title = inProgressListing?.title;
+    description = inProgressListing!.description;
+    tags = inProgressListing?.tags ?? [];
+    listingEndDate = inProgressListing?.listingEndDate;
+    latLng = LatLng(inProgressListing!.lat, inProgressListing!.lng);
+    country = CountryCode(code: inProgressListing?.country);
+    city = inProgressListing?.city;
+    region = inProgressListing?.region;
+    price = double.parse(inProgressListing?.price ?? "0.0").toInt();
+    stock = inProgressListing?.stockQuantity;
+    minRentPeriod = inProgressListing?.minRentPeriod;
+    maxRentPeriod = inProgressListing?.maxRentPeriod;
+    //when there are no additional options or shipping fees, the api returns [] instead of null. So it's safe to use '!'.
+    additionalOptions =
+        mapAdditionalOptions(inProgressListing!.additionalOptions!);
+    shippingFees = mapShippingFees(inProgressListing!.shippingOptions!);
+    variations = mapVariations(inProgressListing?.variantOptions);
+    listingAvailabilityProvider.setAvailabilityState(inProgressListing!);
+    await photosProvider.setPhotos(inProgressListing?.photos, title!);
+  }
+
   bool isListingVerified() => inProgressListing?.isVerifiedByAdmin != null;
+
+  bool isListingDisabled() => inProgressListing?.isDisabled != null;
 
   Future<void> getPricingModels() async {
     httpRequestStateProvider.setLoading();

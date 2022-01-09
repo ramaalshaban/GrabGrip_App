@@ -40,7 +40,8 @@ class _$PostListingStateTearOff {
       List<ShippingFee> shippingFees = const [ShippingFee()],
       List<Variation> variations = const [Variation()],
       PricingModel? pricingModel,
-      bool? isForRent}) {
+      bool? isForRent,
+      bool isEditingMode = false}) {
     return _PostListingState(
       category: category,
       subcategory: subcategory,
@@ -65,6 +66,7 @@ class _$PostListingStateTearOff {
       variations: variations,
       pricingModel: pricingModel,
       isForRent: isForRent,
+      isEditingMode: isEditingMode,
     );
   }
 }
@@ -98,6 +100,7 @@ mixin _$PostListingState {
   List<Variation> get variations => throw _privateConstructorUsedError;
   PricingModel? get pricingModel => throw _privateConstructorUsedError;
   bool? get isForRent => throw _privateConstructorUsedError;
+  bool get isEditingMode => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostListingStateCopyWith<PostListingState> get copyWith =>
@@ -132,7 +135,8 @@ abstract class $PostListingStateCopyWith<$Res> {
       List<ShippingFee> shippingFees,
       List<Variation> variations,
       PricingModel? pricingModel,
-      bool? isForRent});
+      bool? isForRent,
+      bool isEditingMode});
 
   $CategoryCopyWith<$Res>? get category;
   $CategoryCopyWith<$Res>? get subcategory;
@@ -175,6 +179,7 @@ class _$PostListingStateCopyWithImpl<$Res>
     Object? variations = freezed,
     Object? pricingModel = freezed,
     Object? isForRent = freezed,
+    Object? isEditingMode = freezed,
   }) {
     return _then(_value.copyWith(
       category: category == freezed
@@ -269,6 +274,10 @@ class _$PostListingStateCopyWithImpl<$Res>
           ? _value.isForRent
           : isForRent // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isEditingMode: isEditingMode == freezed
+          ? _value.isEditingMode
+          : isEditingMode // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -358,7 +367,8 @@ abstract class _$PostListingStateCopyWith<$Res>
       List<ShippingFee> shippingFees,
       List<Variation> variations,
       PricingModel? pricingModel,
-      bool? isForRent});
+      bool? isForRent,
+      bool isEditingMode});
 
   @override
   $CategoryCopyWith<$Res>? get category;
@@ -408,6 +418,7 @@ class __$PostListingStateCopyWithImpl<$Res>
     Object? variations = freezed,
     Object? pricingModel = freezed,
     Object? isForRent = freezed,
+    Object? isEditingMode = freezed,
   }) {
     return _then(_PostListingState(
       category: category == freezed
@@ -502,6 +513,10 @@ class __$PostListingStateCopyWithImpl<$Res>
           ? _value.isForRent
           : isForRent // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isEditingMode: isEditingMode == freezed
+          ? _value.isEditingMode
+          : isEditingMode // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -534,7 +549,8 @@ class _$_PostListingState
       this.shippingFees = const [ShippingFee()],
       this.variations = const [Variation()],
       this.pricingModel,
-      this.isForRent});
+      this.isForRent,
+      this.isEditingMode = false});
 
   @override
   final Category? category;
@@ -587,10 +603,13 @@ class _$_PostListingState
   final PricingModel? pricingModel;
   @override
   final bool? isForRent;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool isEditingMode;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostListingState(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, title: $title, description: $description, inProgressListing: $inProgressListing, tags: $tags, listingEndDate: $listingEndDate, pricingModels: $pricingModels, place: $place, latLng: $latLng, country: $country, city: $city, region: $region, price: $price, stock: $stock, minRentPeriod: $minRentPeriod, maxRentPeriod: $maxRentPeriod, additionalOptions: $additionalOptions, shippingFees: $shippingFees, variations: $variations, pricingModel: $pricingModel, isForRent: $isForRent)';
+    return 'PostListingState(category: $category, subcategory: $subcategory, listingTypeId: $listingTypeId, title: $title, description: $description, inProgressListing: $inProgressListing, tags: $tags, listingEndDate: $listingEndDate, pricingModels: $pricingModels, place: $place, latLng: $latLng, country: $country, city: $city, region: $region, price: $price, stock: $stock, minRentPeriod: $minRentPeriod, maxRentPeriod: $maxRentPeriod, additionalOptions: $additionalOptions, shippingFees: $shippingFees, variations: $variations, pricingModel: $pricingModel, isForRent: $isForRent, isEditingMode: $isEditingMode)';
   }
 
   @override
@@ -620,7 +639,8 @@ class _$_PostListingState
       ..add(DiagnosticsProperty('shippingFees', shippingFees))
       ..add(DiagnosticsProperty('variations', variations))
       ..add(DiagnosticsProperty('pricingModel', pricingModel))
-      ..add(DiagnosticsProperty('isForRent', isForRent));
+      ..add(DiagnosticsProperty('isForRent', isForRent))
+      ..add(DiagnosticsProperty('isEditingMode', isEditingMode));
   }
 
   @override
@@ -687,7 +707,10 @@ class _$_PostListingState
                     .equals(other.pricingModel, pricingModel)) &&
             (identical(other.isForRent, isForRent) ||
                 const DeepCollectionEquality()
-                    .equals(other.isForRent, isForRent)));
+                    .equals(other.isForRent, isForRent)) &&
+            (identical(other.isEditingMode, isEditingMode) ||
+                const DeepCollectionEquality()
+                    .equals(other.isEditingMode, isEditingMode)));
   }
 
   @override
@@ -715,7 +738,8 @@ class _$_PostListingState
       const DeepCollectionEquality().hash(shippingFees) ^
       const DeepCollectionEquality().hash(variations) ^
       const DeepCollectionEquality().hash(pricingModel) ^
-      const DeepCollectionEquality().hash(isForRent);
+      const DeepCollectionEquality().hash(isForRent) ^
+      const DeepCollectionEquality().hash(isEditingMode);
 
   @JsonKey(ignore: true)
   @override
@@ -747,7 +771,8 @@ abstract class _PostListingState implements PostListingState {
       List<ShippingFee> shippingFees,
       List<Variation> variations,
       PricingModel? pricingModel,
-      bool? isForRent}) = _$_PostListingState;
+      bool? isForRent,
+      bool isEditingMode}) = _$_PostListingState;
 
   @override
   Category? get category => throw _privateConstructorUsedError;
@@ -796,6 +821,8 @@ abstract class _PostListingState implements PostListingState {
   PricingModel? get pricingModel => throw _privateConstructorUsedError;
   @override
   bool? get isForRent => throw _privateConstructorUsedError;
+  @override
+  bool get isEditingMode => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PostListingStateCopyWith<_PostListingState> get copyWith =>

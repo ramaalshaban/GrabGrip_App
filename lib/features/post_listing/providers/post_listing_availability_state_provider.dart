@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_availability_model/post_listing_availability_state.dart';
 
 class PostListingAvailabilityStateProvider
@@ -10,11 +11,12 @@ class PostListingAvailabilityStateProvider
           ),
         );
 
-  void reset(){
+  void reset() {
     state = const PostListingAvailabilityState.published(
       successfullyPublished: false,
     );
   }
+
   void setPublished({required bool succeeded}) {
     state = PostListingAvailabilityState.published(
       successfullyPublished: succeeded,
@@ -31,5 +33,17 @@ class PostListingAvailabilityStateProvider
     state = PostListingAvailabilityState.reEnabled(
       successfullyReEnabled: succeeded,
     );
+  }
+
+  void setAvailabilityState(Gear listing) {
+    if (listing.isPublished == 1) {
+      if (listing.isDraft == 1) {
+        setUnpublished(succeeded: true);
+      } else {
+        setPublished(succeeded: true);
+      }
+    } else if (listing.isDraft == 0 && listing.isPublished == 0) {
+      setPublished(succeeded: false);
+    }
   }
 }

@@ -24,29 +24,56 @@ class _$GearTearOff {
   _Gear call(
       String hash,
       int id,
-      @JsonKey(name: 'user_id') int ownerId,
-      @JsonKey(name: 'category_id') int categoryId,
-      @JsonKey(name: 'pricing_model_id') String pricingModelId,
+      @JsonKey(name: 'user_id')
+          int ownerId,
+      @JsonKey(name: 'category_id')
+          int categoryId,
+      @JsonKey(name: 'pricing_model_id')
+          String pricingModelId,
       String title,
-      @JsonKey(name: 'stock') int? stockQuantity,
+      @JsonKey(name: 'stock')
+          int? stockQuantity,
       String description,
-      @JsonKey(name: 'short_description') String shortDescription,
+      @JsonKey(name: 'short_description')
+          String shortDescription,
+      String? price,
       String currency,
+      @JsonKey(name: "min_duration")
+          int? minRentPeriod,
+      @JsonKey(name: "max_duration")
+          int? maxRentPeriod,
       List<String>? tags,
       String slug,
       double lat,
       double lng,
       String? city,
+      String? region,
       String? country,
       String? thumbnail,
-      @JsonKey(name: 'media') List<ListingPhoto> photos,
-      @JsonKey(name: 'price_formatted') String? formattedPrice,
-      @JsonKey(name: 'user') User? owner,
-      @JsonKey(name: "is_published") int? isPublished,
-      @JsonKey(name: "is_draft") int? isDraft,
-      @JsonKey(name: "is_admin_verified") String? isVerifiedByAdmin,
-      @JsonKey(name: "is_disabled") String? isDisabled,
-      @JsonKey(name: "pricing_model") PricingModel? pricingModel) {
+      @JsonKey(name: 'media')
+          List<ListingPhoto> photos,
+      @JsonKey(name: 'price_formatted')
+          String? formattedPrice,
+      @JsonKey(name: 'user')
+          User? owner,
+      @JsonKey(name: "is_published")
+          int? isPublished,
+      @JsonKey(name: "is_draft")
+          int? isDraft,
+      @JsonKey(name: "is_admin_verified")
+          String? isVerifiedByAdmin,
+      @JsonKey(name: "is_disabled")
+          String? isDisabled,
+      @JsonKey(name: "pricing_model")
+          PricingModel? pricingModel,
+      @JsonKey(name: "additional_options")
+          List<AdditionalOption>? additionalOptions,
+      @JsonKey(name: "shipping_options")
+          List<ShippingFee>? shippingOptions,
+      @JsonKey(name: "variant_options")
+          Map<String, List<String>>? variantOptions,
+      @JsonKey(name: "ends_at")
+          String? listingEndDate) {
     return _Gear(
       hash,
       id,
@@ -57,12 +84,16 @@ class _$GearTearOff {
       stockQuantity,
       description,
       shortDescription,
+      price,
       currency,
+      minRentPeriod,
+      maxRentPeriod,
       tags,
       slug,
       lat,
       lng,
       city,
+      region,
       country,
       thumbnail,
       photos,
@@ -73,6 +104,10 @@ class _$GearTearOff {
       isVerifiedByAdmin,
       isDisabled,
       pricingModel,
+      additionalOptions,
+      shippingOptions,
+      variantOptions,
+      listingEndDate,
     );
   }
 
@@ -100,12 +135,18 @@ mixin _$Gear {
   String get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'short_description')
   String get shortDescription => throw _privateConstructorUsedError;
+  String? get price => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
+  @JsonKey(name: "min_duration")
+  int? get minRentPeriod => throw _privateConstructorUsedError;
+  @JsonKey(name: "max_duration")
+  int? get maxRentPeriod => throw _privateConstructorUsedError;
   List<String>? get tags => throw _privateConstructorUsedError;
   String get slug => throw _privateConstructorUsedError;
   double get lat => throw _privateConstructorUsedError;
   double get lng => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
+  String? get region => throw _privateConstructorUsedError;
   String? get country => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
   @JsonKey(name: 'media')
@@ -124,6 +165,16 @@ mixin _$Gear {
   String? get isDisabled => throw _privateConstructorUsedError;
   @JsonKey(name: "pricing_model")
   PricingModel? get pricingModel => throw _privateConstructorUsedError;
+  @JsonKey(name: "additional_options")
+  List<AdditionalOption>? get additionalOptions =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: "shipping_options")
+  List<ShippingFee>? get shippingOptions => throw _privateConstructorUsedError;
+  @JsonKey(name: "variant_options")
+  Map<String, List<String>>? get variantOptions =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: "ends_at")
+  String? get listingEndDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -137,29 +188,56 @@ abstract class $GearCopyWith<$Res> {
   $Res call(
       {String hash,
       int id,
-      @JsonKey(name: 'user_id') int ownerId,
-      @JsonKey(name: 'category_id') int categoryId,
-      @JsonKey(name: 'pricing_model_id') String pricingModelId,
+      @JsonKey(name: 'user_id')
+          int ownerId,
+      @JsonKey(name: 'category_id')
+          int categoryId,
+      @JsonKey(name: 'pricing_model_id')
+          String pricingModelId,
       String title,
-      @JsonKey(name: 'stock') int? stockQuantity,
+      @JsonKey(name: 'stock')
+          int? stockQuantity,
       String description,
-      @JsonKey(name: 'short_description') String shortDescription,
+      @JsonKey(name: 'short_description')
+          String shortDescription,
+      String? price,
       String currency,
+      @JsonKey(name: "min_duration")
+          int? minRentPeriod,
+      @JsonKey(name: "max_duration")
+          int? maxRentPeriod,
       List<String>? tags,
       String slug,
       double lat,
       double lng,
       String? city,
+      String? region,
       String? country,
       String? thumbnail,
-      @JsonKey(name: 'media') List<ListingPhoto> photos,
-      @JsonKey(name: 'price_formatted') String? formattedPrice,
-      @JsonKey(name: 'user') User? owner,
-      @JsonKey(name: "is_published") int? isPublished,
-      @JsonKey(name: "is_draft") int? isDraft,
-      @JsonKey(name: "is_admin_verified") String? isVerifiedByAdmin,
-      @JsonKey(name: "is_disabled") String? isDisabled,
-      @JsonKey(name: "pricing_model") PricingModel? pricingModel});
+      @JsonKey(name: 'media')
+          List<ListingPhoto> photos,
+      @JsonKey(name: 'price_formatted')
+          String? formattedPrice,
+      @JsonKey(name: 'user')
+          User? owner,
+      @JsonKey(name: "is_published")
+          int? isPublished,
+      @JsonKey(name: "is_draft")
+          int? isDraft,
+      @JsonKey(name: "is_admin_verified")
+          String? isVerifiedByAdmin,
+      @JsonKey(name: "is_disabled")
+          String? isDisabled,
+      @JsonKey(name: "pricing_model")
+          PricingModel? pricingModel,
+      @JsonKey(name: "additional_options")
+          List<AdditionalOption>? additionalOptions,
+      @JsonKey(name: "shipping_options")
+          List<ShippingFee>? shippingOptions,
+      @JsonKey(name: "variant_options")
+          Map<String, List<String>>? variantOptions,
+      @JsonKey(name: "ends_at")
+          String? listingEndDate});
 
   $UserCopyWith<$Res>? get owner;
   $PricingModelCopyWith<$Res>? get pricingModel;
@@ -184,12 +262,16 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
     Object? stockQuantity = freezed,
     Object? description = freezed,
     Object? shortDescription = freezed,
+    Object? price = freezed,
     Object? currency = freezed,
+    Object? minRentPeriod = freezed,
+    Object? maxRentPeriod = freezed,
     Object? tags = freezed,
     Object? slug = freezed,
     Object? lat = freezed,
     Object? lng = freezed,
     Object? city = freezed,
+    Object? region = freezed,
     Object? country = freezed,
     Object? thumbnail = freezed,
     Object? photos = freezed,
@@ -200,6 +282,10 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
     Object? isVerifiedByAdmin = freezed,
     Object? isDisabled = freezed,
     Object? pricingModel = freezed,
+    Object? additionalOptions = freezed,
+    Object? shippingOptions = freezed,
+    Object? variantOptions = freezed,
+    Object? listingEndDate = freezed,
   }) {
     return _then(_value.copyWith(
       hash: hash == freezed
@@ -238,10 +324,22 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
           ? _value.shortDescription
           : shortDescription // ignore: cast_nullable_to_non_nullable
               as String,
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as String?,
       currency: currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String,
+      minRentPeriod: minRentPeriod == freezed
+          ? _value.minRentPeriod
+          : minRentPeriod // ignore: cast_nullable_to_non_nullable
+              as int?,
+      maxRentPeriod: maxRentPeriod == freezed
+          ? _value.maxRentPeriod
+          : maxRentPeriod // ignore: cast_nullable_to_non_nullable
+              as int?,
       tags: tags == freezed
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -261,6 +359,10 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
       city: city == freezed
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      region: region == freezed
+          ? _value.region
+          : region // ignore: cast_nullable_to_non_nullable
               as String?,
       country: country == freezed
           ? _value.country
@@ -302,6 +404,22 @@ class _$GearCopyWithImpl<$Res> implements $GearCopyWith<$Res> {
           ? _value.pricingModel
           : pricingModel // ignore: cast_nullable_to_non_nullable
               as PricingModel?,
+      additionalOptions: additionalOptions == freezed
+          ? _value.additionalOptions
+          : additionalOptions // ignore: cast_nullable_to_non_nullable
+              as List<AdditionalOption>?,
+      shippingOptions: shippingOptions == freezed
+          ? _value.shippingOptions
+          : shippingOptions // ignore: cast_nullable_to_non_nullable
+              as List<ShippingFee>?,
+      variantOptions: variantOptions == freezed
+          ? _value.variantOptions
+          : variantOptions // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<String>>?,
+      listingEndDate: listingEndDate == freezed
+          ? _value.listingEndDate
+          : listingEndDate // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 
@@ -336,29 +454,56 @@ abstract class _$GearCopyWith<$Res> implements $GearCopyWith<$Res> {
   $Res call(
       {String hash,
       int id,
-      @JsonKey(name: 'user_id') int ownerId,
-      @JsonKey(name: 'category_id') int categoryId,
-      @JsonKey(name: 'pricing_model_id') String pricingModelId,
+      @JsonKey(name: 'user_id')
+          int ownerId,
+      @JsonKey(name: 'category_id')
+          int categoryId,
+      @JsonKey(name: 'pricing_model_id')
+          String pricingModelId,
       String title,
-      @JsonKey(name: 'stock') int? stockQuantity,
+      @JsonKey(name: 'stock')
+          int? stockQuantity,
       String description,
-      @JsonKey(name: 'short_description') String shortDescription,
+      @JsonKey(name: 'short_description')
+          String shortDescription,
+      String? price,
       String currency,
+      @JsonKey(name: "min_duration")
+          int? minRentPeriod,
+      @JsonKey(name: "max_duration")
+          int? maxRentPeriod,
       List<String>? tags,
       String slug,
       double lat,
       double lng,
       String? city,
+      String? region,
       String? country,
       String? thumbnail,
-      @JsonKey(name: 'media') List<ListingPhoto> photos,
-      @JsonKey(name: 'price_formatted') String? formattedPrice,
-      @JsonKey(name: 'user') User? owner,
-      @JsonKey(name: "is_published") int? isPublished,
-      @JsonKey(name: "is_draft") int? isDraft,
-      @JsonKey(name: "is_admin_verified") String? isVerifiedByAdmin,
-      @JsonKey(name: "is_disabled") String? isDisabled,
-      @JsonKey(name: "pricing_model") PricingModel? pricingModel});
+      @JsonKey(name: 'media')
+          List<ListingPhoto> photos,
+      @JsonKey(name: 'price_formatted')
+          String? formattedPrice,
+      @JsonKey(name: 'user')
+          User? owner,
+      @JsonKey(name: "is_published")
+          int? isPublished,
+      @JsonKey(name: "is_draft")
+          int? isDraft,
+      @JsonKey(name: "is_admin_verified")
+          String? isVerifiedByAdmin,
+      @JsonKey(name: "is_disabled")
+          String? isDisabled,
+      @JsonKey(name: "pricing_model")
+          PricingModel? pricingModel,
+      @JsonKey(name: "additional_options")
+          List<AdditionalOption>? additionalOptions,
+      @JsonKey(name: "shipping_options")
+          List<ShippingFee>? shippingOptions,
+      @JsonKey(name: "variant_options")
+          Map<String, List<String>>? variantOptions,
+      @JsonKey(name: "ends_at")
+          String? listingEndDate});
 
   @override
   $UserCopyWith<$Res>? get owner;
@@ -386,12 +531,16 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
     Object? stockQuantity = freezed,
     Object? description = freezed,
     Object? shortDescription = freezed,
+    Object? price = freezed,
     Object? currency = freezed,
+    Object? minRentPeriod = freezed,
+    Object? maxRentPeriod = freezed,
     Object? tags = freezed,
     Object? slug = freezed,
     Object? lat = freezed,
     Object? lng = freezed,
     Object? city = freezed,
+    Object? region = freezed,
     Object? country = freezed,
     Object? thumbnail = freezed,
     Object? photos = freezed,
@@ -402,6 +551,10 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
     Object? isVerifiedByAdmin = freezed,
     Object? isDisabled = freezed,
     Object? pricingModel = freezed,
+    Object? additionalOptions = freezed,
+    Object? shippingOptions = freezed,
+    Object? variantOptions = freezed,
+    Object? listingEndDate = freezed,
   }) {
     return _then(_Gear(
       hash == freezed
@@ -440,10 +593,22 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
           ? _value.shortDescription
           : shortDescription // ignore: cast_nullable_to_non_nullable
               as String,
+      price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as String?,
       currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as String,
+      minRentPeriod == freezed
+          ? _value.minRentPeriod
+          : minRentPeriod // ignore: cast_nullable_to_non_nullable
+              as int?,
+      maxRentPeriod == freezed
+          ? _value.maxRentPeriod
+          : maxRentPeriod // ignore: cast_nullable_to_non_nullable
+              as int?,
       tags == freezed
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -463,6 +628,10 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
       city == freezed
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      region == freezed
+          ? _value.region
+          : region // ignore: cast_nullable_to_non_nullable
               as String?,
       country == freezed
           ? _value.country
@@ -504,6 +673,22 @@ class __$GearCopyWithImpl<$Res> extends _$GearCopyWithImpl<$Res>
           ? _value.pricingModel
           : pricingModel // ignore: cast_nullable_to_non_nullable
               as PricingModel?,
+      additionalOptions == freezed
+          ? _value.additionalOptions
+          : additionalOptions // ignore: cast_nullable_to_non_nullable
+              as List<AdditionalOption>?,
+      shippingOptions == freezed
+          ? _value.shippingOptions
+          : shippingOptions // ignore: cast_nullable_to_non_nullable
+              as List<ShippingFee>?,
+      variantOptions == freezed
+          ? _value.variantOptions
+          : variantOptions // ignore: cast_nullable_to_non_nullable
+              as Map<String, List<String>>?,
+      listingEndDate == freezed
+          ? _value.listingEndDate
+          : listingEndDate // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -521,12 +706,16 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       @JsonKey(name: 'stock') this.stockQuantity,
       this.description,
       @JsonKey(name: 'short_description') this.shortDescription,
+      this.price,
       this.currency,
+      @JsonKey(name: "min_duration") this.minRentPeriod,
+      @JsonKey(name: "max_duration") this.maxRentPeriod,
       this.tags,
       this.slug,
       this.lat,
       this.lng,
       this.city,
+      this.region,
       this.country,
       this.thumbnail,
       @JsonKey(name: 'media') this.photos,
@@ -536,7 +725,11 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       @JsonKey(name: "is_draft") this.isDraft,
       @JsonKey(name: "is_admin_verified") this.isVerifiedByAdmin,
       @JsonKey(name: "is_disabled") this.isDisabled,
-      @JsonKey(name: "pricing_model") this.pricingModel);
+      @JsonKey(name: "pricing_model") this.pricingModel,
+      @JsonKey(name: "additional_options") this.additionalOptions,
+      @JsonKey(name: "shipping_options") this.shippingOptions,
+      @JsonKey(name: "variant_options") this.variantOptions,
+      @JsonKey(name: "ends_at") this.listingEndDate);
 
   factory _$_Gear.fromJson(Map<String, dynamic> json) => _$$_GearFromJson(json);
 
@@ -564,7 +757,15 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
   @JsonKey(name: 'short_description')
   final String shortDescription;
   @override
+  final String? price;
+  @override
   final String currency;
+  @override
+  @JsonKey(name: "min_duration")
+  final int? minRentPeriod;
+  @override
+  @JsonKey(name: "max_duration")
+  final int? maxRentPeriod;
   @override
   final List<String>? tags;
   @override
@@ -575,6 +776,8 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
   final double lng;
   @override
   final String? city;
+  @override
+  final String? region;
   @override
   final String? country;
   @override
@@ -603,10 +806,22 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
   @override
   @JsonKey(name: "pricing_model")
   final PricingModel? pricingModel;
+  @override
+  @JsonKey(name: "additional_options")
+  final List<AdditionalOption>? additionalOptions;
+  @override
+  @JsonKey(name: "shipping_options")
+  final List<ShippingFee>? shippingOptions;
+  @override
+  @JsonKey(name: "variant_options")
+  final Map<String, List<String>>? variantOptions;
+  @override
+  @JsonKey(name: "ends_at")
+  final String? listingEndDate;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Gear(hash: $hash, id: $id, ownerId: $ownerId, categoryId: $categoryId, pricingModelId: $pricingModelId, title: $title, stockQuantity: $stockQuantity, description: $description, shortDescription: $shortDescription, currency: $currency, tags: $tags, slug: $slug, lat: $lat, lng: $lng, city: $city, country: $country, thumbnail: $thumbnail, photos: $photos, formattedPrice: $formattedPrice, owner: $owner, isPublished: $isPublished, isDraft: $isDraft, isVerifiedByAdmin: $isVerifiedByAdmin, isDisabled: $isDisabled, pricingModel: $pricingModel)';
+    return 'Gear(hash: $hash, id: $id, ownerId: $ownerId, categoryId: $categoryId, pricingModelId: $pricingModelId, title: $title, stockQuantity: $stockQuantity, description: $description, shortDescription: $shortDescription, price: $price, currency: $currency, minRentPeriod: $minRentPeriod, maxRentPeriod: $maxRentPeriod, tags: $tags, slug: $slug, lat: $lat, lng: $lng, city: $city, region: $region, country: $country, thumbnail: $thumbnail, photos: $photos, formattedPrice: $formattedPrice, owner: $owner, isPublished: $isPublished, isDraft: $isDraft, isVerifiedByAdmin: $isVerifiedByAdmin, isDisabled: $isDisabled, pricingModel: $pricingModel, additionalOptions: $additionalOptions, shippingOptions: $shippingOptions, variantOptions: $variantOptions, listingEndDate: $listingEndDate)';
   }
 
   @override
@@ -623,12 +838,16 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       ..add(DiagnosticsProperty('stockQuantity', stockQuantity))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('shortDescription', shortDescription))
+      ..add(DiagnosticsProperty('price', price))
       ..add(DiagnosticsProperty('currency', currency))
+      ..add(DiagnosticsProperty('minRentPeriod', minRentPeriod))
+      ..add(DiagnosticsProperty('maxRentPeriod', maxRentPeriod))
       ..add(DiagnosticsProperty('tags', tags))
       ..add(DiagnosticsProperty('slug', slug))
       ..add(DiagnosticsProperty('lat', lat))
       ..add(DiagnosticsProperty('lng', lng))
       ..add(DiagnosticsProperty('city', city))
+      ..add(DiagnosticsProperty('region', region))
       ..add(DiagnosticsProperty('country', country))
       ..add(DiagnosticsProperty('thumbnail', thumbnail))
       ..add(DiagnosticsProperty('photos', photos))
@@ -638,7 +857,11 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       ..add(DiagnosticsProperty('isDraft', isDraft))
       ..add(DiagnosticsProperty('isVerifiedByAdmin', isVerifiedByAdmin))
       ..add(DiagnosticsProperty('isDisabled', isDisabled))
-      ..add(DiagnosticsProperty('pricingModel', pricingModel));
+      ..add(DiagnosticsProperty('pricingModel', pricingModel))
+      ..add(DiagnosticsProperty('additionalOptions', additionalOptions))
+      ..add(DiagnosticsProperty('shippingOptions', shippingOptions))
+      ..add(DiagnosticsProperty('variantOptions', variantOptions))
+      ..add(DiagnosticsProperty('listingEndDate', listingEndDate));
   }
 
   @override
@@ -669,9 +892,17 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
             (identical(other.shortDescription, shortDescription) ||
                 const DeepCollectionEquality()
                     .equals(other.shortDescription, shortDescription)) &&
+            (identical(other.price, price) ||
+                const DeepCollectionEquality().equals(other.price, price)) &&
             (identical(other.currency, currency) ||
                 const DeepCollectionEquality()
                     .equals(other.currency, currency)) &&
+            (identical(other.minRentPeriod, minRentPeriod) ||
+                const DeepCollectionEquality()
+                    .equals(other.minRentPeriod, minRentPeriod)) &&
+            (identical(other.maxRentPeriod, maxRentPeriod) ||
+                const DeepCollectionEquality()
+                    .equals(other.maxRentPeriod, maxRentPeriod)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.slug, slug) ||
@@ -682,6 +913,8 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
                 const DeepCollectionEquality().equals(other.lng, lng)) &&
             (identical(other.city, city) ||
                 const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.region, region) ||
+                const DeepCollectionEquality().equals(other.region, region)) &&
             (identical(other.country, country) ||
                 const DeepCollectionEquality()
                     .equals(other.country, country)) &&
@@ -705,11 +938,12 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
                 const DeepCollectionEquality()
                     .equals(other.isVerifiedByAdmin, isVerifiedByAdmin)) &&
             (identical(other.isDisabled, isDisabled) ||
-                const DeepCollectionEquality()
-                    .equals(other.isDisabled, isDisabled)) &&
-            (identical(other.pricingModel, pricingModel) ||
-                const DeepCollectionEquality()
-                    .equals(other.pricingModel, pricingModel)));
+                const DeepCollectionEquality().equals(other.isDisabled, isDisabled)) &&
+            (identical(other.pricingModel, pricingModel) || const DeepCollectionEquality().equals(other.pricingModel, pricingModel)) &&
+            (identical(other.additionalOptions, additionalOptions) || const DeepCollectionEquality().equals(other.additionalOptions, additionalOptions)) &&
+            (identical(other.shippingOptions, shippingOptions) || const DeepCollectionEquality().equals(other.shippingOptions, shippingOptions)) &&
+            (identical(other.variantOptions, variantOptions) || const DeepCollectionEquality().equals(other.variantOptions, variantOptions)) &&
+            (identical(other.listingEndDate, listingEndDate) || const DeepCollectionEquality().equals(other.listingEndDate, listingEndDate)));
   }
 
   @override
@@ -724,12 +958,16 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       const DeepCollectionEquality().hash(stockQuantity) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(shortDescription) ^
+      const DeepCollectionEquality().hash(price) ^
       const DeepCollectionEquality().hash(currency) ^
+      const DeepCollectionEquality().hash(minRentPeriod) ^
+      const DeepCollectionEquality().hash(maxRentPeriod) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(slug) ^
       const DeepCollectionEquality().hash(lat) ^
       const DeepCollectionEquality().hash(lng) ^
       const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(region) ^
       const DeepCollectionEquality().hash(country) ^
       const DeepCollectionEquality().hash(thumbnail) ^
       const DeepCollectionEquality().hash(photos) ^
@@ -739,7 +977,11 @@ class _$_Gear with DiagnosticableTreeMixin implements _Gear {
       const DeepCollectionEquality().hash(isDraft) ^
       const DeepCollectionEquality().hash(isVerifiedByAdmin) ^
       const DeepCollectionEquality().hash(isDisabled) ^
-      const DeepCollectionEquality().hash(pricingModel);
+      const DeepCollectionEquality().hash(pricingModel) ^
+      const DeepCollectionEquality().hash(additionalOptions) ^
+      const DeepCollectionEquality().hash(shippingOptions) ^
+      const DeepCollectionEquality().hash(variantOptions) ^
+      const DeepCollectionEquality().hash(listingEndDate);
 
   @JsonKey(ignore: true)
   @override
@@ -756,29 +998,56 @@ abstract class _Gear implements Gear {
   const factory _Gear(
       String hash,
       int id,
-      @JsonKey(name: 'user_id') int ownerId,
-      @JsonKey(name: 'category_id') int categoryId,
-      @JsonKey(name: 'pricing_model_id') String pricingModelId,
+      @JsonKey(name: 'user_id')
+          int ownerId,
+      @JsonKey(name: 'category_id')
+          int categoryId,
+      @JsonKey(name: 'pricing_model_id')
+          String pricingModelId,
       String title,
-      @JsonKey(name: 'stock') int? stockQuantity,
+      @JsonKey(name: 'stock')
+          int? stockQuantity,
       String description,
-      @JsonKey(name: 'short_description') String shortDescription,
+      @JsonKey(name: 'short_description')
+          String shortDescription,
+      String? price,
       String currency,
+      @JsonKey(name: "min_duration")
+          int? minRentPeriod,
+      @JsonKey(name: "max_duration")
+          int? maxRentPeriod,
       List<String>? tags,
       String slug,
       double lat,
       double lng,
       String? city,
+      String? region,
       String? country,
       String? thumbnail,
-      @JsonKey(name: 'media') List<ListingPhoto> photos,
-      @JsonKey(name: 'price_formatted') String? formattedPrice,
-      @JsonKey(name: 'user') User? owner,
-      @JsonKey(name: "is_published") int? isPublished,
-      @JsonKey(name: "is_draft") int? isDraft,
-      @JsonKey(name: "is_admin_verified") String? isVerifiedByAdmin,
-      @JsonKey(name: "is_disabled") String? isDisabled,
-      @JsonKey(name: "pricing_model") PricingModel? pricingModel) = _$_Gear;
+      @JsonKey(name: 'media')
+          List<ListingPhoto> photos,
+      @JsonKey(name: 'price_formatted')
+          String? formattedPrice,
+      @JsonKey(name: 'user')
+          User? owner,
+      @JsonKey(name: "is_published")
+          int? isPublished,
+      @JsonKey(name: "is_draft")
+          int? isDraft,
+      @JsonKey(name: "is_admin_verified")
+          String? isVerifiedByAdmin,
+      @JsonKey(name: "is_disabled")
+          String? isDisabled,
+      @JsonKey(name: "pricing_model")
+          PricingModel? pricingModel,
+      @JsonKey(name: "additional_options")
+          List<AdditionalOption>? additionalOptions,
+      @JsonKey(name: "shipping_options")
+          List<ShippingFee>? shippingOptions,
+      @JsonKey(name: "variant_options")
+          Map<String, List<String>>? variantOptions,
+      @JsonKey(name: "ends_at")
+          String? listingEndDate) = _$_Gear;
 
   factory _Gear.fromJson(Map<String, dynamic> json) = _$_Gear.fromJson;
 
@@ -806,7 +1075,15 @@ abstract class _Gear implements Gear {
   @JsonKey(name: 'short_description')
   String get shortDescription => throw _privateConstructorUsedError;
   @override
+  String? get price => throw _privateConstructorUsedError;
+  @override
   String get currency => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "min_duration")
+  int? get minRentPeriod => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "max_duration")
+  int? get maxRentPeriod => throw _privateConstructorUsedError;
   @override
   List<String>? get tags => throw _privateConstructorUsedError;
   @override
@@ -817,6 +1094,8 @@ abstract class _Gear implements Gear {
   double get lng => throw _privateConstructorUsedError;
   @override
   String? get city => throw _privateConstructorUsedError;
+  @override
+  String? get region => throw _privateConstructorUsedError;
   @override
   String? get country => throw _privateConstructorUsedError;
   @override
@@ -845,6 +1124,20 @@ abstract class _Gear implements Gear {
   @override
   @JsonKey(name: "pricing_model")
   PricingModel? get pricingModel => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "additional_options")
+  List<AdditionalOption>? get additionalOptions =>
+      throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "shipping_options")
+  List<ShippingFee>? get shippingOptions => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "variant_options")
+  Map<String, List<String>>? get variantOptions =>
+      throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "ends_at")
+  String? get listingEndDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$GearCopyWith<_Gear> get copyWith => throw _privateConstructorUsedError;

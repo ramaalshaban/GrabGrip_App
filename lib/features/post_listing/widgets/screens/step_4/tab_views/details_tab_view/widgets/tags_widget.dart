@@ -22,9 +22,11 @@ class _TagsWidgetState extends State<TagsWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        //region Tags wrapper
         Consumer(
           builder: (_, ref, __) {
-            final tags = ref.watch(postListingProvider).tags;
+            final tags =
+                ref.watch(postListingProvider.select((state) => state.tags));
             return Wrap(
               spacing: 4,
               children: List.generate(
@@ -37,7 +39,9 @@ class _TagsWidgetState extends State<TagsWidget> {
             );
           },
         ),
+        //endregion
         height4(),
+        //region Text field
         Row(
           children: [
             Expanded(
@@ -55,7 +59,8 @@ class _TagsWidgetState extends State<TagsWidget> {
                       return IconButton(
                         onPressed: () {
                           if (tagTextController.text.trim().isNotEmpty) {
-                            ref.watch(postListingProvider.notifier)
+                            ref
+                                .watch(postListingProvider.notifier)
                                 .addTag(tagTextController.text.trim());
                             tagTextController.text = "";
                           }
@@ -74,6 +79,7 @@ class _TagsWidgetState extends State<TagsWidget> {
             ),
           ],
         ),
+        //endregion
       ],
     );
   }

@@ -636,7 +636,7 @@ class NetworkService {
     else if (errorData?["error"] != null) {
       aggregatedErrorMessage += "Entered email or password is incorrect";
     }
-    // when an exception occurs while deleting an image while posting a listing, "success" is not null
+    // when an exception occurs while deleting an image while posting/editing a listing, "success" is not null
     else if (errorData?["success"] != null) {
       aggregatedErrorMessage += "The photo has not been deleted successfully";
       // when the response is 400 for a report listing request, then "message" is not null and has the error message

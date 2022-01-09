@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
@@ -21,7 +20,10 @@ class ListingTypeItem extends ConsumerWidget {
         alignment: Alignment.center,
         height: 24.0,
         decoration: BoxDecoration(
-          color: ref.watch(postListingProvider).listingTypeId == listingType.id
+          color: ref.watch(
+                    postListingProvider.select((state) => state.listingTypeId),
+                  ) ==
+                  listingType.id
               ? AppColors.purple
               : AppColors.white,
           borderRadius: BorderRadius.circular(4),
@@ -34,7 +36,11 @@ class ListingTypeItem extends ConsumerWidget {
           listingType.name,
           style: TextStyle(
             fontSize: 12,
-            color: ref.watch(postListingProvider).listingTypeId == listingType.id
+            color: ref.watch(
+                      postListingProvider
+                          .select((state) => state.listingTypeId),
+                    ) ==
+                    listingType.id
                 ? AppColors.white
                 : AppColors.purple,
           ),

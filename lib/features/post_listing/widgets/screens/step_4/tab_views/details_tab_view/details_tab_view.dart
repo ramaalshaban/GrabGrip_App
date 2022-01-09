@@ -11,19 +11,24 @@ import 'package:grab_grip/shared/widgets/location_picker/location_picker.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text_fields.dart';
 import 'package:grab_grip/utils/constants.dart';
+import 'package:grab_grip/utils/device.dart';
 import 'package:grab_grip/utils/sized_box.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
 
-class DetailsTabView extends ConsumerStatefulWidget    {
+class DetailsTabView extends ConsumerStatefulWidget {
   const DetailsTabView({Key? key}) : super(key: key);
 
   @override
   ConsumerState<DetailsTabView> createState() => _DetailsTabViewState();
 }
 
-class _DetailsTabViewState extends ConsumerState<DetailsTabView> with AutomaticKeepAliveClientMixin {
+class _DetailsTabViewState extends ConsumerState<DetailsTabView>
+    with AutomaticKeepAliveClientMixin {
+  final descriptionController = HtmlEditorController();
+
   @override
   Widget build(BuildContext context) {
-     super.build(context);
+    super.build(context);
     return SingleChildScrollView(
       padding: const EdgeInsets.only(
         top: 10,
@@ -35,18 +40,17 @@ class _DetailsTabViewState extends ConsumerState<DetailsTabView> with AutomaticK
             horizontal: 10,
           ),
           child: Consumer(
-            builder: (_, ref, __) {
+            builder: (context, ref, __) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   //region Title text field
                   TextFormField(
+                    initialValue: ref.watch(postListingProvider.notifier).title,
                     onChanged: (text) {
                       ref.watch(postListingProvider.notifier).title =
                           text.trim();
                     },
-                    controller: TextEditingController(
-                        text: ref.watch(postListingProvider.notifier).title),
                     validator: listingTitleFieldValidator,
                     keyboardType: TextInputType.name,
                     decoration: standardInputDecoration.copyWith(
@@ -57,31 +61,68 @@ class _DetailsTabViewState extends ConsumerState<DetailsTabView> with AutomaticK
                   ),
                   //endregion
                   height24(),
-                  //region Description text field
-                  TextFormField(
-                    minLines: 10,
-                    maxLines: 10,
-                    onChanged: (text) {
-                      ref.watch(postListingProvider.notifier).description =
-                          text.trim();
-                    },
-                    controller: TextEditingController(
-                      text: ref.watch(postListingProvider.notifier).description,
+                  //region Description Html editor
+                  Text(
+                    AppLocalizations.of(context)!.description_label,
+                    style: const TextStyle(
+                      color: AppColors.purple,
                     ),
-                    validator: listingDescriptionFieldValidator,
-                    keyboardType: TextInputType.multiline,
-                    decoration: standardInputDecoration.copyWith(
-                      labelText:
-                          AppLocalizations.of(context)!.description_label,
-                      contentPadding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
+                  ),
+                  height4(),
+
+                  /// IMPORTANT NOTE: the html editor is preventing the location picker (which is in the same screen) from
+                  /// animating the map when the user picks a location. Try removing the html editor from this screen and the animation
+                  /// will get back. This problem can be solved later insha'Allah.
+                  HtmlEditor(
+                    controller: descriptionController,
+                    htmlEditorOptions: HtmlEditorOptions(
+                      adjustHeightForKeyboard: false,
+                      initialText:
+                          ref.watch(postListingProvider.notifier).description,
                     ),
-                    cursorColor: AppColors.purple,
+                    callbacks: Callbacks(
+                      onChangeContent: (String? content) {
+                        ref.watch(postListingProvider.notifier).description =
+                            content?.trim();
+                      },
+                      onFocus: () {
+                        // let the previously focused text field lose the focus so when the user closes the colors pickers, the focus stays in the html editor
+                        FocusScope.of(context).requestFocus(FocusNode());
+                      },
+                    ),
+                    otherOptions: OtherOptions(
+                      height: screenHeightWithoutExtras() / 2.2,
+                      decoration: fieldDecoration,
+                    ),
+                    htmlToolbarOptions: const HtmlToolbarOptions(
+                      toolbarType: ToolbarType.nativeGrid,
+                      buttonSelectedColor: AppColors.purple,
+                      buttonHighlightColor: AppColors.veryLightPurple,
+                      gridViewVerticalSpacing: 0,
+                      defaultToolbarButtons: [
+                        FontSettingButtons(
+                          fontSizeUnit: false,
+                          fontName: false,
+                        ),
+                        FontButtons(
+                          subscript: false,
+                          superscript: false,
+                        ),
+                        ColorButtons(),
+                        ParagraphButtons(
+                          decreaseIndent: false,
+                          increaseIndent: false,
+                          caseConverter: false,
+                          lineHeight: false,
+                        ),
+                      ],
+                    ),
                   ),
                   //endregion
                   height24(),
                   const TagsWidget(),
                   height24(),
-                  DatePicker(),
+                  const DatePicker(),
                   height36(),
                   lightPurpleDividerThickness0_5,
                   height36(),
@@ -93,6 +134,7 @@ class _DetailsTabViewState extends ConsumerState<DetailsTabView> with AutomaticK
                   height24(),
                   //region City text field
                   TextFormField(
+                    initialValue: ref.watch(postListingProvider.notifier).city,
                     onChanged: (text) {
                       ref.watch(postListingProvider.notifier).city =
                           text.trim();
@@ -108,6 +150,8 @@ class _DetailsTabViewState extends ConsumerState<DetailsTabView> with AutomaticK
                   height24(),
                   //region Region text field
                   TextFormField(
+                    initialValue:
+                        ref.watch(postListingProvider.notifier).region,
                     onChanged: (text) {
                       ref.watch(postListingProvider.notifier).region =
                           text.trim();

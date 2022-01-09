@@ -154,6 +154,7 @@ class PostListingStepFourScreen extends ConsumerWidget {
                               onClickAction: () {
                                 if (listingReadyForSavingOrPublishing(
                                   context,
+                                  ref,
                                 )) {
                                   ref
                                       .watch(postListingProvider.notifier)
@@ -178,11 +179,23 @@ class PostListingStepFourScreen extends ConsumerWidget {
     );
   }
 
-  static bool listingReadyForSavingOrPublishing(BuildContext context) {
+  static bool listingReadyForSavingOrPublishing(
+    BuildContext context,
+    WidgetRef ref,
+  ) {
+    final descriptionLength =
+        ref.watch(postListingProvider.notifier).description?.length ?? 0;
     if (!detailsTabFormKey.currentState!.validate()) {
       showWarningSnackBar(
         context,
         "Check the information you entered in the details tab please",
+      );
+      return false;
+    } else if (descriptionLength < 5) {
+      // since the package that we are using for the html editor doesn't take a validator, we check the length of the description by checking postListingProvider
+      showWarningSnackBar(
+        context,
+        "The description must be at least 5 characters",
       );
       return false;
     } else if (!(pricingTabFormKey.currentState?.validate() ?? false)) {

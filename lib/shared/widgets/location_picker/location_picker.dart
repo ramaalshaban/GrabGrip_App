@@ -44,7 +44,7 @@ class LocationPicker extends StatelessWidget {
               Consumer(
                 builder: (_, ref, __) {
                   final inProgressListing =
-                      ref.watch(postListingProvider).inProgressListing!;
+                      ref.watch(postListingProvider.notifier).inProgressListing!;
                   final lat = inProgressListing.lat;
                   final lng = inProgressListing.lng;
                   final latLngToShow = LatLng(lat, lng);

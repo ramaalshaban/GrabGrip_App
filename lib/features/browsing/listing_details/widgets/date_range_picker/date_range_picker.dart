@@ -29,12 +29,13 @@ class DateRangePicker extends ConsumerWidget {
       );
     });
     //endregion
-    final now = DateTime.now();
-    final nextYearLikeToday = DateTime(
-      now.year + 1,
-      now.month,
-      now.day,
-    );
+    // the following commented code might be used later to set a maximum date for the picker
+    // final now = DateTime.now();
+    // final nextYearLikeToday = DateTime(
+    //   now.year + 1,
+    //   now.month,
+    //   now.day,
+    // );
     return Visibility(
       visible: ref.watch(
         listingDetailsProvider
@@ -127,12 +128,13 @@ class DateRangePicker extends ConsumerWidget {
                                     ),
                                     showNavigationArrow: true,
                                     enablePastDates: false,
-                                    maxDate: ref
-                                            .watch(
-                                              listingDetailsProvider.notifier,
-                                            )
-                                            .listingEndDate ??
-                                        nextYearLikeToday,
+                                    // the following commented code might be used later to set a maximum date for the picker
+                                    // maxDate: ref
+                                    //         .watch(
+                                    //           listingDetailsProvider.notifier,
+                                    //         )
+                                    //         .listingEndDate ??
+                                    //     nextYearLikeToday,
                                     headerHeight: 60,
                                     initialDisplayDate: ref
                                         .watch(listingDetailsProvider.notifier)

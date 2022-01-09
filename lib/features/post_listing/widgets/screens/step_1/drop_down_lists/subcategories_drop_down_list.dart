@@ -12,9 +12,12 @@ class SubcategoriesDropDownList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (_, ref, __) {
-        final selectedSubcategory = ref.watch(postListingProvider).subcategory;
-        final subcategories =
-            ref.watch(postListingProvider).category?.subCategories ?? [];
+        final selectedSubcategory =
+            ref.watch(postListingProvider.select((state) => state.subcategory));
+        final subcategories = ref.watch(
+          postListingProvider
+              .select((state) => state.category?.subCategories ?? []),
+        );
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: standardBoxDecoration,

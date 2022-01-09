@@ -44,7 +44,6 @@ const standardInputDecoration = InputDecoration(
 BoxDecoration fieldDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(4),
   border: Border.all(
-    width: 0.5,
     color: AppColors.lightPurple,
   ),
 );

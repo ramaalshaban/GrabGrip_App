@@ -10,7 +10,7 @@ _$_Listing _$$_ListingFromJson(Map<String, dynamic> json) => _$_Listing(
       json['user_id'] as int,
       ListingCategory.fromJson(json['category'] as Map<String, dynamic>),
       PricingModel.fromJson(json['pricing_model'] as Map<String, dynamic>),
-      json['price'] as String,
+      json['price'] as String?,
       json['stock'] as int,
       (json['additional_options'] as List<dynamic>?)
           ?.map((e) => AdditionalOption.fromJson(e as Map<String, dynamic>))

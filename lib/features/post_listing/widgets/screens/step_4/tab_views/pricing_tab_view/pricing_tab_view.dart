@@ -55,6 +55,10 @@ class _PricingTabViewState extends ConsumerState<PricingTabView>
                       //region Price
                       Expanded(
                         child: TextFormField(
+                          initialValue: ref
+                              .watch(postListingProvider.notifier)
+                              .price
+                              ?.toString(),
                           onChanged: (text) {
                             final price = (text.isEmpty) ? 0 : int.parse(text);
                             ref.watch(postListingProvider.notifier).price =
@@ -102,6 +106,10 @@ class _PricingTabViewState extends ConsumerState<PricingTabView>
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             TextFormField(
+                              initialValue: ref
+                                  .watch(postListingProvider.notifier)
+                                  .stock
+                                  ?.toString(),
                               onChanged: (text) {
                                 final stock =
                                     (text.isEmpty) ? 0 : int.parse(text);
@@ -143,6 +151,10 @@ class _PricingTabViewState extends ConsumerState<PricingTabView>
                         //region Minimum rent period
                         Expanded(
                           child: TextFormField(
+                            initialValue: ref
+                                .watch(postListingProvider.notifier)
+                                .minRentPeriod
+                                ?.toString(),
                             onChanged: (text) {
                               final minPeriod =
                                   (text.isEmpty) ? 0 : int.parse(text);
@@ -168,6 +180,10 @@ class _PricingTabViewState extends ConsumerState<PricingTabView>
                         //region Maximum rent period
                         Expanded(
                           child: TextFormField(
+                            initialValue: ref
+                                .watch(postListingProvider.notifier)
+                                .maxRentPeriod
+                                ?.toString(),
                             onChanged: (text) {
                               final maxPeriod =
                                   (text.isEmpty) ? 0 : int.parse(text);

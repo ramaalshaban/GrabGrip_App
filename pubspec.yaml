@@ -44,9 +44,11 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   # flutter_riverpod is used for state management
   flutter_riverpod: ^1.0.3
-  google_maps_flutter: ^2.0.11
+  google_maps_flutter: ^2.1.1
   # google_place is used to implement the autocomplete for the search box in browse screen
   google_place: ^0.4.3
+  # html_editor_enhanced is used for the description field in post/edit a listing screen
+  html_editor_enhanced: ^2.4.0+1
   # image_picker is for picking images from the gallery or taking them by the camera
   image_picker: ^0.8.4+4
   infinite_scroll_pagination: ^3.1.0

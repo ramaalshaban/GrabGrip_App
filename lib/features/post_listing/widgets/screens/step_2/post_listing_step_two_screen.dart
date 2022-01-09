@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -35,12 +34,18 @@ class PostListingStepTwoScreen extends StatelessWidget {
         Consumer(
           builder: (_, ref, __) {
             return AnimatedOpacity(
-              opacity:
-              ref.watch(postListingProvider).listingTypeId == null ? 0.0 : 1.0,
+              opacity: ref.watch(
+                        postListingProvider
+                            .select((state) => state.listingTypeId),
+                      ) ==
+                      null
+                  ? 0.0
+                  : 1.0,
               duration: duration300Milli,
               child: ContinueButton(
                 buttonText: AppLocalizations.of(context)!.continue_label,
-                onClickAction: ref.watch(postListingStepProvider.notifier).setStep3,
+                onClickAction:
+                    ref.watch(postListingStepProvider.notifier).setStep3,
               ),
             );
           },

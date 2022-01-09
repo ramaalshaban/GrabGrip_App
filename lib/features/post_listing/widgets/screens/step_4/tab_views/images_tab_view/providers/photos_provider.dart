@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_exif_rotation/flutter_exif_rotation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:grab_grip/features/browsing/listing_details/models/listing_photo/listing_photo.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/images_tab_view/models/photo/photo.dart';
 import 'package:grab_grip/services/network/network_service.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
@@ -15,6 +16,19 @@ class PhotosProvider extends StateNotifier<List<Photo>> {
 
   void reset() {
     state = [];
+  }
+
+  Future<void> setPhotos(
+    List<ListingPhoto>? listingPhotos,
+    String listingTitle,
+  ) async {
+    if (listingPhotos == null) {
+      return;
+    }
+    for (int i = 0; i < listingPhotos.length; i++) {
+      final imageFile = await makeFileFromUrl(listingPhotos[i].photoUrl);
+      await _addPhoto(file: imageFile, listingTitle: listingTitle);
+    }
   }
 
   //region setters and getters
@@ -74,8 +88,10 @@ class PhotosProvider extends StateNotifier<List<Photo>> {
 //endregion
 
   //region add/remove
-  Future<void> _addPhoto(
-      {required File file, required String listingTitle}) async {
+  Future<void> _addPhoto({
+    required File file,
+    required String listingTitle,
+  }) async {
     String photoIndex;
     if (photos.isEmpty) {
       photoIndex = "0";

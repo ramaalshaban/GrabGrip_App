@@ -9,11 +9,12 @@ import 'package:grab_grip/style/text_fields.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
 class PostListingStepThreeScreen extends ConsumerWidget {
-  const PostListingStepThreeScreen();
+  PostListingStepThreeScreen();
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _formKey = GlobalKey<FormState>();
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,

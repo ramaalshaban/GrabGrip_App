@@ -33,11 +33,12 @@ class PostListingStepOneScreen extends StatelessWidget {
             Consumer(
               builder: (_, ref, __) {
                 return AnimatedOpacity(
-                  opacity: ref.watch(postListingProvider)
-                              .category
-                              ?.subCategories
-                              .isNotEmpty ??
-                          false
+                  opacity: ref.watch(
+                    postListingProvider.select(
+                      (state) =>
+                          state.category?.subCategories.isNotEmpty ?? false,
+                    ),
+                  )
                       ? 1.0
                       : 0.0,
                   duration: duration300Milli,
@@ -62,8 +63,11 @@ class PostListingStepOneScreen extends StatelessWidget {
         ),
         Consumer(
           builder: (_, ref, __) {
-            final selectedCategory = ref.watch(postListingProvider).category;
-            final selectedSubcategory = ref.watch(postListingProvider).subcategory;
+            final selectedCategory = ref
+                .watch(postListingProvider.select((state) => state.category));
+            final selectedSubcategory = ref.watch(
+              postListingProvider.select((state) => state.subcategory),
+            );
             final visibilityConditions = (selectedCategory != null) &&
                 (selectedCategory.subCategories.isEmpty ||
                     (selectedCategory.subCategories.isNotEmpty &&

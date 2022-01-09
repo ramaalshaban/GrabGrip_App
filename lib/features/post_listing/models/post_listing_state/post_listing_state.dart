@@ -37,5 +37,6 @@ class PostListingState with _$PostListingState {
     @Default([Variation()]) List<Variation> variations,
     PricingModel? pricingModel,
     bool? isForRent,
+    @Default(false) bool isEditingMode,
   }) = _PostListingState;
 }

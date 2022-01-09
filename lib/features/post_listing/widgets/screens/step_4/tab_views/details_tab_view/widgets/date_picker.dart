@@ -10,18 +10,13 @@ import 'package:grab_grip/utils/sized_box.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class DatePicker extends StatelessWidget {
-  DatePicker({Key? key}) : super(key: key);
-  final now = DateTime.now();
-  final nextYearLikeToday = DateTime(
-    DateTime.now().year + 1,
-    DateTime.now().month,
-    DateTime.now().day,
-  );
+  const DatePicker({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        //region Label
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -40,8 +35,10 @@ class DatePicker extends StatelessWidget {
             ),
           ],
         ),
+        //endregion
         height8(),
         GestureDetector(
+          //region Date picker dialog
           onTap: () async {
             await showDialog(
               context: context,
@@ -52,6 +49,10 @@ class DatePicker extends StatelessWidget {
                   height: screenHeightWithoutExtras() / 1.5,
                   child: Consumer(
                     builder: (_, ref, __) {
+                      final selectedEndDate = ref
+                          .watch(postListingProvider.notifier)
+                          .getSelectedEndDate();
+                      final initialDate = selectedEndDate ?? DateTime.now();
                       return SfDateRangePicker(
                         onSubmit: (pickedTime) {
                           ref
@@ -61,7 +62,7 @@ class DatePicker extends StatelessWidget {
                         },
                         onCancel: () => context.router.pop(),
                         todayHighlightColor: AppColors.purple,
-                        initialDisplayDate: now,
+                        initialDisplayDate: initialDate,
                         headerStyle: const DateRangePickerHeaderStyle(
                           backgroundColor: AppColors.purple,
                           textStyle: TextStyle(
@@ -71,9 +72,8 @@ class DatePicker extends StatelessWidget {
                         ),
                         showNavigationArrow: true,
                         enablePastDates: false,
-                        maxDate: nextYearLikeToday,
                         headerHeight: 60,
-                        initialSelectedDate: now,
+                        initialSelectedDate: initialDate,
                         selectionColor: AppColors.purple,
                         showTodayButton: true,
                         showActionButtons: true,
@@ -90,6 +90,8 @@ class DatePicker extends StatelessWidget {
               FocusScope.of(context).requestFocus(FocusNode());
             });
           },
+          //endregion
+          //region Picked date container
           child: Container(
             padding: const EdgeInsets.only(left: 12),
             alignment: Alignment.centerLeft,
@@ -97,8 +99,9 @@ class DatePicker extends StatelessWidget {
             constraints: const BoxConstraints.expand(height: 50),
             child: Consumer(
               builder: (_, ref, __) {
-                final listingEndDate =
-                    ref.watch(postListingProvider).listingEndDate;
+                final listingEndDate = ref.watch(
+                  postListingProvider.select((state) => state.listingEndDate),
+                );
                 final formattedDate = formatDateForView(listingEndDate);
                 return Row(
                   children: [
@@ -112,6 +115,7 @@ class DatePicker extends StatelessWidget {
                         ),
                       ),
                     ),
+                    //region Remove end date button
                     IconButton(
                       onPressed: () {
                         ref.watch(postListingProvider.notifier).listingEndDate =
@@ -123,11 +127,13 @@ class DatePicker extends StatelessWidget {
                         size: 30,
                       ),
                     ),
+                    //endregion
                   ],
                 );
               },
             ),
           ),
+          //endregion
         )
       ],
     );

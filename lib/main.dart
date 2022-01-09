@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/configs/routes/guards/auth_guard.dart';
+import 'package:grab_grip/configs/routes/observers/routes_observer.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/device.dart';
 
@@ -50,7 +52,10 @@ class _GrabGripAppState extends ConsumerState<GrabGripApp> {
       locale: ref.watch(localeProvider),
       title: 'Grab Grip',
       theme: _initTheme(),
-      routerDelegate: _appRouter!.delegate(),
+      routerDelegate: AutoRouterDelegate(
+        _appRouter!,
+        navigatorObservers: () => [RoutesObserver(ref)],
+      ),
       routeInformationParser: _appRouter!.defaultRouteParser(),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

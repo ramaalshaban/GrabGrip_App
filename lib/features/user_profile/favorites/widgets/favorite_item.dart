@@ -6,6 +6,7 @@ import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/user_profile/favorites/widgets/favorite_screen_like_button.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text.dart';
+import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/device.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
@@ -124,7 +125,12 @@ class FavoriteItem extends StatelessWidget {
 
 //region actions
   void moveToDetailsScreen(BuildContext context, Gear clickedGear) {
-    context.router.push(ListingDetailsScreenRoute(listing: clickedGear));
+    context.router.push(
+      ListingDetailsScreenRoute(
+        listing: clickedGear,
+        sourceScreenId: favoritesScreenId,
+      ),
+    );
   }
 //endregion
 }

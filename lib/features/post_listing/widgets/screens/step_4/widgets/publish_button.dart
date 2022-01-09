@@ -20,6 +20,7 @@ class PublishButton extends ConsumerWidget {
         onPressed: () {
           if (PostListingStepFourScreen.listingReadyForSavingOrPublishing(
             context,
+            ref,
           )) {
             ref
                 .watch(postListingProvider.notifier)

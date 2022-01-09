@@ -22,14 +22,18 @@ import 'package:grab_grip/features/browsing/listing_details/widgets/variant_opti
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/widgets/tag_view.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/device.dart';
-import 'package:grab_grip/utils/functions.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
 class ListingDetailsScreen extends ConsumerWidget {
-  ListingDetailsScreen({Key? key, required this.listing}) : super(key: key);
+  ListingDetailsScreen({
+    Key? key,
+    required this.listing,
+    required this.sourceScreenId,
+  }) : super(key: key);
 
   final Completer<GoogleMapController> mapController = Completer();
   final Gear listing;
+  final int sourceScreenId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -170,7 +174,10 @@ class ListingDetailsScreen extends ConsumerWidget {
                   delegate: SliverChildListDelegate(
                     [
                       //region Status & Edit button
-                      StatusEditButtonWidget(listing: listing),
+                      StatusEditButtonWidget(
+                        listing: listing,
+                        sourceScreenId: sourceScreenId,
+                      ),
                       //endregion
                       //region Description
                       ListingDescriptionWidget(
@@ -288,109 +295,11 @@ class ListingDetailsScreen extends ConsumerWidget {
                         },
                       ),
                       //endregion
-                      height12(),
-                      //region Debugging button
-                      Consumer(
-                        builder: (_, ref, __) {
-                          return TextButton(
-                            onPressed: () {
-                              if (!ref
-                                  .watch(listingDetailsProvider.notifier)
-                                  .areAllVariantOptionsSelected()) {
-                                showSnackBar(
-                                  context,
-                                  "Select all variant options please",
-                                  AppColors.amber,
-                                );
-                              } else if (!ref
-                                  .watch(listingDetailsProvider.notifier)
-                                  .isShippingIdSelected()) {
-                                showSnackBar(
-                                  context,
-                                  "Select a shipping method please",
-                                  AppColors.amber,
-                                );
-                              } else {
-                                //region Debugging prints
-                                print(
-                                    "-==-=-=========================================-=-=-=-");
-                                print(
-                                    "Quantity : ${ref.watch(listingDetailsProvider.notifier).selectedQuantity}");
-                                for (int i = 0;
-                                    i <
-                                        ref
-                                            .watch(
-                                                listingDetailsProvider.notifier)
-                                            .selectedVariantOptions
-                                            .length;
-                                    i++) {
-                                  final variant = ref
-                                      .watch(listingDetailsProvider.notifier)
-                                      .selectedVariantOptions
-                                      .entries
-                                      .elementAt(i);
-                                  print(
-                                      "variant #$i : ${variant.key} => ${variant.value}");
-                                  print("-------");
-                                }
-                                print(
-                                    "Shipping id : ${ref.watch(listingDetailsProvider.notifier).selectedShippingId}");
-                                for (int i = 0;
-                                    i <
-                                        ref
-                                            .watch(
-                                                listingDetailsProvider.notifier)
-                                            .selectedAdditionalOptions
-                                            .length;
-                                    i++) {
-                                  final additionalOption = ref
-                                      .watch(listingDetailsProvider.notifier)
-                                      .selectedAdditionalOptions
-                                      .entries
-                                      .elementAt(i);
-                                  print(
-                                      "additional option #$i : ${additionalOption.key} => ${additionalOption.value}");
-                                }
-                                for (int i = 0;
-                                    i <
-                                        ref
-                                            .watch(
-                                                listingDetailsProvider.notifier)
-                                            .selectedAdditionalOptionsMeta
-                                            .length;
-                                    i++) {
-                                  if (ref
-                                          .watch(
-                                              listingDetailsProvider.notifier)
-                                          .selectedAdditionalOptionsMeta
-                                          .entries
-                                          .length >
-                                      i) {
-                                    final additionalOptionMeta = ref
-                                        .watch(listingDetailsProvider.notifier)
-                                        .selectedAdditionalOptionsMeta
-                                        .entries
-                                        .elementAt(i);
-                                    print(
-                                        "additional option meta #$i : ${additionalOptionMeta.key} => ${additionalOptionMeta.value}");
-                                  }
-                                }
-                                print(
-                                    "-==-=-=========================================-=-=-=-");
-                                //endregion
-                              }
-                            },
-                            child:
-                                const Text("check values (debugging button)"),
-                          );
-                        },
-                      ),
-                      //endregion
-                      height12(),
+                      height8(),
                       //region Owner/Seller widget
                       const OwnerWidget(),
                       //endregion
-                      height12(),
+                      height8(),
                       //region Reviews
                       const ReviewsWidget(),
                       //endregion

@@ -115,8 +115,10 @@ class AppRouter extends _i21.RootStackRouter {
       final args = routeData.argsAs<ListingDetailsScreenRouteArgs>();
       return _i21.MaterialPageX<dynamic>(
           routeData: routeData,
-          child:
-              _i8.ListingDetailsScreen(key: args.key, listing: args.listing));
+          child: _i8.ListingDetailsScreen(
+              key: args.key,
+              listing: args.listing,
+              sourceScreenId: args.sourceScreenId));
     },
     PostListingScreenRoute.name: (routeData) {
       return _i21.MaterialPageX<dynamic>(
@@ -326,24 +328,29 @@ class BrowseScreenRoute extends _i21.PageRouteInfo<void> {
 /// [_i8.ListingDetailsScreen]
 class ListingDetailsScreenRoute
     extends _i21.PageRouteInfo<ListingDetailsScreenRouteArgs> {
-  ListingDetailsScreenRoute({_i22.Key? key, required _i24.Gear listing})
+  ListingDetailsScreenRoute(
+      {_i22.Key? key, required _i24.Gear listing, required int sourceScreenId})
       : super(ListingDetailsScreenRoute.name,
             path: '/listing-details-screen',
-            args: ListingDetailsScreenRouteArgs(key: key, listing: listing));
+            args: ListingDetailsScreenRouteArgs(
+                key: key, listing: listing, sourceScreenId: sourceScreenId));
 
   static const String name = 'ListingDetailsScreenRoute';
 }
 
 class ListingDetailsScreenRouteArgs {
-  const ListingDetailsScreenRouteArgs({this.key, required this.listing});
+  const ListingDetailsScreenRouteArgs(
+      {this.key, required this.listing, required this.sourceScreenId});
 
   final _i22.Key? key;
 
   final _i24.Gear listing;
 
+  final int sourceScreenId;
+
   @override
   String toString() {
-    return 'ListingDetailsScreenRouteArgs{key: $key, listing: $listing}';
+    return 'ListingDetailsScreenRouteArgs{key: $key, listing: $listing, sourceScreenId: $sourceScreenId}';
   }
 }
 

@@ -28,7 +28,7 @@ class _$ListingTearOff {
           ListingCategory category,
       @JsonKey(name: "pricing_model")
           PricingModel pricingModel,
-      String price,
+      String? price,
       int stock,
       @JsonKey(name: "additional_options")
           List<AdditionalOption>? additionalOptions,
@@ -79,7 +79,7 @@ mixin _$Listing {
   ListingCategory get category => throw _privateConstructorUsedError;
   @JsonKey(name: "pricing_model")
   PricingModel get pricingModel => throw _privateConstructorUsedError;
-  String get price => throw _privateConstructorUsedError;
+  String? get price => throw _privateConstructorUsedError;
   int get stock => throw _privateConstructorUsedError;
   @JsonKey(name: "additional_options")
   List<AdditionalOption>? get additionalOptions =>
@@ -116,7 +116,7 @@ abstract class $ListingCopyWith<$Res> {
           ListingCategory category,
       @JsonKey(name: "pricing_model")
           PricingModel pricingModel,
-      String price,
+      String? price,
       int stock,
       @JsonKey(name: "additional_options")
           List<AdditionalOption>? additionalOptions,
@@ -180,7 +180,7 @@ class _$ListingCopyWithImpl<$Res> implements $ListingCopyWith<$Res> {
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       stock: stock == freezed
           ? _value.stock
           : stock // ignore: cast_nullable_to_non_nullable
@@ -258,7 +258,7 @@ abstract class _$ListingCopyWith<$Res> implements $ListingCopyWith<$Res> {
           ListingCategory category,
       @JsonKey(name: "pricing_model")
           PricingModel pricingModel,
-      String price,
+      String? price,
       int stock,
       @JsonKey(name: "additional_options")
           List<AdditionalOption>? additionalOptions,
@@ -326,7 +326,7 @@ class __$ListingCopyWithImpl<$Res> extends _$ListingCopyWithImpl<$Res>
       price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       stock == freezed
           ? _value.stock
           : stock // ignore: cast_nullable_to_non_nullable
@@ -395,7 +395,7 @@ class _$_Listing with DiagnosticableTreeMixin implements _Listing {
   @JsonKey(name: "pricing_model")
   final PricingModel pricingModel;
   @override
-  final String price;
+  final String? price;
   @override
   final int stock;
   @override
@@ -526,7 +526,7 @@ abstract class _Listing implements Listing {
           ListingCategory category,
       @JsonKey(name: "pricing_model")
           PricingModel pricingModel,
-      String price,
+      String? price,
       int stock,
       @JsonKey(name: "additional_options")
           List<AdditionalOption>? additionalOptions,
@@ -557,7 +557,7 @@ abstract class _Listing implements Listing {
   @JsonKey(name: "pricing_model")
   PricingModel get pricingModel => throw _privateConstructorUsedError;
   @override
-  String get price => throw _privateConstructorUsedError;
+  String? get price => throw _privateConstructorUsedError;
   @override
   int get stock => throw _privateConstructorUsedError;
   @override

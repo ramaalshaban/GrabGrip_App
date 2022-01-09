@@ -16,7 +16,15 @@ const String logoutAction = "logoutAction";
 const String reportListingAction = "reportListingAction";
 const String saveListingSuccessAction = "saveListingSuccessAction";
 const String saveListingError = "saveListingError";
-//region
+//endregion
+
+//region screens id
+const int browseScreenId = 0;
+const int browseScreenMapViewId = 1;
+const int listingsScreenId = 2;
+const int favoritesScreenId = 3;
+//endregion
+
 //region durations
 const Duration duration300Milli = Duration(milliseconds: 300);
 const Duration duration500Milli = Duration(milliseconds: 500);

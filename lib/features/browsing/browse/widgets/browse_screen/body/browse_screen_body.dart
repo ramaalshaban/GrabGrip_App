@@ -51,9 +51,11 @@ class _BrowseScreenBodyState extends ConsumerState<BrowseScreenBody> {
             list: () => const PaginatedListView(),
             map: () => Consumer(
               builder: (_, ref, __) {
-                final browseData = ref.watch(browseDataProvider);
+                final listings = ref.watch(
+                  browseDataProvider.select((state) => state.data.gears),
+                );
                 return GearsMap(
-                  browseData: browseData,
+                  listings: listings,
                 );
               },
             ),
