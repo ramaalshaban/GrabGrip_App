@@ -1,9 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'contact_us_form.freezed.dart';
-
 part 'contact_us_form.g.dart';
 
 @freezed

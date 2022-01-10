@@ -1,10 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grab_grip/shared/models/order/order.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'orders_page.freezed.dart';
-
 part 'orders_page.g.dart';
 
 @freezed

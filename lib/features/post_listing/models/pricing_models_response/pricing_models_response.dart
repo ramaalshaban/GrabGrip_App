@@ -1,10 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grab_grip/features/post_listing/models/selected_category_model/selected_category.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'pricing_models_response.freezed.dart';
-
 part 'pricing_models_response.g.dart';
 
 @freezed

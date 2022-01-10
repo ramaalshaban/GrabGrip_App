@@ -1,10 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grab_grip/features/authentication/models/error/error.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'register_response.freezed.dart';
-
 part 'register_response.g.dart';
 
 @freezed

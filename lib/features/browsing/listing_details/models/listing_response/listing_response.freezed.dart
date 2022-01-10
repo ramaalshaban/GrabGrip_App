@@ -21,7 +21,7 @@ ListingResponse _$ListingResponseFromJson(Map<String, dynamic> json) {
 class _$ListingResponseTearOff {
   const _$ListingResponseTearOff();
 
-  _ListingResponse call(Listing listing, Widget widget) {
+  _ListingResponse call(Listing listing, ResponseWidget widget) {
     return _ListingResponse(
       listing,
       widget,
@@ -39,7 +39,7 @@ const $ListingResponse = _$ListingResponseTearOff();
 /// @nodoc
 mixin _$ListingResponse {
   Listing get listing => throw _privateConstructorUsedError;
-  Widget get widget => throw _privateConstructorUsedError;
+  ResponseWidget get widget => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,10 +52,10 @@ abstract class $ListingResponseCopyWith<$Res> {
   factory $ListingResponseCopyWith(
           ListingResponse value, $Res Function(ListingResponse) then) =
       _$ListingResponseCopyWithImpl<$Res>;
-  $Res call({Listing listing, Widget widget});
+  $Res call({Listing listing, ResponseWidget widget});
 
   $ListingCopyWith<$Res> get listing;
-  $WidgetCopyWith<$Res> get widget;
+  $ResponseWidgetCopyWith<$Res> get widget;
 }
 
 /// @nodoc
@@ -80,7 +80,7 @@ class _$ListingResponseCopyWithImpl<$Res>
       widget: widget == freezed
           ? _value.widget
           : widget // ignore: cast_nullable_to_non_nullable
-              as Widget,
+              as ResponseWidget,
     ));
   }
 
@@ -92,8 +92,8 @@ class _$ListingResponseCopyWithImpl<$Res>
   }
 
   @override
-  $WidgetCopyWith<$Res> get widget {
-    return $WidgetCopyWith<$Res>(_value.widget, (value) {
+  $ResponseWidgetCopyWith<$Res> get widget {
+    return $ResponseWidgetCopyWith<$Res>(_value.widget, (value) {
       return _then(_value.copyWith(widget: value));
     });
   }
@@ -106,12 +106,12 @@ abstract class _$ListingResponseCopyWith<$Res>
           _ListingResponse value, $Res Function(_ListingResponse) then) =
       __$ListingResponseCopyWithImpl<$Res>;
   @override
-  $Res call({Listing listing, Widget widget});
+  $Res call({Listing listing, ResponseWidget widget});
 
   @override
   $ListingCopyWith<$Res> get listing;
   @override
-  $WidgetCopyWith<$Res> get widget;
+  $ResponseWidgetCopyWith<$Res> get widget;
 }
 
 /// @nodoc
@@ -138,7 +138,7 @@ class __$ListingResponseCopyWithImpl<$Res>
       widget == freezed
           ? _value.widget
           : widget // ignore: cast_nullable_to_non_nullable
-              as Widget,
+              as ResponseWidget,
     ));
   }
 }
@@ -156,7 +156,7 @@ class _$_ListingResponse
   @override
   final Listing listing;
   @override
-  final Widget widget;
+  final ResponseWidget widget;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -201,7 +201,7 @@ class _$_ListingResponse
 }
 
 abstract class _ListingResponse implements ListingResponse {
-  const factory _ListingResponse(Listing listing, Widget widget) =
+  const factory _ListingResponse(Listing listing, ResponseWidget widget) =
       _$_ListingResponse;
 
   factory _ListingResponse.fromJson(Map<String, dynamic> json) =
@@ -210,7 +210,7 @@ abstract class _ListingResponse implements ListingResponse {
   @override
   Listing get listing => throw _privateConstructorUsedError;
   @override
-  Widget get widget => throw _privateConstructorUsedError;
+  ResponseWidget get widget => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ListingResponseCopyWith<_ListingResponse> get copyWith =>

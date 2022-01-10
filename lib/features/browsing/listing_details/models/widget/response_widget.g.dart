@@ -1,19 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'widget.dart';
+part of 'response_widget.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Widget _$$_WidgetFromJson(Map<String, dynamic> json) => _$_Widget(
+_$_ResponseWidget _$$_ResponseWidgetFromJson(Map<String, dynamic> json) =>
+    _$_ResponseWidget(
       json['total'] as int,
-      json['error'],
+      json['error'] as String?,
       json['start_date'] as String?,
       json['end_date'] as String?,
     );
 
-Map<String, dynamic> _$$_WidgetToJson(_$_Widget instance) => <String, dynamic>{
+Map<String, dynamic> _$$_ResponseWidgetToJson(_$_ResponseWidget instance) =>
+    <String, dynamic>{
       'total': instance.total,
       'error': instance.error,
       'start_date': instance.startDate,

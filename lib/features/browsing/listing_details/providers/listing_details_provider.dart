@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/features/browsing/listing_details/models/listing_category/listing_category.dart';
 import 'package:grab_grip/features/browsing/listing_details/models/listing_details_state/listing_details_state.dart';
 import 'package:grab_grip/features/browsing/listing_details/models/listing_response/listing_response.dart';
-import 'package:grab_grip/features/browsing/listing_details/models/widget/widget.dart';
+import 'package:grab_grip/features/browsing/listing_details/models/widget/response_widget.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_model/pricing_model.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/additional_options/models/additional_option/additional_option.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/shipping_fees/models/shipping_fee/shipping_fee.dart';
@@ -46,30 +46,56 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
     return pricingModel?.name.substring(0, firstSpaceIndex) ?? "";
   }
 
-  bool areAllVariantOptionsSelected() =>
+  bool _areAllVariantOptionsSelected() =>
       selectedVariantOptions.entries.length == variantOptions.length;
 
-  bool isShippingIdSelected() =>
+  bool _isShippingIdSelected() =>
       (shippingOptions.isNotEmpty && selectedShippingId != null) ||
       shippingOptions.isEmpty;
 
-  String getButtonLabel() {
-    if (listingOwner?.canAcceptPayments == 0) {
-      return "Ask about\navailability"; // show it on two lines to avoid ui issues when the total price (which is the widget that's by side the button) is a big price
+  bool _isBookingDatePicked() =>
+      startDate != null && endDate != null && widget?.error == null;
+
+  // The following function returns string or null
+  // It returns the error message if user has a problem in placing an order
+  // It returns null if no problem in placing an order
+  String? userIssuesPlacingAnOrder() {
+    if (!isListingAvailable()) {
+      return "Sorry, messaging the user is currently not supported";
+    } else if (isListingForRent()) {
+      return _isBookingDatePicked() ? null : "Pick your booking date please";
     } else {
-      if (pricingModel?.widget == buy) {
-        return "Buy now";
-      } else /* i.e. pricingModel.widget == bookDate */ {
+      // the listing is for sell
+      return !_isShippingIdSelected()
+          ? "Select the shipping option please"
+          : !_areAllVariantOptionsSelected()
+              ? "Select the variant you prefer please"
+              : null;
+    }
+  }
+
+  bool isListingAvailable() => listingOwner?.canAcceptPayments == 1;
+
+  bool isListingForRent() => pricingModel?.widget == bookDate;
+
+  String getButtonLabel() {
+    if (!isListingAvailable()) {
+      // show it on two lines to avoid ui issues when the total price (which is the widget that's by side the button) is a big price
+      return "Ask about\navailability";
+    } else {
+      if (isListingForRent()) {
         return "Book now";
+      } else /* i.e. the listing is for sell */ {
+        return "Buy now";
       }
     }
   }
 
   String getOwnerWidgetLabel() {
-    if (pricingModel?.widget == buy) {
-      return "Seller info";
-    } else /* i.e. pricingModel.widget == bookDate */ {
+    if (isListingForRent()) {
       return "Owner info";
+    } else /* i.e. the listing is for sell */ {
+      return "Seller info";
     }
   }
 
@@ -171,9 +197,9 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
   set stockQuantity(int? stockQuantity) =>
       state = state.copyWith(stockQuantity: stockQuantity);
 
-  Widget? get widget => state.widget;
+  ResponseWidget? get widget => state.widget;
 
-  set widget(Widget? widget) => state = state.copyWith(widget: widget);
+  set widget(ResponseWidget? widget) => state = state.copyWith(widget: widget);
 
   DateTime? get listingEndDate => state.listingEndDate;
 

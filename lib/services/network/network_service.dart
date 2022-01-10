@@ -549,22 +549,6 @@ class NetworkService {
         endDate: state.endDate,
         range: "${state.startDate} to ${state.endDate}",
       );
-
-      // check for the following special case
-      if (getListingCall.data.widget.error is String) {
-        // when the user picks an invalid booking date, the api returns a successful response (200 OK) with
-        // an error field (inside the widget field) that contains the error.
-        // so in this case return an error response with the error string
-        // But, check this first:
-        if (state.startDate == null || state.endDate == null) {
-          // when user first opens up listing details screen for a listing of type rent, the error message "These dates cannot be booked" shows up since the api
-          // returns it when there are no start and end dates passed with the request (which is the case when the screen first shows up).
-          // to avoid showing the snack bar, this if statement has been added (to check start and end date)
-          return Success(getListingCall.data);
-        }
-        return Error(getListingCall.data.widget.error as String);
-      }
-      // if data.widget.error is not string, then it's equal to the boolean value false.
       return Success(getListingCall.data);
     } catch (error) {
       final errorMessage = _errorHandler(error as DioError);

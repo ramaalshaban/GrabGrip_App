@@ -1,9 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'identifier.freezed.dart';
-
 part 'identifier.g.dart';
 
 // since we care only if identifier is null or not (to check if this payment

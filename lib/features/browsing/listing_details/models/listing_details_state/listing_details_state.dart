@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grab_grip/features/browsing/listing_details/models/listing_category/listing_category.dart';
-import 'package:grab_grip/features/browsing/listing_details/models/widget/widget.dart';
+import 'package:grab_grip/features/browsing/listing_details/models/widget/response_widget.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_model/pricing_model.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/additional_options/models/additional_option/additional_option.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/pricing_tab_view/shipping_fees/models/shipping_fee/shipping_fee.dart';
@@ -30,7 +30,7 @@ class ListingDetailsState with _$ListingDetailsState {
     String? endDate,
     User? listingOwner,
     int? stockQuantity,
-    Widget? widget,
+    ResponseWidget? widget,
     DateTime? listingEndDate,
     PickerDateRange? pickerDateRange,
     String? formattedBookingDate,

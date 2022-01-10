@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'widget.dart';
+part of 'response_widget.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,20 +13,20 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Widget _$WidgetFromJson(Map<String, dynamic> json) {
-  return _Widget.fromJson(json);
+ResponseWidget _$ResponseWidgetFromJson(Map<String, dynamic> json) {
+  return _ResponseWidget.fromJson(json);
 }
 
 /// @nodoc
-class _$WidgetTearOff {
-  const _$WidgetTearOff();
+class _$ResponseWidgetTearOff {
+  const _$ResponseWidgetTearOff();
 
-  _Widget call(
+  _ResponseWidget call(
       int total,
-      dynamic error,
+      String? error,
       @JsonKey(name: "start_date") String? startDate,
       @JsonKey(name: "end_date") String? endDate) {
-    return _Widget(
+    return _ResponseWidget(
       total,
       error,
       startDate,
@@ -34,18 +34,18 @@ class _$WidgetTearOff {
     );
   }
 
-  Widget fromJson(Map<String, Object> json) {
-    return Widget.fromJson(json);
+  ResponseWidget fromJson(Map<String, Object> json) {
+    return ResponseWidget.fromJson(json);
   }
 }
 
 /// @nodoc
-const $Widget = _$WidgetTearOff();
+const $ResponseWidget = _$ResponseWidgetTearOff();
 
 /// @nodoc
-mixin _$Widget {
+mixin _$ResponseWidget {
   int get total => throw _privateConstructorUsedError;
-  dynamic get error => throw _privateConstructorUsedError;
+  String? get error => throw _privateConstructorUsedError;
   @JsonKey(name: "start_date")
   String? get startDate => throw _privateConstructorUsedError;
   @JsonKey(name: "end_date")
@@ -53,27 +53,30 @@ mixin _$Widget {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $WidgetCopyWith<Widget> get copyWith => throw _privateConstructorUsedError;
+  $ResponseWidgetCopyWith<ResponseWidget> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $WidgetCopyWith<$Res> {
-  factory $WidgetCopyWith(Widget value, $Res Function(Widget) then) =
-      _$WidgetCopyWithImpl<$Res>;
+abstract class $ResponseWidgetCopyWith<$Res> {
+  factory $ResponseWidgetCopyWith(
+          ResponseWidget value, $Res Function(ResponseWidget) then) =
+      _$ResponseWidgetCopyWithImpl<$Res>;
   $Res call(
       {int total,
-      dynamic error,
+      String? error,
       @JsonKey(name: "start_date") String? startDate,
       @JsonKey(name: "end_date") String? endDate});
 }
 
 /// @nodoc
-class _$WidgetCopyWithImpl<$Res> implements $WidgetCopyWith<$Res> {
-  _$WidgetCopyWithImpl(this._value, this._then);
+class _$ResponseWidgetCopyWithImpl<$Res>
+    implements $ResponseWidgetCopyWith<$Res> {
+  _$ResponseWidgetCopyWithImpl(this._value, this._then);
 
-  final Widget _value;
+  final ResponseWidget _value;
   // ignore: unused_field
-  final $Res Function(Widget) _then;
+  final $Res Function(ResponseWidget) _then;
 
   @override
   $Res call({
@@ -90,7 +93,7 @@ class _$WidgetCopyWithImpl<$Res> implements $WidgetCopyWith<$Res> {
       error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       startDate: startDate == freezed
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -104,25 +107,29 @@ class _$WidgetCopyWithImpl<$Res> implements $WidgetCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$WidgetCopyWith<$Res> implements $WidgetCopyWith<$Res> {
-  factory _$WidgetCopyWith(_Widget value, $Res Function(_Widget) then) =
-      __$WidgetCopyWithImpl<$Res>;
+abstract class _$ResponseWidgetCopyWith<$Res>
+    implements $ResponseWidgetCopyWith<$Res> {
+  factory _$ResponseWidgetCopyWith(
+          _ResponseWidget value, $Res Function(_ResponseWidget) then) =
+      __$ResponseWidgetCopyWithImpl<$Res>;
   @override
   $Res call(
       {int total,
-      dynamic error,
+      String? error,
       @JsonKey(name: "start_date") String? startDate,
       @JsonKey(name: "end_date") String? endDate});
 }
 
 /// @nodoc
-class __$WidgetCopyWithImpl<$Res> extends _$WidgetCopyWithImpl<$Res>
-    implements _$WidgetCopyWith<$Res> {
-  __$WidgetCopyWithImpl(_Widget _value, $Res Function(_Widget) _then)
-      : super(_value, (v) => _then(v as _Widget));
+class __$ResponseWidgetCopyWithImpl<$Res>
+    extends _$ResponseWidgetCopyWithImpl<$Res>
+    implements _$ResponseWidgetCopyWith<$Res> {
+  __$ResponseWidgetCopyWithImpl(
+      _ResponseWidget _value, $Res Function(_ResponseWidget) _then)
+      : super(_value, (v) => _then(v as _ResponseWidget));
 
   @override
-  _Widget get _value => super._value as _Widget;
+  _ResponseWidget get _value => super._value as _ResponseWidget;
 
   @override
   $Res call({
@@ -131,7 +138,7 @@ class __$WidgetCopyWithImpl<$Res> extends _$WidgetCopyWithImpl<$Res>
     Object? startDate = freezed,
     Object? endDate = freezed,
   }) {
-    return _then(_Widget(
+    return _then(_ResponseWidget(
       total == freezed
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -139,7 +146,7 @@ class __$WidgetCopyWithImpl<$Res> extends _$WidgetCopyWithImpl<$Res>
       error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       startDate == freezed
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -154,20 +161,22 @@ class __$WidgetCopyWithImpl<$Res> extends _$WidgetCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Widget with DiagnosticableTreeMixin implements _Widget {
-  const _$_Widget(
+class _$_ResponseWidget
+    with DiagnosticableTreeMixin
+    implements _ResponseWidget {
+  const _$_ResponseWidget(
       this.total,
       this.error,
       @JsonKey(name: "start_date") this.startDate,
       @JsonKey(name: "end_date") this.endDate);
 
-  factory _$_Widget.fromJson(Map<String, dynamic> json) =>
-      _$$_WidgetFromJson(json);
+  factory _$_ResponseWidget.fromJson(Map<String, dynamic> json) =>
+      _$$_ResponseWidgetFromJson(json);
 
   @override
   final int total;
   @override
-  final dynamic error;
+  final String? error;
   @override
   @JsonKey(name: "start_date")
   final String? startDate;
@@ -177,14 +186,14 @@ class _$_Widget with DiagnosticableTreeMixin implements _Widget {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Widget(total: $total, error: $error, startDate: $startDate, endDate: $endDate)';
+    return 'ResponseWidget(total: $total, error: $error, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'Widget'))
+      ..add(DiagnosticsProperty('type', 'ResponseWidget'))
       ..add(DiagnosticsProperty('total', total))
       ..add(DiagnosticsProperty('error', error))
       ..add(DiagnosticsProperty('startDate', startDate))
@@ -194,7 +203,7 @@ class _$_Widget with DiagnosticableTreeMixin implements _Widget {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Widget &&
+        (other is _ResponseWidget &&
             (identical(other.total, total) ||
                 const DeepCollectionEquality().equals(other.total, total)) &&
             (identical(other.error, error) ||
@@ -216,28 +225,29 @@ class _$_Widget with DiagnosticableTreeMixin implements _Widget {
 
   @JsonKey(ignore: true)
   @override
-  _$WidgetCopyWith<_Widget> get copyWith =>
-      __$WidgetCopyWithImpl<_Widget>(this, _$identity);
+  _$ResponseWidgetCopyWith<_ResponseWidget> get copyWith =>
+      __$ResponseWidgetCopyWithImpl<_ResponseWidget>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_WidgetToJson(this);
+    return _$$_ResponseWidgetToJson(this);
   }
 }
 
-abstract class _Widget implements Widget {
-  const factory _Widget(
+abstract class _ResponseWidget implements ResponseWidget {
+  const factory _ResponseWidget(
       int total,
-      dynamic error,
+      String? error,
       @JsonKey(name: "start_date") String? startDate,
-      @JsonKey(name: "end_date") String? endDate) = _$_Widget;
+      @JsonKey(name: "end_date") String? endDate) = _$_ResponseWidget;
 
-  factory _Widget.fromJson(Map<String, dynamic> json) = _$_Widget.fromJson;
+  factory _ResponseWidget.fromJson(Map<String, dynamic> json) =
+      _$_ResponseWidget.fromJson;
 
   @override
   int get total => throw _privateConstructorUsedError;
   @override
-  dynamic get error => throw _privateConstructorUsedError;
+  String? get error => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "start_date")
   String? get startDate => throw _privateConstructorUsedError;
@@ -246,5 +256,6 @@ abstract class _Widget implements Widget {
   String? get endDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$WidgetCopyWith<_Widget> get copyWith => throw _privateConstructorUsedError;
+  _$ResponseWidgetCopyWith<_ResponseWidget> get copyWith =>
+      throw _privateConstructorUsedError;
 }

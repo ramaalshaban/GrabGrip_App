@@ -1,10 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'listings_page.freezed.dart';
-
 part 'listings_page.g.dart';
 
 @freezed

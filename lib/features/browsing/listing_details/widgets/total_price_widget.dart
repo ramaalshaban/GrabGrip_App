@@ -6,6 +6,7 @@ import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/device.dart';
+import 'package:grab_grip/utils/functions.dart';
 
 class TotalPriceWidget extends StatelessWidget {
   const TotalPriceWidget({Key? key}) : super(key: key);
@@ -42,7 +43,17 @@ class TotalPriceWidget extends StatelessWidget {
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      context.router.push(const PlaceOrderScreenRoute());
+                      final userIssuesForPlacingAnOrder = ref
+                          .watch(listingDetailsProvider.notifier)
+                          .userIssuesPlacingAnOrder();
+                      if (userIssuesForPlacingAnOrder == null) {
+                        context.router.push(const PlaceOrderScreenRoute());
+                      } else {
+                        showWarningSnackBar(
+                          context,
+                          userIssuesForPlacingAnOrder,
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 4,

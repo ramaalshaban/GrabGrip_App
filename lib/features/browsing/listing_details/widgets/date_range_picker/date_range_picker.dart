@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
+import 'package:grab_grip/features/browsing/listing_details/models/widget/response_widget.dart';
 import 'package:grab_grip/features/browsing/listing_details/widgets/date_range_picker/booking_info_dialog.dart';
-import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
 import 'package:grab_grip/style/box_decorations.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text.dart';
@@ -19,14 +19,26 @@ class DateRangePicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //region Listeners
-    ref.listen<HttpRequestState>(httpRequestStateProvider,
-        (_, httpRequestState) {
-      httpRequestState.whenOrNull(
-        error: (errorMessage) => showSnackBarForError(
+    ref.listen<ResponseWidget?>(
+        listingDetailsProvider.select((value) => value.widget),
+        (_, responseWidget) {
+      if (responseWidget?.error != null) {
+        // when the user picks an invalid booking date, the api returns a successful response (200 OK) with
+        // an error field (inside the widget field) that contains the error.
+        // so in this case we have to show an error snack bar
+        // But, check this first:
+        if (ref.watch(listingDetailsProvider.notifier).startDate == null ||
+            ref.watch(listingDetailsProvider.notifier).endDate == null) {
+          // when user first opens up listing details screen for a listing of type rent, the error message "These dates cannot be booked" shows up since the api
+          // returns it when there are no start and end dates passed with the first getListing request (which is the case when the screen first shows up).
+          // to avoid showing the snack bar, the above if statement has been added (to check start and end date)
+          return;
+        }
+        showSnackBarForError(
           context,
-          errorMessage,
-        ),
-      );
+          responseWidget!.error!,
+        );
+      }
     });
     //endregion
     // the following commented code might be used later to set a maximum date for the picker

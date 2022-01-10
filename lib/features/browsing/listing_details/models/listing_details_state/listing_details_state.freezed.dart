@@ -35,7 +35,7 @@ class _$ListingDetailsStateTearOff {
       String? endDate,
       User? listingOwner,
       int? stockQuantity,
-      Widget? widget,
+      ResponseWidget? widget,
       DateTime? listingEndDate,
       PickerDateRange? pickerDateRange,
       String? formattedBookingDate,
@@ -100,7 +100,7 @@ mixin _$ListingDetailsState {
   String? get endDate => throw _privateConstructorUsedError;
   User? get listingOwner => throw _privateConstructorUsedError;
   int? get stockQuantity => throw _privateConstructorUsedError;
-  Widget? get widget => throw _privateConstructorUsedError;
+  ResponseWidget? get widget => throw _privateConstructorUsedError;
   DateTime? get listingEndDate => throw _privateConstructorUsedError;
   PickerDateRange? get pickerDateRange => throw _privateConstructorUsedError;
   String? get formattedBookingDate => throw _privateConstructorUsedError;
@@ -137,7 +137,7 @@ abstract class $ListingDetailsStateCopyWith<$Res> {
       String? endDate,
       User? listingOwner,
       int? stockQuantity,
-      Widget? widget,
+      ResponseWidget? widget,
       DateTime? listingEndDate,
       PickerDateRange? pickerDateRange,
       String? formattedBookingDate,
@@ -149,7 +149,7 @@ abstract class $ListingDetailsStateCopyWith<$Res> {
   $ListingCategoryCopyWith<$Res>? get category;
   $PricingModelCopyWith<$Res>? get pricingModel;
   $UserCopyWith<$Res>? get listingOwner;
-  $WidgetCopyWith<$Res>? get widget;
+  $ResponseWidgetCopyWith<$Res>? get widget;
 }
 
 /// @nodoc
@@ -261,7 +261,7 @@ class _$ListingDetailsStateCopyWithImpl<$Res>
       widget: widget == freezed
           ? _value.widget
           : widget // ignore: cast_nullable_to_non_nullable
-              as Widget?,
+              as ResponseWidget?,
       listingEndDate: listingEndDate == freezed
           ? _value.listingEndDate
           : listingEndDate // ignore: cast_nullable_to_non_nullable
@@ -327,12 +327,12 @@ class _$ListingDetailsStateCopyWithImpl<$Res>
   }
 
   @override
-  $WidgetCopyWith<$Res>? get widget {
+  $ResponseWidgetCopyWith<$Res>? get widget {
     if (_value.widget == null) {
       return null;
     }
 
-    return $WidgetCopyWith<$Res>(_value.widget!, (value) {
+    return $ResponseWidgetCopyWith<$Res>(_value.widget!, (value) {
       return _then(_value.copyWith(widget: value));
     });
   }
@@ -363,7 +363,7 @@ abstract class _$ListingDetailsStateCopyWith<$Res>
       String? endDate,
       User? listingOwner,
       int? stockQuantity,
-      Widget? widget,
+      ResponseWidget? widget,
       DateTime? listingEndDate,
       PickerDateRange? pickerDateRange,
       String? formattedBookingDate,
@@ -379,7 +379,7 @@ abstract class _$ListingDetailsStateCopyWith<$Res>
   @override
   $UserCopyWith<$Res>? get listingOwner;
   @override
-  $WidgetCopyWith<$Res>? get widget;
+  $ResponseWidgetCopyWith<$Res>? get widget;
 }
 
 /// @nodoc
@@ -493,7 +493,7 @@ class __$ListingDetailsStateCopyWithImpl<$Res>
       widget: widget == freezed
           ? _value.widget
           : widget // ignore: cast_nullable_to_non_nullable
-              as Widget?,
+              as ResponseWidget?,
       listingEndDate: listingEndDate == freezed
           ? _value.listingEndDate
           : listingEndDate // ignore: cast_nullable_to_non_nullable
@@ -600,7 +600,7 @@ class _$_ListingDetailsState
   @override
   final int? stockQuantity;
   @override
-  final Widget? widget;
+  final ResponseWidget? widget;
   @override
   final DateTime? listingEndDate;
   @override
@@ -777,7 +777,7 @@ abstract class _ListingDetailsState implements ListingDetailsState {
       String? endDate,
       User? listingOwner,
       int? stockQuantity,
-      Widget? widget,
+      ResponseWidget? widget,
       DateTime? listingEndDate,
       PickerDateRange? pickerDateRange,
       String? formattedBookingDate,
@@ -826,7 +826,7 @@ abstract class _ListingDetailsState implements ListingDetailsState {
   @override
   int? get stockQuantity => throw _privateConstructorUsedError;
   @override
-  Widget? get widget => throw _privateConstructorUsedError;
+  ResponseWidget? get widget => throw _privateConstructorUsedError;
   @override
   DateTime? get listingEndDate => throw _privateConstructorUsedError;
   @override
