@@ -32,14 +32,11 @@ class TotalPriceWidget extends StatelessWidget {
                         .select((state) => state.listingOwner),
                   ) !=
                   null;
-              return AnimatedOpacity(
-                opacity: listingOwnerFetched &&
-                        ref
-                            .watch(listingDetailsProvider.notifier)
-                            .userOwnsThisListing()
-                    ? 0.0
-                    : 1.0,
-                duration: duration300Milli,
+              return Visibility(
+                visible: listingOwnerFetched &&
+                    !ref
+                        .watch(listingDetailsProvider.notifier)
+                        .userOwnsThisListing(),
                 child: Container(
                   constraints: BoxConstraints(minWidth: screenWidth() / 2.7),
                   height: 60,
