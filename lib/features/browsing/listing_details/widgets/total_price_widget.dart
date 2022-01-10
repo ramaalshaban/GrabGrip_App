@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
+import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/device.dart';
@@ -42,7 +44,9 @@ class TotalPriceWidget extends StatelessWidget {
                   constraints: BoxConstraints(minWidth: screenWidth() / 2.7),
                   height: 60,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.router.push(const PlaceOrderScreenRoute());
+                    },
                     style: ElevatedButton.styleFrom(
                       elevation: 4,
                       primary: AppColors.white,
