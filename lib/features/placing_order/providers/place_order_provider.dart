@@ -5,6 +5,7 @@ import 'package:grab_grip/features/placing_order/models/address/address.dart';
 import 'package:grab_grip/features/placing_order/models/place_order_details_request/place_order_details_request.dart';
 import 'package:grab_grip/features/placing_order/models/place_order_details_response/place_order_details_response.dart';
 import 'package:grab_grip/features/placing_order/models/place_order_state/place_order_state.dart';
+import 'package:grab_grip/features/user_profile/payments/models/payment_method/payment_method.dart';
 import 'package:grab_grip/services/network/network_service.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
 import 'package:grab_grip/services/storage/app_shared_preferences.dart';
@@ -34,12 +35,6 @@ class PlaceOrderProvider extends StateNotifier<PlaceOrderState> {
 
   //endregion
 
-  set billingAndShippingAddressIsTheSame(int isTheSame) =>
-      state = state.copyWith(billingAndShippingAddressIsTheSame: isTheSame);
-
-  int get billingAndShippingAddressIsTheSame =>
-      state.billingAndShippingAddressIsTheSame;
-
   //region shipping address properties
 
   set shippingAddress(Address? shippingAddress) =>
@@ -53,6 +48,22 @@ class PlaceOrderProvider extends StateNotifier<PlaceOrderState> {
   CountryCode? get shippingCountry => state.shippingCountry;
 
 //endregion
+
+  set billingAndShippingAddressIsTheSame(int isTheSame) =>
+      state = state.copyWith(billingAndShippingAddressIsTheSame: isTheSame);
+
+  int get billingAndShippingAddressIsTheSame =>
+      state.billingAndShippingAddressIsTheSame;
+
+  set paymentMethods(List<PaymentMethod> paymentMethods) =>
+      state = state.copyWith(paymentMethods: paymentMethods);
+
+  List<PaymentMethod> get paymentMethods => state.paymentMethods;
+
+  set selectedPaymentMethodId(int? id) =>
+      state = state.copyWith(selectedPaymentMethodId: id);
+
+  int? get selectedPaymentMethodId => state.selectedPaymentMethodId;
 
 //endregion
 
@@ -103,5 +114,6 @@ class PlaceOrderProvider extends StateNotifier<PlaceOrderState> {
         :
         //if the user hasn't selected a country then set KSA as the default
         CountryCode(code: 'Sa');
+    paymentMethods = response.paymentMethods ?? [];
   }
 }

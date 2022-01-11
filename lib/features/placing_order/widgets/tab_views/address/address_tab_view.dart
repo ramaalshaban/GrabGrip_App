@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/placing_order/widgets/place_order_screen.dart';
-import 'package:grab_grip/features/placing_order/widgets/tab_views/address_tab_view/address_form.dart';
+import 'package:grab_grip/features/placing_order/widgets/tab_views/address/address_form.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/sized_box.dart';

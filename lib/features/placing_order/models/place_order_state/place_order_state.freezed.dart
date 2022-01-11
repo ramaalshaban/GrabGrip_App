@@ -22,13 +22,17 @@ class _$PlaceOrderStateTearOff {
       CountryCode? billingCountry,
       int billingAndShippingAddressIsTheSame = 1,
       Address? shippingAddress,
-      CountryCode? shippingCountry}) {
+      CountryCode? shippingCountry,
+      List<PaymentMethod> paymentMethods = const [],
+      int? selectedPaymentMethodId}) {
     return _PlaceOrderState(
       billingAddress: billingAddress,
       billingCountry: billingCountry,
       billingAndShippingAddressIsTheSame: billingAndShippingAddressIsTheSame,
       shippingAddress: shippingAddress,
       shippingCountry: shippingCountry,
+      paymentMethods: paymentMethods,
+      selectedPaymentMethodId: selectedPaymentMethodId,
     );
   }
 }
@@ -44,6 +48,8 @@ mixin _$PlaceOrderState {
       throw _privateConstructorUsedError;
   Address? get shippingAddress => throw _privateConstructorUsedError;
   CountryCode? get shippingCountry => throw _privateConstructorUsedError;
+  List<PaymentMethod> get paymentMethods => throw _privateConstructorUsedError;
+  int? get selectedPaymentMethodId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PlaceOrderStateCopyWith<PlaceOrderState> get copyWith =>
@@ -60,7 +66,9 @@ abstract class $PlaceOrderStateCopyWith<$Res> {
       CountryCode? billingCountry,
       int billingAndShippingAddressIsTheSame,
       Address? shippingAddress,
-      CountryCode? shippingCountry});
+      CountryCode? shippingCountry,
+      List<PaymentMethod> paymentMethods,
+      int? selectedPaymentMethodId});
 
   $AddressCopyWith<$Res>? get billingAddress;
   $AddressCopyWith<$Res>? get shippingAddress;
@@ -82,6 +90,8 @@ class _$PlaceOrderStateCopyWithImpl<$Res>
     Object? billingAndShippingAddressIsTheSame = freezed,
     Object? shippingAddress = freezed,
     Object? shippingCountry = freezed,
+    Object? paymentMethods = freezed,
+    Object? selectedPaymentMethodId = freezed,
   }) {
     return _then(_value.copyWith(
       billingAddress: billingAddress == freezed
@@ -105,6 +115,14 @@ class _$PlaceOrderStateCopyWithImpl<$Res>
           ? _value.shippingCountry
           : shippingCountry // ignore: cast_nullable_to_non_nullable
               as CountryCode?,
+      paymentMethods: paymentMethods == freezed
+          ? _value.paymentMethods
+          : paymentMethods // ignore: cast_nullable_to_non_nullable
+              as List<PaymentMethod>,
+      selectedPaymentMethodId: selectedPaymentMethodId == freezed
+          ? _value.selectedPaymentMethodId
+          : selectedPaymentMethodId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 
@@ -143,7 +161,9 @@ abstract class _$PlaceOrderStateCopyWith<$Res>
       CountryCode? billingCountry,
       int billingAndShippingAddressIsTheSame,
       Address? shippingAddress,
-      CountryCode? shippingCountry});
+      CountryCode? shippingCountry,
+      List<PaymentMethod> paymentMethods,
+      int? selectedPaymentMethodId});
 
   @override
   $AddressCopyWith<$Res>? get billingAddress;
@@ -169,6 +189,8 @@ class __$PlaceOrderStateCopyWithImpl<$Res>
     Object? billingAndShippingAddressIsTheSame = freezed,
     Object? shippingAddress = freezed,
     Object? shippingCountry = freezed,
+    Object? paymentMethods = freezed,
+    Object? selectedPaymentMethodId = freezed,
   }) {
     return _then(_PlaceOrderState(
       billingAddress: billingAddress == freezed
@@ -192,6 +214,14 @@ class __$PlaceOrderStateCopyWithImpl<$Res>
           ? _value.shippingCountry
           : shippingCountry // ignore: cast_nullable_to_non_nullable
               as CountryCode?,
+      paymentMethods: paymentMethods == freezed
+          ? _value.paymentMethods
+          : paymentMethods // ignore: cast_nullable_to_non_nullable
+              as List<PaymentMethod>,
+      selectedPaymentMethodId: selectedPaymentMethodId == freezed
+          ? _value.selectedPaymentMethodId
+          : selectedPaymentMethodId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -204,7 +234,9 @@ class _$_PlaceOrderState implements _PlaceOrderState {
       this.billingCountry,
       this.billingAndShippingAddressIsTheSame = 1,
       this.shippingAddress,
-      this.shippingCountry});
+      this.shippingCountry,
+      this.paymentMethods = const [],
+      this.selectedPaymentMethodId});
 
   @override
   final Address? billingAddress;
@@ -217,10 +249,15 @@ class _$_PlaceOrderState implements _PlaceOrderState {
   final Address? shippingAddress;
   @override
   final CountryCode? shippingCountry;
+  @JsonKey(defaultValue: const [])
+  @override
+  final List<PaymentMethod> paymentMethods;
+  @override
+  final int? selectedPaymentMethodId;
 
   @override
   String toString() {
-    return 'PlaceOrderState(billingAddress: $billingAddress, billingCountry: $billingCountry, billingAndShippingAddressIsTheSame: $billingAndShippingAddressIsTheSame, shippingAddress: $shippingAddress, shippingCountry: $shippingCountry)';
+    return 'PlaceOrderState(billingAddress: $billingAddress, billingCountry: $billingCountry, billingAndShippingAddressIsTheSame: $billingAndShippingAddressIsTheSame, shippingAddress: $shippingAddress, shippingCountry: $shippingCountry, paymentMethods: $paymentMethods, selectedPaymentMethodId: $selectedPaymentMethodId)';
   }
 
   @override
@@ -243,7 +280,14 @@ class _$_PlaceOrderState implements _PlaceOrderState {
                     .equals(other.shippingAddress, shippingAddress)) &&
             (identical(other.shippingCountry, shippingCountry) ||
                 const DeepCollectionEquality()
-                    .equals(other.shippingCountry, shippingCountry)));
+                    .equals(other.shippingCountry, shippingCountry)) &&
+            (identical(other.paymentMethods, paymentMethods) ||
+                const DeepCollectionEquality()
+                    .equals(other.paymentMethods, paymentMethods)) &&
+            (identical(
+                    other.selectedPaymentMethodId, selectedPaymentMethodId) ||
+                const DeepCollectionEquality().equals(
+                    other.selectedPaymentMethodId, selectedPaymentMethodId)));
   }
 
   @override
@@ -253,7 +297,9 @@ class _$_PlaceOrderState implements _PlaceOrderState {
       const DeepCollectionEquality().hash(billingCountry) ^
       const DeepCollectionEquality().hash(billingAndShippingAddressIsTheSame) ^
       const DeepCollectionEquality().hash(shippingAddress) ^
-      const DeepCollectionEquality().hash(shippingCountry);
+      const DeepCollectionEquality().hash(shippingCountry) ^
+      const DeepCollectionEquality().hash(paymentMethods) ^
+      const DeepCollectionEquality().hash(selectedPaymentMethodId);
 
   @JsonKey(ignore: true)
   @override
@@ -267,7 +313,9 @@ abstract class _PlaceOrderState implements PlaceOrderState {
       CountryCode? billingCountry,
       int billingAndShippingAddressIsTheSame,
       Address? shippingAddress,
-      CountryCode? shippingCountry}) = _$_PlaceOrderState;
+      CountryCode? shippingCountry,
+      List<PaymentMethod> paymentMethods,
+      int? selectedPaymentMethodId}) = _$_PlaceOrderState;
 
   @override
   Address? get billingAddress => throw _privateConstructorUsedError;
@@ -280,6 +328,10 @@ abstract class _PlaceOrderState implements PlaceOrderState {
   Address? get shippingAddress => throw _privateConstructorUsedError;
   @override
   CountryCode? get shippingCountry => throw _privateConstructorUsedError;
+  @override
+  List<PaymentMethod> get paymentMethods => throw _privateConstructorUsedError;
+  @override
+  int? get selectedPaymentMethodId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PlaceOrderStateCopyWith<_PlaceOrderState> get copyWith =>
