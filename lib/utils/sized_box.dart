@@ -7,7 +7,11 @@ SizedBox height48() => const SizedBox(height: 48.0);
 
 SizedBox height36() => const SizedBox(height: 36.0);
 
+SizedBox height30() => const SizedBox(height: 30.0);
+
 SizedBox height24() => const SizedBox(height: 24.0);
+
+SizedBox height20() => const SizedBox(height: 20.0);
 
 SizedBox height18() => const SizedBox(height: 18.0);
 

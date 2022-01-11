@@ -4,9 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/authentication/utils/text_field_validators.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/post_listing_step_four_screen.dart';
-import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/widgets/country_picker.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/widgets/date_picker.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/widgets/tags_widget.dart';
+import 'package:grab_grip/shared/widgets/country_picker/country_picker.dart';
+import 'package:grab_grip/shared/widgets/country_picker/country_picker_reason.dart';
 import 'package:grab_grip/shared/widgets/location_picker/location_picker.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/style/text_fields.dart';
@@ -130,7 +131,10 @@ class _DetailsTabViewState extends ConsumerState<DetailsTabView>
                     label: "Location",
                   ),
                   height36(),
-                  const CountryPicker(),
+                  const CountryPicker(
+                    countryPickingReason:
+                        CountryPickerReason.forPostingOrEditing(),
+                  ),
                   height24(),
                   //region City text field
                   TextFormField(

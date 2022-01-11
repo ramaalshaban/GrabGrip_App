@@ -25,12 +25,14 @@ class _$PaymentMethodTearOff {
       int id,
       String key,
       @JsonKey(name: 'display_name') String displayName,
+      @JsonKey(name: 'payment_instructions') String paymentInstructions,
       @JsonKey(name: 'identifier') Identifier? identifier,
       String description) {
     return _PaymentMethod(
       id,
       key,
       displayName,
+      paymentInstructions,
       identifier,
       description,
     );
@@ -50,6 +52,8 @@ mixin _$PaymentMethod {
   String get key => throw _privateConstructorUsedError;
   @JsonKey(name: 'display_name')
   String get displayName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'payment_instructions')
+  String get paymentInstructions => throw _privateConstructorUsedError;
   @JsonKey(name: 'identifier')
   Identifier? get identifier => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
@@ -69,6 +73,7 @@ abstract class $PaymentMethodCopyWith<$Res> {
       {int id,
       String key,
       @JsonKey(name: 'display_name') String displayName,
+      @JsonKey(name: 'payment_instructions') String paymentInstructions,
       @JsonKey(name: 'identifier') Identifier? identifier,
       String description});
 
@@ -89,6 +94,7 @@ class _$PaymentMethodCopyWithImpl<$Res>
     Object? id = freezed,
     Object? key = freezed,
     Object? displayName = freezed,
+    Object? paymentInstructions = freezed,
     Object? identifier = freezed,
     Object? description = freezed,
   }) {
@@ -104,6 +110,10 @@ class _$PaymentMethodCopyWithImpl<$Res>
       displayName: displayName == freezed
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
+              as String,
+      paymentInstructions: paymentInstructions == freezed
+          ? _value.paymentInstructions
+          : paymentInstructions // ignore: cast_nullable_to_non_nullable
               as String,
       identifier: identifier == freezed
           ? _value.identifier
@@ -139,6 +149,7 @@ abstract class _$PaymentMethodCopyWith<$Res>
       {int id,
       String key,
       @JsonKey(name: 'display_name') String displayName,
+      @JsonKey(name: 'payment_instructions') String paymentInstructions,
       @JsonKey(name: 'identifier') Identifier? identifier,
       String description});
 
@@ -162,6 +173,7 @@ class __$PaymentMethodCopyWithImpl<$Res>
     Object? id = freezed,
     Object? key = freezed,
     Object? displayName = freezed,
+    Object? paymentInstructions = freezed,
     Object? identifier = freezed,
     Object? description = freezed,
   }) {
@@ -177,6 +189,10 @@ class __$PaymentMethodCopyWithImpl<$Res>
       displayName == freezed
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
+              as String,
+      paymentInstructions == freezed
+          ? _value.paymentInstructions
+          : paymentInstructions // ignore: cast_nullable_to_non_nullable
               as String,
       identifier == freezed
           ? _value.identifier
@@ -197,6 +213,7 @@ class _$_PaymentMethod with DiagnosticableTreeMixin implements _PaymentMethod {
       this.id,
       this.key,
       @JsonKey(name: 'display_name') this.displayName,
+      @JsonKey(name: 'payment_instructions') this.paymentInstructions,
       @JsonKey(name: 'identifier') this.identifier,
       this.description);
 
@@ -211,6 +228,9 @@ class _$_PaymentMethod with DiagnosticableTreeMixin implements _PaymentMethod {
   @JsonKey(name: 'display_name')
   final String displayName;
   @override
+  @JsonKey(name: 'payment_instructions')
+  final String paymentInstructions;
+  @override
   @JsonKey(name: 'identifier')
   final Identifier? identifier;
   @override
@@ -218,7 +238,7 @@ class _$_PaymentMethod with DiagnosticableTreeMixin implements _PaymentMethod {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PaymentMethod(id: $id, key: $key, displayName: $displayName, identifier: $identifier, description: $description)';
+    return 'PaymentMethod(id: $id, key: $key, displayName: $displayName, paymentInstructions: $paymentInstructions, identifier: $identifier, description: $description)';
   }
 
   @override
@@ -229,6 +249,7 @@ class _$_PaymentMethod with DiagnosticableTreeMixin implements _PaymentMethod {
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('key', key))
       ..add(DiagnosticsProperty('displayName', displayName))
+      ..add(DiagnosticsProperty('paymentInstructions', paymentInstructions))
       ..add(DiagnosticsProperty('identifier', identifier))
       ..add(DiagnosticsProperty('description', description));
   }
@@ -244,6 +265,9 @@ class _$_PaymentMethod with DiagnosticableTreeMixin implements _PaymentMethod {
             (identical(other.displayName, displayName) ||
                 const DeepCollectionEquality()
                     .equals(other.displayName, displayName)) &&
+            (identical(other.paymentInstructions, paymentInstructions) ||
+                const DeepCollectionEquality()
+                    .equals(other.paymentInstructions, paymentInstructions)) &&
             (identical(other.identifier, identifier) ||
                 const DeepCollectionEquality()
                     .equals(other.identifier, identifier)) &&
@@ -258,6 +282,7 @@ class _$_PaymentMethod with DiagnosticableTreeMixin implements _PaymentMethod {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(key) ^
       const DeepCollectionEquality().hash(displayName) ^
+      const DeepCollectionEquality().hash(paymentInstructions) ^
       const DeepCollectionEquality().hash(identifier) ^
       const DeepCollectionEquality().hash(description);
 
@@ -277,6 +302,7 @@ abstract class _PaymentMethod implements PaymentMethod {
       int id,
       String key,
       @JsonKey(name: 'display_name') String displayName,
+      @JsonKey(name: 'payment_instructions') String paymentInstructions,
       @JsonKey(name: 'identifier') Identifier? identifier,
       String description) = _$_PaymentMethod;
 
@@ -290,6 +316,9 @@ abstract class _PaymentMethod implements PaymentMethod {
   @override
   @JsonKey(name: 'display_name')
   String get displayName => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'payment_instructions')
+  String get paymentInstructions => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'identifier')
   Identifier? get identifier => throw _privateConstructorUsedError;

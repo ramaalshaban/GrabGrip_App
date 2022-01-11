@@ -645,6 +645,43 @@ class _GrabGripApi implements GrabGripApi {
     return httpResponse;
   }
 
+  @override
+  Future<HttpResponse<PlaceOrderDetailsResponse>> getPlaceOrderDetails(token,
+      {required hash,
+      quantity = 1,
+      shippingOptionId,
+      variants,
+      additionalOptions,
+      additionalOptionsMeta,
+      startDate,
+      endDate,
+      range}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'quantity': quantity,
+      r'shipping_option': shippingOptionId,
+      r'variant': variants,
+      r'additional_option': additionalOptions,
+      r'additional_options_meta': additionalOptionsMeta,
+      r'start_date': startDate,
+      r'end_date': endDate,
+      r'range': range
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<PlaceOrderDetailsResponse>>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/api/v1/checkout/$hash',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PlaceOrderDetailsResponse.fromJson(_result.data!);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

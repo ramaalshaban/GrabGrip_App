@@ -47,6 +47,9 @@ class TotalPriceWidget extends StatelessWidget {
                           .watch(listingDetailsProvider.notifier)
                           .userIssuesPlacingAnOrder();
                       if (userIssuesForPlacingAnOrder == null) {
+                        ref
+                            .watch(placeOrderProvider.notifier)
+                            .getPlaceOrderDetails();
                         context.router.push(const PlaceOrderScreenRoute());
                       } else {
                         showWarningSnackBar(

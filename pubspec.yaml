@@ -58,7 +58,7 @@ dependencies:
   location: ^4.3.0
   # material_floating_search_bar is used in browse screen for filtering gears by their locations
   material_floating_search_bar: ^0.3.5
-  # multiple_result makes it easy to return two valued from a function
+  # multiple_result makes it easy to return two values from a function
   multiple_result: ^1.0.4
   # permission_handler is for asking the user for permissions while the app is running
   permission_handler: ^8.2.6

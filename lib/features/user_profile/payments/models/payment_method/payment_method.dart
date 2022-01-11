@@ -11,6 +11,7 @@ class PaymentMethod with _$PaymentMethod {
     int id,
     String key,
     @JsonKey(name: 'display_name') String displayName,
+    @JsonKey(name: 'payment_instructions') String paymentInstructions,
     @JsonKey(name: 'identifier') Identifier? identifier,
     String description,
   ) = _PaymentMethod;

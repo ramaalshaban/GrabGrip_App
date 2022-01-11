@@ -16,7 +16,9 @@ import 'package:grab_grip/features/browsing/listing_details/providers/listing_de
 import 'package:grab_grip/features/browsing/listing_details/providers/reviews_provider.dart';
 import 'package:grab_grip/features/feedback/shared/models/feedback_state.dart';
 import 'package:grab_grip/features/feedback/shared/providers/feedback_provider.dart';
+import 'package:grab_grip/features/placing_order/models/place_order_state/place_order_state.dart';
 import 'package:grab_grip/features/placing_order/models/place_order_step_number/place_order_step_number.dart';
+import 'package:grab_grip/features/placing_order/providers/place_order_provider.dart';
 import 'package:grab_grip/features/placing_order/providers/place_order_step_number_provider.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_availability_model/post_listing_availability_state.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_state/post_listing_state.dart';
@@ -185,4 +187,11 @@ final placeOrderStepProvider =
     StateNotifierProvider<PlaceOrderStepNumberProvider, PlaceOrderStepNumber>(
         (_) {
   return PlaceOrderStepNumberProvider();
+});
+
+final placeOrderProvider =
+    StateNotifierProvider<PlaceOrderProvider, PlaceOrderState>((ref) {
+  final httpProvider = ref.watch(httpRequestStateProvider.notifier);
+  final detailsProvider = ref.watch(listingDetailsProvider.notifier);
+  return PlaceOrderProvider(httpProvider, detailsProvider);
 });

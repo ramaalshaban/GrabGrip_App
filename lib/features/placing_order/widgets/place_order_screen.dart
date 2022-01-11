@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
-import 'package:grab_grip/features/placing_order/widgets/tab_views/address_tab_view.dart';
+import 'package:grab_grip/features/placing_order/widgets/tab_views/address_tab_view/address_tab_view.dart';
 import 'package:grab_grip/features/placing_order/widgets/tab_views/payment_tab_view.dart';
 import 'package:grab_grip/features/placing_order/widgets/tab_views/summary_tab_view.dart';
 import 'package:grab_grip/shared/widgets/continue_button.dart';
@@ -59,7 +59,7 @@ class PlaceOrderScreen extends StatelessWidget {
                     ),
                   ),
                   //endregion
-                  height48(),
+                  height30(),
                   //region Tab views
                   const Expanded(
                     flex: 14,
@@ -151,10 +151,8 @@ class PlaceOrderScreen extends StatelessWidget {
                                           buttonText: "Next",
                                           onClickAction: () {
                                             ref
-                                                .watch(
-                                                  placeOrderStepProvider
-                                                      .notifier,
-                                                )
+                                                .watch(placeOrderStepProvider
+                                                    .notifier)
                                                 .next();
                                           },
                                         ),

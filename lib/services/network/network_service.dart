@@ -17,6 +17,8 @@ import 'package:grab_grip/features/browsing/listing_details/models/reviews_page/
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
 import 'package:grab_grip/features/feedback/report_listing/models/report_reasons_response/report_reasons_response.dart';
 import 'package:grab_grip/features/feedback/report_listing/models/report_request/report_listing_request.dart';
+import 'package:grab_grip/features/placing_order/models/place_order_details_request/place_order_details_request.dart';
+import 'package:grab_grip/features/placing_order/models/place_order_details_response/place_order_details_response.dart';
 import 'package:grab_grip/features/post_listing/models/post_edit_listing_response/post_edit_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
@@ -573,6 +575,50 @@ class NetworkService {
       return Error(errorMessage);
     }
   }
+
+  //endregion
+
+  //region place order
+
+  Future<Result<String, PlaceOrderDetailsResponse>> getPlaceOrderDetails({
+    required String token,
+    required PlaceOrderDetailsRequest request,
+  }) async {
+    try {
+      final getPlaceOrderDetailsCall = await _grabGripApi.getPlaceOrderDetails(
+        "Bearer $token",
+        hash: request.hash!,
+        quantity: request.selectedQuantity,
+        shippingOptionId: request.selectedShippingOptionId,
+        variants: request.selectedVariantOptions,
+        additionalOptions: request.selectedAdditionalOptions,
+        additionalOptionsMeta: request.selectedAdditionalOptionsMeta,
+        startDate: request.startDate,
+        endDate: request.endDate,
+        range: "${request.startDate} to ${request.endDate}",
+      );
+      return Success(getPlaceOrderDetailsCall.data);
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+  // Future<Result<String, PostEditListingResponse>> placeOrder(
+  //   String token,
+  //   PlaceOrderRequest placeOrderRequest,
+  // ) async {
+  //   try {
+  //     final placeOrderCall = await _grabGripApi.placeOrder(
+  //       "Bearer $token",
+  //       placeOrderRequest,
+  //     );
+  //     return Success(placeOrderCall.data);
+  //   } catch (error) {
+  //     final errorMessage = _errorHandler(error as DioError);
+  //     return Error(errorMessage);
+  //   }
+  // }
 
   //endregion
 

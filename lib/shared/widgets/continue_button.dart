@@ -22,7 +22,9 @@ class ContinueButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(httpRequestStateProvider).maybeWhen(
           loading: () => const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              color: AppColors.purple,
+            ),
           ),
           orElse: () => Container(
             padding: const EdgeInsets.symmetric(horizontal: 12),

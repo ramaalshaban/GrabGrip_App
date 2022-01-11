@@ -11,6 +11,7 @@ _$_PaymentMethod _$$_PaymentMethodFromJson(Map<String, dynamic> json) =>
       json['id'] as int,
       json['key'] as String,
       json['display_name'] as String,
+      json['payment_instructions'] as String,
       json['identifier'] == null
           ? null
           : Identifier.fromJson(json['identifier'] as Map<String, dynamic>),
@@ -22,6 +23,7 @@ Map<String, dynamic> _$$_PaymentMethodToJson(_$_PaymentMethod instance) =>
       'id': instance.id,
       'key': instance.key,
       'display_name': instance.displayName,
+      'payment_instructions': instance.paymentInstructions,
       'identifier': instance.identifier,
       'description': instance.description,
     };

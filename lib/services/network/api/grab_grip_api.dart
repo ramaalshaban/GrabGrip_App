@@ -13,6 +13,7 @@ import 'package:grab_grip/features/browsing/listing_details/models/reviews_respo
 import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact_us_form.dart';
 import 'package:grab_grip/features/feedback/report_listing/models/report_reasons_response/report_reasons_response.dart';
 import 'package:grab_grip/features/feedback/report_listing/models/report_request/report_listing_request.dart';
+import 'package:grab_grip/features/placing_order/models/place_order_details_response/place_order_details_response.dart';
 import 'package:grab_grip/features/post_listing/models/post_edit_listing_response/post_edit_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
@@ -268,6 +269,23 @@ abstract class GrabGripApi {
     @Query("page") required int pageNumber,
   });
 
+//endregion
+
+  //region place order
+  @GET("/api/v1/checkout/{hash}")
+  Future<HttpResponse<PlaceOrderDetailsResponse>> getPlaceOrderDetails(
+    @Header("Authorization") String? token, {
+    @Path("hash") required String hash,
+    @Query("quantity") int? quantity = 1,
+    @Query("shipping_option") int? shippingOptionId,
+    @Query("variant") Map<String, String>? variants,
+    @Query("additional_option") Map<String, int>? additionalOptions,
+    @Query("additional_options_meta")
+        Map<String, Map<String, int>>? additionalOptionsMeta,
+    @Query("start_date") String? startDate,
+    @Query("end_date") String? endDate,
+    @Query("range") String? range,
+  });
 //endregion
 
 }
