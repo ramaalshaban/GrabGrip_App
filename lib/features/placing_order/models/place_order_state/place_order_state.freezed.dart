@@ -18,33 +18,17 @@ class _$PlaceOrderStateTearOff {
   const _$PlaceOrderStateTearOff();
 
   _PlaceOrderState call(
-      {String? fullName,
-      String? address,
-      String? city,
-      String? stateName,
-      String? postCode,
-      CountryCode? country,
+      {Address? billingAddress,
+      CountryCode? billingCountry,
       int billingAndShippingAddressIsTheSame = 1,
-      String? fullNameShipping,
-      String? addressShipping,
-      String? cityShipping,
-      String? stateNameShipping,
-      String? postCodeShipping,
-      CountryCode? countryShipping}) {
+      Address? shippingAddress,
+      CountryCode? shippingCountry}) {
     return _PlaceOrderState(
-      fullName: fullName,
-      address: address,
-      city: city,
-      stateName: stateName,
-      postCode: postCode,
-      country: country,
+      billingAddress: billingAddress,
+      billingCountry: billingCountry,
       billingAndShippingAddressIsTheSame: billingAndShippingAddressIsTheSame,
-      fullNameShipping: fullNameShipping,
-      addressShipping: addressShipping,
-      cityShipping: cityShipping,
-      stateNameShipping: stateNameShipping,
-      postCodeShipping: postCodeShipping,
-      countryShipping: countryShipping,
+      shippingAddress: shippingAddress,
+      shippingCountry: shippingCountry,
     );
   }
 }
@@ -54,21 +38,12 @@ const $PlaceOrderState = _$PlaceOrderStateTearOff();
 
 /// @nodoc
 mixin _$PlaceOrderState {
-  String? get fullName => throw _privateConstructorUsedError;
-  String? get address => throw _privateConstructorUsedError;
-  String? get city =>
-      throw _privateConstructorUsedError; //I call it stateName instead of state because state is a reserved word in the provider
-  String? get stateName => throw _privateConstructorUsedError;
-  String? get postCode => throw _privateConstructorUsedError;
-  CountryCode? get country => throw _privateConstructorUsedError;
+  Address? get billingAddress => throw _privateConstructorUsedError;
+  CountryCode? get billingCountry => throw _privateConstructorUsedError;
   int get billingAndShippingAddressIsTheSame =>
       throw _privateConstructorUsedError;
-  String? get fullNameShipping => throw _privateConstructorUsedError;
-  String? get addressShipping => throw _privateConstructorUsedError;
-  String? get cityShipping => throw _privateConstructorUsedError;
-  String? get stateNameShipping => throw _privateConstructorUsedError;
-  String? get postCodeShipping => throw _privateConstructorUsedError;
-  CountryCode? get countryShipping => throw _privateConstructorUsedError;
+  Address? get shippingAddress => throw _privateConstructorUsedError;
+  CountryCode? get shippingCountry => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PlaceOrderStateCopyWith<PlaceOrderState> get copyWith =>
@@ -81,19 +56,14 @@ abstract class $PlaceOrderStateCopyWith<$Res> {
           PlaceOrderState value, $Res Function(PlaceOrderState) then) =
       _$PlaceOrderStateCopyWithImpl<$Res>;
   $Res call(
-      {String? fullName,
-      String? address,
-      String? city,
-      String? stateName,
-      String? postCode,
-      CountryCode? country,
+      {Address? billingAddress,
+      CountryCode? billingCountry,
       int billingAndShippingAddressIsTheSame,
-      String? fullNameShipping,
-      String? addressShipping,
-      String? cityShipping,
-      String? stateNameShipping,
-      String? postCodeShipping,
-      CountryCode? countryShipping});
+      Address? shippingAddress,
+      CountryCode? shippingCountry});
+
+  $AddressCopyWith<$Res>? get billingAddress;
+  $AddressCopyWith<$Res>? get shippingAddress;
 }
 
 /// @nodoc
@@ -107,75 +77,57 @@ class _$PlaceOrderStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? fullName = freezed,
-    Object? address = freezed,
-    Object? city = freezed,
-    Object? stateName = freezed,
-    Object? postCode = freezed,
-    Object? country = freezed,
+    Object? billingAddress = freezed,
+    Object? billingCountry = freezed,
     Object? billingAndShippingAddressIsTheSame = freezed,
-    Object? fullNameShipping = freezed,
-    Object? addressShipping = freezed,
-    Object? cityShipping = freezed,
-    Object? stateNameShipping = freezed,
-    Object? postCodeShipping = freezed,
-    Object? countryShipping = freezed,
+    Object? shippingAddress = freezed,
+    Object? shippingCountry = freezed,
   }) {
     return _then(_value.copyWith(
-      fullName: fullName == freezed
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      address: address == freezed
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String?,
-      city: city == freezed
-          ? _value.city
-          : city // ignore: cast_nullable_to_non_nullable
-              as String?,
-      stateName: stateName == freezed
-          ? _value.stateName
-          : stateName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      postCode: postCode == freezed
-          ? _value.postCode
-          : postCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      country: country == freezed
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
+      billingAddress: billingAddress == freezed
+          ? _value.billingAddress
+          : billingAddress // ignore: cast_nullable_to_non_nullable
+              as Address?,
+      billingCountry: billingCountry == freezed
+          ? _value.billingCountry
+          : billingCountry // ignore: cast_nullable_to_non_nullable
               as CountryCode?,
       billingAndShippingAddressIsTheSame: billingAndShippingAddressIsTheSame ==
               freezed
           ? _value.billingAndShippingAddressIsTheSame
           : billingAndShippingAddressIsTheSame // ignore: cast_nullable_to_non_nullable
               as int,
-      fullNameShipping: fullNameShipping == freezed
-          ? _value.fullNameShipping
-          : fullNameShipping // ignore: cast_nullable_to_non_nullable
-              as String?,
-      addressShipping: addressShipping == freezed
-          ? _value.addressShipping
-          : addressShipping // ignore: cast_nullable_to_non_nullable
-              as String?,
-      cityShipping: cityShipping == freezed
-          ? _value.cityShipping
-          : cityShipping // ignore: cast_nullable_to_non_nullable
-              as String?,
-      stateNameShipping: stateNameShipping == freezed
-          ? _value.stateNameShipping
-          : stateNameShipping // ignore: cast_nullable_to_non_nullable
-              as String?,
-      postCodeShipping: postCodeShipping == freezed
-          ? _value.postCodeShipping
-          : postCodeShipping // ignore: cast_nullable_to_non_nullable
-              as String?,
-      countryShipping: countryShipping == freezed
-          ? _value.countryShipping
-          : countryShipping // ignore: cast_nullable_to_non_nullable
+      shippingAddress: shippingAddress == freezed
+          ? _value.shippingAddress
+          : shippingAddress // ignore: cast_nullable_to_non_nullable
+              as Address?,
+      shippingCountry: shippingCountry == freezed
+          ? _value.shippingCountry
+          : shippingCountry // ignore: cast_nullable_to_non_nullable
               as CountryCode?,
     ));
+  }
+
+  @override
+  $AddressCopyWith<$Res>? get billingAddress {
+    if (_value.billingAddress == null) {
+      return null;
+    }
+
+    return $AddressCopyWith<$Res>(_value.billingAddress!, (value) {
+      return _then(_value.copyWith(billingAddress: value));
+    });
+  }
+
+  @override
+  $AddressCopyWith<$Res>? get shippingAddress {
+    if (_value.shippingAddress == null) {
+      return null;
+    }
+
+    return $AddressCopyWith<$Res>(_value.shippingAddress!, (value) {
+      return _then(_value.copyWith(shippingAddress: value));
+    });
   }
 }
 
@@ -187,19 +139,16 @@ abstract class _$PlaceOrderStateCopyWith<$Res>
       __$PlaceOrderStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? fullName,
-      String? address,
-      String? city,
-      String? stateName,
-      String? postCode,
-      CountryCode? country,
+      {Address? billingAddress,
+      CountryCode? billingCountry,
       int billingAndShippingAddressIsTheSame,
-      String? fullNameShipping,
-      String? addressShipping,
-      String? cityShipping,
-      String? stateNameShipping,
-      String? postCodeShipping,
-      CountryCode? countryShipping});
+      Address? shippingAddress,
+      CountryCode? shippingCountry});
+
+  @override
+  $AddressCopyWith<$Res>? get billingAddress;
+  @override
+  $AddressCopyWith<$Res>? get shippingAddress;
 }
 
 /// @nodoc
@@ -215,73 +164,33 @@ class __$PlaceOrderStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? fullName = freezed,
-    Object? address = freezed,
-    Object? city = freezed,
-    Object? stateName = freezed,
-    Object? postCode = freezed,
-    Object? country = freezed,
+    Object? billingAddress = freezed,
+    Object? billingCountry = freezed,
     Object? billingAndShippingAddressIsTheSame = freezed,
-    Object? fullNameShipping = freezed,
-    Object? addressShipping = freezed,
-    Object? cityShipping = freezed,
-    Object? stateNameShipping = freezed,
-    Object? postCodeShipping = freezed,
-    Object? countryShipping = freezed,
+    Object? shippingAddress = freezed,
+    Object? shippingCountry = freezed,
   }) {
     return _then(_PlaceOrderState(
-      fullName: fullName == freezed
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      address: address == freezed
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String?,
-      city: city == freezed
-          ? _value.city
-          : city // ignore: cast_nullable_to_non_nullable
-              as String?,
-      stateName: stateName == freezed
-          ? _value.stateName
-          : stateName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      postCode: postCode == freezed
-          ? _value.postCode
-          : postCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      country: country == freezed
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
+      billingAddress: billingAddress == freezed
+          ? _value.billingAddress
+          : billingAddress // ignore: cast_nullable_to_non_nullable
+              as Address?,
+      billingCountry: billingCountry == freezed
+          ? _value.billingCountry
+          : billingCountry // ignore: cast_nullable_to_non_nullable
               as CountryCode?,
       billingAndShippingAddressIsTheSame: billingAndShippingAddressIsTheSame ==
               freezed
           ? _value.billingAndShippingAddressIsTheSame
           : billingAndShippingAddressIsTheSame // ignore: cast_nullable_to_non_nullable
               as int,
-      fullNameShipping: fullNameShipping == freezed
-          ? _value.fullNameShipping
-          : fullNameShipping // ignore: cast_nullable_to_non_nullable
-              as String?,
-      addressShipping: addressShipping == freezed
-          ? _value.addressShipping
-          : addressShipping // ignore: cast_nullable_to_non_nullable
-              as String?,
-      cityShipping: cityShipping == freezed
-          ? _value.cityShipping
-          : cityShipping // ignore: cast_nullable_to_non_nullable
-              as String?,
-      stateNameShipping: stateNameShipping == freezed
-          ? _value.stateNameShipping
-          : stateNameShipping // ignore: cast_nullable_to_non_nullable
-              as String?,
-      postCodeShipping: postCodeShipping == freezed
-          ? _value.postCodeShipping
-          : postCodeShipping // ignore: cast_nullable_to_non_nullable
-              as String?,
-      countryShipping: countryShipping == freezed
-          ? _value.countryShipping
-          : countryShipping // ignore: cast_nullable_to_non_nullable
+      shippingAddress: shippingAddress == freezed
+          ? _value.shippingAddress
+          : shippingAddress // ignore: cast_nullable_to_non_nullable
+              as Address?,
+      shippingCountry: shippingCountry == freezed
+          ? _value.shippingCountry
+          : shippingCountry // ignore: cast_nullable_to_non_nullable
               as CountryCode?,
     ));
   }
@@ -291,115 +200,60 @@ class __$PlaceOrderStateCopyWithImpl<$Res>
 
 class _$_PlaceOrderState implements _PlaceOrderState {
   const _$_PlaceOrderState(
-      {this.fullName,
-      this.address,
-      this.city,
-      this.stateName,
-      this.postCode,
-      this.country,
+      {this.billingAddress,
+      this.billingCountry,
       this.billingAndShippingAddressIsTheSame = 1,
-      this.fullNameShipping,
-      this.addressShipping,
-      this.cityShipping,
-      this.stateNameShipping,
-      this.postCodeShipping,
-      this.countryShipping});
+      this.shippingAddress,
+      this.shippingCountry});
 
   @override
-  final String? fullName;
+  final Address? billingAddress;
   @override
-  final String? address;
-  @override
-  final String? city;
-  @override //I call it stateName instead of state because state is a reserved word in the provider
-  final String? stateName;
-  @override
-  final String? postCode;
-  @override
-  final CountryCode? country;
+  final CountryCode? billingCountry;
   @JsonKey(defaultValue: 1)
   @override
   final int billingAndShippingAddressIsTheSame;
   @override
-  final String? fullNameShipping;
+  final Address? shippingAddress;
   @override
-  final String? addressShipping;
-  @override
-  final String? cityShipping;
-  @override
-  final String? stateNameShipping;
-  @override
-  final String? postCodeShipping;
-  @override
-  final CountryCode? countryShipping;
+  final CountryCode? shippingCountry;
 
   @override
   String toString() {
-    return 'PlaceOrderState(fullName: $fullName, address: $address, city: $city, stateName: $stateName, postCode: $postCode, country: $country, billingAndShippingAddressIsTheSame: $billingAndShippingAddressIsTheSame, fullNameShipping: $fullNameShipping, addressShipping: $addressShipping, cityShipping: $cityShipping, stateNameShipping: $stateNameShipping, postCodeShipping: $postCodeShipping, countryShipping: $countryShipping)';
+    return 'PlaceOrderState(billingAddress: $billingAddress, billingCountry: $billingCountry, billingAndShippingAddressIsTheSame: $billingAndShippingAddressIsTheSame, shippingAddress: $shippingAddress, shippingCountry: $shippingCountry)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _PlaceOrderState &&
-            (identical(other.fullName, fullName) ||
+            (identical(other.billingAddress, billingAddress) ||
                 const DeepCollectionEquality()
-                    .equals(other.fullName, fullName)) &&
-            (identical(other.address, address) ||
+                    .equals(other.billingAddress, billingAddress)) &&
+            (identical(other.billingCountry, billingCountry) ||
                 const DeepCollectionEquality()
-                    .equals(other.address, address)) &&
-            (identical(other.city, city) ||
-                const DeepCollectionEquality().equals(other.city, city)) &&
-            (identical(other.stateName, stateName) ||
-                const DeepCollectionEquality()
-                    .equals(other.stateName, stateName)) &&
-            (identical(other.postCode, postCode) ||
-                const DeepCollectionEquality()
-                    .equals(other.postCode, postCode)) &&
-            (identical(other.country, country) ||
-                const DeepCollectionEquality()
-                    .equals(other.country, country)) &&
+                    .equals(other.billingCountry, billingCountry)) &&
             (identical(other.billingAndShippingAddressIsTheSame,
                     billingAndShippingAddressIsTheSame) ||
                 const DeepCollectionEquality().equals(
                     other.billingAndShippingAddressIsTheSame,
                     billingAndShippingAddressIsTheSame)) &&
-            (identical(other.fullNameShipping, fullNameShipping) ||
+            (identical(other.shippingAddress, shippingAddress) ||
                 const DeepCollectionEquality()
-                    .equals(other.fullNameShipping, fullNameShipping)) &&
-            (identical(other.addressShipping, addressShipping) ||
+                    .equals(other.shippingAddress, shippingAddress)) &&
+            (identical(other.shippingCountry, shippingCountry) ||
                 const DeepCollectionEquality()
-                    .equals(other.addressShipping, addressShipping)) &&
-            (identical(other.cityShipping, cityShipping) ||
-                const DeepCollectionEquality()
-                    .equals(other.cityShipping, cityShipping)) &&
-            (identical(other.stateNameShipping, stateNameShipping) ||
-                const DeepCollectionEquality()
-                    .equals(other.stateNameShipping, stateNameShipping)) &&
-            (identical(other.postCodeShipping, postCodeShipping) ||
-                const DeepCollectionEquality()
-                    .equals(other.postCodeShipping, postCodeShipping)) &&
-            (identical(other.countryShipping, countryShipping) ||
-                const DeepCollectionEquality()
-                    .equals(other.countryShipping, countryShipping)));
+                    .equals(other.shippingCountry, shippingCountry)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(fullName) ^
-      const DeepCollectionEquality().hash(address) ^
-      const DeepCollectionEquality().hash(city) ^
-      const DeepCollectionEquality().hash(stateName) ^
-      const DeepCollectionEquality().hash(postCode) ^
-      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(billingAddress) ^
+      const DeepCollectionEquality().hash(billingCountry) ^
       const DeepCollectionEquality().hash(billingAndShippingAddressIsTheSame) ^
-      const DeepCollectionEquality().hash(fullNameShipping) ^
-      const DeepCollectionEquality().hash(addressShipping) ^
-      const DeepCollectionEquality().hash(cityShipping) ^
-      const DeepCollectionEquality().hash(stateNameShipping) ^
-      const DeepCollectionEquality().hash(postCodeShipping) ^
-      const DeepCollectionEquality().hash(countryShipping);
+      const DeepCollectionEquality().hash(shippingAddress) ^
+      const DeepCollectionEquality().hash(shippingCountry);
 
   @JsonKey(ignore: true)
   @override
@@ -409,47 +263,23 @@ class _$_PlaceOrderState implements _PlaceOrderState {
 
 abstract class _PlaceOrderState implements PlaceOrderState {
   const factory _PlaceOrderState(
-      {String? fullName,
-      String? address,
-      String? city,
-      String? stateName,
-      String? postCode,
-      CountryCode? country,
+      {Address? billingAddress,
+      CountryCode? billingCountry,
       int billingAndShippingAddressIsTheSame,
-      String? fullNameShipping,
-      String? addressShipping,
-      String? cityShipping,
-      String? stateNameShipping,
-      String? postCodeShipping,
-      CountryCode? countryShipping}) = _$_PlaceOrderState;
+      Address? shippingAddress,
+      CountryCode? shippingCountry}) = _$_PlaceOrderState;
 
   @override
-  String? get fullName => throw _privateConstructorUsedError;
+  Address? get billingAddress => throw _privateConstructorUsedError;
   @override
-  String? get address => throw _privateConstructorUsedError;
-  @override
-  String? get city => throw _privateConstructorUsedError;
-  @override //I call it stateName instead of state because state is a reserved word in the provider
-  String? get stateName => throw _privateConstructorUsedError;
-  @override
-  String? get postCode => throw _privateConstructorUsedError;
-  @override
-  CountryCode? get country => throw _privateConstructorUsedError;
+  CountryCode? get billingCountry => throw _privateConstructorUsedError;
   @override
   int get billingAndShippingAddressIsTheSame =>
       throw _privateConstructorUsedError;
   @override
-  String? get fullNameShipping => throw _privateConstructorUsedError;
+  Address? get shippingAddress => throw _privateConstructorUsedError;
   @override
-  String? get addressShipping => throw _privateConstructorUsedError;
-  @override
-  String? get cityShipping => throw _privateConstructorUsedError;
-  @override
-  String? get stateNameShipping => throw _privateConstructorUsedError;
-  @override
-  String? get postCodeShipping => throw _privateConstructorUsedError;
-  @override
-  CountryCode? get countryShipping => throw _privateConstructorUsedError;
+  CountryCode? get shippingCountry => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PlaceOrderStateCopyWith<_PlaceOrderState> get copyWith =>

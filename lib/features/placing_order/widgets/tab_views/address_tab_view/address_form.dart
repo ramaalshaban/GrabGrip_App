@@ -30,14 +30,24 @@ class AddressForm extends StatelessWidget {
             //region Full Name text field
             TextFormField(
               initialValue: isShippingAddressForm
-                  ? ref.watch(placeOrderProvider.notifier).fullNameShipping
-                  : ref.watch(placeOrderProvider.notifier).fullName,
+                  ? ref
+                      .watch(placeOrderProvider.notifier)
+                      .shippingAddress
+                      ?.fullName
+                  : ref
+                      .watch(placeOrderProvider.notifier)
+                      .billingAddress
+                      ?.fullName,
               onChanged: (text) {
                 isShippingAddressForm
-                    ? ref.watch(placeOrderProvider.notifier).fullNameShipping =
-                        text.trim()
-                    : ref.watch(placeOrderProvider.notifier).fullName =
-                        text.trim();
+                    ? ref
+                        .watch(placeOrderProvider.notifier)
+                        .shippingAddress
+                        ?.copyWith(fullName: text.trim())
+                    : ref
+                        .watch(placeOrderProvider.notifier)
+                        .billingAddress
+                        ?.copyWith(fullName: text.trim());
               },
               validator: mustNotBeEmptyFieldValidator,
               keyboardType: TextInputType.name,
@@ -52,14 +62,24 @@ class AddressForm extends StatelessWidget {
             //region Address text field
             TextFormField(
               initialValue: isShippingAddressForm
-                  ? ref.watch(placeOrderProvider.notifier).addressShipping
-                  : ref.watch(placeOrderProvider.notifier).address,
+                  ? ref
+                      .watch(placeOrderProvider.notifier)
+                      .shippingAddress
+                      ?.address
+                  : ref
+                      .watch(placeOrderProvider.notifier)
+                      .billingAddress
+                      ?.address,
               onChanged: (text) {
                 isShippingAddressForm
-                    ? ref.watch(placeOrderProvider.notifier).addressShipping =
-                        text.trim()
-                    : ref.watch(placeOrderProvider.notifier).address =
-                        text.trim();
+                    ? ref
+                        .watch(placeOrderProvider.notifier)
+                        .shippingAddress
+                        ?.copyWith(address: text.trim())
+                    : ref
+                        .watch(placeOrderProvider.notifier)
+                        .billingAddress
+                        ?.copyWith(address: text.trim());
               },
               validator: mustNotBeEmptyFieldValidator,
               keyboardType: TextInputType.streetAddress,
@@ -74,13 +94,18 @@ class AddressForm extends StatelessWidget {
             //region City text field
             TextFormField(
               initialValue: isShippingAddressForm
-                  ? ref.watch(placeOrderProvider.notifier).cityShipping
-                  : ref.watch(placeOrderProvider.notifier).city,
+                  ? ref.watch(placeOrderProvider.notifier).shippingAddress?.city
+                  : ref.watch(placeOrderProvider.notifier).billingAddress?.city,
               onChanged: (text) {
                 isShippingAddressForm
-                    ? ref.watch(placeOrderProvider.notifier).cityShipping =
-                        text.trim()
-                    : ref.watch(placeOrderProvider.notifier).city = text.trim();
+                    ? ref
+                        .watch(placeOrderProvider.notifier)
+                        .shippingAddress
+                        ?.copyWith(city: text.trim())
+                    : ref
+                        .watch(placeOrderProvider.notifier)
+                        .billingAddress
+                        ?.copyWith(city: text.trim());
               },
               validator: mustNotBeEmptyFieldValidator,
               keyboardType: TextInputType.name,
@@ -95,14 +120,24 @@ class AddressForm extends StatelessWidget {
             //region State text field
             TextFormField(
               initialValue: isShippingAddressForm
-                  ? ref.watch(placeOrderProvider.notifier).stateNameShipping
-                  : ref.watch(placeOrderProvider.notifier).stateName,
+                  ? ref
+                      .watch(placeOrderProvider.notifier)
+                      .shippingAddress
+                      ?.state
+                  : ref
+                      .watch(placeOrderProvider.notifier)
+                      .billingAddress
+                      ?.state,
               onChanged: (text) {
                 isShippingAddressForm
-                    ? ref.watch(placeOrderProvider.notifier).stateNameShipping =
-                        text.trim()
-                    : ref.watch(placeOrderProvider.notifier).stateName =
-                        text.trim();
+                    ? ref
+                        .watch(placeOrderProvider.notifier)
+                        .shippingAddress
+                        ?.copyWith(state: text.trim())
+                    : ref
+                        .watch(placeOrderProvider.notifier)
+                        .billingAddress
+                        ?.copyWith(state: text.trim());
               },
               validator: mustNotBeEmptyFieldValidator,
               keyboardType: TextInputType.name,
@@ -117,14 +152,24 @@ class AddressForm extends StatelessWidget {
             //region ZIP/Post code text field
             TextFormField(
               initialValue: isShippingAddressForm
-                  ? ref.watch(placeOrderProvider.notifier).postCodeShipping
-                  : ref.watch(placeOrderProvider.notifier).postCode,
+                  ? ref
+                      .watch(placeOrderProvider.notifier)
+                      .shippingAddress
+                      ?.postCode
+                  : ref
+                      .watch(placeOrderProvider.notifier)
+                      .billingAddress
+                      ?.postCode,
               onChanged: (text) {
                 isShippingAddressForm
-                    ? ref.watch(placeOrderProvider.notifier).postCodeShipping =
-                        text.trim()
-                    : ref.watch(placeOrderProvider.notifier).postCode =
-                        text.trim();
+                    ? ref
+                        .watch(placeOrderProvider.notifier)
+                        .shippingAddress
+                        ?.copyWith(postCode: text.trim())
+                    : ref
+                        .watch(placeOrderProvider.notifier)
+                        .billingAddress
+                        ?.copyWith(postCode: text.trim());
               },
               validator: mustNotBeEmptyFieldValidator,
               keyboardType: TextInputType.text,
