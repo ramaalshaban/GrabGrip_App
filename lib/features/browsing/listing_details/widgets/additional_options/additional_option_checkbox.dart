@@ -58,24 +58,27 @@ class AdditionalOptionCheckbox extends ConsumerWidget {
           //endregion
           width8(),
           //region Label
-          RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: additionalOption.name,
-                  style: const TextStyle(
-                    color: AppColors.gray,
-                    fontSize: 18,
+          Expanded(
+            child: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: additionalOption.name,
+                    style: const TextStyle(
+                      color: AppColors.gray,
+                      fontSize: 18,
+                    ),
                   ),
-                ),
-                TextSpan(
-                  text: "  (SAR ${additionalOption.price})",
-                  style: const TextStyle(
-                    color: AppColors.lightPurple,
-                    fontSize: 18,
+                  /// Currency here should be dynamic. It's static for now
+                  TextSpan(
+                    text: "  (SAR ${additionalOption.price})",
+                    style: const TextStyle(
+                      color: AppColors.lightPurple,
+                      fontSize: 18,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           )
           //endregion

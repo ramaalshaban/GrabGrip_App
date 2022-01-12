@@ -22,7 +22,7 @@ class _$ResponseWidgetTearOff {
   const _$ResponseWidgetTearOff();
 
   _ResponseWidget call(
-      int total,
+      String total,
       String? error,
       @JsonKey(name: "start_date") String? startDate,
       @JsonKey(name: "end_date") String? endDate) {
@@ -44,7 +44,7 @@ const $ResponseWidget = _$ResponseWidgetTearOff();
 
 /// @nodoc
 mixin _$ResponseWidget {
-  int get total => throw _privateConstructorUsedError;
+  String get total => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   @JsonKey(name: "start_date")
   String? get startDate => throw _privateConstructorUsedError;
@@ -63,7 +63,7 @@ abstract class $ResponseWidgetCopyWith<$Res> {
           ResponseWidget value, $Res Function(ResponseWidget) then) =
       _$ResponseWidgetCopyWithImpl<$Res>;
   $Res call(
-      {int total,
+      {String total,
       String? error,
       @JsonKey(name: "start_date") String? startDate,
       @JsonKey(name: "end_date") String? endDate});
@@ -89,7 +89,7 @@ class _$ResponseWidgetCopyWithImpl<$Res>
       total: total == freezed
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -114,7 +114,7 @@ abstract class _$ResponseWidgetCopyWith<$Res>
       __$ResponseWidgetCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int total,
+      {String total,
       String? error,
       @JsonKey(name: "start_date") String? startDate,
       @JsonKey(name: "end_date") String? endDate});
@@ -142,7 +142,7 @@ class __$ResponseWidgetCopyWithImpl<$Res>
       total == freezed
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -174,7 +174,7 @@ class _$_ResponseWidget
       _$$_ResponseWidgetFromJson(json);
 
   @override
-  final int total;
+  final String total;
   @override
   final String? error;
   @override
@@ -236,7 +236,7 @@ class _$_ResponseWidget
 
 abstract class _ResponseWidget implements ResponseWidget {
   const factory _ResponseWidget(
-      int total,
+      String total,
       String? error,
       @JsonKey(name: "start_date") String? startDate,
       @JsonKey(name: "end_date") String? endDate) = _$_ResponseWidget;
@@ -245,7 +245,7 @@ abstract class _ResponseWidget implements ResponseWidget {
       _$_ResponseWidget.fromJson;
 
   @override
-  int get total => throw _privateConstructorUsedError;
+  String get total => throw _privateConstructorUsedError;
   @override
   String? get error => throw _privateConstructorUsedError;
   @override

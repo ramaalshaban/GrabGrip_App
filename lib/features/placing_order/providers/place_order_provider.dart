@@ -1,10 +1,12 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/browsing/listing_details/providers/listing_details_provider.dart';
 import 'package:grab_grip/features/placing_order/models/address/address.dart';
 import 'package:grab_grip/features/placing_order/models/place_order_details_request/place_order_details_request.dart';
 import 'package:grab_grip/features/placing_order/models/place_order_details_response/place_order_details_response.dart';
 import 'package:grab_grip/features/placing_order/models/place_order_state/place_order_state.dart';
+import 'package:grab_grip/features/placing_order/models/pricing/pricing.dart';
 import 'package:grab_grip/features/user_profile/payments/models/payment_method/payment_method.dart';
 import 'package:grab_grip/services/network/network_service.dart';
 import 'package:grab_grip/services/network/providers/http_request_state_provider.dart';
@@ -65,6 +67,16 @@ class PlaceOrderProvider extends StateNotifier<PlaceOrderState> {
 
   int? get selectedPaymentMethodId => state.selectedPaymentMethodId;
 
+  set orderedListing(Gear? listing) =>
+      state = state.copyWith(orderedListing: listing);
+
+  Gear? get orderedListing => state.orderedListing;
+
+  set pricing(Pricing? pricing) =>
+      state = state.copyWith(pricing: pricing);
+
+  Pricing? get pricing => state.pricing;
+
 //endregion
 
   PlaceOrderDetailsRequest _prepareRequest() => PlaceOrderDetailsRequest(
@@ -115,5 +127,7 @@ class PlaceOrderProvider extends StateNotifier<PlaceOrderState> {
         //if the user hasn't selected a country then set KSA as the default
         CountryCode(code: 'Sa');
     paymentMethods = response.paymentMethods ?? [];
+    orderedListing = response.listing;
+    pricing = response.pricing;
   }
 }

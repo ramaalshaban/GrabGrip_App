@@ -11,7 +11,7 @@ class Pricing with _$Pricing {
   const factory Pricing(
     @JsonKey(name: "user_choice") List<UserChoice> userChoices,
     @JsonKey(name: "price_items") List<PriceItem> priceItems,
-    int total,
+    String total,
   ) = _Pricing;
 
   factory Pricing.fromJson(Map<String, dynamic> json) =>

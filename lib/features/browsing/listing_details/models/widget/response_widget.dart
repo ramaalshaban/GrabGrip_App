@@ -7,7 +7,7 @@ part 'response_widget.g.dart';
 @freezed
 class ResponseWidget with _$ResponseWidget {
   const factory ResponseWidget(
-    int total,
+    String total,
     String? error,
     @JsonKey(name: "start_date") String? startDate,
     @JsonKey(name: "end_date") String? endDate,

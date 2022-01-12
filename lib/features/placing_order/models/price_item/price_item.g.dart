@@ -8,7 +8,7 @@ part of 'price_item.dart';
 
 _$_PriceItem _$$_PriceItemFromJson(Map<String, dynamic> json) => _$_PriceItem(
       json['label'] as String,
-      json['price'] as int,
+      json['price'] as String,
     );
 
 Map<String, dynamic> _$$_PriceItemToJson(_$_PriceItem instance) =>

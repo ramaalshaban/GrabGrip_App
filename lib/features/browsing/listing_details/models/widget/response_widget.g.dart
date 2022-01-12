@@ -8,7 +8,7 @@ part of 'response_widget.dart';
 
 _$_ResponseWidget _$$_ResponseWidgetFromJson(Map<String, dynamic> json) =>
     _$_ResponseWidget(
-      json['total'] as int,
+      json['total'] as String,
       json['error'] as String?,
       json['start_date'] as String?,
       json['end_date'] as String?,

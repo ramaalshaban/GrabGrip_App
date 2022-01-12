@@ -9,6 +9,9 @@ class UserChoice with _$UserChoice {
   const factory UserChoice(
     String name,
     String value,
+    String group,
+    String? price,
+    int? quantity,
   ) = _UserChoice;
 
   factory UserChoice.fromJson(Map<String, dynamic> json) =>

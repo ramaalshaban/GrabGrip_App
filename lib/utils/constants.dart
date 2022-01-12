@@ -48,3 +48,8 @@ const Divider lightGrayDividerThickness0_5 = Divider(
   color: AppColors.lightGray,
 );
 //endregion
+
+//region padding
+const EdgeInsets summaryTabViewPadding =
+    EdgeInsets.fromLTRB(28.0, 8.0, 28.0, 8.0);
+//endregion

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/features/placing_order/widgets/tab_views/address/address_tab_view.dart';
 import 'package:grab_grip/features/placing_order/widgets/tab_views/payment/payment_tab_view.dart';
-import 'package:grab_grip/features/placing_order/widgets/tab_views/summary_tab_view.dart';
+import 'package:grab_grip/features/placing_order/widgets/tab_views/summary/summary_tab_view.dart';
 import 'package:grab_grip/shared/widgets/continue_button.dart';
 import 'package:grab_grip/shared/widgets/custom_app_bar.dart';
 import 'package:grab_grip/style/colors.dart';

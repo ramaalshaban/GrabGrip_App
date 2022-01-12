@@ -16,6 +16,7 @@ class PaymentMethodItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
+      elevation: 5,
       child: InkWell(
         onTap: () {
           ref.watch(placeOrderProvider.notifier).selectedPaymentMethodId =

@@ -275,6 +275,8 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
     availableOptions.addAll(selectedAdditionalOptions);
     availableOptions.addAll(toAddAdditionalOption);
     selectedAdditionalOptions = availableOptions;
+    // when the user selects an additional option, set its quantity value to 1 in meta map
+    changeAdditionalOptionValue(toAddAdditionalOption.keys.first,1);
   }
 
   void removeAdditionalOption(String toRemoveAdditionalOptionId) {

@@ -9,6 +9,7 @@ part of 'place_order_details_response.dart';
 _$_PlaceOrderDetailsResponse _$$_PlaceOrderDetailsResponseFromJson(
         Map<String, dynamic> json) =>
     _$_PlaceOrderDetailsResponse(
+      Gear.fromJson(json['listing'] as Map<String, dynamic>),
       Pricing.fromJson(json['pricing'] as Map<String, dynamic>),
       json['billing_address'] == null
           ? null
@@ -24,6 +25,7 @@ _$_PlaceOrderDetailsResponse _$$_PlaceOrderDetailsResponseFromJson(
 Map<String, dynamic> _$$_PlaceOrderDetailsResponseToJson(
         _$_PlaceOrderDetailsResponse instance) =>
     <String, dynamic>{
+      'listing': instance.listing,
       'pricing': instance.pricing,
       'billing_address': instance.billingAddress,
       'shipping_address': instance.shippingAddress,

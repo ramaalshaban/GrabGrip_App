@@ -23,11 +23,13 @@ class _$PlaceOrderDetailsResponseTearOff {
   const _$PlaceOrderDetailsResponseTearOff();
 
   _PlaceOrderDetailsResponse call(
+      Gear listing,
       Pricing pricing,
       @JsonKey(name: "billing_address") Address? billingAddress,
       @JsonKey(name: "shipping_address") Address? shippingAddress,
       @JsonKey(name: "payment_providers") List<PaymentMethod>? paymentMethods) {
     return _PlaceOrderDetailsResponse(
+      listing,
       pricing,
       billingAddress,
       shippingAddress,
@@ -45,6 +47,7 @@ const $PlaceOrderDetailsResponse = _$PlaceOrderDetailsResponseTearOff();
 
 /// @nodoc
 mixin _$PlaceOrderDetailsResponse {
+  Gear get listing => throw _privateConstructorUsedError;
   Pricing get pricing => throw _privateConstructorUsedError;
   @JsonKey(name: "billing_address")
   Address? get billingAddress => throw _privateConstructorUsedError;
@@ -65,11 +68,13 @@ abstract class $PlaceOrderDetailsResponseCopyWith<$Res> {
           $Res Function(PlaceOrderDetailsResponse) then) =
       _$PlaceOrderDetailsResponseCopyWithImpl<$Res>;
   $Res call(
-      {Pricing pricing,
+      {Gear listing,
+      Pricing pricing,
       @JsonKey(name: "billing_address") Address? billingAddress,
       @JsonKey(name: "shipping_address") Address? shippingAddress,
       @JsonKey(name: "payment_providers") List<PaymentMethod>? paymentMethods});
 
+  $GearCopyWith<$Res> get listing;
   $PricingCopyWith<$Res> get pricing;
   $AddressCopyWith<$Res>? get billingAddress;
   $AddressCopyWith<$Res>? get shippingAddress;
@@ -86,12 +91,17 @@ class _$PlaceOrderDetailsResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? listing = freezed,
     Object? pricing = freezed,
     Object? billingAddress = freezed,
     Object? shippingAddress = freezed,
     Object? paymentMethods = freezed,
   }) {
     return _then(_value.copyWith(
+      listing: listing == freezed
+          ? _value.listing
+          : listing // ignore: cast_nullable_to_non_nullable
+              as Gear,
       pricing: pricing == freezed
           ? _value.pricing
           : pricing // ignore: cast_nullable_to_non_nullable
@@ -109,6 +119,13 @@ class _$PlaceOrderDetailsResponseCopyWithImpl<$Res>
           : paymentMethods // ignore: cast_nullable_to_non_nullable
               as List<PaymentMethod>?,
     ));
+  }
+
+  @override
+  $GearCopyWith<$Res> get listing {
+    return $GearCopyWith<$Res>(_value.listing, (value) {
+      return _then(_value.copyWith(listing: value));
+    });
   }
 
   @override
@@ -149,11 +166,14 @@ abstract class _$PlaceOrderDetailsResponseCopyWith<$Res>
       __$PlaceOrderDetailsResponseCopyWithImpl<$Res>;
   @override
   $Res call(
-      {Pricing pricing,
+      {Gear listing,
+      Pricing pricing,
       @JsonKey(name: "billing_address") Address? billingAddress,
       @JsonKey(name: "shipping_address") Address? shippingAddress,
       @JsonKey(name: "payment_providers") List<PaymentMethod>? paymentMethods});
 
+  @override
+  $GearCopyWith<$Res> get listing;
   @override
   $PricingCopyWith<$Res> get pricing;
   @override
@@ -176,12 +196,17 @@ class __$PlaceOrderDetailsResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? listing = freezed,
     Object? pricing = freezed,
     Object? billingAddress = freezed,
     Object? shippingAddress = freezed,
     Object? paymentMethods = freezed,
   }) {
     return _then(_PlaceOrderDetailsResponse(
+      listing == freezed
+          ? _value.listing
+          : listing // ignore: cast_nullable_to_non_nullable
+              as Gear,
       pricing == freezed
           ? _value.pricing
           : pricing // ignore: cast_nullable_to_non_nullable
@@ -208,6 +233,7 @@ class _$_PlaceOrderDetailsResponse
     with DiagnosticableTreeMixin
     implements _PlaceOrderDetailsResponse {
   const _$_PlaceOrderDetailsResponse(
+      this.listing,
       this.pricing,
       @JsonKey(name: "billing_address") this.billingAddress,
       @JsonKey(name: "shipping_address") this.shippingAddress,
@@ -216,6 +242,8 @@ class _$_PlaceOrderDetailsResponse
   factory _$_PlaceOrderDetailsResponse.fromJson(Map<String, dynamic> json) =>
       _$$_PlaceOrderDetailsResponseFromJson(json);
 
+  @override
+  final Gear listing;
   @override
   final Pricing pricing;
   @override
@@ -230,7 +258,7 @@ class _$_PlaceOrderDetailsResponse
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PlaceOrderDetailsResponse(pricing: $pricing, billingAddress: $billingAddress, shippingAddress: $shippingAddress, paymentMethods: $paymentMethods)';
+    return 'PlaceOrderDetailsResponse(listing: $listing, pricing: $pricing, billingAddress: $billingAddress, shippingAddress: $shippingAddress, paymentMethods: $paymentMethods)';
   }
 
   @override
@@ -238,6 +266,7 @@ class _$_PlaceOrderDetailsResponse
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'PlaceOrderDetailsResponse'))
+      ..add(DiagnosticsProperty('listing', listing))
       ..add(DiagnosticsProperty('pricing', pricing))
       ..add(DiagnosticsProperty('billingAddress', billingAddress))
       ..add(DiagnosticsProperty('shippingAddress', shippingAddress))
@@ -248,6 +277,9 @@ class _$_PlaceOrderDetailsResponse
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _PlaceOrderDetailsResponse &&
+            (identical(other.listing, listing) ||
+                const DeepCollectionEquality()
+                    .equals(other.listing, listing)) &&
             (identical(other.pricing, pricing) ||
                 const DeepCollectionEquality()
                     .equals(other.pricing, pricing)) &&
@@ -265,6 +297,7 @@ class _$_PlaceOrderDetailsResponse
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(listing) ^
       const DeepCollectionEquality().hash(pricing) ^
       const DeepCollectionEquality().hash(billingAddress) ^
       const DeepCollectionEquality().hash(shippingAddress) ^
@@ -285,6 +318,7 @@ class _$_PlaceOrderDetailsResponse
 
 abstract class _PlaceOrderDetailsResponse implements PlaceOrderDetailsResponse {
   const factory _PlaceOrderDetailsResponse(
+      Gear listing,
       Pricing pricing,
       @JsonKey(name: "billing_address")
           Address? billingAddress,
@@ -296,6 +330,8 @@ abstract class _PlaceOrderDetailsResponse implements PlaceOrderDetailsResponse {
   factory _PlaceOrderDetailsResponse.fromJson(Map<String, dynamic> json) =
       _$_PlaceOrderDetailsResponse.fromJson;
 
+  @override
+  Gear get listing => throw _privateConstructorUsedError;
   @override
   Pricing get pricing => throw _privateConstructorUsedError;
   @override
