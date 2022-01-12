@@ -7,7 +7,6 @@ import 'package:grab_grip/features/placing_order/widgets/tab_views/summary/summa
 import 'package:grab_grip/shared/widgets/continue_button.dart';
 import 'package:grab_grip/shared/widgets/custom_app_bar.dart';
 import 'package:grab_grip/style/colors.dart';
-import 'package:grab_grip/utils/device.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
 class PlaceOrderScreen extends StatelessWidget {
@@ -113,17 +112,7 @@ class PlaceOrderScreen extends StatelessWidget {
                             child: ref
                                 .watch(httpRequestStateProvider)
                                 .maybeWhen(
-                                  innerLoading: (_) => Container(
-                                    constraints: BoxConstraints(
-                                          minWidth: screenWidth(),
-                                        ) /
-                                        3,
-                                    child: const Center(
-                                      child: CircularProgressIndicator(
-                                        color: AppColors.purple,
-                                      ),
-                                    ),
-                                  ),
+                                  loading: () => Container(),
                                   orElse: () => Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
