@@ -21,6 +21,7 @@ import 'package:grab_grip/features/browsing/listing_details/widgets/total_price_
 import 'package:grab_grip/features/browsing/listing_details/widgets/variant_options_widget.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/step_4/tab_views/details_tab_view/widgets/tag_view.dart';
 import 'package:grab_grip/style/colors.dart';
+import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/device.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
@@ -347,9 +348,9 @@ class ListingDetailsScreen extends ConsumerWidget {
           ),
           //endregion
           //region Total price widget
-          const Expanded(
-            flex: 2,
-            child: TotalPriceWidget(),
+          Expanded(
+            flex: listing.pricingModel?.widget == bookDate ? 3 : 2,
+            child: TotalPriceWidget(listing: listing),
           ),
           //endregion
         ],

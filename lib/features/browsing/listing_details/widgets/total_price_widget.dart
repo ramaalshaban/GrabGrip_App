@@ -3,16 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
+import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/style/colors.dart';
 import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/device.dart';
 import 'package:grab_grip/utils/functions.dart';
 
 class TotalPriceWidget extends StatelessWidget {
-  const TotalPriceWidget({Key? key}) : super(key: key);
+  const TotalPriceWidget({Key? key, required this.listing}) : super(key: key);
+  final Gear listing;
 
   @override
   Widget build(BuildContext context) {
+    final isListingForRent = listing.pricingModel?.widget == bookDate;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14),
       decoration: const BoxDecoration(
@@ -82,6 +85,35 @@ class TotalPriceWidget extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              //region Per day price & Vat included label
+              Visibility(
+                visible: isListingForRent,
+                child: Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        // some dummy and old listings data has no formatted price so I put here this (?? "") to avoid the exception
+                        listing.formattedPrice ?? "",
+                        style: const TextStyle(
+                          color: AppColors.white,
+                          fontSize: 12,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const Text(
+                        "VAT included",
+                        style: TextStyle(
+                          color: AppColors.green,
+                          fontSize: 12,
+                        ),
+                        textAlign: TextAlign.center,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              //endregion
               //region Total label
               const Expanded(
                 child: Center(
@@ -95,7 +127,7 @@ class TotalPriceWidget extends StatelessWidget {
                 ),
               ),
               //endregion
-              //region Price
+              //region Total Price
               Expanded(
                 child: Consumer(
                   builder: (_, ref, __) {
@@ -106,7 +138,7 @@ class TotalPriceWidget extends StatelessWidget {
                           ),
                       duration: duration300Milli,
                       child: Text(
-                        "SAR ${ref.watch(listingDetailsProvider).widget?.total}",
+                        "${listing.currency} ${ref.watch(listingDetailsProvider.select((value) => value.widget?.total ?? ""))}",
                         style: const TextStyle(
                           color: AppColors.green,
                           fontWeight: FontWeight.bold,
@@ -127,24 +159,3 @@ class TotalPriceWidget extends StatelessWidget {
     );
   }
 }
-
-/// The following widgets can be used later to customize the listings that are for rent:
-/// Column(
-///                     children: [
-///                     Text(
-///                     isThisListingForRent ? " per day" : "",
-///                       style: const TextStyle(
-///                         color: AppColors.green,
-///                       ),
-///                       textAlign: TextAlign.center,
-///                     ),
-///                     Text(
-///                     isThisListingForRent ? " VAT included" : "",
-///                     style: const TextStyle(
-///                     color: AppColors.green,
-///                     ),
-///                     textAlign: TextAlign.center,
-///                     )
-///                     ]
-///                     ,
-///                     )
