@@ -125,7 +125,7 @@ class SummaryTabView extends ConsumerWidget {
                     ),
                     width4(),
                     Text(
-                      pricing.total,
+                      pricing.total.toString(),
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

@@ -8,7 +8,7 @@ part 'price_item.g.dart';
 class PriceItem with _$PriceItem {
   const factory PriceItem(
     String label,
-    String price,
+    double price,
   ) = _PriceItem;
 
   factory PriceItem.fromJson(Map<String, dynamic> json) =>

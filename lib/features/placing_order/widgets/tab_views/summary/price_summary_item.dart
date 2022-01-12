@@ -22,7 +22,7 @@ class PriceSummaryItem extends StatelessWidget {
         children: [
           Expanded(child: Text(priceItem.label)),
           Row(
-            children: [Text(currency), width4(), Text(priceItem.price)],
+            children: [Text(currency), width4(), Text(priceItem.price.toString())],
           ),
         ],
       ),

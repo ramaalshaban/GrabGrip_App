@@ -22,7 +22,7 @@ class _$PricingTearOff {
   const _$PricingTearOff();
 
   _Pricing call(@JsonKey(name: "user_choice") List<UserChoice> userChoices,
-      @JsonKey(name: "price_items") List<PriceItem> priceItems, String total) {
+      @JsonKey(name: "price_items") List<PriceItem> priceItems, double total) {
     return _Pricing(
       userChoices,
       priceItems,
@@ -44,7 +44,7 @@ mixin _$Pricing {
   List<UserChoice> get userChoices => throw _privateConstructorUsedError;
   @JsonKey(name: "price_items")
   List<PriceItem> get priceItems => throw _privateConstructorUsedError;
-  String get total => throw _privateConstructorUsedError;
+  double get total => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -58,7 +58,7 @@ abstract class $PricingCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: "user_choice") List<UserChoice> userChoices,
       @JsonKey(name: "price_items") List<PriceItem> priceItems,
-      String total});
+      double total});
 }
 
 /// @nodoc
@@ -87,7 +87,7 @@ class _$PricingCopyWithImpl<$Res> implements $PricingCopyWith<$Res> {
       total: total == freezed
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
     ));
   }
 }
@@ -100,7 +100,7 @@ abstract class _$PricingCopyWith<$Res> implements $PricingCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: "user_choice") List<UserChoice> userChoices,
       @JsonKey(name: "price_items") List<PriceItem> priceItems,
-      String total});
+      double total});
 }
 
 /// @nodoc
@@ -130,7 +130,7 @@ class __$PricingCopyWithImpl<$Res> extends _$PricingCopyWithImpl<$Res>
       total == freezed
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
     ));
   }
 }
@@ -151,7 +151,7 @@ class _$_Pricing with DiagnosticableTreeMixin implements _Pricing {
   @JsonKey(name: "price_items")
   final List<PriceItem> priceItems;
   @override
-  final String total;
+  final double total;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -204,7 +204,7 @@ abstract class _Pricing implements Pricing {
   const factory _Pricing(
       @JsonKey(name: "user_choice") List<UserChoice> userChoices,
       @JsonKey(name: "price_items") List<PriceItem> priceItems,
-      String total) = _$_Pricing;
+      double total) = _$_Pricing;
 
   factory _Pricing.fromJson(Map<String, dynamic> json) = _$_Pricing.fromJson;
 
@@ -215,7 +215,7 @@ abstract class _Pricing implements Pricing {
   @JsonKey(name: "price_items")
   List<PriceItem> get priceItems => throw _privateConstructorUsedError;
   @override
-  String get total => throw _privateConstructorUsedError;
+  double get total => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PricingCopyWith<_Pricing> get copyWith =>

@@ -13,7 +13,7 @@ _$_Pricing _$$_PricingFromJson(Map<String, dynamic> json) => _$_Pricing(
       (json['price_items'] as List<dynamic>)
           .map((e) => PriceItem.fromJson(e as Map<String, dynamic>))
           .toList(),
-      json['total'] as String,
+      (json['total'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$_PricingToJson(_$_Pricing instance) =>

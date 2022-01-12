@@ -21,7 +21,7 @@ PriceItem _$PriceItemFromJson(Map<String, dynamic> json) {
 class _$PriceItemTearOff {
   const _$PriceItemTearOff();
 
-  _PriceItem call(String label, String price) {
+  _PriceItem call(String label, double price) {
     return _PriceItem(
       label,
       price,
@@ -39,7 +39,7 @@ const $PriceItem = _$PriceItemTearOff();
 /// @nodoc
 mixin _$PriceItem {
   String get label => throw _privateConstructorUsedError;
-  String get price => throw _privateConstructorUsedError;
+  double get price => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +51,7 @@ mixin _$PriceItem {
 abstract class $PriceItemCopyWith<$Res> {
   factory $PriceItemCopyWith(PriceItem value, $Res Function(PriceItem) then) =
       _$PriceItemCopyWithImpl<$Res>;
-  $Res call({String label, String price});
+  $Res call({String label, double price});
 }
 
 /// @nodoc
@@ -75,7 +75,7 @@ class _$PriceItemCopyWithImpl<$Res> implements $PriceItemCopyWith<$Res> {
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
     ));
   }
 }
@@ -86,7 +86,7 @@ abstract class _$PriceItemCopyWith<$Res> implements $PriceItemCopyWith<$Res> {
           _PriceItem value, $Res Function(_PriceItem) then) =
       __$PriceItemCopyWithImpl<$Res>;
   @override
-  $Res call({String label, String price});
+  $Res call({String label, double price});
 }
 
 /// @nodoc
@@ -111,7 +111,7 @@ class __$PriceItemCopyWithImpl<$Res> extends _$PriceItemCopyWithImpl<$Res>
       price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
     ));
   }
 }
@@ -127,7 +127,7 @@ class _$_PriceItem with DiagnosticableTreeMixin implements _PriceItem {
   @override
   final String label;
   @override
-  final String price;
+  final double price;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -171,7 +171,7 @@ class _$_PriceItem with DiagnosticableTreeMixin implements _PriceItem {
 }
 
 abstract class _PriceItem implements PriceItem {
-  const factory _PriceItem(String label, String price) = _$_PriceItem;
+  const factory _PriceItem(String label, double price) = _$_PriceItem;
 
   factory _PriceItem.fromJson(Map<String, dynamic> json) =
       _$_PriceItem.fromJson;
@@ -179,7 +179,7 @@ abstract class _PriceItem implements PriceItem {
   @override
   String get label => throw _privateConstructorUsedError;
   @override
-  String get price => throw _privateConstructorUsedError;
+  double get price => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PriceItemCopyWith<_PriceItem> get copyWith =>
