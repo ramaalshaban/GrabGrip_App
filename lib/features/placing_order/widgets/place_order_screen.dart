@@ -7,6 +7,7 @@ import 'package:grab_grip/features/placing_order/widgets/tab_views/summary/summa
 import 'package:grab_grip/shared/widgets/continue_button.dart';
 import 'package:grab_grip/shared/widgets/custom_app_bar.dart';
 import 'package:grab_grip/style/colors.dart';
+import 'package:grab_grip/utils/functions.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
 class PlaceOrderScreen extends StatelessWidget {
@@ -138,16 +139,10 @@ class PlaceOrderScreen extends StatelessWidget {
                                         ),
                                         orElse: () => ContinueButton(
                                           buttonText: "Next",
-                                          onClickAction: () {
-                                            ref
-                                                .watch(
-                                                  placeOrderStepProvider
-                                                      .notifier,
-                                                )
-                                                .next();
-                                          },
+                                          onClickAction: () =>
+                                              _validateGoingNext(context, ref),
                                         ),
-                                      ),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -165,4 +160,41 @@ class PlaceOrderScreen extends StatelessWidget {
       ),
     );
   }
+
+  void _validateGoingNext(BuildContext context, WidgetRef ref) {
+    final currentStep = ref.watch(placeOrderStepProvider);
+    currentStep.when(
+      step1: (_) {
+        final isTheSameAddress = ref.watch(
+          placeOrderProvider
+              .select((state) => state.billingAndShippingAddressIsTheSame),
+        );
+        if (AddressTabView.billingAddressFormKey.currentState!.validate()) {
+          if (isTheSameAddress != 1) {
+            // not the same address
+            if (AddressTabView.shippingAddressFormKey.currentState!
+                .validate()) {
+              _goNext(ref);
+            }
+          } else {
+            _goNext(ref);
+          }
+        }
+      },
+      step2: (_) {
+        final paymentMethodIsSelected =
+            ref.watch(placeOrderProvider.notifier).isPaymentMethodSelected();
+        paymentMethodIsSelected
+            ? _goNext(ref)
+            : showWarningSnackBar(
+                context,
+                "Select a payment method please",
+              );
+      },
+      step3: (_) {},
+    );
+  }
+
+  void _goNext(WidgetRef ref) =>
+      ref.watch(placeOrderStepProvider.notifier).next();
 }

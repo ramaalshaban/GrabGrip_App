@@ -72,12 +72,13 @@ class PlaceOrderProvider extends StateNotifier<PlaceOrderState> {
 
   Gear? get orderedListing => state.orderedListing;
 
-  set pricing(Pricing? pricing) =>
-      state = state.copyWith(pricing: pricing);
+  set pricing(Pricing? pricing) => state = state.copyWith(pricing: pricing);
 
   Pricing? get pricing => state.pricing;
 
 //endregion
+
+  bool isPaymentMethodSelected() => selectedPaymentMethodId != null;
 
   PlaceOrderDetailsRequest _prepareRequest() => PlaceOrderDetailsRequest(
         hash: listingDetailsProvider.hash,
