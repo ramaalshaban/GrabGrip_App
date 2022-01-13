@@ -1,20 +1,54 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grab_grip/configs/providers/providers.dart';
+import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/placing_order/widgets/tab_views/address/address_tab_view.dart';
 import 'package:grab_grip/features/placing_order/widgets/tab_views/payment/payment_tab_view.dart';
 import 'package:grab_grip/features/placing_order/widgets/tab_views/summary/summary_tab_view.dart';
+import 'package:grab_grip/services/network/models/http_request_state/http_request_state.dart';
+import 'package:grab_grip/shared/widgets/are_you_sure_dialog.dart';
 import 'package:grab_grip/shared/widgets/continue_button.dart';
 import 'package:grab_grip/shared/widgets/custom_app_bar.dart';
 import 'package:grab_grip/style/colors.dart';
+import 'package:grab_grip/utils/constants.dart';
 import 'package:grab_grip/utils/functions.dart';
 import 'package:grab_grip/utils/sized_box.dart';
 
-class PlaceOrderScreen extends StatelessWidget {
+class PlaceOrderScreen extends ConsumerWidget {
   const PlaceOrderScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      ref.watch(placeOrderProvider.notifier).getPlaceOrderDetails();
+    });
+    //region listeners
+    ref.listen<HttpRequestState>(httpRequestStateProvider, (_, httpState) {
+      httpState.whenOrNull(
+        success: (_, succeededAction) {
+          if (succeededAction == placeOrderSuccessAction) {
+            showSnackBar(
+              context,
+              "Your order has been placed successfully",
+            );
+            // go back to place order step 1 after a successful order placing
+            ref.watch(placeOrderStepProvider.notifier).reset();
+            // pop this screen
+            Navigator.pop(context);
+            // pop listing details screen
+            Navigator.pop(context);
+            context.router.push(const MyOrdersScreenRoute());
+          }
+        },
+        error: (errorMessage) => showSnackBarForError(
+          context,
+          errorMessage,
+          const Duration(seconds: 4),
+        ),
+      );
+    });
+    //endregion
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: const CustomAppBar(
@@ -114,6 +148,11 @@ class PlaceOrderScreen extends StatelessWidget {
                                 .watch(httpRequestStateProvider)
                                 .maybeWhen(
                                   loading: () => Container(),
+                                  innerLoading: (_) => const Center(
+                                    child: CircularProgressIndicator(
+                                      color: AppColors.purple,
+                                    ),
+                                  ),
                                   orElse: () => Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -134,8 +173,30 @@ class PlaceOrderScreen extends StatelessWidget {
                                       ),
                                       currentStepIndex.maybeWhen(
                                         step3: (_) => ContinueButton(
-                                          onClickAction: () {},
                                           buttonText: "Place order",
+                                          onClickAction: () => showDialog(
+                                            context: context,
+                                            builder: (_) => AreYouSureDialog(
+                                              contentText:
+                                                  'By clicking "Place order" I approve the User Terms and confirm I have read the Privacy Notice. I agree to the terms & conditions of this Merchant.',
+                                              cancelAction: () {
+                                                Navigator.pop(context);
+                                              },
+                                              continueAction: () {
+                                                ref
+                                                    .watch(
+                                                      placeOrderProvider
+                                                          .notifier,
+                                                    )
+                                                    .placeOrder();
+                                                //pop the dialog
+                                                Navigator.pop(context);
+                                              },
+                                              cancelActionText:
+                                                  "Wait, I want to read them",
+                                              continueActionText: "Place order",
+                                            ),
+                                          ),
                                         ),
                                         orElse: () => ContinueButton(
                                           buttonText: "Next",
@@ -163,7 +224,7 @@ class PlaceOrderScreen extends StatelessWidget {
 
   void _validateGoingNext(BuildContext context, WidgetRef ref) {
     final currentStep = ref.watch(placeOrderStepProvider);
-    currentStep.when(
+    currentStep.whenOrNull(
       step1: (_) {
         final isTheSameAddress = ref.watch(
           placeOrderProvider
@@ -191,7 +252,6 @@ class PlaceOrderScreen extends StatelessWidget {
                 "Select a payment method please",
               );
       },
-      step3: (_) {},
     );
   }
 

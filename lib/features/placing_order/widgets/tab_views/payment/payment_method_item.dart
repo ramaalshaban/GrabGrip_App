@@ -19,8 +19,8 @@ class PaymentMethodItem extends ConsumerWidget {
       elevation: 5,
       child: InkWell(
         onTap: () {
-          ref.watch(placeOrderProvider.notifier).selectedPaymentMethodId =
-              paymentMethod.id;
+          ref.watch(placeOrderProvider.notifier).selectedPaymentMethod =
+              paymentMethod;
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 18.0),
@@ -29,15 +29,14 @@ class PaymentMethodItem extends ConsumerWidget {
               //region Radio button
               Radio(
                 activeColor: AppColors.purple,
-                value: paymentMethod.id,
+                value: paymentMethod,
                 groupValue: ref.watch(
                   placeOrderProvider
-                      .select((state) => state.selectedPaymentMethodId),
+                      .select((state) => state.selectedPaymentMethod),
                 ),
-                onChanged: (int? selectedId) {
-                  ref
-                      .watch(placeOrderProvider.notifier)
-                      .selectedPaymentMethodId = selectedId;
+                onChanged: (PaymentMethod? selectedPaymentMethod) {
+                  ref.watch(placeOrderProvider.notifier).selectedPaymentMethod =
+                      selectedPaymentMethod;
                 },
               ),
               //endregion

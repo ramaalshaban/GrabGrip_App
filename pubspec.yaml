@@ -21,7 +21,7 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  # auto_route is used for managing the routes between the about_us in the app.
+  # auto_route is used for managing the routes of the app.
   auto_route: ^3.2.0
   # cached_network_image is for showing images from the internet and caching them
   cached_network_image: ^3.1.0

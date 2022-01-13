@@ -1,4 +1,3 @@
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grab_grip/features/browsing/browse/models/gear/gear.dart';
 import 'package:grab_grip/features/placing_order/models/address/address.dart';
@@ -12,12 +11,10 @@ class PlaceOrderState with _$PlaceOrderState {
   const factory PlaceOrderState({
     Gear? orderedListing,
     Pricing? pricing,
-    Address? billingAddress,
-    CountryCode? billingCountry,
+    @Default(Address()) Address billingAddress,
     @Default(1) int billingAndShippingAddressIsTheSame,
-    Address? shippingAddress,
-    CountryCode? shippingCountry,
+    @Default(Address()) Address shippingAddress,
     @Default([]) List<PaymentMethod> paymentMethods,
-    int? selectedPaymentMethodId,
+    PaymentMethod? selectedPaymentMethod,
   }) = _PlaceOrderState;
 }

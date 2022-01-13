@@ -26,7 +26,7 @@ class AddressForm extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //region Label
-          Text(isShippingAddressForm ? "Shipping Address" : "Address"),
+          Text(isShippingAddressForm ? "Shipping Address" : "Billing Address"),
           //endregion
           height18(),
           //region Full Name text field
@@ -35,21 +35,16 @@ class AddressForm extends ConsumerWidget {
                 ? ref
                     .watch(placeOrderProvider.notifier)
                     .shippingAddress
-                    ?.fullName
+                    .fullName
                 : ref
                     .watch(placeOrderProvider.notifier)
                     .billingAddress
-                    ?.fullName,
+                    .fullName,
             onChanged: (text) {
-              isShippingAddressForm
-                  ? ref
-                      .watch(placeOrderProvider.notifier)
-                      .shippingAddress
-                      ?.copyWith(fullName: text.trim())
-                  : ref
-                      .watch(placeOrderProvider.notifier)
-                      .billingAddress
-                      ?.copyWith(fullName: text.trim());
+              ref.watch(placeOrderProvider.notifier).setFullName(
+                    fullName: text,
+                    isShippingForm: isShippingAddressForm,
+                  );
             },
             validator: mustNotBeEmptyFieldValidator,
             keyboardType: TextInputType.name,
@@ -64,24 +59,13 @@ class AddressForm extends ConsumerWidget {
           //region Address text field
           TextFormField(
             initialValue: isShippingAddressForm
-                ? ref
-                    .watch(placeOrderProvider.notifier)
-                    .shippingAddress
-                    ?.address
-                : ref
-                    .watch(placeOrderProvider.notifier)
-                    .billingAddress
-                    ?.address,
+                ? ref.watch(placeOrderProvider.notifier).shippingAddress.address
+                : ref.watch(placeOrderProvider.notifier).billingAddress.address,
             onChanged: (text) {
-              isShippingAddressForm
-                  ? ref
-                      .watch(placeOrderProvider.notifier)
-                      .shippingAddress
-                      ?.copyWith(address: text.trim())
-                  : ref
-                      .watch(placeOrderProvider.notifier)
-                      .billingAddress
-                      ?.copyWith(address: text.trim());
+              ref.watch(placeOrderProvider.notifier).setAddress(
+                    address: text,
+                    isShippingForm: isShippingAddressForm,
+                  );
             },
             validator: mustNotBeEmptyFieldValidator,
             keyboardType: TextInputType.streetAddress,
@@ -96,18 +80,13 @@ class AddressForm extends ConsumerWidget {
           //region City text field
           TextFormField(
             initialValue: isShippingAddressForm
-                ? ref.watch(placeOrderProvider.notifier).shippingAddress?.city
-                : ref.watch(placeOrderProvider.notifier).billingAddress?.city,
+                ? ref.watch(placeOrderProvider.notifier).shippingAddress.city
+                : ref.watch(placeOrderProvider.notifier).billingAddress.city,
             onChanged: (text) {
-              isShippingAddressForm
-                  ? ref
-                      .watch(placeOrderProvider.notifier)
-                      .shippingAddress
-                      ?.copyWith(city: text.trim())
-                  : ref
-                      .watch(placeOrderProvider.notifier)
-                      .billingAddress
-                      ?.copyWith(city: text.trim());
+              ref.watch(placeOrderProvider.notifier).setCity(
+                    city: text,
+                    isShippingForm: isShippingAddressForm,
+                  );
             },
             validator: mustNotBeEmptyFieldValidator,
             keyboardType: TextInputType.name,
@@ -122,18 +101,13 @@ class AddressForm extends ConsumerWidget {
           //region State text field
           TextFormField(
             initialValue: isShippingAddressForm
-                ? ref.watch(placeOrderProvider.notifier).shippingAddress?.state
-                : ref.watch(placeOrderProvider.notifier).billingAddress?.state,
+                ? ref.watch(placeOrderProvider.notifier).shippingAddress.state
+                : ref.watch(placeOrderProvider.notifier).billingAddress.state,
             onChanged: (text) {
-              isShippingAddressForm
-                  ? ref
-                      .watch(placeOrderProvider.notifier)
-                      .shippingAddress
-                      ?.copyWith(state: text.trim())
-                  : ref
-                      .watch(placeOrderProvider.notifier)
-                      .billingAddress
-                      ?.copyWith(state: text.trim());
+              ref.watch(placeOrderProvider.notifier).setState(
+                    stateName: text,
+                    isShippingForm: isShippingAddressForm,
+                  );
             },
             validator: mustNotBeEmptyFieldValidator,
             keyboardType: TextInputType.name,
@@ -151,21 +125,16 @@ class AddressForm extends ConsumerWidget {
                 ? ref
                     .watch(placeOrderProvider.notifier)
                     .shippingAddress
-                    ?.postCode
+                    .postCode
                 : ref
                     .watch(placeOrderProvider.notifier)
                     .billingAddress
-                    ?.postCode,
+                    .postCode,
             onChanged: (text) {
-              isShippingAddressForm
-                  ? ref
-                      .watch(placeOrderProvider.notifier)
-                      .shippingAddress
-                      ?.copyWith(postCode: text.trim())
-                  : ref
-                      .watch(placeOrderProvider.notifier)
-                      .billingAddress
-                      ?.copyWith(postCode: text.trim());
+              ref.watch(placeOrderProvider.notifier).setPostCode(
+                    postCode: text,
+                    isShippingForm: isShippingAddressForm,
+                  );
             },
             validator: mustNotBeEmptyFieldValidator,
             keyboardType: TextInputType.text,

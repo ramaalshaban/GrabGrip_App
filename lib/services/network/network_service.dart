@@ -19,6 +19,7 @@ import 'package:grab_grip/features/feedback/report_listing/models/report_reasons
 import 'package:grab_grip/features/feedback/report_listing/models/report_request/report_listing_request.dart';
 import 'package:grab_grip/features/placing_order/models/place_order_details_request/place_order_details_request.dart';
 import 'package:grab_grip/features/placing_order/models/place_order_details_response/place_order_details_response.dart';
+import 'package:grab_grip/features/placing_order/models/place_order_session_request/place_order_session_request.dart';
 import 'package:grab_grip/features/post_listing/models/post_edit_listing_response/post_edit_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
@@ -604,21 +605,32 @@ class NetworkService {
     }
   }
 
-  // Future<Result<String, PostEditListingResponse>> placeOrder(
-  //   String token,
-  //   PlaceOrderRequest placeOrderRequest,
-  // ) async {
-  //   try {
-  //     final placeOrderCall = await _grabGripApi.placeOrder(
-  //       "Bearer $token",
-  //       placeOrderRequest,
-  //     );
-  //     return Success(placeOrderCall.data);
-  //   } catch (error) {
-  //     final errorMessage = _errorHandler(error as DioError);
-  //     return Error(errorMessage);
-  //   }
-  // }
+  Future<Result<String, String>> placeOrder({
+    required String token,
+    required PlaceOrderSessionRequest request,
+  }) async {
+    try {
+      final createPlaceOrderSessionCall =
+          await _grabGripApi.createPlaceOrderSession(
+        "Bearer $token",
+        hash: request.hash!,
+        body: request,
+      );
+      final paymentMethodKey =
+          createPlaceOrderSessionCall.data.paymentMethodKey;
+      final sessionId = createPlaceOrderSessionCall.data.session.id.toString();
+
+      await _grabGripApi.placeOrder(
+        "Bearer $token",
+        paymentMethodKey: paymentMethodKey,
+        sessionId: sessionId,
+      );
+      return const Success("");
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
 
   //endregion
 

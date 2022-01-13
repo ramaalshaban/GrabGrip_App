@@ -29,19 +29,25 @@ class CountryPicker extends StatelessWidget {
               forPostingOrEditing: () =>
                   ref.watch(postListingProvider.notifier).country?.code,
               forPlacingOrder: (isShippingAddress) => isShippingAddress
-                  ? ref.watch(placeOrderProvider.notifier).shippingCountry?.code
-                  : ref.watch(placeOrderProvider.notifier).billingCountry?.code,
+                  ? ref
+                      .watch(placeOrderProvider.notifier)
+                      .shippingAddress
+                      .country
+                  : ref
+                      .watch(placeOrderProvider.notifier)
+                      .billingAddress
+                      .country,
             ),
             onChanged: (selectedCountry) {
               countryPickingReason.when(
                 forPostingOrEditing: () => ref
                     .watch(postListingProvider.notifier)
                     .country = selectedCountry,
-                forPlacingOrder: (isShippingAddress) => isShippingAddress
-                    ? ref.watch(placeOrderProvider.notifier).shippingCountry =
-                        selectedCountry
-                    : ref.watch(placeOrderProvider.notifier).billingCountry =
-                        selectedCountry,
+                forPlacingOrder: (isShippingAddress) =>
+                    ref.watch(placeOrderProvider.notifier).setCountry(
+                          country: selectedCountry.code!,
+                          isShippingForm: isShippingAddress,
+                        ),
               );
               // prevent the previously focused text field from receiving the focus again after closing the picker
               FocusScope.of(context).requestFocus(FocusNode());

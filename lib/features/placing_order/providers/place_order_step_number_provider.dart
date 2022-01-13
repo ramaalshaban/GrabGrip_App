@@ -4,6 +4,8 @@ import 'package:grab_grip/features/placing_order/models/place_order_step_number/
 class PlaceOrderStepNumberProvider extends StateNotifier<PlaceOrderStepNumber> {
   PlaceOrderStepNumberProvider() : super(const PlaceOrderStepNumber.step1(0));
 
+  void reset() => state = const PlaceOrderStepNumber.step1(0);
+
   void next() =>
       state.whenOrNull(step1: (_) => setStep2(), step2: (_) => setStep3());
 

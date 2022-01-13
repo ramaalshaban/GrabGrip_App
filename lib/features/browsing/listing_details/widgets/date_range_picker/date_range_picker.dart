@@ -20,7 +20,7 @@ class DateRangePicker extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     //region Listeners
     ref.listen<ResponseWidget?>(
-        listingDetailsProvider.select((value) => value.widget),
+        listingDetailsProvider.select((state) => state.widget),
         (_, responseWidget) {
       if (responseWidget?.error != null) {
         // when the user picks an invalid booking date, the api returns a successful response (200 OK) with

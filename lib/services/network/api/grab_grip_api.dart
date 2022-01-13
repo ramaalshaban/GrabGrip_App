@@ -14,6 +14,8 @@ import 'package:grab_grip/features/feedback/contact_us/models/contact_us/contact
 import 'package:grab_grip/features/feedback/report_listing/models/report_reasons_response/report_reasons_response.dart';
 import 'package:grab_grip/features/feedback/report_listing/models/report_request/report_listing_request.dart';
 import 'package:grab_grip/features/placing_order/models/place_order_details_response/place_order_details_response.dart';
+import 'package:grab_grip/features/placing_order/models/place_order_session_request/place_order_session_request.dart';
+import 'package:grab_grip/features/placing_order/models/place_order_session_response/place_order_session_response.dart';
 import 'package:grab_grip/features/post_listing/models/post_edit_listing_response/post_edit_listing_response.dart';
 import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_request/post_listing_as_draft_request.dart';
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
@@ -95,7 +97,7 @@ abstract class GrabGripApi {
   @GET("/categories")
   Future<HttpResponse<CategoriesResponse>> getCategories();
 
-//endregion
+  //endregion
 
   //region post a listing
   @GET("/api/v1/create")
@@ -168,7 +170,7 @@ abstract class GrabGripApi {
     @Path("hash") String hash,
   );
 
-//endregion
+  //endregion
 
   //region user profile
   @GET("/api/v1/auth/me")
@@ -199,7 +201,7 @@ abstract class GrabGripApi {
     @Path("id") required String id,
   });
 
-//endregion
+  //endregion
 
   //region listings
   @GET("/api/v1/account/listings")
@@ -208,7 +210,7 @@ abstract class GrabGripApi {
     @Query("page") required int pageNumber,
   });
 
-//endregion
+  //endregion
 
   //region incoming orders
   @GET("/api/v1/account/orders")
@@ -217,7 +219,7 @@ abstract class GrabGripApi {
     @Query("page") required int pageNumber,
   });
 
-//endregion
+  //endregion
 
   //region my orders
   @GET("/api/v1/account/purchase-history")
@@ -226,7 +228,7 @@ abstract class GrabGripApi {
     @Query("page") required int pageNumber,
   });
 
-//endregion
+  //endregion
 
   //region favorites
   @GET("/api/v1/account/favorites")
@@ -241,9 +243,9 @@ abstract class GrabGripApi {
     @Path("slug") required String slug,
   });
 
-//endregion
+  //endregion
 
-//endregion
+  //endregion
 
   //region listing details
   @GET("/api/v1/listing/{hash}/{slug}")
@@ -269,7 +271,7 @@ abstract class GrabGripApi {
     @Query("page") required int pageNumber,
   });
 
-//endregion
+  //endregion
 
   //region place order
   @GET("/api/v1/checkout/{hash}")
@@ -286,6 +288,20 @@ abstract class GrabGripApi {
     @Query("end_date") String? endDate,
     @Query("range") String? range,
   });
-//endregion
 
+  @POST("/api/v1/checkout/{hash}")
+  Future<HttpResponse<PlaceOrderSessionResponse>> createPlaceOrderSession(
+    @Header("Authorization") String? token, {
+    @Path("hash") required String hash,
+    @Body() required PlaceOrderSessionRequest body,
+  });
+
+  @GET("/api/v1/payments/{payment_key}/{session_id}")
+  Future<HttpResponse> placeOrder(
+    @Header("Authorization") String? token, {
+    @Path("payment_key") required String paymentMethodKey,
+    @Path("session_id") required String sessionId,
+  });
+
+//endregion
 }

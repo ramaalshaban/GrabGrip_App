@@ -22,19 +22,19 @@ class _$AddressTearOff {
   const _$AddressTearOff();
 
   _Address call(
-      @JsonKey(name: "full_name") String fullName,
-      String address,
-      String city,
-      String state,
-      @JsonKey(name: "zip") String postCode,
-      String country) {
+      {@JsonKey(name: "full_name") String? fullName,
+      String? address,
+      String? city,
+      String? state,
+      @JsonKey(name: "zip") String? postCode,
+      String country = 'Sa'}) {
     return _Address(
-      fullName,
-      address,
-      city,
-      state,
-      postCode,
-      country,
+      fullName: fullName,
+      address: address,
+      city: city,
+      state: state,
+      postCode: postCode,
+      country: country,
     );
   }
 
@@ -49,12 +49,13 @@ const $Address = _$AddressTearOff();
 /// @nodoc
 mixin _$Address {
   @JsonKey(name: "full_name")
-  String get fullName => throw _privateConstructorUsedError;
-  String get address => throw _privateConstructorUsedError;
-  String get city => throw _privateConstructorUsedError;
-  String get state => throw _privateConstructorUsedError;
+  String? get fullName => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
+  String? get city => throw _privateConstructorUsedError;
+  String? get state => throw _privateConstructorUsedError;
   @JsonKey(name: "zip")
-  String get postCode => throw _privateConstructorUsedError;
+  String? get postCode =>
+      throw _privateConstructorUsedError; //if the user hasn't selected a country then set Saudi Arabia [Sa] as the default
   String get country => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -67,11 +68,11 @@ abstract class $AddressCopyWith<$Res> {
   factory $AddressCopyWith(Address value, $Res Function(Address) then) =
       _$AddressCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: "full_name") String fullName,
-      String address,
-      String city,
-      String state,
-      @JsonKey(name: "zip") String postCode,
+      {@JsonKey(name: "full_name") String? fullName,
+      String? address,
+      String? city,
+      String? state,
+      @JsonKey(name: "zip") String? postCode,
       String country});
 }
 
@@ -96,23 +97,23 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
       fullName: fullName == freezed
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       address: address == freezed
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       city: city == freezed
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       state: state == freezed
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       postCode: postCode == freezed
           ? _value.postCode
           : postCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       country: country == freezed
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
@@ -127,11 +128,11 @@ abstract class _$AddressCopyWith<$Res> implements $AddressCopyWith<$Res> {
       __$AddressCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: "full_name") String fullName,
-      String address,
-      String city,
-      String state,
-      @JsonKey(name: "zip") String postCode,
+      {@JsonKey(name: "full_name") String? fullName,
+      String? address,
+      String? city,
+      String? state,
+      @JsonKey(name: "zip") String? postCode,
       String country});
 }
 
@@ -154,27 +155,27 @@ class __$AddressCopyWithImpl<$Res> extends _$AddressCopyWithImpl<$Res>
     Object? country = freezed,
   }) {
     return _then(_Address(
-      fullName == freezed
+      fullName: fullName == freezed
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
-              as String,
-      address == freezed
+              as String?,
+      address: address == freezed
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      city == freezed
+              as String?,
+      city: city == freezed
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
-              as String,
-      state == freezed
+              as String?,
+      state: state == freezed
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as String,
-      postCode == freezed
+              as String?,
+      postCode: postCode == freezed
           ? _value.postCode
           : postCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      country == freezed
+              as String?,
+      country: country == freezed
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String,
@@ -185,25 +186,31 @@ class __$AddressCopyWithImpl<$Res> extends _$AddressCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Address with DiagnosticableTreeMixin implements _Address {
-  const _$_Address(@JsonKey(name: "full_name") this.fullName, this.address,
-      this.city, this.state, @JsonKey(name: "zip") this.postCode, this.country);
+  const _$_Address(
+      {@JsonKey(name: "full_name") this.fullName,
+      this.address,
+      this.city,
+      this.state,
+      @JsonKey(name: "zip") this.postCode,
+      this.country = 'Sa'});
 
   factory _$_Address.fromJson(Map<String, dynamic> json) =>
       _$$_AddressFromJson(json);
 
   @override
   @JsonKey(name: "full_name")
-  final String fullName;
+  final String? fullName;
   @override
-  final String address;
+  final String? address;
   @override
-  final String city;
+  final String? city;
   @override
-  final String state;
+  final String? state;
   @override
   @JsonKey(name: "zip")
-  final String postCode;
-  @override
+  final String? postCode;
+  @JsonKey(defaultValue: 'Sa')
+  @override //if the user hasn't selected a country then set Saudi Arabia [Sa] as the default
   final String country;
 
   @override
@@ -268,28 +275,28 @@ class _$_Address with DiagnosticableTreeMixin implements _Address {
 
 abstract class _Address implements Address {
   const factory _Address(
-      @JsonKey(name: "full_name") String fullName,
-      String address,
-      String city,
-      String state,
-      @JsonKey(name: "zip") String postCode,
-      String country) = _$_Address;
+      {@JsonKey(name: "full_name") String? fullName,
+      String? address,
+      String? city,
+      String? state,
+      @JsonKey(name: "zip") String? postCode,
+      String country}) = _$_Address;
 
   factory _Address.fromJson(Map<String, dynamic> json) = _$_Address.fromJson;
 
   @override
   @JsonKey(name: "full_name")
-  String get fullName => throw _privateConstructorUsedError;
+  String? get fullName => throw _privateConstructorUsedError;
   @override
-  String get address => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
   @override
-  String get city => throw _privateConstructorUsedError;
+  String? get city => throw _privateConstructorUsedError;
   @override
-  String get state => throw _privateConstructorUsedError;
+  String? get state => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "zip")
-  String get postCode => throw _privateConstructorUsedError;
-  @override
+  String? get postCode => throw _privateConstructorUsedError;
+  @override //if the user hasn't selected a country then set Saudi Arabia [Sa] as the default
   String get country => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

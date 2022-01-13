@@ -138,18 +138,6 @@ class SummaryTabView extends ConsumerWidget {
           ),
           //endregion
           height20(),
-          //region Information text
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 28.0),
-            child: Text(
-              'By clicking "Place Order" I approve the User Terms and confirm I have read the Privacy Notice. I agree to the terms & conditions of this Merchant.',
-              style: TextStyle(
-                fontSize: 10,
-              ),
-            ),
-          ),
-          //endregion
-          height20(),
         ],
       ),
     );

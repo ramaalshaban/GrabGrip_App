@@ -16,6 +16,7 @@ const String logoutAction = "logoutAction";
 const String reportListingAction = "reportListingAction";
 const String saveListingSuccessAction = "saveListingSuccessAction";
 const String saveListingError = "saveListingError";
+const String placeOrderSuccessAction = "placeOrderSuccessAction";
 //endregion
 
 //region screens id

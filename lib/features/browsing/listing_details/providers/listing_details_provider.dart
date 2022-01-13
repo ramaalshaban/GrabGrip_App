@@ -276,7 +276,7 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
     availableOptions.addAll(toAddAdditionalOption);
     selectedAdditionalOptions = availableOptions;
     // when the user selects an additional option, set its quantity value to 1 in meta map
-    changeAdditionalOptionValue(toAddAdditionalOption.keys.first,1);
+    changeAdditionalOptionValue(toAddAdditionalOption.keys.first, 1);
   }
 
   void removeAdditionalOption(String toRemoveAdditionalOptionId) {
@@ -373,7 +373,14 @@ class ListingDetailsProvider extends StateNotifier<ListingDetailsState> {
     shippingOptions = response.listing.shippingOptions ?? [];
     variantOptions = response.listing.variantOptions ?? {};
     listingOwner = response.listing.user;
+    // when a user picks a date range which is already picked by another user, the response.widget will contain the error message "sorry no availability etc...."
+    // when the user pick the same date range again response.widget will be exactly equal to widget (this state's widget). so in this case, the listener in data_range_picker.dart (who listens to
+    // this widget's state) will not be notified because this state's widget will not be updated (because widget == response.widget) the error message "sorry no availability etc...." will not
+    // appear again (it appears only once). So to avoid this situation and always notify that listener, reset the widget and fill it with data again:
+    widget = null;
     widget = response.widget;
+    // Note: these two assignments (widget = null;widget = response.widget) will notify that listener twice but the message will appear only once because when widget == null the listener will return
+    // without showing a message. (see the inner if statement of the listener in data_range_picker.dart)
     isForRent = pricingModel?.widget == bookDate;
     isFavorited = response.listing.isFavorited as bool?;
     userRating = response.listing.userRating;
