@@ -15,6 +15,7 @@ import 'package:grab_grip/features/feedback/report_listing/widgets/report_listin
 import 'package:grab_grip/features/placing_order/widgets/place_order_screen.dart';
 import 'package:grab_grip/features/post_listing/widgets/screens/post_listing_screen.dart';
 import 'package:grab_grip/features/user_profile/change_password/change_password_screen.dart';
+import 'package:grab_grip/features/user_profile/edit_profile/edit_profile_screen.dart';
 import 'package:grab_grip/features/user_profile/favorites/widgets/favorites_screen.dart';
 import 'package:grab_grip/features/user_profile/incoming_orders/widgets/incoming_orders_screen.dart';
 import 'package:grab_grip/features/user_profile/listings/widgets/listings_screen.dart';
@@ -58,6 +59,7 @@ import 'package:grab_grip/shared/widgets/verify_your_email_screen.dart';
     AutoRoute(page: MyOrdersScreen, guards: [AuthGuard]),
     AutoRoute(page: FavoritesScreen, guards: [AuthGuard]),
     AutoRoute(page: ChangePasswordScreen, guards: [AuthGuard]),
+    AutoRoute(page: EditProfileScreen, guards: [AuthGuard]),
     AutoRoute(page: ReportListingScreen, guards: [AuthGuard]),
     AutoRoute(page: PlaceOrderScreen, guards: [AuthGuard]),
   ],

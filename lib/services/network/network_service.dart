@@ -25,6 +25,7 @@ import 'package:grab_grip/features/post_listing/models/post_listing_as_draft_req
 import 'package:grab_grip/features/post_listing/models/pricing_models_response/pricing_models_response.dart';
 import 'package:grab_grip/features/post_listing/models/save_listing_request/save_listing_request.dart';
 import 'package:grab_grip/features/user_profile/change_password/models/change_password_request.dart';
+import 'package:grab_grip/features/user_profile/edit_profile/models/edit_profile_request.dart';
 import 'package:grab_grip/features/user_profile/payments/models/payment_method/payment_method.dart';
 import 'package:grab_grip/features/user_profile/shared/models/user.dart';
 import 'package:grab_grip/services/network/api/grab_grip_api.dart';
@@ -139,6 +140,24 @@ class NetworkService {
   ) async {
     try {
       await _grabGripApi.changePassword(
+        "Bearer $token",
+        requestBody,
+      );
+      // the successful response is a user object, ignore it (it can be useful later)
+      return const Success("");
+    } catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
+
+
+  Future<Result<String, String>> editProfile(
+      String token,
+      EditProfileRequest requestBody,
+      ) async {
+    try {
+      await _grabGripApi.editProfile(
         "Bearer $token",
         requestBody,
       );

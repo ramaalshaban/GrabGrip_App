@@ -25,7 +25,7 @@ class AboutUsScreen extends StatelessWidget {
                 children: [
                   height48(),
                   const Text(
-                    "ABOUT CARBON",
+                    "ABOUT CARBONs",
                     style: AppTextStyles.bigTitle,
                   ),
                   height24(),
