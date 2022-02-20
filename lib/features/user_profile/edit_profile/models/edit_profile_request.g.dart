@@ -9,12 +9,15 @@ part of 'edit_profile_request.dart';
 _$_EditProfileRequest _$$_EditProfileRequestFromJson(
         Map<String, dynamic> json) =>
     _$_EditProfileRequest(
-      json['name'] as String,
-      json['name'] as String,
+      json['display_name'] as String,
+      json['username'] as String,
+      json['bio'] as String?,
     );
 
 Map<String, dynamic> _$$_EditProfileRequestToJson(
         _$_EditProfileRequest instance) =>
     <String, dynamic>{
-      'name': instance.name,
+      'display_name': instance.displayName,
+      'username': instance.userName,
+      'bio': instance.bio,
     };

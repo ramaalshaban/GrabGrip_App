@@ -21,10 +21,12 @@ EditProfileRequest _$EditProfileRequestFromJson(Map<String, dynamic> json) {
 class _$EditProfileRequestTearOff {
   const _$EditProfileRequestTearOff();
 
-  _EditProfileRequest call(String name, @JsonKey(name: "name") dynamic name) {
+  _EditProfileRequest call(@JsonKey(name: 'display_name') String displayName,
+      @JsonKey(name: 'username') String userName, String? bio) {
     return _EditProfileRequest(
-      name,
-      name,
+      displayName,
+      userName,
+      bio,
     );
   }
 
@@ -38,9 +40,11 @@ const $EditProfileRequest = _$EditProfileRequestTearOff();
 
 /// @nodoc
 mixin _$EditProfileRequest {
-  String get name => throw _privateConstructorUsedError;
-  @JsonKey(name: "name")
-  dynamic get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'display_name')
+  String get displayName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'username')
+  String get userName => throw _privateConstructorUsedError;
+  String? get bio => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,7 +57,10 @@ abstract class $EditProfileRequestCopyWith<$Res> {
   factory $EditProfileRequestCopyWith(
           EditProfileRequest value, $Res Function(EditProfileRequest) then) =
       _$EditProfileRequestCopyWithImpl<$Res>;
-  $Res call({String name, @JsonKey(name: "name") dynamic name});
+  $Res call(
+      {@JsonKey(name: 'display_name') String displayName,
+      @JsonKey(name: 'username') String userName,
+      String? bio});
 }
 
 /// @nodoc
@@ -67,18 +74,23 @@ class _$EditProfileRequestCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? name = freezed,
-    Object? name = freezed,
+    Object? displayName = freezed,
+    Object? userName = freezed,
+    Object? bio = freezed,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      displayName: displayName == freezed
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      bio: bio == freezed
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -90,7 +102,10 @@ abstract class _$EditProfileRequestCopyWith<$Res>
           _EditProfileRequest value, $Res Function(_EditProfileRequest) then) =
       __$EditProfileRequestCopyWithImpl<$Res>;
   @override
-  $Res call({String name, @JsonKey(name: "name") dynamic name});
+  $Res call(
+      {@JsonKey(name: 'display_name') String displayName,
+      @JsonKey(name: 'username') String userName,
+      String? bio});
 }
 
 /// @nodoc
@@ -106,15 +121,23 @@ class __$EditProfileRequestCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? name = freezed,
-    Object? name = freezed,
+    Object? displayName = freezed,
+    Object? userName = freezed,
+    Object? bio = freezed,
   }) {
     return _then(_EditProfileRequest(
-      name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      displayName == freezed
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
               as String,
-      name == freezed ? _value.name : name,
+      userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      bio == freezed
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -124,20 +147,24 @@ class __$EditProfileRequestCopyWithImpl<$Res>
 class _$_EditProfileRequest
     with DiagnosticableTreeMixin
     implements _EditProfileRequest {
-  const _$_EditProfileRequest(this.name, @JsonKey(name: "name") this.name);
+  const _$_EditProfileRequest(@JsonKey(name: 'display_name') this.displayName,
+      @JsonKey(name: 'username') this.userName, this.bio);
 
   factory _$_EditProfileRequest.fromJson(Map<String, dynamic> json) =>
       _$$_EditProfileRequestFromJson(json);
 
   @override
-  final String name;
+  @JsonKey(name: 'display_name')
+  final String displayName;
   @override
-  @JsonKey(name: "name")
-  final dynamic name;
+  @JsonKey(name: 'username')
+  final String userName;
+  @override
+  final String? bio;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'EditProfileRequest(name: $name, name: $name)';
+    return 'EditProfileRequest(displayName: $displayName, userName: $userName, bio: $bio)';
   }
 
   @override
@@ -145,25 +172,31 @@ class _$_EditProfileRequest
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'EditProfileRequest'))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('name', name));
+      ..add(DiagnosticsProperty('displayName', displayName))
+      ..add(DiagnosticsProperty('userName', userName))
+      ..add(DiagnosticsProperty('bio', bio));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _EditProfileRequest &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)));
+            (identical(other.displayName, displayName) ||
+                const DeepCollectionEquality()
+                    .equals(other.displayName, displayName)) &&
+            (identical(other.userName, userName) ||
+                const DeepCollectionEquality()
+                    .equals(other.userName, userName)) &&
+            (identical(other.bio, bio) ||
+                const DeepCollectionEquality().equals(other.bio, bio)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(name);
+      const DeepCollectionEquality().hash(displayName) ^
+      const DeepCollectionEquality().hash(userName) ^
+      const DeepCollectionEquality().hash(bio);
 
   @JsonKey(ignore: true)
   @override
@@ -178,16 +211,21 @@ class _$_EditProfileRequest
 
 abstract class _EditProfileRequest implements EditProfileRequest {
   const factory _EditProfileRequest(
-      String name, @JsonKey(name: "name") dynamic name) = _$_EditProfileRequest;
+      @JsonKey(name: 'display_name') String displayName,
+      @JsonKey(name: 'username') String userName,
+      String? bio) = _$_EditProfileRequest;
 
   factory _EditProfileRequest.fromJson(Map<String, dynamic> json) =
       _$_EditProfileRequest.fromJson;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'display_name')
+  String get displayName => throw _privateConstructorUsedError;
   @override
-  @JsonKey(name: "name")
-  dynamic get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'username')
+  String get userName => throw _privateConstructorUsedError;
+  @override
+  String? get bio => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$EditProfileRequestCopyWith<_EditProfileRequest> get copyWith =>

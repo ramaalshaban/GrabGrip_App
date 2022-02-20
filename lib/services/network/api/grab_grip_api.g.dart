@@ -148,7 +148,7 @@ class _GrabGripApi implements GrabGripApi {
   }
 
   @override
-  Future<HttpResponse<dynamic>> editProfile(token, requestBody) async {
+  Future<HttpResponse<EditProfileRequest>> editProfile(token, requestBody) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -160,7 +160,7 @@ class _GrabGripApi implements GrabGripApi {
             .compose(_dio.options, '/api/v1/account/edit_profile',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+    final value = EditProfileRequest.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

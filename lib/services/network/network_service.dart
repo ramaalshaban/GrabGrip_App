@@ -113,6 +113,18 @@ class NetworkService {
       return Error(errorMessage);
     }
   }
+  Future<Result<String, EditProfileRequest>> editProfile(String token, EditProfileRequest requestBody) async {
+    try {
+      final editProfileCall = await _grabGripApi.editProfile("Bearer $token", requestBody);
+      // the successful response is a user object, ignore it (it can be useful later)
+      return Success(editProfileCall.data);
+
+    }
+    catch (error) {
+      final errorMessage = _errorHandler(error as DioError);
+      return Error(errorMessage);
+    }
+  }
 
   Future<Result<String, LoginResponse>> login(AuthModel authModel) async {
     try {
@@ -150,24 +162,17 @@ class NetworkService {
       return Error(errorMessage);
     }
   }
+  // Future<Result<String, LoginResponse>> login(AuthModel authModel) async {
+  //   try {
+  //     final loginCall = await _grabGripApi.login(authModel);
+  //     return Success(loginCall.data);
+  //   } catch (error) {
+  //     final errorMessage = _errorHandler(error as DioError);
+  //     return Error(errorMessage);
+  //   }
+  // }
 
 
-  Future<Result<String, String>> editProfile(
-      String token,
-      EditProfileRequest requestBody,
-      ) async {
-    try {
-      await _grabGripApi.editProfile(
-        "Bearer $token",
-        requestBody,
-      );
-      // the successful response is a user object, ignore it (it can be useful later)
-      return const Success("");
-    } catch (error) {
-      final errorMessage = _errorHandler(error as DioError);
-      return Error(errorMessage);
-    }
-  }
 
   //endregion
 

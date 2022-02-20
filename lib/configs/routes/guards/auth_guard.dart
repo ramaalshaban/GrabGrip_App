@@ -4,10 +4,7 @@ import 'package:grab_grip/configs/providers/providers.dart';
 import 'package:grab_grip/configs/routes/app_router.gr.dart';
 import 'package:grab_grip/features/authentication/providers/auth_state.dart';
 
-class AuthGuard extends AutoRouteGuard {
-  WidgetRef ref;
-
-  AuthGuard({required this.ref});
+class AuthGuard extends AutoRouteGuard {WidgetRef ref;AuthGuard({required this.ref});
 
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) {

@@ -101,6 +101,7 @@ class UserProfileScreen extends ConsumerWidget {
                                         image: imageProvider,
                                         fit: BoxFit.fill,
                                       ),
+
                                     ),
                                   ),
                                 ),
@@ -139,7 +140,9 @@ class UserProfileScreen extends ConsumerWidget {
               children: [
                 AppDrawerButton(
                   title: "Edit Profile",
-                  onTabFunction: () {},
+                  onTabFunction: () {
+                    context.router.push(const EditProfileScreenRoute());
+                  },
                 ),
                 lightGrayDividerThickness0_5,
                 AppDrawerButton(

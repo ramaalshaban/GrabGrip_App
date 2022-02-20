@@ -125,6 +125,22 @@ class AuthProvider extends StateNotifier<AuthState> {
     });
   }
 
+  // Future<void> register(AuthModel authModel) async {
+  //   httpRequestStateProvider.setLoading();
+  //   await NetworkService().register(authModel).then((result) {
+  //     result.when((errorMessage) {
+  //       state = const AuthState.notAuthenticated();
+  //       httpRequestStateProvider.setError(errorMessage);
+  //     }, (response) async {
+  //       _saveTokenData(response);
+  //       await userProfileProvider.getUserProfileAndSaveIt();
+  //       state = const AuthState.authenticated(isVerified: false);
+  //       httpRequestStateProvider.setSuccess();
+  //     });
+  //   });
+  // }
+  //
+
   Future<void> editProfile(EditProfileRequest requestBody) async {
     httpRequestStateProvider.setLoading();
     final token = await AppSharedPreferences().getToken();

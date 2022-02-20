@@ -65,7 +65,8 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   //region Email text field
-                  Consumer(builder: (_, ref, __) {
+                  Consumer(
+                      builder: (_, ref, __) {
                     return TextFormField(
                       decoration: standardInputDecoration.copyWith(
                         labelText: AppLocalizations.of(context)!.email,

@@ -63,11 +63,13 @@ abstract class GrabGripApi {
   //region auth requests
   @POST("/api/v1/auth/register")
   Future<HttpResponse<RegisterResponse>> register(
-    @Body() AuthModel registerRequest,
-  );
+      @Body() AuthModel registerRequest);
 
   @POST("/api/v1/auth/login")
-  Future<HttpResponse<LoginResponse>> login(@Body() AuthModel registerRequest);
+  Future<HttpResponse<LoginResponse>> login(
+      @Body() AuthModel registerRequest);
+
+
 
   @POST("/api/v1/auth/logout")
   Future<HttpResponse> logout(@Header("Authorization") String token);
@@ -79,12 +81,16 @@ abstract class GrabGripApi {
   );
 
 
+
+
+
+
   @POST("/api/v1/account/edit_profile")
-  Future<HttpResponse> editProfile(
+  Future<HttpResponse<EditProfileRequest>> editProfile(
       @Header("Authorization") String token,
       @Body() EditProfileRequest requestBody,
-      );
 
+      );
 
 
   //endregion
